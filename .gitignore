@@ -1,0 +1,13 @@
+# Local agent scratch notes; not project deliverables.
+/.local/
+
+# Website dependencies, generated output and local verification.
+node_modules/
+site/.next/
+site/out/
+coverage/
+.artifacts/
+.DS_Store
+*.log
+.env*
+!.env.example

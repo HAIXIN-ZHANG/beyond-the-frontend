@@ -59,3 +59,38 @@ Pages 产物虽然包含 URL 前缀，`site/out/` 内部不再额外嵌套 `beyo
 ## 验收与交接
 
 实际结果见 `docs/handoffs/developer/D02.md`。本阶段完成后等待 review，再按明确的正文契约进入 D03。
+
+## CI01：自动检查
+
+`.github/workflows/ci.yml` 在 PR 和推送到 `main` 时运行，不负责部署。代码审查仍由主对话进行；工作流不接 GitHub AI review action。
+
+三个检查名称保持稳定，方便主对话在云端实际通过后配置 required checks：
+
+| Check | 命令与范围 |
+| --- | --- |
+| `Quality` | `npm ci --no-fund` 后运行 `npm run check`，当前含 ESLint 和 4 项测试 |
+| `Static export (root)` | 显式设 `NEXT_PUBLIC_BASE_PATH=''`，运行 `npm run build` 与 `npm run verify:export` |
+| `Static export (pages)` | 设 `NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend`，运行 `npm run build:pages` 与 `npm run verify:export` |
+
+Quality 通过后，两种 export 在独立 runner 中执行；一项失败不会提前取消另一项。构建与验证共用同一 job 环境；根路径 job 的显式空值会覆盖 workflow/repository 等继承的前缀值。本地复现时也要明确清空根前缀：
+
+```sh
+NEXT_PUBLIC_BASE_PATH='' npm run check
+NEXT_PUBLIC_BASE_PATH='' npm run build
+NEXT_PUBLIC_BASE_PATH='' npm run verify:export
+NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run build:pages
+NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run verify:export
+```
+
+使用 `ubuntu-24.04` GitHub 托管 runner，项目 Node 主版本来自 `.nvmrc`，具体 Node/npm 版本输出到每个 job 日志。Node 24 的具体补丁随官方发行更新；不是冻结整台 runner 镜像。`npm ci` 使用项目锁文件，不在 CI 升级依赖。
+
+官方 Actions 固定至已核实的完整 commit SHA：
+
+- [actions/checkout v7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1)：`3d3c42e5aac5ba805825da76410c181273ba90b1`。
+- [actions/setup-node v7.1.0](https://github.com/actions/setup-node/releases/tag/v7.1.0)：`949feb2413d6458794dcd2491c4babbbce0c15c1`。
+
+2026-11-15 已通过 GitHub API 读取官方 release tag 与 commit 对应关系，并读取相应 tag 的 README/action.yml：二者使用 Node 24 action runtime，要求 Actions Runner ≥2.327.1。这里使用 GitHub 托管 runner，不为此配置或升级本机/自托管 runner。
+
+工作流只有 `contents: read`，checkout 设置 `persist-credentials: false`；关闭自动包缓存，不配置 registry 凭据、私有 secret、发布权限或 artifact 上传。使用 `pull_request` 而不是 `pull_request_target`，不将 issue/PR 文本拼入 shell。新的 PR 提交会取消同一 PR 的旧运行。
+
+本地命令通过不表示 Linux runner 或云端 Actions 已通过，也不表示 required checks 已配置。CI01 的修订、实际验证和云端状态见 `docs/handoffs/developer/CI01.md`；主对话 review 后负责 PR、云端检查和合并，Developer 不通过本阶段修改分支保护或发布网站。

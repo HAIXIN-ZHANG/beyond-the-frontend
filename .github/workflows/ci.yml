@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+  # Explicitly clear inherited values for checks and root-path builds.
+  NEXT_PUBLIC_BASE_PATH: ''
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  quality:
+    name: Quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Report runtime versions
+        run: |
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --no-fund
+      - name: Run project checks
+        run: npm run check
+
+  static-export:
+    name: Static export (${{ matrix.deployment }})
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - deployment: root
+            base_path: ''
+            build_script: build
+          - deployment: pages
+            base_path: /beyond-the-frontend
+            build_script: build:pages
+    # The same value applies to BOTH the build and its export verification.
+    env:
+      NEXT_PUBLIC_BASE_PATH: ${{ matrix.base_path }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Report runtime versions
+        run: |
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --no-fund
+      - name: Build static site
+        run: npm run ${{ matrix.build_script }}
+      - name: Verify exported pages and assets
+        run: npm run verify:export

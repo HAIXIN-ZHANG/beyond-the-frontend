@@ -51,3 +51,7 @@ W01 全目录可作为明确标注的提案入库，**不表示 45 章编排已�
 允许 Coordinator 仅将上方 27 份及本记录通过 `codex/project-docs-contracts` 文档 PR 整合，按实际提交差异复核并使用匹配 head SHA 的 squash merge。提交前记录候选文件摘要，提交后再次核对精确清单与已审文件字节；新差异需重新检查。
 
 这是入库前审查记录，不预先宣称已经提交、合并或部署。精确 reviewed head SHA、实际检查与最终 merge result 由该 PR 的整合记录提供，GitHub 上的实时结果为准；本记录不写入尚未生成的 PR 号或合并 SHA。Coordinator 在执行后向两位负责人同步实际 main 基线；不为填表重复启动后续任务。
+
+### 执行后记录（2026-11-15）
+
+[PR #3](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/3) 的 reviewed head 为 `f4790e1916aee7a1c0bea376e96a350e8bd64839`，精确 28 文件与本地已审摘要逐字节一致。Developer 独立只读交叉检查在 R2 纠正后未发现剩余问题。PR 通过匹配 head SHA 的 squash merge 合并为 `884129bb313e62160321a0c1c1422452a237478a`；Coordinator 独立获取远端 main，验证完整 tree 与已审分支相同，工作区干净。未部署。本段为后续迭代追加的执行事实，不属于原 PR 的预合并结论。

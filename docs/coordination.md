@@ -8,9 +8,9 @@ Updated: 2026-11-15 (Australia/Perth). This is the sole live record of assignmen
 
 **Implementation and manuscript work remain Paused.** This assignment does not resume new prose/translation, chapter schema/rendering, website/UI, theme/browser acceptance, E2E or deployment. Coordinator owns resolution with the user; resumption requires an explicit scoped assignment lifting the applicable hold. Earlier necessary-tool/release authorization does not override it. Do not select new providers, frameworks or paid services through this planning task.
 
-## Assigned workspace and baseline
+## Last scoped workspace and baseline
 
-- Current checkout: `/Users/haixin/Desktop/code/beyond-the-frontend`; branch `codex/full-stack-ai-book-scope`.
+- The accepted planning stage used `/Users/haixin/Desktop/code/beyond-the-frontend` on `codex/full-stack-ai-book-scope`. This is a completed drafting workspace record, not a permanent checkout assignment; verify actual checkout after integration.
 - Verified starting HEAD and local `origin/main`: `f10d6a193c37a731688aca41f5f10a44a2e8fe94`, initially clean. Coordinator created this branch from fetched remote main; Developer verified actual local revision/status.
 - The usual project directory has already returned to that main baseline before this branch was created. Restoring it is not a pending action from onboarding. Verify actual branch/HEAD/status before each new assignment rather than infer them from this historical transition.
 - This checkout holds the frozen Writer and Developer deliveries with disjoint ownership. Any specifically requested revision uses explicit workdirs and absolute edit paths. Coordinator manages all Git writes and branch/worktree changes. The workspace record is not an instruction to continue drafting; the old temporary documentation worktree is not this task's workspace.
@@ -26,7 +26,7 @@ Updated: 2026-11-15 (Australia/Perth). This is the sole live record of assignmen
 
 ## Integration — Coordinator only
 
-**Pending.** The [actual review](reviews/full-stack-ai-book-scope.md) records combined content acceptance, the accepted two-file closure, closure of Writer's SQL-parameterization finding and source-inspection limits. Coordinator handles the authorized PR, exact reviewed head, required checks and merge separately. No new PR/head/CI/merge result is recorded yet. Prior PR #8 evidence below does not satisfy this iteration's integration gate. Integration and planning acceptance do not lift any product/prose hold or authorize deployment.
+**Execution record: [PR #9](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/9).** The [actual review](reviews/full-stack-ai-book-scope.md) accepts the combined content and two-file closure, including Writer's corrected SQL-parameterization finding and source-inspection limits. The reviewed content snapshot is `717782d5b95c74b1e4a778a5c7bf3a33e2fa0ac4`; only Coordinator review/board integration pointers are added afterward. At this record's commit, the final-head checks and merge remain pending. The linked PR records the actual final head/run/merge as integration proceeds; no executor task remains. Prior PR #8 checks do not satisfy this gate. Integration does not lift any product/prose hold or authorize deployment.
 
 ## Last completed integration
 

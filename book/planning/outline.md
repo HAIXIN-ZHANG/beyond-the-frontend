@@ -1,6 +1,8 @@
-# Full-stack + AI Product Engineering: v1 Content Framework
+# Vibe Coding, Then What? — v1 Content Framework
 
 Updated: 2026-11-15. Owner: Writer. **The author has confirmed the v1 positioning, Junior–Senior audience and eight-part direction.** This is the current content framework, replacing the former three-part/45-chapter proposal as the organizing plan. Working reading-page names and splits remain editable; this framework is not individual chapter research, manuscript, website or publication acceptance.
+
+Book/project: **Vibe Coding, Then What?** — **Understand the Systems Behind Your AI-Built Products**. Start from engineers who have built with AI and want to understand the systems behind their products. This branding entry preserves Junior–Senior Full-stack + AI Product Engineer coverage and the eight-part/48-adjustable-unit framework below; it is not a beginner-from-zero or complete-knowledge promise.
 
 [Vision](../../docs/project-vision.md) · [Editorial baseline](editorial-brief.md) · [Writing gates](tasks.md) · [Current task/holds](../../docs/coordination.md)
 
@@ -10,9 +12,9 @@ A “page” below is an independently readable teaching unit, not a printed pag
 
 Junior, Mid and Senior readers share the same text: **essential mechanism → concrete engineering example → optional deeper trade-off**. Explain prerequisites briefly or link their main home. Junior does not mean no development experience; Senior does not require reading every specialist sidebar. There is no promise of a job level or compulsory integrated project.
 
-The opening and G01 Chinese manuscripts remain accepted only in their existing scope/paths; the [initial content contract](../../docs/content-contract.md) is unchanged. G01 anchors P1.1 but does not pre-approve new success-criteria material. [F01A](analyses/F01.md) is accepted browser analysis, not prose; its existing boundaries support P1.2 only. Wider changes return to analysis review. No old slug or published identity is renamed by a planning label.
+The opening and G01 Chinese manuscripts retain their previously reviewed scope/paths. The opening's explicitly authorized book-name replacement is a branding-only resubmission; the assigned contract owner updates its hash/review pointer after exact-change review under the [initial content contract](../../docs/content-contract.md). G01 anchors P1.1 but does not pre-approve new success-criteria material. [F01A](analyses/F01.md) is accepted browser analysis, not prose; its existing boundaries support P1.2 only. Wider changes return to analysis review. No chapter slug or identity is renamed by a planning label.
 
-The opening's historical three-part orientation needs a separately assigned editorial alignment before a v1 release. This planning update does not make that prose edit or change its currently reviewed hash.
+The opening's historical three-part orientation needs a separately assigned editorial alignment before a v1 release. The current book-name-only edit changes its hash for exact-change review; it does not make or approve that broader prose revision. G01 and F01 analysis are unchanged.
 
 **Core:** AI product architecture is required v1 reading, alongside product goals, frontend, APIs/data, reliability, delivery and operations. Using AI to develop is a separate delivery thread; neither substitutes for the other. Cases recur throughout instead of becoming a required capstone. Parts are navigable by question but dependencies remain visible.
 

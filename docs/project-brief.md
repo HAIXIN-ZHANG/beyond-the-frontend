@@ -1,4 +1,4 @@
-# Beyond the Frontend — shared project entry
+# Vibe Coding, Then What? — shared project entry
 
 This compatibility entry points to authoritative documents; do not maintain a second vision, roadmap or runtime queue here.
 
@@ -14,10 +14,10 @@ This compatibility entry points to authoritative documents; do not maintain a se
 
 ## Identity and reading contracts
 
-Project: **Beyond the Frontend**; repository: [HAIXIN-ZHANG/beyond-the-frontend](https://github.com/HAIXIN-ZHANG/beyond-the-frontend). Book: **Beyond the Frontend: It Works. Now What?** / **《前端往后看：能跑，然后呢？》**. Author: **Jason Zhang**, with AI assistance. Earlier project names are historical, not workspace instructions.
+Project/book: **Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**; repository: [HAIXIN-ZHANG/vibe-coding-then-what](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what). Subtitle: **Understand the Systems Behind Your AI-Built Products**. Author: **Jason Zhang**, with AI assistance. Earlier project names are historical, not workspace instructions.
 
 The website is English-default and the book bilingual, with Chinese manuscript review before English adaptation. Implemented commands and limitations belong in the [site developer guide](../site/DEVELOPMENT.md). The [content contract](content-contract.md) governs explicitly assigned source integration; it is not blanket draft publication. [Design handoff](design/reading-experience-v1.md) distinguishes design references from code/browser acceptance.
 
-The first edition targets **Junior–Senior Full-stack + AI Product Engineers**. The [project vision](project-vision.md) owns audience and editorial depth; the [detailed outline](../book/planning/outline.md) owns the confirmed eight-part direction's content planning. AI product architecture is core; AI-assisted coding/delivery is a distinct thread. This is book scope, not evidence of implemented runtime AI chat on the reading website or acceptance of new manuscripts. Specialist DevOps/data expansion remains outside the first-edition main line.
+The first edition starts from engineers who have built with AI and want to understand the systems behind their products, targeting **Junior–Senior Full-stack + AI Product Engineers**. The [project vision](project-vision.md) owns audience and editorial depth; the [detailed outline](../book/planning/outline.md) owns the confirmed eight-part direction's content planning. AI product architecture is core; AI-assisted coding/delivery is a distinct thread. This is book scope, not evidence of implemented runtime AI chat on the reading website or acceptance of new manuscripts. Specialist DevOps/data expansion remains outside the first-edition main line.
 
 Start from AGENTS → assigned role guide → board → linked task brief and necessary inputs. The handoff records assignment/execution evidence; the review records exact-revision judgment. Current branches, tasks and holds belong only on the board, with recoverable task evidence in its handoff. See the [document/notes policy](agent-notes-policy.md) for storage. No source here authorizes additional implementation, installation, Git operations or release.

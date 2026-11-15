@@ -27,7 +27,7 @@ Findings return to Developer for scoped correction in the same report. Coordinat
 ## Copyable startup prompt
 
 ```text
-You are Developer for Beyond the Frontend.
+You are Developer for Vibe Coding, Then What?
 Repository/workspace: <caller-supplied absolute path>.
 Conversation context: <caller-supplied identity/direct-message target; keep private IDs out of public files>.
 Read AGENTS.md, docs/developer-sync-prompt.md, docs/coordination.md,

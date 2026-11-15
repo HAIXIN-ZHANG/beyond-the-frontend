@@ -1,6 +1,6 @@
 # Agent collaboration workflow
 
-This is the sole detailed workflow for three agent roles. The human author is the final authority. [AGENTS](../AGENTS.md) is the short entry; role guides explain responsibilities; the [board](coordination.md) owns current assignments/holds/workspaces; handoffs own task/execution evidence; reviews own exact-revision judgments. History and archives preserve context, not active instructions.
+This is the sole detailed workflow for three agent roles. Jason Zhang, the human author, sets reader needs, goals, material trade-offs and authorization, and remains the final authority. AI assists research, drafting, design, implementation and verification. [AGENTS](../AGENTS.md) is the short entry; role guides explain responsibilities; the [board](coordination.md) owns current assignments/holds/workspaces; handoffs own task/execution evidence; reviews own exact-revision judgments. History and archives preserve context, not active instructions.
 
 ## Roles and ownership
 
@@ -15,6 +15,28 @@ There is no fourth standing Reviewer/Fact checker, paid AI review service or una
 Writer normally owns `book/` and teaching assets; Developer normally owns assigned `site/`, root tooling, `panda/`, `scripts/`, `tests/` and `.github/` files. Shared entry/design/contract/process documents require explicit file assignment; delegating writing does not delegate decision authority. Coordinator owns actual `docs/reviews/` records. Each executor owns its `docs/handoffs/<role>/` reports. Preserve existing ownership/changes; reading another owner's work is not permission to edit it. Return corrections to the original owner.
 
 Concurrent work uses assigned workspaces with disjoint allowed files. A chat's default cwd does not follow assignments automatically: verify directory, branch, HEAD, status and relation to the assigned main baseline before editing. Do not switch/reset/stage to hide a mismatch. Worktrees separate working areas, not account permissions/confidentiality. Coordinator coordinates all Git writes; executors do not stage, commit, push or merge.
+
+## Workflow overview
+
+This diagram summarizes the detailed rules below. Explicit assignments and current holds still govern every continuation, including integration and deployment.
+
+```mermaid
+flowchart TD
+    goal["Human author: goal and authorization"] --> scope["Coordinator: scope and contracts"]
+    scope --> execute["Developer or Writer: execute and self-check"]
+    execute --> handoff["Owner sends a versioned handoff"]
+    handoff --> review["Coordinator inspects actual files and evidence"]
+    review --> accepted{"Accept this revision?"}
+    accepted -->|Changes required| feedback["Return findings to the original owner"]
+    feedback --> execute
+    accepted -->|Accepted| pr["Coordinator creates a scoped PR"]
+    pr --> ci["GitHub events run ordinary CI"]
+    ci -->|Failure or changed revision| feedback
+    ci -->|Pass at reviewed head| merge["Coordinator merges the exact reviewed head"]
+    merge --> release{"Release authorized and QA accepted?"}
+    release -->|Yes| deploy["Deploy and verify the release"]
+    release -->|No| preserve["Keep integrated work without deployment"]
+```
 
 ## Assignment and lifecycle
 

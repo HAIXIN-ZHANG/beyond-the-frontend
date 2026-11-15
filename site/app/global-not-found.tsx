@@ -4,7 +4,7 @@ import { DocumentLayout } from '../components/document-layout.tsx';
 import { NotFoundContent } from '../components/not-found-content.tsx';
 import { getMessages } from '../config/i18n.ts';
 
-export const metadata: Metadata = { title: 'Page not found | Beyond the Frontend' };
+export const metadata: Metadata = { title: 'Page not found | Vibe Coding, Then What?' };
 
 export default function GlobalNotFound() {
   const chinese = getMessages('zh');

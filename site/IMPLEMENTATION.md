@@ -2,6 +2,8 @@
 
 Original proposal: 2026-11-14 (Australia/Perth). Owner: Developer. Legacy references: D01/D02 and the original D03–D05 proposal.
 
+Current identity: **Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**, subtitle **Understand the Systems Behind Your AI-Built Products**, repository slug `vibe-coding-then-what`. The book/repository names, illustrative tree and proposed URL below retain their historical identity. Follow [the developer guide](DEVELOPMENT.md) for current `/vibe-coding-then-what` build/preview commands. The existing local checkout path is intentionally unchanged; a repository rename does not rename an active local directory. This narrow migration does not resume the rest of the proposal.
+
 This preserves the initial staged plan in English; it is not the current execution graph. Website Foundation and Bilingual Routing, Continuous Integration and Merge Protection, and Strict TypeScript Migration are now in main. Design Tokens and Day/Night Themes is an unaccepted separate checkpoint. Further code/content/release work is paused for the documentation task. Use [Development History](../docs/development-history.md), the [board](../docs/coordination.md) and [main's developer guide](DEVELOPMENT.md) for actual status/commands. JavaScript/JSX and the tree below describe the earlier proposal, not current source extensions.
 
 ## 1. Purpose and decision boundaries

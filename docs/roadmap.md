@@ -1,6 +1,8 @@
-# Roadmap: Content, Reading Product and Maintenance
+# Roadmap: Vibe Coding, Then What?
 
 Updated: 2026-11-15. This is a planning framework, not a delivery-date commitment or a replacement for a scoped assignment.
+
+Project/book: **Vibe Coding, Then What?** Repository slug: `vibe-coding-then-what`. Subtitle: **Understand the Systems Behind Your AI-Built Products**. The AI-assisted-product entry positioning does not change the content framework, Beta scopes or implementation holds below.
 
 [Project entry](../README.md) · [Vision and audience](project-vision.md) · [Development history](development-history.md) · [Chinese stage summary](stage-summary.zh-CN.md)
 
@@ -19,9 +21,9 @@ Review, CI, merge and deployment are separate states. Prefer readable outcome na
 
 ## 1. Current baseline and immediate priority
 
-The [board](coordination.md) owns current assignments and holds. The bounded **Full-stack and AI Product Engineering — v1 Content Framework** task updates product positioning/content planning only. The author-confirmed audience is Junior–Senior, with required AI product architecture and a separate coding-AI delivery thread. [Eight-part framework](../book/planning/outline.md) is the content direction; page names/splits can evolve and individual pages have not passed research/manuscript review by being listed.
+The [board](coordination.md) alone owns current assignments and holds. **Full-stack and AI Product Engineering — v1 Content Framework** is a completed historical planning stage, accepted and integrated through [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9). Its Junior–Senior audience, required AI product architecture, separate coding-AI delivery thread and [eight-part framework](../book/planning/outline.md) remain the content direction; page names/splits can evolve and listing does not accept their research/manuscripts.
 
-Product implementation, new prose/translation, UI/schema/E2E and deployment remain on hold unless explicitly reassigned. Earlier tool and post-QA GitHub Pages authorization remains recorded but does not resume execution. Completed documentation/onboarding outcomes belong in [history](development-history.md) and their [documentation](reviews/ai-development-documentation.md)/[onboarding](reviews/agent-workflow-onboarding.md) reviews rather than being reissued as current tasks.
+The rebranding assignment is a narrow exception for naming/positioning, necessary site metadata and Pages-prefix migration/verification, plus the explicitly authorized opening book-name replacement. It does not resume other product implementation, new prose/translation, UI/schema/E2E or deployment. Earlier tool and post-QA GitHub Pages authorization does not lift those holds. Use the board for current owners, status and exact scope, rather than treating this roadmap as an assignment. Completed documentation/onboarding outcomes belong in [history](development-history.md) and their [documentation](reviews/ai-development-documentation.md)/[onboarding](reviews/agent-workflow-onboarding.md) reviews.
 
 | Deliverable | Current evidence | Remaining boundary |
 | --- | --- | --- |
@@ -56,77 +58,101 @@ The Panda checkpoint includes an upstream declaration problem and a proposed spl
 | --- | --- |
 | Junior–Senior Full-stack + AI Product Engineer framework | Confirmed audience/eight-part direction; refine independent page names/merges through planning review without claiming a job-level outcome |
 | Eight connected parts | Product/architecture; frontend/Design Systems; API/integration; data/search; async/traffic/reliability; cloud/testing/delivery; observability/recovery; required AI product architecture plus coding-AI delivery. Detailed scope/examples/optional depth and all 45 legacy mappings live only in the outline. |
-| Existing accepted material | Preserve opening/G01 prose and F01A analysis byte-for-byte in this task. Placement does not expand their old acceptance or authorize the unstarted F01 manuscript. |
+| Existing accepted material | Rebranding permits only the opening's book-name replacement, separately reviewed with its new source hash; G01 and F01A analysis stay byte-identical. Placement does not expand their old acceptance or authorize the unstarted F01 manuscript. |
 | Future page writing | Concrete assignment → sources/detailed analysis and review → confirmed writing scope → manuscript and separate review. Do not list all working pages as Assigned. |
 | Connected cases and depth | Shared mechanism/example/optional-trade-off layers; cases explain decisions, not compulsory projects. DevOps/data support product delivery/maintenance; specialist platforms and model training are outside the main line. |
 | Frameworks, observability and AI providers | Examples chosen for explanatory value and checked when writing. Datadog is one proposed original correlation example; no provider/service/library adoption, installation or new paid account. |
 
 The book's required AI product coverage is distinct from the reading website's optional AI question-card experiment. Required book coverage does not authorize live model calls, a chat product or an SDK integration on this site.
 
-## 3. Reading-product feature priorities
+## 3. Reading-product releases and product rationale
 
-Priorities guide design; they do not assign all work at once. Establish reading and discovery before validating enhancements.
+**The book is the product; the website supports reading it.** Website Beta 1/2/3 are capability milestones, independent of the first-edition eight-part manuscript. New reviewed chapters do not require a new website beta. Later DevOps/data or other career guides are content extensions, not a current requirement for a recommendation engine, plugin system or specialist platform.
 
-| Area | Minimum useful scope | Status | Outside the initial scope |
-| --- | --- | --- | --- |
-| Content and languages | One source for prose, order, status and language mapping | Accepted minimal opening/G01 contract; broader schema and future bilingual extensions TBU | Automatic publication of unreviewed drafts; translation on page open |
-| Reading UI | Home, chapters, category navigation, local outline, responsive layout, Day/Night and keyboard access | Core direction; design delivered, implementation acceptance pending | Full desktop-OS simulation or unnecessary window controls |
-| Search and case entry points | Chapter/paragraph search, keyword and case indexes | Priority plan; engine/index rules TBU | Semantic search or model recommendations |
-| Reading recovery | Current-device position and necessary bookmarks | Planned; test with real prose | Accounts or cross-device synchronization |
-| Sharing and correction | Stable paragraph links; feedback with chapter, location and version | Priority plan; details TBU | Built-in social platform or live comments |
-| Terminology | Small shared glossary with keyboard-accessible short explanations and deeper links | Planned | A complete encyclopedia or repeated definitions |
-| AI question cards | Curated questions, necessary context and copying | Small priority experiment | Hosted AI chat, model keys or live inference |
-| Chapter audio | One listening sample, playback and narration conversion | Candidate experiment | Immediate full-book audio or arbitrary voice cloning |
-| Content updates | Material-change notes and language/audio version mapping | Add as content grows; rules TBU | Notifications or regeneration for every punctuation change |
-| Offline export | Validate one EPUB or PDF path | Later candidate | Every format and a dedicated reader at once |
-| Progressive diagrams | Reveal a few difficult relationships in steps with static explanations retained | Later candidate | Animation for every diagram or interaction required to understand a principle |
+These are author-approved planning priorities, not implemented features, delivery dates or execution assignments. Existing implementation/manuscript holds still apply. Beta 1 can open with a small set of reviewed representative chapters; it does not require all working pages or both complete language editions. Any launch overview must first align the accepted opening's old organization through its own editorial review.
 
-## 4. Product acceptance checkpoints
+### Product evidence and selection rules
 
-These checkpoints complement the delivery stages without replacing their legacy identifiers or exact assignments.
+The desk review consulted [mdBook's reader guide](https://rust-lang.github.io/mdBook/guide/reading.html), [Material for MkDocs search](https://squidfunk.github.io/mkdocs-material/plugins/search/) and [Diátaxis](https://diataxis.fr/). These illustrate established reading/navigation/search patterns and distinct explanation/reference/tutorial/how-to needs. They are design references, not proof that our readers want every feature or a decision to adopt those tools.
 
-### Positioning and sample chapters
+**Not yet validated:** demand for audio, offline reading, exports, interactive diagrams or downloadable AI context. Junior–Senior is the confirmed audience range, not a validated market segmentation. Prefer chapter prerequisites, suggested routes and optional deeper discussion over separate skill-level products.
 
-The Junior–Senior Full-stack + AI Product Engineer audience and eight-part direction are confirmed. Validate tone, detailed page splits and explanations through scoped planning and sample review. The accepted opening/foundations remain unchanged; later chapter and English-sample scopes are separate. License choices remain TBU. A confirmed framework does not mean every page has completed analysis or manuscript review.
+For each proposed feature, record the reader and situation, concrete problem, simplest content/link alternative, observable success and ongoing maintenance cost. Reject additions whose main justification is technical novelty. Distinguish a product hypothesis from an observed reader outcome; do not invent demand, engagement or analytics.
 
-### Comfortable reading of approved content
+### Beta 1 — Reliable basic reading
 
-- Use the accepted [initial-chapter contract](content-contract.md) for stable opening/G01 IDs, slugs/order, typed allowlist, source hashes, reviewed-draft status and missing-English navigation. It permits only these inputs for a later assigned implementation; main does not yet render them. Agree broader metadata/schema, new chapters and future translation/version behavior before expanding it.
-- Build only approved prose and necessary public resources. Planning, handoffs, reviews, sync prompts and `.local/` do not enter the reading directory or search merely because they exist in Git. Search and audio must share the publication boundary.
-- Validate the home, desktop and mobile chapter direction with real text, tables, diagrams, code, links and terminology.
-- Developer supplies browser, keyboard, language-switching and runtime-error evidence for the scoped integration.
-- Acceptance requires readable mobile/desktop samples, reliable refresh/switching and exclusion of unreviewed/private material from public artifacts.
-- The minimal initial contract is accepted; its implementation and browser acceptance remain undone. Full-book schema, future bilingual/version extensions and expanded file scope remain **TBU**. Do not reopen accepted minimum decisions or imply they already shipped.
+| Capability | Reader value and minimum boundary |
+| --- | --- |
+| Entry and published chapters | Explain the book, prerequisites and where to start; render only explicitly approved chapter/resource inputs. Retain the accepted initial contract and review broader expansion separately. |
+| Navigation and orientation | Chapter groups, previous/next, in-page outline and stable heading links. Chapter introductions and related-reading links help connect ideas without a recommendation system. |
+| Comfortable reading | Responsive desktop/tablet/mobile, Day/Night with system default and persistent explicit choice, readable prose/figures/callouts/code/tables, local overflow, keyboard access and visible focus. Defaults must work without settings. |
+| Basic static search | Search approved published content, reach a chapter or heading and explain no results. Content coverage and Chinese/English behavior must be tested; no semantic search or backend. |
+| Languages and sharing | Clear language entry, honest missing-translation behavior, shareable chapter/heading URLs and a simple GitHub correction entry. A complete bilingual corpus is not a release prerequisite. |
+| Small AI question-card trial | A few useful questions at genuine conceptual difficulties, with visible necessary context, source/version and copy feedback. Readers edit/paste into their own tools; no hidden chat context, keys or live site inference. No quota of cards per chapter. |
+| Release quality | Actual browser/accessibility checks, useful narrow E2E coverage, required CI/root/subpath export evidence, clear public content/license boundaries and separately scoped live deployment acceptance. |
 
-### Find, share and resume reading
+Core reading must not wait for audio, exports or a general AI feature framework. If question cards have not demonstrated value or passed review, record them as deferred rather than block a basic-reading release.
 
-Assign search, case entry points, paragraph access, correction context and reading-position behavior. Check Chinese/English search, no results, stable links and invalid local state. A reader should find an explanation from an ordinary engineering problem and share or report its precise location. Search/index updates, versioning and analytics remain **TBU**; do not assume tracking, accounts or a backend.
+### Beta 2 — Practical improvements, with bounded experiments
 
-### Low-cost AI reading extensions
+| Priority | Capability | Scope and rationale |
+| --- | --- | --- |
+| First | Resume and local bookmarks | Help readers return after a break; current device only. Handle missing/invalid stored state and changed chapters. No accounts or cloud sync. |
+| First | Glossary, case/topic index and related chapters | Support revisiting an engineering question as the corpus grows. Use ordinary pages/links; avoid a complete encyclopedia or complex taxonomy. |
+| Next | Better search and correction context | Useful excerpts, limited filters when content warrants them, and feedback including chapter/location/version. Avoid maintaining filters before useful content exists. |
+| Next | Small reading preferences and print styles | Assess font size/reading width and browser printing after default typography is sound. Do not build an elaborate settings panel. |
+| Next | More useful question cards | Trial another example, counterexample or understanding check; a few editable assumptions if needed. Copy only, without a hosted model service. |
+| Next | Content and language updates | Simple material-change notes and links to available counterparts. Career-oriented reading routes remain ordinary editorial pages, not personalized recommendations. |
+| Independent pilot | One offline export format | Try PDF **or** EPUB on reviewed chapters; inspect figures, links, code and version information before expansion. Browser print styles do not imply a validated export pipeline. |
+| Independent pilot | One listening chapter | Pre-generate and manually review a suitable chapter, with basic playback controls. Manual asset updates are acceptable. No full-book coverage or automatic regeneration requirement. |
 
-- Writer prepares a few cards in two or three suitable stable chapters; Coordinator reviews their assumptions and questions with the prose.
-- Developer provides preview/copy with chapter links and versions, without a model call. Cards may ask for another example, a counterexample or a check of understanding.
-- Readers manually paste the editable text into their own tools. Do not automatically send text, manage accounts/sessions or hold keys.
-- Acceptance requires understandable prompts without hidden chat history, copying-error feedback and cards that do not interrupt reading.
-- Actual tool-use trials, feedback collection and downloadable context remain **TBU**. A prepared prompt is not an integration with GPT, Codex or Claude, and does not guarantee model output.
+Beta 2 is not a commitment to ship every row together. Prioritize observed reading problems; export/audio pilots can be deferred without blocking the useful reading improvements. Image zoom is an optional small remedy for an observed figure-legibility problem, not a diagram platform.
 
-### Single-chapter audio trial
+### Beta 3 — Selective, evidence-led extensions
 
-- Choose a stable chapter suitable for listening, with samples for explanation, mixed-language technical terms and diagram/table narration.
-- Derive narration from the same Markdown source. Skip raw code, URL strings and formatting; supply useful spoken explanations. Avoid maintaining a duplicate full-book script.
-- Generate by section and assess necessary user-initiated play/pause/resume/stop, progress and speed controls; minimum scope remains TBU.
-- Compare intelligibility, omissions/repetition, pronunciation, resources and generation time. Model, voice, execution location and budget are **TBU**; no listening trial or service selection has occurred.
-- Check the audio against its prose and record which material needs the page.
-- Only after a useful trial, design reviewed narration changes → affected-section regeneration → new asset upload → successful index switch. Narration, model and voice configuration jointly identify a version. Failed generation must not replace a working version; older concurrent jobs must not overwrite newer indexes.
-- Generate only reviewed versions authorized for publication. Label older audio or hide it when material prose changes are not yet reflected. Formatting-only changes need not trigger regeneration. Implementation must specify retries and failure handling.
-- Storage/CDN, execution, automation and costs remain **TBU**; model/deployment choices require applicable authorization. Local generation still uses hardware, time and storage and cannot continue while the machine is offline. Playback alone need not introduce an always-running application backend.
-- Expand only after listening acceptance, not simply because full generation is technically possible.
+These are candidates, not a promise to implement them all. Select one or two only after a smaller trial shows enough reader value to justify development and maintenance.
 
-### Public maintenance and release
+| Candidate | Value hypothesis | Complexity that must be justified |
+| --- | --- | --- |
+| Versioned chapter listening | Review suitable explanations away from the screen | Narration adaptation, technical pronunciation, matching text/audio versions, chapter/section navigation, incremental regeneration, storage and failure recovery. Text/listening position linking is optional. |
+| Offline website reading | Continue approved chapters with unreliable connectivity | Asset coverage, storage limits, cache/update behavior, unavailable content and recovery. PWA is an implementation option, not a mandated dependency. |
+| Selected progressive/interactive diagrams | Inspect difficult flows and changed conditions, such as retries, queues or RAG | Accessible controls and an equivalent useful static/text explanation; no animation throughout the book. |
+| Downloadable AI context bundles | Carry selected explanations and questions into readers' own tools | Bounded editable context, source/version attribution and Markdown export. No live chat or model-key custody. |
 
-Confirm content/code licenses, contribution rules, issue/PR entry points, public chapter scope and change notes. Verify static deployment, public URL, subpaths, 404 and released features on the live site. Update README links to actual deliveries and retain limitations. Release timing and each release's scope remain **TBU**. Basic reading can justify a first release without waiting for audio, cards or every candidate feature.
+Other candidates require a concrete need: local reading-record import/export, a cross-chapter concept map, bilingual side-by-side comparison, material translation-drift notices or additional export formats. Keep stable links during ordinary updates from the start; sophisticated revision navigation is a separate later candidate. Do not add cross-device accounts to make these features possible.
 
-Feedback guides revisions and the next questions; it does not automatically generate or publish unreviewed prose. Keep feedback mechanisms small. Accounts, rankings, billing, advertising and lead generation are outside the initial release.
+### Outside the planned betas
+
+Hosted AI chat/personalized Q&A, accounts/cloud synchronization, community/live comments/rankings, billing/advertising/lead generation, automatic unreviewed translation/publication and full desktop-OS simulation are not planned. AI product engineering remains required **book content** without requiring the website to become an AI application.
+
+## 4. Product validation and acceptance checkpoints
+
+### Validate the reading proposition
+
+Use a small formative trial, for example 3–5 willing target readers with different experience levels; this is a proposed usability exercise, not completed research or statistically representative market validation. Let them find a topic from an engineering question, read/explain one mechanism, return later and try a question card. Observe confusion, navigation failure, misunderstood assumptions and whether the card adds anything beyond the prose. Do not collect private prompts or introduce tracking by default.
+
+Record actual observations, limitations and resulting scope decisions. An unsuccessful task should first trigger examination of the text, labels and structure; it does not automatically justify another feature. User recruitment, external messages and telemetry need applicable authorization.
+
+### Beta 1 gate: find, read, continue and share
+
+- Preserve the [accepted initial-chapter contract](content-contract.md): opening/G01 IDs, order, reviewed source hashes, allowlist and missing-English navigation. Rendering is not implemented by this plan; broader schema/new inputs need review.
+- Build/search only approved public prose/resources. Planning, drafts without publication approval, handoffs, reviews, sync prompts and `.local/` must not leak into artifacts or indexes.
+- Demonstrate the reading journey with actual reviewed content: entry → chapter → relevant heading → next chapter → share/report. Test basic search/no-results and both language entry paths honestly.
+- Verify desktop/tablet/narrow screens, Day/Night/system/refresh, keyboard/focus, diagrams, long code/tables, broken links and runtime errors. Show root and Pages-subpath build/artifact checks and required CI on the proposed revision.
+- For any released cards, review assumptions with the prose, preview exact text/context and provide keyboard-accessible copy success/failure feedback. A copied prompt is not a GPT/Codex/Claude integration or a guarantee of output quality.
+- Confirm content/code licenses, contribution boundaries and public chapter scope before release; separately verify deployed URL, assets, subpaths and 404. Reviewed, merged and deployed remain separate facts.
+
+### Beta 2 gate: improve a demonstrated reading need
+
+Check resume/bookmark recovery against changed headings and invalid local state; test glossary/index/search with real content and Chinese/English availability. Validate preferences without reducing accessibility or breaking layout. Review contextual feedback and question-card changes without adding a backend by default.
+
+Accept pilots separately. For export, inspect one output format on representative chapters. For audio, compare intelligibility, technical pronunciation, omissions/repetition and whether tables/diagrams can be understood or require the page. Adapt from the same approved Markdown rather than maintaining an independent full-book script; skip raw code/URLs/formatting and retain necessary spoken explanation. Record resources, time and limitations; model, voice, execution location and cost remain TBU. A basic single-chapter trial does not require a production regeneration pipeline.
+
+### Beta 3 gate: prove value and maintenance feasibility
+
+Each selected candidate needs a bounded assignment, a smaller accepted trial, concrete reader evidence and operational acceptance. For automated audio, narration and model/voice configuration identify a version; regenerate only affected reviewed material, publish assets before switching the index, preserve the working version on failure and prevent older jobs overwriting newer versions. Label or hide stale audio after material prose changes; formatting-only edits need not regenerate it. Specify retry/recovery and storage/cost boundaries. Playback uses prepared assets, not inference per visit; no arbitrary voice cloning.
+
+Offline/interactive/context-bundle candidates each need their own accessibility, content-version and failure checks. Do not infer approval for a provider, library, paid service or implementation from this roadmap. Feedback informs reviewed revisions; it never automatically publishes generated prose.
 
 ## 5. Ownership and handoff
 
@@ -143,10 +169,10 @@ Writer authors assigned vision/roadmap and planning explanations; Developer auth
 | Detailed reading-page names/splits and next assigned page | Writer | Author / Coordinator | Confirmed eight-part direction; planning review, then an explicit page assignment |
 | Future language/status/path contract extensions | Writer + Developer | Coordinator | Preserve the accepted initial opening/G01 contract; review expansion before new prose integration |
 | Home/chapter/mobile design | Existing UI03 design; Developer supplies implementation feedback | Author / Coordinator | Visual acceptance and explicit implementation scope |
-| Search, recovery and correction behavior | Developer | Coordinator | Content contract and basic reading |
+| Beta 1 search/sharing; Beta 2 recovery and contextual correction | Developer | Coordinator | Content contract, basic reading and observed reader needs |
 | Card and copy-context format | Writer + Developer | Coordinator | Stable chapters allowed for publication |
-| Audio model, resources and cost | Developer proposes; Writer supplies samples | Author / Coordinator | Single-chapter scope and resource authorization |
+| Beta 2 export/audio pilots; Beta 3 automation | Developer proposes; Writer supplies samples | Author / Coordinator | Separate bounded trial, reader value and resource authorization |
 | Content/code license and contributions | Assigned document owner proposes options | Author decides; Coordinator records | Before reuse and outside contributions |
-| Deployment URL, evidence and first-release scope | Developer | Author / Coordinator | Reading and QA gates accepted |
+| Reader trial, release scope and deployment evidence | Owners propose; Developer supplies runtime evidence | Author / Coordinator | Bounded validation authorization; relevant reading, content and QA gates accepted |
 
 Close TBU items with evidence, remove obsolete placeholders and synchronize status. Do not insert guessed measurements, unapproved dates or cost commitments.

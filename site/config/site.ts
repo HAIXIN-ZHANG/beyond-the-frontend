@@ -1,5 +1,5 @@
 export const site = Object.freeze({
-  name: 'Beyond the Frontend',
-  repository: 'https://github.com/HAIXIN-ZHANG/beyond-the-frontend',
-  issues: 'https://github.com/HAIXIN-ZHANG/beyond-the-frontend/issues',
+  name: 'Vibe Coding, Then What?',
+  repository: 'https://github.com/HAIXIN-ZHANG/vibe-coding-then-what',
+  issues: 'https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues',
 });

@@ -15,8 +15,10 @@ test('language switching preserves the current page without doubling the deploym
     ['/read/', 'en', '', '/zh/read/'],
     ['/zh/', 'zh', '', '/'],
     ['/zh/read/', 'zh', '', '/read/'],
-    ['/beyond-the-frontend/read/', 'en', '/beyond-the-frontend', '/zh/read/'],
-    ['/beyond-the-frontend/zh/read/', 'zh', '/beyond-the-frontend', '/read/'],
+    ['/vibe-coding-then-what/', 'en', '/vibe-coding-then-what', '/zh/'],
+    ['/vibe-coding-then-what/zh/', 'zh', '/vibe-coding-then-what', '/'],
+    ['/vibe-coding-then-what/read/', 'en', '/vibe-coding-then-what', '/zh/read/'],
+    ['/vibe-coding-then-what/zh/read/', 'zh', '/vibe-coding-then-what', '/read/'],
   ];
   for (const [pathname, locale, basePath, expected] of cases) {
     assert.equal(alternateLocalePath(pathname, locale, basePath), expected);

@@ -1,41 +1,41 @@
-# Beyond the Frontend — coordination board
+# Vibe Coding, Then What? — coordination board
 
-Updated: 2026-11-15 (Australia/Perth). This is the sole live record of assignments, holds and workspaces. Start from [AGENTS](../AGENTS.md) → explicitly assigned role guide → this board → linked task brief and necessary inputs. [Collaboration](collaboration.md) owns the detailed workflow; [history](development-history.md) and the [archived previous board](archive/coordination-before-onboarding.md) are optional evidence.
+Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → linked brief/necessary inputs. [Collaboration](collaboration.md) owns the detailed workflow; [History](development-history.md) retains earlier identities and evidence.
 
 ## Current scope and independent holds
 
-**Planning accepted; executor drafting closed:** First-edition Full-stack + AI Product Engineer scope for Junior–Senior readers. Coordinator accepted Writer r2, Developer r1 content and its r2 closure after actual affected review; **no open executor tasks** remain. Coordinator integration is separate. [Vision](project-vision.md) and [detailed outline](../book/planning/outline.md) own the accepted planning direction, not approval of new chapter research or manuscripts.
+**Branding and reader-documentation accepted; no open executor tasks:** English title/project name **Vibe Coding, Then What?**, Chinese title **《Vibe Coding 之后：能跑，然后呢？》**, subtitle **Understand the Systems Behind Your AI-Built Products**, slug `vibe-coding-then-what`. Writer r2 and Developer r1 passed actual review at checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`. The author's additional reader-facing README/workflow supplement has passed affected review; accepted implementation stays frozen. Beta planning remains planning, not execution authorization.
 
-**Implementation and manuscript work remain Paused.** This assignment does not resume new prose/translation, chapter schema/rendering, website/UI, theme/browser acceptance, E2E or deployment. Coordinator owns resolution with the user; resumption requires an explicit scoped assignment lifting the applicable hold. Earlier necessary-tool/release authorization does not override it. Do not select new providers, frameworks or paid services through this planning task.
+Other product/prose work remains **Paused**: no chapter writing/translation, chapter renderer/schema implementation, theme acceptance, UI redesign, E2E expansion or deployment. Coordinator resolves holds with the user; earlier tool/release authorization does not lift them. The opening's one-name replacement and current contract hash/reference passed actual review. No other prose or route/schema change follows from that exception.
 
 ## Last scoped workspace and baseline
 
-- The accepted planning stage used `/Users/haixin/Desktop/code/beyond-the-frontend` on `codex/full-stack-ai-book-scope`. This is a completed drafting workspace record, not a permanent checkout assignment; verify actual checkout after integration.
-- Verified starting HEAD and local `origin/main`: `f10d6a193c37a731688aca41f5f10a44a2e8fe94`, initially clean. Coordinator created this branch from fetched remote main; Developer verified actual local revision/status.
-- The usual project directory has already returned to that main baseline before this branch was created. Restoring it is not a pending action from onboarding. Verify actual branch/HEAD/status before each new assignment rather than infer them from this historical transition.
-- This checkout holds the frozen Writer and Developer deliveries with disjoint ownership. Any specifically requested revision uses explicit workdirs and absolute edit paths. Coordinator manages all Git writes and branch/worktree changes. The workspace record is not an instruction to continue drafting; the old temporary documentation worktree is not this task's workspace.
+- The reviewed stage used `/Users/haixin/Desktop/code/beyond-the-frontend`; branch `codex/vibe-coding-rebrand`; starting HEAD/local `origin/main` `40f5f40effc2bedecf2e1b91c4a31fd58caba308`.
+- The directory name is intentionally unchanged to preserve active chats/IDE references; it is not the repository slug. Verify actual branch/HEAD/status before editing.
+- Writer's authorized vision/roadmap Beta changes existed before this assignment and are preserved. Writer/Developer share the checkout with disjoint exact manifests. Commands use explicit workdirs; edit paths are absolute. Coordinator manages all Git writes and remote settings.
 
-## Closed executor tasks
+## Current tasks
 
-**No open executor tasks.** Preserve accepted files; any correction needs specific review feedback, and further work needs a new scoped assignment.
-
-| Owner | Task and brief | Lifecycle status | Next action |
+| Owner | Assigned scope and brief | State | Next action |
 | --- | --- | --- | --- |
-| Writer | Seven files: vision, roadmap, editorial brief, detailed outline, writing-task alignment, single Chinese overview and [own task brief/handoff](handoffs/writer/full-stack-ai-book-scope.md) | Accepted r2; closed | Preserve frozen planning delivery; no chapter prose or other continuation |
-| Developer | Five files: README, compatibility brief, this board, one History direction entry and [own task brief/handoff](handoffs/developer/full-stack-ai-book-scope.md) | Content r1 / closure r2 Accepted; closed | Preserve delivery; no dependent implementation |
+| Writer | Accepted original scope; additional README-only reader introduction, free/public wording and confirmed author opportunity/collaboration entry, plus same [handoff](handoffs/writer/vibe-coding-rebrand.md) | Accepted through r3; closed | Preserve accepted files; no new manuscript work |
+| Developer | Accepted original scope; additionally move the necessary README workflow diagram into existing `collaboration.md`, plus same [handoff](handoffs/developer/vibe-coding-rebrand.md) | Accepted through r2; closed | Preserve accepted files; no dependent implementation |
+| Coordinator/Reviewer | Actual affected supplement review and Git integration; [review](reviews/vibe-coding-rebrand.md) | All local review accepted; integration pending | Manage final reviewed head, required checks and authorized merge |
 
-## Integration — Coordinator only
+Both executor assignments are closed; no continuation is implied. License selection, CONTRIBUTING, broad document cleanup, historical moves and other audit suggestions are not implicitly assigned. Integration is Coordinator-only. [PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10) contains the accepted branding checkpoint; its final head/checks/merge will be recorded there after actual supplement acceptance. No future success is prefilled. Historical evidence remains intact.
 
-**Execution record: [PR #9](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/9).** The [actual review](reviews/full-stack-ai-book-scope.md) accepts the combined content and two-file closure, including Writer's corrected SQL-parameterization finding and source-inspection limits. The reviewed content snapshot is `717782d5b95c74b1e4a778a5c7bf3a33e2fa0ac4`; only Coordinator review/board integration pointers are added afterward. At this record's commit, the final-head checks and merge remain pending. The linked PR records the actual final head/run/merge as integration proceeds; no executor task remains. Prior PR #8 checks do not satisfy this gate. Integration does not lift any product/prose hold or authorize deployment.
+## External rename already completed
+
+Coordinator renamed the same GitHub repository (ID `1417292071`) to [HAIXIN-ZHANG/vibe-coding-then-what](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what) and updated About: “Understand what AI helped you build. A guide to full-stack and AI product engineering—from interfaces and APIs to data, delivery, debugging and recovery.” Developer's read-only metadata check confirms that name/ID/description and default `main`; local `origin` is the new canonical URL. Remote rename is an accomplished external change, not evidence of code review/CI/merge. Coordinator's bounded repository-control verification is recorded in the review; Developer did not change settings or perform a new account/Figma audit.
 
 ## Last completed integration
 
-Agent Workflow and Cold-start Onboarding is **completed and merged**, not an open executor task: [review](reviews/agent-workflow-onboarding.md), [PR #8](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/8). Verified merged head: `12718e7e8689e8ab2e0d66cf2cfc464b2ac7f87a`; [run 43675030008](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43675030008) passed Quality, Static export (root) and Static export (pages); squash result `f10d6a193c37a731688aca41f5f10a44a2e8fe94` is this iteration's base. These are prior-task facts, not this planning task's review/check/merge evidence. No deployment is claimed.
+The first-edition Full-stack + AI Product Engineer planning stage is completed: [review](reviews/full-stack-ai-book-scope.md), [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9). Read-only PR metadata confirms merged final head `3f3b938364f35130156bb5bedd2f85ead2904dc1` and squash `40f5f40effc2bedecf2e1b91c4a31fd58caba308`. Coordinator recorded all three required jobs/steps successful in [run 43716601789](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43716601789). That planning acceptance/merge does not accept new manuscripts or this migration's artifacts.
 
-The earlier AI Development Workflow and Delivery History integration remains recorded in [its review](reviews/ai-development-documentation.md), [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7) and History; it is not the active task.
+Earlier onboarding/history integrations remain in their original review/PR records. Recorded former names and URLs describe their own revisions; they are not current instructions.
 
-## Preserved recovery points
+## Preserved recovery
 
-Design Tokens and Day/Night Themes remains **unaccepted**. Durable references: branch `codex/ds01-panda-theme` and checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`, verified in both local and remote-tracking refs. Locate workspaces with `git worktree list` and verify actual branch/HEAD/status; the usual project directory does not permanently belong to the theme branch. [Theme handoff](handoffs/developer/DS01.md) and [review](reviews/DS01.md) retain local evidence and missing independent browser/integration acceptance. Do not edit or run its temporary browser harness for this planning assignment.
+The unaccepted theme work remains at branch `codex/ds01-panda-theme` and checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`. Use `git worktree list` and actual branch/revision checks to locate it; no directory permanently belongs to that branch. [Theme handoff](handoffs/developer/DS01.md) and [review](reviews/DS01.md) retain local evidence and missing browser/integration acceptance. Do not migrate that checkpoint as part of this task.
 
-Theme-generated files preserved during the earlier return to main remain in ignored `.local/recovery/theme-generated-after-onboarding-2026-11-15/styled-system/`, with a sibling `manifest.json`. They are local recovery material, not main's build input, accepted theme implementation or a new deliverable. This task preserves that backup and the theme branch/checkpoint; no product state is inferred from it.
+The 31 generated files remain in ignored `.local/recovery/theme-generated-after-onboarding-2026-11-15/styled-system/` with sibling `manifest.json`. Preserve their bytes and refs. They are local recovery material, not main's build input, an accepted theme or a new deliverable.

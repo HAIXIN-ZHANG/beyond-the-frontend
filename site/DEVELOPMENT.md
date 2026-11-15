@@ -1,8 +1,8 @@
 # Website Foundation and Strict TypeScript — developer guide
 
-This guide describes **main at `4ff4a1ffd32209e80f64a60bd12766f3864ea489`**, the base of this documentation task. It provides a bilingual static website skeleton, strict TypeScript and CI. It does not yet render manuscripts, provide themes/search/audio, or expose an application backend. There is no verified deployed reading URL.
+This guide describes the implemented bilingual static website foundation, strict TypeScript and CI. Its active brand is **Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**, with subtitle **Understand the Systems Behind Your AI-Built Products** and repository slug `vibe-coding-then-what`. It does not yet render manuscripts, provide themes/search/audio, or expose an application backend. There is no verified deployed reading URL.
 
-Design Tokens and Day/Night Themes is preserved in a separate [unaccepted checkpoint](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/commit/4da2578048f8df113fed92d99e084f644a9a788e). Its Panda/codegen commands are **not available on main**. See the [checkpoint handoff](../docs/handoffs/developer/DS01.md), [incomplete review](../docs/reviews/DS01.md) and [Development History](../docs/development-history.md) before resuming it. The current task changes documentation only.
+Design Tokens and Day/Night Themes is preserved in a separate [unaccepted checkpoint](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/commit/4da2578048f8df113fed92d99e084f644a9a788e). Its Panda/codegen commands are **not available on main**. See the [checkpoint handoff](../docs/handoffs/developer/DS01.md), [incomplete review](../docs/reviews/DS01.md) and [Development History](../docs/development-history.md) before resuming it. Only the narrow brand/Pages-prefix migration is active; the checkpoint remains outside this implementation.
 
 ## Environment and commands
 
@@ -37,12 +37,12 @@ Project links are configured in `site/config/site.ts`; book titles and interface
 
 ```sh
 npm run build:pages
-NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run verify:export
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run verify:export
 ```
 
 `NEXT_PUBLIC_BASE_PATH` is validated at build time. Next applies it to internal links and assets; do not add it manually twice. Build and verification must receive the same value. Explicitly clear it when restoring a root export.
 
-The Pages output has prefixed URLs but no extra `beyond-the-frontend/` directory within `site/out/`. A static preview must mount the directory at `/beyond-the-frontend/` and serve its actual `404.html` with HTTP 404 for unknown paths. `next start` does not run an exported site; `next dev` does not prove production hosting behavior. A production Pages release is separately authorized after accepted code/content/QA, and currently paused.
+The Pages output has prefixed URLs but no extra `vibe-coding-then-what/` directory within `site/out/`. A static preview must mount the directory at `/vibe-coding-then-what/` and serve its actual `404.html` with HTTP 404 for unknown paths. `next start` does not run an exported site; `next dev` does not prove production hosting behavior. A production Pages release is separately authorized after accepted code/content/QA, and currently paused.
 
 ## Strict TypeScript
 
@@ -64,7 +64,7 @@ The Panda checkpoint has an additional strict build-tool compiler and a document
 | --- | --- |
 | `Quality` | `npm ci --no-fund`, then `npm run check` |
 | `Static export (root)` | Empty prefix, `npm run build`, `npm run verify:export` |
-| `Static export (pages)` | `/beyond-the-frontend`, `npm run build:pages`, `npm run verify:export` |
+| `Static export (pages)` | `/vibe-coding-then-what`, `npm run build:pages`, `npm run verify:export` |
 
 The export jobs wait for Quality, then run independently with fail-fast disabled. Each build/verify pair shares its environment, with root explicitly clearing inherited prefixes. New PR commits cancel older runs for the same PR. Reproduce all checks with:
 
@@ -72,8 +72,8 @@ The export jobs wait for Quality, then run independently with fail-fast disabled
 NEXT_PUBLIC_BASE_PATH='' npm run check
 NEXT_PUBLIC_BASE_PATH='' npm run build
 NEXT_PUBLIC_BASE_PATH='' npm run verify:export
-NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run build:pages
-NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run verify:export
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run build:pages
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run verify:export
 ```
 
 The hosted runner is `ubuntu-24.04`, with actual Node/npm versions printed. Node 24 patches and runner images are not immutable. Official Actions are pinned to full commits verified on 2026-11-15:
@@ -87,10 +87,12 @@ Required checks were enabled only after successful cloud execution, with up-to-d
 
 ## Evidence and limits
 
+The narrow branding migration's actual check/build/export/browser evidence is recorded in its [Developer handoff](../docs/handoffs/developer/vibe-coding-rebrand.md), with acceptance recorded separately by Coordinator. That evidence checks the existing reading shell and new prefix; it does not accept the separate theme checkpoint or establish a public deployment.
+
 Historical foundation and TypeScript runs passed clean installation, lint, four behavior tests, strict coverage and both static exports: five HTML pages and 73 local references each. Export checks include languages, titles, correct switch destinations, bilingual 404/noindex and actual local asset paths. Coordinator independently checked the actual files and compared all 18 migrated runtime/JSX modules after extension normalization. The [TypeScript review](../docs/reviews/TS01.md) records its PR/cloud acceptance; the [foundation review](../docs/reviews/D02.md) retains incomplete browser checks.
 
 Full dependency audit recorded seven moderate dependency entries from one [minimatch advisory](https://github.com/advisories/GHSA-g3hv-75wg-m249) in the typescript-eslint development chain. Patched 11.0.1 is outside upstream `^10.2.2`. The inspected configuration did not enable projectService/allowDefaultProject or the advisory's high-optimization trigger. Coordinator judged current usage non-blocking; it is neither repaired nor guaranteed safe. Production-only audit was zero. Reassess on upstream/configuration changes; no forced override or incompatible downgrade was used.
 
 Project commands disable Next telemetry without changing machine settings, and automatic agent-rule generation is disabled. No API, server writes, credentials, external fonts or analytics were added. The simple SVG icon is original. Internal directories (`book/`, `docs/`, `.local/`, `.git/`, dependencies) are not a public content source; generated output/caches/env files stay out of Git.
 
-Necessary npm/browser tools and a small future E2E suite are authorized. The temporary browser harness has only passed syntax checking; no accepted screenshot set or completed first-paint/hydration/keyboard gate is claimed. Further implementation/testing/deployment is paused during this documentation priority. Review, cloud checks, merge and deployment remain separate facts.
+Necessary npm/browser tools and a small future E2E suite are authorized. The older DS01 theme harness only passed syntax checking at its historical checkpoint; that theme's screenshot/first-paint/hydration/keyboard acceptance is incomplete. The separate branding regression checks are recorded in the [rebrand handoff](../docs/handoffs/developer/vibe-coding-rebrand.md); they do not complete DS01's theme gate. Further product/manuscript work, theme acceptance, E2E and deployment remain paused; the branding migration does not release them. Review, cloud checks, merge and deployment remain separate facts.

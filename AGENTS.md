@@ -1,6 +1,6 @@
-# Beyond the Frontend — agent entry
+# Vibe Coding, Then What? — agent entry
 
-Beyond the Frontend is a bilingual engineering book with a supporting reading website. Consult [README](README.md), [project vision](docs/project-vision.md) and [roadmap](docs/roadmap.md) when the assigned task needs product context; they are not mandatory startup reading or execution authorization.
+Vibe Coding, Then What? is a bilingual engineering book with a supporting reading website. Consult [README](README.md), [project vision](docs/project-vision.md) and [roadmap](docs/roadmap.md) when the assigned task needs product context; they are not mandatory startup reading or execution authorization.
 
 The human author is the final authority. Work only on a concrete user/Coordinator assignment; roadmaps, historical prompts and document updates do not authorize execution. Preserve user and other owners' changes. Flag scope/ownership conflicts to Coordinator.
 

@@ -71,6 +71,8 @@ The book's required AI product coverage is distinct from the reading website's o
 
 These are author-approved planning priorities, not implemented features, delivery dates or execution assignments. Existing implementation/manuscript holds still apply. Beta 1 can open with a small set of reviewed representative chapters; it does not require all working pages or both complete language editions. Any launch overview must first align the accepted opening's old organization through its own editorial review.
 
+The [UI04 design and professional re-review](reviews/beta1-design-alignment.md) accepts the [Beta 1 target](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388) for technical handoff, with author visual judgment retained. It distinguishes actual Chinese reviewed-draft availability from the eight-part plan and English layout specimens, adds explicit System/Day/Night and truthful language/search/copy recovery, and retains a card-free baseline. This is design evidence, not implementation: main remains a bilingual shell and its passing checks do not establish reading-feature conformance or remove existing holds.
+
 ### Product evidence and selection rules
 
 The desk review consulted [mdBook's reader guide](https://rust-lang.github.io/mdBook/guide/reading.html), [Material for MkDocs search](https://squidfunk.github.io/mkdocs-material/plugins/search/) and [Diátaxis](https://diataxis.fr/). These illustrate established reading/navigation/search patterns and distinct explanation/reference/tutorial/how-to needs. They are design references, not proof that our readers want every feature or a decision to adopt those tools.
@@ -86,9 +88,9 @@ For each proposed feature, record the reader and situation, concrete problem, si
 | Entry and published chapters | Explain the book, prerequisites and where to start; render only explicitly approved chapter/resource inputs. Retain the accepted initial contract and review broader expansion separately. |
 | Navigation and orientation | Chapter groups, previous/next, in-page outline and stable heading links. Chapter introductions and related-reading links help connect ideas without a recommendation system. |
 | Comfortable reading | Responsive desktop/tablet/mobile, Day/Night with system default and persistent explicit choice, readable prose/figures/callouts/code/tables, local overflow, keyboard access and visible focus. Defaults must work without settings. |
-| Basic static search | Search approved published content, reach a chapter or heading and explain no results. Content coverage and Chinese/English behavior must be tested; no semantic search or backend. |
+| Basic static search | Search approved published content in the current reading language, reach a chapter/heading and explain no results or failure. With no English chapter corpus, explain availability and offer a deliberate Chinese-index route; no fictional English results, silent cross-language expansion, semantic search or backend. Actual retrieval still needs implementation checks. |
 | Languages and sharing | Clear language entry, honest missing-translation behavior, shareable chapter/heading URLs and a simple GitHub correction entry. A complete bilingual corpus is not a release prerequisite. |
-| Small AI question-card trial | A few useful questions at genuine conceptual difficulties, with visible necessary context, source/version and copy feedback. Readers edit/paste into their own tools; no hidden chat context, keys or live site inference. No quota of cards per chapter. |
+| Small AI question-card trial | Conditional: a few reviewed questions at genuine difficulties, visible/editable necessary context, real source/version and accessible copy/manual-copy feedback. Readers explicitly copy, then paste/review/send in their own tools; no automatic transmission, hidden chat context, keys or hosted inference. No quota per chapter or mandatory card in the baseline. |
 | Release quality | Actual browser/accessibility checks, useful narrow E2E coverage, required CI/root/subpath export evidence, clear public content/license boundaries and separately scoped live deployment acceptance. |
 
 Core reading must not wait for audio, exports or a general AI feature framework. If question cards have not demonstrated value or passed review, record them as deferred rather than block a basic-reading release.
@@ -107,6 +109,8 @@ Core reading must not wait for audio, exports or a general AI feature framework.
 | Independent pilot | One listening chapter | Pre-generate and manually review a suitable chapter, with basic playback controls. Manual asset updates are acceptable. No full-book coverage or automatic regeneration requirement. |
 
 Beta 2 is not a commitment to ship every row together. Prioritize observed reading problems; export/audio pilots can be deferred without blocking the useful reading improvements. Image zoom is an optional small remedy for an observed figure-legibility problem, not a diagram platform.
+
+The isolated [UI04 Beta 2 section](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475) previews local resume/bookmark recovery, terminology placement and optional preferences only. These are labelled concepts, not live controls or approved glossary content. Printing, one-format export and one-chapter listening remain their distinct candidate/pilot scopes above; no audio/export functionality or Beta 3 implementation is inferred from the preview.
 
 ### Beta 3 — Selective, evidence-led extensions
 

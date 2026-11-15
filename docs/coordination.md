@@ -24,7 +24,7 @@ Main remains a bilingual home/empty-index/404 shell, not a Beta 1 chapter reader
 | Writer | Accepted r1 editorial audit; r2 vision/roadmap pointers, single Chinese summary and same [report](handoffs/writer/beta1-design-alignment.md) | Accepted through r2; closed | Preserve accepted documents; no prose/body/outline expansion |
 | Coordinator/Reviewer | Owns Figma changes, professional review, document acceptance, feedback and Git integration; [review](reviews/beta1-design-alignment.md) | Design and alignment Accepted; integration pending | Handle scoped PR, exact-head required checks and authorized merge |
 
-Both executor assignments are closed after actual affected review. No future PR/head/cloud run/merge result is prefilled; remaining integration is Coordinator-only. The scoped workspace above is execution history, not a permanent checkout assignment. Preserve other holds throughout.
+Both executor assignments are closed after actual affected review. Coordinator integration is tracked in [PR #11](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/11), starting with accepted snapshot `94f321565058c464834fe671225c51159c232461`; only actual review/board pointers are added afterward. At this record's commit, final-head checks and merge remain pending. The PR execution record owns their eventual actual results; no future success is prefilled. The scoped workspace above is history, not a permanent checkout assignment. Preserve other holds throughout.
 
 ## Current design decisions and durable evidence
 

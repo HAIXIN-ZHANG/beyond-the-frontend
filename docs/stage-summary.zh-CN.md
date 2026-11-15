@@ -2,6 +2,8 @@
 
 更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页解释内容方向和已发生的关口，不另建任务队列。正式规划文档使用英文，中文书稿保持原稿。
 
+**新版设计 UI04：** [实际设计与专业用词/排版复审](reviews/beta1-design-alignment.md)已接受用于技术交接，作者视觉判断仍独立；[Beta 1 设计](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388)已区分真实中文 reviewed drafts 与八篇规划，英文正文仍仅为排版样例，补齐 System/Day/Night、当前阅读语言搜索及无英文语料说明、真实链接分享纠错；AI 卡片是可不发布的预览/编辑/复制试验，手动粘贴到读者工具，不是站内 chat。移动搜索使用输入框，不显示桌面 ⌘K 提示。[Beta 2 独立区域](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475)只展示本机续读/书签、术语位置和偏好候选，Beta 3 仍只在路线图。Figma 保留三页、111 variables、14 styles，组件明细以设计交接/review 为准；主代码仍是双语 shell，现有检查与四项测试通过不等于阅读页、主题、搜索、复制或可访问性已实现/验收，本次必要文档对齐不解除其他产品和稿件 hold。
+
 ## 新书名与项目名
 
 正式名称：**Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**；仓库 slug：`vibe-coding-then-what`。英文副标题：**Understand the Systems Behind Your AI-Built Products**。中文副描述：**系统理解 AI 帮你构建的产品：从界面、API 和数据，到交付、恢复与 AI 能力。**

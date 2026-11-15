@@ -1,41 +1,47 @@
 # Vibe Coding, Then What? — coordination board
 
-Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → linked brief/necessary inputs. [Collaboration](collaboration.md) owns the detailed workflow; [History](development-history.md) retains earlier identities and evidence.
+Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow. Reviews own actual acceptance; handoffs own execution/recovery evidence.
 
-## Current scope and independent holds
+## Current scope and holds
 
-**Branding and reader-documentation accepted; no open executor tasks:** English title/project name **Vibe Coding, Then What?**, Chinese title **《Vibe Coding 之后：能跑，然后呢？》**, subtitle **Understand the Systems Behind Your AI-Built Products**, slug `vibe-coding-then-what`. Writer r2 and Developer r1 passed actual review at checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`. The author's additional reader-facing README/workflow supplement has passed affected review; accepted implementation stays frozen. Beta planning remains planning, not execution authorization.
+**Beta 1 design/code/docs alignment:** Coordinator completed live Figma inspection, design changes and professional language/typography/composition re-review, accepted for technical handoff in [the actual review](reviews/beta1-design-alignment.md). Author visual judgment remains separate. Both r1 source/editorial audits were accepted. The author's required order was design/re-review first, then these narrowly assigned owner-authored alignment documents.
 
-Other product/prose work remains **Paused**: no chapter writing/translation, chapter renderer/schema implementation, theme acceptance, UI redesign, E2E expansion or deployment. Coordinator resolves holds with the user; earlier tool/release authorization does not lift them. The opening's one-name replacement and current contract hash/reference passed actual review. No other prose or route/schema change follows from that exception.
+Main remains a bilingual home/empty-index/404 shell, not a Beta 1 chapter reader. Coordinator actually passed `npm run check` (lint, route types, strict TypeScript and four tests); that is shell evidence, not implemented reader/theme/search/copy behavior. No immediate source-only code fix was justified by the audit. [UI04 handoff](design/reading-experience-v1.md) defines targets and future acceptance.
+
+**Other product/prose work remains Paused:** no chapter writing/translation or opening-orientation revision, chapter renderer/schema, Panda/theme integration, new UI behavior, E2E implementation, dependency installation or deployment. Design/document acceptance does not lift those holds. Future changes require exact assigned scope after the relevant review.
 
 ## Last scoped workspace and baseline
 
-- The reviewed stage used `/Users/haixin/Desktop/code/beyond-the-frontend`; branch `codex/vibe-coding-rebrand`; starting HEAD/local `origin/main` `40f5f40effc2bedecf2e1b91c4a31fd58caba308`.
-- The directory name is intentionally unchanged to preserve active chats/IDE references; it is not the repository slug. Verify actual branch/HEAD/status before editing.
-- Writer's authorized vision/roadmap Beta changes existed before this assignment and are preserved. Writer/Developer share the checkout with disjoint exact manifests. Commands use explicit workdirs; edit paths are absolute. Coordinator manages all Git writes and remote settings.
+- Actual root: `/Users/haixin/Desktop/code/vibe-coding-then-what`; branch `codex/beta1-design-alignment`; HEAD/base/local `origin/main` verified at `630ab7e57dd2139c87e2bdd3e90cd981c008a6fd` before alignment.
+- Initial main was clean. Coordinator subsequently created this branch while preserving the two audit reports. Executors made no Git writes. Use explicit workdirs and absolute edit paths; preserve disjoint ownership.
+- The earlier directory `/Users/haixin/Desktop/code/beyond-the-frontend` in past handoffs is historical execution context. The project directory was externally renamed before PR #10's final return to main; Coordinator verified repository/origin/file hashes and preserved ignored recovery data. Do not recreate the old directory or rewrite historical handoffs.
 
-## Current tasks
+## Closed owner assignments
 
-| Owner | Assigned scope and brief | State | Next action |
+| Owner | Concrete scope and handoff | State | Next action |
 | --- | --- | --- | --- |
-| Writer | Accepted original scope; additional README-only reader introduction, free/public wording and confirmed author opportunity/collaboration entry, plus same [handoff](handoffs/writer/vibe-coding-rebrand.md) | Accepted through r3; closed | Preserve accepted files; no new manuscript work |
-| Developer | Accepted original scope; additionally move the necessary README workflow diagram into existing `collaboration.md`, plus same [handoff](handoffs/developer/vibe-coding-rebrand.md) | Accepted through r2; closed | Preserve accepted files; no dependent implementation |
-| Coordinator/Reviewer | Actual affected supplement review and Git integration; [review](reviews/vibe-coding-rebrand.md) | All local review accepted; integration pending | Manage final reviewed head, required checks and authorized merge |
+| Developer | Accepted r1 source/DS01 audit; r2 UI04 design handoff, this board, brief developer-guide target pointer and same [report](handoffs/developer/beta1-design-alignment.md) | Accepted through r3; closed | Preserve accepted documents; no implementation continuation |
+| Writer | Accepted r1 editorial audit; r2 vision/roadmap pointers, single Chinese summary and same [report](handoffs/writer/beta1-design-alignment.md) | Accepted through r2; closed | Preserve accepted documents; no prose/body/outline expansion |
+| Coordinator/Reviewer | Owns Figma changes, professional review, document acceptance, feedback and Git integration; [review](reviews/beta1-design-alignment.md) | Design and alignment Accepted; integration pending | Handle scoped PR, exact-head required checks and authorized merge |
 
-Both executor assignments are closed; no continuation is implied. License selection, CONTRIBUTING, broad document cleanup, historical moves and other audit suggestions are not implicitly assigned. Integration is Coordinator-only. [PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10) contains the accepted branding checkpoint; its final head/checks/merge will be recorded there after actual supplement acceptance. No future success is prefilled. Historical evidence remains intact.
+Both executor assignments are closed after actual affected review. No future PR/head/cloud run/merge result is prefilled; remaining integration is Coordinator-only. The scoped workspace above is execution history, not a permanent checkout assignment. Preserve other holds throughout.
 
-## External rename already completed
+## Current design decisions and durable evidence
 
-Coordinator renamed the same GitHub repository (ID `1417292071`) to [HAIXIN-ZHANG/vibe-coding-then-what](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what) and updated About: “Understand what AI helped you build. A guide to full-stack and AI product engineering—from interfaces and APIs to data, delivery, debugging and recovery.” Developer's read-only metadata check confirms that name/ID/description and default `main`; local `origin` is the new canonical URL. Remote rename is an accomplished external change, not evidence of code review/CI/merge. Coordinator's bounded repository-control verification is recorded in the review; Developer did not change settings or perform a new account/Figma audit.
+Same Figma file `3GYIfJz8xSPGx3AE3RRkKi`, three pages and 111 variables/four collections/14 text styles. Final addition: **eight families/24 variants**, six Beta 1 (including conditional copy and SearchField) and two Beta 2 concepts. The prior seven/21 count preceded the final SearchField correction. Compatibility BTF namespaces remain for DS01 mapping; no Code Connect publication is established.
+
+[Beta 1 states](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388) separate real Chinese availability and planned navigation. Current-language search honestly handles absent English corpus; Appearance separates effective Day/Night trigger from System/Day/Night preference; principal chapter layouts are card-free, with optional editable copy/manual fallback isolated. SearchField is distinct from the search trigger, including 320px text entry without a desktop shortcut hint. [Beta 2 concepts](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475) stay separate; Beta 3 remains roadmap-only.
+
+The design handoff records exact IDs, actual reported structure/color checks and unresolved runtime/accessibility gates. Temporary screenshots are supplementary; design composition, code implementation, browser acceptance and release are distinct.
 
 ## Last completed integration
 
-The first-edition Full-stack + AI Product Engineer planning stage is completed: [review](reviews/full-stack-ai-book-scope.md), [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9). Read-only PR metadata confirms merged final head `3f3b938364f35130156bb5bedd2f85ead2904dc1` and squash `40f5f40effc2bedecf2e1b91c4a31fd58caba308`. Coordinator recorded all three required jobs/steps successful in [run 43716601789](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43716601789). That planning acceptance/merge does not accept new manuscripts or this migration's artifacts.
+Branding and reader-facing README/workflow alignment completed through [PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10). Coordinator's actual integration record names final reviewed head `ec037833532cad033126e20f99952e1c82eea6c9`, successful Quality/root/Pages jobs and steps in [run 43719534693](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43719534693), and squash `630ab7e57dd2139c87e2bdd3e90cd981c008a6fd`, the locally verified current base. [Its review](reviews/vibe-coding-rebrand.md) retains the accepted opening-title exception/current hash and scope. No deployment occurred.
 
-Earlier onboarding/history integrations remain in their original review/PR records. Recorded former names and URLs describe their own revisions; they are not current instructions.
+The canonical repository/About/origin rename is completed. Older task paths, aliases and review/PR records retain their historical identities; none is an active assignment or proof of the current design's implementation.
 
 ## Preserved recovery
 
-The unaccepted theme work remains at branch `codex/ds01-panda-theme` and checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`. Use `git worktree list` and actual branch/revision checks to locate it; no directory permanently belongs to that branch. [Theme handoff](handoffs/developer/DS01.md) and [review](reviews/DS01.md) retain local evidence and missing browser/integration acceptance. Do not migrate that checkpoint as part of this task.
+The unaccepted DS01 work stays at branch `codex/ds01-panda-theme` / checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`. Locate it with `git worktree list` and actual revision/status checks, without assuming a permanent directory. [DS01 handoff](handoffs/developer/DS01.md) and [review](reviews/DS01.md) retain local evidence and unfinished browser/integration gates; no wholesale merge or harness run is assigned here.
 
-The 31 generated files remain in ignored `.local/recovery/theme-generated-after-onboarding-2026-11-15/styled-system/` with sibling `manifest.json`. Preserve their bytes and refs. They are local recovery material, not main's build input, an accepted theme or a new deliverable.
+Keep the 31 generated files and `manifest.json` in ignored `.local/recovery/theme-generated-after-onboarding-2026-11-15/` byte-identical. Their presence is recovery evidence, not main's theme implementation or a published artifact.

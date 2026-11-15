@@ -1,10 +1,68 @@
-# Reading experience design
+# Reading experience design — UI04 / Beta 1
+
+Updated: 2026-11-15 (Australia/Perth). Current revision: **UI04 / Beta 1 technical handoff**, with limited separately labelled Beta 2 concepts. Coordinator accepted the design and professional language/typography/composition re-review in [the actual review](../reviews/beta1-design-alignment.md); the author's visual judgment remains separate. Developer maintains this document from that evidence, without claiming a separate live Figma inspection. The existing file/path and historical UI03 sources are retained below.
+
+**Target versus implementation:** main is still a bilingual home/empty-index/404 shell. It does not implement chapter rendering, current-language search, theme preferences, section sharing or AI preview/copy. Coordinator's actual `npm run check` passed shell lint/type generation/strict TypeScript/four tests; it does not establish UI04 conformance. The [Developer audit](../handoffs/developer/beta1-design-alignment.md), [initial content contract](../content-contract.md) and [runtime guide](../../site/DEVELOPMENT.md) distinguish future implementation from design. DS01 remains a separate unaccepted token/theme checkpoint; no Panda migration or new runtime behavior follows from this handoff.
+
+## Current design sources and retained identity
+
+Figma file: [Vibe Coding, Then What? — reading design](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388). This is a descriptive project link, not a claim that a new file was created or every historical folder label was renamed. Exactly three pages remain: Tokens (`0:1`), Components (`22:135`) and Page Designs (`2:2`). Existing node IDs and **111 variables, four collections and 14 text styles** are retained. Legacy BTF style/collection namespaces intentionally preserve compatibility with DS01's saved ID-based mapping; they are not obsolete brand text to bulk-replace.
+
+The final added **eight families have 24 variants**: six Beta 1 families (including the conditional copy trial and SearchField) and two Beta 2 preview families. The earlier seven-family/21-variant count preceded the final SearchField correction and is not the final inventory. Existing semantic colors, geometry aliases, text styles and auto layout are reused; no new token collection, font package or flattened UI image was needed.
+
+| Current target | Stable node/link | Contract and boundary |
+| --- | --- | --- |
+| Foundations | [40:12](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) | Retained primitive/semantic roles and typography; old WEB syntax and DS01 mapping are not Code Connect or generated main CSS |
+| Components page | [22:135](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) | Existing sources plus eight additional families; reuse meaningful structures rather than make one component per frame |
+| Page Designs | [2:2](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2) | Beta 1 primary reading and isolated later concepts on the existing page |
+| Appearance picker | [127:69](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-69) | Three preference variants: System, Day, Night; explicit return to System |
+| Search states | [127:95](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-95) | Ready, loading, results, no match and unavailable; current-reading-language scope |
+| Search text entry | [139:124](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=139-124), set [139:134](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=139-134) | SearchField Default `139:128`, Focus `139:130`, Disabled `139:132`; distinct from the search-opening trigger |
+| Chapter availability | [127:134](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-134) | Chinese reviewed draft, missing English and planned; specimen labels cannot create published destinations |
+| Section actions | [127:160](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-160) | Native section links, copy feedback/manual recovery and deliberate GitHub correction |
+| Optional AI question trial | [127:186](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-186) | Editable preview, copied and manual-copy states, conditional on an actually reviewed trial |
+| Beta 2 preview families | [127:212](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-212), [127:231](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=127-231) | Two variants each; local return/bookmark and optional reading-preference concepts, outside the Beta 1 baseline |
+| Updated Beta 1 states | [129:388](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388) | Day/Night availability, mobile entry, appearance/language recovery, search, copy and section actions |
+| Desktop and mobile availability | [129:392](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-392), [129:416](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-416), [129:405](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-405) | Real Chinese source labels with separate available-reading and planned-map presentation; Day/Night desktop and mobile references |
+| 320px search and copy | [134:458](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=134-458), [134:473](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=134-473) | Narrow query/recovery, context and actions; still need real browser/focus/clipboard verification |
+| Separate Beta 2 section | [129:475](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475) | Local resume/bookmark, changed-position recovery, terminology placement and optional preferences; visibly later-stage specimens |
+
+Existing home and seven chapter-layout IDs are retained: `4:11` / `4:220` / `24:71` for home references, and `4:115`, `4:256`, `24:177`, `24:330`, `25:71`, `25:183`, `25:311` for desktop/mobile/Night/compact/tablet/narrow chapter references. Their current baseline is **card-free**. A separate optional trial specimen must not make AI cards mandatory or imply those layouts are rendered by main.
+
+## Current Beta 1 behavior contract
+
+- **Brand and content availability:** use Vibe Coding, Then What? and the approved subtitle. The eight-part map is planned orientation, distinct from the actually approved Chinese opening/G01 inputs. Preserve draft/body-language notices; no invented English manuscript, publication date/count or clickable unpublished next chapter. At the last available chapter, return to available reading. The existing opening's organizational update remains a separate Writer gate.
+- **Search:** search approved public content in the current reading language. With no English chapter corpus, show an honest availability explanation and a deliberate link to the Chinese chapter index; do not silently cross languages or fabricate English results. Older English result examples are future-corpus layout specimens, not current data. Distinguish loading, no match and unavailable/index failure, preserve query context and offer retry or browse recovery. SearchField is text entry, distinct from a trigger that opens search; mobile search `129:445` and `134:458` use the actual field and omit a desktop Command-K hint. Rich filters/categories remain later concepts unless separately scoped.
+- **Appearance:** the 44px compact header trigger shows effective Day/Night and opens the Appearance picker. It does not expose the stored preference as a misleading two-state toggle. The picker offers **System / Day / Night**, with a clear selected preference and a route back to System. System follows environment; an explicit preference overrides it until changed. Before-paint resolution, persistence/invalid storage, refresh, media changes and cross-tab behavior require implementation evidence.
+- **Section links and correction:** use native stable heading links with clear “Copy section link” and “Report a correction” actions. Copy feedback and a visible selectable manual fallback remain available if clipboard access fails. GitHub reporting is deliberate; replace specimen context with real public chapter/heading/revision data only when it exists, without sending private prompt text automatically.
+- **Optional question-copy trial:** the seven main chapter layouts remain usable without a card. A separately reviewed trial may expose exact visible/editable question/context, source/version, copy success/failure and manual selection. Readers review/paste into their own tools. No live inference, model keys, hidden automatic transmission or fabricated provenance is implied. Deferral does not block basic reading.
+- **Navigation and responsive content:** reuse semantic heading/nav/toolbar/footer structure and real available destinations. Current long branding, ordered part labels, figure/code/table overflow, missing-language explanations and context notes must fit narrow, tablet and wide layouts. Existing UI03 breakpoints/type roles remain design inputs, not runtime acceptance. Reader-facing explanations stay concise; implementation constraints belong in component descriptions and this contract.
+
+## Composition, bindings and review evidence
+
+Coordinator's actual review inspected original home/chapter, Day/Night, 1024/768/320px and new sections, then repeated professional wording/typography/layout inspection. Action names were normalized (Search chapters, Copy section link, Report a correction, Observability & recovery). Variant-text mismatches and narrow clipping were corrected. Desktop availability uses two auto-layout columns, with 704px available-reading content beside a distinct planned-map panel; the eight entries are ordered lines, not spaces used to imitate columns. Day/Night actions remain parallel.
+
+The inspected views remain editable frames/text/vectors/instances, with no full-page UI raster fill. New source families bind semantic color/geometry and text styles. The radius diagnostic was corrected to inspect the **four individual corner bindings**, each aliasing `shape/card`, rather than infer missing bindings from the aggregate key. Existing Inter/JetBrains Mono and Noto Sans SC styles support the English/code/actual Chinese labels. This is not a font-package delivery claim for the website.
+
+Final text-containment inspection found no text exceeding its immediate parent horizontally in the inspected existing principal views and both Beta sections; new family overview frames did not overlap. Specific semantic text/canvas ratios measured by Coordinator: Day default 13.79, muted 5.35, accent 6.54; Night default 16.26, muted 9.10, accent 12.04. These source-color and structure checks do not certify all alpha/state compositions, runtime responsiveness or WCAG conformance.
+
+Durable evidence is the [review](../reviews/beta1-design-alignment.md), exact IDs, scope and limits here. Screenshots/diagnostics under `/tmp/beta1-design-review/` are supplementary; they are neither the sole handoff nor application screenshots. No new access/account audit or Code Connect publication is claimed. Developer's saved DS01 audit establishes agreement with the historical token snapshot, not an automatic verification of every changed live instance.
+
+## Beta 2 previews and outstanding gates
+
+Beta 2 concepts are confined to `129:475` and labelled later-stage families. Resume/bookmarks are local-device ideas with missing/changed-position recovery; glossary placement is a concept, not an accepted glossary definition. Preferences remain optional. No audio player, offline engine, accounts/cloud sync, hosted chat, full-book export or speculative control is promoted into primary Beta 1 reading. Beta 3 stays in the [roadmap](../roadmap.md); a preview never assigns its implementation.
+
+Technical design/professional re-review is accepted for handoff, with author visual judgment retained. Runtime reading/search/clipboard, theme first paint/persistence/hydration, keyboard/focus/assistive technology, real content/fonts, safe allowlist/index output, root/subpath behavior and release/publication gates remain outstanding. No immediate code-only fix was identified by the source audit; future implementation needs exact assigned files and separate acceptance. Do not run or merge DS01 as a consequence of this document.
+
+## Historical UI03 handoff — preserved record
+
+The following sections retain the UI03 source wording and IDs (headings are nested here for clarity). Former file/folder/brand names, two-state ThemeControl and chapter/question specimens describe that historical revision. Current behavior is the UI04 contract above; old stage/pause language is not an active assignment. Historical [UI03](../reviews/UI03.md) and [UI02](../reviews/UI02.md) reviews are unchanged.
 
 Design date: 2026-11-14. Revision: v3 / UI03. Decision/review owner: Coordinator; this English technical handoff is maintained by Developer under the delegated documentation task. The three-page organization, English annotations, semantic layout and design re-review are complete; author visual acceptance remains pending. The original file and this path are retained. See [UI03](../reviews/UI03.md) and historical [UI02](../reviews/UI02.md).
 
 Figma UI, page titles, component notes and native annotations are English-first, with Chinese only where necessary. Day/Night and the bilingual book plan remain unchanged. UI03 itself did not implement the website. Since then, TS01 merged and DS01 implemented the token/theme foundation pending review; full component/page/browser acceptance remains separate. See the [runtime guide](../../site/DEVELOPMENT.md) and stage handoffs for current code status.
 
-## Design sources
+### Design sources
 
 - Team: HAIXIN's Starter team.
 - Project: [Beyond the Frontend Folder](https://www.figma.com/files/team/1563112246153281261/folder/690927640). The user authorized its creation and moving this design into it; its location was verified in desktop Figma.
@@ -35,7 +93,7 @@ Figma UI, page titles, component notes and native annotations are English-first,
 
 Chapter names, search results, English prose and code in Figma are layout specimens, not an accepted public table of contents or English manuscript. Mobile specimens changed from Chinese to English design copy without editing `book/`. The accepted [content contract](../content-contract.md) governs actual reading inputs and publication state.
 
-## Visual and responsive rules
+### Visual and responsive rules
 
 Use a lightly translucent navigation layer, pill theme selection, restrained radii and generous reading space. Day uses a pale canvas with deep green accents; Night uses charcoal with soft green accents. Prose surfaces remain solid; materials are concentrated in navigation. This is a web reading design, not a claim to implement UIKit or full Liquid Glass.
 
@@ -47,7 +105,7 @@ Use a lightly translucent navigation layer, pill theme selection, restrained rad
 - Use a 4px spacing rhythm and 6/12/20px radii. Each theme option has a 44×44px action target; Button, IconButton and navigation controls have explicit targets.
 - Inline links are underlined. Navigation communicates selection through position, text and surface treatment. Focus has a visible ring; motion respects reduced-motion preference.
 
-## Tokens and component layers
+### Tokens and component layers
 
 The user selected PandaCSS. At the UI03 design checkpoint, code still used legacy CSS and no style migration was performed. DS01 subsequently mapped the foundation; that does not imply that all Figma components, Code Connect or later features are implemented.
 
@@ -68,7 +126,7 @@ Teaching diagrams preserve editable layers and explanations. Use semantic HTML f
 
 All variables have explicit scopes and WEB syntax. The original CSS names were implementation targets, not generated code. DS01's `panda/figma-reference.json` records source IDs, actual alias targets, original WEB syntax and Panda paths; generated variables normalize camelCase to kebab-case. This mapping does not edit Figma or establish Code Connect.
 
-## Historical library options
+### Historical library options
 
 These UI03 options do not add dependencies to the current foundation task. DS01 uses only its necessary Panda/PostCSS/type tooling; future libraries require their own compatible use case and assignment.
 
@@ -82,7 +140,7 @@ These UI03 options do not add dependencies to the current foundation task. DS01 
 
 The historical proposal was PandaCSS with a small Park UI subset and Ark UI for complex behavior. Native links, buttons and static prose do not need an interaction runtime solely for consistent appearance. Static export remains the website model; client code is limited to features that actually require it. UI03's recommendations were based on official documentation, not package installation or compatibility tests. TS01 has since completed the actual TypeScript migration; its earlier pending note is historical.
 
-## Interaction requirements
+### Interaction requirements
 
 - Search: a visible trigger or shortcut outside text input opens it; Escape/close returns focus. Distinguish loading, results, empty and failure. Preserve the query and offer retry or chapter browsing after failure. Search covers only current-language approved public content; Figma results are specimens.
 - Mobile chapter navigation: locate the current chapter; closing returns focus without losing reading position. A modal drawer manages focus and background scrolling; chapter destinations remain native links.
@@ -94,7 +152,7 @@ The historical proposal was PandaCSS with a small Park UI subset and Ark UI for 
 
 Figma contains theme mode/variant actions and retained or reconnected reading/search/question previews. Those connections are not website functionality or complete prototype click acceptance. Actual search, clipboard, focus trapping, shortcuts, scroll behavior, system following and persistence require code/browser evidence.
 
-## Access evidence
+### Access evidence
 
 SEC01 recheck on 2026-11-14 opened Share and Share settings in desktop Figma: Anyone / View was selected, Edit was not, and view/comment access was explicit. The file list showed Owner and project inheritance; only HAIXIN ZHANG appeared as an inherited editor. No further change was needed. Viewer copy/save/export was allowed; copying does not grant editing of the original. This was not an exhaustive team-membership or account-integration audit. See [SEC01](../reviews/SEC01.md) and the [access baseline](../security/access-policy.md).
 
@@ -102,7 +160,7 @@ Earlier UI02 work tightened the Folder team default from editing/inviting/changi
 
 These are file/account controls. An agent authorized through the same Owner account may still edit; Figma does not provide Writer/Developer account isolation here. Assigned scope still constrains each role.
 
-## UI03 checks and remaining acceptance
+### UI03 checks and remaining acceptance
 
 The review covered three pages and 13 component families; all 17 original screen/state frame IDs remain. Screenshots covered Tokens, component overview, Day composition, mobile Day/Night, 320px and feedback states. Fixes addressed Header height/insets, overly wide documentation, black theme-source fallback fills, a filled disabled icon, short swatch rows, and recipe/binding inconsistencies. Search gained loading/failure recovery guidance.
 
@@ -112,7 +170,7 @@ Mobile Search/Prompt still has behavior guidance without complete separate narro
 
 Author visual direction, reading comfort and feature density remain acceptance items. Coordinator then assigns implementation, mapping and content scope; the design artifact alone never releases a full rewrite, fonts or publishing. Subsequent authorized DS01/CMP01/PAGE01/QA01/DEP01 gates are recorded separately and are currently paused. Complete the current documentation review/integration, then discuss overall project design before any resumption.
 
-## UI02 historical checks
+### UI02 historical checks
 
 UI02 inspected 17 screen/state frames, with screenshots of home, Day/Night desktop/mobile chapters, compact/tablet/narrow layouts, dark search/question previews and code/table specimens. Fixes addressed 320px Header overflow, tablet footer width and Night theme selection. No missing fonts remained in inspected pages; final responsive specimens had no horizontal overflow. At that checkpoint, 55 variables had explicit scopes and WEB syntax.
 

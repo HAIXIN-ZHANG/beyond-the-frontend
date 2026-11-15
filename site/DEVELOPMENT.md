@@ -2,7 +2,9 @@
 
 This guide describes the implemented bilingual static website foundation, strict TypeScript and CI. Its active brand is **Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**, with subtitle **Understand the Systems Behind Your AI-Built Products** and repository slug `vibe-coding-then-what`. It does not yet render manuscripts, provide themes/search/audio, or expose an application backend. There is no verified deployed reading URL.
 
-Design Tokens and Day/Night Themes is preserved in a separate [unaccepted checkpoint](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/commit/4da2578048f8df113fed92d99e084f644a9a788e). Its Panda/codegen commands are **not available on main**. See the [checkpoint handoff](../docs/handoffs/developer/DS01.md), [incomplete review](../docs/reviews/DS01.md) and [Development History](../docs/development-history.md) before resuming it. Only the narrow brand/Pages-prefix migration is active; the checkpoint remains outside this implementation.
+Design Tokens and Day/Night Themes is preserved in a separate [unaccepted checkpoint](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/commit/4da2578048f8df113fed92d99e084f644a9a788e). Its Panda/codegen commands are **not available on main**. See the [checkpoint handoff](../docs/handoffs/developer/DS01.md), [incomplete review](../docs/reviews/DS01.md) and [Development History](../docs/development-history.md) before any explicitly assigned reuse; the checkpoint remains outside this implementation.
+
+The [UI04 / Beta 1 design handoff](../docs/design/reading-experience-v1.md) is the accepted technical design target, with [reviewed scope and limits](../docs/reviews/beta1-design-alignment.md). Main remains the bilingual shell: reader/search/theme/copy behavior is not implemented by design acceptance or passing its existing four tests. Beta 2 views are labelled concepts; no new commands or implementation stage follow from the design. The [alignment audit](../docs/handoffs/developer/beta1-design-alignment.md) records concrete source gaps and future assignment boundaries.
 
 ## Environment and commands
 

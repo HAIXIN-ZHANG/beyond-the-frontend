@@ -1,5 +1,9 @@
 # 发给 Writer 的协作同步指令
 
+## 最新任务授权：基础建设六阶段（2026-11-15）
+
+读取 `docs/coordination.md` 顶部的 CI01 → TS01 → DS01 → CMP01 → PAGE01 → QA01 授权与关口。这是用户新指令，覆盖下方“不放行 CI/TypeScript/PandaCSS”的旧阶段快照；对应 TS/Panda 实施所必需的最小兼容官方 npm 依赖已获准，不扩大为额外组件库或付费服务。各阶段仍须交接、实际 review、返修、精确 PR/检查与主审合并，不部署。Writer 未因此获分配新章；已审书稿保持稳定，页面先用清楚标注的排版样例。CI01 已有三个成功云端 job，同名 required checks 已保存并复核；PR/当前 main 以实际 GitHub 状态和看板为准。
+
 ## 当前文档整合：DOC01（2026-11-15）
 
 此前剩余的 27 份本地 Markdown 已完成归属盘点与有限状态返修，现由主对话统一 review 并通过独立文档 PR 整合；范围与实际结果见 `docs/reviews/DOC01.md` 和 `docs/coordination.md`。下方各阶段的提交号、分支和“未跟踪”描述均为对应日期的历史快照，不能作为当前 checkout 或任务状态。获取当前 main 应读取远端，不复用这里的旧 SHA。目录仍为提案，整合文档不放行下一章、TypeScript/PandaCSS 实施、CI 或部署；按已明确的任务继续交接、review 和返修。

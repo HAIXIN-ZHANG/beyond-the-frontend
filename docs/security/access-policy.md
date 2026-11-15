@@ -1,6 +1,6 @@
 # Repository and design access policy
 
-Verified: 2026-11-14 (Australia/Perth). Scope: `HAIXIN-ZHANG/beyond-the-frontend` and Figma file `3GYIfJz8xSPGx3AE3RRkKi`. This is a project access baseline, not an audit of every account, token or connected application.
+Verified: 2026-11-14 (Australia/Perth). Scope: `HAIXIN-ZHANG/beyond-the-frontend` and Figma file `3GYIfJz8xSPGx3AE3RRkKi`. GitHub required CI checks were additionally verified on 2026-11-15 through CI01; Figma was not re-audited in that stage. This is a project access baseline, not an audit of every account, token or connected application.
 
 ## GitHub
 
@@ -17,12 +17,14 @@ Verified: 2026-11-14 (Australia/Perth). Scope: `HAIXIN-ZHANG/beyond-the-frontend
 | Resolve review conversations | Required |
 | GitHub auto-merge | Disabled; Coordinator reviews and executes authorized merges |
 | Required GitHub approval count | 0; local Coordinator review is recorded separately |
-| Required CI status checks | Not configured yet; do not claim CI gates exist |
+| Required CI status checks | `Quality`, `Static export (root)`, `Static export (pages)`; GitHub Actions app 15368; branch must be up to date |
 | Default Actions token permissions | Read-only; workflow approval of PR reviews disabled |
 
 Approval count 0 is intentional for the existing single-account workflow: the same GitHub identity cannot approve its own PR. The PR requirement still prevents ordinary direct updates to main, including by the owner while the rule remains in effect. The Coordinator reads actual files, records the reviewed revision, returns defects to the original author and merges only the accepted head SHA. A Markdown checkbox or CODEOWNERS entry cannot independently enforce that judgment.
 
 Visitors are not granted write access by watching, starring, following a LinkedIn link, commenting, forking or opening a PR. A fork is a separate copy; it does not change this repository. Contributor requests do not justify accepting a write invitation or executing untrusted code with privileged credentials.
+
+CI01 first passed all three jobs in [cloud run 43664712998](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43664712998) for reviewed head `d81df0a9b6ea79d50d4f0be6d00130f28a794d14`. Coordinator then enabled those observed checks, independently read the saved protection and compared every other field to the pre-change snapshot: no other protection changed. Later commits must still pass their own required checks; this evidence is not approval of future revisions.
 
 ## Figma
 

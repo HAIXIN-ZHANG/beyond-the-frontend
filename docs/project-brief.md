@@ -16,7 +16,7 @@ Updated: 2026-11-14 (Australia/Perth). This file remains for existing agent prom
 - Local workspace: `/Users/haixin/Desktop/code/beyond-the-frontend`. Engineer Better / `engineer-better` and NEStory / `nestory-web` are historical names.
 - D02 has a Next.js static-export skeleton with React, JavaScript/JSX and npm. Code/build review passed; Browser acceptance remains incomplete. English is the default website language; the book targets English and Simplified Chinese, with Chinese drafts reviewed before English adaptation. Content schema and publication rules remain TBU.
 - Writer's Chinese opening/foundations drafts passed [W02 review](reviews/W02.md) and were merged through PR #1; the full chapter outline is still a proposal. The future analysis-first workflow passed [WF01](reviews/WF01.md), without releasing another chapter.
-- GitHub's default branch is `main`, protected against force pushes/deletion and requiring PRs even for administrators. Public Figma access is view/comment only. See the committed [access policy](security/access-policy.md); site deployment and required CI checks remain unconfigured.
+- GitHub's default branch is `main`, protected against force pushes/deletion and requiring PRs even for administrators. Public Figma access is view/comment only. See the committed [access policy](security/access-policy.md); CI01 has cloud-verified Quality/root-export/Pages-export checks configured as required, with up-to-date branches required. Site deployment remains unconfigured.
 
 ## Coordination
 

@@ -2,6 +2,8 @@
 
 ## Project document entry points
 
+2026-11-15 CI01 cloud gate: [PR #4](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/4) first reviewed head `d81df0a9b6ea79d50d4f0be6d00130f28a794d14` passed Quality and both Static export jobs in [run 43664712998](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43664712998). Coordinator enabled these three observed checks as required, bound to GitHub Actions app 15368 and requiring up-to-date branches; an independent GET confirmed every other protection field unchanged. Any subsequent documentation commit must pass its own run before merge. TS01 implementation waits for CI01 integration and a coordinated branch change. See [CI01 review](reviews/CI01.md).
+
 2026-11-15 evening foundation iteration: The user explicitly authorized the following ordered website stages. Developer executes and submits actual files/evidence/questions through a stage handoff; Coordinator reviews, returns revisions, rechecks the exact proposed revision, and manages scoped PR/squash merge. Preserve existing work and coordinate all Git operations in this shared checkout. A passed stage permits the next authorized stage, not an unreviewed batch of all six. Stop with a recoverable handoff on quota exhaustion or an unresolved blocker; do not weaken acceptance to finish the list. No deployment or paid AI review service.
 
 | Stage | Authorized result | Main boundary |

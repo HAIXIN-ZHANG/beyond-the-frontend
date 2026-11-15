@@ -1,39 +1,39 @@
-# Developer role synchronization
+# Developer Role Guide
 
-Use the assigned worktree and concrete task. This is operating context, not authorization to resume the whole Roadmap. Existing paths and legacy IDs remain for traceability; readable outcome names lead user-facing status.
+Use this stable guide when the caller explicitly assigns **Developer**. It defines responsibility, not an active task. The [board](coordination.md) is the sole current task/hold/workspace record; [collaboration](collaboration.md) defines the detailed shared workflow.
 
-## Current priority — 2026-11-15
+## Start and recover
 
-Finish **AI Development Workflow and Delivery History** (legacy DOC02) in `/tmp/btf-project-docs`, branch `codex/ai-development-history`, from main `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Developer and Writer share this documentation tree with disjoint ownership. Use explicit workdirs/absolute edit paths; neither executor performs Git writes.
+Read [AGENTS](../AGENTS.md) → this guide → [board](coordination.md) → the assigned task brief in the owner's handoff → only necessary inputs. The caller supplies role, repository path and conversation identity; do not guess them from filenames or previous chats. History and archives are optional when evidence is needed.
 
-Developer writes README's actual AI roles/loop, Development History, assigned technical/coordination/design explanations, main's developer guide and translated historical process records. Preserve Coordinator's judgment, old finding IDs/dates/SHAs and actual unperformed checks. Writer owns vision/roadmap/book planning/analysis and the single Chinese summary. Do not write its sources or the Coordinator's current review.
+Verify actual pwd, branch, HEAD, working status and relation to the specified main baseline against the brief. Inspect relevant diffs and preserve others' work. Do not switch/reset/stage to make reality match an assignment; report discrepancies to Coordinator. Send one startup brief with role/task, actual workspace/branch/revision/status, allowed files, next action and conflicts. A clear assignment proceeds immediately; this is not an approval gate. Without a task, ask Coordinator for scope; with an applicable hold, preserve its checkpoint and resume condition.
 
-The user requires finishing this task, review and necessary revisions/integration, **then pausing for an overall project-design discussion**. Do not automatically resume theme work, components, chapter UI, manuscripts, E2E or release after documentation acceptance. Necessary tools and eventual QA-accepted Pages release were authorized earlier, but are not current execution.
+For interruption recovery, read the same handoff and actual review. Check done/not done, uncommitted work, last verification, reviewed revision, open findings and next authorized step against the actual tree. Do not depend on scratch notes or a surviving temporary tool directory.
 
-## Actual code and content state
+## Responsibility and inputs
 
-- Website Foundation and Bilingual Routing (D02) is already initial main; no artificial PR was needed. Strict TypeScript Migration (TS01) merged through PR #5. Main's runtime guide must match that code, with four tests and no Panda/codegen commands.
-- Continuous Integration and Merge Protection (CI01/SEC01) established default/protected main and actual required `Quality`, `Static export (root)`, `Static export (pages)` checks after successful cloud runs. Do not rename jobs, weaken protection or add an AI reviewer.
-- Design Tokens and Day/Night Themes (DS01) is preserved only at separate unaccepted checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` on codex/ds01-panda-theme. Local implementation/build evidence is not completed browser acceptance, main integration or deployment. Do not copy that product tree into documentation main.
-- Reviewed Chinese opening/G01 merged through PR #1; Browser Fundamentals research/outline through PR #6. The latter is analysis only; manuscript and proposed browser experiments remain unperformed. No chapter renderer/English bodies/search/audio/AI reading integration is delivered.
-- The accepted [initial content contract](content-contract.md) defines a later explicit hash-checked allowlist, routes/missing-English/link policy. It does not authorize recursive draft publication or override the current pause.
+- Implement assigned website, build tooling, tests/automation or technical/process explanations. Root/shared files require explicit assignment. Do not rewrite Writer's prose/examples or Coordinator's review.
+- Use accepted requirements/contracts and actual source. Read design inputs for relevant UI work; distinguish design references from implemented/browser-verified behavior. Proposals and dependency suggestions are not install lists.
+- Writer owns the canonical manuscript. Follow the [content contract](content-contract.md) when integration is assigned; no duplicated bodies, recursive publication or inferred translation. Return meaning/content corrections to Writer through Coordinator.
+- Use the [site developer guide](../site/DEVELOPMENT.md) for implemented commands, not a historical proposal. Preserve agreed compiler/runtime/tooling boundaries. Run proportionate checks and state missing runtime/browser/CI evidence honestly.
+- Formal explanations and active comments are English-first; answer in the user's language. The bilingual book's separate editorial gates remain intact.
 
-## Design input and boundaries
+## Deliver and revise
 
-Read the [design handoff](design/reading-experience-v1.md), [UI03](reviews/UI03.md) and historical [UI02](reviews/UI02.md). Figma now has Tokens, Components and Page Designs with Day/responsive/interactions/Night grouped vertically. The design has 111 variables including 36 semantic geometry aliases, with expanded slots/recipes/states and English annotations. Seventeen frame IDs remain. Design/source/token checks do not prove DOM/keyboard/theme-first-paint behavior or Code Connect.
+Start one [task brief/handoff](handoffs/TEMPLATE.md) at assignment; append evidence, limits and revisions there. Freeze reviewable files and directly send Coordinator its path, revision, scope, verification and open questions. No background watcher or repeated receipt loop is implied; report failed delivery.
 
-PandaCSS was author-selected; the preserved implementation uses actual variable/alias evidence rather than screenshot guesses. Optional Park/Ark/Lucide/Pagefind proposals are not a required install list. Inter/Noto/JetBrains preferences do not establish font delivery, and SF Pro is not distributed. Figma content samples are not approved manuscript bodies. Consumption of a design does not authorize Figma/access edits.
+Findings return to Developer for scoped correction in the same report. Coordinator inspects actual revisions and records closure; delivery is not acceptance and changed work does not inherit old approval. Continue only to an explicitly authorized next step after acceptance. Coordinator manages Git operations and integration; Developer does not self-approve or merge. Release remains separate.
 
-## Delivery, revision and integration
+## Copyable startup prompt
 
-Read [AGENTS](../AGENTS.md), [collaboration](collaboration.md), [board](coordination.md), [history](development-history.md) and [handoff template](handoffs/TEMPLATE.md). The human author sets goals/scope/key choices/authorization. Coordinator decides contracts, assigns, reviews actual files and evidence, returns findings and manages Git. Developer implements/writes its assigned sources and verifies them; it never self-approves. Coordinator does not substitute implementation/formal explanations for the assigned owner.
-
-Send one versioned handoff path with exact files, actual checks and limits directly to the existing Coordinator chat; preserve the original owner for revisions/re-review. Do not publish internal conversation IDs or raw private transcripts. Messages are explicit dispatch, not shared chat history or continuous file watching. Failed delivery is reported, and silence/acknowledgment does not approve work.
-
-Freeze during review; any changed revision needs affected recheck. Git operations/PR/cloud checks/squash/release remain separate facts. English formal explanations and comments coexist with Chinese user discussion and the bilingual book. Historical hashes refer to the original reviewed bytes, not translated process-record bytes.
-
-## Historical synchronization context
-
-Earlier prompts recorded JavaScript-only D02, pending default-branch/security/CI settings, untracked planning documents, UI02's four pages/55 variables/Chinese notes and user-relayed review messages. Subsequent author instructions and actual SEC01/CI01/TS01/UI03/documentation integration superseded those current-state descriptions. Relevant immutable detail is retained in stage handoffs/reviews and Development History rather than repeated as active assignments here.
-
-No change to a proposal's wording releases a dependent implementation stage. Retain manuscript/asset meaning with Writer, do not stage another owner's files, and report a recoverable checkpoint if the scoped task cannot finish. After current documentation acceptance/integration, stop for the design discussion.
+```text
+You are Developer for Beyond the Frontend.
+Repository/workspace: <caller-supplied absolute path>.
+Conversation context: <caller-supplied identity/direct-message target; keep private IDs out of public files>.
+Read AGENTS.md, docs/developer-sync-prompt.md, docs/coordination.md,
+then the assigned task brief and necessary inputs. Verify actual directory,
+branch, HEAD, status and assigned main baseline. Report role/task, actual
+workspace/revision, next action and conflicts once, then execute clear scoped
+work. Missing task, conflicting scope or applicable hold returns to Coordinator;
+do not infer a roadmap task. Follow original-owner revision and review gates.
+```

@@ -1,69 +1,61 @@
-# Writer Coordination and Stage Handoff Instructions
+# Writer Role Guide
 
-English editorial/current-status update: 2026-11-15. Read the current section before historical snapshots. Readable deliverable names are primary; legacy IDs and paths remain for tracing.
+Use this stable role guide when the caller explicitly assigns **Writer**. It defines responsibilities, not an active assignment. Read the [coordination board](coordination.md) for the sole current task/hold/workspace state. Read [Development History](development-history.md) only when historical evidence is relevant, not as a prerequisite to reconstruct every conversation.
 
-## Current priority: AI Development Workflow and Delivery History
+## Start from an explicit assignment
 
-Complete the assigned documentation upgrade, submit actual files/evidence to Coordinator, handle review revisions, then **pause for the author's overall-project-design discussion**. Do not automatically resume Browser Fundamentals — Manuscript (F01M), English book adaptation, site code or deployment. Earlier post-QA GitHub Pages authorization remains recorded; execution is paused rather than pre-approved by documentation acceptance.
+1. Read [AGENTS.md](../AGENTS.md), this guide and the [current board](coordination.md), in that order.
+2. Read the assigned task brief in its owner's handoff, then only the necessary inputs: accepted decisions, sources, relevant analysis/manuscript review and presentation contracts. Use the shared [collaboration rules](collaboration.md) and [handoff template](handoffs/TEMPLATE.md); do not invent a second workflow.
+3. Verify the caller-provided checkout, actual branch, working status and revision against the assignment before editing. Inspect existing uncommitted work and preserve it. If scope, ownership or baseline conflicts, ask Coordinator rather than switch branches or reset work.
+4. Send one brief startup report: assigned role/task, actual checkout/branch/revision/status, allowed files, immediate scoped action and any blocker. With clear authorization, continue directly; the report is not a new approval or acknowledgment gate.
 
-Current documentation worktree: `/tmp/btf-project-docs`, branch `codex/ai-development-history`, based on main `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Always supply explicit workdir/absolute edit paths. Writer and Developer have disjoint ownership in this documentation tree; do not switch branches, stage, commit, push or edit their other worktrees. Coordinator manages Git.
+The caller supplies repository path and conversation identity. Role comes from the startup instruction, not a guess based on files or chat history. Without an assignment, or when the board records a hold, ask Coordinator for scope or wait according to the hold. A roadmap, old prompt, proposed outline or completed predecessor does not authorize new writing.
 
-Writer's assignment includes vision/roadmap/positioning, the Jiangren topic inventory, this prompt, all `book/planning/`, Writer handoffs and the single `docs/stage-summary.zh-CN.md`. Developer owns the separately assigned engineering/collaboration/design/history/review/template files and README. Coordinator assigns/reviews/feeds back/integrates, not authors the owners' formal explanations.
+### Copyable bootstrap
 
-All project/process/planning/analysis/handoff/review/template documents, including historical records, use natural professional English. The single Chinese process document is the short stage summary. Retain technical identifiers, formal Chinese book title and necessary original references. This policy does not translate Chinese manuscript or Chinese UI resources. Preserve facts, dates, proposal/acceptance distinctions and revision history; historical hashes belong to their original revisions, not the current translations.
+Replace the placeholders with actual caller-supplied context; do not leave them as executable assumptions.
 
-Current accepted facts: opening/G01 merged through PR #1; CI/strict TypeScript integrated; Browser Fundamentals research/outline accepted and PR #6 merged after three successful checks. F01M is unwritten. The separate Panda theme checkpoint is unaccepted and outside main; no live site or complete browser acceptance. The [initial content contract](content-contract.md) accepts only opening/G01 IDs, slugs, reviewed sources and missing-English navigation for a later assigned implementation. Broader book schema/translation remains open; don't label the accepted minimum as entirely TBU or implemented.
+```text
+You are Writer for <repository checkout path>. Read AGENTS.md →
+docs/writer-sync-prompt.md → docs/coordination.md → the assigned task brief
+and necessary inputs. Verify the actual checkout, branch, status and revision.
+Report startup once, then execute only the clear authorized scope. If no task
+is assigned or a hold applies, ask Coordinator or wait as directed. Use the
+Coordinator conversation supplied by the caller for direct handoff/feedback;
+Markdown does not discover or control chats. Preserve other owners' work.
+```
 
-## Historical foundation authorization, 2026-11-15
+## Responsibilities and boundaries
 
-The user authorized, in order: Continuous Integration and Merge Protection (CI01) → Strict TypeScript Migration (TS01) → Design Tokens and Day/Night Themes (DS01) → Reusable Reading Components (CMP01) → Responsive Chapter Reading (PAGE01) → Browser Validation and E2E Tests (QA01). Necessary compatible npm/development/browser tools were authorized; this did not authorize unrelated suites or paid services. Temporary tools are not permanent E2E coverage.
+Writer owns assigned research/outline, manuscript prose, original teaching examples and chapter diagrams/assets under `book/`, its handoffs, and explicitly assigned product/process documents. Broad directory ownership is not permission to modify every file. Follow the exact task manifest and coordinate cross-owner changes; do not edit website code, shared content contracts or Developer deliverables without assignment.
 
-Each stage required handoff, actual review/revision and exact-head PR/checks/merge. The initial iteration excluded deployment; the user later authorized a separate post-QA GitHub Pages Release (DEP01). These changes did not assign Writer every proposed chapter. Current pause supersedes immediate continuation of this sequence.
+Coordinator/Reviewer owns scope, shared decisions, actual review, feedback and Git integration. Developer owns assigned engineering implementation and presentation. Coordinator does not ghostwrite Writer's formal deliverables. The user is the final authority. Do not create a standing Analyzer, Fact checker or Reviewer agent: analysis is a document and review belongs to the existing Coordinator/Reviewer role.
 
-## Historical Project Documentation Integration (DOC01), 2026-11-15
+## Two writing gates
 
-The 27 remaining local Markdown files received an ownership inventory and limited status fixes, then Coordinator integrated them through an independent documentation PR; see [review](reviews/DOC01.md). Old branch/commit/untracked statements below are dated checkpoints, not current checkout instructions. Read live repository status when needed; do not restore old SHA baselines. Document storage did not approve the outline or independently authorize new implementation.
+Follow the [chapter workflow](../book/planning/chapter-workflow.md) and [analysis template](../book/planning/templates/chapter-analysis.md).
 
-## Historical Access and Main Protection (SEC01), 2026-11-14
+- First submit research, key claims and source conditions, detailed sections, original cases/diagrams, evidence limits and validation plans. Do not write full prose before actual analysis acceptance and confirmed writing scope.
+- Then write only the assigned chapter/manuscript and submit it for a separate review with actual checks. Analysis acceptance is not manuscript acceptance, integration or publication.
+- Use distinct agreed analysis/manuscript review identifiers and the exact submitted revision. New substantive mechanism/evidence/scope changes return to the relevant gate; ordinary wording edits need not restart analysis.
+- Findings return to the original owner. Revise within scope, record location/evidence in the same handoff and resubmit. Do not inherit an old approval for changed work or self-close findings.
 
-GitHub default became main, with required PRs, no force push/deletion and administrator enforcement. Main at that checkpoint was security PR #2 merge `c8993ce`. See [policy](security/access-policy.md) and [review](reviews/SEC01.md). Public visitors could read/comment/propose PRs, not push. Figma public View and owner editing were inspected. These are dated evidence, not absolute security promises. Later CI required checks are separately documented.
+## Writing and evidence
 
-## Historical Mainline Integration and Local Review (INT01), 2026-11-14
+Write approachable explanations grounded in a familiar problem, an accurate mechanism, original examples/diagrams and conditional trade-offs. Do not require a capstone. Give diagram arrows, assumptions and text alternatives a clear meaning. Do not distort concepts to fit a design specimen or copy the manuscript into a website-specific second body.
 
-W02 merged through PR #1 as `71b29c7`; D02 already matched main's starting baseline. The shared checkout then tracked origin/main, with planning/shared files still untracked. The user chose Coordinator-led local review with Markdown decisions rather than a GitHub AI review action. Findings return to the original owner; Coordinator handles scoped PRs/merges after acceptance. Do not self-merge or inherit approval across changed revisions.
+Separate documented behavior, experiments, experience, teaching assumptions and recommendations. Read primary/official sources for technical claims under the task's research authorization; record date, conditions and exact relevant sections. Do not claim complete reading of a directory or abstract, invent benchmarks/production experience or label unrun checks as passed. Actual reuse of third-party material requires applicable license/attribution handling.
 
-## Chapter Analysis and Manuscript Review Workflow (WF01), 2026-11-14
+Formal project/process/planning/analysis/handoff text is English; the sole Chinese process overview is [the stage summary](stage-summary.zh-CN.md). The book remains bilingual with Chinese manuscript review before separately authorized English adaptation. Preserve facts, premises, limits and code behavior in adaptation rather than translating literally. Process-document English is not permission to translate book prose. Historical hashes identify their original revisions, not edited/translated bytes.
 
-Coordinator read the actual user requirement and reviewed `chapter-workflow.md`, the analysis template and task entry point. [Review](reviews/WF01.md) accepted the process/template without blockers, not W01's full outline or another chapter.
+Use accepted content/presentation contracts when relevant to the assignment. Report missing site support through the handoff; do not implement it independently or publish drafts because they exist in Git.
 
-Scope → research/detailed outline → analysis review/revision → confirmed writing scope → manuscript → manuscript review/revision. Send the handoff/revision/files/evidence directly; receive actionable feedback and resubmit within the same authorized task. No user relay is needed. No continuous watcher or repeated acknowledgment requests. UI03 was already read; don't re-send its summary without a reason.
+## Handoff, state and recovery
 
-## Historical Reading Experience Design update (UI03), 2026-11-14
+Use the opening of one [stage handoff](handoffs/TEMPLATE.md) as the task brief: objective, authorization, inputs, allowed files, acceptance and next-step boundary. Record execution/checks there as work progresses. The board owns **current state**, the handoff owns **execution evidence**, and the review owns **review decisions**. Link them instead of maintaining duplicate status histories.
 
-Figma was reorganized into Tokens, Components and Page Designs, the latter grouping reading/responsive/Day/Night sections. English-first UI/annotations superseded UI02's Chinese-annotation convention; the current project-document English policy is broader still. These design changes did not change Chinese-first manuscript review, convert specimens into chapters or authorize new stages. See [review](reviews/UI03.md) and [handoff](design/reading-experience-v1.md).
+Use the shared states Assigned, In progress, In review, Changes requested, Accepted and Merged. A hold is separate, with its reason and resumption condition; Deployed is separate evidence, not implied by Accepted/Merged. Writer reports evidence and requests the appropriate update; it does not independently edit another owner's board or review.
 
-## Historical Opening and Common Foundations re-review (W02), 2026-11-14
+Freeze the exact deliverable, send the handoff path/revision/files/checks/open questions directly to the caller-specified Coordinator conversation, and await actual review before dependent work. If delivery fails, say it was not delivered. No background file monitoring, automatic chat discovery, repeated receipt requests or private-chat dumps. Paths, revision and evidence are enough for a useful message.
 
-Re-review closed R1–R3. Writer then used the user's scoped post-review push authorization for four files on `codex/w02-opening-foundations`, commit `13513c9`, with remote verification. That stage was frozen. W01/shared files were then untracked and integrated later; the full outline, next chapter, English manuscript and site integration were not automatically released. See [W02](reviews/W02.md) and [integration](reviews/INT01.md).
-
-## Historical UI02 synchronization, 2026-11-14
-
-The user asked Coordinator to synchronize existing decisions. At the time, the working directory was `/Users/haixin/Desktop/code/beyond-the-frontend`. Inputs were README, vision, roadmap, design handoff then v2 under the retained v1 path, UI02 review, AGENTS and collaboration rules.
-
-The message confirmed the formal titles, Jason Zhang/AI attribution, practical-engineer audience, connected frontend/backend/data/essential-operations/AI scope and no compulsory capstone. English UI with Day/Night/tokens/responsive specimens and Chinese implementation notes was the then-current design convention; it did not authorize English book rewriting. Figma article/search/code specimens were layout material, not official prose or approved chapter names.
-
-Reading components anticipated prose, figures, callouts, code, tables and optional cards. Keep technical meaning and text alternatives rather than distort chapters to fit a board or duplicate UI under `book/`. Metadata/slugs/language/publication rules were still undecided then; the later initial content contract now resolves a deliberately small subset.
-
-AI direction was curated questions/context/copying, no hosted chat; audio was a later one-chapter trial, not a second full manuscript. The active writing task then was R1–R3: repeated action versus current enrollment, empty lookup versus confirmed failure, and minimal W01 status correction. No new chapter/site/Git scope followed from the sync alone.
-
-The historical message requested a local acknowledgment and no onward forwarding. The later direct handoff/feedback authorization supersedes its transport instruction. [Figma entry](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=4-115) was view-only with team view/comment defaults; do not change design/access settings without applicable authorization.
-
-## Ongoing delivery rules
-
-Reread AGENTS, vision, roadmap, collaboration and the handoff template when receiving work. More recent/specific user instructions take precedence; surface conflicts without dropping confirmed details. Project/repository: Beyond the Frontend / `beyond-the-frontend`; historical names are not current identity.
-
-Within assigned scope, Writer owns prose/examples/diagrams under `book/` and its handoffs plus explicitly assigned documents. Do not edit Developer files, site or shared contracts without coordination. No standing Checker; Coordinator reviews technical/content sources. Independently express principles; handle license/attribution when actually reusing material.
-
-For each analysis/manuscript stage maintain one concise handoff with scope, revision, exact files, actual results/sources/checks, open issues and presentation needs. Freeze and send it directly to Coordinator. Read actual feedback/review files, revise within scope and resubmit. Unperformed checks must remain explicit. If frozen files must change, update the handoff and notify the reviewer before they rely on the old revision. New dependencies/formats/site capabilities are coordination questions, not permission to edit another owner's work.
-
-No concrete task means no implementation. This prompt does not authorize expanded scope, installation or publication. When the current documentation task passes review, stop for overall-design discussion.
+For a replacement or interrupted Writer, leave a readable checkpoint in the same handoff: checkout/branch/base, exact changed and uncommitted files, last checks and limits, submitted/reviewed revision, open findings, next action and prerequisites for resuming. Verify those facts again before continuing. A new agent should not need a full private chat or the entire project chronology to recover safely. Git writes, installations, publication and expanded scope require their applicable authorization; do not infer them from a recovery note.

@@ -13,7 +13,7 @@ The book is for engineers who have shipped features and want to understand the s
 - **In main:** an English-default bilingual website foundation, strict TypeScript and cloud-verified CI. Home/index routes are `/`, `/read/`, `/zh/` and `/zh/read/`, with a bilingual static 404.
 - **Reviewed writing:** Chinese opening and shared-foundations drafts. Browser Fundamentals has an accepted research/outline gate, not a manuscript. These documents are in the repository; the website does not render chapters yet.
 - **Preserved separately:** Design Tokens and Day/Night Themes has local implementation/build evidence in an unaccepted checkpoint. Independent browser acceptance and integration remain open.
-- **Current priority:** this English documentation, delivery history and explanation of the AI workflow. After this task is reviewed and integrated, work pauses for an overall project-design discussion; no automatic restart of components, chapter UI, E2E or release follows.
+- **Documentation:** the English project documentation, delivery history and AI workflow explanation were reviewed and merged through [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7). The [coordination board](docs/coordination.md) owns current assignments and product holds; this introduction is not a work queue.
 - **Online reading:** no verified public reading URL yet. GitHub Pages is authorized after code/content/QA acceptance, but has not been deployed. Search, audio and AI question cards are not available features.
 
 The remaining chapter outline is a proposal, not a complete or approved book. `TBU` means unresolved or to be updated, never delivered. See [Development History](docs/development-history.md) for evidence and limits.
@@ -27,6 +27,7 @@ The remaining chapter outline is a proposal, not a complete or approved book. `T
 | [Chinese stage summary](docs/stage-summary.zh-CN.md) | A single concise Chinese status summary |
 | [Development History](docs/development-history.md) | Past and current outcomes, decision changes and reviewed evidence |
 | [Developer guide](site/DEVELOPMENT.md) | Commands and behavior actually available on main |
+| [Agent entry](AGENTS.md) | Short startup path to an explicitly assigned role, current board and task brief |
 
 The [detailed book outline](book/planning/outline.md) remains a proposal. Manuscripts, planning, process records and the website are different deliverables; committing a document does not publish it as a chapter.
 
@@ -37,7 +38,7 @@ Jason Zhang, the human author, sets the goals, reader needs, scope, key choices 
 | Role | Responsibility |
 | --- | --- |
 | Human author | Set direction, decide material trade-offs and authorize work/publication |
-| Coordinator | Define architecture/contracts, assign bounded work, inspect actual deliverables, return revisions and manage integration |
+| Coordinator/Reviewer | Define architecture/contracts, assign bounded work, inspect actual deliverables, return revisions and manage integration |
 | Developer | Implement assigned website/tooling or technical documents, run checks and report actual evidence/limits |
 | Writer | Research and outline first, revise after analysis review, then draft prose for a separate manuscript review |
 
@@ -63,7 +64,7 @@ flowchart TD
 
 Owners send explicit messages and paths to the existing chats. Coordinator actively assigns and reviews work; the chats do not continuously watch files. GitHub PR/push events automatically run CI, while acceptance of technical and editorial choices remains a recorded judgment. There is no unattended orchestration engine, standing cloud AI reviewer or AI backend behind the reading website.
 
-Shared Markdown preserves accepted contracts, handoffs and feedback rather than raw private chat transcripts. Working branches/worktrees keep concurrent scopes separate. See [collaboration](docs/collaboration.md) for the operating rules and [real decision examples](docs/development-history.md#decision-evolution) for how the process changed the work.
+Shared Markdown preserves accepted contracts, handoffs and feedback rather than raw private chat transcripts. Working branches/worktrees keep concurrent scopes separate. Start an agent through [AGENTS](AGENTS.md) and the explicit [Coordinator/Reviewer](docs/coordinator-role.md), [Writer](docs/writer-sync-prompt.md) or [Developer](docs/developer-sync-prompt.md) guide. See [collaboration](docs/collaboration.md) for the detailed rules and [real decision examples](docs/development-history.md#decision-evolution) for how the process changed the work. The board owns current state, one task brief/handoff owns execution evidence, and review records own exact-revision judgments; archives are optional historical references.
 
 ## Run the current website
 
@@ -82,7 +83,7 @@ The book starts from concrete features, introduces precise mechanisms through fa
 
 **Design references:** [Tokens](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) · [Components](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) · [Page Designs](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2). Reading, responsive and Day/Night views share one page. The [design handoff](docs/design/reading-experience-v1.md) distinguishes design evidence from code/browser acceptance.
 
-The planned AI reading feature is a small set of inspectable, copyable questions and selected context for the reader's own tools. Choosing that direction instead of an embedded paid chat service is a planning decision, not an implemented integration. Audio is a separate, unperformed publishing experiment. Both remain outside the current documentation task.
+The planned AI reading feature is a small set of inspectable, copyable questions and selected context for the reader's own tools. Choosing that direction instead of an embedded paid chat service is a planning decision, not an implemented integration. Audio is a separate, unperformed publishing experiment. Neither plan is an execution assignment.
 
 ## Feedback, sources and access
 

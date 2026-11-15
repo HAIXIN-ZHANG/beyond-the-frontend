@@ -1,28 +1,27 @@
 # Formal documents and agent notes
 
-The user distinguishes formal project sources from optional local working notes. The original checkout is `/Users/haixin/Desktop/code/beyond-the-frontend`; do not create or write to the historical `engineer-better` directory based on stale instructions. Use an explicitly assigned worktree when the coordination board specifies one; the current documentation task uses `/tmp/btf-project-docs`, not the frozen theme checkout.
+Use the caller's assigned checkout, verified against the [board](coordination.md); never select a historical directory from old prompts. This policy defines storage, not an active task or workspace.
 
 ## Formal project sources
 
-Store formal documents in the repository and use the project review/integration process. Being committed does not automatically publish a document on the reading website.
+Store formal sources in the repository and use the [collaboration workflow](collaboration.md). A commit does not automatically publish a document as a website chapter.
 
-- Writer owns `book/planning/` positioning, outlines and assigned writing stages, with manuscripts and teaching assets under `book/`.
-- Developer owns the assigned website/tooling and technical explanations. `site/IMPLEMENTATION.md` preserves the staged proposal; `site/DEVELOPMENT.md` describes implemented behavior and commands. A proposal is not an implemented feature.
-- Executors maintain their reports under `docs/handoffs/writer/` and `docs/handoffs/developer/`.
-- Coordinator decides shared scope/contracts/status and writes review conclusions under `docs/reviews/`. When assigned, Developer records accepted technical/design/coordination decisions; Writer handles assigned product explanations. Neither executor decides its own acceptance.
+- Writer owns assigned book planning, manuscripts, teaching assets and product/editorial explanations.
+- Developer owns assigned website/tooling and technical/process explanations. `site/IMPLEMENTATION.md` preserves a proposal; `site/DEVELOPMENT.md` describes implemented commands/behavior.
+- Executors begin one task brief/handoff under `docs/handoffs/<role>/` at assignment and append execution, revisions and recovery there.
+- Coordinator decides shared contracts/scope/status and writes actual judgments under `docs/reviews/`. Assigned executors record accepted explanations without deciding their own acceptance.
+- The board owns live assignments/holds/workspaces; stable role guides describe responsibility; history/archive preserves past evidence. Link these sources rather than maintaining duplicate queues.
 
-Formal sources may contain proposals if clearly marked draft, unresolved or accepted. Cross-role decisions go through Coordinator. Formal technical explanations and active code/design comments are English-first; temporary or secondary handoffs may be Chinese. This does not change the bilingual manuscript plan.
+Formal sources can contain clearly labelled proposals, unresolved questions and accepted decisions. Formal technical/product/process explanations and active comments are English-first; temporary/secondary handoffs may be Chinese. The bilingual manuscript sequence remains separate.
 
 ## Optional local notes
 
-Use `.local/notes/writer/` or `.local/notes/developer/` only when useful. The root `.gitignore` excludes them. They can hold temporary ideas, source leads, experiment notes and questions; no task needs a duplicate Markdown log, and formal documents should not have a second maintained copy. Do not store credentials or unnecessary personal information here.
+Use ignored `.local/notes/writer/` or `.local/notes/developer/` only when useful. Notes can hold temporary ideas/source leads, not a second maintained formal body or a required duplicate log. Do not store credentials or unnecessary personal details.
 
-Git exclusion is not access isolation. Other agents with access to the same checkout/account may read these files. Worktrees do not turn them into secret storage. Neither website builds nor public artifacts may contain `.local/`.
+Git exclusion is not access isolation. Agents sharing an account/checkout may read these files; worktrees are not secret storage. Website builds and public artifacts must exclude `.local/`.
 
-## Turning notes into a deliverable
+## Deliverable and recovery
 
-Move useful conclusions into the appropriate formal source with their status and evidence. Other roles must be able to work from formal documents without depending on scratch notes. A handoff must stand on its own and point to actual results and verification.
+Move useful conclusions into the owning formal source with status and evidence. Other roles must recover without scratch notes or private chats. A task handoff must preserve done/not done, exact uncommitted owner files, checkout/branch/base, last checks/limits, reviewed revision, open findings, next action and resume condition. Temporary logs/screenshots may supplement this record but must not be its only recovery evidence.
 
-Preserve existing directories, proposals and reports. This policy does not authorize bulk relocation, deletion or overwriting. If an existing file appears temporary, propose its classification in the owning role's handoff first. This storage rule neither releases a new stage nor independently authorizes installation, Git operations or publication; existing explicit task authorization still applies.
-
-Current priority: finish the assigned documentation upgrade and its review/revisions/integration, then pause for overall project-design discussion. Storage/documentation acceptance does not resume code, manuscripts, E2E or release.
+Preserve existing files and reports; this policy does not authorize relocation/deletion or overwriting. Propose uncertain classifications to the owning role through Coordinator. Storage acceptance does not release work, lift a hold or authorize installation, external calls, Git writes or publication.

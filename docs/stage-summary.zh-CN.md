@@ -1,52 +1,33 @@
 # 项目阶段速览
 
-更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览；详细记录以英文[开发历史](development-history.md)、[路线图](roadmap.md)和各阶段 review 为准。书稿仍按中文先审、之后英文改写。
+更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页提供简短说明和历史入口，不维护第二份任务看板。正式流程文档使用英文，中文书稿保持不变。
 
-## 当前：文档升级收尾后，先暂停讨论整体设计
+## 本次更新：协作流程与新 agent 接手
 
-本轮交付 **AI Development Workflow and Delivery History**：整理英文项目、工程、协作、规划和审查文档，用可读的成果名称解释 AI 协作与交付过程，保留旧编号追溯；不写 F01 正文、不改网站功能。
+用户已批准 **Agent Workflow and Cold-start Onboarding** 文档改造：让没有聊天背景的新 agent 能确定角色、找到任务、核验工作区，并按现有 review/返修机制接手。Writer 整理角色指引、章节流程与本速览；Developer 整理共享入口、流程、看板、模板和其他角色文档。实际进展与审查结论分别查看[看板](coordination.md)及其中链接的 handoff/review。
 
-以下状态表保留本轮文档提交 review、进入 PR 前的快照，不作为持续更新的最终结论。最终 review、PR、CI 与合并事实，以[本轮正式审查记录](reviews/ai-development-documentation.md)及其链接的 PR 为准；不在此预填尚未知晓的合并结果。
+- 启动顺序：`AGENTS.md` → 调用方指定的角色指引 → 当前看板 → 任务 brief 和必要输入 → 核验实际 checkout、分支、状态与版本 → 一次简短启动报告。范围清楚即可执行，启动报告不增加一层批准或回执。
+- 三个角色是 Coordinator/Reviewer、Writer、Developer。主对话派工、验收、反馈和管理 Git；正式执行产物由被分配的负责人写。角色不靠猜，仓库位置与会话身份由调用方提供；Markdown 不会自动找到或控制聊天。
+- 看板记录当前状态，handoff 复用开工部分作为任务 brief 并保存执行证据，review 保存审查决定。`Assigned`、`In progress`、`In review`、`Changes requested`、`Accepted`、`Merged` 分开；hold 另写原因与恢复条件，`Deployed` 单独记录。
+- 中断或替换 agent 时，同一 handoff 留清实际工作区、未提交文件、最后检查、受审版本、未决问题、下一步和恢复前提；接手者先核验，不覆盖原工作。
+- 现有会话直接传路径、修订号和证据；没有后台监听，不催回执，不复制私聊。章节仍先分析 review，再按明确范围写正文，正文另审。
 
-| 关口 | 提交前快照 |
+书稿、网站功能、E2E 和部署仍暂停。本轮文档工作不恢复 F01 正文或产品开发，也不把旧 roadmap 当开工指令；之后按用户要求先讨论项目整体设计。恢复执行须以看板记录的明确范围和解除 hold 条件为准。
+
+## 上轮已完成：英文文档与开发历史
+
+**AI Development Workflow and Delivery History**（旧编号 DOC02）已接受并经 [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7) 合并。受审 head 为 `dd08e7aa4a6e13f949bd389d8919e23a96f07a1d`，[run 43672904569](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43672904569) 的三项 required jobs 成功，合并提交为 `aafc467860a80a4ad0918d08055336079ebf0e98`。这些是上轮事实，不是本轮文档的 CI/合并结果；本轮最终证据从看板进入对应 review/PR。
+
+详见[正式审查记录](reviews/ai-development-documentation.md)和[开发历史](development-history.md)。本轮沿用英文过程文档、可读成果名称和旧编号追溯，不翻译中文书稿。
+
+## 已有成果与保留事项
+
+| 成果 / 保留点 | 已确认边界与详细入口 |
 | --- | --- |
-| 文档产出与 review | Writer 与 Developer 按文件分工整理；本中文速览由 Writer 起草，待 Coordinator review 后维护；本轮尚未最终验收 |
-| CI / 合并 | 当前文档修订尚未提交云端检查、未合并；不能套用上一阶段的成功检查 |
-| 部署 | 没有已验收的上线站点；本轮不部署 |
-| 收尾之后 | 完成本轮 review 和返修后暂停；下一步先由用户讨论、优化项目整体设计，不自动恢复代码、正文或部署 |
+| 网站基础、CI、strict TypeScript | 已整合基线，完整浏览器/阅读产品验收仍未完成；[开发历史](development-history.md)记录各次 review、检查与合并 |
+| 开篇与 G01 中文稿 | 已审并合并，正文保持原稿；[最小内容契约](content-contract.md)接受固定 ID/slug、reviewed-draft 输入与缺英文处理，阅读页尚未实现，全书扩展仍待定 |
+| 浏览器基础：研究细纲 | [原 r1 review](reviews/F01A.md)通过并经 PR #6 合并；F01M 正文未写，V1–V4 实验未运行，研究通过不等于正文完成 |
+| Panda 明暗主题 | 未验收 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` 保留在独立工作分支，不在 main；本地构建、10 tests、111-token 报告不等于独立浏览器验收；[主题 review](reviews/DS01.md)记录上游声明和双编译边界的限制 |
+| 后续方向 | 组件、真实章节呈现、永久 E2E/QA 与线上发布未完成；搜索、低成本 AI 提问卡、音频和导出保留为[路线图](roadmap.md)方向，不自动开工 |
 
-## 已有成果与关键决定
-
-- 当前 main 已包括网站双语骨架、开篇与 G01 中文稿、访问保护、原项目文档整合、CI、strict TypeScript，以及浏览器基础的研究细纲。**研究细纲通过不代表正文完成。**
-- 已接受的[最小内容契约](content-contract.md)允许后续指定阶段使用开篇/G01 的原 Markdown、固定 ID/slug 和 reviewed-draft 状态；英文正文尚无，缺英文时明确引导到中文或另一语言目录。契约已接受，正式阅读页尚未实现；全书扩展仍待定。
-- 用户选用 PandaCSS。主题实现冻结在独立 checkpoint，尚未通过完整独立浏览器/UI review，也未合入 main。本地构建、10 项测试和 111-token 报告不等于浏览器验收。
-- Panda 上游声明问题采用分开的应用/构建工具编译边界：Coordinator 提出边界，Developer 实现并做本地检查；不是修好了上游声明，也不是 UI 已验收。
-- AI 阅读增强先考虑低成本提问卡：预览上下文后复制到读者自己的工具；站内付费 chat 不在初期范围。此方向仍为计划。
-- 用户后来授权必要 npm、浏览器和 E2E 工具，并把原先“不部署”扩为相关代码/内容/QA 通过后另做 GitHub Pages 发布。临时工具已安装不代表永久 E2E 已建好；当前整体设计暂停安排优先于自动继续。
-- 项目过程文档统一英文，只保留本速览为中文；中文书稿不随本轮翻译。旧分析 hash 对应原始受审稿，英文整理后的文件需单独 review。
-
-## 恢复点与尚未完成
-
-| 项目 | 恢复依据 / 未完成 |
-| --- | --- |
-| 已整合基线 | `main` 的 F01 分析整合提交 `4ff4a1ffd32209e80f64a60bd12766f3864ea489`；后续文档合并另记实际结果 |
-| 本轮文档 | `/tmp/btf-project-docs`，分支 `codex/ai-development-history`；Coordinator 统一 Git、PR、检查与合并 |
-| 主题实现 | 未验收 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`，不在 main；保留原工作，不覆盖或视作完成 |
-| 浏览器章节 | [分析](../book/planning/analyses/F01.md)已通过原 r1 review；F01M 正文未写，实验 V1–V4 未运行 |
-| 阅读产品 | 组件、真实章节呈现、浏览器/E2E/QA 与线上发布仍未完成；搜索、AI 卡片、音频和导出仍是后续方向 |
-| 下一步 | 本轮文档完成 review/返修后暂停，先讨论整体设计；重新执行须有明确范围和恢复指令 |
-
-## 紧凑历史索引
-
-| 可读成果名称（旧编号） | 实际结果 | 详细证据 |
-| --- | --- | --- |
-| 网站基础与双语路由（D02） | 代码/配置已在 main；浏览器完整验收未完 | [review](reviews/D02.md) |
-| 开篇与共同基础（W02） | R1–R3 已关闭，PR #1 已合并；未上线 | [review](reviews/W02.md)、[整合](reviews/INT01.md) |
-| 访问权限与主线保护（SEC01） | PR #2 已合并；权限检查有日期边界 | [review](reviews/SEC01.md) |
-| 原项目文档整合（DOC01） | 27 份原文档与 review 经 PR #3 合并；目录提案未因此获批 | [review](reviews/DOC01.md) |
-| CI 与合并保护（CI01） | PR #4 三项检查通过并合并；required checks 已核实 | [review](reviews/CI01.md) |
-| Strict TypeScript 迁移（TS01） | PR #5 三项检查通过并合并 | [review](reviews/TS01.md) |
-| 浏览器基础：研究与细纲（F01A） | 原 r1 通过，PR #6 三项检查通过并合并；正文未写 | [review](reviews/F01A.md) |
-| 设计 tokens 与明暗主题（DS01） | 只有未验收 checkpoint；无 review 通过或 main 合并结论 | [路线图](roadmap.md) |
-
-本文件只给状态与入口，不复制完整开发历史，也不把“写完”“已审”“CI 通过”“已合并”“已部署”合成同一个完成标记。
+此前用户授权必要工具及相关代码/内容/QA 通过后的 GitHub Pages 发布；临时工具不等于 E2E 已完成，授权也不解除当前暂停。当前可恢复工作区和负责人从看板查找，不从本页旧路径或旧 SHA 猜测。

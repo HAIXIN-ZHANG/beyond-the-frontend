@@ -1,24 +1,46 @@
-# [Readable outcome name] — handoff
+# [Readable task/outcome name] — task brief and handoff
 
-Legacy reference: [existing task ID]. Revision: [r1/r2]. The owner maintains one report per reviewable stage. Coordinator owns the corresponding [review record](../reviews/TEMPLATE.md). Delete unused placeholders; do not invent evidence to fill a field.
+Owner: [Writer/Developer]. Legacy reference: [if applicable]. Revision: [r1/r2]. Begin this file at assignment, before execution, and maintain one report per meaningful stage. Delete unused placeholders; do not invent evidence. The [board](../coordination.md) owns live state; this report owns assignment/execution evidence; the [review](../reviews/TEMPLATE.md) owns judgment.
 
-- **Status:** awaiting review / revising / awaiting re-review / preserved pause point. Final acceptance comes from the actual review.
-- **Authorization and scope:** concrete user/Coordinator assignment, inputs, allowed files and relevant accepted shared decisions.
-- **Deliverable:** exact paths and important modules/sections; identify the frozen revision and excluded work.
-- **Review type:** research/outline, manuscript, code/page, design or process. Analysis acceptance does not accept a manuscript.
-- **Result:** three to five concrete outcomes, with limitations where material.
-- **Verification/evidence:** commands actually executed, results, inspected sources and genuine browser/screenshot evidence. Name unperformed checks explicitly.
-- **Open issues/dependencies:** the specific question, consequence, owner and decision needed; do not silently expand scope.
-- **Review link:** actual path/revision if a review exists; otherwise “pending Coordinator review,” without a broken placeholder link.
-- **Revision history:** finding IDs, changed locations, verification and re-review outcome. Announce changes to frozen files.
-- **Next step:** re-review, the already authorized next step, or scope pending. A report does not release itself.
+When instantiating this template, relocate relative links for the destination directory. For `docs/handoffs/developer/<task>.md` or `docs/handoffs/writer/<task>.md`, the board link is `../../coordination.md` and the review-template link is `../../reviews/TEMPLATE.md`; replace the latter with the actual stage review when it exists. Verify the instantiated links rather than copying the template's directory-relative destinations unchanged.
 
-## Feedback responses
+## Task brief — record at assignment
 
-| Finding | Change/location | Actual verification and limits | Coordinator closure evidence |
+- **Owner and status:** [assigned role; lifecycle state from collaboration; any independent hold, reason, responsible party and resume condition].
+- **Authority/objective:** [concrete user/Coordinator assignment and intended result].
+- **Allowed files and exclusions:** [exact paths/areas; other-owner changes to preserve].
+- **Workspace/branch/baseline:** [assigned checkout/branch/base, actual verification; Coordinator manages Git writes].
+- **Inputs:** [necessary accepted contracts, files/revisions and source boundaries].
+- **Deliverable/review type:** [output and research/outline, manuscript, code/page, design or process gate].
+- **Acceptance criteria:** [observable checks and explicit evidence required].
+- **Dependencies and next boundary:** [decision/owner needed; next already authorized step or scope pending].
+
+The board links this brief rather than duplicating the full assignment. A role guide or roadmap does not supply missing scope.
+
+## Execution and submitted revision
+
+- **Delivery:** [exact changed files and important sections/modules; submitted revision and excluded work].
+- **Actual verification:** [commands/observations and results, source/browser evidence where relevant; explicitly unperformed checks and limits].
+- **Open issues:** [question, consequence, responsible owner and resolution needed].
+- **Review:** [actual record/revision if present, otherwise pending Coordinator review].
+- **Next action:** [submit/revise/wait, or already authorized continuation after acceptance; no self-release].
+
+Use a commit or exact file/digest manifest when available. A report cannot know its own future commit SHA; do not chase a self-referencing hash. A fixed product/file manifest may exclude this evolving report if stated; Coordinator later records the actual reviewed commit. Historical hashes refer to their named original revisions.
+
+## Revision responses — append in this file
+
+| Finding | Revision and changed location | Actual verification/limits | Coordinator closure evidence |
 | --- | --- | --- | --- |
-| [real finding ID] | [specific revision] | [actual result] | [pending or actual review] |
+| [real ID only] | [specific correction] | [actual result] | [pending or actual review] |
 
-Writer emphasizes causal explanation, original examples/diagrams, sources and evidence boundaries. Developer emphasizes build/behavior checks, actual tested viewports, keyboard/console behavior and content integration. Use readable stage names first; preserve legacy paths/IDs for traceability. Historical hashes refer to the original source revision, not later translated document bytes.
+Freeze submitted files and send the path, revision, short scope/checks/open questions directly to Coordinator. Announce changes to frozen work. Findings return to the original owner; Coordinator rechecks affected revisions. Receipt/silence is not acceptance. Analysis and manuscript have distinct reviews.
 
-After freezing the deliverable, send this path, revision, short scope and open questions directly to Coordinator. Coordinator reads the actual result and returns findings; the original owner revises and resubmits. Delivery, acknowledgment and silence are not acceptance. Do not repeatedly request receipts or depend on background file monitoring.
+## Recovery checkpoint — update before stopping
+
+- **Done / not done:** [deliverables completed, unfinished work and exclusions].
+- **Uncommitted work:** [exact owner files, shared-tree changes to preserve, actual checkout/branch/base].
+- **Last verification:** [checks/results/date, missing checks and limits].
+- **Review state:** [last submitted/reviewed revision, open findings and actual review link].
+- **Resume:** [next concrete action, responsible party, applicable hold and explicit resume condition].
+
+Keep essential recovery facts here, not only ignored notes, temporary screenshots or tool logs. On restart verify actual tree/status and current board before editing. Acceptance, Git/checks/merge and deployment remain separate; reference actual integration records once they exist.

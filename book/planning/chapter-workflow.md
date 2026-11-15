@@ -1,6 +1,6 @@
 # Chapter Workflow: Analysis Review Before Manuscript
 
-Original process: 2026-11-14. English editorial/status update: 2026-11-15. Owner: Writer.
+Original process: 2026-11-14. English editorial update: 2026-11-15. Owner: Writer.
 
 **Confirmed user requirement:** research and analyze each chapter carefully, specify detailed sections, submit an analysis document to the existing project reviewer, handle feedback, then write the manuscript. The manuscript still needs its own review. This process does not authorize an unscoped chapter, the complete outline, installation or publication.
 
@@ -9,6 +9,12 @@ Original process: 2026-11-14. English editorial/status update: 2026-11-15. Owner
 Writer owns research, analysis, outline, prose, necessary verification and revisions. Coordinator reviews actual evidence, accuracy, continuity and reader fit, then returns actionable feedback. The user sets goals/scope and is the final authority. Developer coordinates presentation needs when necessary rather than replacing content review.
 
 “Analyzer” means the **chapter-analysis deliverable**, not another standing agent. Do not create a new analyzer agent or restore the removed Fact checker role.
+
+## Startup and task brief
+
+Follow the stable [Writer role guide](../../docs/writer-sync-prompt.md): AGENTS → role guide → [current board](../../docs/coordination.md) → assigned task brief and necessary inputs → verify actual checkout/branch/status/revision → one short startup report. With clear scope, execute without waiting for another receipt. The caller assigns the role and supplies the repository/conversation context; Markdown does not locate or control chats. No assignment or an applicable hold means ask Coordinator or wait, not select a chapter from the outline.
+
+Use the opening of the existing stage [handoff](../../docs/handoffs/TEMPLATE.md) for objective, authorization, inputs, exact file ownership, acceptance criteria and next-step boundary. Do not create a separate parallel task register. The board owns current state and holds; the handoff owns execution/recovery evidence; the review owns the exact-revision decision. Shared state and recovery mechanics follow [collaboration](../../docs/collaboration.md).
 
 ## Two distinct gates per chapter
 
@@ -55,10 +61,16 @@ Read the full returned review. For each finding, record the change location and 
 
 New mechanisms, source conflicts, business semantics or expanded technical/file scope return to the relevant analysis review. Ordinary wording, transitions and punctuation can be edited without reopening the research gate. Manuscript handoff explains adherence to the accepted outline, deviations and checks performed or omitted.
 
-## Current checkpoint
+## Historical process evidence
 
 Opening and Common Foundations (W02) passed re-review and merged through PR #1; see [integration](../../docs/reviews/INT01.md). Do not pretend it had the later analysis-first gate retroactively.
 
-Chapter Analysis and Manuscript Review Workflow (WF01) accepted this process/template. Browser Fundamentals — Research and Outline (F01A) subsequently passed its own review and merged through PR #6; its original Chinese r1 is the reviewed historical revision. This English editorial translation has different bytes and requires documentation review, not inherited byte-level approval. Browser Fundamentals — Manuscript (F01M) has not started and is paused for the documentation priority.
+Chapter Analysis and Manuscript Review Workflow (WF01) accepted this process/template. Browser Fundamentals — Research and Outline (F01A) subsequently passed its own review and merged through PR #6; its original Chinese r1 is the reviewed historical revision. The English process translation has different bytes from that original r1; the later documentation revision was accepted through [AI Development Workflow and Delivery History](../../docs/reviews/ai-development-documentation.md), integrated through PR #7. Neither acceptance authorizes a new manuscript. These are historical outcomes; read the board for the current assignment/hold rather than use this section as a live chapter queue.
 
 Direct owner→Coordinator handoff→feedback→revision is authorized within an assigned task; no user relay or background monitoring is required. Preserve reviewed prose and file ownership; Coordinator manages Git and integration.
+
+## Interruption or replacement
+
+Keep a readable checkpoint in the same stage handoff: actual checkout/branch/base, changed/uncommitted files and ownership, last checks/limitations, submitted and reviewed revision, open findings, next action and resumption prerequisites. A replacement follows the startup sequence, verifies the checkpoint against the checkout and reads the relevant review before editing. Ask Coordinator about unresolved scope/ownership or a hold; do not reset work or automatically resume from a historical next-step suggestion. Preserve earlier evidence and report which checks were not rerun.
+
+A clear startup report is not another approval gate. Acceptance still requires actual review of the appropriate analysis/manuscript revision; Git merge and deployment remain separately evidenced states. Current task status belongs only in the board.

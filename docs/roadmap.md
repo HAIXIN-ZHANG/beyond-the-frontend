@@ -19,14 +19,16 @@ Review, CI, merge and deployment are separate states. Prefer readable outcome na
 
 ## 1. Current baseline and immediate priority
 
-The current priority is **AI Development Workflow and Delivery History** (legacy DOC02): English project/process documentation, readable delivery names and one concise Chinese stage summary. Complete and review this documentation stage, then pause for the author’s discussion of the overall project design. Do not automatically resume manuscript, code or deployment work after documentation acceptance. Earlier UI/E2E/QA and post-QA GitHub Pages authorization remains recorded, but resumption requires the author’s direction after that discussion.
+The [board](coordination.md) owns current assignments and holds. The bounded **Full-stack and AI Product Engineering — v1 Content Framework** task updates product positioning/content planning only. The author-confirmed audience is Junior–Senior, with required AI product architecture and a separate coding-AI delivery thread. [Eight-part framework](../book/planning/outline.md) is the content direction; page names/splits can evolve and individual pages have not passed research/manuscript review by being listed.
+
+Product implementation, new prose/translation, UI/schema/E2E and deployment remain on hold unless explicitly reassigned. Earlier tool and post-QA GitHub Pages authorization remains recorded but does not resume execution. Completed documentation/onboarding outcomes belong in [history](development-history.md) and their [documentation](reviews/ai-development-documentation.md)/[onboarding](reviews/agent-workflow-onboarding.md) reviews rather than being reissued as current tasks.
 
 | Deliverable | Current evidence | Remaining boundary |
 | --- | --- | --- |
 | Website Foundation and Bilingual Routing (D02) | Reviewed code/configuration is in main; bilingual home/empty contents routes, 404 and static export exist. [Review](reviews/D02.md). | Browser visual, keyboard and client-interaction acceptance is incomplete. |
 | Opening and Common Foundations (W02) | Two Chinese drafts passed re-review with R1–R3 closed and merged through PR #1. [Review](reviews/W02.md). | Not connected to a public reading site; English adaptation and later chapters require scope. The accepted minimal content contract permits these reviewed drafts as initial inputs for a later assigned reading stage; that rendering is not implemented yet. |
 | Repository Access and Main Protection (SEC01) | Default main and required-PR protections were independently checked. [Review](reviews/SEC01.md). | Access observations have dates and must be rechecked after changes; they are not an absolute security guarantee. |
-| Project Documentation Integration (DOC01) | The original 27 documentation files plus the review record were integrated through PR #3. [Review](reviews/DOC01.md). | Storing a proposal does not approve its chapter list or features. |
+| Project Documentation Integration (DOC01) | The original 27 documentation files plus the review record were integrated through PR #3. [Review](reviews/DOC01.md). | The historical 45-chapter proposal was not approved by storage. The author has now confirmed the eight-part v1 direction; individual page analysis/manuscript gates remain. |
 | Continuous Integration and Merge Protection (CI01) | PR #4 passed Quality, Static export (root) and Static export (pages); matching required checks and up-to-date branches were verified. [Review](reviews/CI01.md). | Each new proposed head needs its actual required checks. CI does not deploy. |
 | Strict TypeScript Migration (TS01) | Reviewed strict migration merged through PR #5 as `92a0edf`; three required checks passed. [Review](reviews/TS01.md). | This does not accept the subsequent UI or Panda configuration. |
 | Browser Fundamentals — Research and Outline (F01A) | Analysis r1 accepted; PR #6 passed all three checks and merged as `4ff4a1f`. [Review](reviews/F01A.md). | Analysis only: no manuscript, browser experiment or publication acceptance. |
@@ -48,7 +50,20 @@ The current priority is **AI Development Workflow and Delivery History** (legacy
 
 The Panda checkpoint includes an upstream declaration problem and a proposed split between application and build-tool compiler boundaries. Coordinator proposed the boundary; Developer implemented local checks. Local success is not independent UI acceptance or proof that upstream declarations were repaired. See Development History for the evidence and decision sequence.
 
-## 2. Feature priorities
+## 2. Content direction and prerequisites
+
+| Content outcome | Prerequisite and acceptance boundary |
+| --- | --- |
+| Junior–Senior Full-stack + AI Product Engineer framework | Confirmed audience/eight-part direction; refine independent page names/merges through planning review without claiming a job-level outcome |
+| Eight connected parts | Product/architecture; frontend/Design Systems; API/integration; data/search; async/traffic/reliability; cloud/testing/delivery; observability/recovery; required AI product architecture plus coding-AI delivery. Detailed scope/examples/optional depth and all 45 legacy mappings live only in the outline. |
+| Existing accepted material | Preserve opening/G01 prose and F01A analysis byte-for-byte in this task. Placement does not expand their old acceptance or authorize the unstarted F01 manuscript. |
+| Future page writing | Concrete assignment → sources/detailed analysis and review → confirmed writing scope → manuscript and separate review. Do not list all working pages as Assigned. |
+| Connected cases and depth | Shared mechanism/example/optional-trade-off layers; cases explain decisions, not compulsory projects. DevOps/data support product delivery/maintenance; specialist platforms and model training are outside the main line. |
+| Frameworks, observability and AI providers | Examples chosen for explanatory value and checked when writing. Datadog is one proposed original correlation example; no provider/service/library adoption, installation or new paid account. |
+
+The book's required AI product coverage is distinct from the reading website's optional AI question-card experiment. Required book coverage does not authorize live model calls, a chat product or an SDK integration on this site.
+
+## 3. Reading-product feature priorities
 
 Priorities guide design; they do not assign all work at once. Establish reading and discovery before validating enhancements.
 
@@ -66,13 +81,13 @@ Priorities guide design; they do not assign all work at once. Establish reading 
 | Offline export | Validate one EPUB or PDF path | Later candidate | Every format and a dedicated reader at once |
 | Progressive diagrams | Reveal a few difficult relationships in steps with static explanations retained | Later candidate | Animation for every diagram or interaction required to understand a principle |
 
-## 3. Product acceptance checkpoints
+## 4. Product acceptance checkpoints
 
 These checkpoints complement the delivery stages without replacing their legacy identifiers or exact assignments.
 
 ### Positioning and sample chapters
 
-Confirm the audience, tone, content boundaries, sources and author disclosures. The opening/foundations drafts passed review; later chapter and English-sample scope remain separate. License choices are still TBU. Explanations and examples must work in actual samples; a proposed complete outline is not a reviewed complete outline.
+The Junior–Senior Full-stack + AI Product Engineer audience and eight-part direction are confirmed. Validate tone, detailed page splits and explanations through scoped planning and sample review. The accepted opening/foundations remain unchanged; later chapter and English-sample scopes are separate. License choices remain TBU. A confirmed framework does not mean every page has completed analysis or manuscript review.
 
 ### Comfortable reading of approved content
 
@@ -113,20 +128,20 @@ Confirm content/code licenses, contribution rules, issue/PR entry points, public
 
 Feedback guides revisions and the next questions; it does not automatically generate or publish unreviewed prose. Keep feedback mechanisms small. Accounts, rankings, billing, advertising and lead generation are outside the initial release.
 
-## 4. Ownership and handoff
+## 5. Ownership and handoff
 
-Writer and Developer can advance independent assigned work, with disjoint files. Resolve content schema, language mapping and status rules before integrating them in parallel. During the current documentation priority, both work in a dedicated documentation tree, while the original theme checkpoint remains frozen elsewhere.
+Writer and Developer can advance independent assigned work, with disjoint files. Resolve content schema, language mapping and status rules before integrating them in parallel. Use each task brief and the board to verify workspace and ownership rather than assume an old worktree. The preserved unaccepted theme checkpoint is not an input to content-framework implementation.
 
 Owners submit stage records under their respective `docs/handoffs/` directories. Coordinator reads actual deliverables and evidence, records review decisions under `docs/reviews/`, returns revisions and manages Git integration. A dependent stage waits for its prerequisite review. The roadmap is not blanket authorization; local notes are not hidden dependencies for another role.
 
 Writer authors assigned vision/roadmap and planning explanations; Developer authors assigned engineering/history records. Coordinator assigns, reviews, feeds back and integrates rather than writing the owners' formal deliverables. The author remains the final authority.
 
-## 5. Open decisions
+## 6. Open decisions
 
 | Detail needed | Supplies detail | Accepts / coordinates | Prerequisite |
 | --- | --- | --- | --- |
-| Chapter names, order and next batch | Writer | Author / Coordinator | Current-stage review and outline discussion |
-| Language, status and path contract | Writer + Developer | Coordinator | Before prose integration |
+| Detailed reading-page names/splits and next assigned page | Writer | Author / Coordinator | Confirmed eight-part direction; planning review, then an explicit page assignment |
+| Future language/status/path contract extensions | Writer + Developer | Coordinator | Preserve the accepted initial opening/G01 contract; review expansion before new prose integration |
 | Home/chapter/mobile design | Existing UI03 design; Developer supplies implementation feedback | Author / Coordinator | Visual acceptance and explicit implementation scope |
 | Search, recovery and correction behavior | Developer | Coordinator | Content contract and basic reading |
 | Card and copy-context format | Writer + Developer | Coordinator | Stable chapters allowed for publication |

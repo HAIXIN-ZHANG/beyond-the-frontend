@@ -1,135 +1,97 @@
-# Editorial Baseline: Beyond the Frontend
+# Editorial Baseline: Full-stack + AI Product Engineering
 
-Original planning date: 2026-11-14 (Australia/Perth). English editorial update: 2026-11-15. Owner: Writer.
+Updated: 2026-11-15 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
 
-This is the **Editorial Baseline and Content Map** planning package (legacy W01), not manuscript prose or a replacement for the [vision](../../docs/project-vision.md) and [roadmap](../../docs/roadmap.md). Separate confirmed direction from Writer's proposals. The full outline has not been approved.
+The former W01 three-part/45-chapter proposal is historical, superseded as an organizing framework. Its 45 entries remain traceable in the outline's legacy map and original handoff/Git history. Confirmation of v1 direction does not accept every page's research, prose, implementation or publication.
 
-## Current status and historical scope
+## Identity and reason to write
 
-- W01 delivered planning only; its exact chapter splits, identifiers and batches remain proposals.
-- The separately authorized **Opening and Common Foundations** (W02) passed re-review, with R1–R3 closed. Its two Chinese drafts, scope and handoff merged through PR #1; see [W02](../../docs/reviews/W02.md) and [integration](../../docs/reviews/INT01.md). This did not approve the full outline or integrate prose into the website.
-- The token sample F04 was an earlier candidate, not the actual W02. English manuscript adaptation has not begun.
-- **Chapter Analysis and Manuscript Review Workflow** (WF01) accepted the two-gate process. **Browser Fundamentals — Research and Outline** (F01A) later passed review and merged through PR #6; its manuscript remains unwritten.
-- The earlier DOC01 pass only aligned then-untracked planning, handoff and research status. It did not edit accepted prose or authorize the next chapter.
-- Current priority: **AI Development Workflow and Delivery History** documentation. Translate assigned process documents into English and prepare the single Chinese stage summary. New prose and code stages are paused. See [roadmap](../../docs/roadmap.md) and [history](../../docs/development-history.md).
-
-## Confirmed identity
-
-| Item | Name |
+| Item | Confirmed name |
 | --- | --- |
-| Chinese book title | 《前端往后看：能跑，然后呢？》 |
-| English book title | Beyond the Frontend: It Works. Now What? |
-| Project / repository | Beyond the Frontend / `beyond-the-frontend` |
+| Chinese book | 《前端往后看：能跑，然后呢？》 |
+| English book | Beyond the Frontend: It Works. Now What? |
+| Project/repository | Beyond the Frontend / `beyond-the-frontend` |
+| Author and creation | Jason Zhang, with AI assistance throughout creation |
 
-Engineer Better / `engineer-better` is historical. The author is **Jason Zhang**, with AI assistance throughout creation. Existing drafts do not mean the complete book is written or reviewed. The promotional copy below remains a discussion draft.
+Engineer Better is a historical working name. The frontend remains an approachable starting point, not the boundary of a book now explicitly about full-stack and AI product engineering.
 
-## Why this book
+Readers often learn Design Systems, System Design, data, operations and model integration in separate places. This book connects them through a user's task and the decisions needed to deliver a reliable product. Ask what success means, where responsibility/state/trust live, which work must finish first, what a failure means to the user and what evidence justifies a change.
 
-Frontend Design Systems, backend System Design, data, operations and AI collaboration are often learned separately. Help readers with practical experience see how they jointly support a product.
+Product thinking is concrete: who needs what result, what should count as success, what users can do while waiting or when a result is uncertain, and whether a proposed feature needs AI at all. Architecture is concrete too: boundaries, data, dependencies, quality constraints, trade-offs and recovery. Avoid slogans or a catalogue of fashionable patterns.
 
-The goal is to explain the problem, responsibility and state boundaries, cooperation between parts, costs, evidence of correctness and changes required under new conditions. Product thinking means identifying who has a problem, whether the feature solves it, how waiting/failure affects people and which requirements are worth pursuing. Architectural judgment concerns responsibilities, data, time, dependencies, quality constraints and evolution. Explain both through decisions rather than slogans.
+## Readers: one text, layered depth
 
-Distinguish using AI to develop software from adding AI capabilities to a product. Neither an AI-tool manual nor progressively more elaborate agent configuration is the goal.
+**Confirmed audience: Junior–Senior Full-stack + AI Product Engineers.** This is v1's public direction, not an unresolved positioning label. Readers can begin with frontend, backend or end-to-end experience; they do not need mastery of every topic. Assume practical exposure to software, while explaining unfamiliar mechanisms rather than using seniority as a shortcut.
 
-## Readers and working personas
-
-Primary readers have built real features and want to connect fragmented knowledge and improve judgment across domains. Do not use years, title or geography as a gate. These personas are **editorial hypotheses, not validated interview or market-research findings**.
-
-| Persona | Familiar ground | Main question | Needed support |
-| --- | --- | --- | --- |
-| Frontend engineer looking beyond the UI | Pages, components, forms, API calls | How do permissions, caching and background tasks affect UI state? | Connect interface behavior to APIs, data, services and operations |
-| Backend engineer looking at the whole product | APIs, SQL, business logic | Is a queue or service split needed? How should system state reach the UI? | Explain technical costs and their user consequences |
-| End-to-end builder strengthening judgment | Full-stack features, personal projects, internal tools; possibly frequent AI use | What is missing after it runs locally? How should AI output be checked? | Connected cases, failure paths, evolution and verification |
-
-Assume exposure to components, APIs, databases and Git, but not transaction isolation, message delivery, semantic tokens or agents. Supply brief syntax support and deeper links without turning the main argument into a beginner language course. Experienced readers may fill gaps in another domain; do not promise specialist depth everywhere or organize the book around interviews, certification or promotion.
-
-## Confirmed content direction
-
-1. Three parts: frontend; backend and data; connected cases across layers. Keep common foundations in a short introduction rather than a large abstract theory part.
-2. Explain through examples throughout the first two parts. The last part emphasizes cross-layer decisions instead of repeating definitions.
-3. Set no page/word cap now. Produce coherent drafts and adjust depth after the author reads them. Completeness does not require every framework API.
-4. Markdown is the content source for sequential reading and problem-based lookup. Shared schema, site contracts and diagram formats require coordination rather than independent decisions in this plan.
-5. No compulsory capstone or exercises. Reflection questions include analysis, conditions and possible judgments. Use code/experiments when needed to explain.
-6. Check scope against books, blogs and courses, but independently organize prose and examples. Jiangren's employment, interview, certification and training arrangements are outside scope.
-
-## Proposed voice, to test in chapters
-
-Write like a patient colleague who wants to explain clearly: relaxed, direct and concrete. Begin with an observable problem, then introduce terms and mechanisms. Avoid dismissive language such as “obviously” or “easy,” elaborate fictional characters, dramatic incidents and constant jokes.
-
-A useful relationship, not a mandatory section template:
-
-> Familiar situation → why the problem appears → intuition and accurate mechanism → original example or diagram → choices and trade-offs → reflection after a condition changes.
-
-- **Main prose:** necessary for understanding the case and making basic judgments.
-- **Optional depth:** special mechanisms and conditions that can be skipped without breaking the argument.
-- **Diagrams:** structure, sequence, state or data flow, with arrow meanings, assumptions and text explanations.
-- **Code:** the parts that affect understanding; label simplifications and limits. Add complete runnable material only when useful.
-- **Tables:** genuinely comparable choices without unconditional product rankings.
-- **Analogies:** intuition followed by their limits.
-
-## Recurring original teaching scenarios
-
-| Scenario | Connections |
-| --- | --- |
-| Components and themes | Design Systems, tokens, component contracts, accessibility, design/code and migration |
-| Search and permissions | URL/UI state, request races, APIs, SQL, authorization, pagination and caching |
-| Upload, processing and notification | Object storage, task state, workers, messages, subscriptions, retry, UI feedback and operations |
-| Popular enrollment | Transactions, constraints, idempotency, rate limits, capacity, waiting and unknown outcomes |
-| Learning analytics | Records, events/CDC, ingestion, transformation, scheduling, metrics and quality |
-
-An additional AI-product case reuses document and permission context. These are fictional teaching designs, not the author's/employer's production systems. Separate experiments from narrative assumptions.
-
-## Principles and frameworks
-
-Explain the problem and principle before the pattern and implementation. Use concrete decisions to teach separation of concerns, information hiding, cohesion/coupling, composition, dependency direction, business boundaries and incremental evolution. Explain what SOLID, DRY, KISS and YAGNI protect and how they can be overused rather than merely listing acronyms.
-
-Choose a few representative frontend, backend, messaging, cloud or data implementations per topic. Compare ecosystems only when the difference changes a decision. A framework is not the principle; course frequency is not adoption evidence.
-
-React/Vue/Angular, Next.js/Nuxt, Node.js/NestJS, FastAPI, ASP.NET Core, Spring Boot and database/message/cloud products remain candidate teaching references, not a settled book-wide stack. Verify versions and behavior when the relevant chapter is authorized. This distinction does not unset the website's separately accepted stack.
-
-## Two AI threads
-
-| Thread | Coverage | Placement |
+| Shared reading layer | What it gives | Editorial test |
 | --- | --- | --- |
-| AI-assisted development | Reading code, requirements/acceptance, task boundaries, context, contracts, tools, skills, diff review, debugging and verification | Relevant local examples plus a connected delivery case |
-| AI product capabilities | Model output, structured validation, streaming, retrieval/permissions, tools, state/memory, evaluation, cost and fallback | Backend principles followed by a connected case |
+| Essential mechanism | A clear model, necessary vocabulary and a small normal/failure path | A Junior or reader new to the area can follow without knowing transactions, tokens or agents in advance |
+| Engineering example | Original code/diagram/sequence showing a decision across relevant boundaries | A Mid reader can connect implementation, user behavior and verification rather than memorize definitions |
+| Optional deeper trade-off | Changed constraints, alternatives, failure windows and operating cost | A Senior reader gains depth, while skipping the branch does not break the essential explanation |
 
-Explain a reusable skill through its applicability, input, steps, references, necessary scripts and acceptance, including when no skill is needed. Distinguish project conventions, current instructions, skills, tools and authorization. MCP, workflow, agents and multi-agent coordination have different roles and costs; they are not a mandatory maturity ladder.
+These levels describe reading support, not separate books or a promise of promotion. The author confirmed the audience; the following needs remain editorial hypotheses rather than interview-validated personas: a frontend developer connecting to services/data, a backend developer understanding interaction/AI control, and an end-to-end builder improving delivery/evaluation/recovery judgment. No employment, salary, productivity or certification outcome is promised.
 
-Keep key inputs, necessary diffs, actual observations and human judgment. Do not dump entire chats, mark unrun checks as passed or claim efficiency/reliability improvements from impressions.
+Use short local explanations and links for prerequisites. Do not turn v1 into a zero-experience syntax course, type puzzle collection, distributed-systems encyclopedia or specialist training path.
 
-## Bilingual manuscript: align meaning, write each edition naturally
+## Confirmed eight-part structure
 
-Maintain two authored versions. Establish meaning in Chinese, then adapt and review English. Software handles language switching, chapter mapping and update notices, not on-demand translation of official prose when a reader opens a page.
+1. **Product Goals and the Full-stack Architecture Map:** success criteria, G01 boundaries, browser foundations, architecture dimensions and types/runtime validation.
+2. **Frontend Design Systems and Product Interaction:** real layout, design system/library/Figma, primitive/semantic tokens, component contracts/evolution, state, forms/accessibility, async/AI interaction and rendering/performance.
+3. **APIs, Backend Boundaries and External Integration:** request/API/permission contracts, modules/architecture, expected/unexpected error and cleanup boundaries, files/external APIs/webhooks.
+4. **Databases, Search and Product Data Flow:** modeling/ORM/SQL/index/transaction/isolation/cache/search and product metrics/ingestion/lifecycle.
+5. **Asynchronous Work, Traffic and Reliability:** capacity, limits/quotas/backpressure, timeout/cancel/retry/idempotency, workers/tasks, queues/events/Outbox and failure windows.
+6. **Cloud Runtime, Testing and Delivery:** environment/containers/hosting/network/IAM, software test boundaries, CI/CD/artifacts/migrations/compatible release/rollback or roll-forward.
+7. **Observability, Debugging and Recovery:** logs/metrics/traces/context, frontend-to-DB evidence, incident signals/mitigation and verified backup/restore/RPO/RTO.
+8. **AI Product Architecture and AI-assisted Delivery:** ten working units for suitability, model contracts, user control, context/state, authorized RAG, execution/workflows, security, evals, operating trade-offs and coding-AI delivery.
 
-Preserve technical facts, premises, reasoning, limits and code behavior. English may reorganize sentences, paragraphs and transitions; retain the purpose of humor and analogies rather than literal wording. Do not add conclusions or drop uncertainty. Flag expressions that need editorial judgment. Reuse code and diagram structure where possible with corresponding labels; asset rules await the content contract.
+The outline gives the working independently readable pages. The count and titles can evolve; there is no fixed print length. Cases connect all eight parts rather than occupy a separate duplicated final volume. Theory, examples and trade-offs appear together from the beginning. Readers do not have to complete a project to demonstrate understanding.
 
-Calibrate English through a sample after the Chinese sample is accepted; later adaptation follows stable Chinese batches rather than waiting for the entire book or automatically translating unstable drafts. Reminders when Chinese changes require English review are a proposed tool/site need, not implemented behavior.
+## Narrative voice and original examples
 
-**Documentation language is separate:** this process document is English under the 2026-11-15 policy; Chinese manuscript files remain unchanged. The sole Chinese process summary is `docs/stage-summary.zh-CN.md`.
+Write like a patient colleague explaining something clearly: light, direct, concrete and accurate. Start with an observable difficulty and introduce terms after their purpose is clear. Avoid “obviously,” inflated incidents, long invented character stories and constant jokes.
 
-## Sources and verification
+> Familiar situation → mechanism and intuition → original example/diagram → relevant choice and evidence → one changed condition.
 
-Separate documented behavior, experiments, experience, assumptions and recommendations. Check changing product details against official sources and verify code/numeric claims proportionately. Actual third-party reuse needs license and attribution handling.
+This is an explanatory relationship, not a compulsory set of headings. Main prose contains the necessary reasoning. Optional boxes can expose deeper mechanisms without holding the reader hostage. Analogies help build intuition and immediately state where they stop applying. Tables compare genuinely comparable alternatives, not unconditional product rankings. Code shows the part needed for the mechanism with its assumptions and untested boundaries. Diagrams explain structure/sequence/state/data flow with meaningful arrows and text alternatives.
 
-The [Jiangren topic inventory](../../docs/research/jr-academy-topic-map.md) checks coverage, not technical truth. Earlier discussion referenced Design Systems, Atomic Design, web.dev, DDIA, data-engineering books, SRE and public AI-engineering material. Do not claim complete reading of material not read in full.
+| Recurring fictional case | Main connections |
+| --- | --- |
+| Components/themes | Design rules, tokens, contracts, accessibility, design/code/docs and migration |
+| Authorized course search | URL/UI state, async requests, API/SQL/tenant filters, cache and evidence navigation |
+| Upload/processing/notifications | Storage/access, task state, workers/messages, retry/checkpoints, deployment/recovery and RAG indexing |
+| Last-place enrollment | Product promises, constraints/transactions, idempotency, capacity, release and operational mitigation |
+| Learning reports | Business events/CDC, incremental collection, metrics/grain, late/duplicate/deleted data and restore |
+| AI course assistance | Need/success criteria, model output, stream/control, context, retrieval/permissions, tool execution, evals and budgets |
+| Coding-AI delivery | Decomposition/contracts/context/skills, actual diffs/tests and release verification |
 
-## Promotional copy under discussion
+These cases are not real employer incidents, measured benchmarks or compulsory exercises. A Datadog-shaped RUM/APM investigation is one original example for evidence correlation, not a paid service choice or claim that the project ran Datadog. Start with a simple assumed design, then change one condition rather than draw an architecture containing every advanced tool.
 
-This is an English documentation adaptation of the earlier copy discussion, not publication approval or an English manuscript sample.
+## Two required AI threads with different responsibilities
 
-**Opening line:** The code works. What should we look at next?
+**AI product architecture** is core, not an optional coda or just coding prompts. Explain the user task before a model call; validate structured/semantic outcomes; distinguish context/session/business facts/memory; handle stream/partial/cancel/refusal/failure; enforce retrieval/tool permissions; evaluate quality and regressions; budget latency/cost/concurrency; control model/prompt changes. RAG is a lifecycle, not a vector-store checkbox. A protocol or model suggestion cannot replace the application's authorization boundary.
 
-**Short description:** Look beyond the interface to connect frontend, backend, data and AI collaboration, and understand the design decisions behind a working feature.
+**Coding AI** concerns how engineers deliver: requirements/acceptance, task splitting, relevant context/Markdown/contracts, bounded tool use, diff review, tests and handoff. A reusable skill needs applicability/input/steps/references/checks and examples of when it should not trigger. Separate project conventions, task instructions, skills, tools and permissions. Multi-agent coordination is optional when dependencies justify its cost, not a maturity ladder.
 
-**Repository description:** A practical guide connecting frontend, backend, data, and AI collaboration—one working feature at a time.
+Preserve key inputs, necessary diffs, actual observations and human judgment. Do not dump private chats, mark unrun checks as passed or claim efficiency gains without evidence. Optional website question cards are a separate reading-product experiment; mandatory AI book content does not authorize a hosted site chat or live inference.
 
-**Summary:** The page is built and the API responds. But how do component boundaries, data ownership and background tasks fit together? For developers who want to connect what they already know, this book starts with familiar features and explores frontend, backend, data and working with AI to design, implement and verify software. Understand the parts and how they form a product.
+## Topic homes and depth choices
 
-These are original copy proposals, not third-party quotations. Coordinator reviews and coordinates any use in README/site with the author and relevant file owner; Writer does not change those files here. Original Chinese discussion wording remains recoverable in Git.
+Use [the outline's cross-part homes](outline.md#cross-part-homes-and-linked-cases) instead of defining the same concept again. P2.7 owns visible AI interaction and accessibility; P8.3 owns the stream/remote-work contract. P4.5 owns search fundamentals; P8.5 owns the RAG lifecycle. P7 owns operational signals/diagnosis; P8.8 owns task-quality evals. P5 owns capacity/limits/quota; P8.9 applies them to model/token economics. P6.4 software tests and P8.8 evals complement rather than replace each other.
 
-## Planning entry points
+Core includes relevant algorithmic cost intuition, SQL/isolation/constraints, basic retries/limits and the guarantees needed by examples. CQRS/Event Sourcing/Saga/consensus/sharding, Kubernetes/Service Mesh/multi-region are optional or later. DevOps/data go as far as product delivery and maintenance need; dedicated volumes may be discussed later without building extensions/plugins now. Training/fine-tuning/GPU/inference engines and large-scale data-platform operation are outside the main line.
 
-- [Detailed content map](outline.md): proposed chapter questions, scope, cases and prerequisites.
-- [Writing stages](tasks.md): scope, acceptance and review rules.
-- [Editorial planning handoff (W01)](../../docs/handoffs/writer/W01.md): historical delivery and checks.
+Explain principles before representative frameworks: separation of concerns, information hiding, cohesion/coupling, composition, dependency direction and gradual evolution. SOLID/DRY/KISS/YAGNI need concrete purpose/overuse conditions. React/Vue/Angular, Next.js/Nuxt, backend frameworks, ORM/database, broker/cloud and AI SDK comparisons remain teaching candidates where differences affect judgment. The website's accepted stack is separate; no new provider/library/paid service is chosen here.
+
+## Languages, sources and accepted material
+
+Maintain authored Chinese/English manuscripts with Chinese explanation review first and separate English adaptation. Preserve facts, premises, reasoning, conditions and code behavior while allowing natural sentence/paragraph/humor/analogy changes. Software handles corresponding navigation/status, not on-open machine translation of official prose. The accepted initial opening/G01 contract stays intact; broader language/asset/schema extensions need coordination. Formal planning/process text is English; the only Chinese process overview is the stage summary.
+
+Use official/primary sections and access dates for technical claims; distinguish documented behavior, experiments, experience, teaching assumptions and recommendations. The [planning sources](outline.md#planning-source-checks-not-chapter-research-approval) were checked only for the stated boundaries, not as completed research for all pages. The [Jiangren inventory](../../docs/research/jr-academy-topic-map.md) remains a dated coverage input, not proof of correctness or adoption. Earlier references to Design Systems, Atomic Design, DDIA, data engineering, SRE and AI books are not claims of complete reading. Independently express mechanisms and check license/attribution for actual reuse.
+
+Opening/G01 Chinese sources and accepted F01A analysis are unchanged in this planning task. Their placement does not expand old reviewed scope, change IDs/slugs or approve a new manuscript. Historical original-analysis hashes are not current translation hashes. Follow [two-gate writing](chapter-workflow.md), task scope and current board holds.
+
+## Public copy discussion
+
+Book names and v1 audience/direction above are confirmed; final marketing copy still needs author review. A possible description: **A practical guide to full-stack and AI product engineering, connecting user goals, interfaces, services, data, reliable delivery and controlled AI capabilities.** A lighter opening line remains: **The code works. What should we look at next?**
+
+These are original copy proposals, not quotations or a new README/site assignment. Do not promise job level, productivity, reliability or completed content. Historical earlier descriptions remain in Git; accepted v1 positioning supersedes their narrower audience/scope.

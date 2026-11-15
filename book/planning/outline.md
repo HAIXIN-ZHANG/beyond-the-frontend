@@ -1,182 +1,234 @@
-# Detailed Content Map: Editorial Proposal (W01)
+# Full-stack + AI Product Engineering: v1 Content Framework
 
-Original proposal: 2026-11-14. English editorial/status update: 2026-11-15. Owner: Writer. **The full 45-chapter outline remains a proposal, not an approved table of contents.** Opening/Common Foundations (W02) was separately reviewed and merged through PR #1; Browser Fundamentals research (F01A) was separately accepted and merged through PR #6. Neither approves the remaining list. See [writing stages](tasks.md).
+Updated: 2026-11-15. Owner: Writer. **The author has confirmed the v1 positioning, Junior–Senior audience and eight-part direction.** This is the current content framework, replacing the former three-part/45-chapter proposal as the organizing plan. Working reading-page names and splits remain editable; this framework is not individual chapter research, manuscript, website or publication acceptance.
 
-The three-part direction is confirmed. Names, splits, ordering and identifiers below are Writer's proposals, not routes, paths, frontmatter or a content contract. English working labels translate the planning map; they do not constitute an English manuscript or final published chapter titles.
+[Vision](../../docs/project-vision.md) · [Editorial baseline](editorial-brief.md) · [Writing gates](tasks.md) · [Current task/holds](../../docs/coordination.md)
 
-Do not impose a total page cap now. Explain a specific question per chapter and adjust splits after actual drafts. Use local examples throughout Parts I/II; Part III emphasizes cross-layer choices rather than repeating definitions.
+## Reading model and evidence boundaries
 
-## Common Foundations: What Is a Page Connected To? (G01)
+A “page” below is an independently readable teaching unit, not a printed page, finished Markdown file or URL. The 48 working labels organize the explanation; their count is not a target or limit. Do not create a new file for every label in this planning task. Chinese prose remains Chinese-first, with separately authorized English adaptation.
 
-- **Question:** Why can every local part work while the feature still fails its purpose?
-- **Coverage:** user tasks, frontend/backend/data relationships; boundaries, state, time and dependencies; requirements, latency, reliability, costs and maintenance; structural, sequence and state diagrams.
-- **Case:** search for a course, enroll and find the learning record again. Start with minimal relationships, not a complete cloud diagram.
-- **Judgment:** identify responsibilities and distinguish facts, assumptions and decisions needing validation.
+Junior, Mid and Senior readers share the same text: **essential mechanism → concrete engineering example → optional deeper trade-off**. Explain prerequisites briefly or link their main home. Junior does not mean no development experience; Senior does not require reading every specialist sidebar. There is no promise of a job level or compulsory integrated project.
 
-## Part I: Frontend, from Interfaces to Product Behavior
+The opening and G01 Chinese manuscripts remain accepted only in their existing scope/paths; the [initial content contract](../../docs/content-contract.md) is unchanged. G01 anchors P1.1 but does not pre-approve new success-criteria material. [F01A](analyses/F01.md) is accepted browser analysis, not prose; its existing boundaries support P1.2 only. Wider changes return to analysis review. No old slug or published identity is renamed by a planning label.
 
-### Browser Fundamentals: Before the Page Appears (F01)
+The opening's historical three-part orientation needs a separately assigned editorial alignment before a v1 release. This planning update does not make that prose edit or change its currently reviewed hash.
 
-- **Question:** Why is content sometimes absent, and sometimes visible but not ready to respond?
-- **Coverage:** HTML/CSS/JS roles; DOM, style, layout and paint; events/main thread; network, resource and rendering waits.
-- **Case and outcome:** course-search loading and interaction; locate the kind of wait before choosing a fix. Protocol details belong in B01; rendering strategies in F10. The accepted F01A analysis narrows this chapter's actual writing scope; manuscript work is paused.
+**Core:** AI product architecture is required v1 reading, alongside product goals, frontend, APIs/data, reliability, delivery and operations. Using AI to develop is a separate delivery thread; neither substitutes for the other. Cases recur throughout instead of becoming a required capstone. Parts are navigable by question but dependencies remain visible.
 
-### When Real Content Meets a Design (F02)
+## Part 1 — Product Goals and the Full-stack Architecture Map
 
-- **Question:** Why does a card break with a different title or screen?
-- **Coverage:** hierarchy, type, spacing, box model, Flex/Grid, content-driven and responsive layout; long text, empty data, languages and necessary motion.
-- **Case and outcome:** course cards, search results and forms; visual rules must hold with real content and sizes.
+Establish what success means and where code, data and trust live before choosing a pattern. Start with one useful product feature, not a complete cloud diagram.
 
-### Why a Component Library Still Needs a Design System (F03)
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P1.1 — What result are we promising the user?** | User task, success/failure/unknown outcomes, acceptance criteria, responsibility/state/time/dependencies and quality constraints; read structure/sequence/state diagrams. Existing G01 is the accepted foundation, not a complete new product brief. | A learner searches, enrolls and returns later to a saved record; distinguish UI success from stored facts and response loss. | Additional business success measures require fresh analysis; no invented conversion or productivity results. Link P4.3 for concurrency and P8.1 for AI suitability. |
+| **P1.2 — Before the page appears, what is the browser doing?** | HTML/CSS/JS, DOM/style/layout/paint, resources, main thread/events, visible versus ready; preserve accepted F01A's seven-part causal explanation. | Course search: delayed stylesheet, behavior not installed and busy handling are different waits. | No new trace/benchmark or guaranteed paint after await; Worker/protocol/render strategies remain the accepted analysis's boundaries. F01M remains unwritten. |
+| **P1.3 — Which architecture decision are we actually making?** | Map presentation, module/deployment, communication, async processing, data, hosting, AI orchestration and tenant/control dimensions; locate browser/service/database/trust boundaries. | A course app can combine static public pages, a modular service and queued upload work without becoming microservices. | Overview locates choices, not full implementation. See the architecture map below and each mechanism's main page; no single “most advanced” architecture. |
+| **P1.4 — Types passed. What still needs validation?** | Static types versus runtime/external data, component/API contracts, null/optional/error handling and basic algorithm/data-structure cost intuition needed for later examples. | A typed course response omits a field at runtime; validate at the boundary instead of treating a type annotation as a check. | Essential reasoning about work/data size, not type gymnastics or interview algorithms. Package/build mechanics live in P6.1; query costs in P4.2. |
 
-- **Question:** Why do pages remain inconsistent as the library grows?
-- **Coverage:** principles, shared language, foundations, patterns, components, documentation and governance; library versus system; team size and maintenance costs.
-- **Case and outcome:** similar buttons diverging; decide whether to unify appearance, behavior or usage conventions. Explain Atomic Design and its limits without imposing a unique naming hierarchy.
+## Part 2 — Frontend Design Systems and Product Interaction
 
-### One Blue, Several Names (F04)
+Connect visible rules and behavior to the user's task, including AI interaction. Do not create a page per CSS/framework term.
 
-- **Question:** Does the same color value mean two uses should always change together?
-- **Coverage:** design decisions, primitive/semantic/optional component tokens, references, purpose, theme mapping, state/color combinations and CSS variables.
-- **Case and outcome:** button/link/selection theme changes; select tokens by purpose and recognize when another layer is unnecessary.
-- **Historical candidate:** originally suggested as the first sample, superseded by W02 opening/G01. Not started. If separately assigned, include the necessary brief F03 context.
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P2.1 — What happens when real content meets the design?** | Hierarchy/type/spacing, box model, Flex/Grid, content-driven responsive layout, long/empty/multilingual content and useful motion. | The same course card with a long title, no image and narrow viewport. | Detailed animation engines and CSS catalogues deferred; show just enough layout mechanism to explain failures. |
+| **P2.2 — Components exist. Why a Design System?** | Principles/shared language/foundations/patterns/library versus system, Figma/code relationship, documentation, ownership and maintenance cost. | Similar enrollment controls diverge across two product areas. | Atomic Design as an optional organizing lens, not mandatory levels or a tool migration. |
+| **P2.3 — Why give the same blue different names?** | Primitive/semantic/optional component tokens, purpose/reference, themes/states/color combinations and CSS variables. | Add a second brand without unintentionally changing links, selection and destructive actions together. | No required extra token layer or provider-specific configuration; comparison must retain contrast and state meaning. |
+| **P2.4 — What should a component promise?** | Props/events/behavior/state contracts, composition/variants/controlled behavior, primitive versus business responsibility, cohesion/coupling, Figma mapping, version/deprecation/migration and checks. | A Button accumulates conflicting flags; revise its contract and tell callers how to migrate. | SOLID/DRY/KISS/YAGNI explain concrete decisions, not acronym lists. Component-showcase/Code Connect tools are examples, not site scope. |
+| **P2.5 — Who owns this state?** | Local/shared/URL/server/derived state, single source of truth, data flow and cache synchronization. | Search input, URL filters, result list and selected course disagree after navigation. | One representative framework window; no survey of every state library. Memory/context in P8.4 is a different responsibility. |
+| **P2.6 — Can the user finish the form?** | Input/client-server validation, pending/unknown/error/recovery, focus/keyboard/names/contrast, native semantics/ARIA and optimistic-update conditions. | Enrollment by keyboard after a validation failure or uncertain response. | Accessibility is also applied across other pages. Business idempotency/authorization guarantees live in P5.3/P3.3; UI disabling alone cannot provide them. |
+| **P2.7 — How should an interface behave while work is unfinished?** | Loading/empty/error, out-of-order/stale results, cancel/retry/poll/push feedback; AI streaming/partial answers, citations, stop/edit/confirm/recovery and user control. | Search A returns after search B; an AI course answer stops mid-sentence and the learner edits the request. | Main home for visible interaction behavior. P8.3 supplies model-stream/cancel/recovery contract; do not promise cancel reverses server/tool effects. |
+| **P2.8 — Where is the page made, and why is it slow?** | CSR/SSR/static/hydration, BFF purpose, server/client boundaries, resource/list/image/execution costs and observable responsiveness. | Public course detail versus an authenticated dashboard; a large list handles input slowly. | Framework choice follows discovery/update/interaction/hosting needs. Advanced scheduling is optional; main-thread foundations remain P1.2 and diagnosis P7.2. |
 
-### What Should a Component Promise Its Caller? (F05)
+## Part 3 — APIs, Backend Boundaries and External Integration
 
-- **Question:** How does a Button accumulate conflicting switches?
-- **Coverage:** props, events, state/behavior contracts, composition, variants, controlled/uncontrolled behavior, primitive/business components, information hiding, cohesion/coupling, reuse and premature abstraction.
-- **Case and outcome:** buttons, inputs and filters; allocate component versus business decisions.
+Follow one request and define its agreements before dividing services.
 
-### Who Owns This State? (F06)
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P3.1 — Where does one request travel?** | Essential HTTP/request-response/status, DNS/TLS/proxy/routing/service/data path; timeouts and failure location; HTTP/webhook/poll/SSE/WebSocket roles. | Trace a course-search request from browser entry to response and compare notification delivery needs. | Protocol internals optional. Detailed cloud networking belongs P6.3; connection choice is not a universal live-update upgrade ladder. |
+| **P3.2 — What exactly does the API promise?** | Input/output/runtime validation, expected errors, pagination/cursors, compatibility/versioning, request identity and meaningful success; REST/RPC/GraphQL trade-offs. | A filtered result list changes between pages; the UI receives a structured refusal instead of an untyped error string. | Contract descriptions/checks, not a full API-framework guide; tests P6.4 and model-output contract P8.2. |
+| **P3.3 — Who may read or change this resource?** | Authentication versus authorization, sessions/tokens, ownership/roles/tenant context, entitlements, usage/audit boundaries and relevant XSS/CSRF concerns. | Two organizations share the course product but cannot read each other's uploads; paid access differs from login. | Basic tenant/data-access reasoning is core; advanced isolation topologies optional. AI retrieval/tool permissions extend this in P8.5/P8.7, not replace it. |
+| **P3.4 — Where should business rules live?** | Layers, modular monolith, Ports and Adapters, dependency direction, information hiding, transaction/business boundaries and triggers/costs for service splits. | Separate enrollment rules from email delivery and a replaceable storage adapter in one application. | DDD as a boundary vocabulary; microservices/CQRS/Event Sourcing optional comparisons, not inevitable evolution. |
+| **P3.5 — What should catch this error, and what must still be cleaned up?** | Expected versus unexpected failure, try/catch/rethrow/translation, async rejection, cancellation, finally/resource cleanup and safe error context. | A fetch receives HTTP 404 without a network rejection; a failed upload must release resources without exposing private details. | Language-specific examples kept small; no blanket catch-and-ignore or retry-everything. Retry policy P5.3, operational evidence P7.1. |
+| **P3.6 — What happens at the boundary with another service?** | Files/object storage, upload/download access, external APIs, credentials, webhook verification/replay/duplicates, adapter contracts and failure handling. | Upload course material then receive an external processing callback twice. | Concrete provider-neutral flow, not payment/storage-provider adoption. Durable dedup P5.3 and processing state P5.4; no new external service in this project. |
 
-- **Question:** Why does one filter change require several synchronized copies?
-- **Coverage:** local/shared/URL/server state, derived values, a single source of truth, data flow, caching and synchronization; Hooks/Context or reactive implementations as needed.
-- **Case and outcome:** search filters, lists and details; decide what to store, derive or leave to the server.
+## Part 4 — Databases, Search and Product Data Flow
 
-### A Form Has More Than a Success State (F07)
+Make stored facts trustworthy and retrievable. Analytics coverage serves product decisions and maintenance, not a specialist data-platform course.
 
-- **Question:** What can users do after failure, waiting or repeated clicks?
-- **Coverage:** input, validation, submission, feedback/recovery, client/server checks, disabling, focus/error association and prerequisites for optimistic updates.
-- **Case and outcome:** enrollment; separate clear failure from an unknown result, and a recovery control from business safety. Backend mechanisms follow in B03/B07/B12.
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P4.1 — What facts do we store, and in what shape?** | Entities/relations/keys/constraints, normalization/redundancy, relational/document trade-offs, ORM mappings/query boundaries, source versus derived data. | Model users/courses/enrollments/documents; distinguish a unique constraint from an ORM convenience method. | ORM is a mechanism window, not library selection. Object storage P3.6 and deployment migrations P6.5. |
+| **P4.2 — The query returns rows. Are they right and affordable?** | Basic SQL JOIN/NULL/aggregation/grain/duplicates, indexes/execution plans, pagination/N+1, connection pools and work/data-size costs. Bind data values; keep query structure application-controlled, allowlisting selectable identifiers/sort directions. | A course list makes one extra query per card; a report doubles counts after a join. Search text is bound; `sort=newest` maps to fixed `created_at DESC`, rejecting unapproved choices. | ORM alone guarantees neither injection safety nor authorization; P3.3 owns access rules. Essential algorithmic intuition and plan reading are core; CTE/windows optional when needed, engine internals deferred. |
+| **P4.3 — Who gets the last place?** | ACID, transaction boundaries/isolation basics, locks/optimistic concurrency, constraints, lost updates and interleaving. | Two enrollment requests race for one remaining place; compare protected invariants. | Necessary isolation anomalies belong in core, not only Senior notes. Consensus/sharding/advanced distributed protocols are optional/deferred; retries P5.3. |
+| **P4.4 — What does the cache save, and what can become stale?** | Browser/CDN/application cache, keys/tenant scope/TTL/invalidation, freshness, hot spots, failure and consistency cost. | Rename a course or revoke access while an old result remains cached. | Main home for ordinary cache correctness; AI semantic/prompt cache quality and authorization conditions extend it in P8.9. |
+| **P4.5 — What makes a result relevant and allowed?** | Keyword/inverted-index versus vector similarity intuition, embeddings as derived representations, filtering/ranking/index freshness and authorized query scope. | Exact course code should match reliably while a paraphrased learning goal benefits from similarity search. | Search foundations here; hybrid/reranking as a bridge, with full ingestion-to-grounded-answer RAG in P8.5. No vector database requirement or retrieval-quality guarantee. |
+| **P4.6 — Where did this product metric come from?** | OLTP versus analytics, business tracking/events/CDC, batch/stream/ETL/ELT, collection/transformation/scheduling, metric definition/grain/lineage/freshness, late/duplicate/deleted data and rerun/backfill. | Two course-completion reports disagree after late events and a corrected enrollment. | Core data-flow/metric reasoning; warehouses/lakes/lakehouses and dbt/Airflow/DataFrame are optional comparisons. Spark/platform administration and ML training are outside v1's main line. |
 
-### The Response Arrived. Why Is the Result Wrong? (F08)
+## Part 5 — Asynchronous Work, Traffic and Reliability
 
-- **Question:** Why can an earlier search overwrite a later one?
-- **Coverage:** necessary Promise/async/await concepts, ordering, errors, cancellation and stale results; pagination/loading/empty/error/retry; UI duties for polling/push.
-- **Case and outcome:** search/upload progress; separate request order from completion order and specify UI/API contracts.
+Separate capacity from correctness and from when work finishes. High concurrency, async and serverless can coexist; none is the next mandatory step after another.
 
-### Clickable Is Not Enough (F09)
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P5.1 — How slow is it, and how much can it handle?** | Latency/throughput/concurrency, percentiles/load patterns, resource bottlenecks/pools, capacity estimates versus measurements and scaling. | Enrollment opens at one time; fast average latency hides a slow tail under load. | Illustrative numbers must be labelled, measured claims tested. No performance result inferred from user count; load test role P6.4. |
+| **P5.2 — Who gets capacity when demand grows?** | Rate limits, quotas/entitlements, admission control, backpressure, queue bounds and overload feedback; client debounce reduces requests but is not server protection. | One tenant consumes the report queue; debouncing a search field does not stop direct API traffic. | Main policy home for limits and quota accounting. AI token/concurrency budgets apply it in P8.9; billing-platform implementation deferred. |
+| **P5.3 — Can this failure safely be tried again?** | Timeouts/deadlines/cancellation, unknown outcomes, retries/backoff/jitter/budgets, idempotency/deduplication, circuit breaker/fallback and cleanup. | Enrollment writes succeed but the response is lost; a slow provider is retried by several callers at once. | Explain retry/cancel limits, not exactly-once slogans or global rollback. Cross-service compensation introduced in P5.5; data restore P7.4. |
+| **P5.4 — Who keeps working after the page closes?** | Request execution versus worker/task lifecycle, accepted versus complete, durable state/status queries/poll/push, checkpoints/progress/ownership and user cancellation semantics. | A course upload begins processing; user leaves and returns while a worker has restarted. | Logical web–queue–worker flow can use different hosting. Long AI tasks reuse it in P8.6 rather than invent an entirely separate task system. |
+| **P5.5 — Queue, event or subscription: who receives what?** | Commands/events, competing consumers/pub-sub/event streams, Service Bus as one broker example, ack/order/delivery/retention/dead-letter/replay, consumer checkpoints and Outbox failure windows. | Upload completion triggers indexing and notifications; duplicate delivery and a DB/message dual-write failure need explicit recovery. | Basic delivery/consistency is core; Saga compensation, CQRS/Event Sourcing and sophisticated replay become optional worked comparisons. No broker or Azure service is selected for the project. |
 
-- **Question:** Does the feature work with a keyboard, limited color perception or assistive technology?
-- **Coverage:** semantics, accessible names, keyboard/focus, contrast, errors/dynamic feedback, native capabilities, ARIA and automated-check limits.
-- **Case and outcome:** forms, dialogs and background-task notices; tie accessibility to observable behavior rather than rule identifiers alone.
+## Part 6 — Cloud Runtime, Testing and Delivery
 
-### Where Should the Page Be Generated? (F10)
+Cover the operations needed to deliver and maintain this product, not every cloud or DevOps specialty.
 
-- **Question:** Which work belongs on the client, server or build step?
-- **Coverage:** CSR, SSR, static generation, hydration and server/client boundaries; resources, lists, images, execution costs, caching, discovery and interaction.
-- **Case and outcome:** public course and authenticated administration pages; choose from update, interaction and deployment constraints rather than framework defaults.
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P6.1 — It runs locally. What must exist in the environment?** | Process/ports/files/exit/resources, dependency versions/lockfiles/artifacts, environment/config/secrets, container images/network/volumes and health. | API starts locally but the deployed worker lacks a secret or writes to an ephemeral path. | A few explained shell/curl/log checks; no Linux command catalogue. Types P1.4, cloud identity P6.3. |
+| **P6.2 — What should run this workload?** | Managed service, persistent service/container and Functions/Lambda; lifecycle/state/concurrency/time limits, scaling/cost/operational responsibility. | Compare hosting for a short API call and long document-processing task. | Conditions rather than provider checklists. Kubernetes/Service Mesh/multi-region operation are optional depth or later specialist material; no platform migration. |
+| **P6.3 — How does traffic enter, and what may the workload access?** | DNS/TLS/CDN/proxy, public/private network/subnet/ingress/egress, IAM/workload identity, secrets and health probes. | Browser can reach the public API while only its worker can access a private document store. | Enough topology and trust reasoning to diagnose; not full cloud-network certification. Request semantics P3.1, tenant policy P3.3. |
+| **P6.4 — What evidence says this change works?** | Unit/integration/contract/E2E/smoke/load purpose, boundaries/test data, deterministic versus external dependencies, accessibility and failure paths. | Test enrollment rule, DB constraint, API pagination and browser recovery separately, then smoke-check a release. | No universal test-count/coverage claim. AI task-quality evals in P8.8 supplement these checks rather than replace them. |
+| **P6.5 — How does a change reach users safely?** | Git/PR/review/CI/CD/artifacts/environments, secret/config changes, DB migration/compatibility, feature flags, gradual release, rollback versus roll-forward and verification; IaC/drift basics. | Ship an optional API field and compatible DB change before exposing a new enrollment UI. | Simple controlled release first; complex orchestration/IaC estates optional. Operational mitigation P7.3; backups/restoration P7.4 are different from code rollback. |
 
-### Types Passed. Why Did Runtime Fail? (F11)
+## Part 7 — Observability, Debugging and Recovery
 
-- **Question:** What do types, external validation, dependencies and builds each protect?
-- **Coverage:** TypeScript component/API contracts, runtime validation, packages/versions/lockfiles/artifacts/environment variables and essential build/supply-chain concepts.
-- **Case and outcome:** changed API fields or local success followed by deployment failure; trace static assumptions and real inputs. Put syntax lookup elsewhere.
+Follow evidence from the user's symptom to the responsible boundary, then verify recovery.
 
-### Keeping Design, Code and Documentation in Step (F12)
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P7.1 — Which evidence connects these events?** | Structured logs/metrics/traces, correlation IDs/context propagation, sampling, redaction/access/retention, cardinality and collection cost. | One upload request, queued task and downstream call need a usable chain without logging the private document. | OpenTelemetry as a conceptual instrumentation window, not a required provider or full collector course. Model prompts/output need separate privacy/quality handling P8.7/P8.8. |
+| **P7.2 — The user sees a failure. Where do we look next?** | Browser error/RUM/source maps/release version; DevTools→API→logs/trace→DB hypothesis checks; distinguish symptoms, timing and root-cause evidence. | A fictitious course search shows a slow UI: use an original Datadog RUM/APM-shaped correlation example to follow request to DB, alongside generic evidence. | Datadog is one teaching window, not a product manual, installed integration, paid-service choice or actual incident. Sampling/CORS/instrumentation limits must be stated; no invented screenshot or result. |
+| **P7.3 — What should we do while it is broken?** | User-impact SLI/SLO, actionable alerts, dependency degradation, incident triage/mitigation/runbook/verification and learning from failure. | Document processing backlog grows; stop new work, provide honest status, recover and check user-visible progress. | Simple useful targets first; no enterprise incident platform. AI answer quality is separately evaluated P8.8; healthy latency does not prove correct answers. |
+| **P7.4 — Can we restore the data we promised to keep?** | Backup versus successful restore, RPO/RTO objectives, restore/recovery exercise, consistency/access checks and post-recovery verification. | Restore accidentally deleted enrollment/document metadata, then reconcile derived search indexes. | Not equivalent to retry/restart/code rollback. Multi-region disaster platforms optional; no claimed recovery times without tests. |
 
-- **Question:** How do callers learn about a component change and migrate safely?
-- **Coverage:** Figma/code mapping, handoffs, documentation/component display, versions/deprecation, unit/component/interaction/visual checks, governance and review.
-- **Case and outcome:** token/contract evolution; shared names do not imply automatic synchronization or matching behavior.
+## Part 8 — AI Product Architecture and AI-assisted Delivery
 
-## Part II: Backend and Data, How the System Gets Work Done
+All ten page topics form v1's required AI coverage. Advanced branches within them remain skippable. This is a product architecture thread plus a distinct development-collaboration thread, not an optional AI-tools appendix.
 
-### Requests, business rules and data
+| Working page / main question | Necessary explanation | Original teaching example | Optional depth / boundary |
+| --- | --- | --- | --- |
+| **P8.1 — Does this task need AI?** | User need/success criteria, rules versus ordinary search/model/hybrid, uncertainty, review burden and failure tolerance. | Exact course prerequisites use rules; fuzzy document questions may need retrieval/model support. | No default agent or “AI everywhere.” Links P1.1/P4.5; no promised quality or conversion gain. |
+| **P8.2 — What can the model response safely become?** | Input boundary/model request, structured output/runtime validation, refusal/timeout/provider errors, semantic checks and safe fallback states. | Model returns a course classification with valid JSON but an invalid course identifier, or refuses a request. | Provider-neutral contract before a small verified SDK window; format validation is not factual correctness or authorization. Uses P1.4/P3.2/P3.5. |
+| **P8.3 — How does the user stay in control?** | Streaming transport/partial/terminal states, stop versus cancellation of remote work, edit/retry/confirm/recover, citations/provenance and consequential-action confirmation. | Learner stops a partial answer, revises the question, then confirms a proposed enrollment action separately. | Owns end-to-end stream/control contract; P2.7 owns visual/focus/accessibility patterns. No cancel-as-undo guarantee; tool/task state P5.4/P8.6. |
+| **P8.4 — What should the model know, remember or forget?** | Prompt/context engineering, token budgets, session transcript versus business state versus persistent memory, selection/retrieval/summarization, permissions and lifecycle. | A long tutoring session needs the current course and authorized sources, not every prior message or an invented durable enrollment fact. | Compaction/retrieval trade-offs core intuition; elaborate memory systems optional. Model context is not the authoritative business database. |
+| **P8.5 — How does a document become an authorized, grounded answer?** | Ingestion/parse/chunk/embed/index, keyword/vector/hybrid/rerank retrieval, user/tenant filtering, update/delete/version/citations and retrieval-versus-generation failure. | Upload, replace and later delete a private course guide; a different tenant must not retrieve old fragments or citations. | Main RAG lifecycle home; P4.5 supplies search primitives and P4.6 incremental-data reasoning. No RAG correctness guarantee, vector-store requirement or full data-platform lesson. |
+| **P8.6 — Who chooses and executes the next step?** | Structured generation/workflow/tool calling/agent loop, parameters/state/long tasks, budgets/stopping/checkpoints/human review and execution ownership. | Read-only course lookup needs one call; a multi-step document report uses a bounded workflow; compare a tool-selecting agent only when justified. | Multi-agent coordination is optional, not default; tasks/queues/retry reuse P5.3–P5.5. Historical pattern articles do not establish current SDK APIs. |
+| **P8.7 — What is the AI allowed to read or do?** | Prompt injection/untrusted documents, tool argument/runtime/business validation, least privilege/tenant isolation, confirmation/sandbox/audit, secrets and output exposure; MCP interface versus authorization. | A retrieved file asks the model to export another tenant's data; the executor rejects it regardless of model wording. | Core trust boundaries first; detailed OAuth/MCP-version mechanics researched per chapter, not assumed from a protocol name or a prompt instruction. |
+| **P8.8 — How do we know an AI change is better?** | Task success metrics, evaluation dataset/provenance, normal/edge/adversarial cases, failure taxonomy, deterministic checks/human calibration/model grading, regression and feedback loops. | Correct citation with unsupported answer, missed relevant paragraph, prohibited tool call and good answer with slow delivery are distinct failures. | Main task-quality/evals home; operational signals P7.1–P7.3 and software tests P6.4 remain necessary. No single model score proves product reliability. |
+| **P8.9 — Which model and operating budget fit this feature?** | Quality/latency/cost trade-offs, model selection, context/output budgets, concurrency/rate/quota, cache scope, fallback, prompt/model/version changes and controlled rollout. | Compare smaller/faster versus more capable models for classification and grounded answers; isolate per-tenant budget and cache access. | Reuses capacity/limits/cache/release mechanisms P5.1/P5.2/P4.4/P6.5; teaches AI-specific judgment, not current price/ranking tables or inference-engine operation. |
+| **P8.10 — How do we deliver this with coding AI?** | Requirement/acceptance decomposition, relevant context/Markdown/contracts, tool boundaries, skills for repeated methods, diff review/tests/release verification and handoff. | Add one enrollment-status improvement: agree unknown outcomes, inspect the actual diff, verify behavior and turn repeated review steps into a bounded skill. | Separate from adding model capability to the product. No full chat dump, unnecessary multi-agent hierarchy, compulsory project or unsupported productivity claim. |
 
-| Chapter question | Coverage | Case and judgment |
+## Architecture map: choices on different axes
+
+Use this original classification as a teaching map at P1.3 and revisit the relevant axis in context. It is not an exhaustive pattern standard, ranking or one-prescription-per-product catalogue.
+
+| Decision axis | Combinable choices | Main explanation |
 | --- | --- | --- |
-| What does a request pass through? (B01) | Essential DNS/TLS/HTTP; entry, proxy, routing, application/database; status, timeout and failure location | Trace search and separate network, application and data problems |
-| How does an API make the agreement clear? (B02) | Input/output, validation, errors, pagination, compatibility, REST/RPC/GraphQL trade-offs, descriptions and contract checks | Define business success rather than fields alone |
-| Logged in, but not allowed? (B03) | Authentication/authorization, sessions/tokens, roles, ownership, tenant isolation and relevant CSRF/XSS relationships | Course access/search; identify the trusted decision boundary for each access |
-| How should business code be divided? (B04) | Responsibility, dependencies, modular monolith/services, layers, Ports and Adapters, dependency inversion, DDD boundaries and organizational/transaction costs | Enrollment/notifications; separate module boundaries from independent deployment |
-| What shape should the data take? (B05) | Entities, relationships, constraints, relational/document models, normalization/redundancy, object storage, search indexes and derived data | Users/courses/enrollments/files; derive a model from reads/writes before choosing a product |
-| SQL returns rows. Are they right and affordable? (B06) | JOIN, NULL, aggregation, grain/duplicates, indexes/plans, pagination, N+1, necessary CTE/window functions | Search/analytics; check both correctness and cost |
-| What happens when two people act together? (B07) | ACID, constraints, transaction boundaries/isolation, locks, optimistic concurrency, lost updates and anomalies | Last enrollment place; explain interleaving and the protection offered |
-| What does a cache save, and what does it owe? (B08) | Browser/CDN/application caches, derived values, TTL/invalidation, hot spots/staleness, consistency and resources | Course renaming/permission changes; acceptable staleness and failure behavior |
+| Presentation/composition | CSR, SSR, static generation and BFF | P1.2/P2.8; BFF adapter boundaries P3.4 |
+| Code and deployment boundaries | Layers, modular monolith, Ports and Adapters, selectively independent services | P3.4 |
+| Communication | HTTP API, webhook, polling, SSE, WebSocket | P3.1/P3.6, visible behavior P2.7 |
+| Background coordination | Web–queue–worker, event-driven consumers and task state | P5.4/P5.5 |
+| Data responsibility | Database, cache, object storage, keyword/vector search and derived analytics | P4.1–P4.6/P3.6 |
+| Hosting | Managed service/runtime, containers/persistent services, Functions/Lambda | P6.1–P6.3 |
+| AI decision/execution | Structured generation, RAG, predefined workflow, tool-selecting agent | P8.1–P8.7 |
+| Product control | Tenants, entitlements, usage quotas and audit | P3.3/P5.2/P7.1/P8.7/P8.9 |
 
-### Asynchronous work, reliability and capacity
+A layered modular application may expose HTTP, process queued work in a managed runtime, use a DB plus search index and add RAG. High concurrency, async and serverless answer different questions. Introduce more machinery only after identifying the changed condition, guarantee and cost; 2026 popularity is not a sufficient reason.
 
-| Chapter question | Coverage | Case and judgment |
+## Cross-part homes and linked cases
+
+| Shared subject | Main home | What other pages add without repeating it |
 | --- | --- | --- |
-| Where is it slow, and what can it handle? (B09) | Latency/throughput/concurrency/percentiles/load, resources/pools/bottlenecks, balancing/scaling, rate limits/backpressure, estimates and measurements | Enrollment peak; distinguish correctness, capacity and performance without inferring microservices from user count |
-| Who works after the request ends? (B10) | Request-bound work, workers, task records/lifecycle, accepted versus complete, queries/polling/push | Upload processing after page close; understand continuation and result lookup |
-| Are queues, subscriptions and events the same? (B11) | Commands/events, competing consumers, pub/sub/routing, acknowledgments/order/retention/replay, broker versus event log | Processing and notifications after upload; compare consumption relationships and delivery needs |
-| Can we try again after a timeout? (B12) | Unknown outcomes, backoff/retry, idempotency/deduplication/dead letters, dual-write windows, Outbox, compensation/Saga, local/cross-system consistency | Processing/enrollment; distinguish execution from safe re-execution and avoid casual end-to-end exactly-once claims |
-| What does serverless manage for us? (B13) | Persistent services/containers/functions, triggers/lifecycle/state/concurrency/limits, operations and cost | Compare execution for one background task; assess async, concurrency and serverless separately |
+| Goals and acceptance | P1.1 | P8.1 AI suitability; P8.8 output-quality criteria, not new product requirements from the model |
+| AI interaction | P2.7 for interface state/focus/control | P8.3 stream/terminal/remote-action contract; P5.4 durable task lifecycle |
+| Search, retrieval and data | P4.5 search primitives; P4.6 product-data flow | P8.5 full RAG ingestion/permission/update/delete/citation chain, referencing rather than retelling SQL and indexing |
+| Software correctness versus quality/health | P6.4 software tests; P7.1–P7.3 operational evidence | P8.8 task-quality evals; combine them rather than call one a replacement |
+| Capacity, quotas, performance and cost | P5.1/P5.2/P4.4 | P2.8 browser cost; P8.9 AI-specific model/token/cache economics; P7.1 telemetry cost |
+| Errors and recovery | P3.5 error boundaries; P5.3 retry safety | P7.3 incident mitigation/P7.4 data restore; P8.2/P8.3 model/stream outcomes |
+| Trust, security and accessibility | P3.3/P8.7 trust; P2.6 accessibility foundations | Enforce throughout components, queries/cache, data/telemetry, tests and tool execution; not an end checklist |
 
-Explain replication, sharding, consistency and consensus when needed for a guarantee, with optional depth. Event Sourcing/CQRS enter only when history or read/write models justify them, not as a required progression.
+Recurring original cases connect the parts: themes/components (P2), authorized search (P2/P3/P4/P7), upload/processing (P3/P5/P6/P7/P8.5), last-place enrollment (P1/P4/P5/P6), trustworthy learning reports (P4.6/P7), AI course assistance (P2.7/P8) and coding-AI delivery (P8.10 with tests/release references). Each begins with a simple assumed design and changes one condition. They are explanations, not compulsory implementation exercises or real employer incidents. Datadog is one evidence-navigation example, not a newly required service.
 
-### From running locally to staying operational
+## Depth and scope limits
 
-| Chapter question | Coverage | Case and judgment |
+Core mechanisms include relevant algorithmic work/cost intuition, basic SQL/isolation/constraints, async ordering, limits, retries, access control, tests and recovery reasoning. Every page carries its own optional boundary; readers must not need an advanced sidebar to understand the essential guarantee.
+
+CQRS/Event Sourcing/Saga/consensus/sharding, Kubernetes/Service Mesh and multi-region designs are skippable comparisons or later extensions, not independent required v1 courses. Model training/fine-tuning/GPU/inference engines and large data-platform administration are outside the main line. Dedicated DevOps/data volumes can be discussed later without inventing a plugin architecture, extension system or site features now.
+
+Representative React/Vue/Angular, backend frameworks, SQL/ORMs, message/cloud providers and AI SDKs may illustrate a meaningful difference after the principle. No provider/library, paid service or book-wide technology stack is selected by this map. Concrete versions/guarantees remain chapter research. Security, accessibility, testing, observability and performance recur in the examples themselves.
+
+## Legacy proposal mapping — all 45 entries retained for traceability
+
+This table supersedes the old proposal's organization, not its historical record in Git/[W01 handoff](../../docs/handoffs/writer/W01.md). No old ID becomes a URL or an accepted new manuscript. “Merged” below means editorial coverage combined into a planning home, not Git integration or review acceptance.
+
+| Legacy proposal | New main home | Disposition and scope boundary |
 | --- | --- | --- |
-| Where does the running program live? (B14) | Processes/ports/files/permissions/environment/exit/resources, essential Linux/shell/logs/curl/debugging | Local success/environment failure; follow evidence rather than only pasting an error into AI |
-| Running, but unreachable? (B15) | Reverse proxies, DNS/TLS/CDN, public/private networks/subnets/ingress/egress, cloud access/workload identity | API/object storage; understand network and permission boundaries |
-| Does a container make the problems disappear? (B16) | Images/containers, network/volumes/configuration/health, orchestration responsibilities, Kubernetes as needed | API/worker deployment; identify conditions beyond a runnable image |
-| How does a change reach production? (B17) | Git/commits/branches/PRs/conflicts/review, CI/CD/checks/artifacts, environments/secrets, database migration, gradual release/rollback, IaC/drift | Token/API change; coordinate code, data and infrastructure changes |
-| A user says it broke. Where do we look? (B18) | Logs/metrics/traces, SLI/SLO/alerts, dependency failure/degradation/availability, backup/recovery verification and incident review | Upload backlog/request failure; distinguish detection, diagnosis and recovery through user impact |
+| G01 | P1.1 | Existing accepted source retained byte-for-byte; any added goal/acceptance material needs review |
+| F01 | P1.2 | Accepted analysis scope retained; no prose or acceptance of other pages |
+| F02 | P2.1 | Real-content/layout scope retained |
+| F03 | P2.2 | Design System scope retained |
+| F04 | P2.3 | Token/theme scope retained; still no sample prose |
+| F05 | P2.4 | Contract/composition with governance/version connections |
+| F06 | P2.5 | State-ownership scope retained |
+| F07 | P2.6 | Form/accessibility combined, retry guarantee linked P5.3 |
+| F08 | P2.7 | Async interface scope, extended by new AI controls subject to chapter analysis |
+| F09 | P2.6 | Accessibility foundations merged; applied across all cases |
+| F10 | P2.8 | Rendering/performance scope, BFF mapped as separate composition choice |
+| F11 | P1.4/P6.1 | Split types/runtime validation from dependencies/build environment |
+| F12 | P2.4/P6.4 | Design/code/version/governance plus test strategy, not a separate duplicated tool chapter |
+| B01 | P3.1/P6.3 | Request semantics and hosting-network topology separated |
+| B02 | P3.2 | API agreement/compatibility retained |
+| B03 | P3.3 | Trust/tenant scope retained; AI extension P8.7 |
+| B04 | P3.4 | Modules/architecture retained; CQRS/Event Sourcing optional |
+| B05 | P4.1/P3.6 | Business model versus file/storage integration separated |
+| B06 | P4.2 | SQL/cost retained; analytic grain example linked P4.6 |
+| B07 | P4.3 | Transaction/isolation basics remain core, advanced distribution optional |
+| B08 | P4.4 | Cache/freshness retained; AI-specific economics P8.9 |
+| B09 | P5.1/P5.2 | Split performance/capacity from admission/quotas/backpressure |
+| B10 | P5.4 | Task lifecycle retained, long AI work reuses it |
+| B11 | P5.5 | Queue/event/subscription retained |
+| B12 | P5.3/P5.5 | Retry/idempotency versus message/Outbox windows; Saga optional |
+| B13 | P6.2 | Serverless moved to hosting comparison, not an async upgrade |
+| B14 | P6.1 | Runtime/debug fundamentals retained |
+| B15 | P6.3 | Network/identity retained |
+| B16 | P6.1/P6.2 | Containers/hosting combined; Kubernetes/Service Mesh optional/later |
+| B17 | P6.5 | Delivery/migrations/IaC basics retained; testing home P6.4 |
+| B18 | P7.1–P7.4 | Split signals, evidence navigation, incident mitigation and restore |
+| B19 | P4.6 | Product analytics/data-flow core retained, platform detail optional |
+| B20 | P4.6 | Incremental/late/rerun/backfill merged into one product-data narrative |
+| B21 | P4.6 | Warehouse/lake/tool detail optional; distributed-platform operation later |
+| B22 | P4.6 | Metric definitions/quality/lifecycle retained |
+| B23 | P8.1/P8.2/P8.3/P8.9 | AI suitability/contract/interaction/operating trade-offs separated |
+| B24 | P4.5/P8.5 | Search primitives versus complete authorized RAG lifecycle |
+| B25 | P8.4/P8.6/P8.7/P8.8 | Context/state, execution, security and evaluation separated; multi-agent optional |
+| C01 | P2.2–P2.4 | Theme case embedded across principles/contracts/migration |
+| C02 | P2.5/P2.7/P3.2/P3.3/P4.2/P4.4/P7.2 | Authorized-search case links homes; no second full definitions chapter |
+| C03 | P3.6/P5.3–P5.5/P6/P7/P8.5 | Upload case carried through storage, work, delivery, recovery and indexing |
+| C04 | P1.1/P4.3/P5.1–P5.3/P7.3 | Enrollment case retains correctness/capacity distinction |
+| C05 | P4.6/P7.1/P7.4 | Learning-report case, quality evidence and source/derived recovery |
+| C06 | P2.7/P8.1–P8.9 | AI product case becomes required cross-part material, not a lone optional finale |
+| C07 | P8.10/P6.4/P6.5 | Coding-AI delivery remains distinct with verification/release links |
 
-### From business records to trustworthy analysis
+## Planning-source checks, not chapter research approval
 
-| Chapter question | Coverage | Case and judgment |
-| --- | --- | --- |
-| Why not run every report on the business database? (B19) | OLTP/analytics, structured/unstructured and source/derived data, events/CDC, batch/stream, ETL/ELT | Learning events to reports; explain flow and separation costs |
-| The data moved. Why rerun it? (B20) | File/API/database ingestion, pagination/rate limits/checkpoints/incremental watermarks/duplicates/schema change, reruns/backfills/late data | Daily records; recovery start points and avoiding omissions/duplication |
-| Warehouse, lake or lakehouse? (B21) | Storage/tables/compute, facts/dimensions/partitions, SQL/DataFrame, transformation/scheduling/distributed compute; candidate dbt/Airflow/Spark windows | One pipeline; separate logic, engine, workflow and storage |
-| Why do both reports claim to be correct? (B22) | Grain/metric definitions/quality/freshness/lineage/permissions/privacy/retention/deletion and visualization context | Course completers; check definitions, sources and time rather than charts alone |
+Access date: **2026-11-15**. Read only the body sections identified below, not complete books, linked documentation trees or all vendor guidance. These readings check the organization/boundaries; they do not verify every future chapter mechanism or choose a provider. The eight-part structure and original cases are this project's editorial design, not copied source expression, code or diagrams.
 
-### After a model joins the system
+| Source and sections actually read | Limited use in this plan |
+| --- | --- |
+| [Azure architecture styles](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/): introduction/quick tour, N-tier/Web-Queue-Worker/Microservices; [Web-Queue-Worker](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/web-queue-worker): components/when to use | Distinguish code/deployment/processing choices and explain request/worker separation; not Azure adoption or exhaustive style coverage |
+| [Azure AI architecture pattern](https://learn.microsoft.com/en-us/azure/well-architected/ai/architecture-pattern): high-level architecture/workload composition | Separate pretrained-model application engineering from optional training/fine-tuning; broader vendor pattern is not all v1 required scope |
+| [Secure multitenant RAG](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/secure-multitenant-rag): introduction, Identity, tenant/authorization requirements and Data filtering | Place identity/permissions through retrieval, not only in the chat UI; no copied topology or healthcare case |
+| [Anthropic Building effective agents](https://www.anthropic.com/research/building-effective-agents): dated introduction, What are agents? and tooling-history notice | 2024 workflow/agent distinction as a design vocabulary; its own notice says tooling has changed, so it is not current SDK/API instruction |
+| [Anthropic context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents): context/prompt definitions and retrieval/agentic-search discussion (redirects to the research page) | Context selection/lifecycle deserves its own explanation; not a claim more context, memory or autonomy is always better |
+| [OpenAI evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices): evaluation types/reading, anti-patterns, Design your eval process, Identify where you need evals and platform-transition notice | Separate task objectives/data/metrics/regression/human judgment from uptime. Use conceptual guidance, not the platform as a selected dependency; no vendor example thresholds or API adoption |
+| [MCP security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices): Purpose and Scope, Token Passthrough/Risks (redirected versioned tutorial) | Protocol use does not replace credential/audience/access controls. A moving latest link is not a pinned project protocol version |
+| [OpenTelemetry signals](https://opentelemetry.io/docs/concepts/signals/): signal definition and supported signals overview | Separate operational outputs/traces/metrics/logs from AI answer-quality judgment; no SDK/collector selection |
+| [Datadog Connect RUM and Traces](https://docs.datadoghq.com/tracing/other_telemetry/rum/): Overview, Prerequisites and Setup RUM introduction | One correlation teaching window needs instrumentation/configuration and may incur charges; no install/account/screenshot/service use authorized |
+| [MDN Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch): introduction and Checking response status | Error-boundary example separates HTTP response status from rejected network promise; detailed cleanup/cancel behavior remains chapter research |
+| [OWASP SQL Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html): Introduction, SQL Injection in ORM Query Languages, Parameterized Queries and Allow-List Input Validation; read for r2 | Separating bound values from fixed/allowlisted query structure belongs in P4.2 core; ORM use does not itself guarantee safety. No copied code or whole-security-guide audit |
 
-| Chapter question | Coverage | Case and judgment |
-| --- | --- | --- |
-| The model returned text. Can users rely on it? (B23) | Token/context intuition, requests/streaming/structured output, uncertainty/validation/failure/latency/cost/model change, training versus application | Document Q&A/classification; distinguish parseable format, factual support and business usefulness |
-| Why can it answer wrongly with the documents provided? (B24) | Preparation/chunking/embedding, keyword/vector/hybrid retrieval, reranking/citations/versions/permissions, separate retrieval/generation evaluation | Authorized course material; locate the error and avoid treating RAG as a correctness guarantee |
-| The AI wants a tool. Who executes it? (B25) | Arguments/permissions/tools/MCP, workflow/agent/loop, session/business state/memory, budgets/stopping/fallback/human review/multi-agent costs, evaluation/tracing/regression/injection/data protection | Read-only to controlled writes; justify complexity and constrain/observe execution |
+## Review and next gate
 
-Training, fine-tuning, complex memory and specialist inference infrastructure receive deeper references as needed, not a full algorithms course. AI-assisted development appears in relevant chapters and C07; it is separate from model integration.
-
-## Part III: Connected Cases, Decisions Back in One Product
-
-| Case | Cross-layer scope | Main judgment and prerequisites |
-| --- | --- | --- |
-| How many themes does one product need? (C01) | Principles/tokens/contracts/accessibility/design/code/docs/migration | Which layer changes for a new brand or local business customization? F03–F05/F09/F12 |
-| Searchable does not mean accessible (C02) | URL/state/async/API/SQL/permission filters/pagination/cache | Boundaries affected by slow queries, disorder or permission changes; F06/F08 and B02/B03/B06/B08 |
-| Upload finished. Is the work done? (C03) | Storage/tasks/queue/worker/subscription/idempotency/UI/deployment/monitoring | Recovery after page close, duplicate execution, interruption or notification failure; F07/F08 and relevant B10–B18 |
-| Who gets the last place? (C04) | Product feedback/transactions/constraints/idempotency/limits/queue/capacity/alerts | Correctness versus capacity; B07/B09/B12/B18 |
-| Where did this learning report come from? (C05) | Sources/events/CDC/ingestion/transformation/scheduling/models/metrics/permissions | Backfills/late data/duplicates/deletion; B19–B22 |
-| Adding AI to an existing product (C06) | UI/services/documents/permissions/retrieval/model/necessary tools/evaluation/cost/operations | Missing/conflicting material, unauthorized access, timeouts and model change; B23–B25 plus foundations |
-| Delivering the same requirement with AI (C07) | Requirements/acceptance/product decomposition/context/Markdown/scope/contracts/tools/skills/Git/review/verification/handoff | Key task snippets and actual evidence; extract a reusable skill and test its boundaries, not a chat dump or compulsory project |
-
-Start each case with a simple design under explicit assumptions, then change one condition. Do not pack every advanced mechanism into a final architecture diagram. Keep a useful simple design and explain each increase in complexity.
-
-## Coverage and prerequisites
-
-- Proposed identifiers are for discussion. Coordinator confirms stable identity, paths, language mapping and navigation.
-- Explain a concept fully in one main location; reuse reminders/links elsewhere. Connected cases spend their space on cross-layer choices.
-- Give enough permission/idempotency context for frontend decisions without requiring half the backend part first.
-- Security, accessibility, testing and observability need both focused explanation and application in cases, not only closing checklists.
-- Compare frameworks/databases/messages/cloud/AI SDKs under the relevant problem rather than adding brand chapters.
-- Add diagrams, glossary and syntax/command references from actual chapter needs rather than pre-generating every appendix.
-
-## Candidate appendices and exclusions
-
-Candidates: bilingual terminology, reading architecture diagrams, essential Git/curl/SQL, environment/debugging, comparison entry points and source index. Decide after the chapters that need them.
-
-Excluded standalone tracks: employment/interviews/certification, mobile development, blockchain, WordPress, general office/media tools and full machine-learning training.
-
-## Questions originally raised for full-outline review
-
-1. Do the parts still build whole-system understanding, or has added coverage become an encyclopedia?
-2. Are F11/B17 overloaded, and are the five backend units balanced and ordered well?
-3. Could F04 serve as a self-contained style sample? This historical candidate was superseded by W02's actual scope; F04 remains unstarted.
-4. Does AI collaboration support relevant chapters and C07 without repetition or taking over the main argument?
-5. What should merge, split or move to deeper reading? Page count is not the selection criterion here.
+Review this framework for coverage, depth, independent reading and cross-part continuity. Names/splits can change after reader/editorial feedback; there is no fixed physical length. A future page starts only with a concrete assignment and accepted analysis scope, then separate manuscript review. Content/publication routing follows its own contract. This planning update does not lift product, prose, translation, UI, schema, E2E or deployment holds.

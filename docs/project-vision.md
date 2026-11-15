@@ -1,6 +1,6 @@
 # Project Vision: Beyond the Frontend
 
-Updated: 2026-11-15. Status: shared direction and working framework; details remain open. `TBU` means information or a decision is still needed, not that a feature exists.
+Updated: 2026-11-15. Status: author-confirmed v1 positioning and eight-part direction; individual reading-page names/splits remain editable. `TBU` means information or a decision is still needed, not that a feature exists.
 
 [Project entry](../README.md) · [Roadmap](roadmap.md) · [Development history](development-history.md) · [Chinese stage summary](stage-summary.zh-CN.md)
 
@@ -14,23 +14,27 @@ This document owns the audience, content scope and product direction. The roadma
 
 Create an engineering guide that readers can follow from beginning to end or consult when a particular problem arises, maintained through a static reading website. The project and repository use **Beyond the Frontend / `beyond-the-frontend`**, replacing the earlier working name Engineer Better.
 
-Start from a visible interface and connect it to services, databases, asynchronous work, data analysis and essential operations. Help readers explain why a feature is designed this way, how its parts cooperate, what should change when conditions change, and how to implement and verify those decisions with AI.
+The first edition is a connected guide for **Full-stack + AI Product Engineers, from Junior through Senior**. Start with user tasks and success criteria, then connect interfaces, Design Systems, APIs, business/data rules, asynchronous work, cloud delivery, observability, recovery and AI product architecture. Help readers judge how the parts cooperate and verify changes under real constraints. The title keeps the frontend as an approachable entry, not a limit on the book’s scope.
 
 The author is **Jason Zhang**, with AI assistance throughout creation. The website is the book's reading product, not simply a list of Markdown files. Both the explanations and the reading experience need validation through actual sample chapters and feedback.
 
 ## 2. Readers
 
-The primary audience is **engineers who want to move from implementing individual parts toward delivering complete products with AI assistance, while strengthening their design foundations**.
+The author has confirmed **Junior–Senior Full-stack + AI Product Engineer** as the v1 audience and positioning; this is no longer a public-positioning TBU. Readers may be strongest in frontend, backend or end-to-end delivery and want to connect the parts into products that can be built, evaluated, operated and recovered.
 
-- Engineers with practical frontend experience who want to understand the rest of product delivery.
-- Engineers who have worked across frontend and backend and want to connect scattered experience with underlying principles.
-- Engineers using GPT, Codex, Claude or similar tools who want to describe requirements, judge designs and check results more effectively.
+Use one common text with three layers:
 
-Readers should have some experience building pages, APIs or data processing. They need not know every stack. Explain necessary concepts where they arise without restarting from basic syntax for every language or requiring a capstone project.
+| Reading need | How the shared text helps |
+| --- | --- |
+| Junior: build reliable mental models | Explain essential mechanisms, terms and a small normal/failure example without assuming prior distributed-systems or AI knowledge |
+| Mid: connect implementation and product behavior | Trace one engineering example across UI/API/data/runtime, including failures, tests and evidence |
+| Senior: inspect conditions and trade-offs | Offer skippable comparisons, boundary changes and operational/economic consequences without making every specialist mechanism required |
 
-“AI-assisted full-stack engineering” describes a possible direction. “AI Full-stack Engineer” and “Full-stack AI Engineer” are not the sole audience labels: using AI to write code and delivering an AI product involve different responsibilities. Whether to use those terms in public positioning remains **TBU**, informed by the content and reader feedback.
+These are reading needs, not a validated market segmentation or a promise of promotion. Readers should have some practical development exposure; the book does not restart from every language's syntax. More experienced readers can fill gaps or follow deeper trade-offs, while new-to-topic readers can follow the essential argument.
 
-The intended value is understanding design relationships and their conditions. Do not promise employment, income, productivity or career outcomes, or present teaching examples as the author's production experience.
+**AI product architecture is required v1 content**, not an optional final demo. It includes deciding whether AI is appropriate, model integration/validation, user control, context/state, authorized RAG, workflow/tool execution, security, evals and operating trade-offs. **Coding AI is a distinct development/delivery thread:** requirements, context/contracts, skills, diff review, tests and release verification. Neither replaces the other or turns the book into a tool manual.
+
+Do not promise employment, income, productivity or a job level, or present teaching cases as the author's production experience.
 
 ## 3. Editorial choices
 
@@ -40,54 +44,35 @@ The intended value is understanding design relationships and their conditions. D
 | Be approachable and accurate | Build intuition, then explain mechanisms and limits | Analogies support rather than distort the explanation |
 | Connect the layers | Revisit one feature through UI, APIs, data and operations | Readers can trace how a decision affects other parts |
 | Make choices conditional | Explain the need before comparing a few representative implementations | Benefits, costs and unsuitable conditions are explicit |
-| Use AI where it helps | Show scope, relevant context, contracts and verification | AI serves the current question rather than adding a generic prompt to every chapter |
+| Teach AI product engineering and AI-assisted delivery separately | Required AI architecture plus contextual coding-AI examples, not generic prompts in every chapter | Readers can distinguish product capability from development assistance and verify both |
 | Respect attention | Short connected sections, explained terms, useful diagrams and optional depth | Readers can follow the argument and recover context after a break |
 
 These are editorial choices, not claims that nobody has used them before. Their value must be demonstrated through completed content.
 
 ## 4. Content map
 
-Use a common-foundations introduction followed by three parts. This map is not a completed or fully approved table of contents. Writer's [detailed outline proposal](../book/planning/outline.md) is the single detailed input for chapter names, identifiers and splits; those decisions are accepted stage by stage.
+The author-confirmed v1 framework has **eight parts**. The [detailed content framework](../book/planning/outline.md) owns independent reading-page questions, necessary knowledge, original examples, depth boundaries and the complete old-to-new mapping. Page labels are planning aids, not routes, schema or a count of finished chapters. The old three-part/45-chapter proposal is historical; its useful scope is redistributed rather than silently discarded.
 
-### Common foundations: what is a page connected to?
-
-Use search, enrollment or upload to explain user goals, responsibility boundaries, state, time, dependencies and constraints. Distinguish UI feedback, request results and persistent business records. Introduce structural, sequence and state diagrams by the questions each answers.
-
-### Part I: frontend, from interfaces to product behavior
-
-| Topic group | Planned questions |
+| Part | Reader outcome |
 | --- | --- |
-| Browsers and real content | What happens before a page appears? What changes when real text or different screens meet a design? |
-| Design Systems | Why does a component library still need a design system? How do primitive tokens, semantic tokens, themes and components fit together? |
-| Components and state | What does a component promise its caller? Who owns input, URL, shared and server state? |
-| Interaction and quality | How do forms, request races, accessibility, rendering and performance shape the complete experience? |
-| Engineering and evolution | How do types and runtime validation cooperate? How do Figma, code, documentation, versions and migrations stay aligned? |
+| 1. Product Goals and the Full-stack Architecture Map | Define user success and boundaries, locate browser execution and static/runtime contracts, distinguish combinable architecture dimensions |
+| 2. Frontend Design Systems and Product Interaction | Make layout, tokens, component contracts, state, accessibility, async/AI controls and rendering serve the product task |
+| 3. APIs, Backend Boundaries and External Integration | Define HTTP/API/permission agreements, business modules, error/cleanup responsibilities and file/external/webhook boundaries |
+| 4. Databases, Search and Product Data Flow | Reason about models/ORM/SQL/constraints/transactions/cache/search and trustworthy product metrics/data lifecycle |
+| 5. Asynchronous Work, Traffic and Reliability | Separate capacity from correctness; design quotas/backpressure, timeout/retry safety, tasks, queues/events and consistency windows |
+| 6. Cloud Runtime, Testing and Delivery | Choose runtime/hosting/network identity and produce evidence through tests, controlled builds/releases/migrations and rollback/roll-forward |
+| 7. Observability, Debugging and Recovery | Follow frontend-to-data evidence, define useful operational signals/alerts and verify incident/data recovery |
+| 8. AI Product Architecture and AI-assisted Delivery | Build controlled, evaluated AI capabilities and separately collaborate with coding AI; ten working reading units, not ten completed chapters |
 
-### Part II: backend and data, how the system gets work done
+Connected original examples recur across the parts: themes, authorized search, upload/processing, last-place enrollment, learning reports, AI course assistance and coding-AI delivery. They are explanatory cases, not compulsory capstones or a separate duplicate definitions section. Case size/code volume follows the question, not a page quota.
 
-| Topic group | Planned questions |
-| --- | --- |
-| Business applications | How should APIs, authentication, authorization and module boundaries work? When should a system remain a monolith or split services? |
-| Data correctness | How do modeling, indexes, concurrency and transactions work? What can queries and caches guarantee? |
-| Concurrency and capacity | Where is the delay? How do latency, throughput, hot spots, connections, scaling and rate limits interact? |
-| Asynchronous work and events | When should work happen later? How do queues, pub/sub, event streams and subscriptions differ? How do duplicates, backlogs, failures and consistency affect the design? |
-| Cloud and essential DevOps | When are functions, containers or persistent services appropriate? How do deployment, observation, rollback, backup and recovery fit together? |
-| Data analysis | How do OLTP and analytical workloads connect through batch/stream processing, CDC, ETL/ELT, warehouses/lakes/lakehouses, metrics and quality? |
-| AI product capabilities | How should model output, structured validation, retrieval permissions, tool execution, evaluation, costs and fallbacks work? |
+Architecture choices occupy different axes: CSR/SSR/static/BFF; layers/modular monolith/Ports and Adapters/services; HTTP/webhooks/poll/SSE/WebSocket; web–queue–worker/events; database/cache/object/search/vector; managed runtime/container/functions; structured generation/RAG/workflow/agent; tenant/entitlement/quota/audit controls. They can be combined. High concurrency, async and serverless are not a maturity ladder.
 
-High concurrency, asynchronous work and serverless are dimensions that can be combined, not a required upgrade path. Operations coverage supports a product's continued operation rather than becoming a full platform-engineering course.
+Essential algorithmic, SQL/isolation, limits/retries, security, accessibility, testing, observability and performance reasoning belongs in core explanations. CQRS/Event Sourcing/Saga/consensus/sharding, Kubernetes/Service Mesh and multi-region designs are optional comparisons or later extensions. DevOps and data cover what delivering and maintaining a product requires; specialist volumes may be considered later. Model training/fine-tuning/GPU/inference-engine operation and large data-platform administration are outside the v1 main line. This does not introduce an extension/plugin architecture or new website features.
 
-### Part III: connected cases, putting decisions back into a product
+**Accepted material stays scoped:** existing opening/G01 manuscripts and F01A browser analysis retain their reviewed boundaries and original source paths/hashes. Their placement in this map does not approve expanded text, all 48 working pages or publication. Each future page still needs an assigned analysis gate and separate manuscript review.
 
-- Multi-brand themes: design rules, tokens, component contracts and migration.
-- Search and permissions: filters, APIs, queries, pagination and caching.
-- Upload and processing: progress, storage, tasks, notifications and recovery.
-- Popular enrollment: user promises, concurrency, constraints, idempotency and capacity.
-- Learning analytics: business events and trustworthy metrics.
-- Adding AI to an existing product: user needs, controlled capabilities, evaluation and fallbacks.
-- Delivering with AI: requirements, context, tools, code review and verification.
-
-Cases support explanation and reflection; readers do not have to submit assignments. Case size, code volume and cross-chapter reuse remain **TBU**.
+The accepted opening still describes the earlier three-part organization. Preserve its bytes in this planning task; align that orientation through a separately scoped editorial revision/re-review before presenting it as the v1 overview. Do not silently rewrite the accepted source or treat new scope as already reviewed.
 
 ## 5. Languages and content forms
 
@@ -139,4 +124,4 @@ Do not invent users, traffic, company cases, productivity improvements or income
 | Website implementation, content loading, validation and operational instructions | Developer | Coordinator reviews evidence and limitations |
 | Chapter status, cross-role consistency and integration | Owners report evidence; Coordinator maintains accepted status | Coordinator verifies; author is final authority |
 
-For this documentation iteration, Writer owns this document and the roadmap; Coordinator reviews and integrates rather than ghostwriting the formal explanation. Later ownership changes must be explicit. `TBU` does not authorize unlimited research, installation, paid services or publication.
+Writer authors assigned revisions of this document and the roadmap; Coordinator reviews and integrates rather than ghostwriting the formal explanation. Current assignments/holds are recorded only in the [board](coordination.md); this content framework does not lift manuscript, translation or engineering holds. Later ownership changes must be explicit. `TBU` does not authorize unlimited research, installation, paid services or publication.

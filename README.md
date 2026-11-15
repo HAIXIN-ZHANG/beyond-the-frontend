@@ -2,21 +2,29 @@
 
 **《前端往后看：能跑，然后呢？》**
 
-An evolving engineering book connecting frontend design systems, backend architecture, data and AI collaboration through everyday product decisions.
+An evolving engineering book for Junior–Senior **Full-stack + AI Product Engineers**, connecting user goals, frontend design systems, backend/data architecture, reliable delivery and AI products through everyday product decisions.
 
 **By Jason Zhang · Created with AI assistance throughout planning, writing and development.**
 
-The book is for engineers who have shipped features and want to understand the systems around them. Start with a working page, follow its requests and records, and examine the choices behind it. Some development experience helps; knowing every layer in advance is not required.
+Junior, mid-level and senior readers share the same explanations: foundational mechanisms, concrete engineering examples and optional deeper trade-offs that can be read selectively. Some experience building pages, APIs or data processing helps; knowing every layer in advance is not required. Engineers entering from frontend or another specialty can follow the connections across a complete product. These are reading paths, not a promise of a job level or promotion.
+
+## First-edition direction
+
+The first edition connects eight parts: **product goals and the full-stack architecture map; frontend Design Systems and product interaction; APIs, backend boundaries and external integrations; databases, search and data flow; asynchronous work, traffic and reliability; cloud, testing and delivery; observability, debugging and recovery; AI product architecture and AI-assisted development**. The [detailed outline](book/planning/outline.md) owns chapter boundaries, ordering and coverage; this summary is not a second table of contents. Direction approval does not imply that chapters, research or manuscripts are completed or reviewed.
+
+**AI product architecture is core reading.** It includes deciding whether AI helps a user task, controlled model integration, context and retrieval, workflows/tools, permissions, evaluation and quality/latency/cost trade-offs. Coding AI is a separate development-and-delivery thread: scoping work, providing context/contracts, reviewing changes and verifying releases. Teaching these topics does not mean this reading website runs model inference or embedded AI chat.
+
+DevOps and data coverage supports delivering and maintaining a product; specialized platform/data volumes can be considered later. Explanations combine theory, original examples and conditional choices, with security, accessibility, testing, observability and performance woven through the relevant parts. Connected cases explain decisions rather than impose a capstone assignment. Training models, GPU/inference infrastructure and full specialist data-platform courses are outside the first-edition main line; detailed depth and optional extensions belong in the outline.
 
 ## What is available
 
 - **In main:** an English-default bilingual website foundation, strict TypeScript and cloud-verified CI. Home/index routes are `/`, `/read/`, `/zh/` and `/zh/read/`, with a bilingual static 404.
 - **Reviewed writing:** Chinese opening and shared-foundations drafts. Browser Fundamentals has an accepted research/outline gate, not a manuscript. These documents are in the repository; the website does not render chapters yet.
 - **Preserved separately:** Design Tokens and Day/Night Themes has local implementation/build evidence in an unaccepted checkpoint. Independent browser acceptance and integration remain open.
-- **Documentation:** the English project documentation, delivery history and AI workflow explanation were reviewed and merged through [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7). The [coordination board](docs/coordination.md) owns current assignments and product holds; this introduction is not a work queue.
+- **Documentation:** the English project documentation and delivery history merged through [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7); agent workflow/onboarding followed in [PR #8](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/8). The [coordination board](docs/coordination.md) owns current assignments and execution holds; this introduction is not a work queue.
 - **Online reading:** no verified public reading URL yet. GitHub Pages is authorized after code/content/QA acceptance, but has not been deployed. Search, audio and AI question cards are not available features.
 
-The remaining chapter outline is a proposal, not a complete or approved book. `TBU` means unresolved or to be updated, never delivered. See [Development History](docs/development-history.md) for evidence and limits.
+The audience and eight-part direction are confirmed; detailed chapter splits remain planning proposals until their relevant review. An outline is not a complete or approved manuscript. `TBU` means unresolved or to be updated, never delivered. See [Development History](docs/development-history.md) for evidence and limits.
 
 ## Explore the project
 
@@ -29,7 +37,7 @@ The remaining chapter outline is a proposal, not a complete or approved book. `T
 | [Developer guide](site/DEVELOPMENT.md) | Commands and behavior actually available on main |
 | [Agent entry](AGENTS.md) | Short startup path to an explicitly assigned role, current board and task brief |
 
-The [detailed book outline](book/planning/outline.md) remains a proposal. Manuscripts, planning, process records and the website are different deliverables; committing a document does not publish it as a chapter.
+The [detailed book outline](book/planning/outline.md) owns content planning under the confirmed direction; its individual writing gates remain separate. Manuscripts, planning, process records and the website are different deliverables; committing a document does not publish it as a chapter.
 
 ## How this project is built with AI
 
@@ -79,7 +87,7 @@ npm run dev
 
 ## Reading direction and design
 
-The book starts from concrete features, introduces precise mechanisms through familiar examples, and connects interface behavior to APIs, stored records, background work and analytical data. Technology choices are contextual trade-offs, not a list everyone must adopt. Examples are teaching scenarios, not an employer's systems or evidence of production scale.
+The book starts from user tasks and success criteria, introduces precise mechanisms through familiar examples, and connects interface behavior to APIs, records, background work, delivery/recovery and AI capabilities. Architecture choices describe combinable dimensions rather than a ladder from synchronous to asynchronous, serverless or high-concurrency systems. Technology choices are contextual trade-offs, not a list everyone must adopt. Examples are teaching scenarios, not an employer's systems or evidence of production scale.
 
 **Design references:** [Tokens](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) · [Components](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) · [Page Designs](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2). Reading, responsive and Day/Night views share one page. The [design handoff](docs/design/reading-experience-v1.md) distinguishes design evidence from code/browser acceptance.
 

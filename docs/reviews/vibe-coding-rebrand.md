@@ -1,6 +1,6 @@
 # Vibe Coding, Then What? — naming and project alignment review
 
-Date: 2026-11-15 (Australia/Perth). Reviewer: Coordinator/Reviewer. Status: Writer r2 and Developer r1 accepted; integration pending.
+Date: 2026-11-15 (Australia/Perth). Reviewer: Coordinator/Reviewer. Status: Writer r3 and Developer r2 accepted, including the original branding; integration pending.
 
 ## Assignment and boundaries
 
@@ -58,3 +58,17 @@ Developer reports actual Node 24.14.1/npm 11.11.0 check (lint/typegen/strict tsc
 **Accepted; no open blocking findings or executor tasks.** Writer r2 and Developer r1 remain frozen; Coordinator owns closure status and integration. The preserved theme checkpoint uses a historical identity and must be reconciled with current main's naming/prefix when separately resumed, not copied over this migration. Required final-head cloud CI and an authorized expected-head squash merge remain separate gates. No release or wider product/prose continuation is authorized.
 
 Final independent source check: 67 Markdown files, 337 relative destinations/anchors, no link/heading/fence/sensitive-pattern findings; exact 29-path assigned scope, no whitespace errors. The eight parts, 48 working labels and all 45 legacy rows remain, and the outline's teaching body from Part 1 onward matches main exactly. Source/hash checks use the accepted new opening hash rather than falsely expecting its historical bytes. Coordinator's board updates close both tasks; no executor implementation was substituted.
+
+## Additional reader-documentation instruction
+
+After the accepted branding checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`, the author explicitly requested a reader-facing README in a separate conversation: explain the book/readership/content, honest online status, free/public reading direction and a brief author opportunity/collaboration entry. Writer is assigned README and its same handoff only. Developer is assigned the necessary existing workflow diagram's relocation into `docs/collaboration.md` and its same handoff only. Other accepted files remain frozen. No license is selected, no contact details are invented, and the broader document-audit recommendations do not authorize a repository-wide reorganization.
+
+[PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10) contains the accepted branding checkpoint. The additional documents require actual affected review before a new commit is accepted. Its final-head cloud checks and actual squash result will be recorded in the PR execution record; initial-head CI is not approval of a changed final head. No deployment is authorized.
+
+### Supplement affected review and acceptance
+
+Read the full final README, actual collaboration diff and both updated handoffs. README now introduces the book, audience, eight parts, existing Chinese drafts, honest unlaunched online status, free/public reading direction, confirmed author/GitHub opportunity entry, references and undecided license. Development commands and lengthy internal process/PR/checkpoint/design details are absent; relevant existing guides are linked. No license, contact URL, completed English manuscript or released website is invented.
+
+Collaboration remains the single workflow authority: its existing role table is reused, with the necessary author/AI context and former README diagram added. Independently verified the Mermaid source is byte-identical to the accepted checkpoint's README and all detailed rules from Assignment and lifecycle onward are unchanged. Inspected the actual render result (13 nodes/14 edges, no reported errors); Developer reports visual inspection with existing tooling. No new system, workflow permissions, install or code change resulted.
+
+**Writer r3 and Developer r2 accepted; both assignments closed.** The only six-file delta from the accepted checkpoint is README, collaboration, the two handoffs and Coordinator's board/review. All implementation/browser evidence remains applicable to unchanged source; the final commit still requires its own cloud checks. Final scope is 30 paths including collaboration. Coordinator will record final head/run/squash in the linked PR and return the usual checkout to main after verified merge. Other audit suggestions, formal licensing and new product/prose work remain unassigned/held.

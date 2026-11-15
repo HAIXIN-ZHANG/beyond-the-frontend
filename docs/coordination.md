@@ -4,13 +4,13 @@ Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/wor
 
 ## Current scope and independent holds
 
-**Branding accepted; no open executor tasks:** English title/project name **Vibe Coding, Then What?**, Chinese title **《Vibe Coding 之后：能跑，然后呢？》**, subtitle **Understand the Systems Behind Your AI-Built Products**, slug `vibe-coding-then-what`. Writer r2 and Developer r1 passed actual review. Existing Beta planning edits are retained and reviewed as planning, not permission for implementation. Coordinator integration remains separate.
+**Branding and reader-documentation accepted; no open executor tasks:** English title/project name **Vibe Coding, Then What?**, Chinese title **《Vibe Coding 之后：能跑，然后呢？》**, subtitle **Understand the Systems Behind Your AI-Built Products**, slug `vibe-coding-then-what`. Writer r2 and Developer r1 passed actual review at checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`. The author's additional reader-facing README/workflow supplement has passed affected review; accepted implementation stays frozen. Beta planning remains planning, not execution authorization.
 
 Other product/prose work remains **Paused**: no chapter writing/translation, chapter renderer/schema implementation, theme acceptance, UI redesign, E2E expansion or deployment. Coordinator resolves holds with the user; earlier tool/release authorization does not lift them. The opening's one-name replacement and current contract hash/reference passed actual review. No other prose or route/schema change follows from that exception.
 
-## Workspace and baseline
+## Last scoped workspace and baseline
 
-- Active checkout remains `/Users/haixin/Desktop/code/beyond-the-frontend`; branch `codex/vibe-coding-rebrand`; starting HEAD/local `origin/main` `40f5f40effc2bedecf2e1b91c4a31fd58caba308`.
+- The reviewed stage used `/Users/haixin/Desktop/code/beyond-the-frontend`; branch `codex/vibe-coding-rebrand`; starting HEAD/local `origin/main` `40f5f40effc2bedecf2e1b91c4a31fd58caba308`.
 - The directory name is intentionally unchanged to preserve active chats/IDE references; it is not the repository slug. Verify actual branch/HEAD/status before editing.
 - Writer's authorized vision/roadmap Beta changes existed before this assignment and are preserved. Writer/Developer share the checkout with disjoint exact manifests. Commands use explicit workdirs; edit paths are absolute. Coordinator manages all Git writes and remote settings.
 
@@ -18,11 +18,11 @@ Other product/prose work remains **Paused**: no chapter writing/translation, cha
 
 | Owner | Assigned scope and brief | State | Next action |
 | --- | --- | --- | --- |
-| Writer | Active editorial/entry identity, existing Beta inputs and narrow approved opening title change; [handoff](handoffs/writer/vibe-coding-rebrand.md) | Accepted r2; closed | Preserve frozen files and accepted opening revision; no other manuscript continuation |
-| Developer | Active engineering/agent names, website metadata/links, package identity, Pages prefix, verification/tests/guides and accepted opening contract reference; [handoff](handoffs/developer/vibe-coding-rebrand.md) | Accepted r1; closed | Preserve frozen files; no dependent implementation |
-| Coordinator/Reviewer | Exact combined review, opening/hash acceptance, owner feedback and Git integration; [review](reviews/vibe-coding-rebrand.md) | Local review accepted; integration pending | Manage reviewed-head PR, required checks and authorized merge |
+| Writer | Accepted original scope; additional README-only reader introduction, free/public wording and confirmed author opportunity/collaboration entry, plus same [handoff](handoffs/writer/vibe-coding-rebrand.md) | Accepted through r3; closed | Preserve accepted files; no new manuscript work |
+| Developer | Accepted original scope; additionally move the necessary README workflow diagram into existing `collaboration.md`, plus same [handoff](handoffs/developer/vibe-coding-rebrand.md) | Accepted through r2; closed | Preserve accepted files; no dependent implementation |
+| Coordinator/Reviewer | Actual affected supplement review and Git integration; [review](reviews/vibe-coding-rebrand.md) | All local review accepted; integration pending | Manage final reviewed head, required checks and authorized merge |
 
-Both executor tasks are closed. Integration is Coordinator-only; no future branding PR/head/CI/merge or deployment result is prefilled. Historical reviews/handoffs/security/Figma names are not bulk-rewritten.
+Both executor assignments are closed; no continuation is implied. License selection, CONTRIBUTING, broad document cleanup, historical moves and other audit suggestions are not implicitly assigned. Integration is Coordinator-only. [PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10) contains the accepted branding checkpoint; its final head/checks/merge will be recorded there after actual supplement acceptance. No future success is prefilled. Historical evidence remains intact.
 
 ## External rename already completed
 

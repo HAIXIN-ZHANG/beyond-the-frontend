@@ -1,6 +1,6 @@
 # Vibe Coding, Then What? — Developer rebrand handoff
 
-Owner: Developer. Revision: r1. Date: 2026-11-15 (Australia/Perth). Status: In review; frozen r1. Coordinator owns [review](../../reviews/vibe-coding-rebrand.md), GitHub rename/About/remote and all Git writes; this report owns assigned execution evidence.
+Owner: Developer. Revision: r2 (documentation supplement after accepted r1). Date: 2026-11-15 (Australia/Perth). Status: supplement frozen for review; accepted r1 implementation remains frozen. Coordinator owns [review](../../reviews/vibe-coding-rebrand.md), GitHub rename/About/remote and all Git writes; this report owns assigned execution evidence.
 
 ## Task brief
 
@@ -64,10 +64,32 @@ Final r1 source/scope checks passed: 67 Markdown files, 337 local links, five he
 
 Coordinator's inline engineering feedback was applied before freeze: the two role prompts have no extra period after the question-mark title, and the developer guide explicitly identifies the older syntax-only harness as DS01 theme evidence, distinct from this migration's actual browser checks. These corrections do not claim independent Developer acceptance.
 
-## Recovery
+## r2 task brief — reader README documentation supplement
+
+- **Authority/goal:** the user requested a reader-focused README; Coordinator assigned migration of its necessary collaboration explanation into the existing workflow authority, not a second AI-workflow document.
+- **Allowed paths:** `docs/collaboration.md` and this same handoff only. Accepted r1 code/engineering files remain frozen. Writer exclusively edits README and its own handoff; Coordinator owns board/review/integration.
+- **Workspace/input:** same absolute root and `codex/vibe-coding-rebrand`; current checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`. Read the exact former README AI-workflow section from `63127db:README.md` and the current collaboration document. No Git writes by Developer.
+- **Deliverable/acceptance:** preserve the unique Mermaid flow and necessary human/agent responsibility/coordination explanation in collaboration, merged with its existing role table and detailed rules. Do not duplicate rule sets, npm instructions, current-task state or historical rewrites. Preserve owner revision, hold, Git/release and evidence boundaries. Check Markdown links/structure/whitespace and Mermaid parse/render with existing tooling only.
+- **Next boundary:** freeze r2 supplement and submit affected evidence to Coordinator. No new install, CI/code edit, product implementation or build/E2E rerun for this docs-only supplement. Accepted r1 verification stays historical evidence, not a new execution claim.
+
+## r2 delivery and verification
+
+- **Exact affected paths:** `docs/collaboration.md` and this report. Collaboration's opening integrates the human author's role and AI-assistance context; its existing three-agent role table and detailed workflow remain the authority. One workflow overview contains the exact Mermaid source from checkpoint `63127db:README.md`, with an explicit reminder that assignments/holds govern continuation. No duplicated role table, npm commands or current-task queue was added.
+- **Diagram evidence:** reused installed Mermaid `12.3.0` and the existing isolated Chrome renderer, changing only its input/output paths in a temporary script. Actual parse/render passed with **13 nodes, 14 edges, zero page errors**. Developer opened the rendered PNG and checked readable labels, owner-feedback loop and separate release/no-release paths. SVG/PNG/result: `/tmp/btf-rebrand-checks/collaboration-workflow.svg`, `collaboration-workflow.png`, `collaboration-render-result.json`. This is local render evidence, not a GitHub-hosted-rendering check.
+- **Ownership and scope:** Writer separately removes the old workflow/role/Mermaid/npm blocks from README and updates its own report. Coordinator separately owns the board/review updates. Developer did not edit those files. The implementation/package/CI/contract files accepted in r1 remain unchanged by this supplement. No new workflow file, npm guide, license/contribution document, tooling installation or product change was introduced.
+- **Review boundary:** Coordinator already accepted the r1 engineering deliverable; this r2 supplement needs its own affected review. No runtime check/build/E2E rerun is claimed for unchanged code, and no new PR/cloud/merge/deployment result is prefilled.
+- **Final source checks:** 67 Markdown files, 323 relative links and four heading anchors pass structure/link/sensitive-pattern checks; `git diff --check` passes. The unique active diagram across README/collaboration matches the checkpoint source byte for byte; collaboration has one role table, no copied npm instructions and no current-task snapshot. All detailed rules from “Assignment and lifecycle” onward are byte-identical to the checkpoint. The accepted fixed r1 engineering files match checkpoint bytes; only Coordinator's separately owned board is excluded from that comparison. Current supplement delta is six Markdown paths: two Developer, two Writer and two Coordinator, with no code/CI/package changes.
+
+## r1 recovery — historical submission snapshot
 
 **Done:** the 19-file manifest, root/new-Pages builds/export checks, strict check/tests, actual browser cases and approved current opening-reference update. **Not done:** Coordinator's independent Developer/combined review, any requested revision/closure, new PR/cloud CI/merge, or deployment. Submitted Developer revision is frozen r1; acceptance is pending.
 
 The 19 Developer paths are uncommitted on the assigned branch/base. Preserve Writer's nine separate paths (including its opening edit) and Coordinator's review; do not stage/reset/change branches. Local folder deliberately retains its old name while origin uses the new slug. The unaccepted DS01 branch/checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` and 31 ignored generated backup files remain recovery inputs, not this migration's targets.
 
 Next action: Coordinator reads frozen sources/evidence and returns any specific findings to Developer. Resume only such scoped corrections after AGENTS → role guide → board → this report/review and actual directory/branch/HEAD/status checks. No new UI, theme, prose, E2E or release stage follows automatically. Temporary tools/screenshots/digests are supplementary; exact paths, commands, outcomes and limits remain recorded here for recovery without them.
+
+## Current r2 recovery
+
+The original r1 files are accepted and preserved at checkpoint `63127dbf27717a5ff34ad993720af78fe941c722`; their earlier uncommitted/pending-review wording above records the r1 submission moment. Current Developer work consists only of the two uncommitted supplement paths named above, frozen as r2. Preserve concurrent Writer README/handoff and Coordinator board/review changes in the shared checkout. No Developer Git writes occurred.
+
+Done: source migration, local diagram parse/render and visual inspection, plus the source checks recorded below. Not done: Coordinator's affected r2 review and any subsequent integration. Next action is that review; only specific feedback authorizes a revision. Current product/prose holds and Git/release boundaries remain unchanged. Re-read current board/brief/review and verify actual branch/HEAD/status before any future scoped continuation. Temporary artifacts are supplementary; this record preserves source provenance, exact paths, actual verification and remaining boundaries.

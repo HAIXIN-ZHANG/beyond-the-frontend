@@ -1,6 +1,6 @@
 # Vibe Coding, Then What? — Writer Rebranding Handoff
 
-Revision: r2. Date: 2026-11-15 (Australia/Perth). Owner: Writer. Submitted revision: frozen for re-review. Task brief recorded before branding edits; original r1 evidence and the r2 feedback response follow. Current assignments/holds belong to the [board](../../coordination.md).
+Revision: r3 supplement. Date: 2026-11-15 (Australia/Perth). Owner: Writer. Reader-facing README supplement frozen for review; accepted r2 content outside this supplement stays frozen. Task brief recorded before branding edits; original evidence and revision scopes follow. Current assignments/holds belong to the [board](../../coordination.md).
 
 ## Task brief
 
@@ -54,3 +54,24 @@ Starting workspace/base, incoming modified files and scope are in the brief. Nin
 Read the actual [rebranding review](../../reviews/vibe-coding-rebrand.md). Changed only roadmap section 1's opening, the corresponding Chinese summary status wording and this handoff: PR #9's content framework is historical/completed; current assignments defer to the board. Naming/site metadata/Pages-prefix migration and its necessary verification are the explicit narrow exception, without resuming other implementation, prose/translation, UI/schema/E2E or deployment.
 
 Affected structure/link/anchor checks and `git diff --check` passed. The complete roadmap Beta block remains identical to the frozen r1/incoming plan; no eight-part or opening change. Other r1 deliverables stay frozen, including the exact accepted opening hash. R1 closure awaits Coordinator's affected re-review; no Git write or new task.
+
+## r3 supplemental task brief — reader-facing README
+
+Coordinator accepted r2 and closed R1, then relayed a new explicit user assignment rather than another r2 correction. From checkpoint `63127dbf27717a5ff34ad993720af78fe941c722` on the same assigned branch/workspace, modify only `README.md` and this handoff. Keep all other accepted Writer files frozen.
+
+Make README a concise reader/book entry: identity/subtitle, purpose/audience/eight-part overview, free/public reading direction, actual writing/online status, brief Jason Zhang attribution and openness to engineering opportunities/collaboration through the supplied real GitHub profile. Retain necessary reference acknowledgments, license TBU, feedback and a few deeper links. Use 400–600 English words as a flexible editing target, not an acceptance quota.
+
+Remove the lengthy role/process table, Mermaid and npm commands from README. Developer separately preserves the workflow under existing collaboration documentation using this checkpoint; local commands already live in the developer guide. Do not duplicate that move or edit Developer files. No license selection, new legal/contribution file, guessed contact, publication claim, dependency/code or deployment work. Formal README remains English with the confirmed Chinese book title.
+
+Verification planned: actual relative destinations/structure/copy length and semantic scope, canonical links, no new contact/provider/license claims, unchanged accepted Writer/source files and `git diff --check`. Freeze and submit actual results for separate r3 review; no Git writes.
+
+### r3 actual delivery and checks
+
+- Changed only `README.md` and this handoff after the supplemental brief. README is now a reader-facing book entry with purpose, Junior–Senior audience, concise eight-part direction, real draft links/availability, author/profile, feedback, license TBU and necessary reference acknowledgments.
+- Visible-text count is 551 English words under the recorded regex method (597 when URL/file tokens in raw Markdown are counted), within the flexible editing target. Count is editing evidence, not a quality guarantee.
+- README has one H1 and no code fence, Mermaid, npm commands, internal role table, PR/checkpoint/Figma detail or claim of accepted Panda functionality. It links existing collaboration and developer documentation rather than deleting or duplicating those records. Developer owns transfer of the old workflow from checkpoint `63127db`; Writer did not edit or independently verify that transfer.
+- All seven README relative destinations exist. Identity, real supplied GitHub profile, canonical issue URL, author collaboration wording, free/public reading statement and unselected license terms were checked. No invented LinkedIn/email, release URL, permanent-free/nonprofit pledge or license selection.
+- Nine recorded accepted Writer/source hashes are unchanged across r3: vision, roadmap, compatibility brief, Chinese summary, editorial baseline, outline, opening, G01 and F01 analysis. The opening remains exactly the previously accepted name-only revision; no manuscript or Beta changes.
+- `git diff --check` passed. No Git write, dependency/code change, website build/browser run, deployment or external-service operation was performed by Writer.
+
+Please review this new reader-entry supplement separately from accepted r2. The scope closes after affected review/revisions; other accepted files and implementation/manuscript holds remain. Integration and the cross-owner workflow-transfer check belong to Coordinator; no review/CI/merge/publication result is prefilled for r3.

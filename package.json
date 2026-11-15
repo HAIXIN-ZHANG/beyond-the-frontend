@@ -8,14 +8,16 @@
     "npm": ">=11 <12"
   },
   "scripts": {
-    "dev": "NEXT_TELEMETRY_DISABLED=1 next dev site",
-    "build": "NEXT_TELEMETRY_DISABLED=1 next build site",
+    "dev": "npm run codegen && NEXT_TELEMETRY_DISABLED=1 next dev site",
+    "build": "npm run codegen && NEXT_TELEMETRY_DISABLED=1 next build site",
     "build:pages": "NEXT_PUBLIC_BASE_PATH=/beyond-the-frontend npm run build",
-    "lint": "eslint site scripts tests eslint.config.mjs --max-warnings=0",
+    "lint": "eslint site scripts tests eslint.config.mjs panda.config.ts panda --max-warnings=0",
     "test": "node --test tests/*.test.mjs",
     "check": "npm run lint && npm run typecheck && npm test",
     "verify:export": "node scripts/verify-export.mjs",
-    "typecheck": "NEXT_TELEMETRY_DISABLED=1 next typegen site && tsc --project site/tsconfig.json --noEmit"
+    "typecheck": "npm run codegen && NEXT_TELEMETRY_DISABLED=1 next typegen site && tsc --project site/tsconfig.json --noEmit && tsc --project tsconfig.panda.json --noEmit",
+    "codegen": "panda codegen",
+    "prepare": "npm run codegen"
   },
   "dependencies": {
     "next": "16.4.6",
@@ -25,11 +27,14 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@next/eslint-plugin-next": "16.4.6",
+    "@pandacss/dev": "2.5.0",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "eslint": "10.15.0",
     "eslint-plugin-react-hooks": "7.1.1",
+    "pkg-types": "2.3.0",
+    "postcss": "8.5.33",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.2"
   }

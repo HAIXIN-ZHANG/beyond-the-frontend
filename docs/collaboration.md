@@ -1,57 +1,58 @@
-# Writer 与 Developer 的协作方式
+# Writer and Developer collaboration
 
-用户已允许 Writer 和 Developer 按各自对话确认的任务开工。具体范围以用户在相应对话中的指令为准；本文规定协作机制，不扩大实施、安装或发布授权。主对话负责设计、审核和协调。
+The user has released Writer and Developer to execute the tasks agreed in their respective conversations. This document defines coordination; it does not expand implementation, installation or publication scope. Coordinator assigns work, decides shared contracts, reviews actual deliverables, returns feedback and manages Git integration. Coordinator does not write product code, manuscripts or formal implementation documentation on an executor's behalf.
 
-## 工作区域
+## Workspaces and ownership
 
-两个独立对话使用同一个本地目录 `/Users/haixin/Desktop/code/beyond-the-frontend`，目前没有独立 worktree 或沙盒目录。以下是文件所有权约定，不是技术上的写入限制。未创建的目录将在任务放行后由对应负责人建立。
+The original checkout is `/Users/haixin/Desktop/code/beyond-the-frontend`. Coordinator may allocate independent Git worktrees for concurrent stages. Writer's current F01A worktree is `/tmp/btf-writer-f01a`; Developer remains in the original checkout. The [board](coordination.md) records actual branches and stage gates. A conversation's default cwd does not follow assignments automatically: verify the assigned directory before executing. Worktrees are branch working areas in one repository, not a second canonical manuscript or a confidentiality boundary.
 
-正式项目材料与可选的本地工作笔记按 [文档存放规则](agent-notes-policy.md) 分开：共同依据留在 repo 的正式目录，临时笔记可放在被 Git 忽略的 `.local/notes/<role>/`。不维护两份正式正文。
+Follow the [document storage policy](agent-notes-policy.md): formal sources stay in repository directories; optional scratch notes belong under ignored `.local/notes/<role>/`. Do not maintain a second formal body.
 
-| 区域 | 负责人 | 职责 |
+| Area | Writing/implementation owner | Responsibility |
 | --- | --- | --- |
-| `book/` | Writer | 章节 Markdown、原创例子、参考链接、章节专用图片与图示源文件 |
-| `book/assets/` | Writer | 与正文一起维护的教学图示；具体格式待内容契约确认 |
-| `site/` | Developer | 阅读页面、布局、导航、内容读取、搜索、图示渲染和站点样式 |
-| 根目录构建配置、依赖清单与锁文件、`scripts/`、`tests/`、`.github/` | Developer，仅限已分配文件 | D02 使用 Next.js 静态导出、React、JavaScript/JSX 和 npm；后续工具与新增依赖另行确认 |
-| `AGENTS.md`、`README.md`、`docs/project-vision.md`、`docs/roadmap.md`、共同设计与协作文件、`docs/reviews/` | 主对话 | 定位、目录、内容契约、任务、决策、状态和审核意见 |
-| `docs/research/` 等已有材料 | 保留原有负责人与用户修改 | 作为输入阅读；未经协调不重写 |
-| `docs/handoffs/writer/` | Writer | 章节或批次交接摘要 |
-| `docs/handoffs/developer/` | Developer | 网站阶段交接摘要 |
+| `book/`, including `book/assets/` | Writer | Manuscripts, original examples, sources and chapter diagrams/assets |
+| `site/` | Developer | Website, layouts, navigation, content rendering and styles within the assigned stage |
+| Root build configuration, dependency files, `panda/`, `scripts/`, `tests/`, `.github/` | Developer, assigned files only | Build tooling, strict checks, design definitions and automation |
+| `AGENTS.md`, shared technical/design/coordination documents and content contracts | Developer when explicitly assigned | Record Coordinator's accepted decisions and actual evidence; do not independently expand scope |
+| `README.md`, `docs/project-vision.md`, `docs/roadmap.md` | Writer when assigned | Formal product/reader explanations following Coordinator's accepted decisions |
+| `docs/reviews/` | Coordinator | Actual review findings, decisions, revision acceptance and integration evidence |
+| Existing `docs/research/` and other owned material | Existing owner | Preserve user/other-agent changes; coordinate before editing |
+| `docs/handoffs/writer/`, `docs/handoffs/developer/` | Respective executor | Stage evidence, open questions and revision responses |
 
-双方可以阅读对方交付，但不直接修改对方负责的文件。确需变更，先提出具体原因，由主对话交给文件负责人处理。Git 操作统一协调，避免一个对话提交另一个对话尚未完成的文件。
+Coordinator remains the decision owner for requirements, contracts, scope and status; delegating their documentation does not delegate approval. Git operations remain Coordinator-managed. Read other owners' work as input, but request a scoped assignment before editing it. Never stage another owner's unfinished work.
 
-## 两者之间的接口
+Formal technical/coordination/design explanations and active code comments are English-first. Chinese is appropriate for user discussion in Chinese and temporary or secondary handoffs. The bilingual book and its Chinese-first manuscript review sequence remain unchanged; language cleanup does not authorize translation or publication of prose.
 
-Writer 提供内容，Developer 将同一份内容呈现为网站。Developer 不在网站中复制维护另一份章节正文；章节无需手动写成页面组件。
+## Content interface
 
-接入正式正文前由主对话明确内容契约：目录与稳定标识、标题和排序、元数据、内容状态、链接与图片路径、代码块和图示支持方式。网站工程选型已确定，精确内容 schema 尚未决定，双方不能各自假定一种格式。
+Writer owns the single manuscript source. Developer renders it without copying chapter bodies into JSX or another website-specific document. The accepted [initial content contract](content-contract.md) defines the reviewed opening/G01 allowlist, hashes, language routes, missing-English behavior and build-time rendering. It is not permission to crawl all drafts or publish proposed chapters. Future inputs require an accepted source/revision and stage assignment.
 
-Writer 决定图中要解释什么、节点关系和文字；Developer 负责显示清晰、移动端可读以及必要的文本替代支持。技术含义由主对话审核。
+Writer determines diagram meaning, relationships and labels. Developer handles readable rendering, responsive behavior and text alternatives; Coordinator reviews technical meaning. Changes to prose or diagram meaning return to Writer.
 
-## 一次交接怎样发生
+## Delivery and review loop
 
-1. 主对话发布有编号的任务，明确输入、具体文件、验收要求和依赖。开工前双方重新读取共享文件。
-2. Writer 每章先交分析调研、详细小节、案例/图示、证据边界和验证计划；主对话 review 并反馈，分析与写作范围明确通过后才写正文。正文另交一次 review。见 [逐章流程](../book/planning/chapter-workflow.md)、[模板](../book/planning/templates/chapter-analysis.md) 与 [流程 review](reviews/WF01.md)。这不是新增 Analyzer 角色。
-3. Developer 在已分配范围内实现和自查；内容契约与样章接入获准后，再用已指定正文验证显示。反馈路径、截图、检查结果与排版/格式问题；需要改正文时交还 Writer。
-4. 执行方完成后主动把阶段交接发送给主对话。主对话读取实际文件，记录“通过 / 需修改 / 缺少证据无法判定”，将带位置、原因、负责人和验收要求的反馈直接发回执行方。
-5. 执行方按项返修，补充处理位置和实际验证，发回复审。主审关闭问题后，推进任务中已授权的下一步；新增范围另行明确。用户不必手动搬运同一阶段的摘要和意见。
-6. 仓库推送、合并及网站部署各自按适用授权记录，正文或代码通过 review 不自动等于已上线。
+1. Coordinator assigns a task ID, inputs, allowed files, acceptance criteria and next authorized step. Executors reread relevant shared decisions.
+2. Writer submits research, detailed outline, examples, evidence boundaries and validation plans before prose. Analysis acceptance and writing scope must precede a separate manuscript review. See the [chapter workflow](../book/planning/chapter-workflow.md), [analysis template](../book/planning/templates/chapter-analysis.md) and [WF01](reviews/WF01.md). No standing Analyzer role is created.
+3. Developer implements and verifies only the assigned stage. Use agreed content inputs when integration is authorized; return required manuscript corrections to Writer.
+4. The executor writes one stage report using the [handoff template](handoffs/TEMPLATE.md), freezes its reviewable files and sends the path directly to Coordinator. Report changed paths, actual checks, missing evidence, unresolved issues and dependencies.
+5. Coordinator reads actual files, verifies as needed and records **accepted**, **changes required** or **insufficient evidence**, with actionable findings. A summary, delivery receipt, silence or elapsed time is not acceptance.
+6. The original executor revises the same handoff with locations and verification, then submits the new revision. Coordinator rechecks and closes findings without silently reusing an older acceptance.
+7. After acceptance, advance only into an already authorized dependent step. New scope still needs assignment. Push, merge and deployment have separate evidence and applicable authorization.
 
-章节状态与任务状态必须分开：写完、已审核、已公开不是同一件事。待审核内容如何进入预览、哪些内容进入公开网站，将由内容契约明确规定。
+Manuscript completion, review acceptance and public availability are separate states. The content contract controls which reviewed materials may enter an authorized site release. Deployment after code/content/QA acceptance is authorized as a separate DEP01 stage; a stage review does not itself publish the site.
 
-## 信息同步
+## Messages and records
 
-独立任务对话不自动共享聊天记录，也不会持续监听文件。用户已明确授权本项目现有 Writer、Developer 与主对话之间直接发送交接、review 和修订反馈；执行方完成阶段后主动发送给主对话，由主对话实际审查并回传，不再以用户手动通知为必需步骤。共享文件承载正式决定，消息只附路径和必要摘要；不要重复发送或触发无意义的回执循环。若跨对话工具不可用，在本对话明确留下未送达状态。没有持续后台文件监听；主审工作在收到消息触发的对话回合中执行。收到新任务时重读相关决定，再开始依赖它们的工作。
+The user authorizes direct handoff, feedback and revision messages among the existing Writer, Developer and Coordinator conversations. Executors send paths and short useful summaries; the user need not relay routine messages. Chats do not share histories automatically or continuously monitor files. If delivery fails, explicitly record that it was not delivered. Avoid repeated acknowledgment loops.
 
-`docs/coordination.md` 由主对话统一更新。每次交接使用简短摘要：任务编号、修改路径、完成内容、验证结果、待解决问题、需要另一方支持的事项。重要决定写入共享设计文档，临时讨论不全部堆进看板。
+Coordinator decides shared status and accepted contracts; the assigned Developer records those facts in the board and formal technical documents. Keep raw chat transcripts, private conversation identifiers and unrelated personal details out of this public repository.
 
-使用 [交接模板](handoffs/TEMPLATE.md)。按完整章节、明确的一批章节或一个可验收的网站功能交接，不逐段写 summary。报告正文建议约 10–20 行，证据另附链接或路径。每阶段一个文件，如 `writer/W01.md`、`developer/D01.md`；修订时在同一报告补记改动，保留已审核内容的变化记录。提交 review 后暂时冻结该阶段文件，避免审查期间正文或代码继续变化；紧急修正需更新报告并通知审查者。任务未另行约定时，等待 review 后再推进依赖该阶段的工作。
+Use one handoff per meaningful stage, normally a concise 10–20-line report with evidence linked separately. Revise the same report rather than creating a new file for every paragraph or feedback round. Freeze the reviewed deliverable; if an urgent correction changes it, update the report and notify the reviewer. Without a different task instruction, wait for review before dependent implementation.
 
-主对话阅读实际文件并按需验证，不以 summary 代替 review。审核意见使用 [review 模板](reviews/TEMPLATE.md)，保存在 `docs/reviews/<任务标识>.md`，标明通过、需修改或因缺少信息无法判定，并给出具体问题和负责人。同一阶段保留返修历史；Writer 分析稿和正文使用分别确定的 review 标识，避免一个结论覆盖另一个。对共享格式、接口或职责的变更由主对话确认，用户要求优先。常驻 Checker 已取消，事实与来源审核并入主对话 review；版权仅在实际复用第三方材料时按适用条件处理。
+Coordinator owns the [review template](reviews/TEMPLATE.md) records under `docs/reviews/<task-id>.md`, including reviewed revision, findings, outcome and closure. Analysis and manuscript gates use distinct agreed IDs. Shared format/interface/ownership changes require Coordinator's decision; user instructions take precedence. The standing Checker is removed: Coordinator handles technical/source review, with license/attribution checks when actual reuse requires them.
 
-## PR 与主线整合
+## Pull requests and mainline
 
-用户已选择由主对话承担本地 reviewer，不接 GitHub AI review action、不另设常驻 Reviewer。执行方在工作分支交付，主对话检查实际差异、运行必要验证、维护 review MD；有问题退回原负责人修订。已授权迭代范围内，明确通过后由主对话创建 PR 并按已审核的 head SHA 执行 squash merge，不再重复请求同一阶段的例行确认。CI 是独立的机械检查，不因取消云端 AI review 而取消。
+`main` is stable integration. Executors deliver on assigned branches/worktrees; Coordinator reviews the exact revision, returns fixes to its owner, then creates the scoped PR and uses the permitted squash merge after required checks pass. The implementer does not self-approve or merge. No paid AI reviewer or GitHub AI review action is part of this workflow; ordinary CI remains required.
 
-新增提交需复核受影响内容；GitHub 上存在的必需检查或合并限制必须满足，不绕过。PR、review 通过、合并和部署分别记录。合并后从最新远端 `main` 开始下一次迭代；共享 checkout 的分支切换仍由主对话协调。若某分支内容已完整包含在 `main`，记录验证结果即可，不为制造 PR 重写主线历史。
+New commits require affected changes to be rechecked. Respect server-side checks/protection and the reviewed head SHA; never weaken rules to merge. Record PR, local review, cloud results, merge and deployment separately. Start each new iteration from current remote `main`; Coordinator coordinates branch/worktree changes. If a branch is already identical to or included in `main`, verify and record that rather than manufacturing a PR or rewriting history.

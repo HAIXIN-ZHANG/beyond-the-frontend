@@ -5,6 +5,7 @@
 node_modules/
 site/.next/
 site/out/
+site/styled-system/
 site/next-env.d.ts
 *.tsbuildinfo
 coverage/

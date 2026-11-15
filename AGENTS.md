@@ -23,14 +23,14 @@ Current UI design: [design handoff](docs/design/reading-experience-v1.md), lates
 
 The user has subsequently raised TypeScript migration in the Developer conversation. JavaScript/JSX describes the implemented D02 baseline, not a permanent language restriction. Developer must address that request under its actual task scope; this synchronization is not itself a blanket migration or dependency-installation authorization.
 
-Read [file ownership and handoff](docs/collaboration.md) for the Writer/Developer boundary. Both independent conversations use the same local checkout; ownership is an agreement, not filesystem isolation. Neither conversation automatically reads the other's messages or watches document updates.
+Read [file ownership and handoff](docs/collaboration.md) for the Writer/Developer boundary. The original conversations shared one checkout; concurrent stages may use Coordinator-assigned Git worktrees recorded in the board. Use the assigned checkout rather than assuming the conversation's default cwd is current. Ownership remains an agreement, and neither conversation automatically reads the other's messages or watches document updates.
 
 - User instructions override documents. If they conflict, flag the conflict to the coordinator.
 - Coordinator owns shared requirements, content contracts and the board. Proposals are not accepted decisions until recorded as such.
 - Direct agent messages carry urgent updates, questions and handoffs. Important accepted decisions must also be recorded in the shared files by the coordinator.
 - Report completed work with changed file paths, verification, unresolved issues and dependencies. A report is not final approval.
 - Share paths and short summaries rather than copying entire drafts into messages. Do not dump private conversations or personal information into this public-project repository.
-- Agents share the checkout. Parallel work must have disjoint file ownership. Git operations remain coordinator-managed.
+- Agents share the repository; work in the assigned checkout/worktree. Parallel work must have disjoint file ownership. Git operations remain coordinator-managed.
 
 ## Required delivery and review loop
 

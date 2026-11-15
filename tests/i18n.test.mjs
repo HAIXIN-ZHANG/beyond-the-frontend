@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { alternateLocalePath, defaultLocale, getMessages } from '../site/config/i18n.mjs';
+import { alternateLocalePath, defaultLocale, getMessages } from '../site/config/i18n.ts';
 
 test('English is default and unknown languages are rejected', () => {
   assert.equal(defaultLocale, 'en');

@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import { parseBasePath } from './config/deployment.mjs';
+import { parseBasePath } from './config/deployment.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 

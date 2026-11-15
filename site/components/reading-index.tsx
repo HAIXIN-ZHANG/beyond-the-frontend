@@ -1,7 +1,8 @@
-import { site } from '../config/site.mjs';
-import { getMessages } from '../config/i18n.mjs';
+import type { Locale } from '../config/i18n.ts';
+import { site } from '../config/site.ts';
+import { getMessages } from '../config/i18n.ts';
 
-export function ReadingIndex({ locale }) {
+export function ReadingIndex({ locale }: { locale: Locale }) {
   const messages = getMessages(locale);
   return (
     <section className="reading-index" aria-labelledby="contents-title">

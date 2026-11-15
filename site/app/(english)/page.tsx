@@ -1,4 +1,4 @@
-import { HomePage } from '../../components/home-page.jsx';
+import { HomePage } from '../../components/home-page.tsx';
 
 export default function Home() {
   return <HomePage locale="en" />;

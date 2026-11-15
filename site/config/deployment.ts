@@ -1,5 +1,5 @@
 // A build-time prefix: Next.js adds it to internal Link URLs and framework assets.
-export function parseBasePath(value = '') {
+export function parseBasePath(value: string = ''): string {
   if (value === '' || value === '/') return '';
 
   if (!/^\/[a-zA-Z0-9_-]+(?:\/[a-zA-Z0-9_-]+)*$/.test(value)) {

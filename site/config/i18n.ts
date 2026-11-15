@@ -1,5 +1,30 @@
 export const defaultLocale = 'en';
 
+export type Locale = 'en' | 'zh';
+
+type Messages = {
+  lang: string;
+  title: string;
+  titleLines: readonly [string, string];
+  description: string;
+  home: string;
+  contents: string;
+  navigation: string;
+  skip: string;
+  feedback: string;
+  browse: string;
+  repository: string;
+  reading: string;
+  emptyTitle: string;
+  emptyDescription: string;
+  suggest: string;
+  missing: string;
+  missingDescription: string;
+  back: string;
+  switchLabel: string;
+  switchText: string;
+};
+
 const messages = {
   en: {
     lang: 'en',
@@ -45,19 +70,19 @@ const messages = {
     switchLabel: 'Switch to English',
     switchText: 'English',
   },
-};
+} satisfies Record<Locale, Messages>;
 
-export function getMessages(locale = defaultLocale) {
+export function getMessages(locale: Locale = defaultLocale): Messages {
   if (!Object.hasOwn(messages, locale)) throw new Error(`Unsupported locale: ${locale}`);
   return messages[locale];
 }
 
-export function localePath(locale, suffix = '') {
+export function localePath(locale: Locale, suffix: string = ''): string {
   getMessages(locale);
   return `${locale === 'zh' ? '/zh' : ''}/${suffix}`;
 }
 
-export function alternateLocalePath(pathname, locale, basePath = '') {
+export function alternateLocalePath(pathname: string, locale: Locale, basePath: string = ''): string {
   getMessages(locale);
   const path = basePath && (pathname === basePath || pathname.startsWith(`${basePath}/`))
     ? pathname.slice(basePath.length) || '/'

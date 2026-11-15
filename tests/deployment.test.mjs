@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseBasePath } from '../site/config/deployment.mjs';
+import { parseBasePath } from '../site/config/deployment.ts';
 
 test('root and repository deployments are accepted', () => {
   assert.equal(parseBasePath(), '');

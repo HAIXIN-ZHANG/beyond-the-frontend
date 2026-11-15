@@ -4,8 +4,7 @@
 
 负责人：Developer
 
-当前阶段：**D02 工程骨架；用户已在本对话放行。本文件的 D01 提案不等于已通过 review。**
-D02 的实际实现和双语约定见 [运行说明](DEVELOPMENT.md)，交接见 `docs/handoffs/developer/D02.md`。
+本文保留 D01/D02 的历史方案；其中 JavaScript/JSX 和示意目录不再代表当前扩展名。CI01 已完成集成；当前 TS01 strict TypeScript 迁移待 review，实际代码与检查命令见 [运行说明](DEVELOPMENT.md)，交接见 `docs/handoffs/developer/TS01.md`。后续阶段以协调看板和实际任务为准，本提案不自动放行实施。
 
 ## 1. 本文的用途与决定边界
 

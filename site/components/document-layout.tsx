@@ -1,9 +1,17 @@
-import { SiteHeader } from './site-header.jsx';
-import { site } from '../config/site.mjs';
-import { getMessages } from '../config/i18n.mjs';
+import type { ReactNode } from 'react';
+import type { Locale } from '../config/i18n.ts';
+import { SiteHeader } from './site-header.tsx';
+import { site } from '../config/site.ts';
+import { getMessages } from '../config/i18n.ts';
 import '../styles/global.css';
 
-export function DocumentLayout({ children, locale, languageHome = false }) {
+type DocumentLayoutProps = {
+  children: ReactNode;
+  locale: Locale;
+  languageHome?: boolean;
+};
+
+export function DocumentLayout({ children, locale, languageHome = false }: DocumentLayoutProps) {
   const messages = getMessages(locale);
   return (
     <html lang={messages.lang}>

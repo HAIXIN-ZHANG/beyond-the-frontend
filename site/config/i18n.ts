@@ -28,9 +28,9 @@ type Messages = {
 const messages = {
   en: {
     lang: 'en',
-    title: 'Beyond the Frontend: It Works. Now What?',
-    titleLines: ['Beyond the Frontend', 'It Works. Now What?'],
-    description: 'An evolving guide to software engineering.',
+    title: 'Vibe Coding, Then What?',
+    titleLines: ['Vibe Coding,', 'Then What?'],
+    description: 'Understand the Systems Behind Your AI-Built Products',
     home: 'Home',
     contents: 'Chapters',
     navigation: 'Main navigation',
@@ -50,9 +50,9 @@ const messages = {
   },
   zh: {
     lang: 'zh-CN',
-    title: '前端往后看：能跑，然后呢？',
-    titleLines: ['前端往后看', '能跑，然后呢？'],
-    description: '一本持续更新的中文工程指南。',
+    title: 'Vibe Coding 之后：能跑，然后呢？',
+    titleLines: ['Vibe Coding 之后：', '能跑，然后呢？'],
+    description: '理解 AI 帮你构建的产品背后的系统。',
     home: '首页',
     contents: '章节目录',
     navigation: '主导航',

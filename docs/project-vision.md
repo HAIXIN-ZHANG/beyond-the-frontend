@@ -1,4 +1,4 @@
-# Project Vision: Beyond the Frontend
+# Project Vision: Vibe Coding, Then What?
 
 Updated: 2026-11-15. Status: author-confirmed v1 positioning and eight-part direction; individual reading-page names/splits remain editable. `TBU` means information or a decision is still needed, not that a feature exists.
 
@@ -8,13 +8,17 @@ This document owns the audience, content scope and product direction. The roadma
 
 ## 1. What we want to make
 
-**Beyond the Frontend: It Works. Now What?**
+**Vibe Coding, Then What?**
 
-**《前端往后看：能跑，然后呢？》**
+**Understand the Systems Behind Your AI-Built Products**
 
-Create an engineering guide that readers can follow from beginning to end or consult when a particular problem arises, maintained through a static reading website. The project and repository use **Beyond the Frontend / `beyond-the-frontend`**, replacing the earlier working name Engineer Better.
+**《Vibe Coding 之后：能跑，然后呢？》**
 
-The first edition is a connected guide for **Full-stack + AI Product Engineers, from Junior through Senior**. Start with user tasks and success criteria, then connect interfaces, Design Systems, APIs, business/data rules, asynchronous work, cloud delivery, observability, recovery and AI product architecture. Help readers judge how the parts cooperate and verify changes under real constraints. The title keeps the frontend as an approachable entry, not a limit on the book’s scope.
+Chinese supporting description: **系统理解 AI 帮你构建的产品：从界面、API 和数据，到交付、恢复与 AI 能力。**
+
+Create an engineering guide that readers can follow from beginning to end or consult when a particular problem arises, maintained through a static reading website. The project and book use **Vibe Coding, Then What?**; the repository slug is **`vibe-coding-then-what`**. Beyond the Frontend and Engineer Better are historical working names.
+
+The first edition is a connected guide for **Full-stack + AI Product Engineers, from Junior through Senior**. Start from engineers who have built with AI and want to understand gaps in how their product works. Connect user tasks and success criteria with interfaces, Design Systems, APIs, business/data rules, asynchronous work, cloud delivery, observability, recovery and AI product architecture. Help readers judge how the parts cooperate and verify changes under real constraints. A working AI-assisted product is the entry point; the goal is informed product and engineering judgment, not a claim that AI-written code is inherently wrong.
 
 The author is **Jason Zhang**, with AI assistance throughout creation. The website is the book's reading product, not simply a list of Markdown files. Both the explanations and the reading experience need validation through actual sample chapters and feedback.
 
@@ -70,9 +74,9 @@ Architecture choices occupy different axes: CSR/SSR/static/BFF; layers/modular m
 
 Essential algorithmic, SQL/isolation, limits/retries, security, accessibility, testing, observability and performance reasoning belongs in core explanations. CQRS/Event Sourcing/Saga/consensus/sharding, Kubernetes/Service Mesh and multi-region designs are optional comparisons or later extensions. DevOps and data cover what delivering and maintaining a product requires; specialist volumes may be considered later. Model training/fine-tuning/GPU/inference-engine operation and large data-platform administration are outside the v1 main line. This does not introduce an extension/plugin architecture or new website features.
 
-**Accepted material stays scoped:** existing opening/G01 manuscripts and F01A browser analysis retain their reviewed boundaries and original source paths/hashes. Their placement in this map does not approve expanded text, all 48 working pages or publication. Each future page still needs an assigned analysis gate and separate manuscript review.
+**Accepted material stays scoped:** existing opening/G01 manuscripts and F01A browser analysis retain their reviewed boundaries and source paths. This rebranding changes only the opening's book-name string, for separate exact-change review and an updated content-contract hash by its assigned owner; G01 and F01 analysis are unchanged. Placement in this map does not approve expanded text, all 48 working pages or publication. Each future page still needs an assigned analysis gate and separate manuscript review.
 
-The accepted opening still describes the earlier three-part organization. Preserve its bytes in this planning task; align that orientation through a separately scoped editorial revision/re-review before presenting it as the v1 overview. Do not silently rewrite the accepted source or treat new scope as already reviewed.
+The opening still describes the earlier three-part organization. Apart from the explicitly authorized book-name replacement, retain its prose; align that orientation through a separately scoped editorial revision/re-review before presenting it as the v1 overview. The branding-only submission does not accept a broader rewrite.
 
 ## 5. Languages and content forms
 
@@ -93,6 +97,8 @@ PandaCSS is user-selected. The **Design Tokens and Day/Night Themes** implementa
 
 Readers should be able to follow the book or enter through a specific engineering question or case. Term explanations, paragraph links, reading recovery and correction reporting remain product directions. A few difficult diagrams may benefit from progressive disclosure, but always retain a useful static/text explanation.
 
+Website capability releases are separate from book editions and chapter publication. The [roadmap](roadmap.md#3-reading-product-releases-and-product-rationale) defines Beta 1 basic reading with a small question-card trial, Beta 2 practical reading improvements and bounded export/audio pilots, and Beta 3 selective extensions requiring evidence. First release need not wait for the entire manuscript or optional pilots. Other career guides are later editorial extensions, not a requirement to build a platform. Feature priorities are product hypotheses until tested with readers; navigation clarity and explanations take priority over novelty.
+
 ## 7. Low-cost AI extensions and audio
 
 Explore a small number of curated question cards with copyable context: a question, necessary assumptions, a short relevant passage, source links and content version. Placement and quantity should follow the chapter's needs, not a fixed quota.
@@ -103,7 +109,7 @@ The initial site does not host AI chat, store model keys, perform live inference
 
 Audio is a separate exploration using pre-generated publication assets, not inference on every visit. It should help understanding and review: narrate explanations, normally skip raw code, give short descriptions of diagrams/tables, and omit Markdown punctuation and URLs. Generate and check audio before publishing; play existing assets on the website.
 
-After material changes, update only the affected narration. Label older audio or withhold it until a matching version is available. Model, execution location, storage and automation choices follow a single-chapter listening trial; they remain undecided.
+A Beta 2 listening pilot may use manually reviewed asset updates; automatic incremental regeneration is a Beta 3 candidate, not a prerequisite. After material changes, update only the affected narration. Label older audio or withhold it until a matching version is available. Model, execution location, storage and automation choices follow a single-chapter listening trial; they remain undecided.
 
 ## 8. References and disclosures
 

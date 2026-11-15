@@ -6,11 +6,11 @@ Implementation is currently paused during the documentation upgrade. This is an 
 
 ## Approved initial input
 
-Use the existing Markdown files as the single body source. Coordinator read both manuscripts and verified they are byte-identical to W02's merged revision `71b29c7`; [W02](reviews/W02.md) and [INT01](reviews/INT01.md) record their accepted draft review. The user has authorized using these reviewed materials for the app and deployment after QA.
+Use the existing Markdown files as the single body source. At the original contract acceptance, Coordinator verified both manuscripts byte-identical to W02's merged revision `71b29c7`; [W02](reviews/W02.md) and [INT01](reviews/INT01.md) retain that historical review. The opening's original W02 SHA-256 was `726963e8c759d832b6821bede35c07780c24ca166f8b67ce86dac82e19ec21c5`. Coordinator subsequently accepted exactly one old-book-title to new-book-title string replacement in [the branding review](reviews/vibe-coding-rebrand.md); the current opening hash below identifies only that branding revision, without accepting any other prose change. G01 remains unchanged. The user has authorized using the reviewed materials for the app and deployment after QA; current execution holds remain separate.
 
 | Stable ID | Locale | Slug | Display title | Source | SHA-256 |
 | --- | --- | --- | --- | --- | --- |
-| `opening` | `zh` | `before-we-start` | 写在前面：能跑，然后呢？ | `book/drafts/zh/00-before-we-start.md` | `726963e8c759d832b6821bede35c07780c24ca166f8b67ce86dac82e19ec21c5` |
+| `opening` | `zh` | `before-we-start` | 写在前面：能跑，然后呢？ | `book/drafts/zh/00-before-we-start.md` | `805d2ebd747d63c65f8383275d3a3f709df40e960b0994a71eadc06837dfa8d0` |
 | `G01` | `zh` | `a-page-and-a-system` | 一个页面，究竟连着什么？ | `book/drafts/zh/01-a-page-and-a-system.md` | `b928e5df21876c0ca49a3c227eb6c7e20723b3f22bb9c7cb2d560cc198db62d2` |
 
 Order is opening, then G01. Publish these as **reviewed drafts**, without claiming the whole book or an English adaptation is complete. Figma sample prose and F01 analysis are not publishable chapters under this list.

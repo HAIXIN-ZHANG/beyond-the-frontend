@@ -1,4 +1,4 @@
-# Editorial Baseline: Full-stack + AI Product Engineering
+# Editorial Baseline: Vibe Coding, Then What?
 
 Updated: 2026-11-15 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
 
@@ -8,12 +8,13 @@ The former W01 three-part/45-chapter proposal is historical, superseded as an or
 
 | Item | Confirmed name |
 | --- | --- |
-| Chinese book | 《前端往后看：能跑，然后呢？》 |
-| English book | Beyond the Frontend: It Works. Now What? |
-| Project/repository | Beyond the Frontend / `beyond-the-frontend` |
+| Chinese book | 《Vibe Coding 之后：能跑，然后呢？》 |
+| English book/project | Vibe Coding, Then What? |
+| Subtitle | Understand the Systems Behind Your AI-Built Products |
+| Repository slug | `vibe-coding-then-what` |
 | Author and creation | Jason Zhang, with AI assistance throughout creation |
 
-Engineer Better is a historical working name. The frontend remains an approachable starting point, not the boundary of a book now explicitly about full-stack and AI product engineering.
+Beyond the Frontend and Engineer Better are historical working names. The entry is an engineer who has built a working product with AI but wants to connect gaps in system understanding. Build informed judgment about interfaces, APIs, data, delivery, recovery and AI capabilities without implying that AI-written code is inherently wrong or promising complete knowledge. This remains full-stack and AI product engineering for readers with development exposure, not a from-zero programming course.
 
 Readers often learn Design Systems, System Design, data, operations and model integration in separate places. This book connects them through a user's task and the decisions needed to deliver a reliable product. Ask what success means, where responsibility/state/trust live, which work must finish first, what a failure means to the user and what evidence justifies a change.
 
@@ -88,7 +89,7 @@ Maintain authored Chinese/English manuscripts with Chinese explanation review fi
 
 Use official/primary sections and access dates for technical claims; distinguish documented behavior, experiments, experience, teaching assumptions and recommendations. The [planning sources](outline.md#planning-source-checks-not-chapter-research-approval) were checked only for the stated boundaries, not as completed research for all pages. The [Jiangren inventory](../../docs/research/jr-academy-topic-map.md) remains a dated coverage input, not proof of correctness or adoption. Earlier references to Design Systems, Atomic Design, DDIA, data engineering, SRE and AI books are not claims of complete reading. Independently express mechanisms and check license/attribution for actual reuse.
 
-Opening/G01 Chinese sources and accepted F01A analysis are unchanged in this planning task. Their placement does not expand old reviewed scope, change IDs/slugs or approve a new manuscript. Historical original-analysis hashes are not current translation hashes. Follow [two-gate writing](chapter-workflow.md), task scope and current board holds.
+The opening has only an explicitly authorized book-name replacement, submitted for separate exact-change review and an updated source hash; its other prose, G01 and accepted F01A analysis remain unchanged. Placement does not expand old reviewed scope, change chapter IDs/slugs or approve a new manuscript. Historical original-analysis hashes are not current translation hashes. Follow [two-gate writing](chapter-workflow.md), task scope and current board holds.
 
 ## Public copy discussion
 

@@ -23,7 +23,7 @@ Coordinator owns judgment and closes the loop; executors own deliverables and re
 ## Copyable startup prompt
 
 ```text
-You are Coordinator/Reviewer for Beyond the Frontend.
+You are Coordinator/Reviewer for Vibe Coding, Then What?
 Repository/workspace: <caller-supplied absolute path>.
 Conversation context: <caller-supplied identity and existing owner chats>.
 Read AGENTS.md, docs/coordinator-role.md, docs/coordination.md, then the

@@ -58,7 +58,7 @@ jobs:
             base_path: ''
             build_script: build
           - deployment: pages
-            base_path: /beyond-the-frontend
+            base_path: /vibe-coding-then-what
             build_script: build:pages
     # The same value applies to BOTH the build and its export verification.
     env:

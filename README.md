@@ -1,8 +1,12 @@
-# Beyond the Frontend: It Works. Now What?
+# Vibe Coding, Then What?
 
-**《前端往后看：能跑，然后呢？》**
+**Understand the Systems Behind Your AI-Built Products**
 
-An evolving engineering book for Junior–Senior **Full-stack + AI Product Engineers**, connecting user goals, frontend design systems, backend/data architecture, reliable delivery and AI products through everyday product decisions.
+**《Vibe Coding 之后：能跑，然后呢？》**
+
+AI can help you turn an idea into a working product. This book helps you understand the systems behind it, so you can judge what works, what needs checking and what should change next.
+
+An evolving engineering book for Junior–Senior **Full-stack + AI Product Engineers**, connecting user goals, interfaces, APIs, data, delivery, recovery and AI capabilities. It starts from the gaps engineers encounter after building with AI and develops the understanding needed to make informed product and engineering decisions.
 
 **By Jason Zhang · Created with AI assistance throughout planning, writing and development.**
 
@@ -21,7 +25,7 @@ DevOps and data coverage supports delivering and maintaining a product; speciali
 - **In main:** an English-default bilingual website foundation, strict TypeScript and cloud-verified CI. Home/index routes are `/`, `/read/`, `/zh/` and `/zh/read/`, with a bilingual static 404.
 - **Reviewed writing:** Chinese opening and shared-foundations drafts. Browser Fundamentals has an accepted research/outline gate, not a manuscript. These documents are in the repository; the website does not render chapters yet.
 - **Preserved separately:** Design Tokens and Day/Night Themes has local implementation/build evidence in an unaccepted checkpoint. Independent browser acceptance and integration remain open.
-- **Documentation:** the English project documentation and delivery history merged through [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7); agent workflow/onboarding followed in [PR #8](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/8). The [coordination board](docs/coordination.md) owns current assignments and execution holds; this introduction is not a work queue.
+- **Documentation:** the English project documentation and delivery history merged through [PR #7](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/7); agent workflow/onboarding followed in [PR #8](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/8). The [coordination board](docs/coordination.md) owns current assignments and execution holds; this introduction is not a work queue.
 - **Online reading:** no verified public reading URL yet. GitHub Pages is authorized after code/content/QA acceptance, but has not been deployed. Search, audio and AI question cards are not available features.
 
 The audience and eight-part direction are confirmed; detailed chapter splits remain planning proposals until their relevant review. An outline is not a complete or approved manuscript. `TBU` means unresolved or to be updated, never delivered. See [Development History](docs/development-history.md) for evidence and limits.
@@ -87,7 +91,7 @@ npm run dev
 
 ## Reading direction and design
 
-The book starts from user tasks and success criteria, introduces precise mechanisms through familiar examples, and connects interface behavior to APIs, records, background work, delivery/recovery and AI capabilities. Architecture choices describe combinable dimensions rather than a ladder from synchronous to asynchronous, serverless or high-concurrency systems. Technology choices are contextual trade-offs, not a list everyone must adopt. Examples are teaching scenarios, not an employer's systems or evidence of production scale.
+The book starts from a working AI-assisted product and asks how its user tasks, success criteria and systems fit together. Familiar examples introduce precise mechanisms, connecting interface behavior to APIs, records, background work, delivery/recovery and AI capabilities. Architecture choices describe combinable dimensions rather than a ladder from synchronous to asynchronous, serverless or high-concurrency systems. Technology choices are contextual trade-offs, not a list everyone must adopt. Examples are teaching scenarios, not an employer's systems or evidence of production scale.
 
 **Design references:** [Tokens](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) · [Components](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) · [Page Designs](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2). Reading, responsive and Day/Night views share one page. The [design handoff](docs/design/reading-experience-v1.md) distinguishes design evidence from code/browser acceptance.
 
@@ -95,7 +99,7 @@ The planned AI reading feature is a small set of inspectable, copyable questions
 
 ## Feedback, sources and access
 
-[Open an issue](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/issues) with a question, correction or relevant source. Public access permits reading and proposed changes, not pushing or merging into the original repository or editing the Figma source. See [SECURITY.md](SECURITY.md) and the [dated access baseline](docs/security/access-policy.md).
+[Open an issue](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues) with a question, correction or relevant source. Public access permits reading and proposed changes, not pushing or merging into the original repository or editing the Figma source. See [SECURITY.md](SECURITY.md) and the [dated access baseline](docs/security/access-policy.md).
 
 Technical claims should identify primary sources, conditions and what was actually checked. AI-generated explanations are not evidence by themselves. Review acceptance, cloud checks, merge and deployment are distinct records.
 

@@ -1,33 +1,40 @@
 # 项目阶段速览
 
-更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页提供简短说明和历史入口，不维护第二份任务看板。正式流程文档使用英文，中文书稿保持不变。
+更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页解释内容方向和已发生的关口，不另建任务队列。正式规划文档使用英文，中文书稿保持原稿。
 
-## 本次更新：协作流程与新 agent 接手
+## 第一版定位：Full-stack + AI Product Engineer
 
-用户已批准 **Agent Workflow and Cold-start Onboarding** 文档改造：让没有聊天背景的新 agent 能确定角色、找到任务、核验工作区，并按现有 review/返修机制接手。Writer 整理角色指引、章节流程与本速览；Developer 整理共享入口、流程、看板、模板和其他角色文档。实际进展与审查结论分别查看[看板](coordination.md)及其中链接的 handoff/review。
+用户已确认面向 **Junior–Senior** 的全栈与 AI 产品工程师。大家共读同一正文，按“基础机制 → 具体工程例子 → 可跳读的进阶取舍”分层；不承诺读完获得某个职级，也不要求完成综合项目。
 
-- 启动顺序：`AGENTS.md` → 调用方指定的角色指引 → 当前看板 → 任务 brief 和必要输入 → 核验实际 checkout、分支、状态与版本 → 一次简短启动报告。范围清楚即可执行，启动报告不增加一层批准或回执。
-- 三个角色是 Coordinator/Reviewer、Writer、Developer。主对话派工、验收、反馈和管理 Git；正式执行产物由被分配的负责人写。角色不靠猜，仓库位置与会话身份由调用方提供；Markdown 不会自动找到或控制聊天。
-- 看板记录当前状态，handoff 复用开工部分作为任务 brief 并保存执行证据，review 保存审查决定。`Assigned`、`In progress`、`In review`、`Changes requested`、`Accepted`、`Merged` 分开；hold 另写原因与恢复条件，`Deployed` 单独记录。
-- 中断或替换 agent 时，同一 handoff 留清实际工作区、未提交文件、最后检查、受审版本、未决问题、下一步和恢复前提；接手者先核验，不覆盖原工作。
-- 现有会话直接传路径、修订号和证据；没有后台监听，不催回执，不复制私聊。章节仍先分析 review，再按明确范围写正文，正文另审。
+AI 产品架构是必读主线，包括是否需要 AI、模型接入、用户控制、上下文与状态、RAG、工具执行、权限、评测和质量/延迟/成本取舍。Coding AI 是另一条开发交付线：需求拆分、上下文/契约、skills、diff review、测试和发布验证，不能替代产品架构。
 
-书稿、网站功能、E2E 和部署仍暂停。本轮文档工作不恢复 F01 正文或产品开发，也不把旧 roadmap 当开工指令；之后按用户要求先讨论项目整体设计。恢复执行须以看板记录的明确范围和解除 hold 条件为准。
+## 八篇内容框架
 
-## 上轮已完成：英文文档与开发历史
-
-**AI Development Workflow and Delivery History**（旧编号 DOC02）已接受并经 [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7) 合并。受审 head 为 `dd08e7aa4a6e13f949bd389d8919e23a96f07a1d`，[run 43672904569](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43672904569) 的三项 required jobs 成功，合并提交为 `aafc467860a80a4ad0918d08055336079ebf0e98`。这些是上轮事实，不是本轮文档的 CI/合并结果；本轮最终证据从看板进入对应 review/PR。
-
-详见[正式审查记录](reviews/ai-development-documentation.md)和[开发历史](development-history.md)。本轮沿用英文过程文档、可读成果名称和旧编号追溯，不翻译中文书稿。
-
-## 已有成果与保留事项
-
-| 成果 / 保留点 | 已确认边界与详细入口 |
+| 篇章 | 要连起来的问题 |
 | --- | --- |
-| 网站基础、CI、strict TypeScript | 已整合基线，完整浏览器/阅读产品验收仍未完成；[开发历史](development-history.md)记录各次 review、检查与合并 |
-| 开篇与 G01 中文稿 | 已审并合并，正文保持原稿；[最小内容契约](content-contract.md)接受固定 ID/slug、reviewed-draft 输入与缺英文处理，阅读页尚未实现，全书扩展仍待定 |
-| 浏览器基础：研究细纲 | [原 r1 review](reviews/F01A.md)通过并经 PR #6 合并；F01M 正文未写，V1–V4 实验未运行，研究通过不等于正文完成 |
-| Panda 明暗主题 | 未验收 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` 保留在独立工作分支，不在 main；本地构建、10 tests、111-token 报告不等于独立浏览器验收；[主题 review](reviews/DS01.md)记录上游声明和双编译边界的限制 |
-| 后续方向 | 组件、真实章节呈现、永久 E2E/QA 与线上发布未完成；搜索、低成本 AI 提问卡、音频和导出保留为[路线图](roadmap.md)方向，不自动开工 |
+| 1. 产品目标与全栈架构全景 | 用户成功标准、系统边界、浏览器、架构维度、类型与运行时校验 |
+| 2. 前端 Design System 与产品交互 | 真实布局、设计系统/tokens/组件契约、状态、表单/a11y、异步与 AI 流式控制、渲染性能 |
+| 3. API、后端与外部集成 | HTTP/接口/权限约定、模块边界、错误与清理、文件/外部 API/webhook |
+| 4. 数据库、搜索与数据流 | 模型/ORM/SQL/索引/事务/缓存、关键词与向量、业务事件和可信指标 |
+| 5. 异步、流量与可靠性 | 容量、限流/配额/背压、超时取消重试、幂等、worker/消息与一致性窗口 |
+| 6. 云、测试与交付 | 运行环境/容器/托管与函数选择、网络身份、测试、CI/CD、迁移和安全发布 |
+| 7. 可观测性、排错与恢复 | logs/metrics/traces、前端到数据库的证据链、故障缓解、备份恢复/RPO/RTO |
+| 8. AI 产品架构与协作开发 | 十个工作阅读单元，分别解释产品能力与 Coding AI 交付 |
 
-此前用户授权必要工具及相关代码/内容/QA 通过后的 GitHub Pages 发布；临时工具不等于 E2E 已完成，授权也不解除当前暂停。当前可恢复工作区和负责人从看板查找，不从本页旧路径或旧 SHA 猜测。
+详见[正式细纲](../book/planning/outline.md)、[愿景](project-vision.md)和[写作基线](../book/planning/editorial-brief.md)。目前整理成 48 个工作阅读单元，数量和拆分可继续调整，不是印刷页数指标、网站路由或已完成篇数。每单元写明主要问题、必要范围、原创例子和进阶边界；旧 45 个章号在细纲中逐项映射，不丢弃历史。
+
+主题设主讲位置并交叉引用：前端负责 AI 界面与可访问性，AI 篇负责流式/远程执行约定；数据篇讲搜索基础，RAG 页讲摄取到权限/更新/删除/引用；运维证据不同于 AI 输出质量 evals；一般流量配额不同于 AI token/模型成本。架构方案是可组合的不同维度，不把高并发、异步和 serverless 当升级链。
+
+DevOps/Data 只讲交付、维护产品所必需的知识。CQRS/Event Sourcing/Saga、共识/分片、Kubernetes/Service Mesh、多区域等为可跳读或后续扩展；训练/微调/GPU/推理引擎和大数据平台运维不进入第一版主线，不因此建立插件架构或更多网站功能。
+
+## 本轮范围与保留关口
+
+本轮 **Full-stack and AI Product Engineering — v1 Content Framework** 只更新定位与规划，实际文件、来源检查和待审项见[任务交接](handoffs/writer/full-stack-ai-book-scope.md)，状态/最终 review 从看板进入。方向已获用户确认，不代表每页研究、正文或发布通过。之后仍逐页“分析调研/细纲 review → 明确范围写正文 → 正文独立 review”。
+
+- 开篇和 G01 中文正文保持原字节；G01 放在第一篇承接已有边界/状态解释，不把新增成功标准内容算作已审。[最小内容契约](content-contract.md)的 ID/slug 不改。
+- 已审开篇仍介绍旧三部分结构；作为 v1 发布前，需要另行安排这段说明的编辑与复审，本轮不静默改稿或更新其 hash。
+- F01 仍只有已审分析，放在浏览器阅读单元；F01M 正文未写，V1–V4 实验未运行。更大范围须返回分析关口。
+- 网站/UI/schema/E2E/部署和新正文/英文书稿仍暂停；原未验收主题 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` 保留，不因本轮规划自动恢复。
+- 英文文档与开发历史升级已经 [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7) 合并；协作/接手流程已经 [PR #8](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/8) 合并。它们的成功不代替本轮 review/CI/merge；详细证据见[开发历史](development-history.md)。
+
+本速览不预填本轮通过、合并或上线结果。新执行须有明确任务范围；必要工具和 QA 后发布的旧授权不解除当前 hold。

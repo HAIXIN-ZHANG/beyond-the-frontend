@@ -1,59 +1,57 @@
-# Writer and Developer collaboration
+# Agent collaboration workflow
 
-The user has released Writer and Developer to execute the tasks agreed in their respective conversations. This document defines coordination; it does not expand implementation, installation or publication scope. Coordinator assigns work, decides shared contracts, reviews actual deliverables, returns feedback and manages Git integration. Coordinator does not write product code, manuscripts or formal implementation documentation on an executor's behalf.
+This is the sole detailed workflow for three agent roles. The human author is the final authority. [AGENTS](../AGENTS.md) is the short entry; role guides explain responsibilities; the [board](coordination.md) owns current assignments/holds/workspaces; handoffs own task/execution evidence; reviews own exact-revision judgments. History and archives preserve context, not active instructions.
 
-## Workspaces and ownership
+## Roles and ownership
 
-The original checkout preserves the unaccepted theme checkpoint on `codex/ds01-panda-theme`. The current documentation assignment uses `/tmp/btf-project-docs`, branch `codex/ai-development-history`, shared by Writer and Developer with disjoint file ownership. The earlier research worktree `/tmp/btf-writer-f01a` is historical; no manuscript work is active. The [board](coordination.md) records actual branches and stage gates. A conversation's default cwd does not follow assignments automatically: verify the assigned directory before executing. Worktrees are branch working areas in one repository, not a second canonical manuscript or a confidentiality boundary.
-
-Follow the [document storage policy](agent-notes-policy.md): formal sources stay in repository directories; optional scratch notes belong under ignored `.local/notes/<role>/`. Do not maintain a second formal body.
-
-| Area | Writing/implementation owner | Responsibility |
+| Role | Responsibility | Boundary |
 | --- | --- | --- |
-| `book/`, including `book/assets/` | Writer | Manuscripts, original examples, sources and chapter diagrams/assets |
-| `site/` | Developer | Website, layouts, navigation, content rendering and styles within the assigned stage |
-| Root build configuration, dependency files, `panda/`, `scripts/`, `tests/`, `.github/` | Developer, assigned files only | Build tooling, strict checks, design definitions and automation |
-| `AGENTS.md`, shared technical/design/coordination documents and content contracts | Developer when explicitly assigned | Record Coordinator's accepted decisions and actual evidence; do not independently expand scope |
-| `README.md` and `docs/development-history.md` | Developer for this documentation task | Public AI workflow and past/current delivery evidence |
-| `docs/project-vision.md`, `docs/roadmap.md`, book planning and the single Chinese stage summary | Writer when assigned | Formal product/reader explanations following Coordinator's accepted decisions |
-| `docs/reviews/` | Coordinator | Actual review findings, decisions, revision acceptance and integration evidence |
-| Existing `docs/research/` and other owned material | Existing owner | Preserve user/other-agent changes; coordinate before editing |
-| `docs/handoffs/writer/`, `docs/handoffs/developer/` | Respective executor | Stage evidence, open questions and revision responses |
+| Coordinator/Reviewer | Architecture/contracts, assignments, inspection, feedback, status and Git integration | Does not substitute product code, prose or executor implementation explanations |
+| Writer | Assigned research/outline, prose, examples, teaching diagrams and product/editorial explanations | Does not implement the website or self-accept manuscripts |
+| Developer | Assigned website/tooling/tests and technical/process explanations | Does not rewrite Writer meaning/prose or self-accept implementation |
 
-Coordinator remains the decision owner for requirements, contracts, scope and status; delegating their documentation does not delegate approval. Git operations remain Coordinator-managed. Read other owners' work as input, but request a scoped assignment before editing it. Never stage another owner's unfinished work.
+There is no fourth standing Reviewer/Fact checker, paid AI review service or unattended agent engine. Coordinator handles technical/source review. The implementer does not approve or merge its own deliverable.
 
-Formal technical/coordination/design explanations and active code comments are English-first. Chinese is appropriate for user discussion in Chinese and temporary or secondary handoffs. The bilingual book and its Chinese-first manuscript review sequence remain unchanged; language cleanup does not authorize translation or publication of prose.
+Writer normally owns `book/` and teaching assets; Developer normally owns assigned `site/`, root tooling, `panda/`, `scripts/`, `tests/` and `.github/` files. Shared entry/design/contract/process documents require explicit file assignment; delegating writing does not delegate decision authority. Coordinator owns actual `docs/reviews/` records. Each executor owns its `docs/handoffs/<role>/` reports. Preserve existing ownership/changes; reading another owner's work is not permission to edit it. Return corrections to the original owner.
 
-## Content interface
+Concurrent work uses assigned workspaces with disjoint allowed files. A chat's default cwd does not follow assignments automatically: verify directory, branch, HEAD, status and relation to the assigned main baseline before editing. Do not switch/reset/stage to hide a mismatch. Worktrees separate working areas, not account permissions/confidentiality. Coordinator coordinates all Git writes; executors do not stage, commit, push or merge.
 
-Writer owns the single manuscript source. Developer renders it without copying chapter bodies into JSX or another website-specific document. The accepted [initial content contract](content-contract.md) defines the reviewed opening/G01 allowlist, hashes, language routes, missing-English behavior and build-time rendering. It is not permission to crawl all drafts or publish proposed chapters. Future inputs require an accepted source/revision and stage assignment.
+## Assignment and lifecycle
 
-Writer determines diagram meaning, relationships and labels. Developer handles readable rendering, responsive behavior and text alternatives; Coordinator reviews technical meaning. Changes to prose or diagram meaning return to Writer.
+Coordinator specifies task, owner, goal, inputs, allowed files, workspace/branch, deliverable, acceptance, dependencies and next authorized boundary. A roadmap, proposal or message receipt is not an assignment. The owner starts one report using the [task brief/handoff template](handoffs/TEMPLATE.md) at assignment, before execution, then appends results/revisions. The board links the brief and summarizes current state only.
 
-## Delivery and review loop
+The lifecycle is **Assigned → In progress → In review → Changes requested or Accepted → Merged**. Changes requested returns to the original owner, then In review. Accepted is distinct from Merged: authorized integration may still be pending. Merged needs actual Git evidence; a verified already-integrated branch can close without an artificial PR. Deployment is separate, not the implied next state.
 
-1. Coordinator assigns a task ID, inputs, allowed files, acceptance criteria and next authorized step. Executors reread relevant shared decisions.
-2. Writer submits research, detailed outline, examples, evidence boundaries and validation plans before prose. Analysis acceptance and writing scope must precede a separate manuscript review. See the [chapter workflow](../book/planning/chapter-workflow.md), [analysis template](../book/planning/templates/chapter-analysis.md) and [WF01](reviews/WF01.md). No standing Analyzer role is created.
-3. Developer implements and verifies only the assigned stage. Use agreed content inputs when integration is authorized; return required manuscript corrections to Writer.
-4. The executor writes one stage report using the [handoff template](handoffs/TEMPLATE.md), freezes its reviewable files and sends the path directly to Coordinator. Report changed paths, actual checks, missing evidence, unresolved issues and dependencies.
-5. Coordinator reads actual files, verifies as needed and records **accepted**, **changes required** or **insufficient evidence**, with actionable findings. A summary, delivery receipt, silence or elapsed time is not acceptance.
-6. The original executor revises the same handoff with locations and verification, then submits the new revision. Coordinator rechecks and closes findings without silently reusing an older acceptance.
-7. After acceptance, advance only into an already authorized dependent step. New scope still needs assignment. Push, merge and deployment have separate evidence and applicable authorization.
+**Paused** and **Blocked** are independent holds on the recorded lifecycle state. Record affected scope, reason, responsible party and resume condition. A product hold can coexist with an explicit documentation assignment. No task means ask Coordinator for scope; a hold means preserve recovery and await its stated resolution. Silence, elapsed time and a resumed chat do not lift a hold. Coordinator resolves conflicts; the parent Coordinator owns closure rather than leaving an executor to invent work.
 
-Manuscript completion, review acceptance and public availability are separate states. The content contract controls which reviewed materials may enter an authorized site release. GitHub Pages Release (legacy DEP01) is authorized after code/content/QA acceptance but currently paused, together with later UI/E2E/manuscript work. A stage review does not itself publish the site. The current task is AI Development Workflow and Delivery History (legacy DOC02). Complete its necessary review/revisions/integration, then stop for overall project-design discussion; acceptance does not automatically resume later work.
+At startup, read AGENTS → explicitly assigned role guide → board → task brief and necessary inputs. Verify the tree and send one brief with role/task, workspace/revision/status, next scoped action and conflicts. This is information, not another approval gate: continue clear authorized work directly. The caller supplies role/path/chat identity; do not guess or claim every tool loads these files automatically. Full history/archive reading is not required.
 
-## Messages and records
+## Execution, review and revision
 
-The user authorizes direct handoff, feedback and revision messages among the existing Writer, Developer and Coordinator conversations. Executors send paths and short useful summaries; the user need not relay routine messages. Chats do not share histories automatically or continuously monitor files. If delivery fails, explicitly record that it was not delivered. Avoid repeated acknowledgment loops.
+1. Execute only the assigned scope with proportionate checks. Preserve others' work; report missing evidence/limits rather than expanding scope.
+2. Append actual paths, results, checks, open questions and recovery to the same handoff. Freeze reviewable files; send Coordinator the path, revision, short scope and open items directly.
+3. Coordinator reads actual files/evidence, verifies as needed and records exact revision, findings and **Accepted**, **Changes requested** or **Insufficient evidence** using the [review format](reviews/TEMPLATE.md). Insufficient evidence leaves In review, or returns a specific evidence request to its owner; it is not acceptance.
+4. Return findings with location, impact, owner and criterion. The original owner revises, updates the same handoff and resubmits. Coordinator rechecks affected work, records closure and preserves history. Changed work does not inherit old acceptance.
+5. After acceptance, Coordinator closes executor tasks or releases only an already authorized next step. Remaining PR/check/merge work is integration, not an instruction to keep editing accepted files. Holds on other scopes remain effective.
 
-Coordinator decides shared status and accepted contracts; the assigned Developer records those facts in the board and formal technical documents. Keep raw chat transcripts, private conversation identifiers and unrelated personal details out of this public repository.
+Writer's [chapter workflow](../book/planning/chapter-workflow.md) requires analysis/research, detailed outline, examples, evidence boundaries and validation plans first. Accepted analysis plus assigned writing scope precedes prose; manuscripts have a separate review and distinct agreed identifier. Analysis is a document, not another agent. Ordinary wording edits need no new analysis gate; substantive mechanism/evidence/scope changes return to the relevant gate.
 
-Use readable outcome names first, with legacy IDs retained for traceability and existing paths. Use one handoff per meaningful stage, normally a concise 10–20-line report with evidence linked separately. Revise the same report rather than creating a new file for every paragraph or feedback round. Freeze the reviewed deliverable; if an urgent correction changes it, update the report and notify the reviewer. Without a different task instruction, wait for review before dependent implementation.
+## Content, language and evidence
 
-Coordinator owns the [review template](reviews/TEMPLATE.md) records under `docs/reviews/<task-id>.md`, including reviewed revision, findings, outcome and closure. Analysis and manuscript gates use distinct agreed IDs. Shared format/interface/ownership changes require Coordinator's decision; user instructions take precedence. The standing Checker is removed: Coordinator handles technical/source review, with license/attribution checks when actual reuse requires them.
+Writer owns the canonical manuscript and diagram meaning. Developer follows the accepted [content contract](content-contract.md) when integration is assigned, without copying bodies into JSX, recursively publishing drafts or inferring translation. Rendering/responsiveness/text alternatives belong to Developer; meaning/example corrections return to Writer. Reviewed drafts, merged sources and publicly rendered chapters are distinct outcomes.
 
-## Pull requests and mainline
+Formal technical/product/process explanations and active code/design comments are English-first. Answer in the user's language; temporary/secondary handoffs may be Chinese. The bilingual book retains Chinese-first manuscript review before English adaptation. Explain mechanisms concretely; distinguish documented behavior, experiments, experience, assumptions and recommendations. Verify volatile claims with primary sources when authorized, respect licenses/attribution and do not invent measurements, sources or experience.
 
-`main` is stable integration. Executors deliver on assigned branches/worktrees; Coordinator reviews the exact revision, returns fixes to its owner, then creates the scoped PR and uses the permitted squash merge after required checks pass. The implementer does not self-approve or merge. No paid AI reviewer or GitHub AI review action is part of this workflow; ordinary CI remains required.
+## Messages, records and recovery
 
-New commits require affected changes to be rechecked. Respect server-side checks/protection and the reviewed head SHA; never weaken rules to merge. Record PR, local review, cloud results, merge and deployment separately. Start each new iteration from current remote `main`; Coordinator coordinates branch/worktree changes. If a branch is already identical to or included in `main`, verify and record that rather than manufacturing a PR or rewriting history.
+The user authorizes direct assignment/handoff/feedback/revision messages among existing Coordinator, Writer and Developer chats. Send paths and useful summaries; no user relay or repeated receipt loop is needed. Chats do not automatically share histories or continuously monitor files. Report failed delivery. Receipt, acknowledgment, silence and timing are not approval.
+
+Use readable outcome names with legacy IDs for traceability. Keep one handoff per meaningful stage, not per feedback paragraph. The board is the only live state summary; do not duplicate its queue/workspaces in stable guides. Reviews record judgment rather than copying full task briefs. Accepted decisions belong in formal sources; private transcripts, conversation identifiers, credentials and unnecessary personal details stay out of this public repository.
+
+Before interruption, append done/not done, uncommitted work, last checks/limits, last reviewed revision, open findings, next action and resume condition to the handoff. Keep enough durable detail to recover without temporary logs or ignored notes. On recovery, reread board/brief/review and verify actual tree/status. Follow the [document/notes policy](agent-notes-policy.md); scratch notes are optional, neither formal sources nor secret storage.
+
+## Git integration and publication
+
+Start new iterations from current remote `main`, with Coordinator coordinating branch/worktree changes. Within applicable user authorization, Coordinator creates a scoped PR after local review, verifies matching reviewed head and successful required checks, then uses permitted squash merge. New commits need affected re-review and their own required checks. Respect protection; never weaken it to finish. Already authorized integration needs no repeated routine confirmation.
+
+Record actual PR/head, acceptance, cloud checks, squash merge and deployment separately; a PR head is not its squash commit. Verify already-equal/included branches rather than manufacture PRs or rewrite history. Access baselines are dated evidence, not permanent guarantees; follow [SECURITY](../SECURITY.md) and [access policy](security/access-policy.md), rechecking live settings when relevant. Installation, external calls, expanded scope, access changes and publication need applicable user authorization. Review/merge does not authorize release or override a current hold.

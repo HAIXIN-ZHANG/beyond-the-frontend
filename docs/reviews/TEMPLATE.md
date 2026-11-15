@@ -1,39 +1,41 @@
-# [Readable outcome name] — review
+# [Readable task/outcome name] — review
 
-Legacy reference: [existing review/task ID]. Coordinator writes the actual judgment. Use one record per gate, preserving revisions; research/outline and manuscript use different references. Historical translation may clarify names without changing the original acceptance or finding IDs.
+Coordinator/Reviewer owns this judgment. Keep one record per gate with revision history; chapter analysis and manuscript use distinct agreed references. The task brief owns the full assignment and the board owns live state; link them instead of copying both.
 
-- **Date/reviewer:** [date, timezone, reviewer]
-- **Review type:** [research/outline / manuscript / code/page / design / process]
-- **Handoff:** [actual path]
-- **Reviewed revision and scope:** [revision, exact files, commit/digest when available, exclusions]
-- **Outcome:** accepted / changes required before re-review / insufficient evidence
-- **Next step:** [specific authorized continuation or required revision/evidence; unresolved scope stays unresolved]
+- **Date/reviewer:** [date, timezone, reviewer].
+- **Handoff/gate:** [actual path and review type].
+- **Reviewed revision and scope:** [exact revision/commit or file/digest manifest, exclusions; distinguish executor evidence from inspected evidence].
+- **Outcome:** [Accepted / Changes requested / Insufficient evidence].
+- **Next boundary:** [required owner revision/evidence or already authorized continuation; holds and unresolved scope remain effective].
 
 ## Actual inspection and evidence
 
-Record what was read, run or observed, with results and missing checks. Distinguish source checks, static inspection, runtime tests and browser verification. An executor's report does not become independent reviewer evidence merely by copying it.
+Record files read, commands run or behavior observed, actual results and missing checks. Distinguish source inspection, runtime checks, browser observation and cloud evidence. An executor's claim is not independent evidence merely because it is copied here. A documentation review does not accept product behavior.
 
-## Findings
+## Findings and closure
 
-| ID | Severity | Location and actual issue | Impact/evidence | Owner, revision and acceptance criterion |
-| --- | --- | --- | --- | --- |
-| R1 | [blocking / non-blocking] | [trigger and file/section] | [specific consequence] | [who changes what and how it is rechecked] |
+| ID | Severity | Location and issue | Impact/evidence | Original owner and acceptance criterion | Closure evidence/status |
+| --- | --- | --- | --- | --- | --- |
+| [real ID] | [blocking/non-blocking] | [file/section/trigger] | [consequence] | [who corrects what, how rechecked] | [open or verified closure/revision] |
 
-If there are no required revisions, say so and remove the example. Do not manufacture findings. Separate suggestions from blockers.
+If no required revisions exist, say so and remove the example. Separate suggestions from blockers. “Insufficient evidence” is not acceptance; name the missing evidence and responsible owner.
 
-## Feedback returned to the owner
+## Feedback and re-review history
 
-Provide executable guidance: findings, allowed files, preserved behavior/content, checks, handoff update and re-review. If accepted, state the exact acceptance and next already authorized step without enlarging scope.
+### [Date / submitted revision]
 
-## Re-review history
+- **Feedback sent:** [findings, allowed revision scope, checks and original owner; report failed delivery].
+- **Actual affected recheck:** [changed files/revision and what the reviewer inspected/ran].
+- **Closed/open:** [finding IDs and closure evidence, preserving prior history].
+- **Outcome and next action:** [exact acceptance or outstanding work; do not automatically release unrelated work].
 
-### [Date / revision]
-
-- **Actual recheck:** changed files, findings and checks.
-- **Closed/open:** finding IDs, locations and evidence.
-- **Current outcome:** accepted / further revision / insufficient evidence.
-- **Continuation:** already authorized next step or pending decision.
+Changed revisions require affected re-review; never apply old approval silently. Close executor assignments after acceptance unless scoped revisions or an explicitly authorized next task remain. Keep any product hold separate from review/integration.
 
 ## Git and publication evidence
 
-Record actual PR, reviewed head SHA, check run/results, squash merge and deployment separately. New commits require affected changes to be rechecked. A reviewed PR head and its squash commit are different identifiers. Review acceptance is not evidence that Git operations or publication occurred; do not execute extra release work merely to populate this section.
+- **PR/actual reviewed head:** [verified URL and exact head when available].
+- **Required checks:** [actual run/job results for that head, not an earlier revision].
+- **Merge:** [actual permitted squash result or verified already-in-main equality; never a predicted SHA].
+- **Deployment:** [separate applicable authorization and actual outcome, or not performed].
+
+The proposed head and squash commit differ. This review cannot contain its own future commit/merge SHA: use a pre-merge decision with an actual PR pointer, then the PR execution record or later evidence for final identifiers; recheck any additional committed change. Do not manufacture a PR for an already integrated branch, weaken protection or deploy merely to populate fields. Acceptance is not proof of checks, merge or release.

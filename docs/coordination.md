@@ -1,0 +1,107 @@
+# Beyond the Frontend — coordination board
+
+## Project document entry points
+
+2026-11-15 DOC01 documentation integration: The remaining 27 untracked files were all formal Markdown deliverables: 20 Coordinator documents and 7 Writer planning/research/handoff documents. They were deliberately excluded from earlier W02/security PRs; no Developer code was left uncommitted. Coordinator owns this combined documentation PR because the shared/Writer files depend on one another. See [DOC01](reviews/DOC01.md) for the exact inventory, scope, fixes and verification. W01 remains a proposed outline, WF01 is an accepted process, and no next chapter or site implementation is released by storing the documents. The integration uses a separate `codex/project-docs-contracts` branch; the PR's live merge state and resulting commit are authoritative on GitHub. Older statements below that these documents are untracked describe the pre-DOC01 checkpoint.
+
+2026-11-14 SEC01 completed: Coordinator set and independently verified GitHub's default branch as main and enabled main protection: PR required, force push/deletion prohibited, enforcement for admins, linear history and conversation resolution. No collaborators beyond owner, deploy keys or pending invitations were found; Actions default token is already read-only with PR approvals disabled. Figma desktop inspection confirmed Anyone / View with Edit unselected, comment permission retained, and only Owner in the inherited editor list. No Figma permission change was needed. Five scoped baseline files were reviewed in [SEC01](reviews/SEC01.md), pushed through [PR #2](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/2), and squash-merged as `c8993cec0eb94203cae3a57104462e2dd67f2e3f`. Local main and origin/HEAD now track the verified mainline; untracked planning/design/shared files remain untouched. GitHub approvals remain 0 for the single-account local-review workflow; no CI workflow, paid review or deployment was introduced. Access policy: [security/access-policy.md](security/access-policy.md). Older pending-default-branch notes below are historical and superseded.
+
+2026-11-14 INT01 integration completed: User selected Coordinator-led local review with Markdown records, without a GitHub AI review action, and explicitly authorized integrating the existing branches into main. D02 was already identical to main at `d0965a1`, so no artificial D02 PR or history rewrite was created. W02 [PR #1](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/1) was reviewed and squash-merged as `71b29c7885812e19936de5c1c0cbb73dd6347271`. Coordinator independently fetched main and verified its full tree matches the reviewed W02 branch; lint and all 4 tests passed, as did manuscript hashes/committed-link checks. See [INT01](reviews/INT01.md). Local checkout is now `main`, tracking `origin/main`; untracked shared/Writer planning documents remain untouched and unpushed. No deployment, paid review workflow or CI configuration was introduced. GitHub's default branch is still the old D02 branch; the in-app browser control remains unavailable, and Safari was not used again.
+
+2026-11-14 main bootstrap: On the user's explicit requirement for a regular project mainline, Coordinator created remote `main` from the already code-reviewed D02 commit `d0965a172196091c9781f4ffea6b8dc9941ae6c5` through the GitHub connector and verified the branch exists. This creates a branch reference, not a new commit or merge; W02 and untracked shared documents were not included. Changing the default branch is pending GitHub's interactive access verification in Safari; the connector has no repository-settings update operation and no GitHub CLI is installed. The current verified default is still `codex/d02-engineering-skeleton`. CI, branch protection and automatic merge/review configuration have not been implemented in this task. Local checkout is unchanged.
+
+Subsequent access update: User completed GitHub verification, and Safari showed General settings. The user then directed Coordinator to prefer the already-open in-app browser. A direct connection to that exact tab returned `Local browser access is unavailable for this chat`; no default-branch update was submitted. Safari interaction was stopped. The remaining step is to switch the repository default to the existing `main` through an available settings interface, then verify through the connector.
+
+2026-11-14 workflow documentation: On the user's request, Coordinator made the delivery/review loop a dedicated required section in `AGENTS.md`, retained and extended the existing [handoff template](handoffs/TEMPLATE.md), and added a separate [review template](reviews/TEMPLATE.md). Executors own handoffs and revision evidence; Coordinator owns actual review decisions, findings and closure. One report is maintained per stage, with distinct analysis/manuscript review identifiers. No extra root-level review/handoff log, new chapter, implementation stage or Git operation was introduced.
+
+2026-11-14 coordination check: Coordinator read both independent conversations and verified that Writer and Developer had acknowledged UI03. No duplicate design briefing is needed. Reviewed the Writer chapter workflow and analysis template as [WF01](reviews/WF01.md): accepted for future scoped tasks, with no blocking revision. On the user's latest instruction, executors now send handoffs directly to Coordinator; Coordinator reviews actual files, records a decision and sends actionable feedback to the owner for revision/re-review. Routine feedback within the authorized task does not need the user to relay it. This is explicit messaging, not continuous background file monitoring.
+
+The WF01 outcome and direct-review-loop update were delivered once to each existing conversation. Coordinator read both subsequent acknowledgments: Writer confirmed analysis/manuscript submissions and re-review while keeping W02 frozen; Developer confirmed direct stage handoff and re-review while preserving D02. Both reported no new implementation or Git work. The evergreen role prompts were updated to remove the old requirement for the user to relay review results.
+
+2026-11-14 UI03: On the user's revised design brief, Coordinator consolidated Figma into exactly three pages: Tokens, Components and Page Designs. The latter groups Day reading, responsive samples, interactions and Night sections vertically. Thirteen source families are expanded; the file has 111 variables including 36 semantic layout aliases, with English-first visible notes and annotations. The second design pass corrected header padding, documentation density, source-theme fallback fills, a disabled icon, swatch row sizing and recipe inconsistencies, and added search recovery guidance. See [UI03](reviews/UI03.md) and the updated [handoff](design/reading-experience-v1.md). No website implementation or permission changes; author visual acceptance remains pending. UI02 below is historical; its Chinese-note convention and four-page structure are superseded.
+
+2026-11-14 W02 re-review: Coordinator accepted the revised Chinese opening/G01 stage and closed R1–R3 in [W02](reviews/W02.md). W01 received only a naming/stage consistency check; its full outline remains a proposal. Developer paused Git writes for this handoff. Writer completed the four-file push on `codex/w02-opening-foundations`, commit `13513c91edf6b8a201222ab11b90cafee07c9d36`; Writer independently verified the remote with `git ls-remote`, and Coordinator checked the actual commit scope and unchanged prose hashes. Git writes for this handoff have ended; the local checkout remains on the Writer branch. W01 planning and Coordinator shared/design/review/research files remain local and untracked until separately integrated; they were not pushed. No merge, deployment, English manuscript, next chapter or website content integration was released.
+
+2026-11-14 UI02 synchronization: On the user's explicit request, Coordinator did a final documentation consistency pass (9 Markdown files / 86 links), corrected stale v1 wording and the pending TypeScript context, then sent the role-specific [Developer prompt](developer-sync-prompt.md) and [Writer prompt](writer-sync-prompt.md) once each to the existing independent conversations. Both tools accepted delivery and both recipients acknowledged in their own conversations. Developer is reading the shared updates and scoping the TypeScript request, with no code/dependency changes in that analysis turn; Writer acknowledged W02 R1–R3, Chinese-first manuscript work and re-review. These acknowledgments are not completion or approval of their subsequent work; no full D03 or new writing stage was released.
+
+2026-11-14 UI02: Coordinator reviewed and refined the Figma design system: English UI, Chinese implementation annotations, shared reading components, 55 tokens, Day/Night compositions, and 1024/768/320px samples alongside the existing 1440/390px layouts. On explicit confirmation, changed the Beyond the Frontend Folder's team default to view/comment; verified the file's public link is view-only and Owner editing remains. See [UI02 review](reviews/UI02.md) and [current design handoff](design/reading-experience-v1.md). User visual review and code-level acceptance remain pending; no dependent implementation stage is released.
+
+[README](../README.md) is the public entry, [project vision](project-vision.md) owns audience/content/product direction, and [roadmap](roadmap.md) owns feature scope and checkpoints. `project-brief.md` is a compatibility entry. Current project/repository name is Beyond the Frontend / `beyond-the-frontend`; older names in history below are not current instructions.
+
+2026-11-14 historical v1 checkpoint: On user request, Coordinator created the Beyond the Frontend Folder under HAIXIN's Starter team and verified the design file was moved into it. The first design included 8 screen/state compositions; it was subsequently expanded and reviewed as UI02 above. The [design handoff](design/reading-experience-v1.md) retains its original path and now describes v2. No website implementation was changed during either design task.
+
+2026-11-14: Coordinator reviewed these documents against the recent reader-positioning, UI, AI-card, audio and collaboration discussions. Corrected current naming/stack/status references, clarified AI prompt handoff and audio version/failure handling, and retained TBU for unresolved choices. No Writer, website implementation or historical review/handoff files were modified in this document-cleanup task.
+
+## Documentation storage update
+
+2026-11-14: Current working directory is `/Users/haixin/Desktop/code/beyond-the-frontend`. [Formal documents and optional local notes](agent-notes-policy.md) defines the storage rule; `.local/` is Git-ignored and the ignore rule was verified. On explicit user authorization, one role-specific follow-up was sent to each Writer/Developer conversation with this rule and the current path. Both tool calls succeeded; recipient acknowledgment is not yet verified. This does not release a new work stage or move existing deliverables.
+
+Updated: 2026-11-14 (Australia/Perth). Owner: coordinator.
+
+## Execution gate
+
+**Task-scoped execution.** The user has cleared Writer and Developer to work on the tasks agreed in their respective conversations and will request stage reviews here. Main conversation has read relevant user messages for the D02 and W02 reviews, not the full history of every task. Concrete scope and any installation/publication authorization come from the user's instructions; missing details must not be invented.
+
+## Roles and status
+
+| Role | Current assignment | Status | Future output boundary |
+| --- | --- | --- | --- |
+| Coordinator | Shared design and stage reviews | D02 reviewed; W02 R1–R3 closed; UI03 three-page/token/component review completed; author visual acceptance pending | Shared requirements, contracts, assignments, final review |
+| Writer (independent conversation below) | W02 merged to main; future chapter-analysis workflow accepted in WF01 | UI03 acknowledged; W02 PR #1 merged as `71b29c7`. W01 full outline and next chapter scope remain undecided | `book/`, including chapter assets; `docs/handoffs/writer/` |
+| Developer (independent conversation below) | D02 already included in main; TypeScript analysis and UI03 alignment | Main now includes D02 + W02. No TypeScript/PandaCSS implementation or installation; D02 Browser acceptance remains incomplete | `site/`, assigned tooling; `docs/handoffs/developer/` |
+| Fact checker | Standing role removed by user | Inactive | Review handled by coordinator |
+
+## Communication and handoff
+
+1. Agents send questions, blockers and completion summaries directly to the coordinator. The coordinator routes dependencies to the relevant role.
+2. Accepted decisions and task/status changes are recorded here or linked from the project brief. The coordinator is the single editor of this board to avoid parallel overwrites.
+3. Before execution, each task receives an ID, input dependencies, exact file ownership and acceptance criteria.
+4. Before handing off, report: task ID; changed paths; summary; verification performed and results; unresolved questions; next dependency. Do not report completion while required checks are missing.
+5. Fact-check findings identify file/section, claim, supporting or conflicting source, severity and proposed correction. The coordinator assigns fixes and verifies resolution.
+
+Agent messages are coordination, not automatic approval. A changed file must be read before a dependent agent relies on it.
+
+## Cloud synchronization and next-step snapshot
+
+- Figma UI03 is already saved in the cloud; GitHub needs the current links and handoff, not a second flattened copy of the design.
+- Main at the start of DOC01 is `c8993ce`, including D02, W02 PR #1 and SEC01 PR #2. GitHub's default is main and its protections were verified. DOC01 adds the reviewed documentation package through its own PR; no site deployment has occurred.
+- README, shared vision/roadmap/agent documents, design handoff/reviews, W01 planning and the future chapter workflow are now accounted for in the DOC01 scope. A workflow or outline may be committed with its accurate proposal status; that does not approve the proposed chapters.
+- Stage only the exact DOC01 manifest, including its review report. Keep `.local/`, temporary screenshots, raw chat records and unrelated changes outside the documentation PR. Candidate links must resolve from the committed tree, not merely the work directory.
+- Suggested next independent tracks: Writer prepares a scoped F01 browser-foundations analysis before prose; Developer prepares a scoped TypeScript migration handoff, then implements only after its actual task scope and dependency authorization are settled. PandaCSS/UI03 implementation follows a small reviewed migration stage. These are recommendations, not newly released tasks.
+- Coordinator next owns the documentation integration, the proposed chapter-sequence review and the minimal content contract (identity/path, language mapping, draft/public state and asset/link rules). Search, audio and broader AI features remain later work.
+
+## Accepted decisions
+
+- Main agent owns design and final review; execution is delegated.
+- User selected local Coordinator review rather than a GitHub AI review action. In an authorized iteration, Coordinator reviews the exact revision, returns fixes to its owner and, after acceptance and required verification, creates and merges the scoped PR with the reviewed head SHA. No extra routine confirmation is needed for that iteration; no new standing Reviewer is created. CI remains separate.
+- Active execution roles are Writer and Developer. The user subsequently removed the standing Fact checker role; coordinator owns technical/source review.
+- Requested configuration for each: `gpt-6.1-sol`, reasoning `high`.
+- Initial onboarding hold was subsequently lifted for tasks the user approves in the independent conversations. Publishing and installation are governed by specific authorization, not this status change.
+
+## Historical onboarding
+
+All three agents read the shared documents, acknowledged their role and ended their onboarding turn without changing files or beginning execution. The coordinator can resume each with a new assignment after user release. They are subagents of this conversation, not separate top-level project chats.
+
+## Historical creation of independent task conversations
+
+The user subsequently requested three visible independent conversations. Created in the local Engineer Better project with `gpt-6.1-sol` / `high`, each with detailed background and an explicit read-and-wait-only prompt:
+
+| Role | Conversation | Initial gate |
+| --- | --- | --- |
+| Writer | Existing independent Writer conversation | HOLD |
+| Developer | Existing independent Developer conversation | HOLD |
+| Fact checker | Historical conversation; standing role removed | HOLD |
+
+Private conversation identifiers are kept outside the public repository. The Coordinator resolves the existing conversations through the local app when sending authorized handoffs.
+
+These are the user-facing execution conversations. Earlier same-conversation subagents remain idle and must not be independently released to duplicate this work. Independent conversations do not automatically share messages: the user/coordinator relays handoffs, and accepted decisions live in these shared files. Creation is not implementation authorization. Each conversation was told to read the three context files, acknowledge, then end its onboarding turn.
+
+Subsequent update: the user chose to remove the Checker conversation; its actual deletion was not verified here. Do not resume that role. Earlier HOLD entries in the creation table are historical, superseded by the current execution gate above. File ownership and handoff are documented in [collaboration](collaboration.md).
+
+## Current handoff process
+
+Book title confirmed: **Beyond the Frontend: It Works. Now What?** / **《前端往后看：能跑，然后呢？》**. Current repository: `HAIXIN-ZHANG/beyond-the-frontend`.
+
+Writer writes stage reports under `docs/handoffs/writer/`; Developer under `docs/handoffs/developer/`, using [template](handoffs/TEMPLATE.md). Executors send the handoff directly to Coordinator, who reads actual deliverables, writes decisions under `docs/reviews/` and returns feedback. There is no background file watcher. Role-specific sync prompts are in [Writer prompt](writer-sync-prompt.md) and [Developer prompt](developer-sync-prompt.md).
+
+2026-11-14: On the user's explicit instruction, the coordinator successfully sent follow-up messages to both independent conversations, synchronizing project/repository name, bilingual book title, file ownership and handoff/review rules. Both sends were accepted by the task messaging tool; recipient acknowledgment has not been checked here. Existing user-approved tasks in those conversations remain authoritative.

@@ -1,8 +1,15 @@
 # 分阶段写作任务与 review 清单
 
-更新：2026-11-14。负责人：Writer。
+更新：2026-11-15。负责人：Writer。
 
-当前 **W02 已复审通过，限定四文件已通过 PR #1 合入 main**，见 [W02 review](../../docs/reviews/W02.md) 与 [INT01](../../docs/reviews/INT01.md)；W01 全目录仍未整体通过。[WF01](../../docs/reviews/WF01.md) 已接受每章先分析调研和细纲 review、再写正文并另行 review 的流程与模板，见 [逐章流程](chapter-workflow.md) 与 [分析稿模板](templates/chapter-analysis.md)。本轮仅按 DOC01 对齐文档状态，不启动下一章；其余阶段仍为建议。
+当前 **W02 已复审通过，限定四文件已通过 PR #1 合入 main**，见 [W02 review](../../docs/reviews/W02.md) 与 [INT01](../../docs/reviews/INT01.md)；W01 全目录仍未整体通过。[WF01](../../docs/reviews/WF01.md) 已接受每章先分析调研和细纲 review、再写正文并另行 review 的流程与模板，见 [逐章流程](chapter-workflow.md) 与 [分析稿模板](templates/chapter-analysis.md)。DOC01 的文档状态对齐已结束；2026-11-15 Coordinator 单独授权 F01A 浏览器基础分析，当前待分析 review，不含正文；其余候选阶段不因此启动。
+
+## F01A：页面出现之前，浏览器在忙什么？（分析待 review）
+
+- **授权：** 2026-11-15 Coordinator 明确范围；独立工作区 `/tmp/btf-writer-f01a`，Writer 只维护本分析、交接及必要任务状态，不操作 Git。
+- **交付：** [章节分析 r1](analyses/F01.md)、[F01A 交接](../../docs/handoffs/writer/F01A.md)。包括来源/证据边界、七节细纲、案例与图示、具体验证计划；未写正文。
+- **检查：** 来源具体小节已查阅；文档实际检查见交接。浏览器实验尚未运行，没有虚构 trace 或性能数据。
+- **关口：** 等待主审实际 review，处理反馈并复审。下一正文使用 F01M 独立标识，须另行确认允许文件与验证要求；不将分析通过当作成稿通过。
 
 ## 状态与角色
 

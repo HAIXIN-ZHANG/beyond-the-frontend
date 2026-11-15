@@ -1,25 +1,24 @@
-# W01 / D01：阶段名称
+# [Readable outcome name] — handoff
 
-由执行方维护；对应主审记录使用 [review 模板](../reviews/TEMPLATE.md)。按实际任务标识命名，每阶段维护一份交接，不逐轮复制新文件。
+Legacy reference: [existing task ID]. Revision: [r1/r2]. The owner maintains one report per reviewable stage. Coordinator owns the corresponding [review record](../reviews/TEMPLATE.md). Delete unused placeholders; do not invent evidence to fill a field.
 
-- **状态：** 待 review / 修改中 / 待复审（最终通过由主审记录）
-- **任务依据与范围：** 用户或协调者授权的具体任务；涉及双方的新增决定及出处。
-- **交付文件：** 实际路径，重要段落/模块；标明本阶段应冻结审查的文件。
-- **修订号与 review 类型：** 分析稿 / 正文 / 代码；标明本次对应的版本和前次 review。Writer 分析通过不代替正文通过。
-- **本次完成：** 3–5 个具体结果。
-- **验证及证据：** 实际执行的检查、结果、预览地址/截图或来源路径；未做的检查明确说明。
-- **已知问题与未完成：** 尚未确认的结论、限制及范围外事项。
-- **需要另一方或主审决定：** 明确到问题和影响，不自行扩大任务。
-- **对应 review：** 主审记录的实际路径与已审修订号；尚未生成时写“待主审”，不创建假链接。
-- **后续修订：** review 后修了哪些文件、如何验证；审查中的文件若变化，在此注明。
-- **下一步：** 待复审 / 已授权的具体下一步 / 范围待确定；通过结论引用主审记录，不自行放行。
+- **Status:** awaiting review / revising / awaiting re-review / preserved pause point. Final acceptance comes from the actual review.
+- **Authorization and scope:** concrete user/Coordinator assignment, inputs, allowed files and relevant accepted shared decisions.
+- **Deliverable:** exact paths and important modules/sections; identify the frozen revision and excluded work.
+- **Review type:** research/outline, manuscript, code/page, design or process. Analysis acceptance does not accept a manuscript.
+- **Result:** three to five concrete outcomes, with limitations where material.
+- **Verification/evidence:** commands actually executed, results, inspected sources and genuine browser/screenshot evidence. Name unperformed checks explicitly.
+- **Open issues/dependencies:** the specific question, consequence, owner and decision needed; do not silently expand scope.
+- **Review link:** actual path/revision if a review exists; otherwise “pending Coordinator review,” without a broken placeholder link.
+- **Revision history:** finding IDs, changed locations, verification and re-review outcome. Announce changes to frozen files.
+- **Next step:** re-review, the already authorized next step, or scope pending. A report does not release itself.
 
-## 收到反馈后的处理记录
+## Feedback responses
 
-| Review 意见编号 | 处理位置与改动 | 实际验证与限制 | 主审关闭依据 |
+| Finding | Change/location | Actual verification and limits | Coordinator closure evidence |
 | --- | --- | --- | --- |
-| [收到真实反馈后填写；没有则删除本行] | [文件及小节/模块] | [真实结果，不只写“已修复”] | [待复审；关闭后引用实际结论] |
+| [real finding ID] | [specific revision] | [actual result] | [pending or actual review] |
 
-Writer 重点：原理与案例连贯性、关键技术来源、图示及需要网站支持的元素。Developer 重点：构建/功能验证、实际测试的桌面与移动尺寸、键盘操作、控制台问题和内容集成。仅记录真正完成的检查，不为填表编造结果。
+Writer emphasizes causal explanation, original examples/diagrams, sources and evidence boundaries. Developer emphasizes build/behavior checks, actual tested viewports, keyboard/console behavior and content integration. Use readable stage names first; preserve legacy paths/IDs for traceability. Historical hashes refer to the original source revision, not later translated document bytes.
 
-完成后把本交接路径、修订号、变更清单和未决项直接发送主对话，请其实际 review；有反馈则由原负责人返修、更新同一交接并再次提交。不把送达、回执或沉默记为审批；不要为了收回执反复触发对话。
+After freezing the deliverable, send this path, revision, short scope and open questions directly to Coordinator. Coordinator reads the actual result and returns findings; the original owner revises and resubmits. Delivery, acknowledgment and silence are not acceptance. Do not repeatedly request receipts or depend on background file monitoring.

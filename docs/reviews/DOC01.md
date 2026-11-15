@@ -1,57 +1,55 @@
-# DOC01：剩余项目文档归属与整合 review
+# Project Documentation Integration — review
 
-日期：2026-11-15（Australia/Perth）。主审与整合：Coordinator。结论：**27 份文档经有限返修后可作为正式项目资料入库。** 本记录另计 1 份，文档 PR 共 28 份；不包含网站代码、章节正文、配置或依赖变更。
+Legacy reference: DOC01. Date: 2026-11-15 (Australia/Perth). Reviewer/integrator: Coordinator. **Outcome: 27 documents suitable for formal storage after limited revisions.** This review adds one record, for 28 PR files; no website code, prose bodies, configuration or dependencies were changed. English translation preserves the original decision and findings.
 
-## 为什么还有 27 个 change
+## Why 27 changes remained
 
-开始审查时 `main` 为 `c8993cec0eb94203cae3a57104462e2dd67f2e3f`，暂存区和已跟踪文件均无差异，27 份全部为未跟踪 Markdown。它们此前被排除在 W02 四文件 PR #1 和安全基线五文件 PR #2 外，以保持两次整合范围明确。20 份由 Coordinator 维护，7 份由 Writer 交付；没有遗留的 Developer 网站代码。责任按原交付记录和 Writer 确认判定，未跟踪文件本身没有可用于归属的 Git 作者记录。
+At inspection, main was `c8993cec0eb94203cae3a57104462e2dd67f2e3f`, with tracked/index differences empty. All 27 files were untracked Markdown, previously excluded from the four-file W02 PR #1 and five-file access PR #2. Twenty were Coordinator-maintained and seven Writer-owned; no Developer implementation was left over. Ownership came from delivery history and Writer confirmation, not nonexistent untracked-file Git authorship.
 
-共享规则与 Writer 规划互相链接，因此由 Coordinator 统一建立文档分支和 PR，而不是让 Writer 提交其他角色的文件。Developer 已收到本轮 Git 协调说明；Writer 已交回 DOC01 有限状态修订 r1 并冻结七份文件。
+Shared rules and Writer planning linked each other, so Coordinator managed one documentation branch/PR instead of asking Writer to submit other owners' work. Developer was notified of Git coordination; Writer returned limited status revision r1 and froze seven files.
 
-## 精确文件清单
+## Exact inventory
 
-| 负责人 | 文件 |
+| Historical owner | Files |
 | --- | --- |
-| Coordinator | `AGENTS.md`、`README.md` |
-| Coordinator | `docs/agent-notes-policy.md`、`docs/collaboration.md`、`docs/coordination.md` |
-| Coordinator | `docs/project-brief.md`、`docs/project-vision.md`、`docs/roadmap.md`、`docs/positioning-discussion.md` |
+| Coordinator | `AGENTS.md`, `README.md` |
+| Coordinator | `docs/agent-notes-policy.md`, `docs/collaboration.md`, `docs/coordination.md` |
+| Coordinator | `docs/project-brief.md`, `docs/project-vision.md`, `docs/roadmap.md`, `docs/positioning-discussion.md` |
 | Coordinator | `docs/design/reading-experience-v1.md` |
-| Coordinator | `docs/developer-sync-prompt.md`、`docs/writer-sync-prompt.md` |
-| Coordinator | `docs/handoffs/TEMPLATE.md`、`docs/reviews/TEMPLATE.md` |
-| Coordinator | `docs/reviews/D02.md`、`docs/reviews/INT01.md`、`docs/reviews/UI02.md`、`docs/reviews/UI03.md`、`docs/reviews/W02.md`、`docs/reviews/WF01.md` |
-| Writer | `book/planning/editorial-brief.md`、`book/planning/outline.md`、`book/planning/tasks.md` |
-| Writer | `book/planning/chapter-workflow.md`、`book/planning/templates/chapter-analysis.md` |
-| Writer | `docs/handoffs/writer/W01.md`、`docs/research/jr-academy-topic-map.md` |
+| Coordinator | `docs/developer-sync-prompt.md`, `docs/writer-sync-prompt.md` |
+| Coordinator | `docs/handoffs/TEMPLATE.md`, `docs/reviews/TEMPLATE.md` |
+| Coordinator | `docs/reviews/D02.md`, `docs/reviews/INT01.md`, `docs/reviews/UI02.md`, `docs/reviews/UI03.md`, `docs/reviews/W02.md`, `docs/reviews/WF01.md` |
+| Writer | `book/planning/editorial-brief.md`, `book/planning/outline.md`, `book/planning/tasks.md` |
+| Writer | `book/planning/chapter-workflow.md`, `book/planning/templates/chapter-analysis.md` |
+| Writer | `docs/handoffs/writer/W01.md`, `docs/research/jr-academy-topic-map.md` |
 
-本记录 `docs/reviews/DOC01.md` 是 Coordinator 的新增审查产物，不是原 27 份之一。`.local/`、临时验证脚本、原始私聊和账户材料不在提交范围。
+This `docs/reviews/DOC01.md` was the new 28th file. Scratch notes, temporary checks, raw private chats and account materials were excluded. Historical ownership does not override the later executor-writing role decision.
 
-## 发现、返修与复审
+## Findings, revisions and recheck
 
-| 编号 | 问题与影响 | 处理和复核结果 |
+| ID | Issue | Actual correction/closure |
 | --- | --- | --- |
-| R1 | Writer 当前入口仍称 W02 待复审或只推送分支，未反映 PR #1 已合入 main；流程入口仍暗示需要用户搬运反馈 | Writer 修订六份自有文件，W01 交接只追加后续状态；复读实际入口，确认 W02 R1–R3 已关闭、WF01 已接受、直接反馈返修循环一致。已关闭 |
-| R2 | 文档用途需要区分：阶段方案与已实现基线不是同一入口；Coordinator 初查误判 `site/IMPLEMENTATION.md` 不存在 | Developer 交叉检查指出原文件已跟踪；Coordinator 读取两份实际文件，更正判断，并在笔记规则同时说明 `site/IMPLEMENTATION.md` 是阶段方案、`site/DEVELOPMENT.md` 是已实现基线与运行说明。已关闭 |
-| R3 | 旧 UI02 的四页、中文注释与旧默认分支状态容易被当成当前指令 | Coordinator 补历史说明；UI03 的三页、English-first 注释及 SEC01 默认 main/权限基线为当前依据。角色同步入口注明旧 SHA/checkout 只是快照。已关闭 |
-| R4 | 协调表包含内部对话 ID，传播讨论包含不必要的个人职业背景 | Coordinator 改用角色名称，保留项目需要的产品定位和实际能力边界，移除内部 ID 与个人求职背景。已关闭 |
+| R1 | Writer entries still said W02 awaited re-review or only a branch push; feedback appeared to require user relay | Writer revised six owned files and appended subsequent state to W01 handoff. Actual entries confirmed W02 R1–R3 closure, accepted workflow and direct feedback loop. Closed |
+| R2 | Proposal versus implemented runtime guide was unclear; Coordinator initially misreported `site/IMPLEMENTATION.md` as absent | Developer's cross-check identified the tracked file; Coordinator read both documents, corrected the mistake and clarified their roles in notes policy. Closed |
+| R3 | Old four-page/Chinese-annotation/default-branch snapshots could appear current | Historical labels added; UI03's three pages/English annotations and SEC01 main/access baseline were current. Old SHA/checkout statements explicitly dated. Closed |
+| R4 | Internal conversation IDs and unnecessary career context appeared in shared material | Replaced identifiers with roles and removed unrelated private background while retaining product needs/boundaries. Closed |
 
-Writer 的实际修订和检查见 [W01 追加交接](../handoffs/writer/W01.md)。复核的是文件本身，不将交接中的自查直接等同于主审证据。
+[Writer's W01 addendum](../handoffs/writer/W01.md) records its actual revision checks. The reviewer reread files rather than treating self-report as independent proof.
 
-## 实际检查与边界
+## Checks and limits
 
-- 阅读项目入口、愿景、路线图、共享协作规则、设计交接及各阶段记录；核对书名、角色、英文 UI/中文先行书稿、PandaCSS 选定但未实施、D02 基线和 W02 已合并状态。
-- 检查全部 28 份候选文件的单一 H1、代码围栏、尾部空白；116 处相对 Markdown 链接按已跟踪文件与本次精确清单共同组成的候选提交树解析并通过，不能靠未提交文件掩盖断链。
-- 复核 45 个目录提案编号唯一、顺序保持原提案；分析模板未改，研究笔记只增加旧工作名说明。研究盘点保留原查阅日期及“公开目录/介绍盘点”的证据边界，没有声称重新调研或读过完整课程。
-- 扫描凭据常见形式和内部对话 ID，未发现匹配项；这是有限静态检查，不是全面秘密检测或账户安全审计。
-- 复核已跟踪文件保持不变，网站代码、W02 四文件及安全基线未混入。没有安装、运行网站测试、改 Figma 或重新核实所有历史外部来源；纯文档整合不重复代替先前代码/设计验收。
+- Read entries, vision/roadmap, shared rules, design handoff and stage records; checked names/roles, English UI with Chinese-first manuscript work, selected-but-unimplemented Panda, foundation baseline and merged W02.
+- Single H1, fences and trailing whitespace passed for all 28 candidates. The candidate committed tree resolved 116 relative links using tracked files plus the exact manifest, without unsubmitted files concealing missing targets.
+- The 45 proposed outline references stayed unique/in order. The analysis template was unchanged; research inventory gained only a historical-name note, preserving original date and public-catalogue evidence limits rather than claiming new/full-course research.
+- Limited scans found no common credential patterns or internal conversation IDs; this was not exhaustive secret/account auditing.
+- Existing tracked code, W02's four files and access baseline were not mixed in. No install, website tests, Figma edits or recheck of every historical external source occurred in this documentation integration.
 
-W01 全目录可作为明确标注的提案入库，**不表示 45 章编排已整体通过**。下一章分析、英文改写、网站内容契约、TypeScript/PandaCSS 实施、CI 和部署仍按实际任务范围另行处理。许可证仍为 TBU，不把公开可读解释为任意复用许可。
+W01 was stored as a marked proposal, **not acceptance of all 45 chapters**. New analysis, English prose, content contracts, TypeScript/Panda, CI and release still needed applicable tasks at that checkpoint. Licensing remained TBU; public reading was not an unrestricted reuse license.
 
-## 允许的下一步与 Git 证据
+## Authorized integration and actual execution
 
-允许 Coordinator 仅将上方 27 份及本记录通过 `codex/project-docs-contracts` 文档 PR 整合，按实际提交差异复核并使用匹配 head SHA 的 squash merge。提交前记录候选文件摘要，提交后再次核对精确清单与已审文件字节；新差异需重新检查。
+Coordinator could integrate only the manifest plus review through `codex/project-docs-contracts`, recheck actual differences/bytes and squash the matching head. Candidate digests and exact committed inventory were to be checked; new differences needed review. The original pre-PR text did not prefill future success.
 
-这是入库前审查记录，不预先宣称已经提交、合并或部署。精确 reviewed head SHA、实际检查与最终 merge result 由该 PR 的整合记录提供，GitHub 上的实时结果为准；本记录不写入尚未生成的 PR 号或合并 SHA。Coordinator 在执行后向两位负责人同步实际 main 基线；不为填表重复启动后续任务。
+### Post-execution record — 2026-11-15
 
-### 执行后记录（2026-11-15）
-
-[PR #3](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/3) 的 reviewed head 为 `f4790e1916aee7a1c0bea376e96a350e8bd64839`，精确 28 文件与本地已审摘要逐字节一致。Developer 独立只读交叉检查在 R2 纠正后未发现剩余问题。PR 通过匹配 head SHA 的 squash merge 合并为 `884129bb313e62160321a0c1c1422452a237478a`；Coordinator 独立获取远端 main，验证完整 tree 与已审分支相同，工作区干净。未部署。本段为后续迭代追加的执行事实，不属于原 PR 的预合并结论。
+[PR #3](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/3) reviewed head `f4790e1916aee7a1c0bea376e96a350e8bd64839` matched the 28 reviewed file digests byte-for-byte. Developer's independent read-only cross-check found no remaining finding after R2 correction. Matching-head squash produced `884129bb313e62160321a0c1c1422452a237478a`; Coordinator independently fetched main and verified full-tree equality/clean checkout. No deployment. This later execution fact is separate from the initial pre-merge judgment; historical digests describe the original revision, not this translated text.

@@ -1,142 +1,142 @@
-# 项目愿景：前端往后看
+# Project Vision: Beyond the Frontend
 
-更新：2026-11-14。状态：项目方向与框架稿，细节可继续修改。`TBU` 表示待补充或待决定，不表示已经实现。
+Updated: 2026-11-15. Status: shared direction and working framework; details remain open. `TBU` means information or a decision is still needed, not that a feature exists.
 
-[项目入口](../README.md) · [功能与阶段路线](roadmap.md)
+[Project entry](../README.md) · [Roadmap](roadmap.md) · [Development history](development-history.md) · [Chinese stage summary](stage-summary.zh-CN.md)
 
-本文是目标读者、内容范围与产品方向的共同依据；路线图维护功能状态和阶段。旧 `project-brief.md` 仅保留跳转入口。Writer 的细化目录、Developer 的实现说明与阶段报告各司其职；有新决定先同步到相应共同文档，避免维护多套互相冲突的项目定位。
+This document owns the audience, content scope and product direction. The roadmap owns future dependencies and acceptance checkpoints; Development History records what happened and the evidence behind it. The old `project-brief.md` remains a compatibility entry. Writer's detailed outline and Developer's implementation records have separate responsibilities. Accepted changes should reach the appropriate shared document rather than create competing project descriptions.
 
-## 1. 我们希望做成什么
+## 1. What we want to make
 
 **Beyond the Frontend: It Works. Now What?**
+
 **《前端往后看：能跑，然后呢？》**
 
-做一本可以连续阅读、遇到问题也能随时查阅的工程指南，并通过静态网站长期维护。项目与仓库统一使用 **Beyond the Frontend / `beyond-the-frontend`**，取代此前工作名 Engineer Better。
+Create an engineering guide that readers can follow from beginning to end or consult when a particular problem arises, maintained through a static reading website. The project and repository use **Beyond the Frontend / `beyond-the-frontend`**, replacing the earlier working name Engineer Better.
 
-书从看得见的界面出发，连接服务、数据库、异步流程、数据分析和必要的运行维护。帮助读者回答：一个功能为什么这样设计，各部分如何配合，条件变了以后应该改哪里，以及怎样与 AI 一起把设计落实并验证。
+Start from a visible interface and connect it to services, databases, asynchronous work, data analysis and essential operations. Help readers explain why a feature is designed this way, how its parts cooperate, what should change when conditions change, and how to implement and verify those decisions with AI.
 
-作者署名 **Jason Zhang**，AI 全程辅助创作。网站是这本书的阅读产品，不只是把 Markdown 罗列出来；书的解释和阅读体验都需要经过真实样章与反馈检验。
+The author is **Jason Zhang**, with AI assistance throughout creation. The website is the book's reading product, not simply a list of Markdown files. Both the explanations and the reading experience need validation through actual sample chapters and feedback.
 
-## 2. 为谁写
+## 2. Readers
 
-### 主要读者
+The primary audience is **engineers who want to move from implementing individual parts toward delivering complete products with AI assistance, while strengthening their design foundations**.
 
-核心定位：**希望借助 AI 从局部开发走向完整产品交付、并补齐设计基础的工程师。**
+- Engineers with practical frontend experience who want to understand the rest of product delivery.
+- Engineers who have worked across frontend and backend and want to connect scattered experience with underlying principles.
+- Engineers using GPT, Codex, Claude or similar tools who want to describe requirements, judge designs and check results more effectively.
 
-- 做过实际功能，希望从前端逐渐理解完整产品交付的工程师。
-- 已经参与前后端开发，希望把零散经验与基础理论重新连接的工程师。
-- 使用 GPT、Codex、Claude 等工具辅助工作，希望更好地描述需求、做设计判断和检查结果的工程师。
+Readers should have some experience building pages, APIs or data processing. They need not know every stack. Explain necessary concepts where they arise without restarting from basic syntax for every language or requiring a capstone project.
 
-### 起点与预期
+“AI-assisted full-stack engineering” describes a possible direction. “AI Full-stack Engineer” and “Full-stack AI Engineer” are not the sole audience labels: using AI to write code and delivering an AI product involve different responsibilities. Whether to use those terms in public positioning remains **TBU**, informed by the content and reader feedback.
 
-读者不需要已经掌握所有技术栈，但应有一些页面、接口或数据处理经验。遇到必要概念会解释；不从每种语言的基础语法重新讲起，也不要求完成综合项目。
+The intended value is understanding design relationships and their conditions. Do not promise employment, income, productivity or career outcomes, or present teaching examples as the author's production experience.
 
-“AI-assisted full-stack engineering”可以作为方向描述。AI Full-stack Engineer / Full-stack AI Engineer 暂不作为唯一人群标签，避免把会用 AI coding 与能完整交付 AI 产品混为一谈。是否采用这些词作为传播关键词：**TBU**，由实际内容和读者反馈决定。
+## 3. Editorial choices
 
-对读者的价值目标是看清设计关系与适用条件。求职、收入、效率提升或职业转型结果不作保证；不把教程案例包装成作者的生产项目经历。
-
-## 3. 我们自己的特点
-
-| 写作选择 | 具体做法 | 怎样判断是否做到了 |
+| Choice | Practice | Evidence of success |
 | --- | --- | --- |
-| 从熟悉问题进入 | 组件要不要共享、搜索状态放哪里、请求超时后怎么办 | 开头能让读者知道为什么值得继续读 |
-| 通俗与准确结合 | 给直觉，再说明机制和边界 | 类比不会替代或歪曲技术解释 |
-| 把前后连起来 | 同一业务在 UI、API、数据与运行中反复出现 | 读者能追踪一个决定影响了哪些部分 |
-| 选择有条件 | 先解释需要，再比较少量代表性框架 | 能说清收益、代价和不适用情况 |
-| AI 按需出现 | 展示任务范围、相关上下文、契约与验证 | 对当前问题有帮助，不是每章附通用 prompt |
-| 体谅读者的注意力 | 短而连贯的小节、术语解释、必要图示、可选深入 | 可以顺读，也能停下后找回上下文 |
+| Begin with familiar problems | Sharing a component, placing search state, recovering from a timeout | The opening makes the reason to keep reading clear |
+| Be approachable and accurate | Build intuition, then explain mechanisms and limits | Analogies support rather than distort the explanation |
+| Connect the layers | Revisit one feature through UI, APIs, data and operations | Readers can trace how a decision affects other parts |
+| Make choices conditional | Explain the need before comparing a few representative implementations | Benefits, costs and unsuitable conditions are explicit |
+| Use AI where it helps | Show scope, relevant context, contracts and verification | AI serves the current question rather than adding a generic prompt to every chapter |
+| Respect attention | Short connected sections, explained terms, useful diagrams and optional depth | Readers can follow the argument and recover context after a break |
 
-这些是我们选择的编辑方向，不声称前人没有做过。差异化是否成立，要靠完成的内容而不是宣传词证明。
+These are editorial choices, not claims that nobody has used them before. Their value must be demonstrated through completed content.
 
-## 4. 全书结构与章节主题
+## 4. Content map
 
-采用“共同基础导读＋三大部分”的组织方向。下面是内容地图，不是已经完成或全部获批的精确目录。章节名称、编号和拆分以 Writer 的 [详细目录提案](../book/planning/outline.md) 为单一细化输入，逐阶段 review 后再确定；这里不维护第二份完整的章节编号表。
+Use a common-foundations introduction followed by three parts. This map is not a completed or fully approved table of contents. Writer's [detailed outline proposal](../book/planning/outline.md) is the single detailed input for chapter names, identifiers and splits; those decisions are accepted stage by stage.
 
-### 导读：一个页面，究竟连着什么
+### Common foundations: what is a page connected to?
 
-以一次搜索、报名或上传说明用户目标、责任边界、状态、时间、依赖和约束；区分页面反馈、请求结果和持久业务记录。帮助读者理解结构图、时序图和状态图分别回答什么问题。
+Use search, enrollment or upload to explain user goals, responsibility boundaries, state, time, dependencies and constraints. Distinguish UI feedback, request results and persistent business records. Introduce structural, sequence and state diagrams by the questions each answers.
 
-### 第一部分：前端——从界面到产品行为
+### Part I: frontend, from interfaces to product behavior
 
-| 主题组 | 计划讨论的章节问题 |
+| Topic group | Planned questions |
 | --- | --- |
-| 浏览器与真实页面 | 页面出现前发生什么？设计稿遇到真实内容、不同屏幕后会怎样？ |
-| Design System | 有组件库为什么还需要设计系统？基础 token、semantic token、主题和组件如何配合？ |
-| 组件与状态 | 组件向调用者承诺什么？输入、URL、共享状态和服务端数据分别由谁管理？ |
-| 交互与质量 | 表单、请求竞态、可访问性、渲染与性能如何影响完整体验？ |
-| 工程与演进 | 类型与运行时校验如何配合？Figma、代码、文档、版本和迁移怎样协作？ |
+| Browsers and real content | What happens before a page appears? What changes when real text or different screens meet a design? |
+| Design Systems | Why does a component library still need a design system? How do primitive tokens, semantic tokens, themes and components fit together? |
+| Components and state | What does a component promise its caller? Who owns input, URL, shared and server state? |
+| Interaction and quality | How do forms, request races, accessibility, rendering and performance shape the complete experience? |
+| Engineering and evolution | How do types and runtime validation cooperate? How do Figma, code, documentation, versions and migrations stay aligned? |
 
-### 第二部分：后端与数据——系统怎样把事情办成
+### Part II: backend and data, how the system gets work done
 
-| 主题组 | 计划讨论的章节问题 |
+| Topic group | Planned questions |
 | --- | --- |
-| 常规业务系统 | API、认证授权、业务模块与服务边界如何组织？什么时候保持单体，什么时候需要拆分？ |
-| 业务数据正确性 | 怎样建模、选索引、处理并发和事务？查询与缓存各自能保证什么？ |
-| 高并发与容量 | 慢在哪里？如何理解延迟、吞吐、热点、连接数、扩展和限流？ |
-| 异步与事件 | 何时后台执行？队列、pub/sub、事件流和订阅有什么不同？如何处理重复、积压、失败和一致性？ |
-| 云与轻量 DevOps | Lambda/Functions、容器与常驻服务如何选择？怎样部署、观察、回滚、备份并恢复？ |
-| 数据分析 | OLTP 与分析负载、批流处理、CDC、ETL/ELT、仓库/湖/湖仓、指标与质量如何连接？ |
-| AI 成为产品能力 | 模型输出、结构化校验、检索权限、工具调用、评估、成本与回退要怎样设计？ |
+| Business applications | How should APIs, authentication, authorization and module boundaries work? When should a system remain a monolith or split services? |
+| Data correctness | How do modeling, indexes, concurrency and transactions work? What can queries and caches guarantee? |
+| Concurrency and capacity | Where is the delay? How do latency, throughput, hot spots, connections, scaling and rate limits interact? |
+| Asynchronous work and events | When should work happen later? How do queues, pub/sub, event streams and subscriptions differ? How do duplicates, backlogs, failures and consistency affect the design? |
+| Cloud and essential DevOps | When are functions, containers or persistent services appropriate? How do deployment, observation, rollback, backup and recovery fit together? |
+| Data analysis | How do OLTP and analytical workloads connect through batch/stream processing, CDC, ETL/ELT, warehouses/lakes/lakehouses, metrics and quality? |
+| AI product capabilities | How should model output, structured validation, retrieval permissions, tool execution, evaluation, costs and fallbacks work? |
 
-高并发、异步和 serverless 是可组合的维度，不是所有系统都应经历的升级路线。DevOps 以产品持续运行所需的基础为边界，不扩张为完整平台运维培训。
+High concurrency, asynchronous work and serverless are dimensions that can be combined, not a required upgrade path. Operations coverage supports a product's continued operation rather than becoming a full platform-engineering course.
 
-### 第三部分：整体案例——把决定放回同一个产品
+### Part III: connected cases, putting decisions back into a product
 
-- 多品牌主题：从设计规则到 token、组件契约和迁移。
-- 搜索与权限：从筛选界面到接口、查询、分页和缓存。
-- 上传与后处理：从进度与状态到存储、任务、通知及恢复。
-- 热门报名：从用户承诺到并发、约束、幂等与容量。
-- 学习数据分析：从业务事件到可信指标。
-- 为已有产品加入 AI：从用户问题到受控能力、评估和回退。
-- 与 AI 一起交付功能：需求拆分、上下文、工具、代码审查和验证的完整联系。
+- Multi-brand themes: design rules, tokens, component contracts and migration.
+- Search and permissions: filters, APIs, queries, pagination and caching.
+- Upload and processing: progress, storage, tasks, notifications and recovery.
+- Popular enrollment: user promises, concurrency, constraints, idempotency and capacity.
+- Learning analytics: business events and trustworthy metrics.
+- Adding AI to an existing product: user needs, controlled capabilities, evaluation and fallbacks.
+- Delivering with AI: requirements, context, tools, code review and verification.
 
-案例用于讲解和思考，不要求读者交作业。具体案例规模、代码量及跨章复用方式：**TBU**。
+Cases support explanation and reflection; readers do not have to submit assignments. Case size, code volume and cross-chapter reuse remain **TBU**.
 
-## 5. 语言与内容形式
+## 5. Languages and content forms
 
-- **书稿目标：** 简体中文与英文。中文先校准解释和风格，再分阶段改写英文；两份内容保持技术含义一致，不要求逐字翻译。
-- **网站默认：** 英文；保留中文切换入口。当前仅骨架已有双语路由，不代表全书已经双语完备。
-- **缺少翻译、版本落后提示、对应 slug：** **TBU**，需要 Writer 与 Developer 共同确认内容契约。
-- **主要形式：** Markdown 正文、原创图示、必要代码、比较表及带分析的思考问题。
-- **可选形式：** 精选提问卡、章节音频、EPUB/PDF。可行性和发布条件见路线图，均不预先宣称上线。
+- **Book:** Simplified Chinese and English. Review Chinese drafts first, then adapt the English in stages. Preserve technical meaning rather than matching every sentence literally.
+- **Website:** English by default with Chinese access. Existing bilingual routes do not mean the complete book has two finished editions.
+- **Project documentation:** English for project, engineering, collaboration, planning, analysis, handoff, review and template documents, including historical records. The single exception is the concise [Chinese stage summary](stage-summary.zh-CN.md). This documentation policy does not translate the Chinese manuscript or change Chinese UI resources.
+- **Initial content contract:** [opening/G01](content-contract.md) has accepted IDs, slugs/order, reviewed source hashes and missing-English navigation rules for later implementation. English chapter bodies do not exist; the English UI must identify Chinese availability and avoid fabricated English routes. Broader full-book schema, later language-version notices and future counterparts remain **TBU**. Accepted rules are not implemented reading pages.
+- **Primary forms:** Markdown prose, original diagrams, necessary code, comparisons and reflection questions with analysis.
+- **Optional forms:** Curated AI question cards, chapter audio and EPUB/PDF; their conditions remain in the roadmap.
 
-## 6. 阅读产品的方向
+## 6. Reading product
 
-视觉参考 OS 的文档与侧栏体验：清楚的层级、克制的颜色、轻边框、安静的正文区域。桌面有章节分类和本章导航；手机正文优先，导航按需展开。首页、章节页、手机布局及必要交互状态已有 [当前 Figma 设计与交接](design/reading-experience-v1.md)，待用户 review。用户已确定以 PandaCSS 为样式基础；组件库推荐按需采用 Park UI / Ark UI，尚未安装或迁移。OS 风格不能牺牲文字可读性、键盘操作、焦点反馈和小屏布局。
+The visual direction borrows the clarity of OS documentation and sidebars: clear hierarchy, restrained color, light borders and a quiet text area. Desktop layouts expose chapter groups and an in-page outline; mobile prioritizes the text and reveals navigation as needed. OS styling must preserve legibility, keyboard access, focus feedback and narrow-screen usability.
 
-读者应能按顺序阅读，也能按工程问题或案例进入；支持必要的术语解释、段落直达、阅读恢复与纠错入口。图示以说明关系为目的，少量难点可尝试逐步展示，但必须保留可理解的静态/文字表达。
+The [design handoff](design/reading-experience-v1.md) and [Reading Experience Design review (UI03)](reviews/UI03.md) describe three Figma pages: Tokens, Components and Page Designs. The last groups reading, responsive and Day/Night views vertically. The design retains iOS-like navigation materials and 1440/1024/768/390/320px specimens. Semantic roles describe layout and color; recipes describe component properties, slots and states. Design annotations are English. Visual acceptance by the author and code-level acceptance are separate gates.
 
-2026-11-14 UI03 设计更新：当前 Figma 仅三页——Tokens、Components、Page Designs；阅读、响应式及 Day/Night 在最后一页从上往下分区。界面、标题和设计注释以英文为主，中文仅在必要时补充。偏 iOS 的导航材质、1440/1024/768/390/320px 样本与双语书稿目标保留；颜色与间距等通过 semantic roles 表达，recipes 描述组件属性、slots 和状态。详见 [设计交接](design/reading-experience-v1.md) 与 [UI03 review](reviews/UI03.md)。这不表示网站主题或新页面已实现。
+PandaCSS is user-selected. The **Design Tokens and Day/Night Themes** implementation has a frozen, unaccepted checkpoint; it is not an accepted or merged reading experience. Park UI / Ark UI were optional recommendations, not evidence that a component suite was installed. Current implementation and validation status belong in the roadmap and history.
 
-## 7. 与 AI 结合的最小方向
+Readers should be able to follow the book or enter through a specific engineering question or case. Term explanations, paragraph links, reading recovery and correction reporting remain product directions. A few difficult diagrams may benefit from progressive disclosure, but always retain a useful static/text explanation.
 
-优先探索少量精选提问卡与复制上下文：本章问题、必要假设、相关短段落、来源链接和内容版本，交给读者自己的工具使用。适用位置和数量由内容需要决定，不强制每章配置。
+## 7. Low-cost AI extensions and audio
 
-卡片可以围绕“换个例子解释”“给一个反例”“检验我的理解”等具体目的。先展示将复制的内容，允许读者自行修改后粘贴到工具；不自动发送正文，不要求读者登录或授权第三方账户。卡片与相应章节一起维护、一起 review，不能在正文改变后继续使用已失效的假设。
+Explore a small number of curated question cards with copyable context: a question, necessary assumptions, a short relevant passage, source links and content version. Placement and quantity should follow the chapter's needs, not a fixed quota.
 
-本站初期不提供内置 AI chat、代管用户模型密钥、实时推理或自动代理执行。读者在自己的工具中使用提示，仍按其账户规则消耗额度。提示文本可预先查看和修改，不作结果正确性或效果保证。
+Cards may ask for another example, a counterexample or a check of understanding. Show the exact content before copying; readers can edit it and paste it into their own tools. Do not send book text automatically or require third-party account authorization. Maintain and review cards with their chapters so old assumptions do not silently survive revisions.
 
-后续可考虑上下文 Markdown 下载和可填写的设计交接模板；模型问答、个性化推荐等不在初期范围。网站音频是发布端预生成资产的独立探索，不意味着读者访问时调用模型。
+The initial site does not host AI chat, store model keys, perform live inference or run autonomous agents. Readers' own tools may consume their own quotas; the project does not guarantee model output quality. Downloadable context Markdown and fillable design handoffs are later candidates. Model-based recommendations and personalized Q&A are outside the initial scope.
 
-音频用于辅助理解和复习：正文可直接讲述，代码通常跳过并保留解释，图和表提供简短口述，不机械朗读 Markdown 标记或 URL。发布端生成并检查音频，网站播放已生成文件。章节变更后只更新受影响的朗读内容；音频对应旧版本时明确提示或暂不提供，不能把旧音频当作最新正文。选模型、运行节点、存储与自动生成方式均待单章试听后决定。
+Audio is a separate exploration using pre-generated publication assets, not inference on every visit. It should help understanding and review: narrate explanations, normally skip raw code, give short descriptions of diagrams/tables, and omit Markdown punctuation and URLs. Generate and check audio before publishing; play existing assets on the website.
 
-## 8. 参考、来源与必要说明
+After material changes, update only the affected narration. Label older audio or withhold it until a matching version is available. Model, execution location, storage and automation choices follow a single-chapter listening trial; they remain undecided.
 
-参考 [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook) 的工程知识组织与阅读入口；参考 [HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter) 的低门槛查阅、持续更新与公开反馈模式。我们独立组织前后端贯通的内容与教学案例，不声称首创、合作或获其背书。
+## 8. References and disclosures
 
-作者为 Jason Zhang，AI 参与目录讨论、资料整理、正文、例子、图示和编辑。已核查的行为、教学假设、经验判断和待验证内容分别标识；草稿不等于已审核，审核通过不等于已发布。
+The earlier positioning discussion used [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook) as a reference for organizing engineering knowledge, and [HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter) for accessible browsing, ongoing updates and public feedback. These are references, not claims of originality, partnership or endorsement. This editorial translation does not constitute a new audit of those projects.
 
-原理与概念自行解释；实际复用第三方图文代码时保留适用许可与归属。内容及代码的许可选择：**TBU（主对话与作者确认）**，最终发布前补全。没有凭空假定参考项目的许可适用于本项目。
+Jason Zhang is the author. AI assists with structure, research organization, prose, examples, diagrams and editing. Distinguish documented behavior, experiments, experience, teaching assumptions and unverified ideas. Drafted, reviewed, merged and published are different states.
 
-不写虚构用户、流量、企业案例、效率提升或收入。职业展示属于作品自然产生的可能价值，不把求职结果或商业机会当作项目承诺。内容可能更新，应按具体环境核对技术选择。
+Explain principles independently. Actual reuse of third-party text, diagrams or code requires the applicable license and attribution. The content/code license remains **TBU**, for the author to decide before release; reference projects' licenses do not automatically apply here.
 
-## 9. 谁补充什么
+Do not invent users, traffic, company cases, productivity improvements or income. Professional visibility may follow from the work but is not a promised outcome. Recheck technology choices against the environment in which they will be used.
 
-| 部分 | 负责人 | 下一步补充 |
+## 9. Responsibilities
+
+| Area | Supplies or authors detail | Decision / acceptance |
 | --- | --- | --- |
-| 产品定位、共同约定、功能优先级与声明 | 主对话 / 作者 | 审核本框架，决定正式文案、范围与许可 |
-| 详细目录、正文、例子与提问卡文本 | Writer | 在已授权阶段填充，向共同文档提出需要同步的变化 |
-| 页面设计实现、内容读取、验证与运行说明 | Developer | 在已授权阶段填充实现证据、限制与估算 |
-| 章节状态、跨角色一致性与最终验收 | 主对话 | 阅读实际成果，不仅依赖摘要 |
+| Positioning, shared requirements, priorities and disclosures | Writer drafts assigned product documents; owners propose scoped changes | Author decides; Coordinator assigns and reviews |
+| Detailed outline, manuscript, examples and question-card text | Writer | Coordinator reviews the actual deliverable; author is final authority |
+| Website implementation, content loading, validation and operational instructions | Developer | Coordinator reviews evidence and limitations |
+| Chapter status, cross-role consistency and integration | Owners report evidence; Coordinator maintains accepted status | Coordinator verifies; author is final authority |
 
-此文档由主对话维护。执行 agent 在自己的目录和交接中提交细节或修改建议，经协调后同步，避免同时改同一份愿景。`TBU` 不是无限任务清单，不自动放行研究、安装、付费服务或发布。
+For this documentation iteration, Writer owns this document and the roadmap; Coordinator reviews and integrates rather than ghostwriting the formal explanation. Later ownership changes must be explicit. `TBU` does not authorize unlimited research, installation, paid services or publication.

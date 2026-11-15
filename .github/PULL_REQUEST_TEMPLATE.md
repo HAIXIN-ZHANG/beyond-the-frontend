@@ -4,7 +4,7 @@ Describe the concrete change and why it is needed.
 
 ## Scope and review
 
-- Task and handoff:
+- Readable outcome name, legacy reference and handoff:
 - Coordinator review record and reviewed revision:
 - Files or behavior outside this change:
 

@@ -1,157 +1,150 @@
-# 匠人学院公开技术方向与本书覆盖建议
+# Jiangren Academy: Public Technical Topics and Book-Coverage Proposals
 
-查阅日期：2026-11-14（Australia/Perth）。
+Research date: 2026-11-14 (Australia/Perth). English editorial translation: 2026-11-15; **no new website research or technical revalidation** was performed for the translation.
 
-历史名称说明：本文整理时项目工作名为 Engineer Better，现统一为 Beyond the Frontend / `beyond-the-frontend`。本轮只补此说明，未重新查阅或扩展原研究证据。
+Historical naming: the working name during this inventory was Engineer Better, now **Beyond the Frontend / `beyond-the-frontend`**. The earlier naming-only update did not refresh the evidence. Status: reference inventory and editorial proposals for the author and Coordinator, not an accepted chapter list, technology selection or release decision.
 
-状态：参考资料盘点与编排建议，供用户和协调者审阅。不是正式章节目录、技术选型或发布决定。
+## Original task and scope
 
-## 任务与范围
+The user authorized inspecting Jiangren's public learning material to record industry topics and suggest book coverage. The original task added only this note, without changing shared decisions, writing chapters or implementing the website.
 
-用户授权查看匠人学院公开学习资料，记录其覆盖的行业技术知识，并提出如何纳入 Engineer Better。本次仅新增这份研究笔记；不修改共享决策文件，不开始章节正文或网站实现。
+Use the discussed three parts: frontend; backend/data; connected cases. Aim for coherent drafts before imposing page limits, then adjust after a complete reading. Reference technical directions and knowledge scope, not site prose, course structure, branding or teaching projects. Develop original questions, explanations, code and diagrams. Employment, interviews, résumés, exam preparation, training schedules and placement marketing are outside this book.
 
-本书按讨论中的三部分组织：前端；后端与数据；整体案例设计。先以完整初稿为目标，不预设页数上限，之后根据通读反馈调整。
+## Evidence boundary
 
-参考对象是技术方向与知识范围。采用自己的问题、解释、代码和图示，不照搬网站正文、课程结构、品牌或教学项目。求职、面试、简历、认证备考、培训安排和就业宣传不进入本书范围。
+This was a horizontal inventory of major public entry points and topic lists, not an exhaustive page-by-page review. It did not watch all videos, read all tutorials, run examples or establish teaching outcomes. Listing a topic shows advertised coverage, not depth, correctness or industry adoption.
 
-## 查阅范围与证据边界
+Some pages were unavailable through the web-reading tool; their public lists were then inspected in a browser. This note stores learning topics, not account state or personal information.
 
-本次是主要公开入口和目录的横向盘点，不是全站逐页审查。没有观看全部视频、阅读全部教程、运行其示例或核验课程实际教学效果。目录列出一个主题，只能证明页面将其列入范围，不能证明讲解深度、技术准确性或行业普及程度。
-
-部分页面无法通过网页读取工具取得，随后在浏览器查看了公开目录。笔记只记录学习内容，不保存账户状态或个人信息。
-
-| 编号 | 来源 | 本次实际查看范围 |
+| Source | Public page | Actually inspected in the original research |
 | --- | --- | --- |
-| JR-01 | [首页](https://jracademy.ai/) | 学习资料、课程、Wiki、路线图和 Lab 的导航入口 |
-| JR-02 | [全栈课程介绍](https://jracademy.ai/program-course/web-code-bootcamp-or-learn-to-code-1) | 技术范围介绍与完整课程大纲入口 |
-| JR-03 | [全栈公开大纲](https://jracademy.ai/curriculum/web-code-bootcamp-or-learn-to-code-1/curriculum.html) | HTML/CSS/JavaScript、Git、React、Node.js、数据与认证、AI 接入、部署等条目 |
-| JR-04 | [DevOps 课程](https://jracademy.ai/program-course/devops) | 公开大纲的技术分组及默认展开项；其余分组未逐项展开 |
-| JR-05 | [数据工程课程](https://jracademy.ai/program-course/data-engineer-data-analyst) | 公开课程条目与技术范围说明 |
-| JR-06 | [AI Engineer 学习方向](https://jracademy.ai/learn/ai-engineer) | 应用接入、检索、工具、评测与部署的方向说明 |
-| JR-07 | [AI Engineer Bootcamp](https://jracademy.ai/program-course/ai-engineer-bootcamp) | 当前页面的技术层次与标注为历史课程回顾的分组；不混同不同班期 |
-| JR-08 | [学习路线图](https://jracademy.ai/roadmaps) | 路线图目录及各条目的简介；未逐一检查图中节点与外部资源 |
-| JR-09 | [Wiki](https://jracademy.ai/wiki) | 推荐内容、学习路线和当前首个列表页的教程标题与摘要；未遍历分页或教程正文 |
-| JR-10 | [Cheat Sheets](https://jracademy.ai/cheat-sheets) | 分类和速查条目名称；未审查各速查表的代码或命令 |
+| JR-01 | [Home](https://jracademy.ai/) | Navigation to learning material, courses, Wiki, roadmaps and Lab |
+| JR-02 | [Full-stack course](https://jracademy.ai/program-course/web-code-bootcamp-or-learn-to-code-1) | Technical-scope description and full-curriculum entry |
+| JR-03 | [Public full-stack curriculum](https://jracademy.ai/curriculum/web-code-bootcamp-or-learn-to-code-1/curriculum.html) | HTML/CSS/JS, Git, React, Node.js, data/authentication, AI integration and deployment entries |
+| JR-04 | [DevOps course](https://jracademy.ai/program-course/devops) | Public technical groups and initially expanded items; remaining groups not individually expanded |
+| JR-05 | [Data-engineering course](https://jracademy.ai/program-course/data-engineer-data-analyst) | Public items and technical-scope description |
+| JR-06 | [AI Engineer learning direction](https://jracademy.ai/learn/ai-engineer) | Application integration, retrieval, tools, evaluation and deployment direction |
+| JR-07 | [AI Engineer Bootcamp](https://jracademy.ai/program-course/ai-engineer-bootcamp) | Current technical levels and groups explicitly labelled as past-course reviews; cohorts kept separate |
+| JR-08 | [Roadmaps](https://jracademy.ai/roadmaps) | Directory and item summaries, not every diagram node or external reference |
+| JR-09 | [Wiki](https://jracademy.ai/wiki) | Recommended content, learning paths and titles/summaries on the first list page; no pagination or tutorial-body survey |
+| JR-10 | [Cheat Sheets](https://jracademy.ai/cheat-sheets) | Categories and entry names; no code/command audit |
 
-博客入口已发现，但本次网页读取失败，未完成正文审阅，不以其文章内容作判断。Context Engineering、前端等独立学习页也未完成详情审阅；相关方向仅在其他已查看页面明确列出时记录。
+The blog entry was found, but page reading failed and article bodies were not reviewed. Dedicated Context Engineering/frontend learning pages were not reviewed in detail either; record their topics only when explicitly present in other inspected sources.
 
-## 网站明确列出的方向
+## Topics explicitly listed
 
-以下是已查看目录的概括，来源编号对应上表。技术名称只用于识别主题，不表示本书已经采用这些产品。
+Product names identify topics, not a selected book stack.
 
-| 技术方向 | 已观察到的内容 | 来源 |
+| Direction | Observed coverage | Sources |
 | --- | --- | --- |
-| Web 基础与前端应用 | HTML、CSS、响应式、JavaScript、DOM、异步请求；React 组件、状态、路由与表单 | JR-03 |
-| 后端与业务数据 | Node.js、Express、REST API、MongoDB、认证、权限、CRUD 与联调 | JR-03 |
-| 协作与开发工具 | Git 分支与合并、PR、冲突；包管理、编辑器、调试工具的路线或速查入口 | JR-03、JR-10 |
-| DevOps 与运行 | 容器化、CI/CD、系统基础、IaC、监控日志、编排、高可用、故障管理；DNS/CDN、云权限 | JR-04 |
-| 数据工程 | 文件与 API 抽取、SQL、云存储、仓库与湖、Kafka/Kinesis、Spark、Airflow/dbt、数据安全 | JR-05 |
-| 分析与机器学习 | 数据分析、可视化、机器学习基础、模型评估和部署；Pandas、BI 等工具入口 | JR-05、JR-09 |
-| AI 协作开发 | 任务拆分、上下文、代码审查、调试、测试和修改；AI 编辑器与终端工具指南 | JR-03、JR-09 |
-| LLM 应用 | API、流式输出、结构化输出、embedding、RAG、混合检索与重排、工具调用和 MCP | JR-06、JR-07 |
-| Agent 与运行质量 | 执行循环、编排、记忆、运行控制、追踪、预算、回退、人工介入、安全和评测 | JR-07 |
-| 横向架构与其他方向 | 系统设计、软件架构、AWS、QA，以及移动端、区块链、WordPress 等路线目录 | JR-08 |
+| Web/frontend | HTML/CSS/responsive/JS/DOM/async requests; React components/state/routing/forms | JR-03 |
+| Backend/business data | Node.js/Express/REST/MongoDB/authentication/permissions/CRUD/integration | JR-03 |
+| Collaboration/tools | Git branches/merge/PR/conflicts; package managers/editors/debugging paths or references | JR-03/JR-10 |
+| DevOps/operations | Containers/CI/CD/system fundamentals/IaC/monitoring/logging/orchestration/availability/incidents; DNS/CDN/cloud identity | JR-04 |
+| Data engineering | File/API extraction, SQL, cloud storage, warehouses/lakes, Kafka/Kinesis, Spark, Airflow/dbt and security | JR-05 |
+| Analytics/ML | Analysis, visualization, ML foundations, evaluation/deployment, Pandas/BI entry points | JR-05/JR-09 |
+| AI-assisted development | Decomposition/context/review/debugging/testing/revision; editor/terminal tool guides | JR-03/JR-09 |
+| LLM applications | APIs/streaming/structured output/embeddings/RAG/hybrid retrieval/reranking/tools/MCP | JR-06/JR-07 |
+| Agents/operational quality | Execution loops/orchestration/memory/control/tracing/budgets/fallback/human intervention/security/evaluation | JR-07 |
+| Architecture/other tracks | System design/software architecture/AWS/QA and mobile/blockchain/WordPress roadmaps | JR-08 |
 
-JR-09 与 JR-10 还列有多种框架、语言和工具。工具目录可帮助发现遗漏，但条目数量或营销描述不作为“必须掌握”“行业主流”或能力高低的依据。
+JR-09/JR-10 list additional frameworks, languages and tools. Lists can reveal gaps, but item counts and marketing are not evidence of required skills, mainstream adoption or expertise.
 
-## 对现有书纲的影响：保留三部分，补足连接环节
+## Proposed coverage: keep three parts and strengthen connections
 
-以下全部是本书的编排建议。与前面讨论的书纲比较，主要有三种处理：已有主题进一步具体化；补入之前不够明确的知识；作为可选延伸或速查。
+Everything below is an editorial recommendation. It either makes existing scope concrete, names previously implicit knowledge or offers optional depth/reference material.
 
-### 第一部分：前端
+### Frontend
 
-| 主题 | 与已有书纲的关系 | 建议怎样覆盖 | 连接案例 |
+| Topic | Relationship to earlier outline | Proposed treatment | Connected case |
 | --- | --- | --- | --- |
-| HTML、CSS 与浏览器 | 已有，补清必要机制 | 语义、布局、DOM、事件、渲染；围绕布局错位、焦点和页面更新解释，不重写全部语法教程 | 组件与主题、表单 |
-| JavaScript 异步与运行 | 已有，需具体化 | Promise、async/await、事件循环的必要概念、异常与取消；用先发请求后返回的问题解释 | 搜索与权限 |
-| TypeScript 与运行时校验 | 补入明确内容 | 类型如何表达组件和接口约定；静态类型与外部输入校验分别保护什么；避免变成类型体操专题 | 搜索 API、表单 |
-| 依赖与构建 | 补入明确内容 | 包、版本、lockfile、构建产物、环境变量；开发环境与部署环境为何可能不同；供应链风险的基本判断 | 首次部署与故障排查 |
-| 组件、状态、路由与表单 | 已有 | 讲状态归属、数据流、组合与契约，再选一种框架展示；用差异有意义的对照解释其他框架 | 主题、搜索、报名 |
-| 数据获取与异步界面 | 已有，补清失败过程 | 加载、空态、错误、过期响应、取消、重试、断线；AI 界面增加流式响应中断与部分结果 | 搜索、上传、AI 问答 |
-| 性能与可访问性 | 保持已有重点 | 用可观察行为与检查证据展开，避免只列优化技巧或合规术语 | 慢速搜索、表单、弹窗 |
-| Design System | 保持本书重点 | tokens、semantic tokens、主题、组件边界、Figma/代码、文档和演进；不因参考课程的侧重点而缩减 | 多主题案例 |
+| HTML/CSS/browser | Existing; clarify mechanisms | Semantics/layout/DOM/events/rendering through broken layout, focus and updates, not a complete syntax course | Components/themes/forms |
+| JS async/runtime | Existing; make concrete | Essential Promise/async/await/event-loop/error/cancellation ideas through out-of-order responses | Search/permissions |
+| TypeScript/runtime validation | Make explicit | Component/API contracts; separate static and external-input checks; avoid type puzzles | Search API/forms |
+| Dependencies/build | Make explicit | Packages/versions/lockfiles/artifacts/environment; development versus deployment; basic supply-chain judgment | First deployment/debugging |
+| Components/state/routing/forms | Existing | Ownership/data flow/composition/contracts before a representative framework; compare meaningful differences | Theme/search/enrollment |
+| Data fetching/async UI | Existing; clarify failures | Loading/empty/error/stale/cancel/retry/disconnect; partial/interrupted AI streams | Search/upload/AI Q&A |
+| Performance/accessibility | Retain emphasis | Observable behavior and evidence, not lists of tricks or compliance terms | Slow search/forms/dialogs |
+| Design System | Retain book emphasis | Tokens/semantic roles/themes/boundaries/Figma/code/docs/evolution; do not shrink it to match course priorities | Multi-theme case |
 
-### 第二部分：后端、数据与运行
+### Backend, data and operations
 
-| 主题 | 与已有书纲的关系 | 建议怎样覆盖 | 连接案例 |
+| Topic | Relationship | Proposed treatment | Case |
 | --- | --- | --- | --- |
-| API、认证、授权和租户 | 已有 | 用明确的请求、响应和权限判断展开；区分界面隐藏与服务端访问控制 | 搜索与权限 |
-| 模块边界与业务规则 | 已有 | 从模块化单体解释职责、依赖、事务边界，再讨论拆服务的触发条件 | 报名与上传 |
-| SQL 的实际阅读能力 | 已有数据库主题，补明确内容 | JOIN、聚合、NULL、约束、索引和执行计划；分析场景按需引入 CTE、窗口函数；解释重复行和粒度错误 | 搜索、学习分析 |
-| 事务、并发、缓存和消息 | 已有 | 保持原理深度；用时间线分析重复操作、失败窗口和陈旧数据，不退回 CRUD 教程 | 报名、处理通知 |
-| 进程、端口与 Linux 基础 | 补入明确内容 | 进程怎样运行和退出，端口、文件权限、环境变量、日志、资源限制；给出少量排错命令及解释 | 本地可运行但上线失败 |
-| 云网络与访问身份 | 已有部署安全，补清结构 | 入口、反向代理、DNS/TLS、CDN；公网/私网、子网、出站访问和工作负载身份的基本关系 | 上传与公开访问 |
-| 容器与编排 | 已有部署主题，补清机制 | 镜像、容器、网络、卷、配置、健康检查；先解释单服务，再按需求介绍编排与 Kubernetes 的职责 | API 与 worker 部署 |
-| CI/CD 与 IaC | CI/CD 已有，IaC 补明确内容 | 从代码、检查、产物到环境；配置和基础设施变更如何 review；漂移、权限、状态与恢复 | 一次受控发布 |
-| 监控、高可用与故障 | 已有 | 用用户影响串联日志、指标、trace、告警、降级和恢复；备份与恢复验证并列考虑 | 上传积压、报名高峰 |
-| 数据采集与管道 | 已有，补真实故障 | API 分页和限流、断点、增量、水位、重复和 schema 变化；保留来源信息，解释重跑与补数 | 学习分析 |
-| 数据处理与编排工具 | 已有，补具体落点 | SQL、Python/DataFrame、dbt、Airflow、Spark 可作候选窗口；区分转换、调度、执行与分布式计算 | 报表生成与更新 |
-| 数据仓库、湖与指标 | 已有 | 把 OLTP、CDC、ETL/ELT、模型、口径、迟到数据、质量和权限连成数据流 | 两张报表数字不同 |
-| AI 应用基础 | 已有，进一步拆清 | 模型 API、输出校验、token/context 的必要概念、流式交互；检索、工具和模型分别承担什么 | AI 功能案例 |
-| AI 检索与执行质量 | 已有，补明确层次 | chunking、embedding、关键词/向量/混合检索、重排、引用；工具参数、权限、超时、停止、预算、回退与评测 | 受权限控制的资料问答 |
+| API/authentication/authorization/tenants | Existing | Requests/responses/decisions; UI hiding versus server access control | Search/permissions |
+| Modules/business rules | Existing | Modular monolith responsibilities/dependencies/transactions before service-split triggers | Enrollment/upload |
+| Reading real SQL | Make database scope explicit | JOIN/aggregation/NULL/constraints/indexes/plans; CTE/windows as needed; duplicates and grain | Search/analytics |
+| Transactions/concurrency/cache/messages | Existing | Preserve depth; use timelines for duplication, failure windows and stale data rather than returning to CRUD | Enrollment/notifications |
+| Processes/ports/Linux | Make explicit | Run/exit/permissions/environment/logs/limits with a few explained diagnostics | Local works, deployment fails |
+| Cloud networking/identity | Clarify structure | Entry/proxy/DNS/TLS/CDN; public/private/subnet/egress/workload identity | Upload/public access |
+| Containers/orchestration | Clarify mechanisms | Images/containers/network/volumes/config/health; one service before orchestration/Kubernetes | API/worker deployment |
+| CI/CD/IaC | IaC made explicit | Code→checks→artifacts→environment; configuration/infrastructure review, drift/permissions/state/recovery | Controlled release |
+| Monitoring/availability/incidents | Existing | User impact connects logs/metrics/traces/alerts/degradation/recovery; verify restoration alongside backups | Upload backlog/enrollment peak |
+| Ingestion/pipelines | Clarify failures | Pagination/limits/checkpoints/incremental watermarks/duplicates/schema; preserve provenance, reruns/backfills | Learning analytics |
+| Processing/orchestration tools | Concrete windows | Candidate SQL/Python/DataFrame/dbt/Airflow/Spark; separate transformation/scheduling/execution/distributed compute | Report generation/refresh |
+| Warehouses/lakes/metrics | Existing | Connect OLTP/CDC/ETL/ELT/models/definitions/late data/quality/permissions into a flow | Conflicting reports |
+| AI application foundations | Separate responsibilities | Model API/output validation/token/context/streaming; retrieval versus tools versus model | AI feature |
+| AI retrieval/execution quality | Explicit levels | Chunking/embeddings/keyword/vector/hybrid/reranking/citations; tool arguments/permissions/timeout/stopping/budget/fallback/evaluation | Authorized document Q&A |
 
-### 第三部分：把知识放回整体案例
+### Connected cases
 
-| 原创案例 | 应串联的内容 | 条件变化与设计判断 |
+| Original case | Connections | Changed conditions and judgment |
 | --- | --- | --- |
-| 多主题组件 | 设计原则、tokens、组件契约、类型、可访问性、设计文件与代码、版本迁移 | 增加新品牌时，应改值、映射、组件还是业务界面？ |
-| 带权限的搜索 | URL 与界面状态、异步请求、API、SQL、权限过滤、分页、缓存、日志 | 查询很慢、权限改变或请求乱序时，哪些层需要变化？ |
-| 上传后处理并通知 | 对象存储、访问权限、任务记录、队列、worker、事件、重试、状态 UI、部署和监控 | 用户离开、任务重复、worker 退出或通知失败时，如何恢复？ |
-| 热门报名 | 表单反馈、幂等、事务与约束、限流、排队、容量与告警 | 如何分别保证业务正确与系统承载能力？ |
-| 可信学习报表 | 源数据、事件/CDC、增量采集、转换、编排、模型、口径和质量检查 | 补数、重跑、迟到事件、用户删除如何影响结果？ |
-| 给已有产品增加 AI | 有权限的资料、检索、模型输出、引用、工具执行、评测、成本、前端状态与部署 | 无资料、资料冲突、越权、超时、模型变更时，产品如何表现？ |
+| Multi-theme components | Principles/tokens/contracts/types/accessibility/design/code/migration | For a new brand, change values, mappings, components or business UI? |
+| Authorized search | URL/UI state/async/API/SQL/permissions/pagination/cache/logging | Which layer changes for slow queries, permission updates or request races? |
+| Upload, processing and notification | Storage/access/tasks/queue/worker/events/retry/UI/deployment/monitoring | Recover after departure, duplicate tasks, worker exit or failed notification |
+| Popular enrollment | Feedback/idempotency/transactions/constraints/limits/queue/capacity/alerts | Separate correctness from capacity |
+| Trustworthy learning reports | Source records/events/CDC/incremental ingestion/transformation/orchestration/models/definitions/quality | Backfills/reruns/late events/user deletion |
+| AI in an existing product | Authorized documents/retrieval/output/citations/tools/evaluation/cost/UI/deployment | Missing/conflicting data, unauthorized access, timeout/model change |
 
-这些案例的上线、改动和故障片段可承接 Git、CI/CD、IaC、排错和恢复，不需要新增一个必做的综合项目。
+Release/failure/recovery segments in these cases can carry Git/CI/CD/IaC and debugging without adding a mandatory capstone.
 
-## AI Coding、skills 与 AI 应用分别怎样写
+## AI coding, skills and AI applications
 
-### AI 帮助开发：贯穿相关章节
+### AI-assisted development across relevant chapters
 
-展示读代码、澄清需求、拆任务、准备相关上下文、实施小范围改动、检查差异、验证与修正。保留关键输入、必要代码差异和验证证据；不倾倒完整聊天记录，不编造运行成功或效率提升。
+Show reading code, clarifying requirements, splitting tasks, preparing context, implementing a small change, reviewing its diff, verifying and correcting. Keep key inputs, necessary diffs and evidence, not full transcripts or invented execution/productivity results.
 
-Git 与 review 应有具体位置：读者需要能判断 AI 改了哪些文件、有没有扩大范围、哪些检查真的运行过，以及怎样安全撤回一次不合适的改动。
+Give Git/review a concrete role: identify changed files, expanded scope, checks actually run and safe recovery from an unsuitable edit.
 
-### Skills：整理可复用方法
+### Skills as reusable methods
 
-建议用本书自己的“增加一个表单组件”或“审查 API 契约”案例：先识别重复工作，再整理适用条件、输入、步骤、参考资源、脚本与验收；用不同需求检查遗漏和误触发。
+Use original cases such as adding a form component or reviewing an API contract. Identify repetition, then specify applicability, input, steps, references, scripts and acceptance. Test different requirements for omissions and false triggers.
 
-不要只提供一个 SKILL.md 模板；要展示为什么这样拆、何时无需 skill、如何维护和验证。也不把项目约定文件、当前任务说明、skill、工具和授权机制混为一谈。
+Explain why the method is divided this way, when no skill is needed, and maintenance/validation; a bare `SKILL.md` template is insufficient. Separate project conventions, task instructions, skills, tools and permissions. This inventory did not establish full coverage of those topics in Jiangren skill articles; they are this book's recommendations based on the user's request.
 
-本次浏览目录不能证明其 skills 正文已完整覆盖这些内容；以上为根据用户要求提出的本书内容建议。
+### AI as a product capability
 
-### AI 成为产品能力：在后端原理与整体案例中展开
+Connect model requests, retrieval, tool execution and UI feedback. Evaluate normal and failure paths using deterministic checks and necessary human judgment alongside model-assisted scoring. Verify concrete models, SDKs, frameworks and services against official sources when writing the chapter.
 
-覆盖模型请求、检索、工具执行和界面反馈之间的关系。评测同时考虑普通路径与失败路径；模型辅助打分之外，也需要可确定检查与必要人工判断。具体模型、SDK、框架和服务行为在写正式章节时回到官方来源核对。
+Introduce sessions, business state and persistent memory when needed. Discuss multi-agent systems when dependencies, shared state and coordination costs warrant it. Offer deeper routes for fine-tuning/training without making the book an algorithms textbook.
 
-会话、业务状态与长期记忆可按具体需要解释；多 agent 只在任务依赖、共享状态和协调成本值得讨论时进入。微调与模型训练给出适用问题和深入入口，不默认把本书扩成算法训练教材。
+## Depth and framework choices
 
-## 内容层次与框架处理
-
-| 层次 | 采用标准 | 典型内容 |
+| Layer | Inclusion test | Examples |
 | --- | --- | --- |
-| 正文 | 缺少它就难以理解案例或作出基本判断 | 状态与边界、API、权限、数据、并发、消息、部署、验证、AI 可靠性 |
-| 可选深入 | 有助于解释特殊条件和进一步取舍 | 数据库细节、复杂编排、Kubernetes、分布式计算、模型微调 |
-| 附录或速查 | 主要用于提醒写法、命令或查找位置 | Git、curl、SQL 示例、环境配置、日志排查、术语映射 |
-| 暂不纳入 | 不能支撑本书主要问题，或会形成独立专业路线 | 求职与认证；移动端、区块链、WordPress 专题；完整 ML 算法课；通用办公和影音工具教程 |
+| Main prose | Necessary to understand the case or make basic judgments | State/boundaries/API/permissions/data/concurrency/messages/deployment/verification/AI reliability |
+| Optional depth | Explains special conditions or further trade-offs | Database internals/complex orchestration/Kubernetes/distributed compute/fine-tuning |
+| Appendix/reference | Reminds readers of syntax, commands or locations | Git/curl/SQL/environment/logs/terminology |
+| Outside scope | Does not support the main questions or becomes a separate specialist track | Employment/certification/mobile/blockchain/WordPress/full ML algorithms/general office or media tools |
 
-框架按“问题—原理—实现—取舍”引入。每个主题选一条主要实现路径，差异影响判断时才对照其他生态；具体选择仍待确认。网站列出的产品可进入候选池，但不据此固定本书技术栈。
+Introduce frameworks through problem → principle → implementation → trade-off. Choose one principal implementation per topic; compare ecosystems when differences matter. Choices remain open. A course product list does not fix the book stack. Any quick reference must be original with official links; public availability is not permission to copy expression or code.
 
-速查内容若制作，也应原创并链接官方来源；发现一份公开速查表不代表可以直接复制其中的表达或代码。
+## Priority outline improvements proposed at the time
 
-## 建议优先落实到书纲的补充
+1. Explicit frontend TypeScript/runtime boundaries and dependencies/builds; make async problems concrete.
+2. Connect runtime fundamentals, cloud networking/identity, containers, CI/CD and IaC into an understandable deployment chain.
+3. Add practical SQL, ingestion failures, incremental/rerun behavior and transformation-versus-scheduling responsibilities.
+4. Keep the development/product AI threads separate; clarify retrieval/evaluation/execution control/failure experience.
+5. Carry additions through existing cases while retaining Design Systems, architecture trade-offs, reliability and original explanations.
 
-1. 前端增加明确的 TypeScript/运行时边界、依赖与构建内容，并把异步请求问题讲具体。
-2. 后端把运行基础、云网络、工作负载身份、容器、CI/CD 与 IaC 连成一条可理解的部署链。
-3. 数据部分补 SQL 阅读、采集失败、增量与重跑、转换与调度的职责区分。
-4. AI 内容保持“协作开发”和“产品能力”两条线，细化检索、评测、执行控制和失败体验。
-5. 通过原有案例承接这些补充，维持 Design System、架构取舍、可靠性与原创讲解的重点。
+These fill scope gaps; they do not demand one chapter per product or remove editorial selection because page count is open.
 
-这些是范围补全建议，不是要求把每个产品写成独立章节，也不因取消页数上限而取消主题取舍。
+## Historical checks and next dependency
 
-## 后续核查与交接
-
-- 本次改动：仅新增 `docs/research/jr-academy-topic-map.md`。
-- 已做：公开目录横向查看、来源登记、知识方向提炼、与此前书纲建议对照、区分观察和建议。
-- 未做：全站爬取、课程质量审查、示例运行、逐项官方技术核验、正式章节写作和技术栈决定。
-- 正式写作的证据要求：产品行为、版本与限制回到各自官方文档；实验结论附运行条件；来源材料实际复用时核查许可与署名。
-- 待协调：用户审阅后，由协调者决定哪些内容进入共享书纲、如何拆章和分配；本笔记不自行修改共享看板或放行其他角色。
+- **Original change:** only `docs/research/jr-academy-topic-map.md` was added.
+- **Performed:** horizontal public-list inspection, source registration, topic synthesis, comparison with the discussed outline, observation/proposal separation.
+- **Not performed:** full-site crawl, course-quality review, running examples, official verification of every technology, chapter writing or stack selection.
+- **Chapter evidence:** verify product behavior/version/limits in official documentation; attach environment conditions to experiments; check license/attribution for actual reuse.
+- **Next dependency at the time:** author/Coordinator review of coverage, chapter splits and assignment. This note neither changes the board nor authorizes another role.
+- **Translation boundary:** the 2026-11-15 English revision preserves the inventory's source identifiers, URLs, date and limitations; it does not turn the original observations into current verification.

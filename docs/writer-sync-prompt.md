@@ -1,59 +1,69 @@
-# 发给 Writer 的协作同步指令
+# Writer Coordination and Stage Handoff Instructions
 
-## 最新任务授权：基础建设六阶段（2026-11-15）
+English editorial/current-status update: 2026-11-15. Read the current section before historical snapshots. Readable deliverable names are primary; legacy IDs and paths remain for tracing.
 
-读取 `docs/coordination.md` 顶部的 CI01 → TS01 → DS01 → CMP01 → PAGE01 → QA01 授权与关口。这是用户新指令，覆盖下方“不放行 CI/TypeScript/PandaCSS”的旧阶段快照；对应 TS/Panda 实施所必需的最小兼容官方 npm 依赖已获准，不扩大为额外组件库或付费服务。各阶段仍须交接、实际 review、返修、精确 PR/检查与主审合并，不部署。Writer 未因此获分配新章；已审书稿保持稳定，页面先用清楚标注的排版样例。CI01 已有三个成功云端 job，同名 required checks 已保存并复核；PR/当前 main 以实际 GitHub 状态和看板为准。
+## Current priority: AI Development Workflow and Delivery History
 
-## 当前文档整合：DOC01（2026-11-15）
+Complete the assigned documentation upgrade, submit actual files/evidence to Coordinator, handle review revisions, then **pause for the author's overall-project-design discussion**. Do not automatically resume Browser Fundamentals — Manuscript (F01M), English book adaptation, site code or deployment. Earlier post-QA GitHub Pages authorization remains recorded; execution is paused rather than pre-approved by documentation acceptance.
 
-此前剩余的 27 份本地 Markdown 已完成归属盘点与有限状态返修，现由主对话统一 review 并通过独立文档 PR 整合；范围与实际结果见 `docs/reviews/DOC01.md` 和 `docs/coordination.md`。下方各阶段的提交号、分支和“未跟踪”描述均为对应日期的历史快照，不能作为当前 checkout 或任务状态。获取当前 main 应读取远端，不复用这里的旧 SHA。目录仍为提案，整合文档不放行下一章、TypeScript/PandaCSS 实施、CI 或部署；按已明确的任务继续交接、review 和返修。
+Current documentation worktree: `/tmp/btf-project-docs`, branch `codex/ai-development-history`, based on main `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Always supply explicit workdir/absolute edit paths. Writer and Developer have disjoint ownership in this documentation tree; do not switch branches, stage, commit, push or edit their other worktrees. Coordinator manages Git.
 
-## 最新权限基线：SEC01（2026-11-14）
+Writer's assignment includes vision/roadmap/positioning, the Jiangren topic inventory, this prompt, all `book/planning/`, Writer handoffs and the single `docs/stage-summary.zh-CN.md`. Developer owns the separately assigned engineering/collaboration/design/history/review/template files and README. Coordinator assigns/reviews/feeds back/integrates, not authors the owners' formal explanations.
 
-GitHub 默认已为 main，禁止 force push/删除且管理员同样需要PR；当前 main 为安全基线 PR #2 合并提交 `c8993ce`。见已提交的 `docs/security/access-policy.md` / `docs/reviews/SEC01.md`，下方默认分支待改的文字仅为历史。访客可阅读/评论/提PR但不能push；Figma公开View，只有Owner继承编辑。保持逐章双review流程，勿擅自改权限或恢复工作分支旧基线；本次没有放行新章节或发布。
+All project/process/planning/analysis/handoff/review/template documents, including historical records, use natural professional English. The single Chinese process document is the short stage summary. Retain technical identifiers, formal Chinese book title and necessary original references. This policy does not translate Chinese manuscript or Chinese UI resources. Preserve facts, dates, proposal/acceptance distinctions and revision history; historical hashes belong to their original revisions, not the current translations.
 
-## 当前主线：main 与本地 review（2026-11-14）
+Current accepted facts: opening/G01 merged through PR #1; CI/strict TypeScript integrated; Browser Fundamentals research/outline accepted and PR #6 merged after three successful checks. F01M is unwritten. The separate Panda theme checkpoint is unaccepted and outside main; no live site or complete browser acceptance. The [initial content contract](content-contract.md) accepts only opening/G01 IDs, slugs, reviewed sources and missing-English navigation for a later assigned implementation. Broader book schema/translation remains open; don't label the accepted minimum as entirely TBU or implemented.
 
-W02 已通过 PR #1 squash merge 到 main（`71b29c7`）；D02 已是 main 的初始基线。共享 checkout 当前为 main，跟踪 origin/main，本地规划/共享文件保留未跟踪。主对话承担本地 reviewer，不接 GitHub AI review action；有问题回原负责人修订，复审通过后由主对话按既有授权创建/合并 scoped PR。分析/正文两道关口不变，不自行 merge。旧段落中 Writer 分支待推送/仅已推送的状态是历史，以 INT01 和看板为准；下一章节范围仍待确定。
+## Historical foundation authorization, 2026-11-15
 
-## 当前 review 循环：WF01 已通过（2026-11-14）
+The user authorized, in order: Continuous Integration and Merge Protection (CI01) → Strict TypeScript Migration (TS01) → Design Tokens and Day/Night Themes (DS01) → Reusable Reading Components (CMP01) → Responsive Chapter Reading (PAGE01) → Browser Validation and E2E Tests (QA01). Necessary compatible npm/development/browser tools were authorized; this did not authorize unrelated suites or paid services. Temporary tools are not permanent E2E coverage.
 
-主对话已核对用户原始要求并 review `chapter-workflow.md`、分析模板和 tasks 流程入口，结论见 `docs/reviews/WF01.md`：流程/模板通过，没有阻塞返修；不等于 W01 全目录或下一章获批。每章按“范围 → 调研/细纲分析 → 分析 review/返修 → 正文 → 正文 review/返修”执行。阶段完成主动发送交接路径、修订号、文件与证据给主对话；主对话直接回传具体反馈，返修后再次提交，不必等待用户手动搬运。通过后推进已授权下一步，扩大范围或发布按适用授权。没有持续后台监听，不重复发送索取回执。UI03 已确认读过，无须重发设计摘要。
+Each stage required handoff, actual review/revision and exact-head PR/checks/merge. The initial iteration excluded deployment; the user later authorized a separate post-QA GitHub Pages Release (DEP01). These changes did not assign Writer every proposed chapter. Current pause supersedes immediate continuation of this sequence.
 
-## 最新设计补充：UI03（2026-11-14）
+## Historical Project Documentation Integration (DOC01), 2026-11-15
 
-Figma 已整理为 Tokens、Components、Page Designs 三页，阅读/响应式/明暗主题在最后一页分区；界面和设计注释以英文为主，中文仅在必要时补充。以 `docs/reviews/UI03.md` 和设计交接为准，下方 UI02 中文注释约定是历史状态。此调整只针对设计，不改变中文先校准、之后英文改写的书稿目标，不要求你为画板复制或重写正文，也不放行新的写作/网站阶段。
+The 27 remaining local Markdown files received an ownership inventory and limited status fixes, then Coordinator integrated them through an independent documentation PR; see [review](reviews/DOC01.md). Old branch/commit/untracked statements below are dated checkpoints, not current checkout instructions. Read live repository status when needed; do not restore old SHA baselines. Document storage did not approve the outline or independently authorize new implementation.
 
-## 当前阶段补充：W02 复审通过（2026-11-14）
+## Historical Access and Main Protection (SEC01), 2026-11-14
 
-后续复审已关闭 R1–R3，详见 `docs/reviews/W02.md` 文末及 `docs/coordination.md`。Writer 已落实用户已有的审查通过后推送指令：四份 W02 文件在独立分支 `codex/w02-opening-foundations` 推送为 `13513c9`，远端已核实，本阶段冻结；W01 规划与共享文档暂留本地未跟踪。下一章、英文稿、网站接入与 W01 全目录仍未放行。此补充替代下方历史消息的“继续修订/暂不 Git”状态，不扩大具体授权。
+GitHub default became main, with required PRs, no force push/deletion and administrator enforcement. Main at that checkpoint was security PR #2 merge `c8993ce`. See [policy](security/access-policy.md) and [review](reviews/SEC01.md). Public visitors could read/comment/propose PRs, not push. Figma public View and owner editing were inspected. These are dated evidence, not absolute security promises. Later CI required checks are separately documented.
 
-## 已发送的 UI02 同步消息（历史记录，2026-11-14）
+## Historical Mainline Integration and Local Review (INT01), 2026-11-14
 
-用户已明确要求主对话把这批更新同步给你。本次是对齐已有决定，不是重新分配全书或放行下一写作阶段。当前工作目录为 `/Users/haixin/Desktop/code/beyond-the-frontend`。
+W02 merged through PR #1 as `71b29c7`; D02 already matched main's starting baseline. The shared checkout then tracked origin/main, with planning/shared files still untracked. The user chose Coordinator-led local review with Markdown decisions rather than a GitHub AI review action. Findings return to the original owner; Coordinator handles scoped PRs/merges after acceptance. Do not self-merge or inherit approval across changed revisions.
 
-请读取 `README.md`、`docs/project-vision.md`、`docs/roadmap.md`、`docs/design/reading-experience-v1.md`（路径沿用 v1，内容已是 v2）及 `docs/reviews/UI02.md`，并遵守 `AGENTS.md` 与 `docs/collaboration.md`。
+## Chapter Analysis and Manuscript Review Workflow (WF01), 2026-11-14
 
-- 项目/书名：Beyond the Frontend；**Beyond the Frontend: It Works. Now What?** / **《前端往后看：能跑，然后呢？》**。作者 Jason Zhang，AI 辅助创作。面向有开发经验、希望串联前端、后端、数据、轻量运行维护与 AI 协作的工程师；讲通原理、例子和取舍，不变成必做综合项目。
-- 已有英文 UI 的 Figma 阅读设计，补齐 Day/Night、组件与 tokens、桌面/平板/手机布局和中文实现注释。**英文要求只针对 UI 设计稿；书稿仍按中文先校准、分阶段英文改写，不要求你现在重写英文。** Figma 中的文章、章名、搜索结果和代码是排版样例，不是你的正式正文或已批准目录。
-- 阅读组件已涵盖正文、图示、提示块、代码块、表格和提问卡。提供内容时保持图文技术含义一致、标题层级清楚、宽图/宽表的文字说明完整；不要迎合画板而删减概念，或在 `book/` 复制一套网站 UI。正式 metadata、slug、语言版本和公开状态契约仍需共同确定。
-- AI 方向是少量精选提问卡，先展示问题、假设、必要上下文和章节出处，再让读者复制到自己的工具；没有站内 chat。卡片不是每章硬性任务；音频仍是后续单章试验，不要求你现在另写整本音频稿。
-- **当前写作主线仍是 W02 的 R1–R3 小范围修订与复审。** 以 `docs/reviews/W02.md` 为准：区分拒绝本次重复动作与当前报名状态；区分暂时查不到记录与原请求已确定失败；最小更新 W01 名称/阶段状态并保留历史。全目录没有因此获批。
+Coordinator read the actual user requirement and reviewed `chapter-workflow.md`, the analysis template and task entry point. [Review](reviews/WF01.md) accepted the process/template without blockers, not W01's full outline or another chapter.
 
-请在自己的对话简短确认“已对齐的决定、当前阶段、尚待主对话确认的依赖”。继续你已有用户授权范围内的 W02 工作，修订后在 `docs/handoffs/writer/W02.md` 逐项交接并请求复审；不要开始下一章、英文稿、网站接入或自行进行 Git 写操作。提交/推送仍按 W02 review 中的分支与文件范围协调；本次同步不改变之前的阶段边界。
+Scope → research/detailed outline → analysis review/revision → confirmed writing scope → manuscript → manuscript review/revision. Send the handoff/revision/files/evidence directly; receive actionable feedback and resubmit within the same authorized task. No user relay is needed. No continuous watcher or repeated acknowledgment requests. UI03 was already read; don't re-send its summary without a reason.
 
-Figma 入口：https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=4-115 。共享链接只读，项目团队默认仅查看和评论；不要修改设计文件或访问设置。请在本对话确认即可，不主动把消息转发到其他对话。
+## Historical Reading Experience Design update (UI03), 2026-11-14
 
-## 常规协作约定
+Figma was reorganized into Tokens, Components and Page Designs, the latter grouping reading/responsive/Day/Night sections. English-first UI/annotations superseded UI02's Chinese-annotation convention; the current project-document English policy is broader still. These design changes did not change Chinese-first manuscript review, convert specimens into chapters or authorize new stages. See [review](reviews/UI03.md) and [handoff](design/reading-experience-v1.md).
 
-请先重新阅读 `AGENTS.md`、`docs/project-vision.md`、`docs/roadmap.md`、`docs/collaboration.md` 和 `docs/handoffs/TEMPLATE.md`，吸收共同约定；保留用户在本对话里给出的更新、更具体的要求。如有冲突，指出并等待相关决定，不丢弃已确认的细节。
+## Historical Opening and Common Foundations re-review (W02), 2026-11-14
 
-正式书名：**Beyond the Frontend: It Works. Now What?**，中文 **《前端往后看：能跑，然后呢？》**。项目简称 **Beyond the Frontend**；仓库和本地目录已改为 `beyond-the-frontend`。旧名称仅作历史记录。
+Re-review closed R1–R3. Writer then used the user's scoped post-review push authorization for four files on `codex/w02-opening-foundations`, commit `13513c9`, with remote verification. That stage was frozen. W01/shared files were then untracked and integrated later; the full outline, next chapter, English manuscript and site integration were not automatically released. See [W02](reviews/W02.md) and [integration](reviews/INT01.md).
 
-你按本对话中用户已批准的范围负责写作，主要修改 `book/`（含章节图示资产），不修改网站、共享契约或 Developer 文件。没有常驻 Checker，主对话负责技术与内容 review。无需为版权单设流程；原理自行表达，实际复用第三方材料按适用许可处理。
+## Historical UI02 synchronization, 2026-11-14
 
-每完成一个约定的分析或正文阶段，在 `docs/handoffs/writer/` 使用实际任务标识留下简短交接：任务范围、修订号、实际文件、完成内容、来源与检查、未解决问题、需要网站支持的元素。参考模板，不逐段写 summary。主动把交接路径和必要摘要发给主对话，请其实际 review；收到意见后按范围返修和复审。不自行启动未授权的依赖阶段。没有实际完成的检查应明确写未完成。
+The user asked Coordinator to synchronize existing decisions. At the time, the working directory was `/Users/haixin/Desktop/code/beyond-the-frontend`. Inputs were README, vision, roadmap, design handoff then v2 under the retained v1 path, UI02 review, AGENTS and collaboration rules.
 
-主对话会直接阅读分析稿、正文与图示，不只阅读摘要。读取主对话回传及写入 `docs/reviews/` 的实际阶段意见，按指令修订并发回复审。提交审查后保持本阶段文件稳定；若必须更改，补记报告并通知主审。新依赖、内容格式或网站能力需求写入交接说明，由主对话协调，不直接改 Developer 文件。
+The message confirmed the formal titles, Jason Zhang/AI attribution, practical-engineer audience, connected frontend/backend/data/essential-operations/AI scope and no compulsory capstone. English UI with Day/Night/tokens/responsive specimens and Chinese implementation notes was the then-current design convention; it did not authorize English book rewriting. Figma article/search/code specimens were layout material, not official prose or approved chapter names.
 
-这是一条协作方式同步消息，不覆盖你与用户已确认的任务。没有明确任务时只确认并等待；不得据此扩大范围、安装依赖或发布。
+Reading components anticipated prose, figures, callouts, code, tables and optional cards. Keep technical meaning and text alternatives rather than distort chapters to fit a board or duplicate UI under `book/`. Metadata/slugs/language/publication rules were still undecided then; the later initial content contract now resolves a deliberately small subset.
+
+AI direction was curated questions/context/copying, no hosted chat; audio was a later one-chapter trial, not a second full manuscript. The active writing task then was R1–R3: repeated action versus current enrollment, empty lookup versus confirmed failure, and minimal W01 status correction. No new chapter/site/Git scope followed from the sync alone.
+
+The historical message requested a local acknowledgment and no onward forwarding. The later direct handoff/feedback authorization supersedes its transport instruction. [Figma entry](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=4-115) was view-only with team view/comment defaults; do not change design/access settings without applicable authorization.
+
+## Ongoing delivery rules
+
+Reread AGENTS, vision, roadmap, collaboration and the handoff template when receiving work. More recent/specific user instructions take precedence; surface conflicts without dropping confirmed details. Project/repository: Beyond the Frontend / `beyond-the-frontend`; historical names are not current identity.
+
+Within assigned scope, Writer owns prose/examples/diagrams under `book/` and its handoffs plus explicitly assigned documents. Do not edit Developer files, site or shared contracts without coordination. No standing Checker; Coordinator reviews technical/content sources. Independently express principles; handle license/attribution when actually reusing material.
+
+For each analysis/manuscript stage maintain one concise handoff with scope, revision, exact files, actual results/sources/checks, open issues and presentation needs. Freeze and send it directly to Coordinator. Read actual feedback/review files, revise within scope and resubmit. Unperformed checks must remain explicit. If frozen files must change, update the handoff and notify the reviewer before they rely on the old revision. New dependencies/formats/site capabilities are coordination questions, not permission to edit another owner's work.
+
+No concrete task means no implementation. This prompt does not authorize expanded scope, installation or publication. When the current documentation task passes review, stop for overall-design discussion.

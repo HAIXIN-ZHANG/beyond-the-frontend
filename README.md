@@ -2,91 +2,99 @@
 
 **《前端往后看：能跑，然后呢？》**
 
-An evolving engineering guide connecting frontend design systems, backend architecture, data, and AI collaboration through everyday product decisions.
+An evolving engineering book connecting frontend design systems, backend architecture, data and AI collaboration through everyday product decisions.
 
-页面能跑了，接下来该看什么？从界面往后看，把前端、后端、数据和 AI 协作连起来，理解功能背后的设计与取舍。
+**By Jason Zhang · Created with AI assistance throughout planning, writing and development.**
 
-**By Jason Zhang · Created with AI assistance throughout the writing process.**
+The book is for engineers who have shipped features and want to understand the systems around them. Start with a working page, follow its requests and records, and examine the choices behind it. Some development experience helps; knowing every layer in advance is not required.
 
-> Early development. The bilingual website skeleton and reviewed Chinese opening/foundations drafts are in `main`; the remaining chapter outline is a proposal. This is not a complete book or a launched reading service. `TBU` marks details to be updated or decided, not a delivered feature.
+## What is available
 
-## Who this is for
+- **In main:** an English-default bilingual website foundation, strict TypeScript and cloud-verified CI. Home/index routes are `/`, `/read/`, `/zh/` and `/zh/read/`, with a bilingual static 404.
+- **Reviewed writing:** Chinese opening and shared-foundations drafts. Browser Fundamentals has an accepted research/outline gate, not a manuscript. These documents are in the repository; the website does not render chapters yet.
+- **Preserved separately:** Design Tokens and Day/Night Themes has local implementation/build evidence in an unaccepted checkpoint. Independent browser acceptance and integration remain open.
+- **Current priority:** this English documentation, delivery history and explanation of the AI workflow. After this task is reviewed and integrated, work pauses for an overall project-design discussion; no automatic restart of components, chapter UI, E2E or release follows.
+- **Online reading:** no verified public reading URL yet. GitHub Pages is authorized after code/content/QA acceptance, but has not been deployed. Search, audio and AI question cards are not available features.
 
-Engineers who have shipped features but want to connect the knowledge around them: frontend developers growing toward full-stack work, full-stack developers revisiting architectural foundations, and engineers using AI coding tools who want to make better design and verification decisions.
+The remaining chapter outline is a proposal, not a complete or approved book. `TBU` means unresolved or to be updated, never delivered. See [Development History](docs/development-history.md) for evidence and limits.
 
-You do not need to know every layer already. The guide assumes some development experience and introduces unfamiliar concepts through concrete problems. “AI-assisted full-stack engineering” describes the direction; a specific job title is not a prerequisite.
+## Explore the project
 
-## What makes this guide worth building
-
-- **Start with a working feature.** A search page, a shared component, a file upload, or a course registration becomes a way to understand the surrounding system.
-- **Connect intuition with precise explanations.** Familiar examples, useful diagrams, technical principles, and the limits of an analogy belong together.
-- **Follow decisions across layers.** UI states, API contracts, stored records, background work, and analytical data affect one another.
-- **Compare choices in context.** Frameworks and cloud services are examples of trade-offs, not a universal shopping list.
-- **Use AI with engineering judgment.** Scope, relevant context, contracts, and evidence matter both when working with AI tools and when building AI-powered features.
-
-These are editorial goals to test with real chapters and reader feedback, not claims of a unique or proven method.
-
-## Content map
-
-| Area | Questions we want to make easier to reason about |
+| Start here | Purpose |
 | --- | --- |
-| Shared foundations | What does a working page depend on? Who owns state, rules, and the meaning of “done”? |
-| Frontend | How do design systems, tokens, components, browser behavior, accessibility, and state fit together? |
-| Backend and operations | How do APIs, databases, transactions, caches, deployment, and recovery support a product? |
-| Concurrency and asynchronous work | When do queues, events, subscriptions, workers, or serverless functions help—and what complexity do they add? |
-| Data | How do operational records become trustworthy metrics and analytical data? |
-| Connected cases and AI collaboration | How do these decisions work together, and what should a coding agent know before implementing them? |
+| [Project vision](docs/project-vision.md) | Audience, editorial direction, content map and intended reading experience |
+| [Roadmap](docs/roadmap.md) | Future scope, priorities and acceptance gates |
+| [Chinese stage summary](docs/stage-summary.zh-CN.md) | A single concise Chinese status summary |
+| [Development History](docs/development-history.md) | Past and current outcomes, decision changes and reviewed evidence |
+| [Developer guide](site/DEVELOPMENT.md) | Commands and behavior actually available on main |
 
-See the [project vision and proposed book structure](docs/project-vision.md) for the intended reading experience. The [Writer's detailed outline](book/planning/outline.md) remains a proposal; chapter names and ordering are not finalized.
+The [detailed book outline](book/planning/outline.md) remains a proposal. Manuscripts, planning, process records and the website are different deliverables; committing a document does not publish it as a chapter.
 
-## Project documents
+## How this project is built with AI
 
-| Document | Purpose |
+Jason Zhang, the human author, sets the goals, reader needs, scope, key choices and authorization. AI helps with research, drafting, design, implementation and verification. The roles have explicit responsibilities:
+
+| Role | Responsibility |
 | --- | --- |
-| This README | Public introduction, reading entry points, current scope, and practical links |
-| [Project vision](docs/project-vision.md) | Audience, editorial choices, content map, languages, and product boundaries |
-| [Roadmap](docs/roadmap.md) | Feature priorities, delivery checkpoints, evidence, and items marked TBU |
+| Human author | Set direction, decide material trade-offs and authorize work/publication |
+| Coordinator | Define architecture/contracts, assign bounded work, inspect actual deliverables, return revisions and manage integration |
+| Developer | Implement assigned website/tooling or technical documents, run checks and report actual evidence/limits |
+| Writer | Research and outline first, revise after analysis review, then draft prose for a separate manuscript review |
 
-Detailed chapters, developer instructions, handoffs, and reviews keep their own roles. They are not a second project vision, and repository documents do not automatically become public reading pages.
+Coordinator reviews and records decisions; it does not write product code, prose or formal implementation explanations for the executors. The implementer does not approve or merge its own work. The chapter [analysis/manuscript gates](book/planning/chapter-workflow.md) remain separate.
 
-## Read, explore, and contribute
+```mermaid
+flowchart TD
+    goal["Human author: goal and authorization"] --> scope["Coordinator: scope and contracts"]
+    scope --> execute["Developer or Writer: execute and self-check"]
+    execute --> handoff["Owner sends a versioned handoff"]
+    handoff --> review["Coordinator inspects actual files and evidence"]
+    review --> accepted{"Accept this revision?"}
+    accepted -->|Changes required| feedback["Return findings to the original owner"]
+    feedback --> execute
+    accepted -->|Accepted| pr["Coordinator creates a scoped PR"]
+    pr --> ci["GitHub events run ordinary CI"]
+    ci -->|Failure or changed revision| feedback
+    ci -->|Pass at reviewed head| merge["Coordinator merges the exact reviewed head"]
+    merge --> release{"Release authorized and QA accepted?"}
+    release -->|Yes| deploy["Deploy and verify the release"]
+    release -->|No| preserve["Keep integrated work without deployment"]
+```
 
-- **Online reading:** TBU — add a verified public URL after deployment. No live reading URL is claimed yet.
-- **Languages:** English and Simplified Chinese are planned for the book. The website skeleton defaults to English and includes Chinese routes; complete bilingual chapters are not yet available.
-- **Current writing:** The Chinese opening and shared-foundations drafts passed W02 review. Drafts live under `book/drafts/`; approval is recorded per stage and does not mean they are available on a deployed reading site.
-- **Questions and corrections:** [Open an issue](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/issues) with a question, a passage, or a source that helps explain the problem.
-- **Contributions:** TBU — review, contribution, and licensing details must be settled before inviting reusable submissions.
+Owners send explicit messages and paths to the existing chats. Coordinator actively assigns and reviews work; the chats do not continuously watch files. GitHub PR/push events automatically run CI, while acceptance of technical and editorial choices remains a recorded judgment. There is no unattended orchestration engine, standing cloud AI reviewer or AI backend behind the reading website.
 
-## Website direction
+Shared Markdown preserves accepted contracts, handoffs and feedback rather than raw private chat transcripts. Working branches/worktrees keep concurrent scopes separate. See [collaboration](docs/collaboration.md) for the operating rules and [real decision examples](docs/development-history.md#decision-evolution) for how the process changed the work.
 
-**Design preview:** [Tokens](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) · [Components](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) · [Page Designs](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2). Reading, responsive and Day/Night views share one page. UI and annotations are English-first. See the [design handoff](docs/design/reading-experience-v1.md); these are designs, not delivered website features.
+## Run the current website
 
-A calm, OS-inspired reading interface for desktop and mobile, with chapter navigation, search, and connected examples. Later candidates include reading-position recovery, inline terminology, shareable passages, curated AI question cards, and chapter audio.
-
-These capabilities have different stages of readiness. See the [roadmap and feature boundaries](docs/roadmap.md). The initial AI direction uses copyable prompts and selected context with the reader's own tools; an embedded chatbot or paid inference service is outside the initial scope. Audio is a separate, pre-generated publishing experiment; it is not yet available.
-
-## Run the website locally
-
-The current skeleton uses Next.js static export, React, and strict TypeScript for its pages, components, and application configuration. Tool scripts retain JavaScript where documented. Environment requirements, installation and build commands, root/subpath behavior, and known limits are maintained in [site/DEVELOPMENT.md](site/DEVELOPMENT.md).
+Main uses Next.js static export, React, strict TypeScript and npm. JavaScript remains at documented tooling boundaries. From the repository root, with Node.js 24 and npm 11:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-## Authorship, sources, and project status
+[The developer guide](site/DEVELOPMENT.md) covers checks, root/Pages builds and known limits. Panda codegen commands belong to the separate checkpoint; they are not commands available on main.
 
-Public access permits reading and feedback, not editing the original repository or design. See [SECURITY.md](SECURITY.md) and the [verified access policy](docs/security/access-policy.md).
+## Reading direction and design
 
-Jason Zhang sets the direction and makes editorial decisions, with AI assistance across planning, drafting, examples, diagrams, and editing. Claims are checked and chapters reviewed in stages; this does not mean all current material has passed review.
+The book starts from concrete features, introduces precise mechanisms through familiar examples, and connects interface behavior to APIs, stored records, background work and analytical data. Technology choices are contextual trade-offs, not a list everyone must adopt. Examples are teaching scenarios, not an employer's systems or evidence of production scale.
 
-Examples are teaching scenarios unless explicitly identified otherwise. They are not representations of an employer's system or evidence of production scale. Technology-specific behavior should include appropriate primary sources and relevant conditions. Questions, corrections, and updates are part of maintaining the guide.
+**Design references:** [Tokens](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=40-12) · [Components](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=22-135) · [Page Designs](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=2-2). Reading, responsive and Day/Night views share one page. The [design handoff](docs/design/reading-experience-v1.md) distinguishes design evidence from code/browser acceptance.
 
-**Licensing: TBU.** Content and website-code licenses have not yet been selected. Public availability is not a blanket reuse license. Third-party materials retain their own terms. No model-generated explanation or prompt is a substitute for checking actual behavior.
+The planned AI reading feature is a small set of inspectable, copyable questions and selected context for the reader's own tools. Choosing that direction instead of an embedded paid chat service is a planning decision, not an implemented integration. Audio is a separate, unperformed publishing experiment. Both remain outside the current documentation task.
+
+## Feedback, sources and access
+
+[Open an issue](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/issues) with a question, correction or relevant source. Public access permits reading and proposed changes, not pushing or merging into the original repository or editing the Figma source. See [SECURITY.md](SECURITY.md) and the [dated access baseline](docs/security/access-policy.md).
+
+Technical claims should identify primary sources, conditions and what was actually checked. AI-generated explanations are not evidence by themselves. Review acceptance, cloud checks, merge and deployment are distinct records.
+
+**Licensing and contribution terms: TBU.** Content/code licenses have not been selected; public availability is not a blanket reuse license. Third-party materials retain their own terms. Formal contribution rules must be settled before inviting reusable submissions.
 
 ## Inspiration
 
-- [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook): a reference for organizing substantial engineering reading around systems and technical decisions.
-- [HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter): a reference for approachable, searchable, continuously maintained public knowledge.
+- [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook): organizing substantial engineering reading around systems and technical decisions.
+- [HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter): approachable, searchable, continuously maintained public knowledge.
 
-This project has its own scope and teaching scenarios. These links acknowledge inspiration, not affiliation, endorsement, or a claim to have originated the underlying concepts.
+These acknowledge inspiration, not affiliation, endorsement or reuse of their code, prose or diagrams.

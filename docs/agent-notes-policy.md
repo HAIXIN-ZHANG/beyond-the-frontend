@@ -1,29 +1,28 @@
-# 正式文档与 Agent 工作笔记
+# Formal documents and agent notes
 
-用户已确认两类材料按用途分开存放。当前项目工作目录为 `/Users/haixin/Desktop/code/beyond-the-frontend`；不要根据旧说明另建或写入 `engineer-better` 目录。
+The user distinguishes formal project sources from optional local working notes. The original checkout is `/Users/haixin/Desktop/code/beyond-the-frontend`; do not create or write to the historical `engineer-better` directory based on stale instructions. Use an explicitly assigned worktree when the coordination board specifies one; the current documentation task uses `/tmp/btf-project-docs`, not the frozen theme checkout.
 
-## 正式项目文档
+## Formal project sources
 
-正式文档是项目共同依据，放在 repo 内并按项目提交流程管理，不意味着自动发布到阅读网站：
+Store formal documents in the repository and use the project review/integration process. Being committed does not automatically publish a document on the reading website.
 
-- Writer：`book/planning/` 的写作定位、目录与阶段任务；正文和教学资产保存在 `book/`。
-- Developer：`site/IMPLEMENTATION.md` 的阶段方案、`site/DEVELOPMENT.md` 的已实现基线与运行说明，以及经批准的网站代码；方案不自动等于已实现功能。
-- 交接：各自的 `docs/handoffs/writer/`、`docs/handoffs/developer/`。
-- 主审：共同设计、协调看板和 `docs/reviews/`。
+- Writer owns `book/planning/` positioning, outlines and assigned writing stages, with manuscripts and teaching assets under `book/`.
+- Developer owns the assigned website/tooling and technical explanations. `site/IMPLEMENTATION.md` preserves the staged proposal; `site/DEVELOPMENT.md` describes implemented behavior and commands. A proposal is not an implemented feature.
+- Executors maintain their reports under `docs/handoffs/writer/` and `docs/handoffs/developer/`.
+- Coordinator decides shared scope/contracts/status and writes review conclusions under `docs/reviews/`. When assigned, Developer records accepted technical/design/coordination decisions; Writer handles assigned product explanations. Neither executor decides its own acceptance.
 
-正式文档可以包含待审核方案，但必须明确标注草案、待定或已确认，不把提议当作共同决定。跨角色有影响的决定要交主对话协调。
+Formal sources may contain proposals if clearly marked draft, unresolved or accepted. Cross-role decisions go through Coordinator. Formal technical explanations and active code/design comments are English-first; temporary or secondary handoffs may be Chinese. This does not change the bilingual manuscript plan.
 
-## 可选的本地工作笔记
+## Optional local notes
 
-- Writer：`.local/notes/writer/`。
-- Developer：`.local/notes/developer/`。
+Use `.local/notes/writer/` or `.local/notes/developer/` only when useful. The root `.gitignore` excludes them. They can hold temporary ideas, source leads, experiment notes and questions; no task needs a duplicate Markdown log, and formal documents should not have a second maintained copy. Do not store credentials or unnecessary personal information here.
 
-这些路径由根目录 `.gitignore` 排除，用于临时思路、资料线索、尝试记录和待整理的问题。需要时才创建，不要求每个任务写第二份 Markdown，也不复制正式文档维护另一个版本。不要在笔记中存储凭据或不必要的个人信息。
+Git exclusion is not access isolation. Other agents with access to the same checkout/account may read these files. Worktrees do not turn them into secret storage. Neither website builds nor public artifacts may contain `.local/`.
 
-这是版本管理上的排除，不是访问隔离：同一 checkout 的其他 agent 仍可能读取这些文件；不应将其当作机密存储。网站构建和公开产物也不得包含 `.local/`。
+## Turning notes into a deliverable
 
-## 从笔记到交付
+Move useful conclusions into the appropriate formal source with their status and evidence. Other roles must be able to work from formal documents without depending on scratch notes. A handoff must stand on its own and point to actual results and verification.
 
-形成有用结论后，把必要内容整理进正式文档，并标明状态和来源。其他角色只依赖正式文档，不依赖临时笔记才能完成任务。正式交接必须能独立理解，并指向实际成果和验证证据。
+Preserve existing directories, proposals and reports. This policy does not authorize bulk relocation, deletion or overwriting. If an existing file appears temporary, propose its classification in the owning role's handoff first. This storage rule neither releases a new stage nor independently authorizes installation, Git operations or publication; existing explicit task authorization still applies.
 
-现有目录、计划与交接说明继续保留；不要因本规则批量搬迁、删除或覆盖文件。发现确属临时材料的文件，先在本角色交接中提出归类建议。本规则不放行下一阶段，也不授权 commit、push、发布或安装依赖。
+Current priority: finish the assigned documentation upgrade and its review/revisions/integration, then pause for overall project-design discussion. Storage/documentation acceptance does not resume code, manuscripts, E2E or release.

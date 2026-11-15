@@ -1,39 +1,39 @@
-# [任务标识]：阶段 review
+# [Readable outcome name] — review
 
-> 由 Coordinator 填写。用真实结果替换占位；删除不适用部分。每个审查阶段维护同一份记录，保留返修与复审历史。分析稿和正文使用不同 review 标识。
+Legacy reference: [existing review/task ID]. Coordinator writes the actual judgment. Use one record per gate, preserving revisions; research/outline and manuscript use different references. Historical translation may clarify names without changing the original acceptance or finding IDs.
 
-- **日期 / 主审：** [日期、时区；主审]
-- **Review 类型：** [章节分析 / 正文 / 代码或页面 / 设计 / 流程]
-- **对应交接：** [实际 handoff 路径]
-- **审查版本与范围：** [交接修订号；实际文件；必要时记录 commit 或摘要，注明未审范围]
-- **结论：** [通过 / 需修改后复审 / 缺少证据无法判定]
-- **下一步：** [明确允许继续的已授权步骤；或先完成哪些修订/补证；范围待定则说明]
+- **Date/reviewer:** [date, timezone, reviewer]
+- **Review type:** [research/outline / manuscript / code/page / design / process]
+- **Handoff:** [actual path]
+- **Reviewed revision and scope:** [revision, exact files, commit/digest when available, exclusions]
+- **Outcome:** accepted / changes required before re-review / insufficient evidence
+- **Next step:** [specific authorized continuation or required revision/evidence; unresolved scope stays unresolved]
 
-## 实际审查与证据
+## Actual inspection and evidence
 
-[写实际阅读和验证了什么、检查结果以及未完成的检查。区分来源核查、静态阅读、运行测试与浏览器验证；不把执行方的声称直接写成主审已验证。]
+Record what was read, run or observed, with results and missing checks. Distinguish source checks, static inspection, runtime tests and browser verification. An executor's report does not become independent reviewer evidence merely by copying it.
 
-## 需处理的问题
+## Findings
 
-| 编号 | 级别 | 位置与具体问题 | 影响及依据 | 负责人、修改要求与验收 |
+| ID | Severity | Location and actual issue | Impact/evidence | Owner, revision and acceptance criterion |
 | --- | --- | --- | --- | --- |
-| R1 | [阻塞 / 非阻塞建议] | [文件和小节/模块；说明实际行为或原文] | [为何有问题；依据是什么] | [谁改、改到什么程度、如何判断完成] |
+| R1 | [blocking / non-blocking] | [trigger and file/section] | [specific consequence] | [who changes what and how it is rechecked] |
 
-[没有发现问题时删除示例行并明确写“本范围未发现需修订项”；不要为填表制造问题。非阻塞建议与必须返修项分开。]
+If there are no required revisions, say so and remove the example. Do not manufacture findings. Separate suggestions from blockers.
 
-## 发回执行方的反馈
+## Feedback returned to the owner
 
-[可直接执行的简短 prompt：需处理的编号、允许文件、必须保留的内容、必要验证、交接更新与复审要求。通过时明确结论与已授权下一步，不扩大任务。]
+Provide executable guidance: findings, allowed files, preserved behavior/content, checks, handoff update and re-review. If accepted, state the exact acceptance and next already authorized step without enlarging scope.
 
-## 复审记录
+## Re-review history
 
-### [日期 / 修订号]
+### [Date / revision]
 
-- **实际复核：** [修订文件、对应问题及检查]
-- **已关闭 / 仍开放：** [按意见编号记录，引用处理位置与依据]
-- **当前结论：** [通过 / 继续返修 / 缺少证据]
-- **后续：** [已授权下一步；或待确定事项]
+- **Actual recheck:** changed files, findings and checks.
+- **Closed/open:** finding IDs, locations and evidence.
+- **Current outcome:** accepted / further revision / insufficient evidence.
+- **Continuation:** already authorized next step or pending decision.
 
-## Git / 发布状态（按需）
+## Git and publication evidence
 
-[分别记录未执行、已提交、已推送分支、已合并、已部署等实际状态及证据。Review 通过不等于任何 Git 或部署操作已完成；不为填此项执行额外发布。]
+Record actual PR, reviewed head SHA, check run/results, squash merge and deployment separately. New commits require affected changes to be rechecked. A reviewed PR head and its squash commit are different identifiers. Review acceptance is not evidence that Git operations or publication occurred; do not execute extra release work merely to populate this section.

@@ -1,61 +1,61 @@
-# W02：开篇与共同基础
+# Opening and Common Foundations: Scope (W02)
 
-更新：2026-11-14（Australia/Perth）。负责人：Writer。状态：主审已记录 W02 复审通过；仓库同步与网站发布分别处理。
+Original scope/re-review date: 2026-11-14 (Australia/Perth). Owner: Writer. English editorial translation: 2026-11-15. The accepted manuscript remains Chinese and unchanged. Historical review/integration evidence applies to the original revision, not to these translated process-document bytes.
 
-## 任务依据
+## Basis and outcome
 
-用户在本对话要求“先把最开始的一些东西写好，最基础的部分”，并明确当前仓库名是 `beyond-the-frontend`。据此，本阶段从开篇和共同基础开始，不执行 W01 计划中原先候选的 F04 token 样章。
+The user asked to write the opening and most basic material first and confirmed `beyond-the-frontend` as the repository. This replaced the earlier candidate token sample F04. The user then requested author attribution, disclosure of AI assistance throughout creation, and a first-person explanation of reading difficulties, AI-assisted learning and the reason to write. The author name was confirmed as **Jason Zhang**. The disclosure describes the creation process, not a claim that the whole book is finished or reviewed.
 
-用户随后要求署名本人，明确 AI 全程辅助，并在开篇写出读书困惑、AI 辅助学习带来的变化和写作动机；最终指定作者署名为 **Jason Zhang**。据此修订本阶段开篇，保留基础章，不扩展其他章节。AI 协作说明描述本书采用的创作方式与后续改写范围，不宣称全书已经完成或经过全部审核。
+The full Editorial Baseline and Content Map (W01) remains a proposal. R3 of the W02 review corrected its current name/stage statements with minimal changes, preserving the original planning handoff. The working directory at that checkpoint was `/Users/haixin/Desktop/code/beyond-the-frontend`.
 
-W01 全目录仍待整体 review，未标记为通过。本阶段是用户新授权的小范围正文初稿，不表示整个目录获批。按 W02 review 的 R3，已最小更新 W01 规划的当前名称与阶段说明，首次交付的事实通过 W01 交接追加记录保留；当前工作目录为 `/Users/haixin/Desktop/code/beyond-the-frontend`。
+Re-review closed R1–R3. The four-file stage subsequently merged through PR #1; see [review](../../docs/reviews/W02.md) and [integration](../../docs/reviews/INT01.md). Repository integration is separate from website publication.
 
-## 本阶段交付
+## Deliverables
 
-| 路径 | 用途 |
+| Path | Purpose |
 | --- | --- |
-| `book/drafts/zh/00-before-we-start.md` | 开篇：为什么写、给谁看、如何阅读、怎样看待例子与 AI |
-| `book/drafts/zh/01-a-page-and-a-system.md` | 共同基础，对应目录提案 G01：从搜索和报名建立边界、状态、时间、依赖与约束的认识 |
-| `book/planning/W02-scope.md` | 本任务范围、检查和待决项 |
-| `docs/handoffs/writer/W02.md` | 本阶段交接 |
+| `book/drafts/zh/00-before-we-start.md` | Purpose, audience, reading approach, examples and AI disclosure |
+| `book/drafts/zh/01-a-page-and-a-system.md` | G01 foundations: search/enrollment, boundaries, state, time, dependencies and constraints |
+| `book/planning/W02-scope.md` | Stage scope, checks and questions |
+| `docs/handoffs/writer/W02.md` | Stage handoff and revision history |
 
-这些是临时审稿路径，不定义正式章节 ID、路由、元数据 schema、公开清单或语言资产规则。文件名中的顺序只服务于本次阅读。正文使用普通 Markdown、表格和原创文本图，不要求网站安装图示或执行代码的依赖。
+These review paths did not define stable IDs, routes, metadata, publication lists or language/asset rules. Their ordering served this review. Plain Markdown, tables and original text diagrams required no website execution or diagram dependency.
 
-## 验收
+## Acceptance recorded at the stage
 
-- [x] 开篇能说明本书目的、读者和读法，不变成项目计划或工具广告。
-- [x] 基础章从一个熟悉场景出发，给每个概念具体落点，不要求读者先理解整套后端术语。
-- [x] 区分界面反馈、服务规则与持久记录；说明结构、顺序、状态三种视角的差异。
-- [x] 用正常路径和响应丢失的假设解释局部观察与整体结果的不同。
-- [x] 产品要求、架构约束和 AI 任务说明互相连接；不夸大 AI 能力或声称有未运行的实验。
-- [x] 技术要点核对原始来源，教学场景、图示和推理自行组织。
-- [x] 检查 Markdown 结构、相对链接、表格、图示文本与叙述一致性，结果写入交接。
-- [x] 提交阶段交接并停止，不自动推进后续章节或英文版。
-- [x] 主审已在 `docs/reviews/W02.md` 文末记录复审通过，R1–R3 全部关闭；W01 全目录未因此通过。
+- [x] Explain the book's purpose, audience and reading approach without becoming a project plan or tool advertisement.
+- [x] Ground each foundation concept in a familiar case without requiring extensive backend vocabulary.
+- [x] Separate UI feedback, service rules and stored records; explain structural, sequence and state views.
+- [x] Use normal and lost-response assumptions to separate local observation from overall outcomes.
+- [x] Connect product requirements, architectural constraints and an AI task snippet without invented experiments or capability claims.
+- [x] Check technical points against primary sources; independently create scenarios, diagrams and reasoning.
+- [x] Record Markdown structure, local-link, table and diagram/prose checks in the handoff.
+- [x] Submit and stop without automatically starting another chapter or English version.
+- [x] Coordinator explicitly accepted re-review and closed R1–R3; the full W01 outline was not thereby approved.
 
-## 本阶段不做
+## Excluded scope and authorization changes
 
-不写 F01 浏览器机制、F04 token 样章或其他正文；不生成英文稿；不固定内容契约；不修改网站、根 README、共享看板、依赖或发布配置。原阶段未授权安装、commit、push 或发布；用户随后授权审查修订通过后推送云端，当前先完成复审，分支与逐文件提交时点仍由主对话协调，不在修订中自行进行 Git 写操作。
+No browser chapter F01, token sample F04, other prose, English manuscript, fixed content contract, website, root README, board, dependencies or release configuration. Installation/commit/push/publication were not part of the original stage. The user later authorized a cloud push after review and revisions; Coordinator coordinated branch and exact files. This historical extension was not authorization to include unrelated changes or publish the reading site.
 
-## R1–R3 修订范围
+## R1–R3 revisions
 
-- R1：基础章状态图和图注、AI 任务片段中区分本次动作未获接受与当前已有有效报名。
-- R2：基础章恢复查询中说明空结果的时间边界，保留明确终态和普通当前状态查询的合理行为。
-- R3：只修正 W01 规划当前名称和阶段映射，追加历史交接记录，不声明全目录通过。
+- **R1:** distinguish refusal of a repeated action from the current existence of a valid enrollment in the state diagram, caption and AI task snippet.
+- **R2:** an empty recovery query can precede the original request's commit; distinguish a confirmed final outcome, pending uncertainty and ordinary current-state queries.
+- **R3:** correct W01 naming and stage mapping only, append handoff history and retain the unapproved outline status.
 
-本轮纳入修订的规划文件为 `book/planning/editorial-brief.md`、`outline.md`、`tasks.md` 和 `docs/handoffs/writer/W01.md`；正文与任务的实际检查见 W02 交接。UI02 同步已阅读：英文 UI 不改变中文先校准的书稿计划；Figma 样例不作为正文或批准目录，当前不为设计新增提问卡、音频或网站实现。
+The planning revisions touched `editorial-brief.md`, `outline.md`, `tasks.md` and the W01 handoff. Actual checks are in the W02 handoff. At that time UI02's English design specimens did not change the Chinese-first book plan or authorize cards, audio or website implementation.
 
-## 复审后的仓库同步范围
+## Repository synchronization arrangement and later result
 
-主对话已确认 Developer 暂停 Git 写操作，安排从 D02 基线 `d0965a172196091c9781f4ffea6b8dc9941ae6c5` 建立 `codex/w02-opening-foundations`。本次只提交本阶段两篇正文、本 scope 与 W02 交接，共四份文件；W01 规划和 Coordinator 文件保留本地，后续另行整合。
+Coordinator confirmed Developer had paused Git writes and coordinated `codex/w02-opening-foundations` from `d0965a172196091c9781f4ffea6b8dc9941ae6c5`. Only the two manuscripts, this scope and W02 handoff entered that push. W01/shared files were kept out for later integration.
 
-本节记录已确认的提交安排，不预填 commit/push 成功结果。实际提交、远端验证由本次最终回报及主对话审查记录补充。推送代码分支不等于接入公开阅读网站，也不放行下一阶段。
+The original scope recorded this arrangement before success and did not prefill a commit/push outcome. Later review/integration records establish Writer commit `13513c91edf6b8a201222ab11b90cafee07c9d36` and PR #1 squash merge `71b29c7885812e19936de5c1c0cbb73dd6347271`. Neither released a later stage or the public site.
 
-## 交给主审的问题
+## Questions raised for review
 
-1. 开篇的轻松程度与基础章的讲解深度是否合适？
-2. 基础章用“边界、状态、时间、依赖”组织是否有帮助，是否需要进一步拆短？
-3. 开篇与 G01 的前端/整体比例是否符合书名，以及目标读者的经验水平？
-4. 审稿路径之后如何进入正式目录、标记状态和网站预览，由主对话协调；Developer 不直接将本目录全部公开。
+1. Is the opening's tone and the foundation chapter's depth appropriate?
+2. Do boundaries, state, time and dependencies help, or should the explanation be shorter?
+3. Does the frontend/whole-product balance fit the title and readers?
+4. How should temporary review files enter a formal directory, status system and preview? Developer must not publish the whole draft directory by default.
 
-下一阶段须根据 review 和用户新指令明确；可以继续浏览器基础，也可以回到 token 样章，当前不预先放行。
+The historical next-step choice between browser foundations and a token sample required a fresh assignment. Browser research was later scoped separately as F01A; it does not retroactively expand W02. New prose is now paused for the documentation priority.

@@ -1,9 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { DocumentLayout } from '../components/document-layout.jsx';
-import { NotFoundContent } from '../components/not-found-content.jsx';
-import { getMessages } from '../config/i18n.mjs';
+import { DocumentLayout } from '../components/document-layout.tsx';
+import { NotFoundContent } from '../components/not-found-content.tsx';
+import { getMessages } from '../config/i18n.ts';
 
-export const metadata = { title: 'Page not found | Beyond the Frontend' };
+export const metadata: Metadata = { title: 'Page not found | Beyond the Frontend' };
 
 export default function GlobalNotFound() {
   const chinese = getMessages('zh');

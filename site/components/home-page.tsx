@@ -1,8 +1,9 @@
+import type { Locale } from '../config/i18n.ts';
 import Link from 'next/link';
-import { site } from '../config/site.mjs';
-import { getMessages, localePath } from '../config/i18n.mjs';
+import { site } from '../config/site.ts';
+import { getMessages, localePath } from '../config/i18n.ts';
 
-export function HomePage({ locale }) {
+export function HomePage({ locale }: { locale: Locale }) {
   const messages = getMessages(locale);
   return (
     <section className="book-intro" aria-labelledby="book-title">

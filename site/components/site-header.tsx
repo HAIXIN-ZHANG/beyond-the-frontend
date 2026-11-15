@@ -1,9 +1,10 @@
+import type { Locale } from '../config/i18n.ts';
 import Link from 'next/link';
-import { site } from '../config/site.mjs';
-import { getMessages, localePath } from '../config/i18n.mjs';
-import { LanguageSwitch } from './language-switch.jsx';
+import { site } from '../config/site.ts';
+import { getMessages, localePath } from '../config/i18n.ts';
+import { LanguageSwitch } from './language-switch.tsx';
 
-export function SiteHeader({ locale, languageHome = false }) {
+export function SiteHeader({ locale, languageHome = false }: { locale: Locale; languageHome?: boolean }) {
   const messages = getMessages(locale);
   const otherLocale = locale === 'en' ? 'zh' : 'en';
   return (

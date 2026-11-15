@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { parseBasePath } from '../site/config/deployment.mjs';
+import { parseBasePath } from '../site/config/deployment.ts';
 
 const output = fileURLToPath(new URL('../site/out/', import.meta.url));
 const basePath = parseBasePath(process.env.NEXT_PUBLIC_BASE_PATH);

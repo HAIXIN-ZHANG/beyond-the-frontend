@@ -67,7 +67,7 @@ These capabilities have different stages of readiness. See the [roadmap and feat
 
 ## Run the website locally
 
-The current skeleton uses Next.js static export, React, and JavaScript/JSX. Environment requirements, installation and build commands, root/subpath behavior, and known limits are maintained in [site/DEVELOPMENT.md](site/DEVELOPMENT.md).
+The current skeleton uses Next.js static export, React, and strict TypeScript for its pages, components, and application configuration. Tool scripts retain JavaScript where documented. Environment requirements, installation and build commands, root/subpath behavior, and known limits are maintained in [site/DEVELOPMENT.md](site/DEVELOPMENT.md).
 
 ```sh
 npm ci

@@ -1,4 +1,4 @@
-import { NotFoundContent } from '../../components/not-found-content.jsx';
+import { NotFoundContent } from '../../components/not-found-content.tsx';
 
 export default function NotFound() {
   return <NotFoundContent locale="en" />;

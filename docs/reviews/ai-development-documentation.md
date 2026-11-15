@@ -59,3 +59,5 @@ No blocking revision remains. Accepted scope is exactly 32 Developer documents, 
 ### Git evidence location
 
 The integration PR will carry the exact reviewed head, actual run/job results and the resulting squash commit. This review's pre-merge decision cannot contain its own future commit or merge SHA. The PR's head/merge records and Coordinator's execution summary supply those identifiers; the integration pointer below will be added once the PR exists, before its final checks/merge. No deployment is part of this task.
+
+**Integration PR:** [#7 — AI workflow, delivery history and design-review pause](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7), targeting main `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Its initial reviewed head is `2b6c627613690e21fba74508be95642ca9a28e61`; exactly 50 Markdown files matched the reviewed manifest. This additional review pointer is an integration-only change, independently rechecked before its next commit; the final proposed head still requires fresh cloud checks. Refer to the PR's execution record for final head, run and squash result. No server rule is bypassed and no deployment is authorized by this PR.

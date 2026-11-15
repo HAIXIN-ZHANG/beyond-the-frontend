@@ -1,137 +1,125 @@
-# 分阶段写作任务与 review 清单
+# Writing Stages and Review Checklist
 
-更新：2026-11-15。负责人：Writer。
+Updated: 2026-11-15. Owner: Writer. Prefer readable delivery names; legacy IDs and existing paths remain for traceability.
 
-当前 **W02 已复审通过，限定四文件已通过 PR #1 合入 main**，见 [W02 review](../../docs/reviews/W02.md) 与 [INT01](../../docs/reviews/INT01.md)；W01 全目录仍未整体通过。[WF01](../../docs/reviews/WF01.md) 已接受每章先分析调研和细纲 review、再写正文并另行 review 的流程与模板，见 [逐章流程](chapter-workflow.md) 与 [分析稿模板](templates/chapter-analysis.md)。DOC01 的文档状态对齐已结束；2026-11-15 Coordinator 单独授权 F01A 浏览器基础分析，当前待分析 review，不含正文；其余候选阶段不因此启动。
+Opening and Common Foundations (W02) passed re-review and merged through PR #1. Chapter Analysis and Manuscript Review Workflow (WF01) accepted the analysis-first process. Browser Fundamentals — Research and Outline (F01A) passed review and merged through PR #6. The full Editorial Baseline and Content Map (W01) is still a proposal. **No new manuscript is authorized to start now.**
 
-## F01A：页面出现之前，浏览器在忙什么？（分析待 review）
+Current priority is AI Development Workflow and Delivery History: assigned English process documents and one Chinese stage summary. Finish its review/revisions, then pause for the user's overall-design discussion; documentation acceptance does not automatically resume F01M, English manuscript adaptation, code or deployment.
 
-- **授权：** 2026-11-15 Coordinator 明确范围；独立工作区 `/tmp/btf-writer-f01a`，Writer 只维护本分析、交接及必要任务状态，不操作 Git。
-- **交付：** [章节分析 r1](analyses/F01.md)、[F01A 交接](../../docs/handoffs/writer/F01A.md)。包括来源/证据边界、七节细纲、案例与图示、具体验证计划；未写正文。
-- **检查：** 来源具体小节已查阅；文档实际检查见交接。浏览器实验尚未运行，没有虚构 trace 或性能数据。
-- **关口：** 等待主审实际 review，处理反馈并复审。下一正文使用 F01M 独立标识，须另行确认允许文件与验证要求；不将分析通过当作成稿通过。
+## Browser Fundamentals — Research and Outline (F01A)
 
-## 状态与角色
+- **Original scope:** Coordinator assigned analysis on 2026-11-15 in `/tmp/btf-writer-f01a`; Writer maintained analysis/handoff/task status only, without Git writes.
+- **Delivery:** [analysis](analyses/F01.md), [handoff](../../docs/handoffs/writer/F01A.md): source conditions, seven sections, original cases/diagrams and specific validation plans. No prose chapter was written.
+- **Checks:** specified source sections and document checks performed; browser experiments were not run. No trace, measurement or performance result was invented.
+- **Actual gate:** [review](../../docs/reviews/F01A.md) accepted original Chinese r1. PR #6 passed three cloud checks and merged as `4ff4a1f`. The English process translation is an editorial revision for separate documentation review; the historical reviewed hash is not its current hash.
+- **Next:** Browser Fundamentals — Manuscript (F01M) needs its separate confirmed files/acceptance and a resumption instruction after the design discussion. Analysis acceptance is not manuscript acceptance/publication.
 
-后续逐章流程：范围确认 → 分析调研与详细细纲 → 分析 review/返修 → 主审确认写作范围 → 正文与自查 → 正文 review/返修 → 主审记录通过 → 按授权协调仓库同步和下一阶段。分析通过不代替成稿通过。
+## Process and roles
 
-写完、通过 review 与公开发布分别记录。Writer 不自批通过，不在待审期间继续改变交付文件，不自行启动依赖该阶段的工作。
+Scope → research/detailed outline → analysis review/revision → confirmed writing scope → manuscript/self-check → manuscript review/revision → recorded acceptance → authorized integration or separately scoped next work. See [workflow](chapter-workflow.md) and [analysis template](templates/chapter-analysis.md).
 
-| 角色 | 本计划中的责任 |
+Drafted, reviewed, merged and published are distinct. Writer does not self-approve, alter a frozen submission silently or launch a dependent stage on its own.
+
+| Role | Responsibility |
 | --- | --- |
-| 用户 | 确定目标、补充偏好、裁定关键选择和授权范围 |
-| 主对话 / 主审 | 内容与技术来源 review、共享决定和内容契约、Writer/Developer 协调；有需修改项时给具体位置与负责人 |
-| Writer | 在授权范围内写目录提案、章节、图示、来源和交接；处理自己的修订 |
-| Developer | 根据已协调契约呈现同一份内容、验证阅读体验；需求由主对话转交，本计划不向其自行派工 |
+| User | Goals, preferences, final choices and scope authorization |
+| Coordinator / reviewer | Assignment, content/source review, shared decisions/contracts, feedback, verification and integration; does not ghostwrite the owner's formal deliverables |
+| Writer | Scoped planning/prose/diagrams/sources/handoffs and their revisions; assigned product explanations |
+| Developer | Shared-source presentation and reading validation under accepted contracts; engineering documentation |
 
-没有常驻 Fact checker。独立对话不自动监听消息或文件，提交交接不意味着 review 已自动开始。
+No standing Fact checker. Independent chats do not watch messages/files automatically; a submitted handoff does not mean review has occurred.
 
-## W01：整理写作规划（历史交付，整体待 review）
+## Editorial Baseline and Content Map (W01): historical delivery, full outline pending
 
-**输入：** 本对话已确认的方向；最新 `AGENTS.md`、`docs/project-brief.md`、`docs/coordination.md`、`docs/collaboration.md`、Writer 同步说明与交接模板；既有知识范围盘点。
+**Inputs:** confirmed discussion, then-current AGENTS/shared context/board/collaboration, Writer synchronization, handoff template and the topic inventory.
 
-**交付与所有权：**
+**Files:** `editorial-brief.md` separates confirmed direction/persona assumptions/proposals; `outline.md` gives chapter questions/scope/cases/prerequisites; this file defines stages/acceptance; `docs/handoffs/writer/W01.md` records evidence and dependencies.
 
-- `book/planning/editorial-brief.md`：保留已确认方向，区分画像假设和写作建议。
-- `book/planning/outline.md`：详细内容地图，列出问题、范围、案例和必要前置，供 review。
-- `book/planning/tasks.md`：本任务与后续候选阶段、验收和交接规则。
-- `docs/handoffs/writer/W01.md`：实际结果、检查、待决项与下一依赖。
+**Historical completion:**
 
-**完成清单：**
+- [x] Record accurate book/project names.
+- [x] Record audience, voice, cases, sources and bilingual principles with evidence boundaries.
+- [x] Propose detailed three-part coverage without a page cap.
+- [x] Explain AI coding, skills and AI product capability placement.
+- [x] Establish staged handoff/review/revision.
+- [x] Check structure, local links and chapter/task mapping; report actual results.
+- [x] Submit the planning handoff and stop.
+- [ ] Complete full-outline review and record the decision. Only the reviewer can establish that acceptance.
 
-- [x] 记录准确的中英文书名，保留项目/仓库名称。
-- [x] 记录目的、读者、语气、案例、来源和双语原则；区分事实、确认方向与提案。
-- [x] 按三大部分列出详细覆盖及知识关系，不预设页数。
-- [x] 说明 AI Coding、skills 与 AI 产品能力如何进入正文。
-- [x] 建立逐阶段 review、修订和交接机制。
-- [x] 检查本次文档结构、本地链接和章节/任务映射；具体结果写入交接。
-- [x] 提交 W01 交接并结束本阶段。
-- [ ] 主审完成实际文件 review，并记录结果。此项由主审更新记录，不由 Writer 自行勾选。
+**Original boundary:** planning only; no prose, English sample, teaching code/diagrams, website/schema/synchronization tools, installation, commits, pushes or release. W02's later authorization does not rewrite those facts.
 
-**当时边界：** 只做规划，不写章节、英文样章、教学代码或图示；不实现网站、内容 schema、同步工具；未安装、commit、push 或发布。用户后续单独授权的正文见 W02，不倒改 W01 当时的任务事实。
+## Opening and Common Foundations (W02): accepted and merged
 
-## W02：开篇与共同基础（已复审通过，PR #1 已合入 main）
+**Basis/result:** the user asked for opening/basic material, then Jason Zhang attribution, disclosure of AI assistance throughout and a first-person motivation. [Review](../../docs/reviews/W02.md) requested R1–R3 and later closed all findings; the four-file stage merged through PR #1. See [scope](W02-scope.md) and [integration](../../docs/reviews/INT01.md).
 
-**任务依据与结果：** 用户要求先写最开始、最基础的部分，随后指定 Jason Zhang 署名、AI 全程辅助与第一人称写作动机。主审在 [W02 review](../../docs/reviews/W02.md) 首次要求 R1–R3 修改，后续复审已全部关闭，四份 W02 文件通过 PR #1 合入 main；历史修订过程保留在报告中。
+**Files:** `book/drafts/zh/00-before-we-start.md`, `book/drafts/zh/01-a-page-and-a-system.md`, `book/planning/W02-scope.md`, `docs/handoffs/writer/W02.md`. R3's W01 status edits were reported separately. Temporary manuscript paths did not themselves define routing/metadata/publication; the later [minimal content contract](../../docs/content-contract.md) accepts these two reviewed drafts for a future assigned reading implementation without changing their bytes.
 
-**实际范围：** 开篇与 G01 共同基础，见 [W02 scope](W02-scope.md)。原先 F04 token 样章只保留为历史候选，不属于当前 W02，也未获执行授权。
+- [x] Deliver opening/foundations and text diagrams with sources and assumptions.
+- [x] R1: distinguish a refused duplicate action from an existing enrollment.
+- [x] R2: distinguish a temporarily empty query from confirmed failure.
+- [x] R3: correct names/stage mapping without approving the full outline.
+- [x] Update handoff, check structure/links and submit re-review.
+- [x] Reviewer closed R1–R3; commit `13513c9` on `codex/w02-opening-foundations`, then PR #1 squash merge `71b29c7`. W01/shared dependencies were excluded from that PR. This status comes from actual review/integration records, not Writer self-approval.
 
-**交付路径：** `book/drafts/zh/00-before-we-start.md`、`book/drafts/zh/01-a-page-and-a-system.md`、`book/planning/W02-scope.md` 与 `docs/handoffs/writer/W02.md`；R3 的 W01 名称/阶段修订另列交接。临时路径不定义正式路由、metadata、公开清单或网站契约。
+**Boundary:** no automatic next chapter, English prose or site integration. Git file scope/timing belongs to Coordinator; do not include another owner's unreviewed work.
 
-**验收清单：**
+## English Sample and Bilingual Alignment (W03): candidate, not started
 
-- [x] 交付开篇、基础章与必要文本图，来源和教学假设明确。
-- [x] 根据 R1 区分本次重复提交被拒绝与当前已有的报名记录。
-- [x] 根据 R2 区分暂时未查到记录与原请求已确定失败。
-- [x] 根据 R3 更新 W01 名称与现行阶段，保留历史而不标记全目录通过。
-- [x] 修订交接，检查结构与链接后提交复审。
-- [x] 主审已关闭 R1–R3；四份 W02 文件先提交为 `13513c9` 并推送 `codex/w02-opening-foundations`，再经 PR #1 squash merge 为 main 提交 `71b29c7`。W01 规划及共享依赖未纳入该 PR。依据主审 W02/INT01 记录，不由 Writer 自批。
+**Prerequisite:** accepted Chinese sample plus coordinated language/path/status/asset rules. **Scope:** adapt the stable sample naturally, record humor/analogy/terminology difficulties, retain technical scope.
 
-**后续边界：** 不进入下一章、英文稿或网站接入。用户要求审查通过后推送云端，分支、提交时点和逐文件范围由主对话协调，不能纳入其他角色未审改动。
+- [ ] Preserve facts, conditions, reasoning, limits and code behavior.
+- [ ] English reads independently, permits paragraph reorganization and retains uncertainty.
+- [ ] Reuse appropriate code/diagram structure with clear language labels.
+- [ ] Coordinate corresponding files, update-review needs and switching; do not claim unimplemented software.
+- [ ] Submit a scoped handoff, freeze and await review. Do not create its file before assignment.
 
-## W03：英文样章与双语对应（候选，未启动）
+English process-document translation in the current iteration is not W03 or an English book sample.
 
-**前置：** 中文样章已通过 review；语言、路径、状态和资产对应约定由主对话协调。
+## Suggested later Chinese batches
 
-**范围：** 只将已稳定的中文样章改写为英文，并记录难以对应的幽默、类比和术语；不逐字直译，不扩大中文技术范围。
+These are coverage groups, not an execution queue. Coordinator may select, reduce, reorder or split a coherent group after review. Each batch needs an outcome name, legacy ID when assigned, exact files, acceptance and review.
 
-**验收清单：**
-
-- [ ] 技术事实、条件、推理、限制和代码行为一致。
-- [ ] 英文可独立顺畅阅读，段落允许重组；未丢失不确定性。
-- [ ] 复用代码和图示结构，对应标签与解释清楚。
-- [ ] 双语文件、更新复核和语言切换需求已交给主对话协调；未宣称软件已经实现。
-- [ ] 提交 `docs/handoffs/writer/W03.md`，冻结并等待 review。
-
-## 后续中文批次建议
-
-以下只是章节覆盖分组，不是当前执行队列。正式阶段由主审根据 W01/W02/W03 结果选择、缩小或重排；通常每次授权一组连贯内容，必要时拆成更小批次。每批有独立任务编号、确切路径、验收和 review，不能把整张表当成一次放行。
-
-| 候选批次 | 章节范围 | 要建立的联系 |
+| Candidate group | Proposed coverage | Connection |
 | --- | --- | --- |
-| 前端基础与设计系统 | F01–F04；衔接已交初稿的 G01 | 浏览器、真实内容、设计规则与 token 的位置 |
-| 组件与状态 | F05–F08 | 组件契约、状态归属、表单与异步数据 |
-| 前端质量与演进 | F09–F12 | 可访问性、渲染性能、类型/构建、协作与治理 |
-| 请求、业务与数据 | B01–B04，再 B05–B08 | 请求、契约、权限、模块边界到数据正确性 |
-| 异步、容量与可靠性 | B09–B13 | 性能、任务、消息、重试与执行方式的区别 |
-| 持续运行 | B14–B18 | 运行环境、网络、容器、交付与故障证据 |
-| 数据与分析 | B19–B22 | 源数据到可信指标的完整流向 |
-| AI 产品基础 | B23–B25 | 输出、检索、受控执行与评测 |
-| 整体案例第一组 | C01–C03 | 主题、搜索、上传中的跨层决定 |
-| 整体案例第二组 | C04–C07 | 报名、分析、AI 功能和 AI 协作的取舍 |
+| Browser/layout/design foundations | F01–F04, building on G01 | Browser, real content, design rules and tokens |
+| Components and state | F05–F08 | Contracts, ownership, forms and async data |
+| Frontend quality/evolution | F09–F12 | Accessibility, rendering, types/builds and governance |
+| Requests/business/data | B01–B04 then B05–B08 | Contracts/permissions/modules and correctness |
+| Async/capacity/reliability | B09–B13 | Performance/tasks/messages/retry/execution |
+| Continued operation | B14–B18 | Runtime/network/containers/delivery/incidents |
+| Data/analytics | B19–B22 | Sources to trusted metrics |
+| AI product foundations | B23–B25 | Output/retrieval/controlled execution/evaluation |
+| Connected cases, first group | C01–C03 | Themes/search/uploads |
+| Connected cases, second group | C04–C07 | Enrollment/analytics/AI capability/AI collaboration |
 
-批次过大时由主对话拆分，不要求每批都写相同章数。F04 尚未启动；G01 已有初稿，后续衔接时应修改同一份内容，不另写重复版本。修改已审内容时记录变更并按影响复核。
+No fixed number of chapters per batch. F04 is unstarted. G01 exists; revise its single source with recorded review impact rather than write duplicates. F01A does not authorize the whole first batch. English batches need separate authorization after corresponding Chinese stabilizes; use a sample to calibrate style rather than waiting for a finished book or translating every unstable draft automatically.
 
-英文后续批次在对应中文稳定后单独授权和交接。双语风格先用 W03 校准，不默认等全书中文完成才开始，也不在中文未稳定时自动并行全量翻译。
+## Common acceptance for a manuscript batch
 
-## 每批共同验收
+- [ ] Formal analysis, checked sources and detailed sections accepted, feedback handled, writing scope explicit.
+- [ ] Reread current inputs/reviews and verify dependencies/revisions rather than trust an old summary.
+- [ ] Modify only assigned Writer files; report site/shared requirements through handoff.
+- [ ] Connect principles, examples and choices rather than list terms.
+- [ ] Avoid cross-chapter contradiction; give repeated concepts a main explanation and useful links.
+- [ ] Official sources/dates support necessary product/framework details; no invented citations, experiments or benefits.
+- [ ] Address normal/failure/unknown outcomes to the depth needed.
+- [ ] Check diagrams/code/tables; give environment evidence for actual execution/rendering and mark omissions.
+- [ ] Separate experiments from teaching assumptions and real employer experience.
+- [ ] Freeze and submit; acceptance belongs to the reviewer.
 
-- [ ] 每章已有正式分析稿、已核查来源与详细小节，分析 review 及反馈处理完成，写作范围明确；没有跳过分析直接写成稿。
-- [ ] 写作前重读本批输入和最新 review，核对依赖文件与版本，不只相信旧摘要。
-- [ ] 只改任务列出的 Writer 文件；对网站、共享文件的需求写进交接。
-- [ ] 原理、例子、技术选择互相连通；没有只剩术语列表的段落。
-- [ ] 无跨章自相矛盾；重复定义有明确主讲位置，链接能找到对应内容。
-- [ ] 产品/框架细节有必要的官方来源与查阅日期；没有虚构来源、实验或收益。
-- [ ] 正常、失败与结果不确定的路径得到与主题相称的讨论。
-- [ ] 图示、代码和表格在源文件层面检查；实际运行/渲染的检查记录环境，未做的明确标出。
-- [ ] 所有实验证据与教学假设区分；教学场景不冒充真实雇主项目。
-- [ ] 提交阶段交接后保持稳定；通过与否由主审记录。
+## Independent whole-book and release stages
 
-## 整稿与发布前的独立阶段
+1. **Chinese manuscript editing:** after author reading, adjust order/depth/repetition/transitions/terminology/case continuity, then revise the opening/public summary.
+2. **English editing and semantic alignment:** check tone/meaning/technical correspondence and Chinese-driven updates.
+3. **Real reading acceptance:** Developer checks directory/languages/links/code/diagrams/desktop/mobile; Writer handles prose issues.
+4. **Final content review:** facts/versions/citations/reuse/TODOs/content status/known limits.
 
-1. **中文整稿编辑：** 用户通读后调整顺序、详略、重复、过渡、术语和案例连续性；再重写导读及对外简介。
-2. **英文整稿与双语校对：** 审核语义、语气和技术对应；处理中文修改带来的英文更新。
-3. **真实阅读体验：** 主对话协调 Developer 验证目录、语言切换、链接、代码、图示、桌面与移动阅读；Writer 处理正文问题。
-4. **最终内容审查：** 关键事实与版本、引用和实际复用、残留 TODO、内容状态和已知限制。
+Each requires its own scope/handoff. Finished drafts do not imply publication. Licenses, contribution, installation and release follow author decisions and applicable authorization. Earlier post-QA Pages authorization remains recorded, but new execution is paused pending overall-design discussion.
 
-这些都需要各自授权和交接；初稿完成不代表可以公开发布。许可证、贡献方式、发布与安装权限仍按主对话和用户的决定执行。
+## Applying feedback
 
-## 主审意见与返修怎样落地
+Owners maintain one stage handoff under `docs/handoffs/writer/` using the [template](../../docs/handoffs/TEMPLATE.md). Coordinator records accepted/needs changes/insufficient evidence with revision, location, owner and acceptance criteria under `docs/reviews/`.
 
-- 阶段交接：`docs/handoffs/writer/Wxx.md`，参考 [模板](../../docs/handoffs/TEMPLATE.md)。
-- 审核结果：由主审维护 `docs/reviews/Wxx.md`，标明通过/需修改/无法判定，以及具体位置、问题和负责人。
-- Writer 在已授权任务内完成阶段后，主动将交接路径、修订号、文件与证据发给主对话；收到主对话回传的具体 review 后按项返修，在原交接补记修改和验证，再直接提交复审，无需用户手动转发。分析获明确接受后才写正文，成稿另审；通过后只进入任务中已授权的下一步。
-- 待审文件若必须修改，先更新交接并通知审查者，不让主审基于旧内容作出结论。
-- 重要跨角色决定由主对话写入共享文档；本目录不自动覆盖内容契约、共享看板或 Developer 的任务。
+Send the handoff path/revision/files/evidence directly, then handle actual feedback in the same handoff and resubmit. The user need not relay routine messages. Analysis acceptance precedes prose, and prose receives separate review. If frozen files must change, report the change before a reviewer relies on the old revision. Cross-role accepted decisions go into shared documents through assigned ownership; this plan does not override contracts, the board or Developer assignments.
 
-W02 已结项、合入 main 并保持冻结；逐章双 review 流程与模板已由 WF01 接受。本轮 DOC01 仅对齐现行状态，W01 全目录、W03 与其他候选批次均不因此获批。项目与仓库统一为 Beyond the Frontend / `beyond-the-frontend`。
+All current documentation work stops after review/revisions for the next overall-design discussion. Project/repository identity remains Beyond the Frontend / `beyond-the-frontend`.

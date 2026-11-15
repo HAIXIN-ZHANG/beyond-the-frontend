@@ -1,182 +1,182 @@
-# 详细内容地图（W01 提案）
+# Detailed Content Map: Editorial Proposal (W01)
 
-更新：2026-11-14。负责人：Writer。状态：全目录提案待整体 review；用户单独授权的 W02 开篇与 G01 已复审通过，并经 PR #1 合入 main，见 [INT01](../../docs/reviews/INT01.md)。下列 45 个章节编号与顺序仍为提案，不表示其他章节或下一章分析获批。
+Original proposal: 2026-11-14. English editorial/status update: 2026-11-15. Owner: Writer. **The full 45-chapter outline remains a proposal, not an approved table of contents.** Opening/Common Foundations (W02) was separately reviewed and merged through PR #1; Browser Fundamentals research (F01A) was separately accepted and merged through PR #6. Neither approves the remaining list. See [writing stages](tasks.md).
 
-三大部分的方向已确认；以下章节的名称、拆分、顺序与编号均为 Writer 建议，尚未成为正式目录或网站内容契约。编号仅用于本轮讨论和任务映射，不代表文件路径、路由或 frontmatter schema。
+The three-part direction is confirmed. Names, splits, ordering and identifiers below are Writer's proposals, not routes, paths, frontmatter or a content contract. English working labels translate the planning map; they do not constitute an English manuscript or final published chapter titles.
 
-不限制总页数。每章以讲清具体问题为目标，可按实际初稿合并或拆分。前两部分用局部案例解释原理，第三部分重点讨论跨层设计，不重复基础定义。
+Do not impose a total page cap now. Explain a specific question per chapter and adjust splits after actual drafts. Use local examples throughout Parts I/II; Part III emphasizes cross-layer choices rather than repeating definitions.
 
-## 导读 G01：一个页面，究竟连着什么？
+## Common Foundations: What Is a Page Connected To? (G01)
 
-- **问题：** 为什么每个局部都能运行，整个功能仍可能不符合预期？
-- **覆盖：** 用户任务、前后端和数据的关系；边界、状态、时间、依赖；功能要求与延迟、可靠性、成本和维护约束；如何读结构图、时序图和状态图。
-- **例子：** 用户搜索课程、报名，再看到学习记录；先画最小关系，不提前堆出完整云架构。
-- **读后判断：** 能指出哪些环节负责什么，区分假设、事实与尚待验证的决定。
+- **Question:** Why can every local part work while the feature still fails its purpose?
+- **Coverage:** user tasks, frontend/backend/data relationships; boundaries, state, time and dependencies; requirements, latency, reliability, costs and maintenance; structural, sequence and state diagrams.
+- **Case:** search for a course, enroll and find the learning record again. Start with minimal relationships, not a complete cloud diagram.
+- **Judgment:** identify responsibilities and distinguish facts, assumptions and decisions needing validation.
 
-## 第一部分：前端——从界面到产品行为
+## Part I: Frontend, from Interfaces to Product Behavior
 
-### F01 页面出现之前，浏览器在忙什么？
+### Browser Fundamentals: Before the Page Appears (F01)
 
-- **问题：** 为什么有时内容还没出现，有时已经看见却无法操作？
-- **覆盖：** HTML/CSS/JavaScript 各自职责；DOM、样式、布局与绘制的必要模型；事件和主线程；网络、资源和渲染的不同等待。
-- **例子与产出：** 搜索页面加载与交互的过程；能先定位等待发生在哪里。网络协议细节交给 B01，渲染策略交给 F10。
+- **Question:** Why is content sometimes absent, and sometimes visible but not ready to respond?
+- **Coverage:** HTML/CSS/JS roles; DOM, style, layout and paint; events/main thread; network, resource and rendering waits.
+- **Case and outcome:** course-search loading and interaction; locate the kind of wait before choosing a fix. Protocol details belong in B01; rendering strategies in F10. The accepted F01A analysis narrows this chapter's actual writing scope; manuscript work is paused.
 
-### F02 设计稿放进真实内容之后
+### When Real Content Meets a Design (F02)
 
-- **问题：** 为什么同一张卡片，换个标题或屏幕就挤坏了？
-- **覆盖：** 信息层级、排版与间距；盒模型、Flex/Grid、内容驱动布局、响应式；长文本、空数据、不同语言与必要动效。
-- **例子与产出：** 课程卡片、搜索结果与表单；理解视觉规则需要在真实内容和不同尺寸下成立。
+- **Question:** Why does a card break with a different title or screen?
+- **Coverage:** hierarchy, type, spacing, box model, Flex/Grid, content-driven and responsive layout; long text, empty data, languages and necessary motion.
+- **Case and outcome:** course cards, search results and forms; visual rules must hold with real content and sizes.
 
-### F03 组件都有了，为什么还需要 Design System？
+### Why a Component Library Still Needs a Design System (F03)
 
-- **问题：** 为什么组件库越来越大，页面仍然不一致？
-- **覆盖：** 设计原则、共同语言、基础规范、模式、组件、文档与治理；设计系统与 UI 库的关系；团队规模和维护成本。
-- **例子与产出：** 几个相似按钮为什么逐渐分叉；判断应统一外观、行为还是使用约定。介绍 Atomic Design 的组织思路及边界，不规定唯一命名层级。
+- **Question:** Why do pages remain inconsistent as the library grows?
+- **Coverage:** principles, shared language, foundations, patterns, components, documentation and governance; library versus system; team size and maintenance costs.
+- **Case and outcome:** similar buttons diverging; decide whether to unify appearance, behavior or usage conventions. Explain Atomic Design and its limits without imposing a unique naming hierarchy.
 
-### F04 同一个蓝色，为什么要起不同的名字？
+### One Blue, Several Names (F04)
 
-- **问题：** 同一色值出现多次，是否意味着它们应该永远一起改变？
-- **覆盖：** 设计决策、基础 token、semantic token、可选组件 token；引用和用途；主题映射、状态与颜色组合；token 与 CSS 变量的区别。
-- **例子与产出：** 按钮、链接和选中状态的主题变更；能按用途选择 token，理解何时不需要增加一层。
-- **历史样章候选：** 原先建议优先写此章；用户后来改为先写开篇与 G01，作为实际 W02。F04 尚未启动，若以后分配为样章，仍需在章内提供 F03 的必要短解释。
+- **Question:** Does the same color value mean two uses should always change together?
+- **Coverage:** design decisions, primitive/semantic/optional component tokens, references, purpose, theme mapping, state/color combinations and CSS variables.
+- **Case and outcome:** button/link/selection theme changes; select tokens by purpose and recognize when another layer is unnecessary.
+- **Historical candidate:** originally suggested as the first sample, superseded by W02 opening/G01. Not started. If separately assigned, include the necessary brief F03 context.
 
-### F05 一个组件，应该答应调用者什么？
+### What Should a Component Promise Its Caller? (F05)
 
-- **问题：** 为什么一个 Button 最后会长出大量互相冲突的开关？
-- **覆盖：** props、事件、状态和行为契约；组合、变体、受控/非受控；基础/业务组件；职责、信息隐藏、内聚与耦合；复用和过早抽象。
-- **例子与产出：** 按钮、输入框与筛选器；说明哪些决定由组件维护，哪些由业务承担。
+- **Question:** How does a Button accumulate conflicting switches?
+- **Coverage:** props, events, state/behavior contracts, composition, variants, controlled/uncontrolled behavior, primitive/business components, information hiding, cohesion/coupling, reuse and premature abstraction.
+- **Case and outcome:** buttons, inputs and filters; allocate component versus business decisions.
 
-### F06 这份状态，到底归谁？
+### Who Owns This State? (F06)
 
-- **问题：** 为什么改一个筛选条件，需要同步好几份数据？
-- **覆盖：** 局部、共享、URL 与服务端状态；派生值、单一事实来源；数据流、缓存与同步；按需理解 Hooks/Context 或响应式实现。
-- **例子与产出：** 搜索条件、列表与详情；判断哪些值得存储，哪些应计算，哪些应留给服务端。
+- **Question:** Why does one filter change require several synchronized copies?
+- **Coverage:** local/shared/URL/server state, derived values, a single source of truth, data flow, caching and synchronization; Hooks/Context or reactive implementations as needed.
+- **Case and outcome:** search filters, lists and details; decide what to store, derive or leave to the server.
 
-### F07 一个表单，不只有提交成功
+### A Form Has More Than a Success State (F07)
 
-- **问题：** 失败、等待或重复点击发生时，用户接下来能做什么？
-- **覆盖：** 输入、校验、提交、反馈和恢复；客户端与服务端校验；禁用、焦点与错误关联；乐观更新的前提。
-- **例子与产出：** 报名表单；区分明确失败与结果未知，不把恢复按钮等同于业务安全。后端机制在 B03/B07/B12 深入。
+- **Question:** What can users do after failure, waiting or repeated clicks?
+- **Coverage:** input, validation, submission, feedback/recovery, client/server checks, disabling, focus/error association and prerequisites for optimistic updates.
+- **Case and outcome:** enrollment; separate clear failure from an unknown result, and a recovery control from business safety. Backend mechanisms follow in B03/B07/B12.
 
-### F08 请求回来了，为什么还是错的？
+### The Response Arrived. Why Is the Result Wrong? (F08)
 
-- **问题：** 为什么较早的搜索结果会盖住较新的结果？
-- **覆盖：** Promise、async/await 的必要解释、异步顺序、异常、取消、过期结果；分页、加载、空态、重试；轮询与推送的界面责任。
-- **例子与产出：** 搜索与上传进度；用时间线区分请求顺序和完成顺序，明确界面与 API 的契约。
+- **Question:** Why can an earlier search overwrite a later one?
+- **Coverage:** necessary Promise/async/await concepts, ordering, errors, cancellation and stale results; pagination/loading/empty/error/retry; UI duties for polling/push.
+- **Case and outcome:** search/upload progress; separate request order from completion order and specify UI/API contracts.
 
-### F09 鼠标能点，就算能用了？
+### Clickable Is Not Enough (F09)
 
-- **问题：** 只用键盘、看不清颜色或依赖辅助技术时，功能还成立吗？
-- **覆盖：** 语义、可访问名称、键盘、焦点、对比度、错误和动态反馈；原生能力与 ARIA；自动检查的边界。
-- **例子与产出：** 表单、弹窗和后台任务提示；把可访问性检查对应到具体行为，避免只列规则编号。
+- **Question:** Does the feature work with a keyboard, limited color perception or assistive technology?
+- **Coverage:** semantics, accessible names, keyboard/focus, contrast, errors/dynamic feedback, native capabilities, ARIA and automated-check limits.
+- **Case and outcome:** forms, dialogs and background-task notices; tie accessibility to observable behavior rather than rule identifiers alone.
 
-### F10 页面应该在哪里生成？
+### Where Should the Page Be Generated? (F10)
 
-- **问题：** 客户端、服务端和构建时分别适合承担什么工作？
-- **覆盖：** CSR、SSR、静态生成、hydration、必要的服务端/客户端边界；资源加载、列表、图片和执行成本；缓存、内容发现与交互的需求。
-- **例子与产出：** 公开课程页与已登录管理页；依据内容更新、交互和部署约束选择，而不是按框架默认值判断。
+- **Question:** Which work belongs on the client, server or build step?
+- **Coverage:** CSR, SSR, static generation, hydration and server/client boundaries; resources, lists, images, execution costs, caching, discovery and interaction.
+- **Case and outcome:** public course and authenticated administration pages; choose from update, interaction and deployment constraints rather than framework defaults.
 
-### F11 类型检查通过了，为什么运行还会错？
+### Types Passed. Why Did Runtime Fail? (F11)
 
-- **问题：** 类型、外部数据、依赖和构建分别保护了什么？
-- **覆盖：** TypeScript 的组件/接口表达、运行时校验；包、版本、lockfile、构建产物、环境变量；构建工具和依赖风险的必要概念。
-- **例子与产出：** API 字段改变、开发环境可用而部署失败；区分静态检查与实际输入，形成可追踪的排错路径。语法速查另附。
+- **Question:** What do types, external validation, dependencies and builds each protect?
+- **Coverage:** TypeScript component/API contracts, runtime validation, packages/versions/lockfiles/artifacts/environment variables and essential build/supply-chain concepts.
+- **Case and outcome:** changed API fields or local success followed by deployment failure; trace static assumptions and real inputs. Put syntax lookup elsewhere.
 
-### F12 设计文件、代码和文档，谁跟着谁走？
+### Keeping Design, Code and Documentation in Step (F12)
 
-- **问题：** 一次组件变化，怎样让使用它的人知道并安全迁移？
-- **覆盖：** Figma 与代码的映射、设计交接、文档与组件展示、版本和弃用；单元、组件、交互与视觉检查；治理和 review。
-- **例子与产出：** token 或组件契约演进；理解拥有共同名称不等于自动同步，也不保证行为一致。
+- **Question:** How do callers learn about a component change and migrate safely?
+- **Coverage:** Figma/code mapping, handoffs, documentation/component display, versions/deprecation, unit/component/interaction/visual checks, governance and review.
+- **Case and outcome:** token/contract evolution; shared names do not imply automatic synchronization or matching behavior.
 
-## 第二部分：后端与数据——系统怎样把事情办成
+## Part II: Backend and Data, How the System Gets Work Done
 
-### 单元 A：请求、业务与数据
+### Requests, business rules and data
 
-| 编号与章节问题 | 具体覆盖 | 案例与读后判断 |
+| Chapter question | Coverage | Case and judgment |
 | --- | --- | --- |
-| B01 一次请求，经过了哪些地方？ | DNS、TLS、HTTP 的必要概念；入口、代理、路由、应用和数据库；状态码、超时与失败位置 | 追踪搜索请求，知道怎样区分网络、应用和数据层问题 |
-| B02 API 怎样把双方的约定说清楚？ | 输入、输出、校验、错误、分页、兼容；REST/RPC/GraphQL 的问题与取舍；接口描述和必要契约检查 | 前后端对“成功”的理解不同；能写出业务可用而非只有字段的契约 |
-| B03 登录了，为什么还不能访问？ | 认证与授权；session/token、角色、资源归属、租户隔离；CSRF/XSS 等必要安全联系 | 搜索与课程资料访问；知道每次访问应在哪个边界判断什么 |
-| B04 业务代码应该怎样分家？ | 职责、依赖、模块化单体与微服务；分层、Ports and Adapters、依赖反转；DDD 的业务边界；组织与事务成本 | 报名和通知模块；理解拆模块与独立部署是不同决定 |
-| B05 数据要存成什么样？ | 实体、关系、约束；关系型/文档模型；规范化与冗余；对象存储、搜索索引和派生数据 | 用户、课程、报名与文件；从读写需求推导模型，而非先挑产品 |
-| B06 SQL 能查到，为什么结果不对或太慢？ | JOIN、NULL、聚合、粒度、重复；索引、执行计划、分页、N+1；必要 CTE/窗口函数 | 搜索与统计；同时检查数据正确性与查询代价 |
-| B07 两个人同时操作，会发生什么？ | ACID、约束、事务边界、隔离；锁、乐观并发、丢失更新和并发异常 | 最后一个报名名额；能用交错时间线解释问题与方案保护范围 |
-| B08 缓存省下了什么，又欠下了什么？ | 浏览器/CDN/应用缓存；派生值、TTL、失效、热点和陈旧；一致性与资源代价 | 课程改名与权限变化；判断可以旧多久，以及失效/故障后的行为 |
+| What does a request pass through? (B01) | Essential DNS/TLS/HTTP; entry, proxy, routing, application/database; status, timeout and failure location | Trace search and separate network, application and data problems |
+| How does an API make the agreement clear? (B02) | Input/output, validation, errors, pagination, compatibility, REST/RPC/GraphQL trade-offs, descriptions and contract checks | Define business success rather than fields alone |
+| Logged in, but not allowed? (B03) | Authentication/authorization, sessions/tokens, roles, ownership, tenant isolation and relevant CSRF/XSS relationships | Course access/search; identify the trusted decision boundary for each access |
+| How should business code be divided? (B04) | Responsibility, dependencies, modular monolith/services, layers, Ports and Adapters, dependency inversion, DDD boundaries and organizational/transaction costs | Enrollment/notifications; separate module boundaries from independent deployment |
+| What shape should the data take? (B05) | Entities, relationships, constraints, relational/document models, normalization/redundancy, object storage, search indexes and derived data | Users/courses/enrollments/files; derive a model from reads/writes before choosing a product |
+| SQL returns rows. Are they right and affordable? (B06) | JOIN, NULL, aggregation, grain/duplicates, indexes/plans, pagination, N+1, necessary CTE/window functions | Search/analytics; check both correctness and cost |
+| What happens when two people act together? (B07) | ACID, constraints, transaction boundaries/isolation, locks, optimistic concurrency, lost updates and anomalies | Last enrollment place; explain interleaving and the protection offered |
+| What does a cache save, and what does it owe? (B08) | Browser/CDN/application caches, derived values, TTL/invalidation, hot spots/staleness, consistency and resources | Course renaming/permission changes; acceptable staleness and failure behavior |
 
-### 单元 B：异步、可靠性与容量
+### Asynchronous work, reliability and capacity
 
-| 编号与章节问题 | 具体覆盖 | 案例与读后判断 |
+| Chapter question | Coverage | Case and judgment |
 | --- | --- | --- |
-| B09 慢在哪里，撑到哪里？ | 延迟、吞吐、并发、百分位与负载；资源、连接池、瓶颈、负载均衡、扩容、限流和背压；估算与测量 | 报名高峰；区分正确性、容量和性能，不从人数直接推导微服务 |
-| B10 请求结束之后，工作交给谁？ | 请求内执行、worker、任务记录与生命周期；接受/完成；状态查询、轮询和推送 | 上传处理；理解页面关闭后任务是否继续，以及结果怎样查询 |
-| B11 队列、订阅和事件，是一回事吗？ | 命令/事件；竞争消费、pub/sub、路由；消息确认、顺序、保留、回放；broker 与事件日志的不同能力 | 上传完成后触发处理与通知；能按消费关系和交付需求比较机制 |
-| B12 超时了，可以再来一次吗？ | 不确定结果、退避、重试、幂等、去重、死信；双写失败窗口、Outbox、补偿/Saga；局部与跨系统一致性 | 任务处理与报名；区分“再执行”与“安全再执行”，不轻率宣称端到端恰好一次 |
-| B13 Serverless 到底替我们管了什么？ | 常驻服务、容器、函数；触发、生命周期、状态、并发、执行限制、运维和成本 | 同一后台任务的执行方式；将异步、高并发与 serverless 分开判断 |
+| Where is it slow, and what can it handle? (B09) | Latency/throughput/concurrency/percentiles/load, resources/pools/bottlenecks, balancing/scaling, rate limits/backpressure, estimates and measurements | Enrollment peak; distinguish correctness, capacity and performance without inferring microservices from user count |
+| Who works after the request ends? (B10) | Request-bound work, workers, task records/lifecycle, accepted versus complete, queries/polling/push | Upload processing after page close; understand continuation and result lookup |
+| Are queues, subscriptions and events the same? (B11) | Commands/events, competing consumers, pub/sub/routing, acknowledgments/order/retention/replay, broker versus event log | Processing and notifications after upload; compare consumption relationships and delivery needs |
+| Can we try again after a timeout? (B12) | Unknown outcomes, backoff/retry, idempotency/deduplication/dead letters, dual-write windows, Outbox, compensation/Saga, local/cross-system consistency | Processing/enrollment; distinguish execution from safe re-execution and avoid casual end-to-end exactly-once claims |
+| What does serverless manage for us? (B13) | Persistent services/containers/functions, triggers/lifecycle/state/concurrency/limits, operations and cost | Compare execution for one background task; assess async, concurrency and serverless separately |
 
-复制、分片、一致性和共识在涉及相应保证时给必要解释与可选深入；Event Sourcing/CQRS 等在状态历史或读写模型确有需要时引入，不组成必经升级路线。
+Explain replication, sharding, consistency and consensus when needed for a guarantee, with optional depth. Event Sourcing/CQRS enter only when history or read/write models justify them, not as a required progression.
 
-### 单元 C：从本地运行到持续运行
+### From running locally to staying operational
 
-| 编号与章节问题 | 具体覆盖 | 案例与读后判断 |
+| Chapter question | Coverage | Case and judgment |
 | --- | --- | --- |
-| B14 程序跑起来之后，住在哪里？ | 进程、端口、文件、权限、环境变量、退出和资源；必要 Linux/shell、日志、curl 与调试 | 本地能跑而环境中失败；沿证据排查，不只复制报错给 AI |
-| B15 服务明明在运行，为什么访问不到？ | 反向代理、DNS/TLS、CDN；公网/私网、子网、入口和出站；云资源访问与工作负载身份 | API 和对象存储；读懂必要网络关系与权限边界 |
-| B16 装进容器，问题就消失了吗？ | 镜像与容器、网络、卷、配置、健康检查；编排的责任；按需介绍 Kubernetes | API/worker 的部署；知道镜像可运行之外还缺哪些运行条件 |
-| B17 一次修改，怎样进入运行环境？ | Git、commit/branch/PR、冲突与 review；CI/CD、检查和产物；环境、secret、数据库迁移、渐进发布、回滚；IaC 与漂移 | token 或 API 更新的发布；理解代码、数据和基础设施变化如何协同 |
-| B18 用户说坏了，我们从哪里查？ | 日志、指标、trace；SLI/SLO、告警、依赖故障、降级、高可用、备份和恢复验证、故障复盘 | 上传积压和请求失败；用用户影响选择证据，区分发现异常、定位原因与恢复 |
+| Where does the running program live? (B14) | Processes/ports/files/permissions/environment/exit/resources, essential Linux/shell/logs/curl/debugging | Local success/environment failure; follow evidence rather than only pasting an error into AI |
+| Running, but unreachable? (B15) | Reverse proxies, DNS/TLS/CDN, public/private networks/subnets/ingress/egress, cloud access/workload identity | API/object storage; understand network and permission boundaries |
+| Does a container make the problems disappear? (B16) | Images/containers, network/volumes/configuration/health, orchestration responsibilities, Kubernetes as needed | API/worker deployment; identify conditions beyond a runnable image |
+| How does a change reach production? (B17) | Git/commits/branches/PRs/conflicts/review, CI/CD/checks/artifacts, environments/secrets, database migration, gradual release/rollback, IaC/drift | Token/API change; coordinate code, data and infrastructure changes |
+| A user says it broke. Where do we look? (B18) | Logs/metrics/traces, SLI/SLO/alerts, dependency failure/degradation/availability, backup/recovery verification and incident review | Upload backlog/request failure; distinguish detection, diagnosis and recovery through user impact |
 
-### 单元 D：从业务记录到可信分析
+### From business records to trustworthy analysis
 
-| 编号与章节问题 | 具体覆盖 | 案例与读后判断 |
+| Chapter question | Coverage | Case and judgment |
 | --- | --- | --- |
-| B19 业务数据库，为什么不直接承担全部报表？ | OLTP 与分析负载；结构化/非结构化、源记录/派生数据；事件与 CDC；批/流和 ETL/ELT | 学习行为到报表；画出数据流并说明分离的成本与必要性 |
-| B20 数据搬过去了，为什么还要重跑？ | 文件/API/数据库采集；分页、限流、断点、增量、水位、重复、schema 变化；重跑、补数和迟到数据 | 每天更新学习记录；知道恢复从哪里开始、怎样避免漏数和重复 |
-| B21 仓库、湖和湖仓，差别在哪里？ | 存储、表与计算的职责；仓库/湖/湖仓；事实、维度、分区；SQL/DataFrame、转换、调度和分布式计算；dbt/Airflow/Spark 的候选落点 | 一条分析管道；区分处理逻辑、执行引擎、工作流和存储 |
-| B22 两张报表，为什么都说自己没算错？ | 粒度、指标口径、质量检查、新鲜度、血缘、权限、隐私、保留和删除；可视化语境 | 完成课程的人数；从定义、来源与时间核对结论，而非只比较图表 |
+| Why not run every report on the business database? (B19) | OLTP/analytics, structured/unstructured and source/derived data, events/CDC, batch/stream, ETL/ELT | Learning events to reports; explain flow and separation costs |
+| The data moved. Why rerun it? (B20) | File/API/database ingestion, pagination/rate limits/checkpoints/incremental watermarks/duplicates/schema change, reruns/backfills/late data | Daily records; recovery start points and avoiding omissions/duplication |
+| Warehouse, lake or lakehouse? (B21) | Storage/tables/compute, facts/dimensions/partitions, SQL/DataFrame, transformation/scheduling/distributed compute; candidate dbt/Airflow/Spark windows | One pipeline; separate logic, engine, workflow and storage |
+| Why do both reports claim to be correct? (B22) | Grain/metric definitions/quality/freshness/lineage/permissions/privacy/retention/deletion and visualization context | Course completers; check definitions, sources and time rather than charts alone |
 
-### 单元 E：模型接入系统之后
+### After a model joins the system
 
-| 编号与章节问题 | 具体覆盖 | 案例与读后判断 |
+| Chapter question | Coverage | Case and judgment |
 | --- | --- | --- |
-| B23 模型返回了文字，就能交给用户吗？ | token/context 的必要直觉；请求、流式与结构化输出；不确定性、校验、失败、延迟、费用和模型变化；训练与应用的边界 | 资料问答或内容分类；区分格式可解析、事实有依据与业务可用 |
-| B24 给模型资料，为什么还会答错？ | 文档准备、切分、embedding、关键词/向量/混合检索、重排、引用、资料版本与权限；检索与生成分别评测 | 有权限的课程资料；定位错误发生在哪一步，避免把 RAG 当作正确性保证 |
-| B25 AI 想调用一个工具，谁来执行？ | 参数校验、执行权限、工具/MCP；workflow/agent、执行循环、会话/业务状态/记忆；预算、停止、回退、人工介入、多 agent 协调成本；评测、追踪、回归、注入与数据保护 | 只读查询到受控修改；判断何时需要更复杂机制，以及怎样约束和观察 |
+| The model returned text. Can users rely on it? (B23) | Token/context intuition, requests/streaming/structured output, uncertainty/validation/failure/latency/cost/model change, training versus application | Document Q&A/classification; distinguish parseable format, factual support and business usefulness |
+| Why can it answer wrongly with the documents provided? (B24) | Preparation/chunking/embedding, keyword/vector/hybrid retrieval, reranking/citations/versions/permissions, separate retrieval/generation evaluation | Authorized course material; locate the error and avoid treating RAG as a correctness guarantee |
+| The AI wants a tool. Who executes it? (B25) | Arguments/permissions/tools/MCP, workflow/agent/loop, session/business state/memory, budgets/stopping/fallback/human review/multi-agent costs, evaluation/tracing/regression/injection/data protection | Read-only to controlled writes; justify complexity and constrain/observe execution |
 
-机器学习训练、模型微调、复杂记忆与专业推理基础设施按需求提供深入入口，不展开完整算法课程。AI 帮助开发的内容在相关章与 C07 中讨论，不与模型产品集成混为一谈。
+Training, fine-tuning, complex memory and specialist inference infrastructure receive deeper references as needed, not a full algorithms course. AI-assisted development appears in relevant chapters and C07; it is separate from model integration.
 
-## 第三部分：整体案例——把决定放回同一个产品
+## Part III: Connected Cases, Decisions Back in One Product
 
-| 编号与案例 | 跨层范围 | 核心设计判断与前置 |
+| Case | Cross-layer scope | Main judgment and prerequisites |
 | --- | --- | --- |
-| C01 一个产品，要换几套主题？ | 原则、tokens、组件契约、可访问性、设计文件、代码、文档和迁移 | 新品牌与局部业务定制应改哪层；主要前置 F03–F05、F09、F12 |
-| C02 搜索得到，不代表可以看 | URL/状态、异步请求、API、SQL、权限过滤、分页与缓存 | 慢、乱序、权限变化分别影响哪些边界；主要前置 F06/F08、B02/B03/B06/B08 |
-| C03 文件传完了，事情办完了吗？ | 对象存储、任务记录、队列、worker、订阅、幂等、状态反馈、部署和监控 | 页面关闭、重复执行、处理中断和通知失败的恢复；前置 F07/F08、B10–B18 的相关内容 |
-| C04 最后一个名额，谁能报上？ | 产品反馈、事务和约束、幂等、限流、排队、容量与告警 | 业务正确性和承载能力分别怎样保证；前置 B07/B09/B12/B18 |
-| C05 一张学习报表，从哪里来？ | 源数据、事件/CDC、采集、转换、调度、模型、指标与权限 | 补数、迟到、重复和删除怎样影响结果；前置 B19–B22 |
-| C06 给已有产品加一个 AI 功能 | 界面状态、服务、资料、权限、检索、模型、必要工具、评测、成本与运行 | 无资料、冲突、越权、超时和模型变更如何表现；前置 B23–B25 及相关基础 |
-| C07 同一个需求，怎样与 AI 一起完成？ | 需求与验收、产品拆分、上下文/Markdown、任务边界、契约、工具、skills、Git/review、验证与交接 | 对照关键任务片段与检查证据；将重复方法整理为 skill，再检验适用边界。不是完整聊天记录，也不要求读者完成项目 |
+| How many themes does one product need? (C01) | Principles/tokens/contracts/accessibility/design/code/docs/migration | Which layer changes for a new brand or local business customization? F03–F05/F09/F12 |
+| Searchable does not mean accessible (C02) | URL/state/async/API/SQL/permission filters/pagination/cache | Boundaries affected by slow queries, disorder or permission changes; F06/F08 and B02/B03/B06/B08 |
+| Upload finished. Is the work done? (C03) | Storage/tasks/queue/worker/subscription/idempotency/UI/deployment/monitoring | Recovery after page close, duplicate execution, interruption or notification failure; F07/F08 and relevant B10–B18 |
+| Who gets the last place? (C04) | Product feedback/transactions/constraints/idempotency/limits/queue/capacity/alerts | Correctness versus capacity; B07/B09/B12/B18 |
+| Where did this learning report come from? (C05) | Sources/events/CDC/ingestion/transformation/scheduling/models/metrics/permissions | Backfills/late data/duplicates/deletion; B19–B22 |
+| Adding AI to an existing product (C06) | UI/services/documents/permissions/retrieval/model/necessary tools/evaluation/cost/operations | Missing/conflicting material, unauthorized access, timeouts and model change; B23–B25 plus foundations |
+| Delivering the same requirement with AI (C07) | Requirements/acceptance/product decomposition/context/Markdown/scope/contracts/tools/skills/Git/review/verification/handoff | Key task snippets and actual evidence; extract a reusable skill and test its boundaries, not a chat dump or compulsory project |
 
-每个案例均以明确假设下的简单方案开始，再改变一个条件讨论调整。不把所有高阶机制堆进一张“最终架构图”；保留可用的简单设计，说明复杂度增加的具体理由。
+Start each case with a simple design under explicit assumptions, then change one condition. Do not pack every advanced mechanism into a final architecture diagram. Keep a useful simple design and explain each increase in complexity.
 
-## 内容覆盖与前置规则
+## Coverage and prerequisites
 
-- 编号是本轮讨论用的提案标识；正式稳定 ID、路径、语言映射和导航由主对话确认。
-- 概念主要在一处完整解释，其他章节用短提醒和链接复用。第三部分引用必要原理，主要篇幅用于跨层选择。
-- 第一部分涉及权限、幂等等后端问题时，先给足理解界面所需的解释，后续再深入；不让读者为了读懂当前章跳过半本书。
-- 安全、可访问性、测试与可观测性既有集中解释，也进入具体案例，不能只在末尾补清单。
-- 前端框架、后端框架、数据库、消息产品、云和 AI SDK 的比较放在相关问题下，不另列一长串品牌章节。
-- 图示、术语表、命令和语法速查按正式章节的真实需要增加；当前只列候选，不预先制造全部附录。
+- Proposed identifiers are for discussion. Coordinator confirms stable identity, paths, language mapping and navigation.
+- Explain a concept fully in one main location; reuse reminders/links elsewhere. Connected cases spend their space on cross-layer choices.
+- Give enough permission/idempotency context for frontend decisions without requiring half the backend part first.
+- Security, accessibility, testing and observability need both focused explanation and application in cases, not only closing checklists.
+- Compare frameworks/databases/messages/cloud/AI SDKs under the relevant problem rather than adding brand chapters.
+- Add diagrams, glossary and syntax/command references from actual chapter needs rather than pre-generating every appendix.
 
-## 候选附录与范围外内容
+## Candidate appendices and exclusions
 
-候选附录：术语中英对照、架构图阅读、Git/curl/SQL 必要速查、环境与排错、技术比较入口、来源索引。内容在使用它的章节出现后再决定是否独立整理。
+Candidates: bilingual terminology, reading architecture diagrams, essential Git/curl/SQL, environment/debugging, comparison entry points and source index. Decide after the chapters that need them.
 
-本轮不扩展为独立路线：求职、面试、认证、移动端、区块链、WordPress、通用办公和影音创作、完整机器学习训练课程。
+Excluded standalone tracks: employment/interviews/certification, mobile development, blockchain, WordPress, general office/media tools and full machine-learning training.
 
-## W01 希望主审重点检查
+## Questions originally raised for full-outline review
 
-1. 三部分是否仍围绕整体理解，是否因补充技术而变成百科。
-2. F11 与 B17 等章节是否过载；后端五个单元的比例与顺序是否合理。
-3. F04 是否适合作为风格样章，能否独立阅读并代表后续讲解深度。
-4. AI 协作是否既贯穿相关章节，又在 C07 得到完整解释，避免重复与抢占主线。
-5. 哪些主题应进一步合并、拆分或放入深入阅读。页数不是本轮取舍依据。
+1. Do the parts still build whole-system understanding, or has added coverage become an encyclopedia?
+2. Are F11/B17 overloaded, and are the five backend units balanced and ordered well?
+3. Could F04 serve as a self-contained style sample? This historical candidate was superseded by W02's actual scope; F04 remains unstarted.
+4. Does AI collaboration support relevant chapters and C07 without repetition or taking over the main argument?
+5. What should merge, split or move to deeper reading? Page count is not the selection criterion here.

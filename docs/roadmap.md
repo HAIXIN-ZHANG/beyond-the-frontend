@@ -1,127 +1,137 @@
-# 路线图：内容、阅读产品与持续维护
+# Roadmap: Content, Reading Product and Maintenance
 
-更新：2026-11-15。状态：阶段规划框架；不是交付时间承诺，也不替代各执行对话中的具体授权。
+Updated: 2026-11-15. This is a planning framework, not a delivery-date commitment or a replacement for a scoped assignment.
 
-[项目入口](../README.md) · [愿景、读者与内容地图](project-vision.md)
+[Project entry](../README.md) · [Vision and audience](project-vision.md) · [Development history](development-history.md) · [Chinese stage summary](stage-summary.zh-CN.md)
 
-本文维护功能状态和验收路线，不重复维护详细章号。共同定位以愿景为准，精确章节编排读取 Writer 的目录提案；冲突交主对话处理，不能只按文件更新时间自行选一份执行。
+The vision owns positioning; Writer's outline owns proposed chapter-level detail. This document owns future dependencies and acceptance. Development History owns the sequence of actual work and decisions. Resolve conflicting instructions through Coordinator rather than choosing whichever file has the newest timestamp.
 
-## 状态如何阅读
+## Reading the status
 
-- **已实现：** 文件或功能存在；验收限制仍需另外写清。
-- **已核查：** 主审执行了对应检查，不代表所有浏览器或部署场景都通过。
-- **待 review：** 有交付，尚未最终接受。
-- **计划方向：** 值得推进，仍需分配具体阶段。
-- **候选试验：** 先用小样本判断价值，不承诺全量上线。
-- **TBU：** 待补充或决定；注明负责人和完成前提。
+- **Implemented:** files or behavior exist; acceptance limitations must be stated separately.
+- **Verified:** the named checks actually ran; this does not imply every browser or deployment passed.
+- **Awaiting review:** a deliverable exists but has not been accepted.
+- **Planned direction:** a useful next area requiring a concrete assignment.
+- **Candidate experiment:** test value on a small sample before committing to wider delivery.
+- **TBU:** detail or a decision remains open; identify the owner and prerequisite.
 
-## 1. 当前基线
+Review, CI, merge and deployment are separate states. Prefer readable outcome names; legacy identifiers remain for traceability and existing paths.
 
-| 工作流 | 已知状态 | 证据与限制 |
+## 1. Current baseline and immediate priority
+
+The current priority is **AI Development Workflow and Delivery History** (legacy DOC02): English project/process documentation, readable delivery names and one concise Chinese stage summary. Complete and review this documentation stage, then pause for the author’s discussion of the overall project design. Do not automatically resume manuscript, code or deployment work after documentation acceptance. Earlier UI/E2E/QA and post-QA GitHub Pages authorization remains recorded, but resumption requires the author’s direction after that discussion.
+
+| Deliverable | Current evidence | Remaining boundary |
 | --- | --- | --- |
-| 网站工程骨架 | 已实现；D02 代码/配置范围 review 通过 | [D02 报告](reviews/D02.md)：双语首页/目录空状态、404、静态导出；Browser 视觉、键盘和客户端交互未完成验收 |
-| 自动检查 | CI01 本地代码 review 通过，三个 PR 云端 job 成功；同名 required checks 已保存并复核 | [CI01](reviews/CI01.md)：lint/tests、root/Pages 构建及产物验证；不负责部署，后续提交仍需重新通过 |
-| 正文写作 | W02 开篇与共同基础中文稿复审通过，R1–R3 关闭 | [W02 报告](reviews/W02.md)；尚未接入公开网站，后续章节和英文稿仍需明确范围 |
-| 全书目录 | 有 Writer 提案，未整体定稿 | [目录提案](../book/planning/outline.md)，不能把提案章节数当成已完成内容 |
-| 阅读体验设计 | Figma v3 / UI03 已完成三页整理与设计复查，待用户视觉 review | [设计交接](design/reading-experience-v1.md)、[UI03](reviews/UI03.md)：英文注释、semantic layout、组件与 Day/Night/响应式同页分区；PandaCSS 已指定，网站尚未迁移 |
-| 公开服务 | 尚无本框架可确认的上线验收 | 公开 URL、部署验收与许可证：TBU |
+| Website Foundation and Bilingual Routing (D02) | Reviewed code/configuration is in main; bilingual home/empty contents routes, 404 and static export exist. [Review](reviews/D02.md). | Browser visual, keyboard and client-interaction acceptance is incomplete. |
+| Opening and Common Foundations (W02) | Two Chinese drafts passed re-review with R1–R3 closed and merged through PR #1. [Review](reviews/W02.md). | Not connected to a public reading site; English adaptation and later chapters require scope. The accepted minimal content contract permits these reviewed drafts as initial inputs for a later assigned reading stage; that rendering is not implemented yet. |
+| Repository Access and Main Protection (SEC01) | Default main and required-PR protections were independently checked. [Review](reviews/SEC01.md). | Access observations have dates and must be rechecked after changes; they are not an absolute security guarantee. |
+| Project Documentation Integration (DOC01) | The original 27 documentation files plus the review record were integrated through PR #3. [Review](reviews/DOC01.md). | Storing a proposal does not approve its chapter list or features. |
+| Continuous Integration and Merge Protection (CI01) | PR #4 passed Quality, Static export (root) and Static export (pages); matching required checks and up-to-date branches were verified. [Review](reviews/CI01.md). | Each new proposed head needs its actual required checks. CI does not deploy. |
+| Strict TypeScript Migration (TS01) | Reviewed strict migration merged through PR #5 as `92a0edf`; three required checks passed. [Review](reviews/TS01.md). | This does not accept the subsequent UI or Panda configuration. |
+| Browser Fundamentals — Research and Outline (F01A) | Analysis r1 accepted; PR #6 passed all three checks and merged as `4ff4a1f`. [Review](reviews/F01A.md). | Analysis only: no manuscript, browser experiment or publication acceptance. |
+| Design Tokens and Day/Night Themes (DS01) | Frozen unaccepted checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` outside main; local build, 10 tests and a 111-token report were reported. | Independent full browser/UI review is incomplete. Temporary browser tooling is not permanent project E2E coverage or a passed browser test. |
+| Reading Experience Design (UI03) | Three Figma pages, semantic layout roles, component contracts and responsive/Day/Night specimens. [Design handoff](design/reading-experience-v1.md), [review](reviews/UI03.md). | Author visual acceptance and implementation acceptance remain distinct. |
+| Public release | No accepted live site at this checkpoint. | URL, live acceptance and licenses remain TBU. |
 
-这是一份当前检查记录，不自动汇总其他对话的后续进展。阶段变化需由主对话按实际交付更新。
+### Authorized implementation sequence, currently paused
 
-## 2. 功能划分与优先级
+| Deliverable | Expected result and gate |
+| --- | --- |
+| Continuous Integration and Merge Protection (CI01) | Completed foundation; require successful checks for subsequent heads without weakening protection. |
+| Strict TypeScript Migration (TS01) | Completed foundation; retain strict application checking as later tooling changes are reviewed. |
+| Design Tokens and Day/Night Themes (DS01) | Keep the frozen checkpoint recoverable. After documentation acceptance, pause for overall-design discussion and a new resumption instruction; later review must still cover tokens, typography, system/default theme, explicit persistence and initial rendering. |
+| Reusable Reading Components (CMP01) | Review shared header, controls, navigation, callout, code and comparison components and their states; no unassigned component suite. |
+| Responsive Chapter Reading (PAGE01) | Review one responsive page against the accepted design. The accepted [minimal content contract](content-contract.md) permits opening/G01 as reviewed-draft inputs when this stage resumes; Figma specimen prose is not manuscript content. |
+| Browser Validation and E2E Tests (QA01) | Actual narrow/tablet/desktop, theme/refresh, keyboard/focus, overflow, console and bilingual-route evidence; maintain a small useful E2E suite and CI/export checks. |
+| GitHub Pages Release (DEP01) | User-authorized after relevant code/content/QA review; scope deployment separately and verify the live URL, subpath and 404. No paid service or automatic publication of all drafts. |
 
-优先级是设计建议，不表示已经分派。先做好连续阅读与查找，再验证增强功能。
+The Panda checkpoint includes an upstream declaration problem and a proposed split between application and build-tool compiler boundaries. Coordinator proposed the boundary; Developer implemented local checks. Local success is not independent UI acceptance or proof that upstream declarations were repaired. See Development History for the evidence and decision sequence.
 
-| 功能域 | 最小可用范围 | 当前定位 | 暂不包含 |
+## 2. Feature priorities
+
+Priorities guide design; they do not assign all work at once. Establish reading and discovery before validating enhancements.
+
+| Area | Minimum useful scope | Status | Outside the initial scope |
 | --- | --- | --- | --- |
-| 内容与语言 | 从同一内容源读取正文、章序、状态和语言对应 | 基础主线；契约 TBU | 未审稿自动公开、读者打开时即时翻译 |
-| 阅读 UI | 首页、章节页、分类导航、本章目录、响应式、Day/Night、键盘使用 | 基础主线；Figma v3 / UI03 已交，用户视觉审核与代码验收待完成 | 完整桌面 OS 仿真、多余窗口操作 |
-| 搜索与案例入口 | 章节/段落检索、关键词与案例索引 | 优先计划；引擎和索引规则 TBU | 语义搜索、模型推荐 |
-| 阅读恢复 | 当前设备记住位置、必要书签 | 计划方向；在真实正文后验证 | 账户、跨设备同步 |
-| 分享与反馈 | 稳定段落链接；纠错带章节、位置与版本 | 优先计划；入口细节 TBU | 内置社交平台、实时评论系统 |
-| 术语解释 | 小型共用术语表，点击/键盘可查看并进入详解 | 计划方向 | 全量百科与重复定义 |
-| AI 提问卡 | 精选难点的提示、必要上下文、一键复制 | 小范围优先试验 | 站内 AI chat、模型密钥与实时推理 |
-| 章节音频 | 一章试听、播放器、适合朗读的内容转换 | 候选试验 | 第一版全书音频、任意声音克隆 |
-| 内容更新 | 实质更新摘要、语言与音频版本对应 | 随内容增长补齐；规则 TBU | 每次标点变动都通知或重生成 |
-| 离线导出 | 验证 EPUB 或 PDF 的一条路径 | 后续候选 | 同时维护所有格式与专用阅读器 |
-| 渐进图示 | 对少量难点逐步展开，保留静态解释 | 后续候选 | 每图动画、依赖交互才能理解原理 |
+| Content and languages | One source for prose, order, status and language mapping | Accepted minimal opening/G01 contract; broader schema and future bilingual extensions TBU | Automatic publication of unreviewed drafts; translation on page open |
+| Reading UI | Home, chapters, category navigation, local outline, responsive layout, Day/Night and keyboard access | Core direction; design delivered, implementation acceptance pending | Full desktop-OS simulation or unnecessary window controls |
+| Search and case entry points | Chapter/paragraph search, keyword and case indexes | Priority plan; engine/index rules TBU | Semantic search or model recommendations |
+| Reading recovery | Current-device position and necessary bookmarks | Planned; test with real prose | Accounts or cross-device synchronization |
+| Sharing and correction | Stable paragraph links; feedback with chapter, location and version | Priority plan; details TBU | Built-in social platform or live comments |
+| Terminology | Small shared glossary with keyboard-accessible short explanations and deeper links | Planned | A complete encyclopedia or repeated definitions |
+| AI question cards | Curated questions, necessary context and copying | Small priority experiment | Hosted AI chat, model keys or live inference |
+| Chapter audio | One listening sample, playback and narration conversion | Candidate experiment | Immediate full-book audio or arbitrary voice cloning |
+| Content updates | Material-change notes and language/audio version mapping | Add as content grows; rules TBU | Notifications or regeneration for every punctuation change |
+| Offline export | Validate one EPUB or PDF path | Later candidate | Every format and a dedicated reader at once |
+| Progressive diagrams | Reveal a few difficult relationships in steps with static explanations retained | Later candidate | Animation for every diagram or interaction required to understand a principle |
 
-## 3. 分阶段交付
+## 3. Product acceptance checkpoints
 
-以下是产品层的检查点，不重新命名或覆盖 Writer/Developer 的 Wxx、Dxx 任务编号。
+These checkpoints complement the delivery stages without replacing their legacy identifiers or exact assignments.
 
-### 检查点 A：定位与样章成立
+### Positioning and sample chapters
 
-- 主对话：本组三份入口文档、内容边界、来源与署名规则；许可选择仍 TBU。
-- Writer：开篇/共同基础修订已通过 review；后续样章及英文校准范围待确定。
-- 完成条件：目标读者与语气清楚，示例讲通，关键概念有依据，交接状态无冲突。
-- 不把“全目录已提出”当成“全目录已审核”。
+Confirm the audience, tone, content boundaries, sources and author disclosures. The opening/foundations drafts passed review; later chapter and English-sample scope remain separate. License choices are still TBU. Explanations and examples must work in actual samples; a proposed complete outline is not a reviewed complete outline.
 
-### 检查点 B：真实正文可以顺畅阅读
+### Comfortable reading of approved content
 
-- 主对话与两执行方确认目录结构、章节标识、元数据、语言对应、缺少翻译处理和公开清单。
-- 网站仅构建批准的正文与必要公开资料；规划、交接、review、同步 prompt 和 `.local/` 不因位于 repo 就进入搜索或阅读目录。全文索引与音频使用同一公开范围约定。
-- 明确首页、桌面章节页与手机章节页的设计方向；用真实样章验证图表、代码、链接与术语的呈现。
-- Developer 接入真实内容、分类与章内导航，补 Browser 视觉、键盘、语言切换和运行错误检查。
-- 完成条件：明确样本在手机/桌面可读，刷新和切换可靠，未审稿与 `.local/` 不进入公开产物。
-- 具体 schema、技术实现和阶段文件范围：**TBU**，由主对话协调；不在本文件预设实现。
+- Use the accepted [initial-chapter contract](content-contract.md) for stable opening/G01 IDs, slugs/order, typed allowlist, source hashes, reviewed-draft status and missing-English navigation. It permits only these inputs for a later assigned implementation; main does not yet render them. Agree broader metadata/schema, new chapters and future translation/version behavior before expanding it.
+- Build only approved prose and necessary public resources. Planning, handoffs, reviews, sync prompts and `.local/` do not enter the reading directory or search merely because they exist in Git. Search and audio must share the publication boundary.
+- Validate the home, desktop and mobile chapter direction with real text, tables, diagrams, code, links and terminology.
+- Developer supplies browser, keyboard, language-switching and runtime-error evidence for the scoped integration.
+- Acceptance requires readable mobile/desktop samples, reliable refresh/switching and exclusion of unreviewed/private material from public artifacts.
+- The minimal initial contract is accepted; its implementation and browser acceptance remain undone. Full-book schema, future bilingual/version extensions and expanded file scope remain **TBU**. Do not reopen accepted minimum decisions or imply they already shipped.
 
-### 检查点 C：内容能找到、能分享、能继续读
+### Find, share and resume reading
 
-- 分配搜索、案例入口、段落直达、关联纠错及阅读位置的具体范围。
-- 验证中文与英文检索、无结果、稳定链接和本地状态失效后的行为。
-- 完成条件：读者能从一个普通工程问题找到相应解释，并能分享/反馈准确的位置。
-- 搜索方案、索引更新、版本与统计方式：**TBU**。不默认引入用户追踪、账户或后台服务。
+Assign search, case entry points, paragraph access, correction context and reading-position behavior. Check Chinese/English search, no results, stable links and invalid local state. A reader should find an explanation from an ordinary engineering problem and share or report its precise location. Search/index updates, versioning and analytics remain **TBU**; do not assume tracking, accounts or a backend.
 
-### 检查点 D：低投入的 AI 阅读延伸
+### Low-cost AI reading extensions
 
-- Writer 在两三篇合适章节准备少量精选提问卡，包含必要假设和问题；主对话随文核对。
-- Developer 提供查看与复制，复制内容含章节链接和版本；不调用模型。
-- 卡片可以按换例子、反例或检验理解组织，跟正文一起版本化和 review；读者手动粘贴到自己的工具。本站不自动打开工具发送内容，不保管账户、会话或密钥。
-- 完成条件：提示在没有整章聊天背景时仍可理解，复制失败有反馈，卡片不打断阅读。
-- 真实工具使用测试、用户反馈方式及是否扩展下载上下文：**TBU**。
-- 不把“预写了 prompt”宣传为已接入 GPT、Codex 或 Claude；模型输出仍由读者判断。
+- Writer prepares a few cards in two or three suitable stable chapters; Coordinator reviews their assumptions and questions with the prose.
+- Developer provides preview/copy with chapter links and versions, without a model call. Cards may ask for another example, a counterexample or a check of understanding.
+- Readers manually paste the editable text into their own tools. Do not automatically send text, manage accounts/sessions or hold keys.
+- Acceptance requires understandable prompts without hidden chat history, copying-error feedback and cards that do not interrupt reading.
+- Actual tool-use trials, feedback collection and downloadable context remain **TBU**. A prepared prompt is not an integration with GPT, Codex or Claude, and does not guarantee model output.
 
-### 检查点 E：单章音频价值验证
+### Single-chapter audio trial
 
-- 选择一篇稳定且适合听的章节，准备纯说明、中英术语、图表说明三类样本。
-- 从同一 Markdown 内容源生成朗读文本：跳过代码原文、链接 URL 和格式标记，图表补口述说明；不另维护一整本重复音频稿。按小节生成，提供用户主动播放、暂停、继续、停止和进度/语速等必要控制，具体最小范围 TBU。
-- 比较模型的可懂度、漏读/重复、发音、资源与生成耗时；模型、声音、运行位置与预算均 **TBU**，未执行试听或选定服务。
-- 验证音频播放器和对应正文，记录哪些内容适合听、哪些需回看页面。
-- 有效后再设计：通过审核的朗读文本变更 → 分节重生成 → 上传新版本 → 成功后切换音频索引。朗读文本/模型/音色配置共同决定版本，避免缓存旧文件或生成失败覆盖可用版本。
-- 只有已审核、允许发布的版本触发生成；正文有实质变动而音频未就绪时标明旧版或暂时隐藏音频。并发生成时，旧任务结果不能覆盖更新版本的索引；实际运行位置、重试与失败处理由实现方案明确。仅改排版无需默认重生成。
-- 存储/CDN、运行节点、自动化触发和费用：**TBU**；选择模型与部署需另行授权。
-- 本地模型与云端服务均可评估；本地方式仍有硬件、耗时和存储成本，电脑离线时不能持续自动生成。无需为音频播放先引入常驻业务后端。
-- 完成条件：试听认可后才扩大；不因功能可以实现就自动全量生成。
+- Choose a stable chapter suitable for listening, with samples for explanation, mixed-language technical terms and diagram/table narration.
+- Derive narration from the same Markdown source. Skip raw code, URL strings and formatting; supply useful spoken explanations. Avoid maintaining a duplicate full-book script.
+- Generate by section and assess necessary user-initiated play/pause/resume/stop, progress and speed controls; minimum scope remains TBU.
+- Compare intelligibility, omissions/repetition, pronunciation, resources and generation time. Model, voice, execution location and budget are **TBU**; no listening trial or service selection has occurred.
+- Check the audio against its prose and record which material needs the page.
+- Only after a useful trial, design reviewed narration changes → affected-section regeneration → new asset upload → successful index switch. Narration, model and voice configuration jointly identify a version. Failed generation must not replace a working version; older concurrent jobs must not overwrite newer indexes.
+- Generate only reviewed versions authorized for publication. Label older audio or hide it when material prose changes are not yet reflected. Formatting-only changes need not trigger regeneration. Implementation must specify retries and failure handling.
+- Storage/CDN, execution, automation and costs remain **TBU**; model/deployment choices require applicable authorization. Local generation still uses hardware, time and storage and cannot continue while the machine is offline. Playback alone need not introduce an always-running application backend.
+- Expand only after listening acceptance, not simply because full generation is technically possible.
 
-### 检查点 F：公开维护与发布
+### Public maintenance and release
 
-- 确认内容和代码许可、贡献方式、issue/PR 入口、公开章节清单及变更记录。
-- 完成静态部署、公开 URL、子路径与404的线上验证，以及发布范围内功能的验收。
-- 更新 README，所有“可用”入口指向真实交付；保留限制与未完成状态。
-- 时间与每次发布范围：**TBU**。基本阅读达到要求即可评估首发，不必等待音频、AI 卡片和所有候选功能。
+Confirm content/code licenses, contribution rules, issue/PR entry points, public chapter scope and change notes. Verify static deployment, public URL, subpaths, 404 and released features on the live site. Update README links to actual deliveries and retain limitations. Release timing and each release's scope remain **TBU**. Basic reading can justify a first release without waiting for audio, cards or every candidate feature.
 
-内容可以持续更新：反馈用于修订既有章节与选择下一批问题，不自动生成或自动发布未经 review 的正文。仅开放必要反馈入口，不在首版安排账户、排行榜、收费、广告或获客系统。
+Feedback guides revisions and the next questions; it does not automatically generate or publish unreviewed prose. Keep feedback mechanisms small. Accounts, rankings, billing, advertising and lead generation are outside the initial release.
 
-## 4. 并行关系与交接
+## 4. Ownership and handoff
 
-- Writer 可写已批准范围内的内容，Developer 可做不依赖未定契约的已批准网站工作。
-- 正文 schema、语言映射与状态规则先共同确定，再并行接入；同一文件不安排双写。
-- 阶段结果分别进入 `docs/handoffs/writer/`、`docs/handoffs/developer/`；主审看实际材料，在 `docs/reviews/` 记录结论。
-- 依赖阶段须等前置 review；独立工作是否可继续，以具体任务为准。不使用整张路线图作为一次授权。
-- 主对话维护这三份入口文件；执行方在交接里提供可验证的填充建议。临时工作笔记不成为其他角色的隐含依赖。
+Writer and Developer can advance independent assigned work, with disjoint files. Resolve content schema, language mapping and status rules before integrating them in parallel. During the current documentation priority, both work in a dedicated documentation tree, while the original theme checkpoint remains frozen elsewhere.
 
-## 5. 首轮 TBU 清单
+Owners submit stage records under their respective `docs/handoffs/` directories. Coordinator reads actual deliverables and evidence, records review decisions under `docs/reviews/`, returns revisions and manages Git integration. A dependent stage waits for its prerequisite review. The roadmap is not blanket authorization; local notes are not hidden dependencies for another role.
 
-| 待补项 | 提供细节 | 接受/更新 | 完成前提 |
+Writer authors assigned vision/roadmap and planning explanations; Developer authors assigned engineering/history records. Coordinator assigns, reviews, feeds back and integrates rather than writing the owners' formal deliverables. The author remains the final authority.
+
+## 5. Open decisions
+
+| Detail needed | Supplies detail | Accepts / coordinates | Prerequisite |
 | --- | --- | --- | --- |
-| 章节名、顺序及下一批范围 | Writer | 主对话 / 作者 | 当前稿 review 与目录讨论 |
-| 中英文内容、状态与路径契约 | Writer + Developer | 主对话 | 接入正文前 |
-| 首页/章节页/手机端设计 | 主对话已交 Figma v3 / UI03，Developer 提实施反馈 | 作者 / 主审 | 当前设计视觉审核后明确实施范围 |
-| 搜索、阅读恢复和纠错实现 | Developer | 主对话 | 内容契约及基础阅读可用 |
-| 提问卡与复制内容规范 | Writer + Developer | 主对话 | 首批可公开章节稳定 |
-| 音频模型、运行条件和成本 | Developer 提方案，Writer 提样本 | 作者 / 主审 | 单章试验范围与资源授权 |
-| 内容/代码许可与贡献规则 | 主对话 | 作者 | 开放复用、接受贡献前 |
-| 部署地址、验收证据与首发范围 | Developer | 作者 / 主审 | 基础阅读达到标准 |
+| Chapter names, order and next batch | Writer | Author / Coordinator | Current-stage review and outline discussion |
+| Language, status and path contract | Writer + Developer | Coordinator | Before prose integration |
+| Home/chapter/mobile design | Existing UI03 design; Developer supplies implementation feedback | Author / Coordinator | Visual acceptance and explicit implementation scope |
+| Search, recovery and correction behavior | Developer | Coordinator | Content contract and basic reading |
+| Card and copy-context format | Writer + Developer | Coordinator | Stable chapters allowed for publication |
+| Audio model, resources and cost | Developer proposes; Writer supplies samples | Author / Coordinator | Single-chapter scope and resource authorization |
+| Content/code license and contributions | Assigned document owner proposes options | Author decides; Coordinator records | Before reuse and outside contributions |
+| Deployment URL, evidence and first-release scope | Developer | Author / Coordinator | Reading and QA gates accepted |
 
-完成 TBU 时附依据，删除失效占位并更新相关状态。没有实际检查的数据不填写推测数值，不写没有授权的日期或费用承诺。
+Close TBU items with evidence, remove obsolete placeholders and synchronize status. Do not insert guessed measurements, unapproved dates or cost commitments.

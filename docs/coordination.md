@@ -1,6 +1,34 @@
 # Beyond the Frontend — coordination board
 
-## Project document entry points
+## Current priority and workspaces
+
+2026-11-15: The user reprioritized **AI Development Workflow and Delivery History** (legacy DOC02). After completing this documentation task and its necessary review/revisions/integration, stop for an overall project-design discussion. Acceptance must not automatically resume any implementation. Further Reusable Reading Components, Responsive Chapter Reading, Browser Validation and E2E Tests, GitHub Pages Release and Browser Fundamentals manuscript work are paused. Necessary npm/tool and later QA/release authorization remains conditional, not current execution. This opening is a pre-submission snapshot: [the documentation review and its PR links](reviews/ai-development-documentation.md) record actual acceptance, revisions and integration results. After the current task is integrated, remain paused for the overall design discussion; do not interpret this snapshot as an instruction to keep executing the documentation task or resume implementation.
+
+The current tree is `/tmp/btf-project-docs`, branch `codex/ai-development-history`, based on verified remote main `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Developer and Writer share it with disjoint assignments and no Git writes. Coordinator assigns/reviews/returns feedback/manages integration; executors write formal explanations. Developer owns README, Development History and the assigned engineering/coordination records; Writer owns vision/roadmap/book planning/analysis explanations and the single Chinese summary draft. Formal documentation and active comments are English-first.
+
+**Verified integration:** Browser Fundamentals — Research and Outline (F01A), [PR #6](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/6), reviewed head `51cb2053e8f142cb2b46762430cde882da45fd02`, [run 43669313631](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43669313631), all three required jobs successful, squash merge `4ff4a1ffd32209e80f64a60bd12766f3864ea489`. Analysis acceptance is not manuscript acceptance; no experiment or chapter page was delivered.
+
+**Preserved, not accepted:** Design Tokens and Day/Night Themes (DS01) and existing documentation drafts were saved/pushed as checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` on `codex/ds01-panda-theme`. Local code/build evidence exists; independent Browser review remains incomplete. The stable Playwright harness passed syntax checking only and never ran. This checkpoint is not a reviewed acceptance, main merge, E2E result or deployment. The original checkout is clean at that checkpoint and must not be overwritten by documentation work.
+
+See [Development History](development-history.md) for the readable outcome map, decision evolution and exact PR/head/merge ledger; [Roadmap](roadmap.md) owns future scope. The dated entries below preserve earlier execution/authorization snapshots and are superseded by this current priority where they conflict.
+
+## Dated execution records
+
+2026-11-15 initial reading contract: Coordinator accepted [the minimal content contract](content-contract.md) for PAGE01: build-time Markdown from an explicit reviewed/hash-checked allowlist, initially opening and G01 Chinese drafts unchanged from W02. Canonical Chinese routes, missing-English behavior, local-link rewriting and reviewed-draft status are specified; no recursive book publication, translation or content duplication. This enables real reading and incremental additions within the user's app/deployment authorization, not immediate integration during DS01.
+
+2026-11-15 DS01 compiler boundary decision: Official Panda declarations have missing pkg-types and ambiguous internal re-exports under full declaration checking across the inspected releases. Do not globally disable application declaration checks or patch vendor code. Keep all browser application/generated types under strict/noEmit/skipLibCheck false. Put build-only Panda definitions in `panda/`; check them and `panda.config.ts` with a separate strict `tsconfig.panda.json`, explicitly limiting skipLibCheck true to upstream build-tool declaration internals. Both compilers must run in npm check/CI and all handwritten files must remain covered. Coordinator's actual probe showed the application boundary has 0 errors with declaration checking retained; the tooling boundary still rejects invalid public configuration and implicit any. This is an explicit dependency boundary with an unresolved upstream limitation, not a claim that Panda's declaration package is repaired. Developer must implement, document and revalidate the actual files before acceptance.
+
+2026-11-15 scope extension and Writer F01A: The user explicitly added GitHub Pages deployment after appropriate code/content/QA review and authorized Writer to advance the next suitable chapter/stage. This supersedes earlier no-deployment statements for a separate DEP01 stage only; PR CI remains read-only, protections stay enabled, no paid service or unrelated feature. Existing approved W02 material may support the reading app through a minimal explicit content contract; no wholesale draft publication or automatic translation.
+
+Coordinator verified no new Writer chapter analysis/handoff existed and assigned F01A browser-foundations research/detailed outline in an independent worktree `/tmp/btf-writer-f01a`, branch `codex/f01a-browser-analysis`, based on main `92a0edf`. Allowed Writer outputs: `book/planning/analyses/F01.md`, `docs/handoffs/writer/F01A.md`, and necessary task-status edits in `book/planning/tasks.md`. Current gate is analysis only; F01M manuscript has a separate acceptance and scope gate. Developer remains in the original `codex/ds01-panda-theme` checkout; this worktree separation supersedes the original same-checkout description for this concurrent stage. Git remains Coordinator-managed.
+
+Writer start was verified by reading its actual execution reply and completed commands: pwd/branch/status/AGENTS and existing planning/manuscript reads all ran in `/tmp/btf-writer-f01a`. This is execution evidence, not analysis acceptance. The assignment was sent only after worktree creation; creation alone did not start Writer.
+
+2026-11-15 browser tooling available: With the user's subsequent explicit npm/tool authorization, Coordinator installed pinned `@playwright/cli` 0.1.24 in an isolated temporary tool directory and successfully opened an independent headless Chrome-channel session on `about:blank`. It does not use the user's personal profile or change project dependencies. Actual page/theme review can proceed when DS01 is delivered; opening a blank browser is not page acceptance. QA01's permanent project tests should select a compatible stable Playwright Test version separately, rather than copy the temporary CLI's driver dependency.
+
+2026-11-15 tooling clarification: The user explicitly authorized installation of necessary npm/development/browser tools for this iteration, and asked for a small useful E2E suite. Preserve minimal compatible dependencies and stage ownership; this is not permission for unrelated services, fees or deployment. Coordinator installs isolated Playwright CLI tooling for independent browser review without racing Developer's package/lock edits. QA01 should add maintainable project E2E coverage for theme persistence/system behavior, bilingual routes, keyboard/focus and narrow/wide-content behavior; keep the initial browser matrix small. This supersedes the earlier pending browser-installation permission below.
+
+2026-11-15 TS01 integrated / DS01 active: [PR #5](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/5) reviewed head `c0418f132e76e19d130b5a073a658e9644656d56` passed all three required checks in [run 43666204903](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/actions/runs/43666204903) and squash-merged as `92a0edf67774966871e8e85e2b82ab02dc3a5e99`. Coordinator independently fetched/fast-forwarded main, verified full-tree equality and clean checkout, then created `codex/ds01-panda-theme`. DS01 implements only PandaCSS/token/typography and theme foundations. Current browser control is unavailable and no existing Playwright installation was found; temporary browser-tool installation permission has been requested, not inferred. Developer must record unperformed browser checks honestly while proceeding with authorized code work. Writer has no new chapter assignment.
 
 2026-11-15 TS01 local review: Developer r1 passed actual local review, including all 18 application modules, unchanged emitted runtime/JSX, strict configuration and coverage, lint/typegen/tsc/tests and root/Pages evidence. R1 removed unnecessary declaration skipping (`skipLibCheck:false`). R2 retains a documented non-blocking development-tool minimatch advisory under the current non-projectService/default-optimization configuration; production audit is 0, full audit is not. See [TS01 review](reviews/TS01.md). Coordinator prepares the scoped migration PR and cloud gate; DS01 implementation remains next after integration, not part of this PR.
 
@@ -12,12 +40,12 @@
 
 | Stage | Authorized result | Main boundary |
 | --- | --- | --- |
-| CI01 | PR/main Actions: lint/tests, root static export/verification, Pages subpath export/verification | Existing commands; no deployment or AI review action; require checks only after cloud runs succeed |
-| TS01 | Minimal strict TypeScript migration and CI typecheck | Preserve functions/routes; no UI rewrite or broad any/suppression |
-| DS01 | PandaCSS primitives/semantic tokens/layout/typography and Day/Night foundation | System default, explicit persistent choice, initial render verified; only necessary compatible official npm dependencies |
-| CMP01 | Header, Button, IconButton, theme control, chapter/section navigation, Callout, CodeBlock, ComparisonTable | Reused recipes/slot recipes and relevant states; no Storybook or extra component suite |
-| PAGE01 | One responsive reading page matching UI03 | Explicit layout specimen until formal content contract exists; no wholesale drafts/schema/translation, search/audio/AI features |
-| QA01 | Actual desktop/tablet/narrow, themes/refresh, keyboard/focus, long-content overflow, console, bilingual routes and CI/export acceptance | Record unavailable checks as incomplete; no deployment |
+| Continuous Integration and Merge Protection (CI01) | PR/main Actions: lint/tests, root static export/verification, Pages subpath export/verification | Existing commands; no deployment or AI review action; require checks only after cloud runs succeed |
+| Strict TypeScript Migration (TS01) | Minimal strict TypeScript migration and CI typecheck | Preserve functions/routes; no UI rewrite or broad any/suppression |
+| Design Tokens and Day/Night Themes (DS01) | PandaCSS primitives/semantic tokens/layout/typography and Day/Night foundation | System default, explicit persistent choice, initial render verified; only necessary compatible official npm dependencies |
+| Reusable Reading Components (CMP01) | Header, Button, IconButton, theme control, chapter/section navigation, Callout, CodeBlock, ComparisonTable | Reused recipes/slot recipes and relevant states; no Storybook or extra component suite |
+| Responsive Chapter Reading (PAGE01) | One responsive reading page matching UI03 | Explicit layout specimen until formal content contract exists; no wholesale drafts/schema/translation, search/audio/AI features |
+| Browser Validation and E2E Tests (QA01) | Actual desktop/tablet/narrow, themes/refresh, keyboard/focus, long-content overflow, console, bilingual routes and CI/export acceptance | Record unavailable checks as incomplete; no deployment |
 
 TypeScript/PandaCSS implementation and the necessary minimal compatible official npm dependencies are now explicitly authorized for the corresponding stages, superseding older pending-installation notes. Developer owns the scoped site/config/test/workflow changes and `docs/handoffs/developer/<stage>.md`; Coordinator owns shared requirements, review records and branch protection. Writer has no newly selected chapter in this instruction and keeps reviewed prose stable until its analysis scope is resolved. Do not reinterpret this website iteration as permission to write new book chapters.
 
@@ -57,7 +85,7 @@ The WF01 outcome and direct-review-loop update were delivered once to each exist
 
 2026-11-14: Current working directory is `/Users/haixin/Desktop/code/beyond-the-frontend`. [Formal documents and optional local notes](agent-notes-policy.md) defines the storage rule; `.local/` is Git-ignored and the ignore rule was verified. On explicit user authorization, one role-specific follow-up was sent to each Writer/Developer conversation with this rule and the current path. Both tool calls succeeded; recipient acknowledgment is not yet verified. This does not release a new work stage or move existing deliverables.
 
-Updated: 2026-11-14 (Australia/Perth). Owner: coordinator.
+Updated: 2026-11-15 (Australia/Perth). Decision/review owner: Coordinator; assigned documentation writer: Developer.
 
 ## Execution gate
 
@@ -65,24 +93,24 @@ Updated: 2026-11-14 (Australia/Perth). Owner: coordinator.
 
 ## Roles and status
 
-| Role | Current assignment | Status | Future output boundary |
+| Role | Current assignment | Evidence/status | Owned output |
 | --- | --- | --- | --- |
-| Coordinator | Shared design and stage reviews | D02 reviewed; W02 R1–R3 closed; UI03 three-page/token/component review completed; author visual acceptance pending | Shared requirements, contracts, assignments, final review |
-| Writer (independent conversation below) | W02 merged to main; future chapter-analysis workflow accepted in WF01 | UI03 acknowledged; W02 PR #1 merged as `71b29c7`. W01 full outline and next chapter scope remain undecided | `book/`, including chapter assets; `docs/handoffs/writer/` |
-| Developer (independent conversation below) | D02 already included in main; TypeScript analysis and UI03 alignment | Main now includes D02 + W02. No TypeScript/PandaCSS implementation or installation; D02 Browser acceptance remains incomplete | `site/`, assigned tooling; `docs/handoffs/developer/` |
-| Fact checker | Standing role removed by user | Inactive | Review handled by coordinator |
+| Coordinator | Scope/contracts, actual review, feedback and Git integration | Stable main includes PRs #1–#6; theme checkpoint is unaccepted | Review decisions and integration operations |
+| Writer | Assigned English vision/roadmap/book planning/analysis explanations and one Chinese summary | Reviewed W02 drafts and F01A analysis preserved; manuscript progression paused | Its assigned documents and Writer handoff |
+| Developer | AI Development Workflow and Delivery History documentation | Current worktree has main's TypeScript code, not the Panda product tree | README, History, assigned technical/process documents and Developer handoff |
+| Fact checker | Removed standing role | Inactive | Technical/source review stays with Coordinator |
 
 ## Communication and handoff
 
 1. Agents send questions, blockers and completion summaries directly to the coordinator. The coordinator routes dependencies to the relevant role.
-2. Accepted decisions and task/status changes are recorded here or linked from the project brief. The coordinator is the single editor of this board to avoid parallel overwrites.
+2. Accepted decisions and task/status changes are recorded here or linked from the project brief. Coordinator decides status; an explicitly assigned executor records accepted facts in this board. Do not arrange concurrent writes to the same file.
 3. Before execution, each task receives an ID, input dependencies, exact file ownership and acceptance criteria.
 4. Before handing off, report: task ID; changed paths; summary; verification performed and results; unresolved questions; next dependency. Do not report completion while required checks are missing.
 5. Fact-check findings identify file/section, claim, supporting or conflicting source, severity and proposed correction. The coordinator assigns fixes and verifies resolution.
 
 Agent messages are coordination, not automatic approval. A changed file must be read before a dependent agent relies on it.
 
-## Cloud synchronization and next-step snapshot
+## Historical documentation-integration snapshot
 
 - Figma UI03 is already saved in the cloud; GitHub needs the current links and handoff, not a second flattened copy of the design.
 - Main at the start of DOC01 is `c8993ce`, including D02, W02 PR #1 and SEC01 PR #2. GitHub's default is main and its protections were verified. DOC01 adds the reviewed documentation package through its own PR; no site deployment has occurred.
@@ -119,7 +147,7 @@ These are the user-facing execution conversations. Earlier same-conversation sub
 
 Subsequent update: the user chose to remove the Checker conversation; its actual deletion was not verified here. Do not resume that role. Earlier HOLD entries in the creation table are historical, superseded by the current execution gate above. File ownership and handoff are documented in [collaboration](collaboration.md).
 
-## Current handoff process
+## Handoff process
 
 Book title confirmed: **Beyond the Frontend: It Works. Now What?** / **《前端往后看：能跑，然后呢？》**. Current repository: `HAIXIN-ZHANG/beyond-the-frontend`.
 

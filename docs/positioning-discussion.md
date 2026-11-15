@@ -1,25 +1,25 @@
-# 定位与传播讨论：同步记录
+# Positioning and Public Presentation: Discussion Record
 
-2026-11-14。此文件概括用户与项目总览对话的讨论，供 Writer、Developer 和主审参考。它不是要求扩大当前阶段范围，也不替代用户在各对话里的具体指令。
+Discussion date: 2026-11-14. English editorial revision: 2026-11-15. This record summarizes the author's discussion for Writer, Developer and Coordinator. It does not expand a stage or replace specific user instructions. Descriptions of external references below preserve the earlier research context; they were not re-audited for this translation.
 
-## 用户希望达到的效果
+## Intended reader experience
 
-这本书要帮助已有开发经验的工程师，把日常接触过的前端 Design System、后端 System Design、数据和 AI 协作连接起来。语言轻松、简单、好读：从熟悉问题进入，先给直觉，再给准确解释，例子和图为理解服务；不过度套用故事或每章都塞固定模板。书用于理解和思考，不要求完成综合实践。
+Help engineers with development experience connect frontend Design Systems, backend System Design, data and AI collaboration. Keep the language light, simple and readable: begin with familiar problems, build intuition, then give accurate mechanisms. Examples and diagrams serve understanding; neither elaborate stories nor an identical chapter template are mandatory. The book supports understanding and reflection without a compulsory capstone.
 
-内容可以围绕普通工作里的决策，例如组件是否进入共享库、要不要队列、筛选状态放哪里，再说明约束变化时的取舍。适当贯穿一个业务场景，例如上传功能，从界面状态、API、存储、后台任务及失败处理，到如何向 AI 说明范围、契约和验收。AI 协作在真正有帮助的地方自然出现，不是每章都附通用 prompt；更多 Markdown 不自动意味着更好的结果。
+Use ordinary decisions: whether a component belongs in a shared library, whether a queue is needed, or where filter state should live. Explain how choices change with constraints. A recurring upload case can connect UI state, APIs, storage, background work, failure handling and the scope/contracts/acceptance information given to AI. Include AI where it helps; more Markdown or a generic prompt in every chapter does not establish better results.
 
-## 外部参考与边界
+## References and boundaries
 
-研究发现 [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook) 和我们的系统设计、数据、serverless 等范围有明显重合，它也提供免费章节、案例、图示与取舍。不能宣传我们首先提出这些想法；我们可以探索的区别是从前端组件和真实产品功能切入、跨前后端讲清联系、自然融入 AI 协作，并以适合目标读者的语言呈现。中英文与轻松语气是方向，是否真正有差异需用样章和读者反馈验证。
+The earlier research found substantial overlap with [The Engineering Handbook](https://github.com/handbook-academy/engineering-handbook) in system design, data and serverless, including free chapters, cases, diagrams and trade-offs. Do not claim these ideas are new. The intended emphasis to test is starting from components and real product behavior, explaining relationships across layers, integrating AI collaboration naturally and writing for this audience. Bilingual content and an approachable voice are directions whose value still needs sample chapters and feedback.
 
-[《高性价比人生指南》](https://github.com/eternity4719/HowToLiveBetter) 提供免费阅读、搜索、贡献入口及不同阅读形式，值得参考低门槛与单篇可分享性。其作者有公开赞赏、广告/商务合作入口及电子书出品说明；我们不知道作者真实动机、收入或各传播渠道的实际转化，不以推测作事实。公开发布与引用按适用许可和项目既有约定处理。
+[HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter) was a reference for free access, search, contribution entry points, reading formats and shareable individual articles. The earlier discussion noted public support, advertising/business-contact and ebook information. It did not establish the author's motives, income or channel conversion rates. Apply relevant licenses and this project's publication rules; do not turn guesses into facts.
 
-## 长期目标与呈现
+## Long-term presentation
 
-项目展示应优先依靠实际内容、设计和可验证的实现。文章、项目能力和作者真实经历须严格区分，不编造用户、流量、合作或交付经验。潜在职业或商业用途不是当前需实现收费、广告、订阅、自动发帖或获客系统的需求。公开社交发布由作者决定；本记录不公开个人求职计划或私下沟通。
+Present actual content, design and verifiable implementation first. Separate teaching content, demonstrated project capabilities and the author's real experience. Do not invent users, traffic, partnerships or delivery experience. Possible professional or commercial uses do not authorize billing, advertising, subscriptions, automated posting or lead-generation systems. Public social publishing remains the author's choice; private career plans and conversations do not belong in this repository.
 
-可以让读者顺序阅读，也能按具体问题找到文章。网站与正文共用内容源，按当前阶段批准的范围推进；移动阅读、清晰导航、章节直达和可分享链接可纳入既定方案评估，不凭本记录新增功能或改技术栈。写作/网站实现以各自对话里用户的最新指令和主审阶段 review 为准。
+Support both sequential reading and entry through a concrete problem. Keep one content source for the book and site. Evaluate mobile reading, navigation, direct chapter access and shareable links within assigned stages; this record does not add features or change the stack. Current user instructions and stage reviews control writing and implementation.
 
-## 交接与状态
+## Handoff
 
-两个工作对话在各自确认的阶段结束后，通过 `docs/handoffs/` 按现有模板报告。主审阅读实际材料及证据；共享文档、图示和实现变动遵循 `docs/collaboration.md` 的分工。此同步消息仅供知悉，不批准后续阶段、安装依赖、提交或发布。
+Each owner reports the agreed stage through `docs/handoffs/`, using the existing template. Coordinator reads the actual materials and evidence. Follow [file ownership and handoff](collaboration.md) for shared documents, diagrams and implementation. This historical synchronization record is not authorization for another stage, installation, commits or publication.

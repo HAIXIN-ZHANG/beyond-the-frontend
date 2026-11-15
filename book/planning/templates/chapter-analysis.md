@@ -1,70 +1,71 @@
-# 章节分析：[工作标识] [暂定章名]
+# [Readable Chapter Outcome] — Research and Outline ([Legacy ID])
 
-> 模板。使用时填写真实结论、来源与状态，删除无关项；不要将模板本身作为已完成调研。
+> Template. Replace placeholders with actual evidence and status; remove irrelevant items. The template is not completed research.
 
-- 任务依据与范围：[用户/主对话授权的具体章节与允许文件]
-- 修订号与日期：[修订号；查阅日期]
-- 状态：[分析中 / 待分析 review / 修订待复审；通过结论引用主审记录]
-- 正文状态：[尚未开始；或指出已经获准进入正文的记录]
-- 分析 review / 阶段交接：[本任务确认的路径；不要链接不存在的占位文件]
+- **Basis and scope:** [specific user/Coordinator assignment, chapter and allowed files]
+- **Revision and date:** [revision; actual research/access date]
+- **Status:** [analysis in progress / awaiting review / revised for re-review; cite the actual reviewer decision when available]
+- **Manuscript:** [not started; or cite explicit acceptance and writing scope]
+- **Review and handoff:** [confirmed actual paths; do not link nonexistent placeholders]
+- **Editorial translation, if applicable:** [original reviewed revision/date/hash; distinguish historical evidence from this document's current bytes]
 
-## 1. 读者的问题与本章目标
+## 1. Reader problem and goal
 
-[从一个具体场景说明读者卡在哪里，以及阅读后能解释或判断什么。]
+[Start from a specific difficulty. State what the reader should explain or judge afterward.]
 
-## 2. 范围与知识依赖
+## 2. Scope and dependencies
 
-- 已有前置：[需掌握的最少内容，已有章节是否已写、已审]
-- 本章讲清：[必要原理和判断]
-- 本章不展开：[留给其他章节/可选深入的内容与原因]
-- 跨章关系：[如何承接已有内容，避免重复]
+- **Prior knowledge:** [minimum knowledge; which earlier chapters actually exist and passed review]
+- **Explain here:** [necessary principles and judgment]
+- **Defer:** [later/optional topics and why]
+- **Cross-chapter relationship:** [continuity without repetition]
 
-## 3. 调研与关键主张
+## 3. Research and key claims
 
-| 主张或问题 | 原始来源及具体位置 | 适用版本/条件与查阅日期 | 结论及证据边界 |
+| Claim or question | Primary/official source and exact section | Version/conditions and access date | Conclusion and evidence boundary |
 | --- | --- | --- | --- |
-| [填真实主张] | [填已阅读的具体文档，说明看的是正文/目录/摘要] | [按需要填写] | [事实/建议/假设/待实验；来源支持什么，不支持什么] |
+| [actual claim] | [actual source; say body/directory/abstract] | [as applicable] | [documented behavior / recommendation / assumption / experiment needed; what is and is not supported] |
 
-[记录冲突、尚未核实的说法和拟采用的解释；没有证据的主张如何删除、限定或继续查。]
+[Resolve source conflicts and unverified statements. Delete, qualify or investigate unsupported claims.]
 
-## 4. 详细小节与讲解路径
+## 4. Detailed sections and explanatory path
 
-| 顺序与暂定小节 | 回答的问题 | 关键原理与解释深度 | 例子、图示或代码 | 选择、边界与衔接 |
+| Order and working heading | Reader question | Mechanism and depth | Example, diagram or code | Choice, limit and transition |
 | --- | --- | --- | --- | --- |
-| [小节] | [读者疑问] | [具体讲什么，不能只有术语] | [要展示的内容及作用] | [适用条件/下一步] |
+| [section] | [question] | [specific explanation, not a list of terms] | [what it shows and why] | [conditions and next step] |
 
-[用短段落说明这一顺序为什么能让读者理解，哪里允许跳过；不需要先写成完整正文。]
+[Explain why this order supports understanding and what can be skipped. Do not write the complete prose here.]
 
-## 5. 原创案例、图示与实现窗口
+## 5. Original cases, diagrams and implementation windows
 
-- 案例与假设：[与全书场景如何复用；明确虚构教学条件]
-- 正常与异常：[与主题有关的失败、未知、竞争或变化情形]
-- 图示：[回答什么，节点/箭头/状态含义与省略条件，文字替代]
-- 代码或技术参考：[为什么需要；是否只需伪代码/文本；框架差异是否影响判断]
-- 类比：[帮助理解什么，哪里不再适用]
-- 第三方实际复用：[如无则写无；有则说明来源、适用许可与归属]
+- **Scenario and assumptions:** [connection to recurring cases; fictional conditions]
+- **Normal and exceptional paths:** [relevant failure/unknown/race/change]
+- **Diagrams:** [question answered; nodes/arrows/states, assumptions and text alternative]
+- **Code or implementation reference:** [why needed; pseudocode/text sufficient? framework difference relevant?]
+- **Analogy:** [what it explains and where it stops applying]
+- **Actual third-party reuse:** [none, or source/license/attribution]
 
-## 6. 验证计划与实际证据
+## 6. Validation plan and actual evidence
 
-| 需要确认什么 | 计划怎么查 | 已执行结果与条件 | 未执行/限制/依赖 |
+| What needs confirmation | Planned check | Actually performed result and conditions | Unperformed work, limits and dependencies |
 | --- | --- | --- | --- |
-| [主张或例子] | [来源核查/必要实验/图文检查] | [只记录实际完成的检查] | [授权、工具或环境；不默认安装/调用付费服务] |
+| [claim/example] | [source review/necessary experiment/diagram check] | [only actual work] | [authorization/tools/environment; no assumed installation or paid service] |
 
-## 7. AI、英文与网站依赖
+## 7. AI, English manuscript and website dependencies
 
-- AI 协作是否有必要：[若没有，说明不增加通用 prompt；如有，说明服务于什么问题]
-- 提问卡：[按需；问题、假设、上下文和出处如何对应；不是站内 chat]
-- 英文改写：[是否另有授权；易丢失的术语/幽默/类比]
-- 呈现需求：[表格、宽图、代码等必要支持；不修改 Developer 文件]
+- **AI collaboration:** [how it serves this question; omit generic prompts if unnecessary]
+- **Question cards:** [optional; question/assumptions/context/source mapping, not hosted chat]
+- **English adaptation:** [separate authorization; terms/humor/analogies needing judgment]
+- **Presentation:** [necessary tables/diagrams/code; do not modify Developer files]
 
-## 8. 待主审判断
+## 8. Reviewer decisions
 
-[列出影响本章范围、深度、准确性或结构的具体问题；不要将全部编辑责任转交主审。]
+[Concrete questions affecting accuracy, depth, scope or structure. Keep editorial responsibility with Writer.]
 
-## 9. review 后的修订记录
+## 9. Review revisions
 
-| 意见标识 | 处理位置与变化 | 核查结果 | 主审结论依据 |
+| Actual finding ID | Location and change | Checks and result | Reviewer decision/evidence |
 | --- | --- | --- | --- |
-| [实际收到后填写] | [改了什么] | [真实检查] | [实际 review 记录；不自行标通过] |
+| [fill after feedback] | [change] | [actual checks] | [actual review record; no self-approval] |
 
-只有分析 review 明确通过、写作范围已确认后，才进入正文。正文完成仍须单独 review。
+Begin prose only after analysis acceptance and confirmed writing scope. A finished manuscript requires its separate review.

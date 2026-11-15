@@ -1,149 +1,135 @@
-# 写作基线：前端往后看
+# Editorial Baseline: Beyond the Frontend
 
-更新：2026-11-14（Australia/Perth）。负责人：Writer。
+Original planning date: 2026-11-14 (Australia/Perth). English editorial update: 2026-11-15. Owner: Writer.
 
-这是 W01 的写作规划材料，不是章节正文，也不代替协调者维护的[项目愿景](../../docs/project-vision.md)与[路线图](../../docs/roadmap.md)。用户已确认的方向与 Writer 的编排建议分开记录。W01 全目录仍待整体 review；本轮按 DOC01 要求只对齐已发生的审核、整合与流程状态。
+This is the **Editorial Baseline and Content Map** planning package (legacy W01), not manuscript prose or a replacement for the [vision](../../docs/project-vision.md) and [roadmap](../../docs/roadmap.md). Separate confirmed direction from Writer's proposals. The full outline has not been approved.
 
-## 本轮授权与当前状态
+## Current status and historical scope
 
-- 历史阶段：W01 只整理规划，已交接；其精确目录、拆章和后续批次仍是待 review 提案。
-- 用户随后单独授权 W02 开篇与共同基础；[W02 review](../../docs/reviews/W02.md) 已关闭 R1–R3，两篇中文初稿及范围/交接共四文件已通过 PR #1 合入 main，见 [INT01](../../docs/reviews/INT01.md)。这不等于全书目录通过，也不表示网站已接入正文。
-- W01 中的 F04 token 样章是原先候选，已不占用现行 W02；英文稿和下一批章节尚未放行。
-- [WF01](../../docs/reviews/WF01.md) 已接受逐章分析与正文两道 review 流程及模板，共享规则已同步；下一章范围仍未确定，W02 保持冻结。
-- Writer 当前仅按 DOC01 对齐未跟踪规划、历史交接和研究盘点的状态说明；不改已审 W02、网站、共享内容契约、根目录配置或看板，不自行操作 Git。
+- W01 delivered planning only; its exact chapter splits, identifiers and batches remain proposals.
+- The separately authorized **Opening and Common Foundations** (W02) passed re-review, with R1–R3 closed. Its two Chinese drafts, scope and handoff merged through PR #1; see [W02](../../docs/reviews/W02.md) and [integration](../../docs/reviews/INT01.md). This did not approve the full outline or integrate prose into the website.
+- The token sample F04 was an earlier candidate, not the actual W02. English manuscript adaptation has not begun.
+- **Chapter Analysis and Manuscript Review Workflow** (WF01) accepted the two-gate process. **Browser Fundamentals — Research and Outline** (F01A) later passed review and merged through PR #6; its manuscript remains unwritten.
+- The earlier DOC01 pass only aligned then-untracked planning, handoff and research status. It did not edit accepted prose or authorize the next chapter.
+- Current priority: **AI Development Workflow and Delivery History** documentation. Translate assigned process documents into English and prepare the single Chinese stage summary. New prose and code stages are paused. See [roadmap](../../docs/roadmap.md) and [history](../../docs/development-history.md).
 
-## 已确认的书名与项目名
+## Confirmed identity
 
-| 项目 | 名称 |
+| Item | Name |
 | --- | --- |
-| 中文书名 | 《前端往后看：能跑，然后呢？》 |
-| 英文书名 | Beyond the Frontend: It Works. Now What? |
-| 项目与仓库 | Beyond the Frontend / `beyond-the-frontend` |
+| Chinese book title | 《前端往后看：能跑，然后呢？》 |
+| English book title | Beyond the Frontend: It Works. Now What? |
+| Project / repository | Beyond the Frontend / `beyond-the-frontend` |
 
-Engineer Better / `engineer-better` 为历史工作名。作者署名为 **Jason Zhang**，AI 全程辅助创作；当前书稿不代表全书已完成或全部通过审核。
+Engineer Better / `engineer-better` is historical. The author is **Jason Zhang**, with AI assistance throughout creation. Existing drafts do not mean the complete book is written or reviewed. The promotional copy below remains a discussion draft.
 
-副标题、首页引句和 description 的讨论稿见下文；它们不是已定稿的出版文案。
+## Why this book
 
-## 为什么写这本书
+Frontend Design Systems, backend System Design, data, operations and AI collaboration are often learned separately. Help readers with practical experience see how they jointly support a product.
 
-前端的 Design System、后端的 System Design，以及数据、运行和 AI 协作，常被分开学习。本书要帮助有实际开发经验的读者看懂它们如何共同支撑一个产品。
+The goal is to explain the problem, responsibility and state boundaries, cooperation between parts, costs, evidence of correctness and changes required under new conditions. Product thinking means identifying who has a problem, whether the feature solves it, how waiting/failure affects people and which requirements are worth pursuing. Architectural judgment concerns responsibilities, data, time, dependencies, quality constraints and evolution. Explain both through decisions rather than slogans.
 
-目标不只是增加技术名词，而是让读者能够解释：解决的是什么问题，边界和状态在哪里，各部分怎样配合，方案付出了什么成本，结果是否符合预期，以及条件改变后应调整什么。
+Distinguish using AI to develop software from adding AI capabilities to a product. Neither an AI-tool manual nor progressively more elaborate agent configuration is the goal.
 
-产品思维在书中用具体判断表达：谁遇到了什么问题、功能是否解决了问题、失败和等待如何影响体验、哪些需求值得做。架构判断则关注责任、数据、时间、依赖、质量约束与演进。二者都通过例子解释，不作为口号。
+## Readers and working personas
 
-AI 是贯穿其中的主题。区分“用 AI 开发软件”与“把 AI 能力放进产品”，不把所有内容改成 AI 工具教程，也不把更复杂的 agent 配置视为必然进步。
+Primary readers have built real features and want to connect fragmented knowledge and improve judgment across domains. Do not use years, title or geography as a gate. These personas are **editorial hypotheses, not validated interview or market-research findings**.
 
-## 读者定位
-
-核心读者：做过实际开发、能完成功能，但希望把零散知识连起来，并提高跨领域判断能力的开发者。不以年限、职级或某个地区作为门槛。
-
-下面三类是指导写作的假设画像，尚未经访谈验证，不是市场调研结论。
-
-| 画像 | 熟悉的部分 | 主要疑问 | 本书需要提供的帮助 |
+| Persona | Familiar ground | Main question | Needed support |
 | --- | --- | --- | --- |
-| 熟悉前端，希望往后看 | 页面、组件、表单、调用 API | 状态怎样组织？权限、缓存和后台任务怎样影响界面？ | 从界面行为连接 API、数据、服务与运行 |
-| 熟悉后端，希望看全产品 | 接口、SQL、业务逻辑 | 是否需要队列或拆服务？怎样把系统状态交给前端？ | 理解技术选择的成本及其用户影响 |
-| 能完成端到端功能，希望提高判断 | 全栈功能、个人项目、内部工具，可能经常使用 AI | 本地跑通后还缺什么？怎样检查 AI 的结果？ | 完整案例、失败路径、演进与验证方法 |
+| Frontend engineer looking beyond the UI | Pages, components, forms, API calls | How do permissions, caching and background tasks affect UI state? | Connect interface behavior to APIs, data, services and operations |
+| Backend engineer looking at the whole product | APIs, SQL, business logic | Is a queue or service split needed? How should system state reach the UI? | Explain technical costs and their user consequences |
+| End-to-end builder strengthening judgment | Full-stack features, personal projects, internal tools; possibly frequent AI use | What is missing after it runs locally? How should AI output be checked? | Connected cases, failure paths, evolution and verification |
 
-可以默认读者见过组件、接口、数据库和 Git；不能默认已理解事务隔离、消息投递、语义 token 或 agent 工作机制。语法不足时提供短解释和深入入口，不把主线改成零基础语言课程。
+Assume exposure to components, APIs, databases and Git, but not transaction isolation, message delivery, semantic tokens or agents. Supply brief syntax support and deeper links without turning the main argument into a beginner language course. Experienced readers may fill gaps in another domain; do not promise specialist depth everywhere or organize the book around interviews, certification or promotion.
 
-资深读者可用于补齐另一领域或重新梳理知识。正文不承诺为所有专家主题提供深入研究，也不围绕面试、求职、考证或职位晋升组织。
+## Confirmed content direction
 
-## 已确认的内容方向
+1. Three parts: frontend; backend and data; connected cases across layers. Keep common foundations in a short introduction rather than a large abstract theory part.
+2. Explain through examples throughout the first two parts. The last part emphasizes cross-layer decisions instead of repeating definitions.
+3. Set no page/word cap now. Produce coherent drafts and adjust depth after the author reads them. Completeness does not require every framework API.
+4. Markdown is the content source for sequential reading and problem-based lookup. Shared schema, site contracts and diagram formats require coordination rather than independent decisions in this plan.
+5. No compulsory capstone or exercises. Reflection questions include analysis, conditions and possible judgments. Use code/experiments when needed to explain.
+6. Check scope against books, blogs and courses, but independently organize prose and examples. Jiangren's employment, interview, certification and training arrangements are outside scope.
 
-1. 三大部分：前端；后端与数据；串联前后端的整体案例设计。少量共同基础放在导读，不新增一个大而抽象的理论部分。
-2. 前两部分也边举例边解释，具体问题不全部留到第三部分。第三部分讨论跨层影响与整体取舍，避免重复各章定义。
-3. 暂不设页数和字数上限，先形成连贯完整的初稿，再由用户通读决定详略。完整不等于穷尽每个框架的 API。
-4. Markdown 是内容来源；支持连续阅读和按问题查阅。准确的内容 schema、站点技术和图示格式由主对话协调，不在本阶段擅自确定。
-5. 不设必做综合项目或练习。思考问题附分析、条件与可选判断；代码和实验按讲解需要出现。
-6. 参考书籍、博客与课程的知识范围检查遗漏，自行组织正文和教学案例。匠人学院的求职、面试、认证和培训安排不进入本书。
+## Proposed voice, to test in chapters
 
-## 建议的叙述声音：待样章检验
+Write like a patient colleague who wants to explain clearly: relaxed, direct and concrete. Begin with an observable problem, then introduce terms and mechanisms. Avoid dismissive language such as “obviously” or “easy,” elaborate fictional characters, dramatic incidents and constant jokes.
 
-像愿意把事情讲清楚的同事，轻松、直接、有耐心。先给一个可观察的问题，再解释术语和机制。避免“显然”“很简单”等表达，也不依赖冗长人物故事、夸张事故或密集玩笑。
+A useful relationship, not a mandatory section template:
 
-大多数章节可以沿着以下关系展开，但不强制每章使用完全相同的小标题：
+> Familiar situation → why the problem appears → intuition and accurate mechanism → original example or diagram → choices and trade-offs → reflection after a condition changes.
 
-> 熟悉场景 → 问题为什么出现 → 直觉与准确解释 → 原创例子或图示 → 方案和取舍 → 条件变化后的思考。
+- **Main prose:** necessary for understanding the case and making basic judgments.
+- **Optional depth:** special mechanisms and conditions that can be skipped without breaking the argument.
+- **Diagrams:** structure, sequence, state or data flow, with arrow meanings, assumptions and text explanations.
+- **Code:** the parts that affect understanding; label simplifications and limits. Add complete runnable material only when useful.
+- **Tables:** genuinely comparable choices without unconditional product rankings.
+- **Analogies:** intuition followed by their limits.
 
-- 正文：理解案例和作出基本判断必需的内容。
-- 可选深入：机制细节、特殊条件和专业延伸，跳过后仍能理解主线。
-- 图示：解释结构、顺序、状态或数据流；标明箭头含义和必要假设，正文提供文字解释。
-- 代码：只展示影响理解的关键部分，说明简化与未覆盖条件；完整运行示例按需另附。
-- 表格：用于真实可比的选择，不给产品做无条件排名。
-- 类比：帮助建立直觉，随后指出与实际机制不一致的地方。
+## Recurring original teaching scenarios
 
-## 反复出现的原创教学场景
-
-| 场景 | 贯穿内容 |
+| Scenario | Connections |
 | --- | --- |
-| 组件与主题 | Design System、tokens、组件契约、可访问性、设计与代码、版本迁移 |
-| 搜索与权限 | URL 和界面状态、请求竞争、API、SQL、授权、分页与缓存 |
-| 上传、处理与通知 | 对象存储、任务状态、worker、消息、订阅、重试、状态反馈与运行 |
-| 热门报名 | 事务、约束、幂等、限流、容量、等待与结果不确定 |
-| 课程学习分析 | 业务记录、事件/CDC、采集、转换、调度、指标与质量 |
+| Components and themes | Design Systems, tokens, component contracts, accessibility, design/code and migration |
+| Search and permissions | URL/UI state, request races, APIs, SQL, authorization, pagination and caching |
+| Upload, processing and notification | Object storage, task state, workers, messages, subscriptions, retry, UI feedback and operations |
+| Popular enrollment | Transactions, constraints, idempotency, rate limits, capacity, waiting and unknown outcomes |
+| Learning analytics | Records, events/CDC, ingestion, transformation, scheduling, metrics and quality |
 
-第三部分另设“给已有产品增加 AI”案例，复用资料与权限等背景。所有场景均为虚构教学设计，不冒充用户、雇主或真实商业项目；实际实验与叙事假设分别标注。
+An additional AI-product case reuses document and permission context. These are fictional teaching designs, not the author's/employer's production systems. Separate experiments from narrative assumptions.
 
-## 经典思路与框架
+## Principles and frameworks
 
-先讲问题和原理，再引入方法或模式，最后展示实现窗口。关注点分离、信息隐藏、内聚与耦合、组合、依赖方向、业务边界、渐进演进等通过具体问题展开。SOLID、DRY、KISS、YAGNI 不只列缩写，应解释保护什么、何时过度使用。
+Explain the problem and principle before the pattern and implementation. Use concrete decisions to teach separation of concerns, information hiding, cohesion/coupling, composition, dependency direction, business boundaries and incremental evolution. Explain what SOLID, DRY, KISS and YAGNI protect and how they can be overused rather than merely listing acronyms.
 
-前端、后端、消息、云与数据工具都允许比较，但每个主题选择少量代表性实现。只有差异会影响判断时才展开对照。不把一种框架等同于原理，不按课程出现次数推断行业普及程度。
+Choose a few representative frontend, backend, messaging, cloud or data implementations per topic. Compare ecosystems only when the difference changes a decision. A framework is not the principle; course frequency is not adoption evidence.
 
-React/Vue/Angular、Next.js/Nuxt、Node.js/NestJS、FastAPI、ASP.NET Core、Spring Boot，以及数据库、消息和云产品等均仍是候选参考；它们不是已确定的本书技术栈。具体版本和行为写作时查官方来源。
+React/Vue/Angular, Next.js/Nuxt, Node.js/NestJS, FastAPI, ASP.NET Core, Spring Boot and database/message/cloud products remain candidate teaching references, not a settled book-wide stack. Verify versions and behavior when the relevant chapter is authorized. This distinction does not unset the website's separately accepted stack.
 
-## AI 内容的两条线
+## Two AI threads
 
-| 线索 | 需要讲清什么 | 怎样出现 |
+| Thread | Coverage | Placement |
 | --- | --- | --- |
-| AI 帮助开发 | 读代码、需求和验收、任务拆分、相关上下文、契约、工具、skills、差异审查、调试和验证 | 在相关章节展示具体片段，在整体案例展示协作过程 |
-| AI 成为产品能力 | 模型输出、结构化校验、流式体验、检索与权限、工具执行、状态/记忆、评测、成本和回退 | 后端部分建立必要原理，整体案例串联 |
+| AI-assisted development | Reading code, requirements/acceptance, task boundaries, context, contracts, tools, skills, diff review, debugging and verification | Relevant local examples plus a connected delivery case |
+| AI product capabilities | Model output, structured validation, streaming, retrieval/permissions, tools, state/memory, evaluation, cost and fallback | Backend principles followed by a connected case |
 
-skills 用可复用工作展示适用条件、输入、步骤、参考资源、必要脚本和验收；讨论不需要 skill 的情况。区分项目约定、当前任务说明、skill、工具与授权。MCP、workflow、agent 和多 agent 说明各自位置、适用条件与协调成本，不组成固定升级路线。
+Explain a reusable skill through its applicability, input, steps, references, necessary scripts and acceptance, including when no skill is needed. Distinguish project conventions, current instructions, skills, tools and authorization. MCP, workflow, agents and multi-agent coordination have different roles and costs; they are not a mandatory maturity ladder.
 
-AI 案例保留关键输入、必要代码差异、实际观察和人的判断。没有运行的检查不写成通过；不凭主观感受声称效率、质量或可靠性提高。
+Keep key inputs, necessary diffs, actual observations and human judgment. Do not dump entire chats, mark unrun checks as passed or claim efficiency/reliability improvements from impressions.
 
-## 中英双语：语义对齐，分别成文
+## Bilingual manuscript: align meaning, write each edition naturally
 
-维护两份正式内容，中文先明确意思，英文通过改写和审校产出。软件负责语言切换、章节对应和更新提示，不在读者打开页面时临时翻译正式正文。
+Maintain two authored versions. Establish meaning in Chinese, then adapt and review English. Software handles language switching, chapter mapping and update notices, not on-demand translation of official prose when a reader opens a page.
 
-- 技术事实、前提、推理、限制与代码行为一致。
-- 允许英文调整句式、段落和过渡，幽默与类比保留其作用，不追求字面相同。
-- 不增加结论，不删除不确定性；无法自然转写的表达标记供审阅。
-- 代码与图示结构尽量共用，说明与标签提供对应语言；具体资产方案待内容契约。
-- 中文样章通过后制作英文样章；中文后续批次稳定后再按阶段改写，避免整书最后才发现风格问题。
-- 中文更新需要复核英文的提醒属于待协调的网站/工具需求，当前未实现。
+Preserve technical facts, premises, reasoning, limits and code behavior. English may reorganize sentences, paragraphs and transitions; retain the purpose of humor and analogies rather than literal wording. Do not add conclusions or drop uncertainty. Flag expressions that need editorial judgment. Reuse code and diagram structure where possible with corresponding labels; asset rules await the content contract.
 
-## 来源与验证
+Calibrate English through a sample after the Chinese sample is accepted; later adaptation follows stable Chinese batches rather than waiting for the entire book or automatically translating unstable drafts. Reminders when Chinese changes require English review are a proposed tool/site need, not implemented behavior.
 
-官方行为、实验、经验、假设和建议分别表述。变化快的产品细节回到官方文档；代码与数值主张做与风险相称的检查。图文代码实际复用时核对适用许可与署名，不以“参考”替代处理。
+**Documentation language is separate:** this process document is English under the 2026-11-15 policy; Chinese manuscript files remain unchanged. The sole Chinese process summary is `docs/stage-summary.zh-CN.md`.
 
-既有 [参考资料盘点](../../docs/research/jr-academy-topic-map.md) 只作为范围检查输入，不是技术事实的最终证据。此前讨论参考了 Design Systems、Atomic Design、web.dev、DDIA、数据工程书籍、SRE 及 AI 工程公开资料；未完整通读的材料不能声称已通读。
+## Sources and verification
 
-## 对外文案讨论稿
+Separate documented behavior, experiments, experience, assumptions and recommendations. Check changing product details against official sources and verify code/numeric claims proportionately. Actual third-party reuse needs license and attribution handling.
 
-引句：**代码能跑了，接下来该看什么？**
+The [Jiangren topic inventory](../../docs/research/jr-academy-topic-map.md) checks coverage, not technical truth. Earlier discussion referenced Design Systems, Atomic Design, web.dev, DDIA, data-engineering books, SRE and public AI-engineering material. Do not claim complete reading of material not read in full.
 
-中文 description：
+## Promotional copy under discussion
 
-> 从界面往后看，把前端、后端、数据和 AI 协作连起来，理解功能背后的设计与取舍。
+This is an English documentation adaptation of the earlier copy discussion, not publication approval or an English manuscript sample.
 
-英文 repo description：
+**Opening line:** The code works. What should we look at next?
 
-> A practical guide connecting frontend, backend, data, and AI collaboration—one working feature at a time.
+**Short description:** Look beyond the interface to connect frontend, backend, data and AI collaboration, and understand the design decisions behind a working feature.
 
-Summary：
+**Repository description:** A practical guide connecting frontend, backend, data, and AI collaboration—one working feature at a time.
 
-> 页面做出来了，接口也通了，但组件怎么拆、数据放哪里、任务为什么要排队，这些决定之间有什么关系？
->
-> 这本书写给做过实际开发、想把零散知识连起来的你。我们从熟悉的功能出发，聊前端、后端、数据，以及怎样与 AI 一起设计、实现和验证软件。看懂每一部分，也看懂它们怎样组成一个产品。
+**Summary:** The page is built and the API responds. But how do component boundaries, data ownership and background tasks fit together? For developers who want to connect what they already know, this book starts with familiar features and explores frontend, backend, data and working with AI to design, implement and verify software. Understand the parts and how they form a product.
 
-这些是原创文案，不包装成第三方引述。主对话决定何时用于 README 或网站，Writer 不在本阶段改写那些文件。
+These are original copy proposals, not third-party quotations. Coordinator reviews and coordinates any use in README/site with the author and relevant file owner; Writer does not change those files here. Original Chinese discussion wording remains recoverable in Git.
 
-## 规划入口
+## Planning entry points
 
-- [详细内容地图](outline.md)：章节级问题、知识范围、案例与前置关系，均为待 review 的编排建议。
-- [分阶段任务](tasks.md)：本阶段范围、后续候选阶段、验收和 review 规则。
-- [W01 交接](../../docs/handoffs/writer/W01.md)：本次实际交付与检查。
+- [Detailed content map](outline.md): proposed chapter questions, scope, cases and prerequisites.
+- [Writing stages](tasks.md): scope, acceptance and review rules.
+- [Editorial planning handoff (W01)](../../docs/handoffs/writer/W01.md): historical delivery and checks.

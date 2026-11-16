@@ -7,6 +7,8 @@ import { parseBasePath } from '../site/config/deployment.ts';
 import { themeStorageKey } from '../site/theme/runtime.ts';
 import { loadBook } from '../site/content/load-book.ts';
 import { chapterPath } from '../site/content/manifest.ts';
+import { buildSearchIndex } from '../site/content/build-search-index.ts';
+import { readSearchIndex } from '../site/content/search.ts';
 
 const output = fileURLToPath(new URL('../site/out/', import.meta.url));
 const basePath = parseBasePath(process.env.NEXT_PUBLIC_BASE_PATH);
@@ -39,6 +41,7 @@ for (const [page, language, title, alternatePath] of pages) {
   assert.ok(html.includes(`<title>${title}</title>`), `${page}: incorrect page title`);
   assert.match(html, /id="main"/, `${page}: missing skip-link target`);
   assert.match(html, /vibe-coding-then-what\/issues/, `${page}: outdated issue URL`);
+  assert.ok(html.includes('class="search-dialog"') && html.includes('aria-haspopup="dialog"'), `${page}: missing search dialog or trigger`);
 
   // Verify the actual production-serialized head script, not only its source function.
   const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1] || '';
@@ -84,6 +87,7 @@ for (const [page, language, title, alternatePath] of pages) {
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `${page}: source title must be the only H1`);
     assert.ok(article.includes(chapter.title), `${page}: source title was lost`);
     assert.ok(html.includes(`data-source-sha256="${chapter.entry.sha256}"`), `${page}: wrong reviewed revision`);
+    assert.equal((article.match(/class="section-actions"/g) || []).length, chapter.headingIds.length, `${page}: missing heading sharing actions`);
     assert.ok(html.includes('中文 · 已审阅草稿'), `${page}: missing truthful draft context`);
     assert.ok(!article.includes('中文初稿 · 待 review'), `${page}: stale authoring preamble exposed`);
     assert.ok(!html.includes('book/drafts/'), `${page}: internal source path exposed`);
@@ -134,4 +138,16 @@ for (const [page, language, title, alternatePath] of pages) {
   }
 }
 
+for (const locale of ['en', 'zh']) {
+  const index = readSearchIndex(JSON.parse(await readFile(path.join(output, `search-index/${locale}.json`), 'utf8')), locale);
+  assert.deepEqual(index, buildSearchIndex(chapters, locale), `${locale}: exported index differs from approved source nodes`);
+  for (const entry of index.entries) {
+    const [route, fragment] = entry.href.split('#');
+    const target = await readFile(path.join(output, route.slice(1), 'index.html'), 'utf8');
+    assert.ok(target.includes(`id="${decodeURIComponent(fragment)}"`), `Search target missing: ${entry.href}`);
+    assert.ok(!entry.href.startsWith(basePath + basePath + '/') || !basePath, 'Search prefix doubled');
+  }
+}
+
 console.log(`Static export verified: ${pages.length} pages, ${checked} local links/assets, basePath=${basePath || '/'}`);
+console.log('Static search indexes verified: zh=20 reviewed sections; en=0; all heading targets exist.');

@@ -4,6 +4,7 @@ import { site } from '../config/site.ts';
 import { getMessages, localePath } from '../config/i18n.ts';
 import { LanguageSwitch } from './language-switch.tsx';
 import { AppearanceControl } from './ui/appearance-control.tsx';
+import { SearchControl } from './search/search-control.tsx';
 
 export function SiteHeader({ locale, languageHome = false }: { locale: Locale; languageHome?: boolean }) {
   const messages = getMessages(locale);
@@ -13,6 +14,7 @@ export function SiteHeader({ locale, languageHome = false }: { locale: Locale; l
       <Link className="wordmark" href={localePath(locale)} aria-label={`${site.name} · ${messages.home}`} lang="en">
         {site.name}
       </Link>
+      <SearchControl locale={locale} />
       <nav aria-label={messages.navigation}>
         <Link href={localePath(locale, 'read/')}>{messages.contents}</Link>
         {languageHome ? (

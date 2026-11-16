@@ -22,7 +22,7 @@ export function ChapterReader({ chapter, chapters }: { chapter: LoadedChapter; c
       </div>
       <p className="chapter-context">中文 · 已审阅草稿 <span>全书仍在写作中</span></p>
       <article className="chapter-prose" data-chapter-id={chapter.entry.id} data-source-sha256={chapter.entry.sha256}>
-        <MarkdownContent node={chapter.tree} />
+        <MarkdownContent node={chapter.tree} sharing={{ chapterId: chapter.entry.id, chapterTitle: chapter.title, sourceHash: chapter.entry.sha256 }} />
       </article>
       <nav className="chapter-pagination" aria-label="前后章节">
         {previous ? <Link href={chapterPath(previous)} rel="prev"><span>上一章</span>{previous.title}</Link> : null}

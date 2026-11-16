@@ -1,8 +1,8 @@
 # Roadmap: Vibe Coding, Then What?
 
-Updated: 2026-11-15. This is a planning framework, not a delivery-date commitment or a replacement for a scoped assignment.
+Updated: 2026-11-16 (Australia/Perth). This is a planning framework, not a delivery-date commitment or a replacement for a scoped assignment.
 
-Project/book: **Vibe Coding, Then What?** Repository slug: `vibe-coding-then-what`. Subtitle: **Understand the Systems Behind Your AI-Built Products**. The AI-assisted-product entry positioning does not change the content framework, Beta scopes or implementation holds below.
+Project/book: **Vibe Coding, Then What?** Repository slug: `vibe-coding-then-what`. Subtitle: **Understand the Systems Behind Your AI-Built Products**. The AI-assisted-product entry positioning does not change the content framework or Beta scopes; current execution permissions belong in the board.
 
 [Project entry](../README.md) · [Vision and audience](project-vision.md) · [Development history](development-history.md) · [Chinese stage summary](stage-summary.zh-CN.md)
 
@@ -23,34 +23,37 @@ Review, CI, merge and deployment are separate states. Prefer readable outcome na
 
 The [board](coordination.md) alone owns current assignments and holds. **Full-stack and AI Product Engineering — v1 Content Framework** is a completed historical planning stage, accepted and integrated through [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9). Its Junior–Senior audience, required AI product architecture, separate coding-AI delivery thread and [eight-part framework](../book/planning/outline.md) remain the content direction; page names/splits can evolve and listing does not accept their research/manuscripts.
 
-The rebranding assignment is a narrow exception for naming/positioning, necessary site metadata and Pages-prefix migration/verification, plus the explicitly authorized opening book-name replacement. It does not resume other product implementation, new prose/translation, UI/schema/E2E or deployment. Earlier tool and post-QA GitHub Pages authorization does not lift those holds. Use the board for current owners, status and exact scope, rather than treating this roadmap as an assignment. Completed documentation/onboarding outcomes belong in [history](development-history.md) and their [documentation](reviews/ai-development-documentation.md)/[onboarding](reviews/agent-workflow-onboarding.md) reviews.
+The historical branding-only exception has completed. After the author resumed staged Beta 1 execution, PR #12 merged the new theme foundation and reviewed opening alignment, PR #13 merged reading components, and PR #14 merged the two-source Chinese reader. The [runtime guide](../site/DEVELOPMENT.md) owns implemented behavior; [history](development-history.md) and actual reviews/PR records own acceptance, CI and merge evidence. Static search and section-link copy were absent at the 2026-11-16 PR #14 baseline; subsequent execution and outcomes follow those authorities and the board, rather than a separate live status here. New manuscripts/translations, Beta 2/3 implementation and deployment remain held; the board alone identifies current owners, workspace and narrow exceptions. This roadmap is not an assignment or a deployment release.
 
 | Deliverable | Current evidence | Remaining boundary |
 | --- | --- | --- |
-| Website Foundation and Bilingual Routing (D02) | Reviewed code/configuration is in main; bilingual home/empty contents routes, 404 and static export exist. [Review](reviews/D02.md). | Browser visual, keyboard and client-interaction acceptance is incomplete. |
-| Opening and Common Foundations (W02) | Two Chinese drafts passed re-review with R1–R3 closed and merged through PR #1. [Review](reviews/W02.md). | Not connected to a public reading site; English adaptation and later chapters require scope. The accepted minimal content contract permits these reviewed drafts as initial inputs for a later assigned reading stage; that rendering is not implemented yet. |
+| Website Foundation and Bilingual Routing (D02) | Historical home/empty-index/404 foundation accepted in the [D02 review](reviews/D02.md); later reader stages extend that shell. | D02's original browser limitations remain historical; later stage evidence does not retroactively change that review. |
+| Opening and Common Foundations (W02) | Two Chinese drafts passed re-review and merged through PR #1; the opening's later r2 orientation passed its [own review](reviews/beta1-opening-alignment.md) and merged through PR #12. | Only these two reviewed sources are rendered under the [content contract](content-contract.md). English adaptation, later manuscripts and public deployment require their own scope/gates. |
 | Repository Access and Main Protection (SEC01) | Default main and required-PR protections were independently checked. [Review](reviews/SEC01.md). | Access observations have dates and must be rechecked after changes; they are not an absolute security guarantee. |
 | Project Documentation Integration (DOC01) | The original 27 documentation files plus the review record were integrated through PR #3. [Review](reviews/DOC01.md). | The historical 45-chapter proposal was not approved by storage. The author has now confirmed the eight-part v1 direction; individual page analysis/manuscript gates remain. |
 | Continuous Integration and Merge Protection (CI01) | PR #4 passed Quality, Static export (root) and Static export (pages); matching required checks and up-to-date branches were verified. [Review](reviews/CI01.md). | Each new proposed head needs its actual required checks. CI does not deploy. |
 | Strict TypeScript Migration (TS01) | Reviewed strict migration merged through PR #5 as `92a0edf`; three required checks passed. [Review](reviews/TS01.md). | This does not accept the subsequent UI or Panda configuration. |
 | Browser Fundamentals — Research and Outline (F01A) | Analysis r1 accepted; PR #6 passed all three checks and merged as `4ff4a1f`. [Review](reviews/F01A.md). | Analysis only: no manuscript, browser experiment or publication acceptance. |
-| Design Tokens and Day/Night Themes (DS01) | Frozen unaccepted checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` outside main; local build, 10 tests and a 111-token report were reported. | Independent full browser/UI review is incomplete. Temporary browser tooling is not permanent project E2E coverage or a passed browser test. |
-| Reading Experience Design (UI03) | Three Figma pages, semantic layout roles, component contracts and responsive/Day/Night specimens. [Design handoff](design/reading-experience-v1.md), [review](reviews/UI03.md). | Author visual acceptance and implementation acceptance remain distinct. |
-| Public release | No accepted live site at this checkpoint. | URL, live acceptance and licenses remain TBU. |
+| Legacy Design Tokens and Day/Night Themes (DS01) | Frozen unaccepted checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` remains outside the accepted mainline; its local build/10 tests/111-token report are historical evidence. | No wholesale acceptance of that checkpoint. Temporary historical browser tooling is not permanent E2E coverage. |
+| New theme foundation and reading components | Separately accepted and merged through PRs #12/#13; System/Day/Night and shared reading primitives. [Foundation review](reviews/beta1-theme-foundation.md), [component review](reviews/beta1-reading-components.md). | Selected DS01 reuse does not accept its whole tree; runtime guide and stage reviews retain actual checks/limits. |
+| Initial Chinese chapter reader | PR #14 merged opening/G01 reading, responsive navigation, source-derived anchors and source figures/tables with honest English availability. [Reader review](reviews/beta1-chapter-reader.md). | Baseline excludes static search, section-link copy, English manuscripts and deployed acceptance; next work needs its own review. |
+| Reading experience design | Historical [UI03](reviews/UI03.md), accepted [UI04](reviews/beta1-design-alignment.md) and separate [Beta 2 palette design](reviews/reading-palettes-design.md). | Design acceptance, author visual judgment and implementation acceptance remain distinct. Production maps 111 variables; live Figma has 133 after design-only palette additions. |
+| Public release | No deployed site established at this baseline. | URL, live acceptance and licenses remain TBU; deployment remains held. |
 
-### Authorized implementation sequence, currently paused
+### Implementation dependencies and remaining gates
 
 | Deliverable | Expected result and gate |
 | --- | --- |
 | Continuous Integration and Merge Protection (CI01) | Completed foundation; require successful checks for subsequent heads without weakening protection. |
 | Strict TypeScript Migration (TS01) | Completed foundation; retain strict application checking as later tooling changes are reviewed. |
-| Design Tokens and Day/Night Themes (DS01) | Keep the frozen checkpoint recoverable. After documentation acceptance, pause for overall-design discussion and a new resumption instruction; later review must still cover tokens, typography, system/default theme, explicit persistence and initial rendering. |
-| Reusable Reading Components (CMP01) | Review shared header, controls, navigation, callout, code and comparison components and their states; no unassigned component suite. |
-| Responsive Chapter Reading (PAGE01) | Review one responsive page against the accepted design. The accepted [minimal content contract](content-contract.md) permits opening/G01 as reviewed-draft inputs when this stage resumes; Figma specimen prose is not manuscript content. |
-| Browser Validation and E2E Tests (QA01) | Actual narrow/tablet/desktop, theme/refresh, keyboard/focus, overflow, console and bilingual-route evidence; maintain a small useful E2E suite and CI/export checks. |
-| GitHub Pages Release (DEP01) | User-authorized after relevant code/content/QA review; scope deployment separately and verify the live URL, subpath and 404. No paid service or automatic publication of all drafts. |
+| Theme foundation | Completed separately through PR #12. Preserve the original unaccepted DS01 checkpoint and accepted strict compiler boundaries; neither is permission for new theme scope. |
+| Reusable Reading Components (CMP01) | Completed through PR #13; compose accepted primitives without assuming a new component-suite assignment. |
+| Responsive Chapter Reading (PAGE01) | Initial two-source reader completed through PR #14 under the [content contract](content-contract.md); Figma specimen prose is not manuscript content. |
+| Static search and section sharing | Build on the merged reader with current-reading-language results, honest empty English corpus and deliberate section-link/copy/correction recovery. Actual assignment, implementation and acceptance/integration evidence belong in the board, runtime guide and linked stage reviews/PR records. |
+| Browser Validation and E2E Tests (QA01) | Retain completed stage evidence and its limits. Subsequent changes need actual narrow/tablet/desktop, theme/focus/overflow/console and bilingual checks, useful permanent E2E, and required root/Pages CI; PR #14 did not add a permanent E2E suite. |
+| GitHub Pages Release (DEP01) | Remains held. Earlier post-QA authorization does not replace a separately released deployment scope and actual live URL/subpath/404 verification. No paid service or automatic publication of all drafts. |
 
-The Panda checkpoint includes an upstream declaration problem and a proposed split between application and build-tool compiler boundaries. Coordinator proposed the boundary; Developer implemented local checks. Local success is not independent UI acceptance or proof that upstream declarations were repaired. See Development History for the evidence and decision sequence.
+The legacy Panda checkpoint exposed upstream declaration errors and introduced separate application/build-tool compiler boundaries. The later accepted foundation retains the reviewed strict separation; it does not repair upstream declarations or retroactively accept the old checkpoint. See Development History and the foundation review for the distinct evidence and decision sequence.
 
 ## 2. Content direction and prerequisites
 
@@ -58,7 +61,7 @@ The Panda checkpoint includes an upstream declaration problem and a proposed spl
 | --- | --- |
 | Junior–Senior Full-stack + AI Product Engineer framework | Confirmed audience/eight-part direction; refine independent page names/merges through planning review without claiming a job-level outcome |
 | Eight connected parts | Product/architecture; frontend/Design Systems; API/integration; data/search; async/traffic/reliability; cloud/testing/delivery; observability/recovery; required AI product architecture plus coding-AI delivery. Detailed scope/examples/optional depth and all 45 legacy mappings live only in the outline. |
-| Existing accepted material | Rebranding permits only the opening's book-name replacement, separately reviewed with its new source hash; G01 and F01A analysis stay byte-identical. Placement does not expand their old acceptance or authorize the unstarted F01 manuscript. |
+| Existing accepted material | Opening r2 orientation is separately reviewed and integrated, with its approved hash in the content contract; G01 and F01A analysis stay unchanged. Placement does not expand their acceptance or authorize the unstarted F01 manuscript. |
 | Future page writing | Concrete assignment → sources/detailed analysis and review → confirmed writing scope → manuscript and separate review. Do not list all working pages as Assigned. |
 | Connected cases and depth | Shared mechanism/example/optional-trade-off layers; cases explain decisions, not compulsory projects. DevOps/data support product delivery/maintenance; specialist platforms and model training are outside the main line. |
 | Frameworks, observability and AI providers | Examples chosen for explanatory value and checked when writing. Datadog is one proposed original correlation example; no provider/service/library adoption, installation or new paid account. |
@@ -69,9 +72,9 @@ The book's required AI product coverage is distinct from the reading website's o
 
 **The book is the product; the website supports reading it.** Website Beta 1/2/3 are capability milestones, independent of the first-edition eight-part manuscript. New reviewed chapters do not require a new website beta. Later DevOps/data or other career guides are content extensions, not a current requirement for a recommendation engine, plugin system or specialist platform.
 
-These are author-approved planning priorities, not implemented features, delivery dates or execution assignments. Existing implementation/manuscript holds still apply. Beta 1 can open with a small set of reviewed representative chapters; it does not require all working pages or both complete language editions. Any launch overview must first align the accepted opening's old organization through its own editorial review.
+These are author-approved capability priorities, not a promise that every row is implemented or an execution assignment. Section 1 distinguishes completed stages from remaining gates; the board owns current holds/exceptions. Beta 1 can open with a small set of reviewed representative chapters; it does not require all working pages or both complete language editions. The opening's orientation has passed its own editorial review; that does not approve later prose or deployment.
 
-The [UI04 design and professional re-review](reviews/beta1-design-alignment.md) accepts the [Beta 1 target](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388) for technical handoff, with author visual judgment retained. It distinguishes actual Chinese reviewed-draft availability from the eight-part plan and English layout specimens, adds explicit System/Day/Night and truthful language/search/copy recovery, and retains a card-free baseline. This is design evidence, not implementation: main remains a bilingual shell and its passing checks do not establish reading-feature conformance or remove existing holds.
+The [UI04 design and professional re-review](reviews/beta1-design-alignment.md) accepts the [Beta 1 target](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388) for technical handoff, with author visual judgment retained. It distinguishes actual Chinese reviewed-draft availability from the eight-part plan and English layout specimens, specifies System/Day/Night and truthful language/search/copy recovery, and retains a card-free baseline. The merged foundation/components/reader implement a reviewed subset; design acceptance alone does not establish complete UI04 conformance. Optional AI cards remain deferred without blocking basic reading.
 
 ### Product evidence and selection rules
 
@@ -112,6 +115,8 @@ Beta 2 is not a commitment to ship every row together. Prioritize observed readi
 
 The isolated [UI04 Beta 2 section](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475) previews local resume/bookmark recovery, terminology placement and optional preferences only. These are labelled concepts, not live controls or approved glossary content. Printing, one-format export and one-chapter listening remain their distinct candidate/pilot scopes above; no audio/export functionality or Beta 3 implementation is inferred from the preview.
 
+The later [palette spec](design/reading-palettes-spec.md) and [design review](reviews/reading-palettes-design.md) add three direct swatches—Original / Mist Blue / Soft Grey—with independent System/Day/Night. Their 22 design-only variables bring live Figma to 133; the 111-variable production mapping is unchanged. This accepted technical handoff does not release Beta 2 implementation or change Beta 1 scope.
+
 ### Beta 3 — Selective, evidence-led extensions
 
 These are candidates, not a promise to implement them all. Select one or two only after a smaller trial shows enough reader value to justify development and maintenance.
@@ -139,7 +144,7 @@ Record actual observations, limitations and resulting scope decisions. An unsucc
 
 ### Beta 1 gate: find, read, continue and share
 
-- Preserve the [accepted initial-chapter contract](content-contract.md): opening/G01 IDs, order, reviewed source hashes, allowlist and missing-English navigation. Rendering is not implemented by this plan; broader schema/new inputs need review.
+- Preserve the merged reader and [accepted initial-chapter contract](content-contract.md): opening/G01 IDs, order, reviewed source hashes, allowlist and missing-English navigation. This plan does not approve broader schema or new inputs; changes need review.
 - Build/search only approved public prose/resources. Planning, drafts without publication approval, handoffs, reviews, sync prompts and `.local/` must not leak into artifacts or indexes.
 - Demonstrate the reading journey with actual reviewed content: entry → chapter → relevant heading → next chapter → share/report. Test basic search/no-results and both language entry paths honestly.
 - Verify desktop/tablet/narrow screens, Day/Night/system/refresh, keyboard/focus, diagrams, long code/tables, broken links and runtime errors. Show root and Pages-subpath build/artifact checks and required CI on the proposed revision.
@@ -172,7 +177,7 @@ Writer authors assigned vision/roadmap and planning explanations; Developer auth
 | --- | --- | --- | --- |
 | Detailed reading-page names/splits and next assigned page | Writer | Author / Coordinator | Confirmed eight-part direction; planning review, then an explicit page assignment |
 | Future language/status/path contract extensions | Writer + Developer | Coordinator | Preserve the accepted initial opening/G01 contract; review expansion before new prose integration |
-| Home/chapter/mobile design | Existing UI03 design; Developer supplies implementation feedback | Author / Coordinator | Visual acceptance and explicit implementation scope |
+| Home/chapter/mobile design refinements | Accepted UI04 design; Developer supplies implementation feedback | Author / Coordinator | Preserve reviewed reader behavior; separate later concepts and author visual judgment |
 | Beta 1 search/sharing; Beta 2 recovery and contextual correction | Developer | Coordinator | Content contract, basic reading and observed reader needs |
 | Card and copy-context format | Writer + Developer | Coordinator | Stable chapters allowed for publication |
 | Beta 2 export/audio pilots; Beta 3 automation | Developer proposes; Writer supplies samples | Author / Coordinator | Separate bounded trial, reader value and resource authorization |

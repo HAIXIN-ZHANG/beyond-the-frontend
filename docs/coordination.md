@@ -22,6 +22,8 @@ Current shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, bra
 
 Completed foundation/opening integration: [PR #12](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/12), final reviewed head `23c3d19586d03e3cfb5d84044f0db7015c51188e`, successful [CI run 43791847318](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43791847318), actual squash `2534b90d23c3624e4ce393aa02f52df4dea75e06`. All Quality/root/Pages jobs and steps passed; exact-head checks came from app 15368. Main remains public/default/protected against force push/deletion; no settings were weakened and no deployment occurred. The original DS01 checkpoint is preserved, not merged wholesale.
 
+Current component integration: [PR #13](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/13), accepted snapshot `f8b00ceac521fd98e77a296bcecea6e56d57ecaf`; only Coordinator board/review pointers follow it. Final-head cloud checks and merge remain pending at this record's commit. The PR execution record owns actual later results. No dependent implementation or deployment starts from a PR pointer alone.
+
 ## Last scoped workspace and baseline
 
 - Actual root: `/Users/haixin/Desktop/code/vibe-coding-then-what`; branch `codex/beta1-design-alignment`; HEAD/base/local `origin/main` verified at `630ab7e57dd2139c87e2bdd3e90cd981c008a6fd` before alignment.

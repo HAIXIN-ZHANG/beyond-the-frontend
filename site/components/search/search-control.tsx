@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { Locale } from '../../config/i18n.ts';
 import type { SearchIndex } from '../../content/search.ts';
 import { localePath } from '../../config/i18n.ts';
+import { withBasePath } from '../../config/deployment.ts';
 import { readSearchIndex, searchEntries, normalizeSearch } from '../../content/search.ts';
 import { Button } from '../ui/button.tsx';
 import { searchMessages } from './messages.ts';
@@ -20,7 +21,7 @@ export function SearchControl({ locale }: { locale: Locale }) {
     if (locale === 'en') return;
     setStatus('loading');
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/search-index/${locale}.json`, { cache: 'no-store' });
+      const response = await fetch(withBasePath(`/search-index/${locale}.json`, process.env.NEXT_PUBLIC_BASE_PATH), { cache: 'no-store' });
       if (!response.ok) throw new Error('Search index unavailable');
       setIndex(readSearchIndex(await response.json(), locale)); setStatus('ready');
     } catch { setStatus('error'); }
@@ -92,7 +93,7 @@ export function SearchControl({ locale }: { locale: Locale }) {
           : status === 'error' ? <><p>{m.retryHint}</p><Button visual="quiet" onClick={() => void loadIndex()}>{m.retry}</Button></>
             : status !== 'loading' && (!hasQuery || composing || !matches.length) ? <p>{hasQuery && !composing ? m.fewer : m.hint}</p> : null}
         {locale === 'zh' && status === 'ready' && !!matches.length ? <ol ref={results} className="search-results">{matches.map(({ entry, excerpt }) => <li key={entry.href}>
-          <a href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${entry.href}`} onClick={closeForNavigation}><span>{entry.chapterTitle}</span><strong>{entry.headingTitle}</strong></a>
+          <a href={withBasePath(entry.href, process.env.NEXT_PUBLIC_BASE_PATH)} onClick={closeForNavigation}><span>{entry.chapterTitle}</span><strong>{entry.headingTitle}</strong></a>
           <p>{excerpt}</p>
         </li>)}</ol> : null}
       </section>

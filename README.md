@@ -35,7 +35,7 @@ Explanations combine principles, original examples and conditional choices. Recu
 
 Start with the reviewed [Chinese opening](book/drafts/zh/00-before-we-start.md) and [common-foundations chapter](book/drafts/zh/01-a-page-and-a-system.md). Browser Fundamentals has an accepted research outline, but its manuscript is not written. The remaining framework is planned content, not a finished book.
 
-The intended editions are Simplified Chinese and English, with Chinese drafts reviewed before English adaptation. There are no English chapter bodies yet. No public online reading site has been released. The website foundation uses Next.js, React and TypeScript with static export; [development instructions](site/DEVELOPMENT.md) are separate from the book.
+The intended editions are Simplified Chinese and English, with Chinese drafts reviewed before English adaptation. There are no English chapter bodies yet. The static reader, current-language search and section-link/correction flow are reviewed and merged, but no deployed Pages reading edition or public reading URL has been verified. The [first-delivery record](docs/delivery/milestone-1.md) explains what shipped in source and what release checks remain; [development instructions](site/DEVELOPMENT.md) are separate from the book.
 
 ## About the author
 

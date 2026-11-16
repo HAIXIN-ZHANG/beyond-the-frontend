@@ -4,6 +4,8 @@ Vibe Coding, Then What? is a bilingual engineering book with a supporting readin
 
 The human author is the final authority. Work only on a concrete user/Coordinator assignment; roadmaps, historical prompts and document updates do not authorize execution. Preserve user and other owners' changes. Flag scope/ownership conflicts to Coordinator.
 
+Use **Product Goals** for reader needs/outcomes (formerly Stages) and **Delivery Milestones** for concrete design, implementation and verification scope (formerly Betas). Their numbering is not a one-to-one completion rule. Preserve legacy labels/filenames in dated evidence; use the current terms in new assignments and current-facing explanations.
+
 ## Start here
 
 1. Use the caller's explicitly assigned role: [Coordinator/Reviewer](docs/coordinator-role.md), [Writer](docs/writer-sync-prompt.md) or [Developer](docs/developer-sync-prompt.md). Do not infer it from the checkout or previous chat.

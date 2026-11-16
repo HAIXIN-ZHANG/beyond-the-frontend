@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { comparison } from '../../styled-system/recipes/comparison.js';
 
 type ComparisonTableProps = {
-  caption: string; columns: readonly { id: string; title: string }[];
+  caption: string; columns: readonly { id: string; title: ReactNode }[];
   rows: readonly { id: string; cells: readonly ReactNode[] }[];
 };
 

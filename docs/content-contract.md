@@ -2,7 +2,7 @@
 
 Decision date: 2026-11-15. Decision owner: Coordinator; technical writing: assigned Developer. Scope: the authorized PAGE01 reading implementation and later reviewed chapter additions. This is a small explicit publishing contract, not approval of the 45-chapter proposal or automatic publication of everything under `book/`.
 
-The theme foundation is now explicitly assigned; chapter rendering remains unimplemented and requires its own next-stage assignment/review. Read the [board](coordination.md) for current execution scopes and holds. This accepted contract defines future reading inputs, not a claim that main already renders chapters or that theme work releases publication.
+The theme and reusable component foundations have merged. The separately assigned [initial chapter-reader stage](handoffs/developer/beta1-chapter-reader.md) implements the two reviewed inputs below in the working tree, pending its own review/integration. Read the [board](coordination.md) for current scopes and holds. This contract defines the approved reading inputs; it neither accepts that implementation nor releases deployment.
 
 ## Approved initial input
 

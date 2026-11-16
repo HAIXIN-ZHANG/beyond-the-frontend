@@ -30,6 +30,9 @@ type Messages = {
   currentAppearance: string;
   systemAppearanceHint: string;
   explicitAppearanceHint: string;
+  availableNotice: string;
+  englishUnavailable: string;
+  chineseDraft: string;
 };
 
 const messages = {
@@ -61,6 +64,9 @@ const messages = {
     currentAppearance: 'Current appearance',
     systemAppearanceHint: 'Follow device appearance.',
     explicitAppearanceHint: 'Day or Night overrides device appearance.',
+    availableNotice: 'Two reviewed drafts are available in Chinese. The book is still being written.',
+    englishUnavailable: 'English chapters are not available yet. The links below open the Chinese originals.',
+    chineseDraft: 'Chinese · Reviewed draft',
   },
   zh: {
     lang: 'zh-CN',
@@ -90,6 +96,9 @@ const messages = {
     currentAppearance: '当前外观',
     systemAppearanceHint: '跟随设备的外观设置。',
     explicitAppearanceHint: '日间或夜间选择会覆盖设备外观。',
+    availableNotice: '目前可阅读两篇已审阅中文草稿，全书仍在写作中。',
+    englishUnavailable: '英文正文尚未提供，下方链接为中文原稿。',
+    chineseDraft: '中文 · 已审阅草稿',
   },
 } satisfies Record<Locale, Messages>;
 
@@ -108,6 +117,9 @@ export function alternateLocalePath(pathname: string, locale: Locale, basePath: 
   const path = basePath && (pathname === basePath || pathname.startsWith(`${basePath}/`))
     ? pathname.slice(basePath.length) || '/'
     : pathname;
-  if (locale === 'zh') return path.replace(/^\/zh(?=\/|$)/, '') || '/';
+  if (locale === 'zh') {
+    if (/^\/zh\/read\/[^/]+\/?$/.test(path)) return '/read/';
+    return path.replace(/^\/zh(?=\/|$)/, '') || '/';
+  }
   return `/zh${path === '/' ? '/' : path}`;
 }

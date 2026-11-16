@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import vm from 'node:vm';
 import { parseBasePath } from '../site/config/deployment.ts';
+import { themeStorageKey } from '../site/theme/runtime.ts';
 
 const output = fileURLToPath(new URL('../site/out/', import.meta.url));
 const basePath = parseBasePath(process.env.NEXT_PUBLIC_BASE_PATH);
@@ -26,6 +28,25 @@ for (const [page, language, title, alternatePath] of pages) {
   assert.ok(html.includes(`<title>${title}</title>`), `${page}: incorrect page title`);
   assert.match(html, /id="main"/, `${page}: missing skip-link target`);
   assert.match(html, /vibe-coding-then-what\/issues/, `${page}: outdated issue URL`);
+
+  // Verify the actual production-serialized head script, not only its source function.
+  const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1] || '';
+  const bootstrap = head.match(/<script\b[^>]*id="btf-theme-bootstrap"[^>]*>([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(bootstrap, `${page}: missing pre-body theme bootstrap`);
+  for (const [stored, dark, expected, preference] of [
+    [null, true, 'dark', 'system'], ['invalid', true, 'dark', 'system'],
+    ['light', true, 'light', 'light'], ['dark', false, 'dark', 'dark'],
+  ]) {
+    const dataset = {};
+    const window = {
+      localStorage: { getItem: key => { assert.equal(key, themeStorageKey); return stored; } },
+      matchMedia: () => ({ matches: dark, addEventListener() {} }),
+      addEventListener() {},
+    };
+    vm.runInNewContext(bootstrap, { window, document: { documentElement: { dataset } } }, { timeout: 1000 });
+    assert.equal(dataset.theme, expected, `${page}: emitted script resolves the wrong appearance`);
+    assert.equal(dataset.themePreference, preference, `${page}: emitted script confuses preference and appearance`);
+  }
 
   const alternateLanguage = language === 'en' ? 'zh' : 'en';
   const links = [...html.matchAll(/<a\b[^>]*>/g)].map(([tag]) => attributes(tag));

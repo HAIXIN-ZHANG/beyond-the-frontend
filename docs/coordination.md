@@ -1,6 +1,6 @@
 # Vibe Coding, Then What? — coordination board
 
-Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow. Reviews own actual acceptance; handoffs own execution/recovery evidence.
+Updated: 2026-11-16 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow. Reviews own actual acceptance; handoffs own execution/recovery evidence.
 
 ## Current scope and holds
 
@@ -8,7 +8,17 @@ Updated: 2026-11-15 (Australia/Perth). This is the sole live assignment/hold/wor
 
 Main remains a bilingual home/empty-index/404 shell, not a Beta 1 chapter reader. Coordinator actually passed `npm run check` (lint, route types, strict TypeScript and four tests); that is shell evidence, not implemented reader/theme/search/copy behavior. No immediate source-only code fix was justified by the audit. [UI04 handoff](design/reading-experience-v1.md) defines targets and future acceptance.
 
-**Other product/prose work remains Paused:** no chapter writing/translation or opening-orientation revision, chapter renderer/schema, Panda/theme integration, new UI behavior, E2E implementation, dependency installation or deployment. Design/document acceptance does not lift those holds. Future changes require exact assigned scope after the relevant review.
+**The author explicitly approved staged Beta 1 execution on 2026-11-16.** Current assignments below lift the earlier hold only for their named files and checks. Coordinator reviews each frozen stage, returns findings to its owner, and integrates accepted work through PR and exact-head CI before assigning dependent stages. Necessary npm/browser tooling is authorized. Do not deploy.
+
+| Owner | Current assignment | State and next boundary |
+| --- | --- | --- |
+| Developer | [Theme foundation](handoffs/developer/beta1-theme-foundation.md): selected DS01 reuse, UI04 Panda tokens, reliable System/Day/Night and scoped opening contract metadata | Frozen r1 [Accepted](reviews/beta1-theme-foundation.md); task closed, PR/CI/integration pending; no automatic component continuation |
+| Writer | [Opening orientation alignment](handoffs/writer/beta1-opening-alignment.md): new entry/audience, eight-part guide and two outline-status paragraphs | Prose r2/status through r4 [Accepted](reviews/beta1-opening-alignment.md); task closed, contract aligned, Git integration pending; no new chapter/translation |
+| Coordinator/Reviewer | Own review/status/Git; preserve disjoint executor changes | Actual opening/theme review complete; integrate accepted snapshot through PR and exact-head CI; no substitute implementation |
+
+After accepted foundation: reading components → reviewed initial chapter renderer → scoped static search/section actions → actual QA/E2E → integration/handoff. These are approved plan dependencies, not current executor file assignments. Optional AI cards may be deferred. Beta 2/3, new manuscript mechanisms, translations and deployment remain on hold.
+
+Current shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/beta1-theme-foundation`, starting HEAD/remote main `eb822357b6bf1cafe090508254b1aa6c3e71ce8f` (fetched and verified before execution). Preserve all concurrent changes. Only Coordinator performs Git writes; Writer and Developer have disjoint allowed paths in their briefs.
 
 ## Last scoped workspace and baseline
 
@@ -24,7 +34,7 @@ Main remains a bilingual home/empty-index/404 shell, not a Beta 1 chapter reader
 | Writer | Accepted r1 editorial audit; r2 vision/roadmap pointers, single Chinese summary and same [report](handoffs/writer/beta1-design-alignment.md) | Accepted through r2; closed | Preserve accepted documents; no prose/body/outline expansion |
 | Coordinator/Reviewer | Owns Figma changes, professional review, document acceptance, feedback and Git integration; [review](reviews/beta1-design-alignment.md) | Design and alignment Accepted; integration pending | Handle scoped PR, exact-head required checks and authorized merge |
 
-Both executor assignments are closed after actual affected review. Coordinator integration is tracked in [PR #11](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/11), starting with accepted snapshot `94f321565058c464834fe671225c51159c232461`; only actual review/board pointers are added afterward. At this record's commit, final-head checks and merge remain pending. The PR execution record owns their eventual actual results; no future success is prefilled. The scoped workspace above is history, not a permanent checkout assignment. Preserve other holds throughout.
+Both design/document executor assignments are closed after actual affected review. [PR #11](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/11) merged after final head `f4f3254a625d0dd38d634f4af127b03102f8cd8e` passed all three required jobs in [run 43723690316](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43723690316); actual squash is `eb822357b6bf1cafe090508254b1aa6c3e71ce8f`, verified locally against fetched main. No deployment occurred. The scoped workspace above is historical, superseded by the current assignments.
 
 ## Current design decisions and durable evidence
 

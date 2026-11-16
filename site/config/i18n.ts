@@ -23,6 +23,10 @@ type Messages = {
   back: string;
   switchLabel: string;
   switchText: string;
+  appearance: string;
+  systemTheme: string;
+  dayTheme: string;
+  nightTheme: string;
 };
 
 const messages = {
@@ -47,6 +51,10 @@ const messages = {
     back: 'Back to home',
     switchLabel: 'Switch to Chinese',
     switchText: '中文',
+    appearance: 'Appearance',
+    systemTheme: 'System',
+    dayTheme: 'Day',
+    nightTheme: 'Night',
   },
   zh: {
     lang: 'zh-CN',
@@ -69,6 +77,10 @@ const messages = {
     back: '返回首页',
     switchLabel: 'Switch to English',
     switchText: 'English',
+    appearance: '外观',
+    systemTheme: '跟随系统',
+    dayTheme: '日间',
+    nightTheme: '夜间',
   },
 } satisfies Record<Locale, Messages>;
 

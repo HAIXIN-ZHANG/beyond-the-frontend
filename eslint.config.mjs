@@ -5,7 +5,7 @@ import hooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  globalIgnores(['site/.next/**', 'site/out/**', 'site/next-env.d.ts', '.artifacts/**']),
+  globalIgnores(['site/.next/**', 'site/out/**', 'site/styled-system/**', 'site/next-env.d.ts', '.artifacts/**']),
   {
     files: ['**/*.{js,mjs,jsx}'],
     extends: [js.configs.recommended],
@@ -15,10 +15,10 @@ export default defineConfig([
     },
   },
   {
-    files: ['site/**/*.{ts,tsx}'],
+    files: ['site/**/*.{ts,tsx}', 'panda.config.ts', 'panda/**/*.ts'],
     extends: [js.configs.recommended, tseslint.configs.recommended],
     languageOptions: {
-      globals: { process: 'readonly', console: 'readonly', URL: 'readonly' },
+      globals: { process: 'readonly', console: 'readonly', URL: 'readonly', window: 'readonly', document: 'readonly' },
     },
   },
   {

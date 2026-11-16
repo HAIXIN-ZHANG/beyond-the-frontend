@@ -2,7 +2,7 @@
 
 Decision date: 2026-11-15. Decision owner: Coordinator; technical writing: assigned Developer. Scope: the authorized PAGE01 reading implementation and later reviewed chapter additions. This is a small explicit publishing contract, not approval of the 45-chapter proposal or automatic publication of everything under `book/`.
 
-The theme, reusable components and two-source reader have merged through PR14. The separately assigned [search/sharing stage](handoffs/developer/beta1-search-sharing.md) derives a static index and link/correction context only from those same reviewed sources and real heading IDs, pending its own review/integration. No additional publication inputs or English corpus are implied. Read the [board](coordination.md) for current scopes and holds; this contract does not release deployment.
+The theme, reusable components and two-source reader have merged through PR14. The [search/sharing implementation](handoffs/developer/beta1-search-sharing.md) derives a static index and link/correction context only from those same reviewed sources and real heading IDs; its [independent review](reviews/beta1-search-sharing.md) records r4 acceptance. No additional publication inputs or English corpus are implied. The [board](coordination.md) and [PR15](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/15) track integration separately from stage acceptance; this contract does not release deployment.
 
 ## Approved initial input
 
@@ -33,8 +33,8 @@ Rewrite the two manuscripts' relative links to one another through the allowlist
 
 ## Reading and validation
 
-PAGE01 should first make one real chapter work responsively using the accepted components; the short opening uses the same renderer. Technical text diagrams may retain their original preformatted meaning with a clear figure label and local scrolling; do not convert them into misleading graphics or edit their technical meaning. Wide code and tables scroll within their own region, not the entire page.
+Both approved chapters use the same responsive renderer and accepted components. Technical text diagrams may retain their original preformatted meaning with a clear figure label and local scrolling; do not convert them into misleading graphics or edit their technical meaning. Wide code and tables scroll within their own region, not the entire page.
 
-Validate the real source-to-page flow, local chapter links, metadata/lang, chapter/index/404 paths under root and Pages prefixes, heading outline, keyboard/focus and narrow layout. QA01 adds a small useful E2E suite; passing parser/unit checks alone is not browser acceptance. The subsequent search/sharing implementation may index only these validated public trees, with current-language scope, source revisions and real target headings; correction drafts require deliberate reader review/submission. Audio, AI features and automatic translation remain outside the iteration.
+Validate the real source-to-page flow, local chapter links, metadata/lang, chapter/index/404 paths under root and Pages prefixes, heading outline, keyboard/focus and narrow layout. A permanent E2E suite remains a separately assigned QA stage; passing parser/unit checks alone is not browser acceptance. Search/sharing indexes only these validated public trees, with current-language scope, source revisions and real target headings; correction drafts require deliberate reader review/submission. Audio, AI features and automatic translation remain outside the iteration.
 
 Future addition: Writer completes the chapter's gates; Coordinator confirms its source/revision and adds or approves an allowlist entry; existing validation and route generation make it readable. Reviewed analysis alone never authorizes a manuscript's publication.

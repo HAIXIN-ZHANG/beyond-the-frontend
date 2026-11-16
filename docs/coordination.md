@@ -12,11 +12,13 @@ Integration baseline includes the accepted r3 two-source chapter reader through 
 
 | Owner | Current assignment | State and next boundary |
 | --- | --- | --- |
-| Developer | [Beta 1 static search and section sharing](handoffs/developer/beta1-search-sharing.md), frozen r4 | [Accepted](reviews/beta1-search-sharing.md) after SEARCH-01/02 owner revisions and independent source/artifact/browser re-review. Task closed; preserve16 fixed files/handoff for integration. No further feature/Git/deployment work |
-| Writer | [Baseline status alignment](handoffs/writer/beta1-status-alignment.md), frozen r2 | [Accepted](reviews/beta1-status-alignment.md) after STATUS-01 revision; current four-document hashes and 121 links/anchors independently match. Task closed; preserve files for integration, no new manuscript/translation/content-framework work |
-| Coordinator/Reviewer | Own live design inspection, bounded assignments, independent review/feedback and Git integration | Search/sharing r4 and Writer status r2 accepted; integrate only frozen files via scoped PR and exact-head required CI. No deployment |
+| Developer | [Beta1 closeout r1](handoffs/developer/beta1-closeout.md), CLOSE-01 | [Accepted](reviews/beta1-closeout.md); three technical documents corrected and frozen, implementation unchanged. Task closed; no further edit/Git/deployment |
+| Writer | [Beta1 closeout r1](handoffs/writer/beta1-closeout.md), CLOSE-02 | [Accepted](reviews/beta1-closeout.md) no-change audit of five reader/planning documents at frozen inputs. Task closed; later parallel roadmap edit is separate |
+| Coordinator/Reviewer | Overall Beta1 review, feedback and Git integration | Overall review accepted;24 fresh compound browser cases and111 live design-variable comparisons passed. Integrate only frozen payload/closeout files through PR15 exact-head required CI. No deployment |
 
-Current sequence: accepted static search/section actions → PR15 exact-head integration → separately scoped actual QA/useful permanent E2E. Executor tasks above are closed; QA requires its own concrete assignment rather than continuation from this sequence. Optional AI cards remain deferred. Beta 2/3 implementation, new manuscript mechanisms, translations and deployment remain on hold; the separately reviewed Beta 2 palette design is recorded below.
+Parallel product-planning work is editing `docs/roadmap.md` after the Writer closeout freeze. Preserve that external working-tree revision; it is outside PR15/Beta1 closeout and needs separate owner review/integration. Only explicitly accepted closeout files may be staged here. Preserve the change across any main reconciliation; a dirty roadmap is not a failed Beta1 implementation check.
+
+Current sequence: author-requested overall Beta1 review and narrow closeout → PR15 exact-head integration → separately scoped useful permanent E2E. Prior search r4/status r2 remain accepted stage evidence; only the new bounded corrections above reopen executor work. Optional AI cards remain deferred. Beta 2/3 implementation, new manuscript mechanisms, translations and deployment remain on hold.
 
 **Latest author instruction:** continue the mainline and align the latest design. This releases the assigned Beta 1 search/sharing stage and necessary disjoint status-document alignment, using the merged reader rather than rebuilding it. Preserve all changes. Delivery alone is not evidence of executor activity or acceptance. Beta 2/3 implementation, new manuscripts/translations and deployment remain held.
 

@@ -14,6 +14,8 @@ The author requested a fresh cross-check of documents, project structure, code/f
 
 Disjoint file ownership and the existing release/design holds remain. This task does not deploy, add new chapter content or implement future reading features. Larger work remains in the existing roadmap/release ledger rather than another duplicate backlog. Preserve all submitted prior-stage files and31 ignored recovery files.
 
+The accepted audit payload `78b44a58af2ba232af9673e3d665aa23de26e7a4` is tracked in [PR19](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/19). Its execution record supplies actual final reviewed head, required PR/main runs, permitted squash and local-main reconciliation. Neither this pre-integration pointer nor source acceptance claims a future merge or deployment.
+
 ## Completed editorial-review clarification
 
 The author confirmed a reader-first full-stack architecture guide, with tone, credible examples and technical accuracy checked at both chapter gates. The bounded [Writer r1 brief/handoff](handoffs/writer/editorial-review-criteria.md) is now [accepted after actual Coordinator review](reviews/editorial-review-criteria.md): the existing chapter workflow owns the criteria; its analysis template contains one link and usage paragraph. Writer's task is closed and its files frozen. [PR18](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/18) merged as `78488012044e0a8fd8e4946f1abc72e1e2b084c9`; its execution record verifies PR/main CI and local reconciliation. This completed task produced no manuscript, translation, runtime feature, design or deployment. Formal updates remain English-first.

@@ -16,6 +16,17 @@ Follow the stable [Writer role guide](../../docs/writer-sync-prompt.md): AGENTS 
 
 Use the opening of the existing stage [handoff](../../docs/handoffs/TEMPLATE.md) for objective, authorization, inputs, exact file ownership, acceptance criteria and next-step boundary. Do not create a separate parallel task register. The board owns current state and holds; the handoff owns execution/recovery evidence; the review owns the exact-revision decision. Shared state and recovery mechanics follow [collaboration](../../docs/collaboration.md).
 
+## Book delivery objectives
+
+The [eight-part outline](outline.md) remains the authoritative detailed content map: product/architecture; frontend and Design Systems; APIs/backend/integration; data/search; async/traffic/reliability; cloud/testing/delivery; observability/recovery; and AI product architecture plus coding-AI delivery. Its 48 working reading units may be split, merged or reordered; they are not a target number of files or finished chapters. Write in an approachable Chinese-first voice with accurate mechanisms, original examples, useful diagrams and conditional technology trade-offs; no mandatory capstone.
+
+- **Product Goal 1:** establish the content direction, outline, writing/review approach and initial reviewed sources. The opening and G01 are reviewed Chinese sources; F01 has accepted analysis, not a completed manuscript. Preserve actual revision and release evidence.
+- **Product Goal 2:** work toward Chinese core-draft coverage of all eight parts, with chapter-level research, analysis review and separate manuscript review as defined below. Select and sequence actual assignments with Coordinator; a representative set can be reviewed and, when separately approved, progressively integrated before the whole draft is finished. A complete core draft is not a claim that every advanced topic or language version is final.
+- **Product Goal 3:** edit across the whole book for structure, continuity, missing or repeated ideas, accuracy and sources, natural tone, pacing, examples and diagrams; incorporate reader feedback and prepare English adaptation in separately reviewed batches from sufficiently stable Chinese text. Continue filling material gaps as needed. Goal 3 refinement complements chapter-level reviews rather than postponing basic correctness until the end.
+- **Product Goal 4:** consider new books or audiences only in light of outcomes from this book. No content framework or delivery objective automatically assigns a chapter, changes an approved source or authorizes deployment.
+
+Content and website work can proceed in independent, coordinated slices; a reading path or interactive example requires actual reviewed material. Preserve the distinction among outline, analysis, draft, reviewed manuscript, integration and public availability. Consult the [roadmap](../../docs/roadmap.md) for the broader product plan and the [board](../../docs/coordination.md) for live scope.
+
 ## Two distinct gates per chapter
 
 | Step | Writer delivery | Condition to continue |
@@ -29,6 +40,15 @@ Use the opening of the existing stage [handoff](../../docs/handoffs/TEMPLATE.md)
 | Integration or next chapter | Exact files/Git coordination and separately scoped next work | Applicable authorization; no automatic deployment or full-book generation |
 
 Delivery, acknowledgment, silence and elapsed time are not approval. Writer does not self-approve.
+
+## Editorial collaboration: two reviews, distinct questions
+
+The Coordinator may assign an overarching chapter question; Writer proposes a sensible split into reading units where useful. The eight-part outline and its working units guide coverage, not a fixed chapter or file count. Keep an approachable, accurate voice: a familiar reader problem, intuition plus precise explanation, original examples or diagrams, and conditional technology choices. This is a flexible teaching approach, not a compulsory heading template, quiz or integrated project.
+
+1. **Review the concept and outline.** Before full prose, Writer investigates the reader's question, anticipated difficulties and attention, logical sequence, candidate examples/diagrams, relevant choices and trade-offs, source evidence, and links or boundaries with other chapters. Coordinator reads the actual analysis and gives actionable feedback on correctness, reader motivation and readability, example clarity, scope and fit with the book. Writer revises and resubmits; Coordinator accepts the analysis and writing scope before the manuscript starts.
+2. **Review the actual manuscript.** After Writer drafts and self-checks, Coordinator independently checks factual accuracy and current primary evidence where needed, assumptions and failure paths, the validity of analogies/diagrams/code, language and natural reading rhythm, unwanted repetition or jargon, and alignment with the accepted concept and the book's original purpose. Coordinator gives specific locations and corrective guidance; Writer revises and Coordinator rechecks affected changes. Material changes to the concept or evidence return to the relevant first gate.
+
+Two reviews mean two different decision points, not a limit of two feedback messages or revisions. Keep the essential explanation complete for readers who skip optional depth and exercises; do not invent work experience or test results. With accepted content and an explicitly scoped publication path, chapters can be integrated progressively rather than waiting for the complete book; integration, review and release remain separate outcomes.
 
 ## What an analysis must establish
 

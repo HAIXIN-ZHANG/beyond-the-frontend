@@ -19,6 +19,99 @@ The vision owns positioning; Writer's outline owns proposed chapter-level detail
 
 Review, CI, merge and deployment are separate states. Prefer readable outcome names; legacy identifiers remain for traceability and existing paths.
 
+## Product Goals: user needs and direction
+
+**Naming and relationship, agreed 2026-11-16:** **Product Goals** describe the reader problem, product intent and desired outcome; **Delivery Milestones** define concrete design, code, content and verification slices that support them. Goal 1–4 are the former product Stage 1–4. Delivery Milestones 1–3 retain the existing Beta 1–3 aliases; proposed Delivery Milestone 4 uses the planning alias Beta 4. These numbers are independent of Product Goal numbering. Historical Beta names, headings, links, handoffs and acceptance records remain unchanged for traceability. A goal can need multiple milestones, and a milestone can support multiple goals; the mapping below is not a one-to-one completion rule. Milestone 4 / Beta 4 is a future proposal. The eight-part first-edition framework remains in the outline. The plan sets direction and priorities, not a release date, implementation assignment or evidence of demand. The [board](coordination.md) owns live assignments and holds.
+
+**Focus for Goals 1–3:** improve this one book and its reading experience under the current title. Evaluate a new umbrella brand or project name, logo design and broader commercial expansion only within Goal 4 (formerly Stage 4), using evidence from the earlier goals. This scope preserves the factual author profile and incidental individual career or collaboration opportunities.
+
+### Product proposition and readers
+
+Start with one freely readable engineering guide for people with some development experience who want to understand the systems behind AI-assisted products. Explain familiar problems in approachable language, connect frontend, backend, data and operation, and distinguish building AI into a product from using AI to build software. The first focus is engineers extending beyond their strongest layer and full-stack or independent developers judging a working AI-assisted product. These are focus hypotheses within the confirmed Junior–Senior audience, not validated segments. The long-term possibility is a maintained collection of guides; do not require a platform or a second book before the first is useful.
+
+### Goal 1 — Establish a usable, trustworthy foundation
+
+**User problem:** a reader needs a real, accessible way to encounter the first reviewed explanations; the author needs a maintainable way to prepare and review them.
+
+**Product requirements:** one content source and a readable website; clear identity and language availability; dependable navigation, visual foundations and publication boundaries. Initial content must be identifiable and reviewable, rather than implying the full book is already available.
+
+**Supporting release:** Beta 1 delivers the reader foundation and also starts Goal 2's core reading journey. Parts of the reader and theme are implemented and reviewed, while search/sharing integration and public release must be checked against the board and actual evidence. Goal 1 is a product framing, not a claim that every Beta 1 task or deployment is complete.
+
+### Goal 2 — Complete the essential reading product
+
+**Reader outcome:** a first-time reader can find a suitable starting point, read, return, share a location and report an issue.
+
+1. Finish and independently verify existing reader, current-language search, section sharing and correction flow; support links to the book/index, chapter and section, and preserve honest published/planned and language availability. Review, integration, CI and public deployment are separate outcomes. Check narrow and wide layouts, keyboard/focus and accessible treatment of tables, code and diagrams.
+2. Offer clear sequential and question-led entry points using real approved content. Improve discovery with accurate page titles, descriptions, stable shareable URLs, search-engine discoverability and social preview metadata; these are prerequisites for discovery, not a traffic promise.
+3. Prioritize local resume and bookmarks: restore the chapter and, where reliable, a section or paragraph; recover to an available chapter/section when content changes or storage is unavailable. Disclose device-only storage and possible loss after data clearing. Evaluate the already-designed palettes and modest reading preferences without making settings necessary for readability.
+4. Prepare a small representative set of reviewed chapters from the existing framework alongside the reader; planned outline entries are not completed manuscripts. Make related links and simple feedback available as relevant content exists. Start with an optional reviewed Markdown question and a visible explanation using the supported content format. Collapsible presentation requires a separately reviewed parser/render/search contract; do not enable arbitrary HTML or MDX to obtain it. The static explanation remains complete without answering; no quiz engine or capstone is required.
+5. Check provenance, applicable license notices, contribution boundaries and the separately authorized publication and deployment path before a public release. The owner selected [MIT for project code/original programming samples](../LICENSE) and [CC BY-SA 4.0 for original book prose/teaching diagrams](../LICENSE-CONTENT.md); this selection does not clear third-party rights or release deployment.
+
+**Check:** exercise entry → real chapter → search or related material → return → share/correction on representative devices and languages. Invite a small number of suitable readers only when separately authorized; 3–5 is a proposed formative sample, not statistical validation. Audio, EPUB/PDF, account sync and AI cards do not block core reading.
+
+### Goal 3 — Connect knowledge and make it reusable
+
+**Reader outcome:** a reader can follow a real engineering question across relevant concepts and return to the guide at work.
+
+1. Add editorially selected related reading, a modest glossary and topic/case indexes as sufficient reviewed chapters exist. Prefer ordinary links over premature taxonomy or recommendations.
+2. Curate a few optional paths, such as frontend to backend, an AI-built feature from interface through operation, or Design System foundations. Paths reuse actual chapters and do not promise a qualification or require a capstone.
+3. Trial a small number of reviewed, editable AI question cards at real points of difficulty. Readers inspect, copy and paste into their own tool; do not transmit prompts automatically or require a hosted model. Compare with an ordinary explanation and defer if not useful.
+4. Offer optional, low-cost learning interactions where they clarify a real concept: a reflection question and explanation, a small controlled simulation, and later a browser-editable frontend example or external sandbox. Pilot a frontend/API request with simulated responses using representative approved content; label the simulation and preserve the complete static explanation. Do not require a capstone or mandatory exercise.
+5. Independently test a bounded sample of audio, one offline export format or an interactive diagram where reader evidence justifies it. Keep an accessible text/static explanation; account for versioning and ongoing maintenance. None is an automatic release requirement.
+6. Explore sharing or giving feedback on a selected passage after chapter/section links work. Start with a stable paragraph target and contextual feedback; precise selection highlighting is an enhancement subject to browser/device checks. When wording or targets change, fall back clearly to the section/chapter and say the original may have changed; do not silently jump to unrelated text.
+
+**Check:** ask whether readers can locate, explain and connect a mechanism, where they become confused, and whether a card or other pilot improves on the text. Use observations to revise content or scope; no claim of retention or validated demand without evidence.
+
+### Goal 4 — Explore additional guides and audiences
+
+**Direction, not a commitment:** after the first guide is useful, test a second real topic or audience as a small editorial collection before treating it as a separate guide. Candidates include frontend/design systems, backend/reliability, AI product engineering, and engineering with coding AI; these overlap the first edition and need not become separate books.
+
+Only when a second collection requires it, assess guide-level entry and navigation, in-guide and cross-guide search, shared articles and reading paths, translation status, stable legacy URLs and contributor review. Design content identity and links with that possibility in mind without building a speculative platform, accounts or a CMS now. Evaluate a new audience with actual readers before claiming a new market.
+
+### Product requirements → Delivery Milestones
+
+This planning map connects desired reader outcomes to feature responses, not a claim of delivery. Milestone 1 = existing Beta 1; Milestone 2 = Beta 2; Milestone 3 = Beta 3; Milestone 4 = proposed Beta 4. Earlier capability and acceptance records keep their original labels and scope. Later work can deepen them without changing history.
+
+| Product goal and user problem | Requirement / reader outcome | Delivery Milestone feature response | Evidence and boundary |
+| --- | --- | --- | --- |
+| Goal 1: establish a foundation | Readers can access real reviewed content and understand what is available | **Beta 1:** bilingual shell, responsive Markdown reader, chapter navigation, accessible reading components and appearance | Reader/theme components have reviewed implementations; see current baseline and board. Review, merge and deployment remain distinct |
+| Goal 2: discover and read | Readers find a real starting point, search and share or correct a precise section | **Beta 1:** index, current-language static search, section link/copy and correction; **Beta 2:** clearer sequential/question-led entry, accurate titles/descriptions, social previews and discoverability where gaps remain | Merged PR #15 supplies current-language search and heading navigation; the runtime guide and actual PR execution record retain behavior and verification limits. New discovery metadata needs its own scoped review. Resume/bookmarks remain planned, not supplied by this merge |
+| Goal 2: resume and return | A reader can come back after a break or save a useful place | **Milestone 2 / Beta 2:** local chapter/section resume, bookmarks, invalid/missing state recovery and device-only disclosure | Planned; no account or cross-device synchronization required |
+| Goal 2: comfortable reading | Defaults and preferences work across devices without obscuring content | **Beta 1:** System/Day/Night and responsive defaults; **Beta 2:** designed palette selection and limited reading preference evaluation | Beta 2 palettes are design-only; preserve keyboard access and independent appearance control |
+| Goal 2–3: connect related questions | Readers can move from a concept to useful context without searching the whole book | **Beta 2:** initial editorial related links and modest glossary/topic/case index as content permits; **Beta 3:** curated cross-chapter paths and richer case connections as needed | Ordinary pages/links first; usefulness depends on available reviewed chapters |
+| Goal 3: deepen understanding | Readers can examine a mechanism or ask a more useful follow-up question | **Beta 2:** optional small question-card and audio/export pilots; **Beta 3:** selected interactive diagrams, context bundles, offline or versioned listening only if a smaller trial justifies them | No automatic model calls; keep static/text alternative; no pilot is a core-reading prerequisite |
+| Goal 2–3: share and respond | Share the book, a chapter or a section; eventually identify a passage for sharing or feedback | **Milestone 1 / Beta 1:** section links and editable issue draft; **Milestone 2 / Beta 2:** finish book/chapter/section sharing and feedback; **Milestone 3 / Beta 3:** stable passage links and feedback pilot, with optional precise selection/highlight | Merged PR #15 supplies heading-link copy/recovery and editable correction drafts. Passage targeting/selection remains planned; preserve changed-content fallback, mobile/keyboard access and explicit selected-text disclosure |
+| Goal 2–3: learn by exploring | Readers can test their understanding or observe an example without mandatory exercises | **Milestone 2 / Beta 2:** optional reflection questions and expandable explanations; **Milestone 3 / Beta 3:** bounded simulation, optional editable frontend or external sandbox sample | Low-cost and optional; do not require an account, paid runtime, mandatory practice or a comprehensive project. Static explanations remain complete |
+| Goal 4: expand to other topics/audiences | Readers can navigate an additional real guide and related material without losing existing links | **Beta 4 (proposed):** first multi-guide entry/navigation, shared-content paths, in-guide/cross-guide search and language/status links, only where the second collection requires them | Requires a real second collection, actual reader evidence and reviewed content/URL contract; no speculative CMS or account platform |
+| Goal 2–4: discoverability and sustainable work | Readers and potential collaborators can find reliable work; commercial choices retain trust | **Beta 2:** correct page metadata/share previews and factual author entry; **Beta 4 candidates:** clearly labeled collaboration or sponsorship information and product offerings after a scoped decision | Distribution, pricing, ads, tracking, outreach and billing are hypotheses, not deployed features or verified income |
+
+**Reading example:** Goal 2 says “help me return to what I was reading”; Beta 2 proposes local resume/bookmarks, missing-position recovery and a visible device-only boundary. Goal 3 says “help me connect related concepts”; Beta 2 can start with editorial links and Beta 3 can add a curated cross-chapter path when real content warrants it.
+
+### Distribution and commercial hypotheses
+
+- Use the website for full explanations, GitHub for public source and correction, and LinkedIn for human-reviewed posts derived from completed articles. A one- or two-week posting rhythm is an optional experiment, not a publication commitment. Other channels can be considered when maintenance capacity and reader evidence support them.
+- Near-term professional value is a truthful portfolio of the author's work and judgment. Possible later revenue includes relevant contracting or consulting, workshops, curated materials or voluntary support; a prospect expressing interest is not proof of paid demand. Do not present examples as actual clients or outcomes.
+- Advertising and sponsorship are future options, not a current feature: compare relevance, transparent labeling, reader trust, maintenance and privacy before any proposal. No current traffic, conversion, ad income or provider is assumed. Any paid content must state its relationship to the free-reading commitment and chosen licenses.
+- Validate three assumptions separately: that target readers want connected explanations; that our approachable presentation helps them; and that an actual buyer values a proposed service or product. Capture observed behavior and uncertainty; a small usability trial, stars or likes do not establish willingness to pay. Any outreach, tracking, paid experiment, sponsorship, advertising, billing or deployment requires its applicable authorization.
+
+### Sequence and evidence
+
+1. Use the reviewed foundation and verify the current checkout/PR and actual deployment status; the board controls active work. PR #15 is present on local main; this does not by itself establish a public deployment.
+2. Define bounded near-term Goal 2 and Goal 3 slices against implemented capabilities and current holds; select representative chapters from the existing outline and coordinate dependent content and reader work.
+3. Review a complete find → read → return → share/feedback journey; resolve publication, license and deployment scope separately.
+4. Advance practical Goal 3 connections alongside independent Goal 2 slices when prerequisites are ready; test higher-cost or uncertain pilots with reader feedback and revise or stop ideas that do not help.
+5. Only after a concrete need, evaluate one Goal 4 collection and a separately scoped commercial experiment. Goals may overlap when independent; a roadmap entry does not itself assign an owner or authorize execution.
+
+**Reference observations (checked 2026-11-16):** [Engineering Handbook](https://github.com/handbook-academy/engineering-handbook) offers multiple handbooks and goal-based entry; [roadmap.sh](https://roadmap.sh/) organizes role- and skill-based paths and offers a separate [team product](https://roadmap.sh/teams); [Refactoring.Guru](https://refactoring.guru/design-patterns) presents a pattern catalog and a separate ebook; [HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter) offers online reading, ebook formats and an AI-assisted lookup skill. These are provider descriptions and inspiration, not evidence of our readers' needs, usage, prices or commercial performance. Ideas and original expression remain distinct; evaluate licenses before reuse.
+
+### Ongoing content and low-cost delivery dependencies
+
+- **Publishing workflow:** keep the reviewed Markdown as source of truth; define who reviews title, stable chapter identity/path, locale, status and ordering, and how manifest, reader, navigation and search update together. Never publish drafts or private planning material merely because they exist in the repository. The existing manifest/allowlist and source-hash checks remain the current contract until a scoped change is reviewed.
+- **Link and location stability:** decide how chapter, heading and later paragraph identities survive edits and provide explicit fallback when a target disappears. Support the same reliable locations for resume, bookmarks, links and feedback; do not assume generated heading text or paragraph ordinal alone remains stable.
+- **Language experience:** English interface currently has no English manuscript corpus. Explain actual availability and offer the Chinese reading path; link counterparts only when they exist. Verify share destinations and search behavior in both languages.
+- **Low-cost interaction:** favor reviewed Markdown reflection and one controlled simulated-API example first. Interactive examples are optional, with equivalent static/text content. For a sandbox, assess actual browser/mobile behavior, third-party terms and privacy, available free usage, dependencies, maintenance and total cost before choosing it. No live AI calls, account or paid server is a prerequisite. See [Sandpack](https://sandpack.codesandbox.io/docs) and [StackBlitz embedding](https://developer.stackblitz.com/guides/integration/embedding); WebContainers embeds have [documented browser restrictions](https://developer.stackblitz.com/platform/webcontainers/browser-support).
+- **Reader evidence:** a 3–5 person formative trial is a proposed usability check, not market or willingness-to-pay validation. Prioritize reader comprehension, finding/returning/sharing and feedback quality; review possible analytics separately and do not assume traffic, costs or revenue.
+
 ## 1. Current baseline and immediate priority
 
 The [board](coordination.md) alone owns current assignments and holds. **Full-stack and AI Product Engineering — v1 Content Framework** is a completed historical planning stage, accepted and integrated through [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9). Its Junior–Senior audience, required AI product architecture, separate coding-AI delivery thread and [eight-part framework](../book/planning/outline.md) remain the content direction; page names/splits can evolve and listing does not accept their research/manuscripts.
@@ -38,7 +131,7 @@ The historical branding-only exception has completed. After the author resumed s
 | New theme foundation and reading components | Separately accepted and merged through PRs #12/#13; System/Day/Night and shared reading primitives. [Foundation review](reviews/beta1-theme-foundation.md), [component review](reviews/beta1-reading-components.md). | Selected DS01 reuse does not accept its whole tree; runtime guide and stage reviews retain actual checks/limits. |
 | Initial Chinese chapter reader | PR #14 merged opening/G01 reading, responsive navigation, source-derived anchors and source figures/tables with honest English availability. [Reader review](reviews/beta1-chapter-reader.md). | Baseline excludes static search, section-link copy, English manuscripts and deployed acceptance; next work needs its own review. |
 | Reading experience design | Historical [UI03](reviews/UI03.md), accepted [UI04](reviews/beta1-design-alignment.md) and separate [Beta 2 palette design](reviews/reading-palettes-design.md). | Design acceptance, author visual judgment and implementation acceptance remain distinct. Production maps 111 variables; live Figma has 133 after design-only palette additions. |
-| Public release | No deployed site established at this baseline. | URL, live acceptance and licenses remain TBU; deployment remains held. |
+| Public release | No deployed site established at this baseline. | Live URL/acceptance, material-specific rights and contribution checks remain open; the [selected license notices](licensing-and-readiness.md) do not release deployment. |
 
 ### Implementation dependencies and remaining gates
 
@@ -70,7 +163,9 @@ The book's required AI product coverage is distinct from the reading website's o
 
 ## 3. Reading-product releases and product rationale
 
-**The book is the product; the website supports reading it.** Website Beta 1/2/3 are capability milestones, independent of the first-edition eight-part manuscript. New reviewed chapters do not require a new website beta. Later DevOps/data or other career guides are content extensions, not a current requirement for a recommendation engine, plugin system or specialist platform.
+**Delivery Milestones**: the feature delivery track retains the existing Beta headings and links below.
+
+**The book is the product; the website supports reading it.** Delivery Milestone 1/2/3 and proposed Milestone 4 retain the existing Beta 1/2/3/4 labels below for traceability. These feature slices map to Product Goals above and are independent of the first-edition eight-part manuscript. New reviewed chapters do not require a new website beta. Later DevOps/data or other career guides are content extensions, not a current requirement for a recommendation engine, plugin system or specialist platform.
 
 These are author-approved capability priorities, not a promise that every row is implemented or an execution assignment. Section 1 distinguishes completed stages from remaining gates; the board owns current holds/exceptions. Beta 1 can open with a small set of reviewed representative chapters; it does not require all working pages or both complete language editions. The opening's orientation has passed its own editorial review; that does not approve later prose or deployment.
 
@@ -86,6 +181,8 @@ For each proposed feature, record the reader and situation, concrete problem, si
 
 ### Beta 1 — Reliable basic reading
 
+**Delivery Milestone 1** (historical label: Beta 1).
+
 | Capability | Reader value and minimum boundary |
 | --- | --- |
 | Entry and published chapters | Explain the book, prerequisites and where to start; render only explicitly approved chapter/resource inputs. Retain the accepted initial contract and review broader expansion separately. |
@@ -100,6 +197,8 @@ Core reading must not wait for audio, exports or a general AI feature framework.
 
 ### Beta 2 — Practical improvements, with bounded experiments
 
+**Delivery Milestone 2** (historical label: Beta 2).
+
 | Priority | Capability | Scope and rationale |
 | --- | --- | --- |
 | First | Resume and local bookmarks | Help readers return after a break; current device only. Handle missing/invalid stored state and changed chapters. No accounts or cloud sync. |
@@ -108,6 +207,8 @@ Core reading must not wait for audio, exports or a general AI feature framework.
 | Next | Small reading preferences and print styles | Assess font size/reading width and browser printing after default typography is sound. Do not build an elaborate settings panel. |
 | Next | More useful question cards | Trial another example, counterexample or understanding check; a few editable assumptions if needed. Copy only, without a hosted model service. |
 | Next | Content and language updates | Simple material-change notes and links to available counterparts. Career-oriented reading routes remain ordinary editorial pages, not personalized recommendations. |
+| Next | Book/chapter/section sharing and feedback | Confirm real stable destinations and copy/manual fallback; retain the existing editable GitHub issue preview. Do not submit on the reader's behalf. |
+| Low-cost content | Optional reflection questions | Start with an optional reviewed Markdown question and a visible explanation using the supported content format. Collapsible presentation requires a separately reviewed parser/render/search contract; do not enable arbitrary HTML or MDX to obtain it. The static explanation remains complete without answering. No mandatory quiz, grading or capstone. |
 | Independent pilot | One offline export format | Try PDF **or** EPUB on reviewed chapters; inspect figures, links, code and version information before expansion. Browser print styles do not imply a validated export pipeline. |
 | Independent pilot | One listening chapter | Pre-generate and manually review a suitable chapter, with basic playback controls. Manual asset updates are acceptable. No full-book coverage or automatic regeneration requirement. |
 
@@ -119,7 +220,9 @@ The later [palette spec](design/reading-palettes-spec.md) and [design review](re
 
 ### Beta 3 — Selective, evidence-led extensions
 
-These are candidates, not a promise to implement them all. Select one or two only after a smaller trial shows enough reader value to justify development and maintenance.
+**Delivery Milestone 3** (historical label: Beta 3).
+
+Product Goals 2 and 3 are both near-term directions. Deliver practical, low-cost features in reviewed slices rather than restricting the whole milestone to one or two features; higher-cost pilots still need small trials and evidence before expansion. Milestone 4 remains a future direction informed by actual reader feedback.
 
 | Candidate | Value hypothesis | Complexity that must be justified |
 | --- | --- | --- |
@@ -127,8 +230,26 @@ These are candidates, not a promise to implement them all. Select one or two onl
 | Offline website reading | Continue approved chapters with unreliable connectivity | Asset coverage, storage limits, cache/update behavior, unavailable content and recovery. PWA is an implementation option, not a mandated dependency. |
 | Selected progressive/interactive diagrams | Inspect difficult flows and changed conditions, such as retries, queues or RAG | Accessible controls and an equivalent useful static/text explanation; no animation throughout the book. |
 | Downloadable AI context bundles | Carry selected explanations and questions into readers' own tools | Bounded editable context, source/version attribution and Markdown export. No live chat or model-key custody. |
+| Passage sharing and contextual feedback | Share or comment on an identifiable paragraph within an approved chapter | Stable paragraph IDs, explicit user action, section/chapter fallback if content changes, accessible selection and manual-copy path; highlight is optional and browser-dependent. Explain if selected text appears in the URL; preview feedback before the reader submits. |
+| Optional interactive examples | Explore one mechanism through a small controlled simulation or editable frontend sample | Begin with a request/response sample using mocked API states, clearly labeled; static prose remains complete. Pilot an external sandbox link or embed only after browser/mobile, service terms, privacy, availability, dependency and cost checks; provide a non-embed fallback. |
 
 Other candidates require a concrete need: local reading-record import/export, a cross-chapter concept map, bilingual side-by-side comparison, material translation-drift notices or additional export formats. Keep stable links during ordinary updates from the start; sophisticated revision navigation is a separate later candidate. Do not add cross-device accounts to make these features possible.
+
+### Beta 4 — Proposed multi-guide experience
+
+**Delivery Milestone 4** (planning alias: Beta 4; proposed).
+
+**Product objective:** support the Goal 4 expansion (formerly Stage 4) when a second real collection serves a validated reader need. This is a proposed future scope, not an assignment, implementation or promise to launch every item.
+
+| Feature candidate | Reader value and condition |
+| --- | --- |
+| Guide directory and guide-scoped navigation | Find a specific guide and understand its scope; only when there are at least two real collections |
+| In-guide and cross-guide search | Find reviewed content with a clear source guide and language; preserve current-language availability |
+| Shared content and editorial reading paths | Reference one approved article from multiple paths without duplicating its source; preserve stable existing URLs |
+| Language/status and contribution information | Show actual translation and publication status; clarify how readers suggest corrections and who reviews them |
+| Author/collaboration information | Present actual work and an appropriate contact route; any sponsorship or paid offering needs a separate, transparent proposal |
+
+**Acceptance direction:** prove both guides can be discovered, navigated and searched with real approved content, stable old links and honest language status; check accessibility, public content boundaries and maintenance effort. No account, payment system, ads, CMS or personalized recommendation engine is implied.
 
 ### Outside the planned betas
 
@@ -153,7 +274,7 @@ Record actual observations, limitations and resulting scope decisions. An unsucc
 
 ### Beta 2 gate: improve a demonstrated reading need
 
-Check resume/bookmark recovery against changed headings and invalid local state; test glossary/index/search with real content and Chinese/English availability. Validate preferences without reducing accessibility or breaking layout. Review contextual feedback and question-card changes without adding a backend by default.
+Check local chapter/section resume and bookmark recovery against changed or deleted content, blocked/invalid storage and device-only disclosure; check book/chapter/section links and user-reviewed feedback; test glossary/index/search with real content and Chinese/English availability. Validate preferences without reducing accessibility or breaking layout. Review contextual feedback and question-card changes without adding a backend by default.
 
 Accept pilots separately. For export, inspect one output format on representative chapters. For audio, compare intelligibility, technical pronunciation, omissions/repetition and whether tables/diagrams can be understood or require the page. Adapt from the same approved Markdown rather than maintaining an independent full-book script; skip raw code/URLs/formatting and retain necessary spoken explanation. Record resources, time and limitations; model, voice, execution location and cost remain TBU. A basic single-chapter trial does not require a production regeneration pipeline.
 
@@ -161,7 +282,11 @@ Accept pilots separately. For export, inspect one output format on representativ
 
 Each selected candidate needs a bounded assignment, a smaller accepted trial, concrete reader evidence and operational acceptance. For automated audio, narration and model/voice configuration identify a version; regenerate only affected reviewed material, publish assets before switching the index, preserve the working version on failure and prevent older jobs overwriting newer versions. Label or hide stale audio after material prose changes; formatting-only edits need not regenerate it. Specify retry/recovery and storage/cost boundaries. Playback uses prepared assets, not inference per visit; no arbitrary voice cloning.
 
-Offline/interactive/context-bundle candidates each need their own accessibility, content-version and failure checks. Do not infer approval for a provider, library, paid service or implementation from this roadmap. Feedback informs reviewed revisions; it never automatically publishes generated prose.
+Offline/interactive/context-bundle candidates each need their own accessibility, content-version and failure checks. For passage sharing, validate actual chapter/paragraph targeting and changed-text fallback, keyboard/mobile access, copy failure and selected-text disclosure; precise highlight is optional. For interactive examples, check mocked-versus-real boundaries, static alternatives, third-party costs/terms and ongoing maintenance. Do not infer approval for a provider, library, paid service or implementation from this roadmap. Feedback informs reviewed revisions; it never automatically publishes generated prose.
+
+### Beta 4 gate: prove multi-guide value
+
+A real second collection and reviewed mapping for its intended reader must exist before selecting implementation scope. Validate guide entry, cross-guide links and search, language availability, stable existing URLs and accessible navigation with approved content. Evaluate maintenance effort and reader feedback. Commercial or advertising experiments, if proposed, have separate scope and authorization; reader interest or site traffic is not proof of payment.
 
 ## 5. Ownership and handoff
 
@@ -180,8 +305,10 @@ Writer authors assigned vision/roadmap and planning explanations; Developer auth
 | Home/chapter/mobile design refinements | Accepted UI04 design; Developer supplies implementation feedback | Author / Coordinator | Preserve reviewed reader behavior; separate later concepts and author visual judgment |
 | Beta 1 search/sharing; Beta 2 recovery and contextual correction | Developer | Coordinator | Content contract, basic reading and observed reader needs |
 | Card and copy-context format | Writer + Developer | Coordinator | Stable chapters allowed for publication |
+| Passage ID, selection and feedback contract | Writer + Developer | Coordinator | Stable links, content-edit fallback, accessible device/browser behavior and explicit text-in-URL disclosure |
+| Low-cost optional learning sample and sandbox | Writer + Developer | Coordinator | Representative approved content; simulated vs actual behavior, accessible fallback and provider/cost/license/privacy review |
 | Beta 2 export/audio pilots; Beta 3 automation | Developer proposes; Writer supplies samples | Author / Coordinator | Separate bounded trial, reader value and resource authorization |
-| Content/code license and contributions | Assigned document owner proposes options | Author decides; Coordinator records | Before reuse and outside contributions |
+| License scope, provenance and contributions | Assigned document owner reviews actual materials and notices | Author decides unresolved scope; Coordinator reviews | Preserve selected MIT/CC BY-SA 4.0 notices; verify applicable rights, attribution and contribution terms before reuse/integration |
 | Reader trial, release scope and deployment evidence | Owners propose; Developer supplies runtime evidence | Author / Coordinator | Bounded validation authorization; relevant reading, content and QA gates accepted |
 
 Close TBU items with evidence, remove obsolete placeholders and synchronize status. Do not insert guessed measurements, unapproved dates or cost commitments.

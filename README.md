@@ -41,7 +41,11 @@ The intended editions are Simplified Chinese and English, with Chinese drafts re
 
 Created and maintained by **Jason Zhang**, with AI assistance in research, writing, design and development. Open to engineering opportunities and collaboration. Find Jason on [GitHub](https://github.com/HAIXIN-ZHANG).
 
-Questions, corrections and relevant sources are welcome through [GitHub issues](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues). Content and code licenses and formal contribution terms remain **TBU**; free/public reading does not imply an already selected open-source license.
+Questions, corrections and relevant sources are welcome through [GitHub issues](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues). See [contributing](CONTRIBUTING.md) for the review process and contribution expectations.
+
+## License
+
+Project source code and original programming samples are offered under the [MIT License](LICENSE). Original book prose and teaching diagrams in `book/drafts/` are offered under [CC BY-SA 4.0](LICENSE-CONTENT.md). Third-party material and project names or logos may be subject to separate rights; see the [content license notice](LICENSE-CONTENT.md) and [licensing notes](docs/licensing-and-readiness.md) for scope and exceptions.
 
 ## Further context
 

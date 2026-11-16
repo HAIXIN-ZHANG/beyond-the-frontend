@@ -8,6 +8,12 @@
 
 Figma 保留三页、四个 collections、14 个 text styles；原有 111 个变量保留，另加 22 个 Beta 2 配色设计变量，现合计 133 个，生产映射仍为 111 个。[配色规范](design/reading-palettes-spec.md)和[设计复审](reviews/reading-palettes-design.md)中的 Original / Mist Blue / Soft Grey 是三个直接可点的色块，与 System/Day/Night 独立；仍只完成设计与技术交接，没有上线这些控件。[其余 Beta 2 概念](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475)与 Beta 3 规划也不等于实现。
 
+## 产品与交付规划更新
+
+[路线图](roadmap.md)区分 **Product Goals（产品目标，原产品 Stage）** 和 **Delivery Milestones（功能交付里程碑，保留历史 Beta 编号）**。目标 2、3 都是近期方向：完善继续阅读、分享反馈，并逐步增加阅读路径、知识连接和低成本可选互动；目标 4 的多指南与复杂平台能力根据实际结果再判断。两条线不是数字一一对应，现有实现、审核、合并和部署分别以实际记录为准。
+
+新增章节应维持经审核的 Markdown 来源，协同更新目录、导航和搜索；分享/书签/阅读位置应考虑内容变更时的稳定定位和回退。思考题、模拟案例和外部沙盒均为可选辅助，不增加强制练习或必做综合项目。当前本文其他地方的 PR #14 / Beta 阶段描述保留为历史基线。
+
 ## 新书名与项目名
 
 正式名称：**Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**；仓库 slug：`vibe-coding-then-what`。英文副标题：**Understand the Systems Behind Your AI-Built Products**。中文副描述：**系统理解 AI 帮你构建的产品：从界面、API 和数据，到交付、恢复与 AI 能力。**

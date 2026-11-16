@@ -14,6 +14,8 @@ The first-delivery retrospective below aligns final outcomes with original plans
 
 The author requested retrospective alignment of first-delivery Markdown, aspirations and delivery records with actual work, using current terminology. The [canonical delivery ledger](delivery/milestone-1.md) is now complete and [independently accepted](reviews/milestone-1-record-alignment.md), with both original-owner tasks closed. Integration evidence belongs in the scoped PR execution record; only Coordinator performs Git writes.
 
+The accepted alignment payload `ea365c7e64adf9db771ea834f0a9f23ae699747e` is tracked in [PR17](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/17). Consult its execution record for the actual final reviewed head, required Quality/root/Pages runs, squash and local-main reconciliation rather than interpreting this pre-integration snapshot as a later merge claim. The bounded chapter-workflow addition is separately inspected in the same review; no book manuscript or runtime file changed.
+
 | Owner | Concrete assignment | State / next boundary |
 | --- | --- | --- |
 | Writer | [Canonical ledger and current-document alignment r1](handoffs/writer/milestone-1-record-alignment.md) | Accepted after M1-01/02 factual corrections; six documents and report frozen. Task closed |
@@ -30,7 +32,7 @@ No new manuscripts/translations, future feature code, dependency/workflow/access
 
 Latest author clarification adds narrow planning alignment to Writer's current roadmap/ledger scope: Product Goal2 aims for the first edition's eight-part Chinese core; Product Goal3 refines whole-book structure, language, facts and examples, with English adaptation in batches. Reading-unit splits remain flexible, not a48-file completion metric; only two approved Chinese manuscripts exist now. The product-planning owner separately edits only `book/planning/chapter-workflow.md` to clarify the existing concept and manuscript review gates, reader experience/examples/style criteria and repeat revision loops; Developer/Writer must preserve that concurrent file. Coordinator reviews its actual handoff with the documentation bundle. This is not release of every chapter, a duplicate writing workflow or publication authorization.
 
-Shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, main at the baseline above. Verify actual branch/HEAD/status before editing. Preserve all uncommitted owner work and31 ignored recovery files; the unaccepted DS01 checkpoint remains separate. Historical dispatch/workspace details below are evidence, not current assignments.
+Assigned checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`; record-alignment work started from main at the baseline above. Coordinator integrates the reviewed `codex/milestone-1-records` branch through PR17 and verifies actual main afterward. Verify actual branch/HEAD/status before any new assignment. Preserve all owner work and31 ignored recovery files; the unaccepted DS01 checkpoint remains separate. Historical dispatch/workspace details below are evidence, not current assignments.
 
 ## Last scoped workspace and baseline
 

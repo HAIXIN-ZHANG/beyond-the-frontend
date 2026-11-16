@@ -1,0 +1,47 @@
+# Product Goals and Delivery Milestones — alignment review
+
+Owner: Coordinator/Reviewer. Date: 2026-11-16 (Australia/Perth). Status: **Accepted planning/public-document closeout and technical analysis; executor tasks closed.** Integration and subsequent Stage2/3 Figma-only design are separate actions. No feature implementation or deployment.
+
+## Authority, baseline and ownership
+
+The product-planning handoff requests review of the updated Product Goals/Delivery Milestones and public-project documents against actual code/design. Human confirmation remains final; no roadmap listing authorizes implementation, deployment, paid services or license selection. Goals2/3 are near-term directions, Goal4 conditional; historical Beta identifiers remain traceable.
+
+Actual baseline: main/origin-main `039c9ee8d09f6b6d3422655825611a1b1b7e70e8`, merged PR15 with verified PR/main CI and accepted Beta1 closeout. Existing uncommitted inputs: README, project-vision, roadmap, Chinese stage summary, CONTRIBUTING and licensing-and-readiness. Preserve them; they belong to parallel product planning and are not yet accepted or staged by this review.
+
+Coordinator owns this review, scope, architecture judgments and board. Developer may write only one `docs/handoffs/developer/product-delivery-alignment.md` describing actual code, gaps, design dependencies and bounded implementation proposals. Writer may write only one `docs/handoffs/writer/product-delivery-alignment.md` auditing the six public/planning documents plus SECURITY and necessary source references. Return concrete corrections before changing shared input documents. No code/manuscript/schema/dependency/Git/access/license/deployment change is assigned.
+
+## Required checks
+
+Separate implemented, independently verified and proposed behavior. Verify merged search/section sharing/correction, current-language availability and reviewed-content intake. Assess local resume/bookmarks/storage recovery, book/chapter/section links and future paragraph/selection stability; reading paths/indexes/reflection questions and one explicitly simulated API example. Include a11y, maintenance cost, owner, prerequisites and meaningful acceptance for each recommended slice. Reuse accepted design tokens/components; identify missing states instead of claiming Beta2 concepts are complete designs.
+
+Review naming/claims across reader entry, vision, roadmap, security/contribution and licensing-decision notes. At initial dispatch the license was undecided; the later product-owner handoff reports the human selection of MIT for code and CC BY-SA4.0 for book/original diagrams. That owner is now adding LICENSE/LICENSE-CONTENT and updating README/CONTRIBUTING/licensing-readiness. Preserve those in-flight files and review after its freeze; selection does not prove actual notices, complete provenance or deployment. New brand/logo/commercial expansion stays at Goal4/formerStage4. Book remains complete without optional interactions and never requires a capstone, account, hosted AI or cloud sandbox. Do not invent a private-reporting channel or response promise.
+
+## Findings and decisions
+
+Pending actual owner deliveries and Coordinator inspection. This record neither implements nor accepts the parallel six-file product proposal.
+
+The subsequent explicit author clarification assigns Writer a bounded roadmap/vision edit alongside its audit: Goals1–3 focus on this one book, with umbrella branding/new name/logo and further commercial expansion deferred to Goal4 and actual evidence. Preserve author biography and ordinary personal opportunities, existing product-input edits and historical headings. Reserved license-owner files remain untouched. Coordinator will review the actual changed revision; this exception does not authorize a rename or implementation.
+
+## Actual review and returned corrections
+
+Developer's analysis, SHA-256 `1571c0c652b3c9187414a8d99ab5c2ffcb8b405807fca0c3b8a5bc9a2774def4`, is accepted **as analysis only** after source inspection. It distinguishes observed code/prior runtime evidence/proposals; current-language search and section sharing are merged, while resume/bookmarks/paragraph identity/editorial paths and demos are not implemented. Local storage uses versioned identity records and explicit return, preserves incoming navigation intent and future-version data, and states concurrency limits. The proposed small local simulation remains labelled, optional and supported by complete static prose. No code, source manuscript or experiment is accepted/authorized by this analysis.
+
+Writer correctly identified four bounded alignment issues. Returned for r2 correction in roadmap/vision plus the contribution-review sentence only: W-PD-01 stale branch/integration language despite mergedPR15; W-PD-02 plain reflection is supported but collapsing requires a separate parser/render/search contract; W-PD-03 avoid promising every proposed PR a maintainer response/review; W-PD-04 proposed Beta4 is a planning alias, unlike existing1–3, without renaming historical headings. License-owner delivery is now frozen; this narrow contribution sentence does not alter its rights/licensing terms. Re-review the actual r2 and preservation evidence before acceptance.
+
+## License and public-readiness review
+
+Inspected actual owner-authored LICENSE, LICENSE-CONTENT, README, CONTRIBUTING and licensing/readiness notice against [MIT's official text](https://opensource.org/license/mit) and [CC BY-SA4.0's legal terms](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en). The notices distinguish original programming code from book prose/teaching diagrams, including text diagrams inside fences; CC scope is `book/drafts/`, with third-party notices, dependency terms and separate name/logo rights preserved. Owner-selected licensing is distinct from material-specific provenance and contributor authorization. Main's author metadata shows owner-name variants, but Git metadata is not proof of an exhaustive chain of rights; no blanket third-party or historic-contribution clearance is asserted. No LICENSE selection was made by the reviewer and no public deployment is claimed.
+
+Primary API references checked for future design constraints: [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) can be denied by browser policy; the proposed recovery UI is necessary. [Text fragments](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments) can cease matching after text changes, so precision highlighting is an enhancement rather than a durable-location guarantee. The current reader's title-derived IDs and HTML-node rejection were independently checked in source; no browser experiment or feature implementation was performed for this planning review.
+
+Latest author priority: finish Stage1 review/integration first, then update only future Stage2/3 designs in the existing Figma file, preserving Stage1. This authorizes design work after closeout, not future feature code, a manuscript or deployment.
+
+## Final affected re-review and acceptance
+
+Writer r2 closes W-PD-01–04 after actual inspection: the two mapping cells correctly name mergedPR15; Goal2/reflection text states the supported plain-Markdown-first and separate collapse contract; contribution text requires review for accepted changes without promising a response; proposed Beta4 alias is distinguished without changing historical headings. Single-book/current-title focus and deferred Goal4 branding/commercial scope remain intact.
+
+Independently matched current roadmap `bf38b1b51d03e49a864ecd2510dd35713cf54f3f100727e8c5c50b0922825e39`, vision `d74029eea92ddf5c44a8c21c772705fc0ed0869c614849af58d956776d0164fb`, CONTRIBUTING `fdacf72630d84ee787e7e7ddd3fb4036bdef712ba48ad4b28657ad031e895dee` and Writer report `2ac7ea718d712fabb2ae4f1f83411213c802ec8f66501d765859c5955e002fcb`. Original-owner README `b4630975fd6efd8a30fc8ced1222fc742a545afba4035d5a75e099281f5bbf6b`, MIT notice `5df221f88567a69a217e90acb595a1a130bf5b528996a3e8903ab7640cda2122`, content notice `f8e841ea0fe3e01b1e7a59c383f9a97d364980c799091399d4c83e62d8725d3d`, readiness `f437f48f6b950061eeb42b07dd9ddc19efa32f678136b8aba19ffec02828fa35` retain their delivered bytes. CONTRIBUTING differs from that delivery only by the assigned one-sentence revision. The Chinese planning summary remains a bounded product-input addition, not a new manuscript or release claim.
+
+Independent local checks:111 current relative destinations exist; runtime/manuscripts/styles/dependencies/CI/SECURITY have no diff from the accepted main baseline. Existing source/unit/browser/CI results remain the PR15 evidence; no unchanged runtime test is relabelled as a fresh run in this document review. Source/reference and license-text review do not certify every possible third-party right or future contribution. No blocking document finding remains in the accepted scope.
+
+Coordinator may integrate the reviewed documentation under the author's Stage1 closeout instruction and existing scoped-PR/exact-head-CI workflow. Both executor reports are frozen, with no follow-on feature/prose assignment. This review does not release public deployment or authorize adding future functionality to the fixed Stage1 design. Subsequent Figma work must label Stage2/3 designs, reuse the current system and preserve all existing Stage1 scenes/components/tokens. The integration PR's actual execution record will retain head/check/merge evidence rather than invent a future SHA here.

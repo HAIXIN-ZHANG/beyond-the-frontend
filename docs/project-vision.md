@@ -6,6 +6,10 @@ Updated: 2026-11-16 (Australia/Perth). Status: author-confirmed v1 positioning a
 
 This document owns the audience, content scope and product direction. The roadmap owns future dependencies and acceptance checkpoints; Development History records what happened and the evidence behind it. The old `project-brief.md` remains a compatibility entry. Writer's detailed outline and Developer's implementation records have separate responsibilities. Accepted changes should reach the appropriate shared document rather than create competing project descriptions.
 
+**Product planning update:** [Roadmap](roadmap.md) distinguishes Product Goals (reader needs and outcomes; formerly product Stages) from Delivery Milestones (feature slices; historical Beta labels retained). Goals 2–3 are both near-term, while Goal 4 is an evidence-led future expansion. Optional low-cost reflection and interactive examples support the book without compulsory practice; current assignments and implementation status remain on the board and actual reviews.
+
+Goals 1–3 focus on making this one book and its reading experience useful under the current title. A new umbrella brand or project name, logo design and broader commercial expansion are deferred to Goal 4 (formerly Stage 4), evaluated from earlier outcomes. The factual author profile and incidental individual career or collaboration opportunities remain within the current scope.
+
 ## 1. What we want to make
 
 **Vibe Coding, Then What?**
@@ -119,7 +123,7 @@ The earlier positioning discussion used [The Engineering Handbook](https://githu
 
 Jason Zhang is the author. AI assists with structure, research organization, prose, examples, diagrams and editing. Distinguish documented behavior, experiments, experience, teaching assumptions and unverified ideas. Drafted, reviewed, merged and published are different states.
 
-Explain principles independently. Actual reuse of third-party text, diagrams or code requires the applicable license and attribution. The content/code license remains **TBU**, for the author to decide before release; reference projects' licenses do not automatically apply here.
+Explain principles independently. The owner selected [MIT for project code and original programming samples](../LICENSE) and [CC BY-SA 4.0 for original book prose and teaching diagrams](../LICENSE-CONTENT.md). Actual reuse still requires review of provenance, applicable terms, attribution and contribution scope; third-party rights are not cleared by the owner's selection. The [licensing/readiness notes](licensing-and-readiness.md) define scope and remaining checks; reference projects' licenses do not automatically apply here.
 
 Do not invent users, traffic, company cases, productivity improvements or income. Professional visibility may follow from the work but is not a promised outcome. Recheck technology choices against the environment in which they will be used.
 

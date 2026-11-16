@@ -1,6 +1,6 @@
 # Beta 1 theme foundation — Developer handoff
 
-Owner: Developer. Revision: r1. Date: 2026-11-16 (Australia/Perth). Status: frozen for Coordinator review. This report owns the scoped task/evidence; Coordinator owns review, integration and all Git writes. No acceptance, PR/check/merge or release result is self-declared.
+Owner: Developer. Revision: r1. Date: 2026-11-16 (Australia/Perth). Status: frozen for Coordinator review. This report owns scoped task/evidence; Coordinator owns the [actual review](../../reviews/beta1-theme-foundation.md), integration and all Git writes. No acceptance, PR/check/merge or release result is self-declared.
 
 ## Task brief
 
@@ -81,6 +81,12 @@ The contract changes only three lines: current-stage/renderer-unimplemented para
 Native footer preference is the chosen foundation control, not UI04's final header Appearance popover or eight new component families. No font package, Code Connect, reader, search/copy, publication, telemetry/backend, later E2E suite or deployment was added. The isolated vendor declaration limitation and unresolved moderate development advisory remain visible for Coordinator's decision. One headless Chrome channel and these viewport/state cases do not establish every platform, screen-reader/zoom/forced-colors state or complete WCAG conformance.
 
 This is a reviewable stage, not completion of all seven planned stages. No new PR, exact-head cloud check/merge or deployment result is predicted. Coordinator owns those later facts and the next authorized stage assignment.
+
+### Final freeze checks
+
+Exact scope inventory passed: **22 Developer paths** plus six separate Writer/Coordinator paths in the shared tree. Existing required CI workflow, app strict tsconfig, brand/deployment configuration, baseline language/deployment tests, historical design/review/DS01 reports, G01 and F01 analysis are unchanged. Every original export-verifier line remains; additions only strengthen theme assertions. Contract diff is exactly the three assigned lines and current opening bytes match the accepted r2 hash.
+
+Both DS01 refs still name `4da2578`; all 31 ignored recovery files match their original manifest. Project Markdown checks passed **74 files, 385 local links and five heading anchors**, with no link/structure/sensitive-pattern error; `git diff --check` passed. These are point-in-time shared-tree checks, not acceptance of another owner's work. Fixed-file SHA-256 manifest: `/tmp/vctw-theme-foundation/developer-r1-fixed.json` covers **21 files**, excluding this evolving handoff to avoid a self-hash loop. Coordinator can compare that exact snapshot before integration; the full durable path manifest and evidence above remain useful if temporary hashes/logs disappear.
 
 ## Recovery
 

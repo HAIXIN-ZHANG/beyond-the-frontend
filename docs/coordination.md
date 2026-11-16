@@ -20,7 +20,7 @@ After accepted foundation: reading components → reviewed initial chapter rende
 
 Current shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/beta1-theme-foundation`, starting HEAD/remote main `eb822357b6bf1cafe090508254b1aa6c3e71ce8f` (fetched and verified before execution). Preserve all concurrent changes. Only Coordinator performs Git writes; Writer and Developer have disjoint allowed paths in their briefs.
 
-Current accepted stage integration: [PR #12](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/12), implementation/opening snapshot `9e11468fd5e3e1ee9742121c7f72dbd88e199d0e`. Only actual Coordinator review/board pointers are appended afterward. Final-head cloud checks and merge are pending at this record's commit; the PR execution record owns actual later results. Do not start dependent implementation from this pointer alone.
+Current accepted stage integration: [PR #12](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/12), implementation/opening snapshot `9e11468fd5e3e1ee9742121c7f72dbd88e199d0e`. Only actual Coordinator review/board pointers and the inspected final theme-handoff supplement are appended afterward; source bytes are unchanged. Final-head cloud checks and merge are pending at this record's commit; the PR execution record owns actual later results. Do not start dependent implementation from this pointer alone.
 
 ## Last scoped workspace and baseline
 

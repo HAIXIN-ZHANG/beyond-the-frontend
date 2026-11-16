@@ -2,6 +2,12 @@
 
 Updated: 2026-11-16 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
+## Active editorial-review clarification
+
+The author confirmed a reader-first full-stack architecture guide, with tone, credible examples and technical accuracy checked at both chapter gates. The bounded [Writer r1 brief/handoff](handoffs/writer/editorial-review-criteria.md) is now [accepted after actual Coordinator review](reviews/editorial-review-criteria.md): the existing chapter workflow owns the criteria; its analysis template contains one link and usage paragraph. Writer's task is closed and its files frozen. Coordinator handles scoped Git integration and required checks separately. No manuscript, translation, website, design, dependency or deployment is assigned. Formal updates remain English-first.
+
+Actual assignment baseline: main/origin-main `8e31da5e65aee4880a80aba8a35a418eb0fd4d45` (merged PR17, PR/main CI verified); branch `codex/editorial-review-criteria`. Writer owns only the brief's listed files; Coordinator owns this board and the review. The previous record-alignment tasks are closed. Future design is not resumed during this narrow documentation task; all release holds remain.
+
 ## Current terminology and accepted baseline
 
 **Product Goals** describe reader needs/outcomes (formerly Stages). **Delivery Milestones** describe concrete design/implementation/verification scope (formerly Betas). Numbering is not a one-to-one completion rule; legacy labels and filenames remain in dated evidence.

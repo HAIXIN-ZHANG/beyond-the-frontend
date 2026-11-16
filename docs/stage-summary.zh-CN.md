@@ -1,14 +1,18 @@
 # Vibe Coding, Then What?：项目阶段速览
 
-更新：2026-11-15（Australia/Perth）。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页解释内容方向和已发生的关口，不另建任务队列。正式规划文档使用英文，中文书稿保持原稿。
+更新：2026-11-16（Australia/Perth），基线为已合并 PR #14 的版本。这是唯一的中文项目过程速览。**当前任务、负责人、工作区、状态与暂停条件，以[协作看板](coordination.md)为唯一依据**；本页解释内容方向和已发生的关口，不另建任务队列。正式规划文档使用英文，中文书稿保持原稿。
 
-**新版设计 UI04：** [实际设计与专业用词/排版复审](reviews/beta1-design-alignment.md)已接受用于技术交接，作者视觉判断仍独立；[Beta 1 设计](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-388)已区分真实中文 reviewed drafts 与八篇规划，英文正文仍仅为排版样例，补齐 System/Day/Night、当前阅读语言搜索及无英文语料说明、真实链接分享纠错；AI 卡片是可不发布的预览/编辑/复制试验，手动粘贴到读者工具，不是站内 chat。移动搜索使用输入框，不显示桌面 ⌘K 提示。[Beta 2 独立区域](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475)只展示本机续读/书签、术语位置和偏好候选，Beta 3 仍只在路线图。Figma 保留三页、111 variables、14 styles，组件明细以设计交接/review 为准；主代码仍是双语 shell，现有检查与四项测试通过不等于阅读页、主题、搜索、复制或可访问性已实现/验收，本次必要文档对齐不解除其他产品和稿件 hold。
+**已合并的阅读基础：** PR #12 合并主题基础与引言更新，PR #13 合并阅读组件，PR #14 合并真实中文阅读器。现在可阅读获审的引言和 G01，支持响应式导航、正文标题锚点、原有文字图表及 System/Day/Night；英文入口如实说明中文可读，尚无英文书稿。这些是代码合并与指定检查的结果，不代表已部署或完成整本书。实际行为以[运行说明](../site/DEVELOPMENT.md)为准，验收、CI 与合并证据见[开发历史](development-history.md)及[阅读器复审](reviews/beta1-chapter-reader.md)。
+
+**设计与实现分开：** [UI04 设计复审](reviews/beta1-design-alignment.md)接受技术交接，作者视觉判断仍独立。设计要求当前阅读语言搜索、无英文语料说明，以及真实章节链接和复制/纠错恢复；在 2026-11-16 的 PR #14 基线中，静态搜索与章节链接复制尚未实现。后续任务以看板为准，实际行为看运行说明，验收与集成看对应复审和 PR 记录，本页不另存实时状态。AI 卡片继续延期，不阻塞基础阅读，也不是站内 chat。
+
+Figma 保留三页、四个 collections、14 个 text styles；原有 111 个变量保留，另加 22 个 Beta 2 配色设计变量，现合计 133 个，生产映射仍为 111 个。[配色规范](design/reading-palettes-spec.md)和[设计复审](reviews/reading-palettes-design.md)中的 Original / Mist Blue / Soft Grey 是三个直接可点的色块，与 System/Day/Night 独立；仍只完成设计与技术交接，没有上线这些控件。[其余 Beta 2 概念](https://www.figma.com/design/3GYIfJz8xSPGx3AE3RRkKi?node-id=129-475)与 Beta 3 规划也不等于实现。
 
 ## 新书名与项目名
 
 正式名称：**Vibe Coding, Then What?** / **《Vibe Coding 之后：能跑，然后呢？》**；仓库 slug：`vibe-coding-then-what`。英文副标题：**Understand the Systems Behind Your AI-Built Products**。中文副描述：**系统理解 AI 帮你构建的产品：从界面、API 和数据，到交付、恢复与 AI 能力。**
 
-从“已经借助 AI 做出能运行的产品，但想补齐系统理解”的工程师出发，帮助判断如何验证、改进和维护产品；不把 AI 写代码一概视为错误，也不承诺从零基础学完一切。本轮只做获准的品牌与定位同步，实际执行和审查见[交接](handoffs/writer/vibe-coding-rebrand.md)及看板。八篇/48 个可调整单元和其他 hold 不变；开篇另获准仅替换一次书名，单独核对改动与新 hash，G01/F01 不变。Beta 1/2/3 阅读产品规划保留，未因此实现或发布。
+从“已经借助 AI 做出能运行的产品，但想补齐系统理解”的工程师出发，帮助判断如何验证、改进和维护产品；不把 AI 写代码一概视为错误，也不承诺从零基础学完一切。此前[品牌同步](handoffs/writer/vibe-coding-rebrand.md)已经完成，后续引言入口、读者指引和八篇导读也经[独立复审](reviews/beta1-opening-alignment.md)通过并随 PR #12 合并。八篇/48 个可调整单元保持原方向，G01/F01 不变；品牌与导读通过不代表其余章节或整套 Beta 功能已完成。
 
 ## 第一版定位：Full-stack + AI Product Engineer
 
@@ -35,14 +39,15 @@ AI 产品架构是必读主线，包括是否需要 AI、模型接入、用户�
 
 DevOps/Data 只讲交付、维护产品所必需的知识。CQRS/Event Sourcing/Saga、共识/分片、Kubernetes/Service Mesh、多区域等为可跳读或后续扩展；训练/微调/GPU/推理引擎和大数据平台运维不进入第一版主线，不因此建立插件架构或更多网站功能。
 
-## 已完成的框架与当前窄范围例外
+## 已完成的关口与后续边界
 
 **Full-stack and AI Product Engineering — v1 Content Framework** 是上一轮已完成的定位与规划任务，已审并经 [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9) 合并，历史文件与检查见[交接](handoffs/writer/full-stack-ai-book-scope.md)。方向已确认，不代表每页研究、正文或发布通过；之后仍逐页“分析调研/细纲 review → 明确范围写正文 → 正文独立 review”。当前任务、负责人和状态只看[协作看板](coordination.md)，不从本页历史记录继续开工。
 
-- 开篇仅按明确授权替换书名字符串，其他正文逐字不动，单独做精确替换复审；契约负责人据此更新当前 hash/review 指针，不篡改 W02 历史。G01 原字节保留，放在第一篇承接边界/状态，不把新增成功标准算作已审；[最小内容契约](content-contract.md)的章节 ID/slug 不改。
-- 开篇仍介绍旧三部分结构；作为 v1 发布前，需要另行安排这段说明的编辑与复审，本轮书名替换不放行该改写。
+- W02 与书名替换保留各自历史来源；后来的引言 r2 已完成入口/读者/八篇导读的独立验收。获审字节与渲染要求以[内容契约](content-contract.md)为准，不把后续验收倒写成最初 W02 就已通过。
+- G01 原字节保留，放在第一篇承接边界/状态，不把新增成功标准算作已审；仅引言/G01 进入当前阅读器，八篇规划不生成未完成章节或英文正文。
 - F01 仍只有已审分析，放在浏览器阅读单元；F01M 正文未写，V1–V4 实验未运行。更大范围须返回分析关口。
-- 本次品牌同步、站点名称/元数据、Pages 路径迁移及必要校验是明确的窄例外，另有开篇一次书名替换；不恢复其他网站/UI/schema/E2E/部署或新正文/英文书稿。原未验收主题 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` 保留。
-- 英文文档与开发历史升级已经 [PR #7](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/7) 合并；协作/接手流程已经 [PR #8](https://github.com/HAIXIN-ZHANG/beyond-the-frontend/pull/8) 合并。它们的成功不代替本轮 review/CI/merge；详细证据见[开发历史](development-history.md)。
+- 原未验收主题 checkpoint `4da2578048f8df113fed92d99e084f644a9a788e` 继续保留。PR #12 的新基础经单独验收，只择取复用，不是整份旧 checkpoint 通过或合并。
+- 阅读器曾因额度中断停在未验收状态；作者恢复主线后，原执行者修订并重新验证，才完成复审和 PR #14 合并。失败、暂停及恢复证据保留在原复审/交接中，不能用后来的通过改写当时状态。
+- 本次恢复只释放看板指定的 Beta 1 工程与必要文档任务；新正文/英文改写、Beta 2/3 实现和部署仍暂停。详细历史与不可变提交/CI 记录集中在[开发历史](development-history.md)，不在各页复制任务队列。
 
-本速览不预填本轮通过、合并或上线结果。新执行须有明确任务范围；必要工具和 QA 后发布的旧授权不解除当前 hold。
+搜索/分享及后续阶段的实际验收、CI、合并或上线结果，以看板链接的复审和 PR 执行记录为准。新执行仍须有明确范围；已有代码合并、工具和 QA 后发布的旧授权不代替当前阶段验收或部署放行。

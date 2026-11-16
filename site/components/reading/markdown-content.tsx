@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { nodeText } from '../../content/markdown.ts';
 import { CodeBlock } from './code-block.tsx';
 import { ComparisonTable } from './comparison-table.tsx';
+import type { SharingContext } from './sharing.ts';
+import { SectionActions } from './section-actions.tsx';
 
-export function MarkdownContent({ node }: { node: Nodes }): ReactNode {
-  const children = 'children' in node ? node.children.map((child, index) => <MarkdownContent key={index} node={child} />) : null;
+export function MarkdownContent({ node, sharing }: { node: Nodes; sharing: SharingContext }): ReactNode {
+  const children = 'children' in node ? node.children.map((child, index) => <MarkdownContent key={index} node={child} sharing={sharing} />) : null;
   switch (node.type) {
     case 'root': return children;
     case 'text': return node.value;
@@ -20,8 +22,9 @@ export function MarkdownContent({ node }: { node: Nodes }): ReactNode {
     case 'heading': {
       const id = node.data?.id;
       if (!id) throw new Error('Heading IDs must be assigned before rendering');
-      return createElement(`h${node.depth}`, { id, tabIndex: -1 },
-        <a className="heading-link" href={`#${encodeURIComponent(id)}`}>{children}</a>);
+      return <>{createElement(`h${node.depth}`, { id, tabIndex: -1 },
+        <a className="heading-link" href={`#${encodeURIComponent(id)}`}>{children}</a>)}
+        <SectionActions context={sharing} headingId={id} headingTitle={nodeText(node)} /></>;
     }
     case 'link': return node.url.startsWith('/')
       ? <Link href={node.url} title={node.title ?? undefined}>{children}</Link>
@@ -35,8 +38,8 @@ export function MarkdownContent({ node }: { node: Nodes }): ReactNode {
     case 'table': {
       const [header, ...rows] = node.children;
       return <ComparisonTable caption={`${String(node.data?.sectionTitle || '本节')}：对照表`}
-        columns={header.children.map((cell, index) => ({ id: `column-${index}`, title: <>{cell.children.map((child, key) => <MarkdownContent key={key} node={child} />)}</> }))}
-        rows={rows.map((row, index) => ({ id: `row-${index}`, cells: row.children.map(cell => <>{cell.children.map((child, key) => <MarkdownContent key={key} node={child} />)}</>) }))} />;
+        columns={header.children.map((cell, index) => ({ id: `column-${index}`, title: <>{cell.children.map((child, key) => <MarkdownContent key={key} node={child} sharing={sharing} />)}</> }))}
+        rows={rows.map((row, index) => ({ id: `row-${index}`, cells: row.children.map(cell => <>{cell.children.map((child, key) => <MarkdownContent key={key} node={child} sharing={sharing} />)}</>) }))} />;
     }
     default: throw new Error(`Unsupported Markdown rendering node: ${node.type} (${nodeText(node)})`);
   }

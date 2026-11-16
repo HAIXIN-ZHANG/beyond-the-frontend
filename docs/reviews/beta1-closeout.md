@@ -1,6 +1,6 @@
 # Beta 1 overall review and closeout
 
-Owner: Coordinator/Reviewer. Date: 2026-11-16 (Australia/Perth). Outcome: **Accepted closeout r1; executor tasks closed.** Required exact-head cloud checks and authorized integration remain subsequent gates. No deployment.
+Owner: Coordinator/Reviewer. Date: 2026-11-16 (Australia/Perth). Outcome: **Accepted closeout r1; executor tasks closed.** Exact-head cloud checks and integration are recorded separately in the PR15 execution record. No deployment.
 
 ## Scope and revision
 
@@ -50,4 +50,4 @@ Developer's [r1 handoff](../handoffs/developer/beta1-closeout.md), SHA-256 `b520
 
 The corrections remove stale review/working-tree claims, distinguish acceptance from integration, describe actual client-component/public-metadata boundaries and Next Link versus native URL prefixes, and label historical dependency findings honestly. The narrow renderer/QA descriptions match current implementation without adding publication scope. Independently confirmed the13 remaining search r4 payload files and31 recovery files unchanged, all58 local destinations across closeout technical/review inputs exist, and historical design/palette body unchanged. Writer's five no-change inputs were previously verified; the later parallel roadmap is explicitly excluded as noted above.
 
-No blocking implementation finding remains from this overall review. Accepted Beta1 reading/search/sharing can be integrated; this is not a declaration that the entire book, permanent E2E, public release or Beta2 is complete. Both executor tasks are closed and frozen; only Coordinator Git/status work remains. The actual final head/CI/merge/local-main result will be appended to the existing [PR15 execution record](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/15), avoiding a speculative merge hash or recursive status-only PR.
+No blocking implementation finding remains from this overall review. Accepted Beta1 reading/search/sharing can be integrated; this is not a declaration that the entire book, permanent E2E, public release or Beta2 is complete. Both executor tasks are closed and frozen. The existing [PR15 execution record](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/15) is authoritative for the actual final head/CI/merge/local-main result, avoiding a speculative merge hash or recursive status-only PR. Later tasks require a new concrete assignment.

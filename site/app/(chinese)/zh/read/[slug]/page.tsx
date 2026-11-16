@@ -1,0 +1,25 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getBook } from '../../../../../content/book.ts';
+import { ChapterReader } from '../../../../../components/reading/chapter-reader.tsx';
+
+type ChapterPageProps = { params: Promise<{ slug: string }> };
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return (await getBook()).map(chapter => ({ slug: chapter.entry.slug }));
+}
+
+export async function generateMetadata({ params }: ChapterPageProps): Promise<Metadata> {
+  const [{ slug }, chapters] = await Promise.all([params, getBook()]);
+  const chapter = chapters.find(item => item.entry.slug === slug);
+  if (!chapter) notFound();
+  return { title: chapter.title, description: `${chapter.title} · 中文已审阅草稿。全书仍在写作中。` };
+}
+
+export default async function ChapterPage({ params }: ChapterPageProps) {
+  const [{ slug }, chapters] = await Promise.all([params, getBook()]);
+  const chapter = chapters.find(item => item.entry.slug === slug);
+  if (!chapter) notFound();
+  return <ChapterReader chapter={chapter} chapters={chapters.map(item => item.entry)} />;
+}

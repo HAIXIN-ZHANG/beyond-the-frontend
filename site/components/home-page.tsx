@@ -10,6 +10,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <p className="eyebrow" lang="en">{site.name}</p>
       <h1 id="book-title">{messages.titleLines[0]}<span>{messages.titleLines[1]}</span></h1>
       <p className="intro">{messages.description}</p>
+      <p className="availability-note">{messages.availableNotice}</p>
       <div className="actions">
         <Link className="button" href={localePath(locale, 'read/')}>
           {messages.browse} <span aria-hidden="true">→</span>

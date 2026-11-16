@@ -16,6 +16,8 @@ Canonical manuscript hashes and all 31 ignored recovery files are unchanged. Eig
 
 Limits remain Chrome-only local browser evidence, no complete assistive-technology/physical-device certification, no deployment and no permanent E2E suite in this stage. The existing strict compiler separation is unchanged; no check/protection was weakened. PR/exact-head cloud checks/merge remain separate pending facts at this decision. The actual PR execution record must identify the eventual reviewed head, successful jobs and permitted squash result; no future SHA is prefilled here.
 
+**Git execution pointer:** [PR #14](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/14), targeting `main`. Accepted payload commit: `2f30ede4982cc08ad3e5598d538694b0f34b8eda` (28 scoped source/design/status files). A subsequent Coordinator-only board/review pointer update was reviewed as documentation; it does not alter any of the 22 frozen owner files. The PR body records the actual final head, all required job/step results and permitted squash result when observed, avoiding a self-referential future commit/merge claim in this fixed review snapshot.
+
 ## Historical interrupted checkpoint
 
 Date: 2026-11-16 (Australia/Perth). Owner: Coordinator/Reviewer. **Outcome: Insufficient evidence; not accepted, committed, in a PR or merged.** The executor reached its usage limit during the current task. The author subsequently asked to record specs and wait until they reset the limit and return to continue.

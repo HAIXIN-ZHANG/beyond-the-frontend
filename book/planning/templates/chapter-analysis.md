@@ -9,6 +9,8 @@
 - **Review and handoff:** [confirmed actual paths; do not link nonexistent placeholders]
 - **Editorial translation, if applicable:** [original reviewed revision/date/hash; distinguish historical evidence from this document's current bytes]
 
+Use the workflow's [reader-first review criteria](../chapter-workflow.md#editorial-collaboration-two-reviews-distinct-questions) throughout sections 1–5. Plan motivation, prerequisites, terminology, reasoning, plausible cases and their limits; assess tone, example suitability and technical validity at this analysis gate. The later manuscript review judges their actual written execution separately. This template does not prescribe the manuscript's headings.
+
 ## 1. Reader problem and goal
 
 [Start from a specific difficulty. State what the reader should explain or judge afterward.]

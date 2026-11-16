@@ -33,3 +33,5 @@ Inspected the final outline sentence and r4 report. Restored the preceding sente
 ## Git and publication evidence
 
 Accepted source, outline and contract metadata are committed in snapshot `9e11468fd5e3e1ee9742121c7f72dbd88e199d0e`, included in [PR #12](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/12). Only review/board pointers and the separately inspected final theme-handoff supplement follow that snapshot; opening/outline/contract bytes remain unchanged. At this checkpoint, final-head cloud checks and merge remain pending; their actual results belong to the PR execution record. Website rendering and deployment remain separate gates; neither was performed.
+
+Later actual verification: PR #12 merged from final reviewed head `23c3d19586d03e3cfb5d84044f0db7015c51188e` after all three required jobs/steps passed in [run 43791847318](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43791847318). Squash/main is `2534b90d23c3624e4ce393aa02f52df4dea75e06`, fetched and verified locally. Opening, outline and contract retain their accepted bytes. Task Merged/closed; no reader or deployment acceptance follows.

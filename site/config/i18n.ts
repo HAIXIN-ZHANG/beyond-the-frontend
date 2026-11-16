@@ -27,6 +27,9 @@ type Messages = {
   systemTheme: string;
   dayTheme: string;
   nightTheme: string;
+  currentAppearance: string;
+  systemAppearanceHint: string;
+  explicitAppearanceHint: string;
 };
 
 const messages = {
@@ -55,6 +58,9 @@ const messages = {
     systemTheme: 'System',
     dayTheme: 'Day',
     nightTheme: 'Night',
+    currentAppearance: 'Current appearance',
+    systemAppearanceHint: 'Follow device appearance.',
+    explicitAppearanceHint: 'Day or Night overrides device appearance.',
   },
   zh: {
     lang: 'zh-CN',
@@ -81,6 +87,9 @@ const messages = {
     systemTheme: '跟随系统',
     dayTheme: '日间',
     nightTheme: '夜间',
+    currentAppearance: '当前外观',
+    systemAppearanceHint: '跟随设备的外观设置。',
+    explicitAppearanceHint: '日间或夜间选择会覆盖设备外观。',
   },
 } satisfies Record<Locale, Messages>;
 

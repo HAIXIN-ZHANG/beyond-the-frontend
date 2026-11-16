@@ -4,7 +4,6 @@ import { SiteHeader } from './site-header.tsx';
 import { site } from '../config/site.ts';
 import { getMessages } from '../config/i18n.ts';
 import { ThemeHead } from '../app/theme-head.tsx';
-import { ThemePreferenceSelect } from './theme-preference-select.tsx';
 import '../styles/global.css';
 
 type DocumentLayoutProps = {
@@ -24,7 +23,6 @@ export function DocumentLayout({ children, locale, languageHome = false }: Docum
         <main className="shell main" id="main" tabIndex={-1}>{children}</main>
         <footer className="site-footer shell">
           <p>{messages.title}</p>
-          <ThemePreferenceSelect locale={locale} />
           <a href={site.issues}>{messages.feedback} <span aria-hidden="true">↗</span></a>
         </footer>
       </body>

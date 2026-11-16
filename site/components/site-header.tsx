@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { site } from '../config/site.ts';
 import { getMessages, localePath } from '../config/i18n.ts';
 import { LanguageSwitch } from './language-switch.tsx';
+import { AppearanceControl } from './ui/appearance-control.tsx';
 
 export function SiteHeader({ locale, languageHome = false }: { locale: Locale; languageHome?: boolean }) {
   const messages = getMessages(locale);
@@ -20,6 +21,7 @@ export function SiteHeader({ locale, languageHome = false }: { locale: Locale; l
           </Link>
         ) : <LanguageSwitch locale={locale} />}
         <a href={site.repository} lang="en">GitHub <span aria-hidden="true">↗</span></a>
+        <AppearanceControl locale={locale} />
       </nav>
     </header>
   );

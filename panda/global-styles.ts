@@ -1,6 +1,6 @@
 import { defineGlobalStyles } from '@pandacss/dev';
 
-// Foundation for the existing skeleton. Component recipes follow in CMP01.
+// Shared document foundation; reused reading controls are defined in recipes.ts.
 export const globalCss = defineGlobalStyles({
   '*': { boxSizing: 'border-box' },
   html: {
@@ -18,7 +18,7 @@ export const globalCss = defineGlobalStyles({
   'html[lang="zh-CN"] body': { textStyle: 'zh-body' },
   a: { color: 'token(colors.fg.link)', textUnderlineOffset: '0.25em' },
   'a:hover': { color: 'token(colors.accent.hover)' },
-  ':where(a, button, select, main):focus-visible': {
+  ':where(a, button, input, select, textarea, pre, [tabindex]):focus-visible': {
     outlineColor: 'token(colors.focus.ring)', outlineStyle: 'solid', outlineWidth: 'token(borderWidths.stroke.focus)',
     outlineOffset: 'token(spacing.focus.inset)',
   },
@@ -34,8 +34,30 @@ export const globalCss = defineGlobalStyles({
     borderBottomWidth: 'token(borderWidths.stroke.subtle)', borderBottomStyle: 'solid', borderColor: 'token(colors.border.default)',
   },
   '.wordmark': { color: 'token(colors.fg.default)', fontWeight: 700, letterSpacing: '-0.03em', textDecoration: 'none' },
-  nav: { display: 'flex', flexWrap: 'wrap', gap: 'token(spacing.header.utilityGap)' },
-  'nav a': { textStyle: 'ui', textDecoration: 'none' },
+  '.site-header nav': { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'token(spacing.header.utilityGap)' },
+  '.site-header nav a': { textStyle: 'ui', textDecoration: 'none', minHeight: 'token(sizes.size.actionMin)', display: 'inline-flex', alignItems: 'center' },
+  '.appearance-control': { display: 'flex', alignItems: 'center' },
+  '[data-appearance-icon="dark"]': { display: 'none' },
+  'html[data-theme="dark"] [data-appearance-icon="dark"]': { display: 'inline' },
+  'html[data-theme="dark"] [data-appearance-icon="light"]': { display: 'none' },
+  '.appearance-panel': {
+    position: 'fixed', inset: 'auto', top: '5rem', right: 'token(spacing.layout.gutterNarrow)', margin: 0,
+    width: 'min(22rem, calc(100vw - token(spacing.layout.gutterNarrow) * 2))',
+    maxHeight: 'calc(100svh - 8rem)', overflowY: 'auto',
+    padding: 'token(spacing.card.padding)', color: 'token(colors.fg.default)', backgroundColor: 'token(colors.bg.surface)',
+    borderWidth: 'token(borderWidths.stroke.subtle)', borderStyle: 'solid', borderColor: 'token(colors.border.control)', borderRadius: 'token(radii.shape.card)',
+    '& fieldset': { border: 0, padding: 0, margin: 0, minWidth: 0 },
+    '& legend': { textStyle: 'ui', fontWeight: 600, marginBottom: 'token(spacing.control.gap)' },
+  },
+  '.appearance-options': { display: 'flex', flexWrap: 'wrap', backgroundColor: 'token(colors.bg.subtle)', borderRadius: 'token(radii.shape.pill)' },
+  '.appearance-hint': { margin: 0, marginTop: 'token(spacing.card.gap)', color: 'token(colors.fg.muted)', textStyle: 'small' },
+  '.appearance-option': {
+    display: 'flex', alignItems: 'center', gap: 'token(spacing.control.gap)', minHeight: 'token(sizes.size.actionMin)',
+    paddingInline: 'token(spacing.control.gap)', borderRadius: 'token(radii.shape.pill)', cursor: 'pointer', textStyle: 'ui',
+    '&:hover': { backgroundColor: 'token(colors.bg.hover)' },
+    '&:has(input:checked)': { backgroundColor: 'token(colors.bg.selected)', color: 'token(colors.fg.link)' },
+    '& input': { margin: 0, accentColor: 'token(colors.accent.default)' },
+  },
   '.main': { flex: 1, paddingBlock: 'token(spacing.layout.sectionGap)' },
   '.book-intro, .reading-index': { maxWidth: 'token(sizes.size.proseMax)' },
   '.eyebrow': { margin: 0, marginBottom: 'token(spacing.prose.blockGap)', color: 'token(colors.fg.muted)', textStyle: 'small' },
@@ -71,12 +93,6 @@ export const globalCss = defineGlobalStyles({
     color: 'token(colors.fg.muted)', textStyle: 'small',
   },
   '.site-footer p': { margin: 0 },
-  '.theme-preference': { display: 'flex', alignItems: 'center', gap: 'token(spacing.control.gap)', textStyle: 'ui' },
-  '.theme-preference select': {
-    minHeight: 'token(sizes.size.actionMin)', paddingInline: 'token(spacing.control.paddingInline)',
-    backgroundColor: 'token(colors.bg.surface)', color: 'token(colors.fg.default)', font: 'inherit',
-    borderWidth: 'token(borderWidths.stroke.subtle)', borderStyle: 'solid', borderColor: 'token(colors.border.control)', borderRadius: 'token(radii.shape.control)',
-  },
   '.skip-link': {
     position: 'fixed', top: 'token(spacing.control.paddingBlock)', left: 'token(spacing.control.paddingInline)',
     paddingBlock: 'token(spacing.control.gap)', paddingInline: 'token(spacing.control.paddingInline)',

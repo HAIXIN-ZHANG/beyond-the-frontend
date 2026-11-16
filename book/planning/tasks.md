@@ -1,12 +1,12 @@
 # Writing Stages and Review Gates
 
-Updated: 2026-11-15. Owner: Writer. [Current assignments/holds](../../docs/coordination.md) belong only to the board. This document describes writing dependencies and evidence, not an independently executable queue.
+Updated: 2026-11-16. Owner: Writer. [Current assignments/holds](../../docs/coordination.md) belong only to the board. This document describes writing dependencies and evidence, not an independently executable queue.
 
 ## Content-framework task: planning only
 
-The author confirmed **Junior–Senior Full-stack + AI Product Engineer** positioning and eight-part v1 direction. The assigned [task brief/handoff](../../docs/handoffs/writer/full-stack-ai-book-scope.md) scopes formal updates to vision, roadmap, editorial brief, outline, this task entry and the single Chinese summary. The framework replaces the former three-part/45-chapter organizing proposal; a compact mapping preserves every legacy entry. Exact reading-page names/splits remain adjustable.
+The author confirmed **Junior–Senior Full-stack + AI Product Engineer** positioning and eight-part v1 direction. That planning task was accepted in the [content-framework review](../../docs/reviews/full-stack-ai-book-scope.md) and integrated through [PR #9](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/9); its [handoff](../../docs/handoffs/writer/full-stack-ai-book-scope.md) retains the assigned file scope and execution evidence. The framework replaces the former three-part/45-chapter organizing proposal; a compact mapping preserves every legacy entry. Exact reading-page names/splits remain adjustable.
 
-**This does not assign all reading pages or approve their research/manuscripts.** No new prose, English manuscript translation, website/UI/schema/E2E/deployment, dependency or theme implementation is part of the task. The preserved theme checkpoint remains unaccepted. Necessary-tool authorization does not independently lift a hold. The next action within this assignment is actual framework review, feedback and scoped re-review, followed by Coordinator-managed integration as authorized; new writing needs a new concrete scope.
+**That completed planning task did not assign all reading pages or approve their research/manuscripts.** Its scope excluded new prose, English manuscript translation and website/runtime/release implementation. The preserved original DS01 checkpoint remains unaccepted as a whole; the separately accepted foundation and later reading/search work are recorded in the [Milestone 1 ledger](../../docs/delivery/milestone-1.md). There is no pending framework-review assignment here. New writing still needs a concrete scope; necessary-tool authorization does not independently lift a hold.
 
 ### Planning acceptance
 
@@ -18,7 +18,7 @@ The author confirmed **Junior–Senior Full-stack + AI Product Engineer** positi
 - [ ] Official planning-source checks specify actual sections/date/limits, not complete chapter research or provider selection.
 - [ ] Actual links/structure/language/source hashes and exact file scope are checked in the handoff; review conclusions come from Coordinator, not Writer's own checklist.
 
-These are acceptance criteria, not prefilled completed reviewer decisions. Execution evidence belongs in the handoff; the review owns closure.
+These retained checkboxes are the historical planning acceptance criteria, not a live unfinished-task list or Writer-issued acceptance. The linked review records actual closure; the handoff retains execution evidence. Current chapter work follows the [chapter workflow](chapter-workflow.md) and board rather than restarting this completed task.
 
 ## Historical reviewed material
 
@@ -30,9 +30,9 @@ These are acceptance criteria, not prefilled completed reviewer decisions. Execu
 | Editorial Baseline and Content Map (W01) | Historical proposal and later R3/DOC01 status corrections in [handoff](../../docs/handoffs/writer/W01.md) | Superseded as the current organizing map. Preserve all 45 IDs in the new outline mapping; do not keep issuing the old proposal as the only current directory. |
 | English process documentation/onboarding | [Documentation review](../../docs/reviews/ai-development-documentation.md) / [onboarding review](../../docs/reviews/agent-workflow-onboarding.md) and PR #7/#8 | Process work did not produce English book prose, new chapter acceptance or product implementation. |
 
-The accepted [initial content contract](../../docs/content-contract.md) covers only reviewed opening/G01 publication inputs for a later assigned implementation. New planning labels are not a manifest, slug schema or automatic public-content list.
+The accepted [initial content contract](../../docs/content-contract.md) covers only reviewed opening/G01 inputs, now used by the integrated reader/search implementation recorded in the Milestone 1 ledger. New planning labels are not a manifest, slug schema or automatic public-content list; source acceptance and integration are distinct from deployed release.
 
-The opening's earlier three-part orientation needs a separately assigned editorial revision and review before a v1 release. Do not change its accepted bytes/hash under this planning task or assume a future source revision is already allowlisted.
+The opening's later AI-assisted-product entry, reader guidance and eight-part orientation passed [independent r2 review](../../docs/reviews/beta1-opening-alignment.md) and integrated through PR #12. The content contract identifies that approved source hash. G01 and F01A retain their existing boundaries; this status correction does not change manuscript bytes or authorize expanded writing.
 
 ## Each future reading page: two gates, separately assigned
 

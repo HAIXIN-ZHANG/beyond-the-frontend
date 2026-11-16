@@ -1,6 +1,6 @@
 # Editorial Baseline: Vibe Coding, Then What?
 
-Updated: 2026-11-15 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
+Updated: 2026-11-16 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
 
 The former W01 three-part/45-chapter proposal is historical, superseded as an organizing framework. Its 45 entries remain traceable in the outline's legacy map and original handoff/Git history. Confirmation of v1 direction does not accept every page's research, prose, implementation or publication.
 
@@ -89,7 +89,7 @@ Maintain authored Chinese/English manuscripts with Chinese explanation review fi
 
 Use official/primary sections and access dates for technical claims; distinguish documented behavior, experiments, experience, teaching assumptions and recommendations. The [planning sources](outline.md#planning-source-checks-not-chapter-research-approval) were checked only for the stated boundaries, not as completed research for all pages. The [Jiangren inventory](../../docs/research/jr-academy-topic-map.md) remains a dated coverage input, not proof of correctness or adoption. Earlier references to Design Systems, Atomic Design, DDIA, data engineering, SRE and AI books are not claims of complete reading. Independently express mechanisms and check license/attribution for actual reuse.
 
-The opening has only an explicitly authorized book-name replacement, submitted for separate exact-change review and an updated source hash; its other prose, G01 and accepted F01A analysis remain unchanged. Placement does not expand old reviewed scope, change chapter IDs/slugs or approve a new manuscript. Historical original-analysis hashes are not current translation hashes. Follow [two-gate writing](chapter-workflow.md), task scope and current board holds.
+The opening's historical book-name replacement and subsequent AI-assisted-product entry, reader guidance and eight-part orientation have separate acceptance evidence in the [opening review](../../docs/reviews/beta1-opening-alignment.md). Its current approved r2 source hash is recorded in the [content contract](../../docs/content-contract.md); G01 and accepted F01A analysis retain their existing boundaries. Placement does not expand reviewed scope, change chapter IDs/slugs or approve a new manuscript. Historical original-analysis hashes are not current translation hashes. Follow [two-gate writing](chapter-workflow.md), task scope and current board holds.
 
 ## Public copy discussion
 

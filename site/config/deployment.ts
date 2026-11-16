@@ -8,3 +8,8 @@ export function parseBasePath(value: string = ''): string {
 
   return value;
 }
+
+// Literal links/fetch URLs need the same normalized prefix as Next.js configuration.
+export function withBasePath(pathname: string, basePath: string = ''): string {
+  return `${parseBasePath(basePath)}${pathname}`;
+}

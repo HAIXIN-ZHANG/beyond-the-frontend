@@ -2,6 +2,18 @@
 
 Updated: 2026-11-17 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
+## Milestone 1 whole-product publication audit — accepted source
+
+The author requested a high-standard whole-product review after finding inconsistent localization, fonts, tokens and page widths. Coordinator assigned one bounded final audit from clean main/origin-main `cc59fd42f74bb5ed856881443a8bb2fd528b0817` (PR24; matching PR/main Quality/root/Pages jobs passed). Shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/milestone-1-product-polish`. PR24 is integrated; its revised public publication has not been observed. The last public identity was `8c29f4d`. Manual release currently requires the author's Mac to be unlocked; do not infer a new deployment or bypass this UI limitation.
+
+| Owner | Assignment | Boundary |
+| --- | --- | --- |
+| Developer | [Whole-product UI and engineering audit](handoffs/developer/milestone-1-product-polish.md) r1 accepted after actual file/hash/visual/interaction review and independent final12Pages E2E | Task closed/files frozen; no new implementation, Git writes or self-publication |
+| Writer | [Public copy and locale audit](handoffs/writer/milestone-1-product-polish.md) r1 accepted after actual source/report review; W-COPY-01–03 aligned with Developer | Task closed/report frozen; source-only evidence, no visual certification. Developer owns the assigned runtime corrections; approved manuscript bodies stay frozen |
+| Coordinator/Reviewer | [Independent product review](reviews/milestone-1-product-polish.md) accepts the bounded source revision; MODAL-01/REFLOW-01/TITLE-01/W-COPY-01–03/DOC-CURRENT-01 closed with actual evidence | Continue authorized protected PR/matching CI/merge and deliberate public verification; actual results belong in the scoped PR execution record |
+
+Retain the current restrained macOS-style visual language, Day/Night behavior, honest availability (two Chinese originals; no English bodies), existing routes, canonical manuscript hashes and31 ignored recovery files. Existing dependency maintenance remains bounded; no speculative features, whole-site redesign, Figma edits or paid service. Any publication follows acceptance and matching CI. Findings return to the original owner; no acceptance is inferred from silence or a green suite.
+
 ## Final Milestone 1 locale correction — reviewed revision
 
 The author's Chinese-first/English-first UI, typography and width corrections are accepted in source after actual before/after visual and browser review. The [Pages review](reviews/pages-release-pipeline.md#localetypography-r3--source-and-visual-acceptance) owns LOCALE-01/TYPE-01/WIDTH-01/WRAP-01 closure and exact frozen revisions. Actual integration/public acceptance is recorded in the scoped PR execution record; source acceptance alone is not publication. Read [public release metadata](https://haixin-zhang.github.io/vibe-coding-then-what/release.json) for the actual deployed identity.

@@ -4,12 +4,13 @@ import { defineGlobalStyles } from '@pandacss/dev';
 export const globalCss = defineGlobalStyles({
   '*': { boxSizing: 'border-box' },
   html: {
-    backgroundColor: 'token(colors.bg.canvas)', colorScheme: 'light',
+    backgroundColor: 'token(colors.bg.canvas)', colorScheme: 'light', scrollbarGutter: 'stable',
     '&[data-theme="dark"]': { colorScheme: 'dark' },
     '@media (prefers-color-scheme: dark)': {
       '&:not([data-theme])': { colorScheme: 'dark' },
     },
   },
+  'html:has(.search-dialog[open])': { overflow: 'hidden' },
   body: {
     minHeight: '100svh', margin: 0, display: 'flex', flexDirection: 'column',
     color: 'token(colors.fg.default)', textStyle: 'body', overflowWrap: 'anywhere',
@@ -31,7 +32,12 @@ export const globalCss = defineGlobalStyles({
     display: 'grid', gridTemplateColumns: 'auto minmax(0, 1fr) auto', alignItems: 'center',
     gap: 'token(spacing.header.gap)', minHeight: 'token(sizes.size.headerWide)', paddingBlock: 'token(spacing.header.paddingBlockWide)',
     borderBottomWidth: 'token(borderWidths.stroke.subtle)', borderBottomStyle: 'solid', borderColor: 'token(colors.border.default)',
-    '@media (max-width: 899px)': { gridTemplateColumns: 'minmax(0, 1fr) auto', gap: 'token(spacing.control.gap)', '& nav': { gridColumn: '1 / -1', justifyContent: 'flex-end' }, '& .wordmark': { textStyle: 'ui', fontWeight: 600 } },
+    '@media (max-width: 899px)': {
+      display: 'flex', flexWrap: 'wrap', gap: 'token(spacing.control.gap)',
+      '& nav': { flexBasis: '100%', justifyContent: 'flex-end' },
+      '& .wordmark': { flex: '1 1 min-content', minWidth: 'min-content', textStyle: 'ui', fontWeight: 600 },
+      '& .search-trigger': { marginInlineStart: 'auto' },
+    },
   },
   '.wordmark': { display: 'flex', flexWrap: 'wrap', alignItems: 'center', minWidth: 0, minHeight: 'token(sizes.size.actionMin)', color: 'token(colors.fg.default)', textStyle: 'brand', textDecoration: 'none', '& span': { whiteSpace: 'pre' } },
   '.visually-hidden': { position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clipPath: 'inset(50%)', whiteSpace: 'nowrap', border: 0 },
@@ -121,7 +127,7 @@ export const globalCss = defineGlobalStyles({
   '.chapter-context': { textStyle: 'small', color: 'token(colors.fg.link)', marginTop: 0, marginBottom: 'token(spacing.prose.blockGap)', '& span': { color: 'token(colors.fg.muted)', display: 'block' } },
   '.chapter-prose': {
     minWidth: 0, maxWidth: 'token(sizes.size.proseMax)', textStyle: 'zh-body',
-    '& h1': { textStyle: 'zh-title', marginBottom: 'token(spacing.prose.blockGap)' },
+    '& h1': { textStyle: 'zh-title', wordBreak: 'keep-all', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h2': { textStyle: 'zh-h2', marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h3, & h4, & h5, & h6': { marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.control.paddingInline)' },
     '& :where(h1,h2,h3,h4,h5,h6)': { scrollMarginTop: 'token(spacing.layout.gutterTablet)', overflowWrap: 'anywhere' },

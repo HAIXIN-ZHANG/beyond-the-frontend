@@ -93,9 +93,10 @@ test('correction drafts encode only explicit public chapter, heading, revision a
   const location = sectionUrl('https://preview.example/reading/zh/read/a-page-and-a-system/?discard=yes', '状态？');
   const url = new URL(correctionUrl(context, '状态？ & API', location));
   assert.equal(url.origin + url.pathname, 'https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues/new');
-  assert.equal(url.searchParams.get('title'), 'Correction: 标题 & question? · 状态？ & API');
+  assert.equal(url.searchParams.get('title'), '纠错：标题 & question? · 状态？ & API');
   const body = url.searchParams.get('body');
   for (const expected of [context.chapterTitle, context.chapterId, context.sourceHash, '状态？ & API', location]) assert.ok(body.includes(expected));
   assert.doesNotMatch(body, /private=|discard=|book\/|docs\/|prompt|logs/);
-  assert.ok(body.endsWith('Suggested correction / 建议修改：\n'));
+  assert.ok(body.startsWith(`章节：${context.chapterTitle} (${context.chapterId})\n小节：状态？ & API\n链接：${location}\n原稿版本 SHA-256：${context.sourceHash}\n`));
+  assert.ok(body.endsWith('建议修改：\n'));
 });

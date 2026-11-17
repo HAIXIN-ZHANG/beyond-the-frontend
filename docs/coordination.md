@@ -2,7 +2,21 @@
 
 Updated: 2026-11-17 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
-## Active project-consistency audit
+## Active Milestone 1 release verification
+
+The author assigned remaining Milestone 1 release work, correcting demonstrated issues before progression. Current branch `codex/milestone-1-release-verification`, based on verified clean main/origin-main `e0b530a3ef7397c16158cde8d59190f18f84e57b`. PR19 correction/audit is merged with successful PR/main Quality/root/Pages runs; its execution record owns exact integration evidence.
+
+| Owner | Current assignment | Boundary |
+| --- | --- | --- |
+| Developer | [Permanent release verification and dependency disposition](handoffs/developer/release-verification.md) | r1 verification accepted after actual review; root/Pages suites and both returned findings complete. Owner task closed/files frozen; integration is Coordinator-only |
+| Writer | [Reviewed release-material inventory](handoffs/writer/release-materials.md) | r1 inventory accepted after actual source/notice/hash review; task closed/report frozen. Public URL/copy update waits for actual public acceptance |
+| Coordinator/Reviewer | [Release-verification review](reviews/release-verification.md), current board and scoped integration | Inspect actual revisions/evidence, return findings, verify exact-head CI/merge; prepare a separate reviewed Pages CD/recovery slice afterward |
+
+Prior necessary npm/browser tooling authorization applies. File ownership stays disjoint; executors do no Git writes. No new reader feature, prose, translation, design, paid service or credential change is assigned. On 2026-11-17 the author explicitly directed completion and actual GitHub Pages setup/publication, superseding the prior no-deployment hold for this bounded Milestone 1 release. Prepare/review the pipeline, pass matching checks, configure only necessary Pages controls and verify the public result/recovery; preserve branch/write protections and existing collaborator scope. A manual release remains deliberate rather than an unreviewed publish-on-merge. Preserve canonical source hashes, historical reports and31 recovery files.
+
+Previous interrupted checkpoint (superseded by explicit resumption): actual branch/HEAD remains the assigned baseline; release-verification changes are uncommitted and no new PR/merge is claimed. Developer records passing lint/strict compilers/32 Node tests, root build/verifier and8 root E2E; Pages verification/final freeze is unfinished. RV-01 failure-artifact upload is present but awaits final workflow review/cloud execution. Writer report is accepted/frozen. Coordinator must inspect actual resumed evidence before dependent CD; do not replace or restart this work from an old task.
+
+## Completed project-consistency audit
 
 The author requested a fresh cross-check of documents, project structure, code/framework, Markdown and README, with bounded present corrections and clearly recorded later work. Assigned branch `codex/project-consistency-audit`, based on actual main/origin-main `78488012044e0a8fd8e4946f1abc72e1e2b084c9`. PR18 has merged after exact-head Quality/root/Pages success in run43899041187; its execution record owns later main-CI evidence.
 
@@ -10,11 +24,11 @@ The author requested a fresh cross-check of documents, project structure, code/f
 | --- | --- | --- |
 | Writer | [Current reader/product/editorial consistency audit](handoffs/writer/project-consistency-audit.md) | r1 accepted after actual diff/source review; W-PC-01–03 corrected in two planning files. Task closed and files frozen; no new manuscript |
 | Developer | [Code/tooling/technical-document consistency audit](handoffs/developer/project-consistency-audit.md) | r1 accepted after AUD-01 and DOC-AUD-01 closure; code/test/guide/handoff frozen. Task closed; unresolved dependency maintenance stays in Release Readiness |
-| Coordinator/Reviewer | [Independent cross-source review](reviews/project-consistency-audit.md), board and integration | Final bounded bundle accepted; owner tasks closed. Handle scoped PR, exact-head required checks and authorized integration; no deployment |
+| Coordinator/Reviewer | [Independent cross-source review](reviews/project-consistency-audit.md), board and integration | Accepted and integrated through PR19; PR/main CI passed and main reconciled. Task closed; no deployment |
 
 Disjoint file ownership and the existing release/design holds remain. This task does not deploy, add new chapter content or implement future reading features. Larger work remains in the existing roadmap/release ledger rather than another duplicate backlog. Preserve all submitted prior-stage files and31 ignored recovery files.
 
-The accepted audit payload `78b44a58af2ba232af9673e3d665aa23de26e7a4` is tracked in [PR19](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/19). Its execution record supplies actual final reviewed head, required PR/main runs, permitted squash and local-main reconciliation. Neither this pre-integration pointer nor source acceptance claims a future merge or deployment.
+The accepted audit payload `78b44a58af2ba232af9673e3d665aa23de26e7a4` integrated through [PR19](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/19), squash `e0b530a3ef7397c16158cde8d59190f18f84e57b`. Its execution record verifies final reviewed head, required PR/main runs and local-main reconciliation. No deployment occurred.
 
 ## Completed editorial-review clarification
 
@@ -44,7 +58,7 @@ The accepted alignment payload `ea365c7e64adf9db771ea834f0a9f23ae699747e` integr
 
 ## Remaining operational gate and holds
 
-**Release Readiness belongs to Delivery Milestone1:** dependency-alert reassessment, a small permanent E2E suite in CI, gated GitHub Pages CD, actual public URL/assets/subpath/404/theme/navigation smoke and a verified recovery/rollback path. Temporary headless browser checks and successful Quality/root/Pages jobs are completed evidence; they are not permanent E2E, CD or deployed acceptance. The original no-deployment hold remains until applicable explicit release authorization. This documentation assignment does not itself implement those operational tasks.
+**Release Readiness belongs to Delivery Milestone1:** dependency-alert reassessment, a small permanent E2E suite in CI, gated GitHub Pages CD, actual public URL/assets/subpath/404/theme/navigation smoke and a verified recovery/rollback path. Temporary headless browser checks and successful Quality/root/Pages jobs are completed evidence; they are not permanent E2E, CD or deployed acceptance. The earlier no-deployment hold was superseded by the author's 2026-11-17 release instruction; deployment still follows reviewed verification/pipeline gates. This documentation assignment does not itself implement those operational tasks.
 
 Future [Delivery Milestones2/3 design](reviews/milestone-2-3-design.md) is held at discovery while records are aligned. Same Figma file/three pages, existing first-delivery components/scenes and133 variables/four collections/14 styles remain unchanged;111 production-reference values/aliases are retained. No new Figma asset was created. The three direct palette swatches remain approved future design, not code. All new reader improvements stay in future milestone scopes, with English UI/notes and the current visual style.
 

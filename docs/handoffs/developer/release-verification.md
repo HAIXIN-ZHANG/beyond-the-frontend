@@ -1,0 +1,116 @@
+# Milestone 1 release verification — Developer handoff
+
+Owner: Developer. Revision: r1. Date: 2026-11-17 (Australia/Perth). Status: Frozen for actual Coordinator review; local verification complete, cloud/PR/integration/deployment not claimed.
+
+## Task brief
+
+- **Authority:** explicit human-authorized release-verification assignment, [board](../../coordination.md) and [actual review](../../reviews/release-verification.md). Close the maintained browser-suite/ordinary-CI gap and reassess the dependency chain before separately reviewed Pages CD work.
+- **Verified baseline:** `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/milestone-1-release-verification`, HEAD/local main `e0b530a3ef7397c16158cde8d59190f18f84e57b`; only Coordinator board/new review changes initially present. PR19 integration facts belong to its execution record. No Developer Git writes.
+- **Allowed implementation:** exact official test dependency/package-lock changes, minimal Playwright config and permanent E2E, a narrowly scoped static-preview helper and meaningful tests, existing root/Pages CI steps, bounded lint/ignore integration, current developer guide and this handoff. Small application corrections require demonstrated failures. Preserve three required job names/read-only triggers/permissions.
+- **Acceptance:** fresh static root and Pages exports; actual entry/chapter/navigation, current-language search/real same-origin heading focus, failure/retry/query recovery, missing English, appearance/refresh/blocked storage, copy-denied/manual sharing/correction preview and narrow keyboard/local-overflow behavior. Bounded workers/timeouts, no skips/swallowed errors/arbitrary sleeps; retained failure artifacts ignored. Original root-alias regression remains without an unnecessary third full build.
+- **Dependency gate:** inspect current official npm/advisory/upstream metadata first. Apply only a narrow verified compatible repair, otherwise document exact unresolved chain/exposure and why no compatible repair was identified. No force/override/incompatible downgrade or broad update to manufacture zero alerts.
+- **Exclusions:** manuscripts/source intake/translation/schema/features, Figma/tokens/architecture, Writer release copy, licenses/access/security settings, old handoffs/reviews, DS01 and all31 recovery files. No Pages deployment workflow/public host/model/paid service or Git writes in this stage. At dispatch public deployment was held; the later author continuation below authorizes the bounded release sequence while CD still waits for this stage's actual review/integration.
+- **Tooling/checks:** project Node24/npm11 and authorized necessary npm/browser/official-primary access. Browser plugin is absent; use a maintained project Playwright setup, not a temporary-only package/server. Run actual check, root/Pages build+verifier+E2E and proportionate preview-helper checks; record failures and final evidence separately.
+- **Delivery/recovery:** one evolving handoff, actual manifest/checks/limits/unresolved items/frozen hashes and stop for Coordinator review. Preserve concurrent owner files. On interruption, record exact completed/not-completed work and resume from verified HEAD/status; no receipt loop.
+
+## Progress
+
+Official npm metadata identified Playwright Test1.65.1 (Node≥20), now installed as an exact development dependency. Only three new lock nodes were added (`@playwright/test`, `playwright`, `playwright-core`); existing resolved dependency nodes did not change. Chromium installation through the project script succeeded. Current typescript-eslint/typescript-estree latest remains8.72.2 and minimatch range`^10.2.2`; compatible repaired latest is still absent, subject to the actual audit/disposition below.
+
+Implemented `playwright.config.mjs`, `tests/e2e/reader.spec.mjs`, project E2E/install scripts, `scripts/static-preview.mjs`, three actual HTTP helper tests, bounded ESLint browser globals and root/Pages CI browser steps. Eight representative E2E cases are defined per export. No application/heading/content/token change was necessary so far. Failure artifacts use the already ignored `.artifacts/`; no extra ignore rule is needed.
+
+Actual `npm run check` passed lint, both strict programs and32 Node tests. The three new helper tests validate actual GET/HEAD/prefix/JSON404/method behavior, malformed/raw/encoded traversal, escaping symlinks and missing-export refusal. Full audit after the necessary test dependency still reports7 moderate/zero high-critical; production audit reports0. Fresh root build/verifier passed7 pages/128 references plus zh20/en0 targets; all8 maintained root E2E passed on the first run. No application defect or initial failing test is concealed; only benign inherited NO_COLOR/FORCE_COLOR tool warnings occurred. Pages verification and final disposition/freeze remain.
+
+**RV-01 applied before final freeze:** Coordinator requested retaining CI failure diagnostics beyond runner lifetime. Official upload-artifact latest releasev7.0.2 and tag ref were independently fetched from GitHub's API, resolving to immutable `cf430e030ddbb5b0abf93d22962f4752f3646cd9`; that commit's actual action.yml uses Node24 and defines the selected inputs. Existing export jobs now upload only `.artifacts/playwright/` on `failure()`, named by deployment/run attempt, retention7 days, absent files ignored. Hidden-file inclusion is limited to that explicit public-test folder; sources/env/cache folders are not selected. Repository permissions/triggers/check names remain unchanged. Cloud upload behavior is not claimed locally, and no unchanged build was rerun solely for this workflow step.
+
+### Usage-limit interruption and explicit recovery
+
+Pages build and matching verifier had already passed before interruption. The first attempted Pages E2E launch was **not executed**: automatic approval review could not complete because of the account usage limit, not a safety rejection or a failed browser assertion. It produced no Pages test result. The author subsequently explicitly resumed the same work and authorized the bounded initial Pages setup/publication after review/QA, superseding the earlier deployment hold. Coordinator preserved the first-stage gate: finish this verification/review/integration before separately scoped CD/settings/dispatch work.
+
+Actual branch/HEAD/status and preserved logs were rechecked after resumption. Only the missing Pages E2E was launched; no successful check/build/verifier was repeated. All8 Pages E2E passed on their first executed run. This stage performs no deployment/settings/Git operation. Writer's accepted material inventory and Coordinator edits are preserved.
+
+**RV-02 applied:** the active developer guide now identifies the author's2026-11-17 bounded release authorization and current board/review sequence, replacing its superseded standing-hold statement while retaining historical holds in prior evidence. This guide-only correction requires no repeated source/build/browser check. Coordinator separately reports saved Pages Source=GitHub Actions/default-domain HTTPS settings and `has_pages=true`; these are attributed Coordinator observations, not Developer actions or proof of a deployed site. This submission still adds no CD workflow and stops for verification review/integration.
+
+## Final implementation and permanent contracts
+
+| File / boundary | Actual behavior |
+| --- | --- |
+| `package.json` / lock | Exact official `@playwright/test@1.65.1`; added only its matching `playwright`/`playwright-core` lock nodes. Existing resolved nodes are unchanged. Added maintained `test:e2e` / `test:e2e:install` scripts and lint coverage for the MJS config. |
+| `playwright.config.mjs` | Chromium, one worker, zero retries, forbidOnly,30-second case timeout,180-second suite timeout,5-second assertions. Fresh static server managed by Playwright at127.0.0.1:4179; existing servers are never reused. Trace/screenshot-on-failure and useful narrow screenshot stay in ignored `.artifacts/playwright/`. |
+| `scripts/static-preview.mjs` | CLI serves only `site/out/` on loopback; complete entry/404 required. Exact normalized prefix mapping, GET/HEAD, MIME types, no-store, actual built404/status, method405, bounded local redirect. Rejects malformed encoding/control/backslash/dot traversal and resolved symlinks outside export; no directory listing or repository serving. Module injection of a fixture directory/ephemeral port is only for unit tests, not a CLI option serving arbitrary directories. |
+| `tests/static-preview.test.mjs` | Three real HTTP tests: root/Pages/JSON/HEAD/404/405/redirect/outside-prefix; raw+encoded traversal/malformed paths/escaping symlink; incomplete-output startup refusal. Native temporary fixtures/servers close and clean up after each run. |
+| `tests/e2e/reader.spec.mjs` | Eight representative case types per export, actual approved manifest IDs/source hashes, no source duplicates. Browser page/console errors fail except the explicitly registered503 at the exact test index URL. Loading is held by a controlled intercepted-response gate, not a sleep. No skips or external issue submission. |
+| `eslint.config.mjs` | Adds browser `window`/`document` globals only for the E2E MJS files. No application/global checking relaxation; strict app/Panda boundaries unchanged. |
+| `.github/workflows/ci.yml` | Existing Quality and root/Pages check names, PR/main triggers and `contents:read` preserved. Each export job builds/verifies, installs its pinned package's Chromium+Linux dependencies, runs the maintained suite, then conditionally retains only public E2E failure output per RV-01. No `pull_request_target`, secret, deploy permission/job or Pages setting. |
+| `site/DEVELOPMENT.md` | Reproducible install/root/Pages commands, static-server/E2E contract, failure artifact/action pin and current release/dependency boundaries. No hardcoded maintained test total. Updated the superseded hold according to explicit author continuation, without claiming this stage deploys. |
+
+The project package owns the browser suite/server/config; no dependency on old `/tmp` tooling exists. Browser plugin is absent, so ordinary project Playwright uses its matching installed Chromium. Local Node24.14.1/npm11.11.0 meet project ranges and Playwright's official Node≥20 engine requirement. Browser install succeeded via `npm run test:e2e:install`; local Chromium/headless shell download is a tool cache, not a package/source setting. CI installs the matching browser and OS dependencies reproducibly. `.artifacts/` was already ignored, so no additional ignore rule was necessary.
+
+Source guidance: [official Playwright CI](https://playwright.dev/docs/ci), [managed web server](https://playwright.dev/docs/test-webserver), [official Playwright package](https://www.npmjs.com/package/@playwright/test), [upload-artifact v7.0.2 release](https://github.com/actions/upload-artifact/releases/tag/v7.0.2) and its [inspected immutable action.yml](https://github.com/actions/upload-artifact/blob/cf430e030ddbb5b0abf93d22962f4752f3646cd9/action.yml). GitHub API release/tag/commit and raw action metadata are captured under `/tmp/vctw-release-verification/upload-artifact-metadata.json` and `upload-artifact-action.yml`. Metadata/doc inspection is not a claim that the new workflow has run in GitHub.
+
+## Actual local evidence
+
+| Command / check | Actual final result | Evidence under `/tmp/vctw-release-verification/` |
+| --- | --- | --- |
+| Exact test dependency install | Exit0; only3 new lock nodes, no changed/removed prior resolved node | `install.log`; actual package/lock diff |
+| Project Chromium install | Exit0; matching browser installed through the project package | `browser-install.log` |
+| `NEXT_PUBLIC_BASE_PATH='' npm run check` | Exit0; lint, Next type generation, strict app+tooling, **32 Node tests passed**; no skips/failures | `check-r1.log` |
+| Fresh root `build` then matching `verify:export` | Exit0 each; **7 pages/128 local references**, zh20/en0 and every actual target verified | `build-root-r1.log`, `verify-root-r1.log`, `root-export.json` |
+| Root `test:e2e` | Exit0; **8 passed**,4.9s reported; first executed run | `e2e-root-r1.log`, `root-e2e-artifacts/` |
+| Fresh Pages `build:pages` then matching `verify:export` | Exit0 each; same7/128 and index/target checks | `build-pages-r1.log`, `verify-pages-r1.log`, `pages-export.json` |
+| Matching Pages `test:e2e` after resumption | Exit0; **8 passed**,3.3s reported; first executed run, initial launch had not executed | `e2e-pages-r1.log`, `pages-e2e-artifacts/` |
+| Workflow structure / action pin | Ruby/Psych parsed actual YAML; three required names/PR-main triggers/read-only permission preserved; immutable Node24 artifact action/input fields verified | Actual workflow + captured action metadata; cloud behavior pending |
+
+Root and Pages exports each have54 hashed files, copied separately before the next build; final ignored `site/out/` is the Pages variant. Root E2E diagnostics were saved before Playwright cleared its output for the Pages run. No third full root-alias build was necessary: original alias regression remains in the existing deployment unit suite and passed within32 tests; this stage changed no app URL builder. No application source correction was needed, and no failing test matrix is concealed. The only execution interruption was the explicit usage-limit auto-review failure above; inherited NO_COLOR/FORCE_COLOR warnings are tool-environment warnings, not browser errors. Successful source checks were not rerun solely for later guide/CI-upload wording.
+
+### Maintained browser coverage and QA limits
+
+| Case | Real asserted outcome on each export |
+| --- | --- |
+| Entry/read/navigation | English entry → honest index → reviewed opening → next G01 → previous opening → missing-English index. Actual article source hashes/title/last-chapter navigation checked. Unknown route returns actual404 plus bilingual document via HTTP. |
+| Chinese search/focus | Actual current-origin prefixed JSON200, valid public source hashes and real result heading, Enter → exact G01 URL/encoded fragment and heading focus. Reopen/Escape returns focus; query remains through close/reopen. |
+| Loading/failure/retry | Controlled real request interception holds loading, returns503, retains `状态` query, then retry fetches actual built resource and renders results. Only this exact503 console resource message is expected; other console/page errors fail. |
+| English absence | Visible absent-corpus state, no fictional result and zero index requests before deliberate Chinese-entry navigation. |
+| Appearance/refresh | System follows emulated OS; explicit Day and Night survive refresh; System resets the key and follows subsequent OS change. |
+| Denied storage | A context-local denied localStorage getter leaves System usable, permits in-memory Day choice and returns to System on refresh. No machine storage settings are changed. |
+| Manual copy/correction | Context-local clipboard denial produces real runtime-origin/prefix/heading URL without query leakage; deliberate preview contains actual source revision and correct editable GitHub draft. No external request/new page/submission. |
+| Narrow keyboard/overflow |320px Night skip/Enter/main focus, summary keyboard open/Tab/Escape and visible focus, code/table focus and local overflow, no whole-page horizontal overflow. Actual narrow screenshots inspected. |
+
+No unexpected page/console error occurred. The expected503 is retained in explicit diagnostic JSON, not globally silenced. Screenshots inspected at `root-e2e-artifacts/reader-narrow-keyboard-nav-f60bf--code-tables-scroll-locally/narrow-reader.png` and the corresponding Pages path show the focused, locally scrolling table in the approved Chinese chapter. Failed-test traces/screenshots are configured and the CI upload step is source/metadata-verified; no deliberately fake failure or successful cloud upload is claimed. On an actual CI failure, public-test evidence is retained for7 days, not indefinitely.
+
+Limits: maintained Chromium/headless local verification, not physical-device/IME, Safari/Firefox, full screen-reader/WCAG, every viewport/state or performance certification. No external GitHub issue was opened/submitted. Exact-head GitHub/Linux execution, PR integration and actual hosting/CD/public smoke/rollback are still separate stages. This report neither self-accepts those stages nor weakens checks to reach them.
+
+## Current dependency disposition
+
+**No compatible repair identified; no forced change.** Official npm metadata queried before dependency edits still identifies typescript-eslint/typescript-estree8.72.2 with minimatch`^10.2.2`. A subsequent official `minimatch@10` version query ends at10.2.6, the affected installed version. The [maintainer advisory](https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249) identifies patched11.0.1, outside that allowed major range. Adding the necessary Playwright package changed no existing resolved dependency, and no override/downgrade was applied.
+
+Actual full audit reports **7 moderate records,0 high/critical**, propagating one GHSA through the typescript-eslint parser/plugin/utils/type-utils/estree development chain to `node_modules/@typescript-eslint/typescript-estree/node_modules/minimatch`10.2.6. Actual production-only audit reports **0**. Audit's proposed major operation remains an unvalidated typescript-eslint8.36.0 downgrade, not a compatible verified repair for this project's current toolchain.
+
+Inspected installed `typescript-estree/dist/useProgramFromProjectService.js:244`: optional `allowDefaultProject` invokes minimatch with `{dot:true}`. The nested minimatch implementation defaults optimizationLevel1; the advisory concerns attacker-controlled glob amplification at level≥2. Effective ESLint parser options remain `{}` with no projectService/allowDefaultProject, and this site's queries/content do not feed that lint glob call. **Inference:** current configuration has lower exposure than the trigger scenario; the package is still affected, and this is not a blanket security/release acceptance. Reassess on upstream/configuration changes; a compatible repair stays in the existing Release Readiness maintenance scope, not a duplicate backlog.
+
+Evidence: `audit-full.json`, `audit-production.json`, `minimatch-10-versions.json`, `eslint-effective.json`, actual installed package/call source and initial official metadata outputs. Reviewer owns the bounded risk decision. No paid service, key/model, global package/system update or incompatible package action was used to remove warnings.
+
+## Frozen r1 submission
+
+| File | SHA-256 |
+| --- | --- |
+| `package.json` | `5e965bc464079da6102a9417ea9d508fcdafa69cca99a3ea3025245e32c45537` |
+| `package-lock.json` | `7d02a83aa8f685cca8b806e297428961f33f5efc3438ebc7ec66ba655c81b53b` |
+| `playwright.config.mjs` | `7b98248657c1021e5f68fb9b0de88c86e54eb87970684aacecaafad5a7186a83` |
+| `scripts/static-preview.mjs` | `d279844fe0ffa91e14559a4a20c8d0961c859ce032e08ac983daad2673ed861e` |
+| `tests/static-preview.test.mjs` | `2a68888c6f158513557e81228fa2f91a744e9265471c974a36192e1b1ea94d27` |
+| `tests/e2e/reader.spec.mjs` | `8f3b478812e3ef8f62925ad73531e4eb643ab45b3e5c7bc39286a107fcd62907` |
+| `eslint.config.mjs` | `02fca8bd9dde066f0dee9a5ead00579964e7f2b3d79ea0a6299980229c4ece77` |
+| `.github/workflows/ci.yml` | `6c889bdd6f4774d6686a30f99597c96c2ad9c33f63b959a538c2acddc507e687` |
+| `site/DEVELOPMENT.md` | `a217b30ddacab5fb146a98a9e9d2efb4ed80bc926579771340abaddebfe1f4c1` |
+| This new handoff | Final digest supplied separately; excluded from its own manifest. |
+
+The baseline had174 tracked files. Excluding the five assigned changed tracked files and concurrent Coordinator board, **168 protected files remain byte-identical**, including **35 prior handoffs/31 prior reviews**, canonical manuscripts/outline, application code, Panda/tokens/design, strict configs, licenses/SECURITY and the original root-alias regression. New Writer release-material and Coordinator review records are preserved and excluded from this executor's manifest. The approved manuscript hashes remain opening`244c4f7a9ddeb781d8530691d07ba17b9daccf611b9631ea60faa412b87a6d90`, G01`b928e5df21876c0ca49a3c227eb6c7e20723b3f22bb9c7cb2d560cc198db62d2`; all31 ignored recovery files match their preserved manifest. Root/Pages54-file snapshots also remain hash-identical to their captured manifests.
+
+Final checks passed: **35 local Markdown link occurrences** in the changed guide/handoff resolve; both files' trailing whitespace/final newline and `git diff --check` pass. All nine submitted non-handoff hashes,168 protected tracked files, both54-file export snapshots, unchanged existing lock nodes and31 recovery files were rechecked at the same assigned HEAD. The recovery manifest also matches the earlier preserved audit digest. `.artifacts/playwright` is actually ignored. The test source contains no skip or arbitrary sleep, and parsed YAML retains required names/read-only permissions and the narrow failure-only upload. Supplemental fixed/validation manifests are `/tmp/vctw-release-verification/developer-r1-fixed.json` and `developer-r1-validation.json`; durable hashes/results above do not depend on temporary files. No deployment workflow, Developer Pages access/config setting, Git write, canonical content/translation/schema or new reader feature was included.
+
+## Recovery / review request
+
+**Done:** maintained implementation, exact test dependency/browser setup, current dependency disposition,32 Node tests, root/Pages fresh build/verifier plus8E2E each, RV-01 failure-artifact upload and preserved-file checks. **Next:** Coordinator reviews the actual frozen r1, closes RV-01 after affected inspection and records any findings/risk disposition, then owns scoped Git/exact-head CI/integration. Only after that prerequisite may the separately scoped, author-authorized Pages CD/public-release/recovery work proceed. Public success is not prefilled here.
+
+On interruption verify actual branch/HEAD/status, frozen hashes and concrete feedback; preserve this checkpoint and other-owner files. Do not rerun completed commands merely because quota was reset, and do not cross into deployment/Git before assignment. Append authorized corrections to this same handoff and recheck affected evidence; no outbound receipt loop.

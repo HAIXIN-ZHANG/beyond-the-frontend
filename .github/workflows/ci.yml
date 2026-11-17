@@ -83,3 +83,16 @@ jobs:
         run: npm run ${{ matrix.build_script }}
       - name: Verify exported pages and assets
         run: npm run verify:export
+      - name: Install Chromium for static reading checks
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Test the static reading experience
+        run: npm run test:e2e
+      - name: Retain failed public browser-check evidence
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: browser-failure-${{ matrix.deployment }}-${{ github.run_attempt }}
+          path: .artifacts/playwright/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7

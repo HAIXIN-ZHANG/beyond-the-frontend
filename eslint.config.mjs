@@ -22,6 +22,10 @@ export default defineConfig([
     },
   },
   {
+    files: ['tests/e2e/**/*.mjs'],
+    languageOptions: { globals: { window: 'readonly', document: 'readonly' } },
+  },
+  {
     files: ['site/**/*.{js,jsx,ts,tsx}'],
     extends: [next.configs['core-web-vitals'], hooks.configs.flat.recommended],
     settings: { next: { rootDir: 'site/' } },

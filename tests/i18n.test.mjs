@@ -12,7 +12,15 @@ test('localized book identity and English catalog labels preserve the Chinese-on
     assert.ok(getMessages('en').chapterLabels[chapter.id].length > 0);
     assert.doesNotMatch(getMessages('en').chapterLabels[chapter.id], /\p{Script=Han}/u);
     assert.equal(getMessages('zh').chapterLabels[chapter.id] ?? chapter.title, chapter.title);
+    for (const locale of ['en', 'zh']) assert.ok(getMessages(locale).chapterBenefits[chapter.id]?.trim(), `${locale}/${chapter.id}: missing home benefit`);
   }
+});
+
+test('availability reflects a public count without importing the source manifest into shared messages', () => {
+  assert.match(getMessages('en').availableNotice(1), /^1 reviewed draft is available in Chinese\./);
+  assert.match(getMessages('en').availableNotice(chapterManifest.length), /^3 reviewed drafts are available in Chinese\./);
+  assert.match(getMessages('zh').availableNotice(chapterManifest.length), /可阅读 3 篇已审阅中文草稿/);
+  assert.equal(getMessages('en').chapterLabels.F01, 'How the Browser Builds a Page');
 });
 
 test('English is default and unknown languages are rejected', () => {

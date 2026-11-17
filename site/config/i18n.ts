@@ -30,10 +30,12 @@ type Messages = {
   currentAppearance: string;
   systemAppearanceHint: string;
   explicitAppearanceHint: string;
-  availableNotice: string;
+  availableNotice: (count: number) => string;
   englishUnavailable: string;
   chineseDraft: string;
   chapterLabels: Readonly<Record<string, string>>;
+  startReading: string;
+  chapterBenefits: Readonly<Record<string, string>>;
 };
 
 const messages = {
@@ -65,12 +67,19 @@ const messages = {
     currentAppearance: 'Current appearance',
     systemAppearanceHint: 'Follow device appearance.',
     explicitAppearanceHint: 'This site uses your selected appearance instead of the device setting.',
-    availableNotice: 'Two reviewed drafts are available in Chinese. The book is still being written.',
+    availableNotice: count => `${count} reviewed ${count === 1 ? 'draft is' : 'drafts are'} available in Chinese. The book is still being written.`,
     englishUnavailable: 'English chapters are not available yet. The links below open the Chinese originals.',
     chineseDraft: 'Chinese · Reviewed draft',
     chapterLabels: {
       opening: 'Before We Start: It Runs. Then What?',
       G01: 'A Page and the System Behind It',
+      F01: 'How the Browser Builds a Page',
+    },
+    startReading: 'Start with these Chinese drafts',
+    chapterBenefits: {
+      opening: 'Why a working AI-built product is the start of the engineering conversation.',
+      G01: 'Follow one feature through the interface, service and database—and the failures between them.',
+      F01: 'Separate resource waits, code execution and visual updates to understand why a visible page can still respond late.',
     },
   },
   zh: {
@@ -101,10 +110,16 @@ const messages = {
     currentAppearance: '当前外观',
     systemAppearanceHint: '跟随设备的外观设置。',
     explicitAppearanceHint: '本网站使用所选外观，不再跟随系统。',
-    availableNotice: '目前可阅读两篇已审阅中文草稿，全书仍在写作中。',
+    availableNotice: count => `目前可阅读 ${count} 篇已审阅中文草稿，全书仍在写作中。`,
     englishUnavailable: '英文正文尚未提供，下方链接为中文原稿。',
     chineseDraft: '中文 · 已审阅草稿',
     chapterLabels: {},
+    startReading: '从这里开始读',
+    chapterBenefits: {
+      opening: '为什么产品能跑起来之后，我们还需要理解它背后的系统。',
+      G01: '顺着一个功能，串起界面、服务、数据库，以及它们之间的问题。',
+      F01: '分清资源等待、代码执行和画面更新，理解页面为什么看得见却还不一定能及时响应。',
+    },
   },
 } satisfies Record<Locale, Messages>;
 

@@ -10,9 +10,9 @@ import { parseMarkdown, nodeText } from '../site/content/markdown.ts';
 import { resolveChapterLink } from '../site/content/links.ts';
 import { alternateLocalePath } from '../site/config/i18n.ts';
 
-test('only the two reviewed sources load with their original titles, attribution, diagrams and citations', async () => {
+test('only the three approved sources load with original titles, attribution, diagrams and citations', async () => {
   const chapters = await loadBook();
-  assert.deepEqual(chapters.map(chapter => chapter.entry.id), ['opening', 'G01']);
+  assert.deepEqual(chapters.map(chapter => chapter.entry.id), ['opening', 'G01', 'F01']);
   assert.equal(chapters[0].title, '写在前面：能跑，然后呢？');
   assert.match(nodeText(chapters[0].tree), /作者：Jason Zhang/);
   assert.match(nodeText(chapters[0].tree), /创作方式：AI 全程辅助创作/);
@@ -24,6 +24,20 @@ test('only the two reviewed sources load with their original titles, attribution
   assert.ok(urls.includes('/zh/read/before-we-start/'));
   assert.ok(urls.some(url => url.startsWith('https://www.rfc-editor.org/')));
   assert.doesNotMatch(nodeText(chapters[0].tree), /中文初稿 · 待 review/);
+});
+
+test('the approved browser chapter retains fenced illustrative HTML and its canonical link back to G01', async () => {
+  const chapters = await loadBook();
+  const browser = chapters.find(chapter => chapter.entry.id === 'F01');
+  assert.equal(browser.title, '页面出现之前，浏览器在忙什么？');
+  assert.equal(browser.entry.sha256, '54b983945710303a7e790706d86b9acc3884f50f6ae82f06dbde71711967ca24');
+  assert.equal(browser.tree.children.filter(node => node.type === 'code').length, 4);
+  assert.equal(browser.tree.children.filter(node => node.type === 'table').length, 2);
+  assert.equal(browser.tree.children.find(node => node.type === 'code').lang, 'html');
+  const links = browser.tree.children.filter(node => node.type === 'paragraph')
+    .flatMap(node => node.children.filter(child => child.type === 'link').map(child => child.url));
+  assert.ok(links.includes(chapterPath(chapters.find(chapter => chapter.entry.id === 'G01').entry)));
+  assert.ok(links.some(url => url.startsWith('https://html.spec.whatwg.org/')));
 });
 
 test('manifest rejects duplicates, invalid order, traversal and absent review provenance', () => {

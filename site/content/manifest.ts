@@ -23,6 +23,12 @@ export const chapterManifest: readonly ChapterEntry[] = [
     sha256: 'b928e5df21876c0ca49a3c227eb6c7e20723b3f22bb9c7cb2d560cc198db62d2',
     status: 'reviewed-draft', review: 'docs/reviews/W02.md',
   },
+  {
+    id: 'F01', locale: 'zh', slug: 'browser-foundations', title: '页面出现之前，浏览器在忙什么？', order: 3,
+    source: 'book/drafts/zh/02-browser-foundations.md',
+    sha256: '54b983945710303a7e790706d86b9acc3884f50f6ae82f06dbde71711967ca24',
+    status: 'reviewed-draft', review: 'docs/reviews/F01M.md',
+  },
 ];
 
 export function chapterPath(chapter: Pick<ChapterEntry, 'slug'>): string {

@@ -2,6 +2,63 @@
 
 Updated: 2026-11-17 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
+
+
+## Active Git integration — reviewed reading baseline, 2026-11-17
+
+The author explicitly authorized isolated packaging, checks, commit, push and a review PR for the accepted quality corrections, F01 Chinese chapter/local intake and necessary documentation. This supersedes the older no-Git hold **only for those operations and that frozen bundle**. It does not authorize merge, deployment, Figma edits, access changes, installation or V2 code.
+
+Coordinator owns `/private/tmp/vctw-reviewed-reading-baseline`, branch `codex/reviewed-reading-baseline`, based on live remote `main@95a6bec69e26cbe13fe9f5d9433ee91e07632091`. The shared dirty checkout remains intact on main; do not switch, reset, stage or overwrite it. The38-file closeout snapshot was verified before copying to the isolated worktree. [Integration review/execution](reviews/reviewed-reading-baseline-pr.md) records exact checks, PR/head and remaining boundaries.
+
+Developer and Writer remain closed/frozen. The separate author-directed V2 owner continues its independent design scope; no concurrent V2 edits or assets enter this frozen baseline. Do not resume old background palettes, Continue/bookmarks or V2 implementation from historical recommendations. Current integration snapshot: local lint/strict/44 Node checks and fresh root+Pages builds/verifiers/16 E2E each passed. Authorized commit/push/PR is next; actual PR/head/cloud results belong in the associated PR execution summary. Merge/publication remain unassigned.
+
+## Current closeout and V2 design-first boundary — 2026-11-17
+
+The author asked to review and preserve the existing uncommitted work before continuing the newly agreed V2 direction. [Closeout review and integration proposal](reviews/uncommitted-closeout-2026-11-17.md) own the exact inventory, evidence and pending decisions. The quality corrections, F01M r3 source and F01 local intake r4 remain accepted within their recorded limits; they are not obsolete because a later visual design is planned. Local source/code has3 Chinese chapters; the last verified public edition has2. No Git integration or new release has occurred.
+
+**Current direction:** preserve Milestone 1/UI04 as reference; use a separate Reading Experience V2 Figma page for neutral Light/Dark/System surfaces and6 independently selected accents. The historical3-background study is no longer an implementation target. Blue is proposed, not an approved exact shade. Design-owner delivery → independent design/technical review → author confirmation → bounded code assessment/assignment precede any V2 implementation.
+
+| Owner | Current scope / hold |
+| --- | --- |
+| Coordinator/Reviewer | Closeout complete; recovery manifests and a concrete integration proposal are recorded. Preserve the accepted baseline; await explicit Git authority or delivered V2 design for the next review. No branch/worktree/stage/commit/push/PR/merge/deploy, Figma edit, package installation or access change is authorized in this task |
+| Developer | Previous intake/preparation accepted and closed; preserve exact source/tests. Do not implement old background palettes, Continue/bookmarks or V2 UI; await a new scoped assignment after the design gate |
+| Writer | Accepted manuscripts/planning-status work closed; preserve source bytes. No new chapter/translation is assigned by the visual-direction update |
+| Author-directed V2 design owner | New visual planning/design stays in its separately authorized conversation and independent Figma page. This Coordinator closeout does not modify Figma or claim that V2 has been completed/approved |
+
+The next-step suggestions in completed records below are dated recommendations, superseded by this design-first boundary. Do not treat them or the roadmap backlog as a standing instruction to code. Existing source reviews, historical Figma records and the approved manuscript framework remain intact.
+
+## Current Delivery Milestone 2 — third-chapter local intake accepted
+
+The author explicitly resumed main work after the accepted writing/preparation slice. Actual checkout remains `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `main`, HEAD/local origin-main `95a6bec69e26cbe13fe9f5d9433ee91e07632091`, with accepted quality/content/document changes uncommitted. Preserve the whole tree; no reset/branch switch/Git write is authorized. This concrete intake assignment supersedes the older preparation-only hold **only for the source and files below**.
+
+| Owner | Assignment | Boundary |
+| --- | --- | --- |
+| Developer | [Third-chapter intake](handoffs/developer/milestone-2-chapter-intake.md), following [preparation r2](handoffs/developer/milestone-2-preparation.md) and the [approved contract extension](content-contract.md#delivery-milestone-2--approved-local-intake-extension) | r4 accepted after [actual code/artifact and affected documentation review](reviews/milestone-2-chapter-intake.md). Task closed; all payload/report files frozen. No continuation/bookmark/palette/translation, build or Git work assigned |
+| Writer | F01M source and necessary [local-intake planning-status follow-up](reviews/F01M.md#local-intake-planning-status-follow-up-review--2026-11-17) accepted | Task closed; source/planning/handoff frozen. No next chapter, English adaptation, research, build or publication assigned |
+| Coordinator/Reviewer | Approved exact source/metadata/contract; inspect actual code/artifacts/screenshots and return findings to Developer | Review complete; preserve the accepted revision and determine the next bounded slice. Current ignored output is the independently verified root export. No integration, force push, remote change or deployment authorized |
+
+Original intake assignment file scope (now closed/frozen): Developer could change `site/content/manifest.ts`, `site/config/i18n.ts`, `site/components/home-page.tsx`, `site/components/reading-index.tsx` only if needed for public count handling, `scripts/verify-export.mjs`, related existing `tests/content.test.mjs`, `tests/search-sharing.test.mjs`, `tests/i18n.test.mjs`, `tests/public-smoke.test.mjs`, `tests/e2e/reader.spec.mjs`, factual `site/DEVELOPMENT.md`, and its one intake handoff. Root owns shared contract/board/roadmap/vision/review changes. If a necessary file falls outside the list, identify the concrete dependency for Coordinator rather than expanding scope silently.
+
+No new dependencies, full-draft scan, broadened schema, translation, Figma edit, resume/bookmark/palette/audio/AI feature or CI/deployment configuration. Preserve the accepted complete search/Unicode/highlight/sticky-outline behavior. These assigned source/build/browser gates were performed and accepted within the limits in the intake review. Both executors are closed; do not treat the completed file-scope list as a standing instruction to keep editing. Other closed stages below retain their historical scope/evidence.
+
+## Delivery Milestone 2 — content-first preparation and scoped writing
+
+The author approved the five-item priority plan and explicitly resumed the main work on 2026-11-17. [Milestone 2's delivery slice](delivery/milestone-2.md) records the sequence and criteria; the roadmap remains the full candidate backlog. This assignment lifts historical documentation-only/manuscript pauses **only for the scoped browser chapter and preparation below**. It does not authorize the full outline, translations, runtime changes, dependencies, Git writes or publication. Actual shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `main`, HEAD/local origin-main `95a6bec69e26cbe13fe9f5d9433ee91e07632091`, with the accepted quality corrections still uncommitted. Preserve those files and the original review; do not reset or switch the shared branch.
+
+| Owner | Current assignment | Boundary / next gate |
+| --- | --- | --- |
+| Writer | Browser Fundamentals / P1.2, [F01M handoff](handoffs/writer/F01M.md): reuse checkpoint accepted in the [scope review](reviews/F01M-scope.md); manuscript r3 and the necessary planning-status alignment accepted after [actual review/revisions](reviews/F01M.md) | Task closed; manuscript/planning status/handoff frozen at their reviewed revisions. No next chapter, English adaptation, website intake or publication assigned |
+| Developer | [Milestone 2 preparation](handoffs/developer/milestone-2-preparation.md): preparation r2 accepted after the [affected review](reviews/milestone-2-preparation.md); intake map and continuation/bookmark proposal complete | Task closed/file frozen. No implementation, manifest/contract/test/config, live Figma or build-output work assigned. Intake needs accepted prose/metadata and a new scoped assignment; visible reading-state work retains its design/implementation gate |
+| Coordinator/Reviewer | Independent quality closure recorded; Writer scope/manuscript r3 and Developer preparation r2 reviewed. Current content-first slice complete in source; determine a separately scoped intake/reading-state implementation next | Keep ownership disjoint; inspect actual frozen artifacts before accepting. No integration/publication authorized; source review and eventual release remain separate |
+
+Writer manuscript/status alignment and Developer preparation are accepted and closed; their assigned files are frozen. Coordinator owns this board, the delivery slice and new review records. Relevant official-source reading is authorized for the browser explanation; no tool or dependency installation or paid service. Existing canonical opening/G01, routes, truthful missing English corpus, recovery files and accepted quality implementation remain frozen. Executors send actual startup and final handoff directly to the existing Coordinator chat; no new standing reviewer is created.
+
+## Independent quality findings — r1 independently accepted, integration pending
+
+The original quality reviewer accepted the seven bounded corrections in the [independent second review](reviews/quality-findings-2026-11-17.md). That review independently matched the submitted handoff SHA and all14 payload hashes, reproduced14 real search destinations and the synthetic Unicode excerpt, ran42 Node tests and15 Pages Chromium E2E, and inspected fresh Figma renders. Visual browser judgment partly used executor captures; root rebuild/E2E, other browser engines/devices/readers and deployed behavior were not independently certified. The dismissible expanded-outline overlay tradeoff is explicitly accepted within this correction.
+
+[Correction handoff](handoffs/developer/quality-findings-2026-11-17.md) preserves r1 reproduction and execution evidence. The reviewed source was the uncommitted tree over `95a6bec69e26cbe13fe9f5d9433ee91e07632091`; no commit, merge or publication is implied or authorized. Its hash manifest identifies the **review-time** board/document bytes, not later authorized coordination updates. Runtime, tests and design correction payload remain frozen; later work has separate scope and acceptance. No outstanding correction is assigned unless the original reviewer returns a concrete finding.
+
 ## Milestone 1 whole-product publication audit — accepted source
 
 The author requested a high-standard whole-product review after finding inconsistent localization, fonts, tokens and page widths. Coordinator assigned one bounded final audit from clean main/origin-main `cc59fd42f74bb5ed856881443a8bb2fd528b0817` (PR24; matching PR/main Quality/root/Pages jobs passed). Shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/milestone-1-product-polish`. PR24 is integrated; its revised public publication has not been observed. The last public identity was `8c29f4d`. Manual release currently requires the author's Mac to be unlocked; do not infer a new deployment or bypass this UI limitation.

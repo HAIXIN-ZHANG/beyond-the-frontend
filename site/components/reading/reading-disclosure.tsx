@@ -22,7 +22,7 @@ export function ReadingDisclosure({ label, children }: { label: string; children
   }, []);
   function close() {
     if (details.current) details.current.open = false;
-    summary.current?.focus();
+    summary.current?.focus({ preventScroll: true });
   }
   return <details ref={details} className="reading-disclosure"
     onKeyDown={event => {
@@ -30,6 +30,12 @@ export function ReadingDisclosure({ label, children }: { label: string; children
     }}
     onClick={event => {
       if (event.target instanceof Element && event.target.closest('a')) close();
+    }} onToggle={event => {
+      if (!event.currentTarget.open) return;
+      // Keep one nearby navigation panel open without changing the reading position.
+      for (const sibling of event.currentTarget.closest('.reading-tools')?.querySelectorAll<HTMLDetailsElement>('details[open]') ?? []) {
+        if (sibling !== event.currentTarget) sibling.open = false;
+      }
     }}>
     <summary ref={summary}>{label}</summary>
     <div className="reading-disclosure-body">{children}</div>

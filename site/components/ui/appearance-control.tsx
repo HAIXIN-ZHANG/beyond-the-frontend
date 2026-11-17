@@ -11,6 +11,7 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
   const id = useId();
   const panel = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const openingRect = useRef<DOMRect | null>(null);
   const { preference, resolvedTheme, setPreference } = useTheme();
   const m = getMessages(locale);
   const options: readonly [ThemePreference, string][] = [['system', m.systemTheme], ['light', m.dayTheme], ['dark', m.nightTheme]];
@@ -22,13 +23,21 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
       if (!panel.current?.matches(':popover-open')) return;
       const returnFocus = panel.current?.contains(document.activeElement);
       panel.current?.hidePopover();
-      if (returnFocus) trigger.current?.focus();
+      if (returnFocus) trigger.current?.focus({ preventScroll: true });
+    };
+    const dismissOnScroll = () => {
+      if (!panel.current?.matches(':popover-open')) return;
+      const rect = trigger.current?.getBoundingClientRect();
+      // A queued scroll from revealing the trigger can arrive after the popover opens.
+      // Dismiss only when its anchor actually moved; panel-internal scrolling is safe too.
+      if (rect && openingRect.current && rect.top === openingRect.current.top && rect.left === openingRect.current.left) return;
+      dismiss();
     };
     window.addEventListener('resize', dismiss);
-    window.addEventListener('scroll', dismiss, { capture: true, passive: true });
+    window.addEventListener('scroll', dismissOnScroll, { capture: true, passive: true });
     return () => {
       window.removeEventListener('resize', dismiss);
-      window.removeEventListener('scroll', dismiss, true);
+      window.removeEventListener('scroll', dismissOnScroll, true);
     };
   }, []);
 
@@ -38,6 +47,7 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
         title={m.appearance} popoverTarget={id} className="appearance-trigger"
         onClick={() => {
           const rect = trigger.current?.getBoundingClientRect();
+          openingRect.current = rect ?? null;
           if (rect && panel.current) {
             const gutter = Number.parseFloat(getComputedStyle(panel.current).getPropertyValue('--spacing-layout-gutter-narrow')) || 16;
             const panelWidth = Number.parseFloat(getComputedStyle(panel.current).width);
@@ -55,14 +65,14 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
       <div id={id} ref={panel} popover="auto" className="appearance-panel"
         onToggle={event => {
           if (event.newState === 'open' && panel.current?.matches(':popover-open')) {
-            panel.current.querySelector<HTMLInputElement>('input:checked')?.focus();
+            panel.current.querySelector<HTMLInputElement>('input:checked')?.focus({ preventScroll: true });
           }
         }}>
         <fieldset>
           <legend>{m.appearance}</legend>
           <div className="appearance-options">{options.map(([value, label]) => <label key={value} className="appearance-option">
             <input type="radio" name={id} value={value} checked={preference === value}
-              onChange={() => { setPreference(value); panel.current?.hidePopover(); trigger.current?.focus(); }} />
+              onChange={() => { setPreference(value); panel.current?.hidePopover(); trigger.current?.focus({ preventScroll: true }); }} />
             <span>{label}</span>
           </label>)}</div>
         </fieldset>

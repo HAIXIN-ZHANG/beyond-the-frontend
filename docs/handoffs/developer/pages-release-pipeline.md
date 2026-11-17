@@ -70,3 +70,59 @@ This handoff's own hash is supplied with delivery rather than self-embedded. Boa
 Please inspect these exact files, least-privilege/main/immutable-source gates, attempt-specific artifact selection, public metadata boundaries, actual test semantics and recovery instructions; return concrete findings to Developer in the existing review. No self-acceptance is implied. Coordinator owns Git, matching-head Linux PR/main checks, environment/settings confirmation, deliberate workflow dispatch, public/browser verification and observed recovery/return. None has been executed by Developer in this stage. Existing unresolved dependency maintenance disposition is unchanged and no broader release-risk acceptance is inferred.
 
 If interrupted, resume from this r1 freeze and actual review findings on the verified branch/baseline, preserving root's board/review and all other owners' sources. The ignored local Pages output has the baseline/test `release.json`; a new build is required before stamping again. Do not dispatch or change Git as Developer. No unfinished local build/test process remains; review is the next gate.
+
+## PAGES-02 — search-to-appearance correction
+
+**r2 submission, 2026-11-17: frozen for affected Coordinator review.** The accepted r1 above remains historical evidence; this correction adds only the four files identified below and claims no new public acceptance.
+
+### Assignment / baseline
+
+Coordinator reopened this report after observed public QA: Chinese search heading navigation succeeded, then Appearance opened but its Night radio became invisible. Assigned branch verified `codex/pages-appearance-recovery`, HEAD/main baseline `9d43198684ff276c7992732246661c90dc0fcbaa` (PR21); initial worktree clean. Scope: reproduce without sleeps/force-click/retry or weakened checks, distinguish harness failure from user defect, make only an evidence-justified component correction and meaningful regression. Preserve manuscript/design/schema/Writer sources, existing pipeline and prior accepted r1 evidence. Coordinator owns board/review/Git/deployment. Browser plugin not available; installed project Playwright used under frontend-testing-debugging and React best-practice guidance.
+
+### Finding and minimal correction
+
+The queued-scroll cause is now observed locally, rather than inferred solely from the public timeout. A captured event trace of the real original combined flow showed:
+
+1. Search Enter focused the actual G01 heading and moved the document to y2506/2923.
+2. Clicking the offscreen header Appearance trigger revealed/focused it at y0; its popover received `beforetoggle(open)` at291.5ms.
+3. A queued document `scroll` arrived at305.1ms while y remained0 and the newly opened trigger had not moved. The original capture handler immediately invoked `hidePopover`; `beforetoggle(closed)` followed at the same timestamp. Night was no longer visible.
+
+The existing ignored Pages output was a local baseline/test export stamped `d390f...`; the appearance/search component and Panda global-style source bytes are unchanged between that commit and the new PR21 baseline (actual Git comparison). It was used only to reproduce the old behavior, never claimed as the new source or public revision. The corrected regression was run against this old output **before** modifying the component: it reached radio `check` and failed after30seconds. Trace/screenshot/error-context were preserved outside the repository in `/tmp/vctw-public-review/PAGES-02-before/`. This reproduces the real browser operation, without synthetic scroll events or implementation-mirroring assertions.
+
+`site/components/ui/appearance-control.tsx` now records the opening trigger rectangle and ignores a captured scroll when that anchor is still at its opening position. An actual changed anchor still dismisses; resize still unconditionally dismisses. Panel focus, choice focus-return and dismissal focus-return use `preventScroll`, preserving reading position. There is no timer, arbitrary threshold, new state/render loop, dependency or visual redesign. Existing listener setup/cleanup remains balanced; scroll listener stays passive.
+
+The existing appearance test in `tests/e2e/reader.spec.mjs` now starts at real G01, searches 状态, follows the actual first result with Enter, verifies heading focus and an offscreen header, then immediately selects appearance through normal locator actions. It retains System/Day/Night and refresh assertions. The same case verifies a real mouse-wheel window scroll dismisses the open panel, returns focus **without jumping back** (scrollY remains positive), resize dismisses it, and a subsequent320px Night choice works. The suite still has nine cases; no retry/force-click/sleep or weakened error handling was added. `site/DEVELOPMENT.md` adds one bounded behavior/evidence paragraph.
+
+### Actual checks / visual QA
+
+Runtime unchanged: Node24.14.1/npm11.11.0, installed Chromium159.0.8154.6/Playwright1.65.1.
+
+| Check | Observed result |
+| --- | --- |
+| Pre-fix affected appearance case against old real Pages output | Failed after30seconds at the actual radio check; preserved trace identifies click→check sequence, diagnostic DOM/events identify stale-scroll dismissal |
+| `NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run check` after component/test correction | Passed lint/strict compilers/all38Node tests |
+| Fresh Pages build + matching verifier | Passed7documents/128local references, zh20/en0 and existing heading targets |
+| Full matching-prefix Pages E2E | All9passed in3.8seconds, including the previously failing combined flow and real scroll/resize/320px assertions |
+| Separate visual check of actual Pages output at1440×900 and320×900 | Correct title/reviewed G01 source, meaningful content/no framework overlay, actual search result/native heading focus, offscreen header activation, visible menu, changed theme/closed menu/returned focus; no page or console errors |
+| Visual bounds | Desktop panel left1056/right1408 in1440px; narrow left16/right304 in320px; no document horizontal overflow. Both screenshots were rendered and inspected |
+| Fresh root build + empty-prefix verifier | Passed7documents/128references, zh20/en0 |
+| Full empty-prefix root E2E | All9passed in3.7seconds, with the same affected combined-flow assertions |
+| Preservation / diff | All183other tracked files match HEAD, excluding these four owned files and two Coordinator-owned files; all31ignored recovery source hashes match; `git diff --check` passed |
+
+Visual evidence outside Git: `/tmp/vctw-public-review/PAGES-02-after-1440.png`, `PAGES-02-after-320.png`, `PAGES-02-after.json`; runnable temporary script `PAGES-02-visual.mjs` in the same directory. The initial temporary visual check incorrectly expected a second check on an already-selected Night radio to trigger a state change/focus return. That assertion failed; the diagnostic was corrected to change Night on desktop and Day on narrow, then passed. No product code or maintained assertion was changed to accommodate that harness assumption. The maintained regression had already passed independently.
+
+### Scope limits and remaining public observation
+
+A separate first read-only public diagnostic failed earlier: after entry→opening→G01, Search click did not yield a visible dialog. Coordinator independently saw the same earlier failure on another run, while its original run successfully searched before hitting PAGES-02. This investigation does **not** establish that a second product defect exists or that it is repaired; readiness/navigation timing remains unproven. No Search component, hydration logic or navigation behavior was modified. The confirmed lifecycle bug above was reproduced and corrected separately with a real combined flow. Coordinator's direct-route public checks are separate evidence, not the Developer's acceptance claim. Recheck the full public combined flow after the reviewed correction is integrated/deployed; return any reproducible readiness defect as concrete scope.
+
+No Git write, dependency install, setting change, new metadata stamp, publication or recovery was performed in this correction. Current ignored `site/out` is the **fresh root-prefix export of uncommitted corrected code**, without `release.json`, from the final root run; it is not a live artifact. Rebuild Pages before any new release stamping/public smoke. Existing hosted workflow/recovery semantics and protected sources are unchanged.
+
+### Frozen correction files / review request
+
+| File | SHA-256 |
+| --- | --- |
+| `site/components/ui/appearance-control.tsx` | `2f9bbaa702caa36ba0770646591efada9ad3d0d2dd0b1c695cfce1e54f8e49ff` |
+| `tests/e2e/reader.spec.mjs` | `feb578a02a9a07280d2572bc53893b06ed7c6fb228bdd19088aaa80a0c9f82fd` |
+| `site/DEVELOPMENT.md` | `901aa00c2f82c4b0f08bccbe1938647b107e6548bcf1e8a2fe50743efee0accb` |
+
+This report is the fourth owned file; its complete hash is supplied on delivery. Please review the exact component lifecycle, genuine regression and preservation of real-scroll/resize/focus behavior; return concrete findings here through the existing Coordinator review. Coordinator owns acceptance, required exact-head Linux checks, integration, public combined-flow recheck and actual all-job recovery/return. Local green tests do not close public release/recovery. No further implementation or background process remains; wait at this affected review gate without a receipt loop.

@@ -16,12 +16,12 @@ const pages = [
   ['index.html', 'en', 'Vibe Coding, Then What?', '/zh/'],
   ['read/index.html', 'en', 'Chapters | Vibe Coding, Then What?', '/zh/read/'],
   ['zh/index.html', 'zh-CN', 'Vibe Coding 之后：能跑，然后呢？', '/'],
-  ['zh/read/index.html', 'zh-CN', '章节目录 | Vibe Coding, Then What?', '/read/'],
+  ['zh/read/index.html', 'zh-CN', '章节目录 | Vibe Coding 之后：能跑，然后呢？', '/read/'],
   ['404.html', 'en', 'Page not found | Vibe Coding, Then What?', '/zh/'],
 ];
 const chapters = await loadBook();
 pages.push(...chapters.map(chapter => [
-  `${chapterPath(chapter.entry).slice(1)}index.html`, 'zh-CN', `${chapter.title} | Vibe Coding, Then What?`, '/read/',
+  `${chapterPath(chapter.entry).slice(1)}index.html`, 'zh-CN', `${chapter.title} | Vibe Coding 之后：能跑，然后呢？`, '/read/',
 ]));
 let checked = 0;
 

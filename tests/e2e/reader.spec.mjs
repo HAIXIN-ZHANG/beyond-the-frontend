@@ -2,6 +2,7 @@ import { test as base, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chapterManifest, chapterPath } from '../../site/content/manifest.ts';
 import { withBasePath } from '../../site/config/deployment.ts';
+import { getMessages } from '../../site/config/i18n.ts';
 
 const at = pathname => withBasePath(pathname, process.env.NEXT_PUBLIC_BASE_PATH);
 const [opening, g01] = chapterManifest;
@@ -33,13 +34,82 @@ async function openSearch(page) {
   return dialog;
 }
 
+test('localized chrome and matching page roles remain coherent across languages and viewport sizes', async ({ page }) => {
+  async function roles() {
+    return page.evaluate(() => Object.fromEntries(Object.entries({
+      header: '.site-header', brand: '.wordmark', content: '.book-intro, .reading-index, .chapter-column',
+      title: 'h1', body: 'body', search: '.search-trigger', nav: '.site-header nav',
+    }).map(([role, selector]) => {
+      const element = document.querySelector(selector), style = window.getComputedStyle(element), rect = element.getBoundingClientRect();
+      return [role, {
+        left: rect.left, width: rect.width, height: rect.height,
+        type: [style.fontFamily, style.fontSize, style.fontWeight, style.lineHeight, style.letterSpacing],
+      }];
+    })));
+  }
+  for (const width of [1440, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    const snapshots = {};
+    for (const locale of ['en', 'zh']) for (const kind of ['home', 'index']) {
+      const route = `${locale === 'zh' ? '/zh' : ''}/${kind === 'index' ? 'read/' : ''}`;
+      const messages = getMessages(locale);
+      await page.goto(at(route));
+      await expect(page).toHaveTitle(kind === 'home' ? messages.title : `${messages.contents} | ${messages.title}`);
+      await expect(page.locator('.wordmark')).toHaveText(messages.title);
+      await expect(page.locator('.wordmark')).toHaveAttribute('aria-label', `${messages.title} · ${messages.home}`);
+      await expect(page.locator('.wordmark')).toHaveAttribute('lang', messages.lang);
+      const brandGeometry = await page.locator('.wordmark').evaluate(element => {
+        const bounds = element.getBoundingClientRect();
+        const phraseLines = [...element.children].map(phrase => {
+          const range = document.createRange(); range.selectNodeContents(phrase);
+          return new Set([...range.getClientRects()].map(rect => rect.top)).size;
+        });
+        return { height: bounds.height, phraseLines };
+      });
+      expect(brandGeometry.height).toBeGreaterThanOrEqual(44);
+      expect(brandGeometry.phraseLines, 'book-title phrases must not split internally').toEqual([1, 1]);
+      await expect(page.getByRole('navigation', { name: messages.navigation, exact: true })).toBeVisible();
+      await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeVisible();
+      if (kind === 'index') {
+        const links = page.locator('.available-chapters a');
+        await expect(links).toHaveCount(chapterManifest.length);
+        for (const [index, chapter] of chapterManifest.entries()) {
+          await expect(links.nth(index)).toHaveText(messages.chapterLabels[chapter.id] ?? chapter.title);
+          await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
+          await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
+          await expect(links.nth(index)).toHaveAttribute('lang', messages.lang);
+        }
+        if (locale === 'en') await expect(page.locator('.reading-index')).toContainText(messages.englishUnavailable);
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      snapshots[`${locale}-${kind}`] = await roles();
+    }
+    for (const kind of ['home', 'index']) {
+      const en = snapshots[`en-${kind}`], zh = snapshots[`zh-${kind}`];
+      for (const role of ['brand', 'title', 'body', 'search']) expect(zh[role].type, `${width}px ${kind} ${role} typography`).toEqual(en[role].type);
+      for (const role of ['header', 'content']) {
+        expect(zh[role].left, `${width}px ${kind} ${role} left`).toBeCloseTo(en[role].left, 0);
+        expect(zh[role].width, `${width}px ${kind} ${role} width`).toBeCloseTo(en[role].width, 0);
+      }
+      expect(zh.header.height, `${width}px ${kind} shared header height`).toBeCloseTo(en.header.height, 0);
+    }
+    await page.goto(at(chapterPath(g01)));
+    await expect(page).toHaveTitle(`${g01.title} | ${getMessages('zh').title}`);
+    const reading = await roles(), index = snapshots['zh-index'];
+    expect(reading.header.left).toBeCloseTo(index.header.left, 0);
+    expect(reading.header.width).toBeCloseTo(index.header.width, 0);
+    expect(reading.brand.type).toEqual(index.brand.type);
+    expect(reading.content.width).toBeCloseTo(index.content.width, 0);
+  }
+});
+
 test('entry, truthful availability, approved chapters, previous/next and static 404', async ({ page, request }) => {
   await page.goto(at('/'));
   await expect(page).toHaveTitle('Vibe Coding, Then What?');
   await page.getByRole('link', { name: /Browse chapters/ }).click();
   await expect(page).toHaveURL(new RegExp(`${at('/read/')}$`));
   await expect(page.getByText('English chapters are not available yet.', { exact: false })).toBeVisible();
-  await page.locator('.available-chapters').getByRole('link', { name: opening.title, exact: true }).click();
+  await page.locator('.available-chapters').getByRole('link', { name: getMessages('en').chapterLabels[opening.id], exact: true }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(opening.title);
   await expect(page.locator('article')).toHaveAttribute('data-source-sha256', opening.sha256);
   await expect(page.locator('article')).not.toContainText('中文初稿 · 待 review');

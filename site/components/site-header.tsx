@@ -11,8 +11,8 @@ export function SiteHeader({ locale, languageHome = false }: { locale: Locale; l
   const otherLocale = locale === 'en' ? 'zh' : 'en';
   return (
     <header className="site-header shell">
-      <Link className="wordmark" href={localePath(locale)} aria-label={`${site.name} · ${messages.home}`} lang="en">
-        {site.name}
+      <Link className="wordmark" href={localePath(locale)} aria-label={`${messages.title} · ${messages.home}`} lang={messages.lang}>
+        <span>{messages.title.slice(0, -messages.titleLines[1].length)}</span><span>{messages.titleLines[1]}</span>
       </Link>
       <SearchControl locale={locale} />
       <nav aria-label={messages.navigation}>

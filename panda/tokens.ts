@@ -1,6 +1,6 @@
 import { defineTokens, defineSemanticTokens, defineTextStyles } from '@pandacss/dev';
 
-// UI03 values and alias targets read from Figma; provenance: figma-reference.json.
+// Historical UI03 provenance: figma-reference.json. Current font/role overrides: site/DEVELOPMENT.md.
 export const tokens = defineTokens({
   "colors": {
     "palette": {
@@ -177,10 +177,10 @@ export const tokens = defineTokens({
   },
   "fonts": {
     "body": {
-      "value": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+      "value": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Noto Sans CJK SC\", \"Noto Sans SC\", sans-serif"
     },
     "chinese": {
-      "value": "\"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", system-ui, sans-serif"
+      "value": "{fonts.body}"
     },
     "mono": {
       "value": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Consolas, monospace"
@@ -518,6 +518,12 @@ export const semanticTokens = defineSemanticTokens({
       "proseMax": {
         "value": "{sizes.704}"
       },
+      "pageMax": {
+        "value": "68rem"
+      },
+      "readingLayoutMax": {
+        "value": "88rem"
+      },
       "sidebarCompact": {
         "value": "{sizes.224}"
       },
@@ -548,6 +554,16 @@ export const semanticTokens = defineSemanticTokens({
 });
 
 export const textStyles = defineTextStyles({
+  // Shared chrome role: explicit metrics avoid inheriting locale/prose typography.
+  "brand": {
+    "value": {
+      "fontFamily": "token(fonts.body)",
+      "fontSize": "16px",
+      "fontWeight": 600,
+      "lineHeight": "24px",
+      "letterSpacing": "-0.01em"
+    }
+  },
   "display": {
     "value": {
       "fontFamily": "token(fonts.body)",
@@ -563,6 +579,15 @@ export const textStyles = defineTextStyles({
       "fontSize": "40px",
       "fontWeight": 600,
       "lineHeight": "48px",
+      "letterSpacing": "-0.02em"
+    }
+  },
+  "h1-compact": {
+    "value": {
+      "fontFamily": "token(fonts.body)",
+      "fontSize": "32px",
+      "fontWeight": 600,
+      "lineHeight": "40px",
       "letterSpacing": "-0.02em"
     }
   },

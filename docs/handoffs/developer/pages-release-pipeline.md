@@ -136,3 +136,58 @@ The guide now reflects verified initial publication, maintained CI/manual CD, pu
 The paragraph retains unresolved moderate development-advisory maintenance, unexercised distinct prior-version rollback/byte-identical restoration and cross-browser/accessibility/security limits; only the two approved Chinese chapters are described as published. No suitable older healthy public release exists for the distinct-version exercise yet. The canonical ledger and actual release review remain the status/evidence authorities; no runtime feature, historical report body or Writer copy was rewritten.
 
 Documentation-only verification: exact diff inspection, resolving local Markdown file targets, whitespace/newline checks, unchanged guide prefix/suffix outside the assigned paragraph and byte-identical prior handoff prefix. No code/tests/build, dependency installation, Git write or publication performed. Changed guide SHA-256: `fadbe7c0178e7242f3eeddf94fce117d53824ffaa88752bf3d1fb7387f08eba7`; this appended report's full hash is supplied on delivery, separate from the frozen r2 hash above. Please review these two exact documentation changes and return any factual correction; Coordinator owns integration and Writer owns concurrent public-document closeout.
+
+## Locale and typography feedback — r3 frozen for review
+
+2026-11-17: the author identified an English-only header title in Chinese UI and inconsistent typography/content width between locales. This concrete feedback supersedes the preceding read-only final audit. Verified workspace branch `codex/milestone-1-final-audit`, HEAD `9729a614d5dd59abcc4f4cbd814657ed1e82d4f6`, initially clean. Developer scope is existing i18n/shared UI and evidence-justified Panda typography/layout corrections, minimal affected regression, bounded developer-guide update and this same handoff. Coordinator owns board/review/Git/deployment; preserve all Writer sources, approved manuscript hashes, workflows/security/dependencies/Figma and31recovery files. No English manuscript or book/repository rename is authorized.
+
+Compared English/Chinese homes and indexes plus Chinese reading at matched 1440×900 and320×900 viewports before implementation. The initial source inspection identified English-only header/eyebrow and Chinese metadata suffix; actual platform-font measurements confirmed the typography mismatch. Browser plugin is unavailable, so installed project Chromium/Playwright and its existing loopback preview were used. No dependency installation or remote font service.
+
+### Observed differences and correction
+
+| Role / evidence | Before | Final |
+| --- | --- | --- |
+| Chinese brand / metadata | English `site.name` with `lang=en` in header, English eyebrow and Chinese page-title suffix | Existing localized canonical title in visible brand, accessible home label, eyebrow and Chinese metadata template. Proper names and language-switch target labels retain their appropriate language |
+| Desktop brand | English18px versus Chinese17px, both weight700; Chinese-page Latin wordmark actually rendered in PingFang | Shared explicit16px/600/24px `brand`; Latin uses native SF, Chinese uses PingFang under one system-first stack |
+| Shared home/index body | English18px/30px versus Chinese17px/30px; mobile29px versus30px line height | Shared18px/400/30px desktop and17px/400/29px mobile, with the same font stack; actual glyph fallback remains script-aware |
+| Home/index main title | Both already40px/600/48px desktop; mobile also40px and caused excessive wrapping | Same desktop role retained; shared `h1-compact`32px/600/40px on mobile |
+| Containers | Same-locale-role home/index were already704px at1440; reading header expanded to1376px while home/index header was1088px | No invented locale width bug: preserve704px content cap. All headers/footers use68rem `pageMax`; only reading main retains88rem `readingLayoutMax` for its rails |
+| Long-form Chinese reading | Separate prose typography and rails, intentionally distinct from landing pages | Explicit `zh-body`17px/30px and `zh-title`30px/700/43px remain independent reading roles. Same-role home/index align across locales; no nonexistent English reading body was created |
+| English catalog | Raw Chinese link labels despite English surrounding UI | Two English navigation labels in the existing i18n contract; unchanged Chinese destinations and `hrefLang=zh`, displayed-label `lang=en`, and explicit unavailable-English-body notice. Manuscript titles/hashes and empty English corpus unchanged |
+
+`fonts.body` is now a shared local system-first Latin/CJK stack; `fonts.chinese` aliases it. This is an **author-requested production override** of the historical Figma font primitives, not a claim that all111historically mapped values are unchanged. Frozen `panda/figma-reference.json` is byte-identical; color/recipe system, content schema and manuscripts are unchanged. Added shared roles are `brand`, `h1-compact`, `pageMax` and `readingLayoutMax`; no per-node token proliferation or locale-specific tiny font.
+
+**WRAP-01:** preliminary after-root screenshots exposed an awkward320px break inside 然后. Final header renders two intact existing `titleLines` phrases, retains exact canonical text/spacing/aria/language, uses shared flex wrapping and keeps the44px minimum target. Both languages retain the same header height. A rendered Range geometry check verifies phrases do not split internally. The global static404 remains the existing English document with a marked Chinese recovery section; no route-specific404 translation or new route was introduced. Search, Appearance and status copy were inspected and existing localized interaction/error tests retained.
+
+### Actual verification and evidence
+
+- Before capture: `/tmp/vctw-locale-before/` contains10screenshots and `metrics.json` with computed family/size/weight/line-height/container positions and actual CDP platform fonts. `/tmp/vctw-locale-after-root/` is the preliminary pre-WRAP set, not the frozen final state.
+- Final capture: `/tmp/vctw-locale-final-root/` and `/tmp/vctw-locale-final-pages/` each contain10matched screenshots plus `metrics.json`; all ten corresponding root/Pages title and header/brand/main/content/title/body metrics match. No document overflow or console/page errors. Actual SF/PingFang fallback was measured on this Mac; platform font appearance on Windows/Linux/Safari is not independently certified.
+- Final1440px geometry across all five pages: header x176/width1088/height73; home/index/reading prose width704. At320px: header x16/width288/height117, content width288. Brand16px/600/24px desktop and14px/600/20px mobile. Final Chinese narrow header wraps at the two meaningful phrases. Rendered desktop/narrow home, index and reading screenshots were inspected, with no clipping or overlay observed.
+- First check stopped at lint because a new browser-evaluate callback used bare `getComputedStyle`; corrected to `window.getComputedStyle` without weakening lint. An earlier status message incorrectly anticipated a pass and was promptly corrected. Full check then passed strict app/Panda compilation, lint and all39Node tests (one added locale/catalog-boundary test).
+- Before WRAP: fresh root build/verifier and all10E2E passed in4.3seconds. Original nine meaningful cases and all health/error assertions remain, plus one cross-locale role/geometry/title/catalog case.
+- After WRAP: fresh root build/verifier passed7documents/128local references, zh20/en0; the affected localized chrome test passed in1.3seconds, including actual phrase layout and shared44px target. Unchanged full root matrix was not redundantly repeated.
+- Final Pages source: full check passed lint/strict compilation/all39Node tests; fresh Pages build/verifier passed7documents/128references, zh20/en0; **all10E2E passed in4.4seconds**, including PAGES-02 combined search→Appearance, real scroll/resize, storage/copy failure, search retry and320px overflow checks. No sleeps/retries/forced actions.
+- The earlier quota interruption rejected the combined WRAP edit/verification call before execution because automatic approval review could not complete. After explicit resumption, actual unchanged source was checked, the correction applied and fresh affected/final Pages evidence obtained; no unavailable check is represented as passing.
+- Preserved171other tracked files (excluding13owned files and six known Coordinator/Writer files), all31recovery hashes, both original manuscript hashes and the entire previously accepted handoff prefix. Local Markdown file targets and `git diff --check` pass. No workflow/lock/dependency/Figma/security/Git/publication change. Current `site/out` is the fresh Pages export of uncommitted corrected UI, without `release.json`.
+
+### Frozen submission and next gate
+
+Thirteen owned files: the twelve below and this appended handoff (full report hash supplied on delivery). `docs/release.md` changes only the current maintained-suite count nine→ten; dated historical nine-case evidence remains intact. Developer guide adds bounded locale/role/provenance/regression explanations. Export verifier changes only expected localized Chinese document titles, preserving its existing strong contracts.
+
+| File | SHA-256 |
+| --- | --- |
+| `docs/release.md` | `8708ec2ceab395aae37866fe085a6596ea9ab70d05f7a94d6e0a40bb58271353` |
+| `panda/global-styles.ts` | `08250fbebbfa235b3984b8eb40285a50394cba2ace2f0cb40a29953199ea9711` |
+| `panda/tokens.ts` | `bac74f94edfdfbbcfedff22a4c9501fb1d5e5a548831e506d11391f24d468b89` |
+| `scripts/verify-export.mjs` | `9d246bcae398bcc0297e2196a67bf5f592ec257a291d9a9041eb5ab2a1bc1d69` |
+| `site/DEVELOPMENT.md` | `fdf053df53fb059543f2dbe90032672fbac37600fd77f4c24f9edb4314319925` |
+| `site/app/(chinese)/zh/layout.tsx` | `62d9d1e5696ccd8242a7ee6d78ef9595e366b4ac167bc26ed48c8811266f45bc` |
+| `site/components/home-page.tsx` | `5a556293aa6cd864e99debdd3de448d012dbd2be7fcda5cd2cb6e3651a3cb653` |
+| `site/components/reading-index.tsx` | `a9f274cadf7c90fd6795b9f8f5aa3d0314ef3c3d25da2a3a150b9eaa6f881a31` |
+| `site/components/site-header.tsx` | `efae23807e089f37ec74e9870cab42b45836bc8ff12659188ac00d90f98713ef` |
+| `site/config/i18n.ts` | `38b152d3634d1c5493fbf823ef4409bf92a9c17e9f8f11c5ca57c1589a16eb8a` |
+| `tests/e2e/reader.spec.mjs` | `510d1c8472ecc389062ad861ffea08a7e68767b4c26310113ec2653b9afffa96` |
+| `tests/i18n.test.mjs` | `f3294983ec768fc0f549294a9c6e30474e97889045c6af5c31a2f0abed924066` |
+
+Please review the exact localized identity, navigation-only labels, shared role metrics and final phrase wrapping against actual captures; return concrete findings to Developer. Coordinator owns acceptance, matching-head CI/Git integration and deliberate publication/public recheck. Local rendering does not update the verified public revision or close independent hosting/browser limits. No further implementation or background process remains; wait at this review gate.

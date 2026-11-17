@@ -115,7 +115,28 @@ Escape is handled explicitly after the composition guard because populated nativ
 
 `SectionActions` is a small details disclosure after each source heading. The original native heading anchor remains available; no repeated default card is added. Copy builds the actual origin/path/encoded-heading URL on interaction, preserving any Pages prefix once and removing unrelated query data. Clipboard failure/absence reveals a selectable read-only URL; success uses a live announcement without requesting focus or scrolling. Correction first previews chapter/heading/source revision/actual URL locally, then offers an editable GitHub issue-draft link. Nothing is submitted automatically; no private logs, manuscript file paths or model request is attached. Runtime origin-dependent values are produced only in event handlers, avoiding hydration-time URL guesses.
 
-Search/action styles use existing semantic roles, shared Button states and explicit Panda token expressions. UI04 feedback/input/card geometry is reused; mobile layouts adapt to the actual content and real buttons rather than copying Figma's spaced header text or simultaneously showing specimen states. Root/Pages export verification preserves all earlier assertions and adds JSON/heading-action checks; actual state/focus/clipboard/screenshot evidence belongs to the search/sharing handoff. Permanent E2E/CI integration remains a separately assigned part of Delivery Milestone 1 Release Readiness.
+Search/action styles use existing semantic roles, shared Button states and explicit Panda token expressions. UI04 feedback/input/card geometry is reused; mobile layouts adapt to the actual content and real buttons rather than copying Figma's spaced header text or simultaneously showing specimen states. Root/Pages export verification preserves all earlier assertions and adds JSON/heading-action checks; the search/sharing handoff retains its original state/focus/clipboard/screenshot evidence. Maintained E2E now checks representative reading/recovery flows as described below; it does not replace every earlier browser or design review.
+
+## Maintained browser verification
+
+`@playwright/test` is an exact development dependency. `playwright.config.mjs` runs the Chromium suite under `tests/e2e/` against fresh static output, using one worker, bounded test/global timeouts, zero retries and `forbidOnly`. Browser setup follows [Playwright's official CI guidance](https://playwright.dev/docs/ci):
+
+```sh
+npm ci
+npm run test:e2e:install
+NEXT_PUBLIC_BASE_PATH='' npm run build
+NEXT_PUBLIC_BASE_PATH='' npm run verify:export
+NEXT_PUBLIC_BASE_PATH='' npm run test:e2e
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run build:pages
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run verify:export
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run test:e2e
+```
+
+On a Linux runner, install Chromium's OS dependencies with `npx --no-install playwright install --with-deps chromium` after `npm ci`. Local browser installation uses the project dependency, not a global or temporary CLI. `test:e2e` never builds automatically: keep its prefix identical to the export just built/verified. `npm run check` runs lint, strict application/tooling types and Node regression tests; the separate browser command covers rendered behavior.
+
+The Playwright-managed server is `scripts/static-preview.mjs`, bound only to `127.0.0.1:4179`. It serves `site/out/`, maps the exact build prefix, sends the built bilingual404 with actual404 status, handles GET/HEAD and rejects traversal/escaping symlinks. It refuses an incomplete export or an already occupied port; it never reuses another server or serves the repository. Node tests exercise its actual HTTP behavior. This is local verification tooling, not production hosting or Pages CD.
+
+The suite uses approved chapter identities/source hashes and covers entry/navigation, real Chinese search/heading focus, retained-query fetch retry, honest English absence, appearance/refresh/denied storage, manual-copy/correction preview and narrow keyboard/local overflow. Unexpected page errors and console errors fail; only the deliberately injected503 from the exact index URL is expected in its recovery test. No external issue is opened/submitted. Failure traces/screenshots and local screenshots are under ignored `.artifacts/playwright/`; inspect traces with `npx --no-install playwright show-trace <trace.zip>`. Do not commit generated artifacts. Current local/cloud outcomes and limitations belong to the [release-verification handoff](../docs/handoffs/developer/release-verification.md) and [actual review](../docs/reviews/release-verification.md); this Chromium sample is not full cross-browser/accessibility acceptance or deployment proof.
 
 ## Continuous Integration and Merge Protection
 
@@ -124,8 +145,8 @@ Search/action styles use existing semantic roles, shared Button states and expli
 | Required check name | Commands |
 | --- | --- |
 | `Quality` | `npm ci --no-fund`, then `npm run check` |
-| `Static export (root)` | Empty prefix, `npm run build`, `npm run verify:export` |
-| `Static export (pages)` | `/vibe-coding-then-what`, `npm run build:pages`, `npm run verify:export` |
+| `Static export (root)` | Empty prefix, build, export verifier, matching Chromium install and `npm run test:e2e` |
+| `Static export (pages)` | `/vibe-coding-then-what`, Pages build, export verifier, matching Chromium install and `npm run test:e2e` |
 
 The export jobs wait for Quality, then run independently with fail-fast disabled. Each build/verify pair shares its environment, with root explicitly clearing inherited prefixes. New PR commits cancel older runs for the same PR. Reproduce all checks with:
 
@@ -133,22 +154,25 @@ The export jobs wait for Quality, then run independently with fail-fast disabled
 NEXT_PUBLIC_BASE_PATH='' npm run check
 NEXT_PUBLIC_BASE_PATH='' npm run build
 NEXT_PUBLIC_BASE_PATH='' npm run verify:export
+NEXT_PUBLIC_BASE_PATH='' npm run test:e2e
 NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run build:pages
 NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run verify:export
+NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what npm run test:e2e
 ```
 
-The hosted runner is `ubuntu-24.04`, with actual Node/npm versions printed. Node 24 patches and runner images are not immutable. Official Actions are pinned to full commits verified on 2026-11-15:
+The hosted runner is `ubuntu-24.04`, with actual Node/npm versions printed. Node 24 patches and runner images are not immutable. Official Actions are pinned to full commits; checkout/setup-node were verified on 2026-11-15, and the failure-artifact action on 2026-11-17:
 
 - [checkout v7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1): `3d3c42e5aac5ba805825da76410c181273ba90b1`.
 - [setup-node v7.1.0](https://github.com/actions/setup-node/releases/tag/v7.1.0): `949feb2413d6458794dcd2491c4babbbce0c15c1`.
+- [upload-artifact v7.0.2](https://github.com/actions/upload-artifact/releases/tag/v7.0.2): `cf430e030ddbb5b0abf93d22962f4752f3646cd9`.
 
-Their tagged runtime/docs specified Node 24 and Actions Runner ≥2.327.1. No local/self-hosted runner was configured for this. Permissions stay `contents:read`; checkout does not persist credentials. There are no private secrets, registry credentials, automatic package caches, artifact uploads or release permissions. The workflow does not use `pull_request_target` or interpolate PR/issue prose into shell commands.
+The inspected Actions use Node24; checkout/setup-node's tagged runtime/docs specified Actions Runner ≥2.327.1. No local/self-hosted runner was configured for this. Permissions stay `contents:read`; checkout does not persist credentials. There are no private secrets, registry credentials, automatic package caches or release permissions. After a failure, each export job uploads only `.artifacts/playwright/` with a deployment/attempt-specific name and seven-day retention, ignoring absent files. Hidden files are included only within that explicit public-test-output folder, so its hidden parent does not prevent diagnostics from being retained; no source/env/cache directory is selected. Actual uploaded artifacts require cloud execution and are not inferred from local passes. The workflow does not use `pull_request_target` or interpolate PR/issue prose into shell commands.
 
 Required checks were enabled only after successful cloud execution, with up-to-date branches required. Each revision still needs its own checks. See the [CI review](../docs/reviews/CI01.md) and [dated access baseline](../docs/security/access-policy.md); a local pass alone does not establish Linux/cloud success or saved server settings.
 
 ## Evidence and limits
 
-**Delivery Milestone 1 Release Readiness remains open.** Read-only source inventory finds only `.github/workflows/ci.yml`: Quality and two static-export jobs, with read-only permissions. `package.json` invokes lint/typecheck/Node tests and export checks; no permanent browser E2E command, Pages CD workflow, online smoke or rollback mechanism is implemented there. Earlier temporary browser matrices and actual PR/main cloud passes are completed evidence for their reviewed revisions, not substitutes for those missing operational gates. The remaining scope is dependency-alert reassessment, a small permanent E2E suite in CI, gated Pages CD, actual public URL/assets/subpath/404/theme/navigation smoke and a verified recovery/rollback path. See the [canonical ledger](../docs/delivery/milestone-1.md) and [record-alignment review](../docs/reviews/milestone-1-record-alignment.md). These are first-delivery operational requirements, not future reader features; they need separate assignments and applicable release authorization. The no-deployment hold remains in force.
+**Delivery Milestone 1 Release Readiness remains open.** `.github/workflows/ci.yml` retains Quality and the two static-export jobs with read-only permissions; the export jobs now include maintained browser verification after their build/verifier. This implementation needs its own actual review and exact-head cloud acceptance, recorded in the [release-verification review](../docs/reviews/release-verification.md), rather than inheriting prior temporary-browser/CI passes. Compatible dependency repair/risk disposition, gated Pages CD, actual public URL/assets/subpath/404/theme/navigation smoke and verified recovery/rollback remain distinct gates. The [canonical ledger](../docs/delivery/milestone-1.md) retains first-delivery release scope. On 2026-11-17 the author authorized the bounded initial Pages release after actual review/verification, superseding the earlier deployment hold; the [board](../docs/coordination.md) owns the sequence and assignments. This verification change adds no CD workflow, changes no Pages settings and does not itself publish the site.
 
 The narrow branding migration's actual check/build/export/browser evidence is recorded in its [Developer handoff](../docs/handoffs/developer/vibe-coding-rebrand.md), with acceptance recorded separately by Coordinator. That evidence checks the existing reading shell and new prefix; it does not accept the separate theme checkpoint or establish a public deployment.
 
@@ -157,6 +181,8 @@ Historical foundation and TypeScript runs passed clean installation, lint, four 
 The [theme-stage handoff](../docs/handoffs/developer/beta1-theme-foundation.md) records a full dependency audit with seven moderate entries from one [minimatch advisory](https://github.com/advisories/GHSA-g3hv-75wg-m249) in the typescript-eslint development chain, and zero production-only findings. That dated audit identified patched 11.0.1 outside upstream `^10.2.2`; it is not a fresh vulnerability assessment. The configuration does not enable projectService/allowDefaultProject or the advisory's high-optimization trigger. The historical TypeScript review judged that usage non-blocking. No dependency repair, forced override or incompatible downgrade is claimed; reassess on upstream/configuration changes.
 
 The [project consistency audit](../docs/handoffs/developer/project-consistency-audit.md) reassessed dependencies during 2026-11-16–17: full npm audit again reports seven moderate development-chain records from that one advisory, with zero production-only findings and no high/critical entries. The installed affected minimatch is 10.2.6 under typescript-estree. Actual effective ESLint parser options do not enable projectService/allowDefaultProject; the inspected call uses `dot:true` with the default optimization level 1, while the [maintainer advisory](https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249) describes amplification at level ≥2. This supports a bounded lower-exposure inference for the inspected configuration, not a fix or general safety guarantee. Official npm latest metadata still identifies typescript-eslint/typescript-estree 8.72.2 with minimatch `^10.2.2`, which excludes patched 11.0.1. Dependencies remain unchanged; review a compatible upstream repair separately, and reassess if the lint/project-service configuration changes. Overall Release Readiness and reviewer risk acceptance remain separate.
+
+The [release-verification handoff](../docs/handoffs/developer/release-verification.md) records the subsequent fresh npm/advisory/allowed-major reassessment after adding the fixed Playwright development package: the same unresolved chain and seven moderate records remain, production-only findings remain zero, and no compatible repaired upstream version was identified. Only the necessary test packages were added; no existing resolved dependency was upgraded, overridden or downgraded. This is a current disposition for review, not a claim that the advisory was repaired or that public release is fully verified.
 
 Project commands disable Next telemetry without changing machine settings, and automatic agent-rule generation is disabled. Search index GET routes generate static files at build time; no request-time backend, server writes, credentials, external fonts or analytics were added. The simple SVG icon is original. Only the two reviewed `book/` entries feed rendered chapters; internal directories (`book/` as a whole, `docs/`, `.local/`, `.git/`, dependencies) are not copied into the public export. Generated output/caches/env files stay out of Git.
 

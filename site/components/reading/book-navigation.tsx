@@ -14,8 +14,8 @@ export function BookNavigation({ chapters, currentId }: { chapters: readonly Cha
       id: chapter.id, title: chapter.title, status: 'available', href: chapterPath(chapter),
       current: chapter.id === currentId, availability: '已审阅草稿',
     })) }]} />
-    <section className="planned-map" aria-label="计划中的八篇">
-      <p>全书方向 · 计划中的八篇</p>
+    <section className="planned-map" aria-label="计划中的八个部分">
+      <p>全书方向 · 计划中的八个部分</p>
       <ol>{plannedParts.map(part => <li key={part}>{part}</li>)}</ol>
       <p>全书仍在写作中。以上是内容方向，可阅读章节见上方。</p>
     </section>

@@ -9,10 +9,10 @@ export function sectionUrl(currentUrl: string, headingId: string): string {
 
 export function correctionUrl(context: SharingContext, heading: string, url: string): string {
   const issue = new URL('https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues/new');
-  issue.searchParams.set('title', `Correction: ${context.chapterTitle} · ${heading}`);
+  issue.searchParams.set('title', `纠错：${context.chapterTitle} · ${heading}`);
   issue.searchParams.set('body', [
-    `Chapter: ${context.chapterTitle} (${context.chapterId})`, `Heading: ${heading}`, `URL: ${url}`,
-    `Source SHA-256: ${context.sourceHash}`, '', 'Suggested correction / 建议修改：', '',
+    `章节：${context.chapterTitle} (${context.chapterId})`, `小节：${heading}`, `链接：${url}`,
+    `原稿版本 SHA-256：${context.sourceHash}`, '', '建议修改：', '',
   ].join('\n'));
   return issue.href;
 }

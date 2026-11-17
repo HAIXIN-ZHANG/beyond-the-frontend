@@ -31,7 +31,7 @@ export function SectionActions({ context, headingId, headingTitle }: { context: 
       <p className="section-copy-status" role="status">{copy?.result === 'copied' ? '本节链接已复制' : copy?.result === 'manual' ? '无法自动复制，请选择下方链接并手动复制。' : ''}</p>
       {copy?.result === 'manual' ? <label className="manual-section-link">本节链接<textarea readOnly value={copy.url} onFocus={event => event.currentTarget.select()} /></label> : null}
       {preview ? <div className="correction-preview">
-        <p>将在 GitHub 打开可编辑的 issue 草稿，请检查后自行提交。</p>
+        <p>将在 GitHub 打开可编辑的问题草稿，请检查后自行提交。</p>
         <dl><dt>章节</dt><dd>{context.chapterTitle} ({context.chapterId})</dd><dt>小节</dt><dd>{headingTitle}</dd>
           <dt>原稿版本 SHA-256</dt><dd><code>{context.sourceHash}</code></dd><dt>本节链接</dt><dd>{preview.url}</dd></dl>
         <a href={preview.issue} target="_blank" rel="noopener noreferrer">在 GitHub 查看并编辑草稿 ↗</a>

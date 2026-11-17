@@ -47,7 +47,7 @@ test('localized chrome and matching page roles remain coherent across languages 
       }];
     })));
   }
-  for (const width of [1440, 320]) {
+  for (const width of [1440, 768, 375, 320]) {
     await page.setViewportSize({ width, height: 900 });
     const snapshots = {};
     for (const locale of ['en', 'zh']) for (const kind of ['home', 'index']) {
@@ -100,6 +100,57 @@ test('localized chrome and matching page roles remain coherent across languages 
     expect(reading.header.width).toBeCloseTo(index.header.width, 0);
     expect(reading.brand.type).toEqual(index.brand.type);
     expect(reading.content.width).toBeCloseTo(index.content.width, 0);
+    for (const chapter of [g01, opening]) {
+      if (chapter !== g01) await page.goto(at(chapterPath(chapter)));
+      const title = page.locator('article h1 .heading-link');
+      await expect(title).toHaveText(chapter.title);
+      const phraseLines = await title.evaluate(element => {
+        const text = element.firstChild, phrases = element.textContent.match(/[^：，。！？]+[：，。！？]?/gu);
+        let offset = 0;
+        return phrases.map(phrase => {
+          const range = document.createRange(); range.setStart(text, offset); offset += phrase.length; range.setEnd(text, offset);
+          return { phrase, lines: new Set([...range.getClientRects()].map(rect => rect.top)).size };
+        });
+      });
+      for (const phrase of phraseLines) expect(phrase.lines, `short title phrase ${phrase.phrase}`).toBe(1);
+    }
+  }
+});
+
+test('enlarged header text wraps controls instead of overlapping intact book-title phrases', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  for (const locale of ['en', 'zh']) {
+    await page.goto(at(locale === 'zh' ? '/zh/' : '/'));
+    // Explicit computed-text enlargement is a text stress test, not native browser zoom.
+    await page.locator('header').evaluate(header => {
+      const samples = [...header.querySelectorAll('*')].map(element => {
+        const style = window.getComputedStyle(element);
+        return { element, size: Number.parseFloat(style.fontSize), line: Number.parseFloat(style.lineHeight) };
+      });
+      for (const { element, size, line } of samples) {
+        element.style.fontSize = `${size * 2}px`;
+        if (Number.isFinite(line)) element.style.lineHeight = `${line * 2}px`;
+      }
+    });
+    const geometry = await page.locator('header').evaluate(header => {
+      const search = header.querySelector('.search-trigger').getBoundingClientRect();
+      return [...header.querySelectorAll('.wordmark span')].map(phrase => {
+        const rect = phrase.getBoundingClientRect();
+        return {
+          left: rect.left, right: rect.right, viewport: window.innerWidth,
+          overlaps: rect.left < search.right && rect.right > search.left && rect.top < search.bottom && rect.bottom > search.top,
+        };
+      });
+    });
+    for (const phrase of geometry) {
+      expect(phrase.overlaps, 'enlarged title must not overlap Search').toBe(false);
+      expect(phrase.left).toBeGreaterThanOrEqual(0);
+      expect(phrase.right).toBeLessThanOrEqual(phrase.viewport);
+    }
+    await page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true }).click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.search-trigger')).toBeFocused();
   }
 });
 
@@ -154,6 +205,44 @@ test('Chinese search uses the real prefixed resource, native heading focus and E
   await expect(page.locator('.search-trigger')).toBeFocused();
   await openSearch(page);
   await expect(page.getByRole('searchbox')).toHaveValue('报名');
+});
+
+test('search locks the reading position while results scroll and restores normal document scrolling on close or navigation', async ({ page }) => {
+  await page.goto(at(chapterPath(g01)));
+  for (const closeWith of ['Escape', 'Close', 'result']) {
+    const heading = page.locator('article h2').nth(1);
+    if (closeWith === 'Escape') { await heading.focus(); await page.keyboard.press('Control+k'); }
+    else await page.getByRole('button', { name: '搜索章节', exact: true }).click();
+    const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible();
+    if (await dialog.getByRole('searchbox').inputValue()) await dialog.getByRole('searchbox').fill('');
+    await expect(dialog).toContainText('搜索已提供的章节');
+    const position = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(2, 850);
+    await page.mouse.wheel(0, 500);
+    // A rendered frame observes the delivered wheel; no sleep or retry can hide movement.
+    await page.evaluate(() => new Promise(resolve => window.requestAnimationFrame(resolve)));
+    expect(await page.evaluate(() => window.scrollY), 'modal backdrop must not scroll the reader').toBe(position);
+    await dialog.getByRole('searchbox').fill('状态');
+    const first = dialog.locator('.search-results a').first();
+    await expect(first).toBeVisible();
+    const destination = new URL(await first.getAttribute('href'), page.url());
+    const bounds = await dialog.boundingBox();
+    await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height - 20);
+    await page.mouse.wheel(0, 500);
+    await expect.poll(() => dialog.evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    if (closeWith === 'Escape') await page.keyboard.press('Escape');
+    else if (closeWith === 'Close') await dialog.getByRole('button', { name: '关闭', exact: true }).click();
+    else { await dialog.getByRole('searchbox').press('Enter'); await expect(page).toHaveURL(destination.href); }
+    await expect(dialog).not.toBeVisible();
+    if (closeWith !== 'result') {
+      await expect(closeWith === 'Escape' ? heading : page.locator('.search-trigger')).toBeFocused();
+      expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    } else await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
+    const restored = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(2, 850); await page.mouse.wheel(0, 150);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(restored);
+  }
 });
 
 test('actual search failure/retry retains the query through loading and error', async ({ page, baseURL, health }) => {

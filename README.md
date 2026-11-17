@@ -6,7 +6,7 @@
 
 AI can help you turn an idea into a working product. This book helps you understand the systems behind it, so you can judge what works, what needs checking and what should change next.
 
-**Free to read and publicly maintained.** The book is being written in public; the online reading edition is still in preparation.
+**[Read online →](https://haixin-zhang.github.io/vibe-coding-then-what/)** Free to read and publicly maintained. Two reviewed Chinese drafts are available; English manuscripts are planned.
 
 ## Who is this for?
 
@@ -35,7 +35,7 @@ Explanations combine principles, original examples and conditional choices. Recu
 
 Start with the reviewed [Chinese opening](book/drafts/zh/00-before-we-start.md) and [common-foundations chapter](book/drafts/zh/01-a-page-and-a-system.md). Browser Fundamentals has an accepted research outline, but its manuscript is not written. The remaining framework is planned content, not a finished book.
 
-The intended editions are Simplified Chinese and English, with Chinese drafts reviewed before English adaptation. There are no English chapter bodies yet. The static reader, current-language search and section-link/correction flow are reviewed and merged, but no deployed Pages reading edition or public reading URL has been verified. The [first-delivery record](docs/delivery/milestone-1.md) explains what shipped in source and what release checks remain; [development instructions](site/DEVELOPMENT.md) are separate from the book.
+The [online reader](https://haixin-zhang.github.io/vibe-coding-then-what/zh/) includes chapter navigation, Chinese search, section links and a correction entry. The interface supports Simplified Chinese and English; there are **two reviewed Chinese drafts and zero English manuscript bodies**. Chinese drafts are reviewed before English adaptation. The [first-delivery record](docs/delivery/milestone-1.md) documents the verified public release and its limits; [development instructions](site/DEVELOPMENT.md) are separate from the book.
 
 ## About the author
 

@@ -16,6 +16,8 @@ Prior necessary npm/browser tooling authorization applies. File ownership stays 
 
 Previous interrupted checkpoint (superseded by explicit resumption): actual branch/HEAD remains the assigned baseline; release-verification changes are uncommitted and no new PR/merge is claimed. Developer records passing lint/strict compilers/32 Node tests, root build/verifier and8 root E2E; Pages verification/final freeze is unfinished. RV-01 failure-artifact upload is present but awaits final workflow review/cloud execution. Writer report is accepted/frozen. Coordinator must inspect actual resumed evidence before dependent CD; do not replace or restart this work from an old task.
 
+Final local release-verification/materials bundle is accepted after actual review; both owner tasks are closed. Actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20) tracks payload `afbb87f918db7504ecc5547e67ab855930ab117e`. Its execution record owns final reviewed-head/cloud browser checks/merge and local main reconciliation. The interrupted checkpoint above is historical; do not restart completed root/Pages checks from it.
+
 ## Completed project-consistency audit
 
 The author requested a fresh cross-check of documents, project structure, code/framework, Markdown and README, with bounded present corrections and clearly recorded later work. Assigned branch `codex/project-consistency-audit`, based on actual main/origin-main `78488012044e0a8fd8e4946f1abc72e1e2b084c9`. PR18 has merged after exact-head Quality/root/Pages success in run43899041187; its execution record owns later main-CI evidence.

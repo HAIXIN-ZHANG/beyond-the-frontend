@@ -52,3 +52,5 @@ The unchanged single-advisory development chain remains bounded unresolved maint
 ## Integration and remaining external step
 
 Coordinator may integrate only the accepted bundle after exact reviewed-head Quality/root/Pages jobs, including the new browser steps, actually pass. Public Pages source is configured and explicit publication is authorized. Native browser continuation currently requires the user's Mac to be unlocked; this is an external UI constraint, not a failed code check or a reason to stop code/CI/pipeline preparation. The separate CD/recovery assignment follows this stage's integration, with observed deployment/live verification recorded separately.
+
+Accepted payload `afbb87f918db7504ecc5547e67ab855930ab117e` is tracked in actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20), based on main `e0b530a3ef7397c16158cde8d59190f18f84e57b`. Only Coordinator review/board pointers follow this snapshot; owner payloads remain frozen. The PR execution record owns actual final-head/browser/check jobs, squash and main reconciliation, without a prefilled outcome.

@@ -6,6 +6,7 @@ import { BookNavigation } from './book-navigation.tsx';
 import { OnThisPage } from './on-this-page.tsx';
 import { MarkdownContent } from './markdown-content.tsx';
 import { ReadingDisclosure } from './reading-disclosure.tsx';
+import { ReadingTools } from './reading-tools.tsx';
 
 export function ChapterReader({ chapter, chapters }: { chapter: LoadedChapter; chapters: readonly ChapterEntry[] }) {
   const index = chapters.findIndex(entry => entry.id === chapter.entry.id);
@@ -16,10 +17,10 @@ export function ChapterReader({ chapter, chapters }: { chapter: LoadedChapter; c
   return <div className="chapter-layout">
     <aside className="book-rail">{bookNavigation}</aside>
     <div className="chapter-column">
-      <div className="reading-tools">
+      <ReadingTools>
         <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航">{bookNavigation}</ReadingDisclosure></div>
         <div className="mobile-outline"><ReadingDisclosure label="本章目录">{outline}</ReadingDisclosure></div>
-      </div>
+      </ReadingTools>
       <p className="chapter-context">中文 · 已审阅草稿 <span>全书仍在写作中</span></p>
       <article className="chapter-prose" data-chapter-id={chapter.entry.id} data-source-sha256={chapter.entry.sha256}>
         <MarkdownContent node={chapter.tree} sharing={{ chapterId: chapter.entry.id, chapterTitle: chapter.title, sourceHash: chapter.entry.sha256 }} />

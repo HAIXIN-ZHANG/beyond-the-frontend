@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { loadBook } from '../site/content/load-book.ts';
 import { buildSearchIndex } from '../site/content/build-search-index.ts';
-import { normalizeSearch, searchEntries, readSearchIndex } from '../site/content/search.ts';
+import { normalizeSearch, searchEntries, readSearchIndex, highlightSearch } from '../site/content/search.ts';
 import { sectionUrl, correctionUrl } from '../site/components/reading/sharing.ts';
 
 const chapters = await loadBook();
@@ -10,7 +10,8 @@ const chinese = buildSearchIndex(chapters, 'zh');
 const english = buildSearchIndex(chapters, 'en');
 
 test('static indexes contain only approved public sections, real IDs and source revisions', () => {
-  assert.equal(chinese.entries.length, 20);
+  assert.equal(chinese.entries.length, chapters.reduce((count, chapter) => count + chapter.headingIds.length, 0));
+  assert.deepEqual(new Set(chinese.entries.map(entry => entry.chapterId)), new Set(['opening', 'G01', 'F01']));
   assert.deepEqual(english.entries, []);
   for (const entry of chinese.entries) {
     const chapter = chapters.find(item => item.entry.id === entry.chapterId);
@@ -65,6 +66,46 @@ test('ranking ties are stable and excerpts stay bounded near a real body match',
   assert.deepEqual(results.map(result => result.entry.chapterId), ['0', '1', '2']);
   assert.ok(results[0].excerpt.includes('needle'));
   assert.ok(Array.from(results[0].excerpt).length <= 142);
+});
+
+test('all matching sections remain reachable beyond the former twelve-result limit', () => {
+  const expected = chinese.entries.filter(entry => normalizeSearch(`${entry.headingTitle} ${entry.chapterTitle} ${entry.text}`).includes('报名'));
+  assert.equal(expected.length, 14);
+  const results = searchEntries(chinese, '报名', 'zh');
+  assert.equal(results.length, expected.length);
+  assert.deepEqual(new Set(results.map(result => result.entry.href)), new Set(expected.map(entry => entry.href)));
+});
+
+test('excerpts locate original graphemes after normalization expands or combines text', () => {
+  const samples = [
+    { text: 'ﬃ'.repeat(100) + 'needle' + '后文'.repeat(80), query: 'needle', hit: 'needle' },
+    { text: '前文'.repeat(60) + 'ﬃ' + '后文'.repeat(80), query: 'ffi', hit: 'ﬃ' },
+    { text: 'e\u0301'.repeat(100) + 'needle' + '后文'.repeat(80), query: 'needle', hit: 'needle' },
+    { text: '前文'.repeat(60) + 'cafe\u0301' + '后文'.repeat(80), query: 'café', hit: 'cafe\u0301' },
+    { text: '😀'.repeat(100) + 'needle' + '𠮷'.repeat(100), query: 'needle', hit: 'needle' },
+    { text: '前文'.repeat(60) + '👩‍💻𠮷' + '后文'.repeat(80), query: '👩‍💻𠮷', hit: '👩‍💻𠮷' },
+  ];
+  for (const sample of samples) {
+    const entry = { ...chinese.entries[0], headingTitle: 'Fixture', chapterTitle: 'Fixture', text: sample.text };
+    const [result] = searchEntries({ version: 1, locale: 'zh', entries: [entry] }, sample.query, 'zh');
+    assert.ok(result, `match for ${sample.query}`);
+    assert.ok(result.excerpt.includes(sample.hit), `original hit must survive: ${sample.query}`);
+    assert.ok(result.excerpt.isWellFormed(), 'no split supplementary character');
+    const excerpt = result.excerpt.replace(/^…|…$/gu, '');
+    assert.ok(sample.text.includes(excerpt), 'excerpt must remain an original text slice');
+  }
+});
+
+test('match highlighting preserves source graphemes, contextual case and literal text', () => {
+  for (const [text, query, expected] of [
+    ['before ﬃ after', 'ffi', 'ﬃ'], ['before cafe\u0301 after', 'CAFÉ', 'cafe\u0301'],
+    ['before 👩‍💻𠮷 after', '👩‍💻𠮷', '👩‍💻𠮷'], ['ΟΣ after', 'ος', 'ΟΣ'],
+    ['<script>alert(1)</script>', 'alert(1)', 'alert(1)'], ['前\t\n 文 needle', '文 needle', '文 needle'],
+  ]) {
+    const parts = highlightSearch(text, query);
+    assert.equal(parts.map(part => part.text).join(''), text);
+    assert.ok(parts.filter(part => part.matched).map(part => part.text).join(' ').includes(expected));
+  }
 });
 
 test('malformed, wrong-language or unsafe fetched index data is rejected for retry', () => {

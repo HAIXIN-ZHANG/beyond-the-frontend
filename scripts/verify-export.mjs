@@ -7,6 +7,7 @@ import { parseBasePath } from '../site/config/deployment.ts';
 import { themeStorageKey } from '../site/theme/runtime.ts';
 import { loadBook } from '../site/content/load-book.ts';
 import { chapterPath } from '../site/content/manifest.ts';
+import { walkMarkdown } from '../site/content/markdown.ts';
 import { buildSearchIndex } from '../site/content/build-search-index.ts';
 import { readSearchIndex } from '../site/content/search.ts';
 
@@ -106,14 +107,21 @@ for (const [page, language, title, alternatePath] of pages) {
     }
     if (chapter.entry.id === 'opening') {
       assert.ok(article.includes('作者：Jason Zhang') && article.includes('创作方式：AI 全程辅助创作。'), `${page}: attribution lost`);
-      assert.ok(links.some(link => link.rel === 'next' && link.href === `${basePath}${chapterPath(chapters[1].entry)}`), `${page}: wrong next chapter`);
-    } else {
+    } else if (chapter.entry.id === 'G01') {
       assert.equal((article.match(/<table\b/g) || []).length, 2, `${page}: source tables missing`);
       assert.equal((article.match(/<pre\b/g) || []).length, 4, `${page}: source text diagrams/examples missing`);
       assert.ok(article.includes('https://www.rfc-editor.org/rfc/rfc9110.html#section-15.3.3'), `${page}: citation lost`);
-      assert.ok(!links.some(link => link.rel === 'next'), `${page}: invented unwritten next chapter`);
-      assert.ok(links.some(link => link.rel === 'prev' && link.href === `${basePath}${chapterPath(chapters[0].entry)}`), `${page}: wrong previous chapter`);
     }
+    const position = chapters.indexOf(chapter);
+    for (const [rel, adjacent] of [['prev', chapters[position - 1]], ['next', chapters[position + 1]]]) {
+      const destinations = links.filter(link => link.rel === rel).map(link => link.href);
+      assert.deepEqual(destinations, adjacent ? [`${basePath}${chapterPath(adjacent.entry)}`] : [], `${page}: wrong ${rel} chapter`);
+    }
+    assert.equal(html.includes('已到当前最后一章'), position === chapters.length - 1, `${page}: incorrect last-chapter state`);
+    const counts = { table: 0, code: 0 };
+    walkMarkdown(chapter.tree, node => { if (node.type === 'table' || node.type === 'code') counts[node.type] += 1; });
+    assert.equal((article.match(/<table\b/g) || []).length, counts.table, `${page}: source tables missing`);
+    assert.equal((article.match(/<pre\b/g) || []).length, counts.code, `${page}: source code/diagrams missing`);
   }
   if (page === 'read/index.html' || page === 'zh/read/index.html') {
     for (const item of chapters) assert.ok(links.some(link => link.href === `${basePath}${chapterPath(item.entry)}`), `${page}: available chapter absent`);
@@ -138,9 +146,11 @@ for (const [page, language, title, alternatePath] of pages) {
   }
 }
 
+const sectionCounts = {};
 for (const locale of ['en', 'zh']) {
   const index = readSearchIndex(JSON.parse(await readFile(path.join(output, `search-index/${locale}.json`), 'utf8')), locale);
   assert.deepEqual(index, buildSearchIndex(chapters, locale), `${locale}: exported index differs from approved source nodes`);
+  sectionCounts[locale] = index.entries.length;
   for (const entry of index.entries) {
     const [route, fragment] = entry.href.split('#');
     const target = await readFile(path.join(output, route.slice(1), 'index.html'), 'utf8');
@@ -150,4 +160,4 @@ for (const locale of ['en', 'zh']) {
 }
 
 console.log(`Static export verified: ${pages.length} pages, ${checked} local links/assets, basePath=${basePath || '/'}`);
-console.log('Static search indexes verified: zh=20 reviewed sections; en=0; all heading targets exist.');
+console.log(`Static search indexes verified: zh=${sectionCounts.zh} reviewed sections; en=${sectionCounts.en}; all heading targets exist.`);

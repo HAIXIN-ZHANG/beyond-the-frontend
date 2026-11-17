@@ -5,7 +5,7 @@ import { withBasePath } from '../../site/config/deployment.ts';
 import { getMessages } from '../../site/config/i18n.ts';
 
 const at = pathname => withBasePath(pathname, process.env.NEXT_PUBLIC_BASE_PATH);
-const [opening, g01] = chapterManifest;
+const [opening, g01, browserChapter] = chapterManifest;
 
 const test = base.extend({
   health: [async ({ page }, use, testInfo) => {
@@ -33,6 +33,89 @@ async function openSearch(page) {
   await expect(dialog).toBeVisible();
   return dialog;
 }
+
+test('every real search match remains available with a truthful count and contextual highlights', async ({ page }) => {
+  for (const width of [1440, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(at('/zh/read/'));
+    const dialog = await openSearch(page);
+    await dialog.getByRole('searchbox').fill('报名');
+    await expect(dialog.getByRole('status')).toHaveText('14 条匹配 · 中文已审阅草稿');
+    const links = dialog.locator('.search-results a');
+    await expect(links).toHaveCount(14);
+    const response = await page.request.get(at('/search-index/zh.json'));
+    const index = await response.json();
+    const expected = index.entries.filter(entry => `${entry.chapterTitle} ${entry.headingTitle} ${entry.text}`.includes('报名'));
+    expect(new Set(await links.evaluateAll(elements => elements.map(element => element.getAttribute('href'))))).toEqual(new Set(expected.map(entry => at(entry.href))));
+    for (const item of await dialog.locator('.search-results li').all()) {
+      await expect(item.locator('mark').first()).toHaveText('报名');
+      expect(Array.from(await item.locator('p').innerText()).length).toBeLessThanOrEqual(66);
+    }
+    await dialog.getByRole('searchbox').press('ArrowDown');
+    for (let index = 1; index < 14; index++) await page.keyboard.press('ArrowDown');
+    await expect(links.last()).toBeFocused();
+    const destination = new URL(await links.last().getAttribute('href'), page.url());
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(destination.href);
+    await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
+  }
+});
+
+test('mobile outline stays nearby without shifting position on opening or hiding anchor targets', async ({ page }) => {
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(at(chapterPath(g01)));
+    const summary = page.locator('.mobile-outline summary');
+    await summary.click();
+    const target = page.locator('.mobile-outline').getByRole('link', { name: '时间：先发生什么，用户要等到哪里？', exact: true });
+    const hash = decodeURIComponent((await target.getAttribute('href')).slice(1));
+    await target.click();
+    const heading = page.locator(`[id="${hash}"]`);
+    await expect(heading).toBeFocused();
+    await expect(summary).toBeInViewport();
+    const position = await page.evaluate(() => window.scrollY);
+    await summary.focus(); await summary.press('Enter');
+    expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    await summary.press('Escape');
+    await expect(summary).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    const geometry = await page.evaluate(id => ({
+      heading: document.getElementById(id).getBoundingClientRect().top,
+      toolbar: document.querySelector('.reading-tools').getBoundingClientRect().bottom,
+    }), hash);
+    expect(geometry.heading).toBeGreaterThanOrEqual(geometry.toolbar);
+    await page.locator('.reading-tools').evaluate(element => {
+      const samples = [...element.querySelectorAll('summary')].map(summary => ({ summary,
+        size: parseFloat(window.getComputedStyle(summary).fontSize), line: parseFloat(window.getComputedStyle(summary).lineHeight) }));
+      for (const { summary, size, line } of samples) {
+        summary.style.fontSize = `${size * 2}px`; summary.style.lineHeight = `${line * 2}px`;
+      }
+    });
+    await summary.press('Enter');
+    await expect(target).toBeVisible();
+    await target.focus(); await target.press('Enter');
+    await expect(heading).toBeFocused();
+    expect(await heading.evaluate(element => element.getBoundingClientRect().top)).toBeGreaterThanOrEqual(
+      await page.locator('.reading-tools').evaluate(element => element.getBoundingClientRect().bottom));
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+});
+
+test('both home locales show exactly the approved Chinese reading destinations and current availability', async ({ page }) => {
+  for (const locale of ['en', 'zh']) {
+    await page.goto(at(locale === 'en' ? '/' : '/zh/'));
+    const links = page.locator('.home-chapters a');
+    await expect(links).toHaveCount(chapterManifest.length);
+    await expect(page.locator('.book-intro > .availability-note')).toHaveText(getMessages(locale).availableNotice(chapterManifest.length));
+    for (const [index, chapter] of chapterManifest.entries()) {
+      await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
+      await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
+      await expect(links.nth(index)).toHaveText(getMessages(locale).chapterLabels[chapter.id] ?? chapter.title);
+    }
+    if (locale === 'en') await expect(page.locator('.home-chapters')).toContainText('English chapters are not available yet.');
+    await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+  }
+});
 
 test('localized chrome and matching page roles remain coherent across languages and viewport sizes', async ({ page }) => {
   async function roles() {
@@ -71,6 +154,7 @@ test('localized chrome and matching page roles remain coherent across languages 
       await expect(page.getByRole('navigation', { name: messages.navigation, exact: true })).toBeVisible();
       await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeVisible();
       if (kind === 'index') {
+        await expect(page.locator('.reading-index > .availability-note')).toHaveText(messages.availableNotice(chapterManifest.length));
         const links = page.locator('.available-chapters a');
         await expect(links).toHaveCount(chapterManifest.length);
         for (const [index, chapter] of chapterManifest.entries()) {
@@ -114,6 +198,70 @@ test('localized chrome and matching page roles remain coherent across languages 
       });
       for (const phrase of phraseLines) expect(phrase.lines, `short title phrase ${phrase.phrase}`).toBe(1);
     }
+  }
+});
+
+test('approved browser chapter renders illustrative source safely and every indexed heading remains reachable', async ({ page, request }, testInfo) => {
+  const response = await request.get(at('/search-index/zh.json'));
+  expect(response.status()).toBe(200);
+  const entries = (await response.json()).entries.filter(entry => entry.chapterId === browserChapter.id);
+  expect(entries).toHaveLength(9);
+  for (const width of [1440, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(at(chapterPath(browserChapter)));
+    await expect(page).toHaveTitle(`${browserChapter.title} | ${getMessages('zh').title}`);
+    const article = page.locator('article');
+    await expect(article).toHaveAttribute('data-chapter-id', browserChapter.id);
+    await expect(article).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+    await expect(article.getByRole('heading', { level: 1 })).toHaveText(browserChapter.title);
+    await expect(article.locator('pre')).toHaveCount(4);
+    await expect(article.locator('table')).toHaveCount(2);
+    await expect(article.locator('pre').first()).toContainText('<input id="query" type="search">');
+    await expect(article.locator('#query, #search, .course-card')).toHaveCount(0);
+    await expect(article.getByRole('link', { name: '返回：一个页面，究竟连着什么？', exact: true }))
+      .toHaveAttribute('href', at(chapterPath(g01)));
+    await expect(page.locator('.chapter-pagination a[rel="prev"]')).toHaveAttribute('href', at(chapterPath(g01)));
+    await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveCount(0);
+    await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
+    for (const [label, theme] of [['日间', 'light'], ['夜间', 'dark']]) {
+      await chooseAppearance(page, label);
+      await page.reload();
+      await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+      await page.screenshot({ path: testInfo.outputPath(`browser-chapter-${width}-${theme}.png`) });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    }
+    const regions = await article.locator('pre, [role="region"]').evaluateAll(elements => elements.map(element => {
+      const rect = element.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, viewport: window.innerWidth, width: element.clientWidth, overflow: window.getComputedStyle(element).overflowX };
+    }));
+    expect(regions).toHaveLength(6);
+    for (const region of regions) {
+      expect(region.width).toBeGreaterThan(0);
+      expect(region.left).toBeGreaterThanOrEqual(0);
+      expect(region.right).toBeLessThanOrEqual(region.viewport);
+      expect(region.overflow).toMatch(/^(auto|scroll)$/);
+    }
+    await attachGeometry(testInfo, `browser-content-geometry-${width}`, regions);
+    if (width <= 390) {
+      const code = article.locator('pre').first(); await code.focus(); await code.press('ArrowRight');
+      expect(await code.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+      await expect.poll(() => code.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
+    }
+    for (const entry of entries) {
+      const dialog = await openSearch(page);
+      await dialog.getByRole('searchbox').fill(entry.headingTitle);
+      const target = dialog.locator(`.search-results a[href="${at(entry.href)}"]`);
+      await expect(target).toHaveCount(1);
+      await expect(target.locator('strong')).toHaveText(entry.headingTitle);
+      await target.click();
+      await expect(page).toHaveURL(new URL(at(entry.href), page.url()).href);
+      await expect(page.locator(`[id="${entry.headingId}"]`)).toBeFocused();
+    }
+    await page.getByRole('link', { name: 'Switch to English', exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${at('/read/')}$`));
+    await expect(page.locator('.reading-index')).toContainText(getMessages('en').englishUnavailable);
+    const missingEnglish = await request.get(at('/read/browser-foundations/'));
+    expect(missingEnglish.status()).toBe(404);
   }
 });
 
@@ -167,7 +315,15 @@ test('entry, truthful availability, approved chapters, previous/next and static 
   await page.locator('.chapter-pagination a[rel="next"]').click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(g01.title);
   await expect(page.locator('article')).toHaveAttribute('data-source-sha256', g01.sha256);
+  await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveAttribute('href', at(chapterPath(browserChapter)));
+  await page.locator('.chapter-pagination a[rel="next"]').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(browserChapter.title);
+  await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
   await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveCount(0);
+  await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
+  await expect(page.locator('.chapter-pagination a[rel="prev"]')).toHaveAttribute('href', at(chapterPath(g01)));
+  await page.locator('.chapter-pagination a[rel="prev"]').click();
+  await expect(page).toHaveURL(new RegExp(`${at(chapterPath(g01))}$`));
   await page.locator('.chapter-pagination a[rel="prev"]').click();
   await expect(page).toHaveURL(new RegExp(`${at(chapterPath(opening))}$`));
   await page.getByRole('link', { name: 'Switch to English', exact: true }).click();

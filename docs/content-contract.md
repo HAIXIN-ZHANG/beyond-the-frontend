@@ -13,7 +13,22 @@ Use the existing Markdown files as the single body source. At the original contr
 | `opening` | `zh` | `before-we-start` | 写在前面：能跑，然后呢？ | `book/drafts/zh/00-before-we-start.md` | `244c4f7a9ddeb781d8530691d07ba17b9daccf611b9631ea60faa412b87a6d90` |
 | `G01` | `zh` | `a-page-and-a-system` | 一个页面，究竟连着什么？ | `book/drafts/zh/01-a-page-and-a-system.md` | `b928e5df21876c0ca49a3c227eb6c7e20723b3f22bb9c7cb2d560cc198db62d2` |
 
-Order is opening, then G01. Publish these as **reviewed drafts**, without claiming the whole book or an English adaptation is complete. Figma sample prose and F01 analysis are not publishable chapters under this list.
+The original input order is opening, then G01; the approved local extension below adds F01. Treat these inputs as **reviewed drafts**, without claiming the whole book or an English adaptation is complete. Figma sample prose and F01 analysis are not publishable chapters under this list.
+
+
+## Delivery Milestone 2 — approved local intake extension
+
+Decision date: 2026-11-17. The author resumed the main work after the first writing/preparation slice. Coordinator now authorizes **local implementation and review of exactly one additional source**, the accepted [F01M manuscript r3](reviews/F01M.md). The original input table/order above is the initial two-source baseline; this additive extension makes the assigned local order opening(1), G01(2), F01(3). It is not a deployment decision: the last verified public edition still has only opening/G01 until separately authorized integration/release is performed.
+
+| Stable ID | Locale | Slug / canonical route | H1 / source | Approved SHA-256 / review |
+| --- | --- | --- | --- | --- |
+| `F01` | `zh` | `browser-foundations` / `/zh/read/browser-foundations/` | 页面出现之前，浏览器在忙什么？ / `book/drafts/zh/02-browser-foundations.md` | `54b983945710303a7e790706d86b9acc3884f50f6ae82f06dbde71711967ca24` / `docs/reviews/F01M.md` |
+
+The new entry has order3 and status `reviewed-draft`. Preserve both original entries, routes and hashes. Approved English **navigation label**, not an English manuscript: **How the Browser Builds a Page**. Home benefits: Chinese **分清资源等待、代码执行和画面更新，理解页面为什么看得见却还不一定能及时响应。**; English **Separate resource waits, code execution and visual updates to understand why a visible page can still respond late.** English bodies remain absent; every chapter link still leads deliberately to a Chinese original.
+
+Reuse the current renderer/parser and relative-link allowlist, including F01's link back to G01. Do not rewrite manuscripts or add source-discovery/frontmatter machinery. Navigation/last-chapter expectations must derive from the approved order: G01 now has next=F01, F01 previous=G01 and no next. Preserve source-specific G01 shape/citation checks separately from these positional rules. Counts/availability/search must describe the actual approved local corpus rather than two-entry assumptions. Shared client i18n must not import full source/review-path metadata merely to obtain a count; pass or derive only public counts where needed.
+
+The new chapter's original diagrams/pseudocode are conceptual material, not browser benchmark results. Verify its real rendered code/tables/headings/links at desktop and320/390px with Day/Night under root and Pages prefixes. Manuscript source acceptance, local intake/code acceptance, CI, Git integration and public deployment remain separate. The [current board](coordination.md) and [intake handoff](handoffs/developer/milestone-2-chapter-intake.md) define permitted execution; this extension assigns no translation, next chapter, resume/bookmark/palette feature, dependency installation or release.
 
 ## Minimal implementation
 
@@ -25,16 +40,16 @@ Order is opening, then G01. Publish these as **reviewed drafts**, without claimi
 
 ## Routes, language and navigation
 
-Canonical chapter routes are `/zh/read/before-we-start/` and `/zh/read/a-page-and-a-system/`, with the normal deployment prefix added once by Next.js. Preserve the existing English/Chinese home/index routes, default English website entry and bilingual 404 behavior.
+The initial canonical chapter routes are `/zh/read/before-we-start/` and `/zh/read/a-page-and-a-system/`; the approved local extension adds `/zh/read/browser-foundations/`. Next.js adds the normal deployment prefix once. Local input approval is distinct from public deployment. Preserve the existing English/Chinese home/index routes, default English website entry and bilingual 404 behavior.
 
 There are no English chapter bodies yet. English navigation may identify an available chapter using an English UI label, but must explicitly say the reading is Chinese and link to its canonical Chinese route. Do not present an automatic translation or a missing English article as delivered. Switching language from an untranslated chapter should lead to the other-language chapter index with a clear availability explanation, rather than manufacture a broken route. Use the same chapter counterpart when one is reviewed and available later.
 
-Rewrite the two manuscripts' relative links to one another through the allowlist. Derive ordered chapter navigation and previous/next links from that same list. Generate the in-page outline and heading IDs from the actual Markdown; handle duplicate headings and preserve readable anchor links. Do not use proposed chapters as active links to nonexistent pages.
+Rewrite relative links among the approved manuscript inputs through the explicit allowlist. Derive ordered chapter navigation and previous/next links from that same list. Generate the in-page outline and heading IDs from the actual Markdown; handle duplicate headings and preserve readable anchor links. Do not use proposed chapters as active links to nonexistent pages.
 
 ## Reading and validation
 
-Both approved chapters use the same responsive renderer and accepted components. Technical text diagrams may retain their original preformatted meaning with a clear figure label and local scrolling; do not convert them into misleading graphics or edit their technical meaning. Wide code and tables scroll within their own region, not the entire page.
+All approved local chapters use the same responsive renderer and accepted components. Technical text diagrams may retain their original preformatted meaning with a clear figure label and local scrolling; do not convert them into misleading graphics or edit their technical meaning. Wide code and tables scroll within their own region, not the entire page.
 
-Validate the real source-to-page flow, local chapter links, metadata/lang, chapter/index/404 paths under root and Pages prefixes, heading outline, keyboard/focus and narrow layout. Delivery Milestone 1 Release Readiness still requires separately assigned dependency-alert reassessment, permanent E2E in CI, gated Pages CD, actual public-URL smoke and verified recovery/rollback under applicable release authorization. Prior temporary browser checks and successful static-export CI do not complete those gates; passing parser/unit checks alone is not browser acceptance. Search/sharing indexes only these validated public trees, with current-language scope, source revisions and real target headings; correction drafts require deliberate reader review/submission. Audio, AI features and automatic translation remain outside this contract.
+Validate the real source-to-page flow, local chapter links, metadata/lang, chapter/index/404 paths under root and Pages prefixes, heading outline, keyboard/focus and narrow layout. The [first-delivery ledger](delivery/milestone-1.md) records actual initial-publication/CI/CD/recovery outcomes and retained dependency/rollback limits. Each later intake still needs its assigned source/build/browser review and separately authorized integration/release; passing parser/unit checks alone is not browser acceptance. Search/sharing indexes only these validated public trees, with current-language scope, source revisions and real target headings; correction drafts require deliberate reader review/submission. Audio, AI features and automatic translation remain outside this contract.
 
 Future addition: Writer completes the chapter's gates; Coordinator confirms its source/revision and adds or approves an allowlist entry; existing validation and route generation make it readable. Reviewed analysis alone never authorizes a manuscript's publication.

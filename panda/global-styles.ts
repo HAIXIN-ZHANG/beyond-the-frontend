@@ -64,6 +64,12 @@ export const globalCss = defineGlobalStyles({
   '.search-feedback': { marginBlock: 'token(spacing.card.padding)', padding: 'token(spacing.card.padding)', border: 'token(borderWidths.stroke.subtle) solid token(colors.border.default)', borderRadius: 'token(radii.shape.card)', backgroundColor: 'token(colors.bg.surface)', '& p': { textStyle: 'ui', marginTop: 0 } },
   '.search-feedback .search-status': { textStyle: 'h3', marginBottom: 'token(spacing.card.gap)' },
   '.search-results': { listStyle: 'none', margin: 0, padding: 0, '& li': { paddingBlock: 'token(spacing.control.paddingInline)', borderBottom: 'token(borderWidths.stroke.subtle) solid token(colors.border.default)' }, '& a': { display: 'block', minHeight: 'token(sizes.size.actionMin)', textStyle: 'ui', '& span': { display: 'block', color: 'token(colors.fg.muted)', textStyle: 'small' } }, '& p': { marginTop: 'token(spacing.control.gap)', marginBottom: 0, color: 'token(colors.fg.muted)', overflowWrap: 'anywhere' } },
+  '.search-results mark': { color: 'token(colors.fg.link)', backgroundColor: 'token(colors.bg.selected)', fontWeight: 600, borderRadius: 'token(radii.shape.label)' },
+  '.search-feedback:has(.search-results)': {
+    padding: 'token(spacing.control.paddingInline)',
+    '& .search-status': { textStyle: 'ui', fontWeight: 600 },
+    '& .search-results p': { textStyle: 'small' },
+  },
   '.section-actions': { textStyle: 'small', marginBlock: 'token(spacing.control.gap)', '& summary': { cursor: 'pointer', color: 'token(colors.fg.link)', minHeight: 'token(sizes.size.actionMin)', width: 'fit-content', paddingBlock: 'token(spacing.control.gap)', '&:focus-visible': { outline: 'token(borderWidths.stroke.focus) solid token(colors.focus.ring)', outlineOffset: 'token(spacing.focus.inset)' } } },
   '.section-actions-body': { paddingBlock: 'token(spacing.control.gap)', borderBlock: 'token(borderWidths.stroke.subtle) solid token(colors.border.default)' },
   '.section-action-controls': { display: 'flex', flexWrap: 'wrap', gap: 'token(spacing.control.gap)' },
@@ -110,7 +116,14 @@ export const globalCss = defineGlobalStyles({
   '.outline-rail': { '@media (max-width: 1199px)': { display: 'none' } },
   '.planned-map, .reading-attribution': { textStyle: 'small', color: 'token(colors.fg.muted)' },
   '.planned-map ol': { paddingInlineStart: 'token(spacing.control.paddingInline)', '& li': { marginBlock: 'token(spacing.control.gap)' } },
-  '.reading-tools': { display: 'none', marginBottom: 'token(spacing.prose.blockGap)', '@media (max-width: 1199px)': { display: 'flex', flexWrap: 'wrap', gap: 'token(spacing.control.gap)' } },
+  '.reading-tools': {
+    display: 'none', marginBottom: 'token(spacing.prose.blockGap)',
+    '@media (max-width: 1199px)': {
+      display: 'flex', flexWrap: 'wrap', gap: 'token(spacing.control.gap)', position: 'sticky', top: 0, zIndex: 2,
+      paddingBlock: 'token(spacing.control.gap)', backgroundColor: 'token(colors.bg.canvas)',
+      borderBottom: 'token(borderWidths.stroke.subtle) solid token(colors.border.default)',
+    },
+  },
   '.mobile-book-navigation': { display: 'none', '@media (max-width: 899px)': { display: 'block' } },
   '.reading-disclosure': {
     minWidth: 0,
@@ -121,8 +134,10 @@ export const globalCss = defineGlobalStyles({
       '&:focus-visible': { outline: 'token(borderWidths.stroke.focus) solid token(colors.focus.ring)', outlineOffset: 'token(spacing.focus.inset)' },
     },
   },
-  '.reading-tools:has(details[open])': { '@media (max-width: 1199px)': { display: 'block' } },
-  '.reading-tools:has(details[open]) .reading-disclosure': { marginBottom: 'token(spacing.control.gap)' },
+  '.reading-tools .reading-disclosure-body': {
+    position: 'absolute', insetInline: 0, top: '100%', marginTop: 0, maxHeight: 'min(55svh, 28rem)',
+    overflowY: 'auto', overscrollBehavior: 'contain',
+  },
   '.reading-disclosure-body': { padding: 'token(spacing.control.paddingInline)', marginTop: 'token(spacing.control.gap)', borderWidth: 'token(borderWidths.stroke.subtle)', borderStyle: 'solid', borderColor: 'token(colors.border.default)', borderRadius: 'token(radii.shape.control)', backgroundColor: 'token(colors.bg.surface)' },
   '.chapter-context': { textStyle: 'small', color: 'token(colors.fg.link)', marginTop: 0, marginBottom: 'token(spacing.prose.blockGap)', '& span': { color: 'token(colors.fg.muted)', display: 'block' } },
   '.chapter-prose': {
@@ -130,7 +145,12 @@ export const globalCss = defineGlobalStyles({
     '& h1': { textStyle: 'zh-title', wordBreak: 'keep-all', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h2': { textStyle: 'zh-h2', marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h3, & h4, & h5, & h6': { marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.control.paddingInline)' },
-    '& :where(h1,h2,h3,h4,h5,h6)': { scrollMarginTop: 'token(spacing.layout.gutterTablet)', overflowWrap: 'anywhere' },
+    '& :where(h1,h2,h3,h4,h5,h6)': {
+      scrollMarginTop: 'token(spacing.layout.gutterTablet)', overflowWrap: 'anywhere',
+      '@media (max-width: 1199px)': {
+        scrollMarginTop: 'calc(var(--reading-tools-height, token(sizes.size.actionMin)) + token(spacing.prose.blockGap))',
+      },
+    },
     '& p, & ul, & ol, & blockquote': { marginBlock: 'token(spacing.prose.blockGap)' },
     '& li > p': { marginBlock: 'token(spacing.control.gap)' },
     '& ul, & ol': { paddingInlineStart: 'token(spacing.card.padding)' },
@@ -156,6 +176,15 @@ export const globalCss = defineGlobalStyles({
   h3: { textStyle: 'h3' },
   '.book-intro h1 span': { display: 'block' },
   '.intro': { marginBlock: 'token(spacing.prose.blockGap)', color: 'token(colors.fg.muted)' },
+  '.home-chapters': {
+    marginTop: 'token(spacing.prose.sectionGap)', paddingTop: 'token(spacing.prose.blockGap)',
+    borderTop: 'token(borderWidths.stroke.subtle) solid token(colors.border.default)',
+    '& h2': { textStyle: 'h3', marginBlock: 'token(spacing.prose.blockGap)' },
+    '& ol': { listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 'token(spacing.prose.blockGap)' },
+    '& a': { display: 'inline-flex', alignItems: 'center', minHeight: 'token(sizes.size.actionMin)', textStyle: 'ui', fontWeight: 600 },
+    '& p': { marginBlock: 'token(spacing.control.gap)', textStyle: 'ui', color: 'token(colors.fg.muted)' },
+    '& span': { textStyle: 'small', color: 'token(colors.fg.muted)' },
+  },
   '.actions': { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'token(spacing.layout.columnGap)', marginTop: 'token(spacing.prose.sectionGap)' },
   '.button': {
     display: 'inline-flex', alignItems: 'center', justifyContent: 'space-between',

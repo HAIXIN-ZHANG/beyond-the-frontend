@@ -12,7 +12,7 @@ export async function ReadingIndex({ locale }: { locale: Locale }) {
     <section className="reading-index" aria-labelledby="contents-title">
       <p className="eyebrow">{messages.reading}</p>
       <h1 id="contents-title">{messages.contents}</h1>
-      <p className="availability-note">{messages.availableNotice}</p>
+      <p className="availability-note">{messages.availableNotice(chapters.length)}</p>
       {locale === 'en' ? <p>{messages.englishUnavailable}</p> : null}
       <ol className="available-chapters">{chapters.map(chapter => <li key={chapter.entry.id}>
         <Link href={chapterPath(chapter.entry)} hrefLang="zh" lang={messages.lang}>{messages.chapterLabels[chapter.entry.id] ?? chapter.title}</Link>

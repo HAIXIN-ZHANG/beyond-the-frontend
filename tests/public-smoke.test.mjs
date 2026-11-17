@@ -47,8 +47,10 @@ test('public smoke defaults to loopback and rejects alternate origins, prefixes 
 test('public smoke checks identity, actual routes/assets, approved Chinese search and real 404 over HTTP', async () => {
   await fixture(() => {}, async url => {
     const result = await smokePublicRelease({ url, commit });
-    assert.equal(result.commit, commit); assert.equal(result.routes, 6); assert.equal(result.assets, 2);
-    assert.equal(result.requests, 12);
+    const routes = 4 + createReleaseMetadata(commit, pagesBasePath).chapters.length;
+    assert.equal(result.commit, commit); assert.equal(result.routes, routes); assert.equal(result.assets, 2);
+    // Metadata + reading routes + two assets + two indexes + actual 404.
+    assert.equal(result.requests, routes + 6);
     await assert.rejects(smokePublicRelease({ url, commit: 'a'.repeat(40) }), /identity/);
   });
 });

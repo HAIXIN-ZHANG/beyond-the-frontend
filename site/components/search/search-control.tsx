@@ -6,7 +6,7 @@ import type { Locale } from '../../config/i18n.ts';
 import type { SearchIndex } from '../../content/search.ts';
 import { localePath } from '../../config/i18n.ts';
 import { withBasePath } from '../../config/deployment.ts';
-import { readSearchIndex, searchEntries, normalizeSearch } from '../../content/search.ts';
+import { readSearchIndex, searchEntries, normalizeSearch, highlightSearch } from '../../content/search.ts';
 import { Button } from '../ui/button.tsx';
 import { searchMessages } from './messages.ts';
 
@@ -42,6 +42,8 @@ export function SearchControl({ locale }: { locale: Locale }) {
     return () => document.removeEventListener('keydown', shortcut);
   }, [open]);
   const matches = index && !composing ? searchEntries(index, query, locale) : [];
+  const highlight = (value: string) => highlightSearch(value, query).map((part, index) => part.matched
+    ? <mark key={index}>{part.text}</mark> : part.text);
   function closeForNavigation() {
     // Native result anchors assign destination focus after the dialog's immediate restoration.
     returnFocus.current = null;
@@ -93,8 +95,8 @@ export function SearchControl({ locale }: { locale: Locale }) {
           : status === 'error' ? <><p>{m.retryHint}</p><Button visual="quiet" onClick={() => void loadIndex()}>{m.retry}</Button></>
             : status !== 'loading' && (!hasQuery || composing || !matches.length) ? <p>{hasQuery && !composing ? m.fewer : m.hint}</p> : null}
         {locale === 'zh' && status === 'ready' && !!matches.length ? <ol ref={results} className="search-results">{matches.map(({ entry, excerpt }) => <li key={entry.href}>
-          <a href={withBasePath(entry.href, process.env.NEXT_PUBLIC_BASE_PATH)} onClick={closeForNavigation}><span>{entry.chapterTitle}</span><strong>{entry.headingTitle}</strong></a>
-          <p>{excerpt}</p>
+          <a href={withBasePath(entry.href, process.env.NEXT_PUBLIC_BASE_PATH)} onClick={closeForNavigation}><span>{highlight(entry.chapterTitle)}</span><strong>{highlight(entry.headingTitle)}</strong></a>
+          <p>{highlight(excerpt)}</p>
         </li>)}</ol> : null}
       </section>
       {locale === 'zh' ? <Link className="search-browse" href={localePath(locale, 'read/')} onClick={closeForNavigation}>{m.browse} →</Link> : null}

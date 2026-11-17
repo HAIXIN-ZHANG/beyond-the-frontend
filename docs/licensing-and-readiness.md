@@ -1,6 +1,6 @@
 # Licensing and public-project readiness
 
-Updated: 2026-11-16. The project owner selected MIT for project source code and original programming examples, and CC BY-SA 4.0 for original book prose and teaching diagrams. [README](../README.md), [LICENSE](../LICENSE) and [LICENSE-CONTENT.md](../LICENSE-CONTENT.md) state the intended scope. These local changes are not evidence of a public release or deployment.
+Updated: 2026-11-17. The project owner selected MIT for project source code and original programming examples, and CC BY-SA 4.0 for original book prose and teaching diagrams. [README](../README.md), [LICENSE](../LICENSE) and [LICENSE-CONTENT.md](../LICENSE-CONTENT.md) state the intended scope. The [first-delivery ledger](delivery/milestone-1.md#6-release-readiness-remains-in-delivery-milestone-1) records the separately verified public reading release and its limits; license notices alone do not establish deployment or blanket rights clearance.
 
 ## Scope and exceptions
 

@@ -131,9 +131,19 @@ async function chooseAppearance(page, label) {
 
 test('appearance separates System/Day/Night and persists explicit choices across refresh', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
-  await page.goto(at('/zh/read/'));
+  await page.goto(at(chapterPath(g01)));
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  const dialog = await openSearch(page);
+  await dialog.getByRole('searchbox').fill('状态');
+  const result = dialog.locator('.search-results a').first();
+  await expect(result).toBeVisible();
+  const destination = new URL(await result.getAttribute('href'), page.url());
+  await dialog.getByRole('searchbox').press('Enter');
+  await expect(page).toHaveURL(destination.href);
+  await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
+  expect(await page.locator('.appearance-trigger').evaluate(element => element.getBoundingClientRect().bottom)).toBeLessThan(0);
+  // Clicking the offscreen header scrolls it into view before opening its popover.
   await chooseAppearance(page, '日间');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'light');
@@ -146,6 +156,20 @@ test('appearance separates System/Day/Night and persists explicit choices across
   await page.emulateMedia({ colorScheme: 'light' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
+  await page.getByRole('button', { name: /^外观:/ }).click();
+  await expect(page.getByRole('radio', { name: '跟随系统', exact: true })).toBeFocused();
+  await page.mouse.move(20, 400);
+  await page.mouse.wheel(0, 400);
+  await expect(page.locator('.appearance-panel')).not.toBeVisible();
+  await expect(page.locator('.appearance-trigger')).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  await page.getByRole('button', { name: /^外观:/ }).click();
+  await expect(page.locator('.appearance-panel')).toBeVisible();
+  await page.setViewportSize({ width: 320, height: 900 });
+  await expect(page.locator('.appearance-panel')).not.toBeVisible();
+  await expect(page.locator('.appearance-trigger')).toBeFocused();
+  await chooseAppearance(page, '夜间');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
 test('denied storage retains usable System fallback and a session-only choice', async ({ page }) => {

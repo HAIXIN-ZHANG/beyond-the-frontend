@@ -8,11 +8,13 @@ Release verification integrated through [PR20](https://github.com/HAIXIN-ZHANG/v
 
 | Owner | Current assignment | Boundary |
 | --- | --- | --- |
-| Developer | [Manual Pages release and recovery](handoffs/developer/pages-release-pipeline.md) | r1 accepted after actual source/HTTP/tool-test review and PAGES-01 correction. Task closed/files frozen; Coordinator handles exact-head CI/integration and actual release. Reopen only on concrete findings |
+| Developer | [Manual Pages release and recovery](handoffs/developer/pages-release-pipeline.md), PAGES-02 affected revision | r2 minimal lifecycle fix/regression accepted after independent affected browser review; task closed/files frozen. Coordinator handles matching-head integration/republication and actual public/recovery checks |
 | Writer | Release-material inventory remains accepted/closed | Public URL/status alignment waits for observed successful publication and a concrete assignment |
 | Coordinator/Reviewer | [Pages release review](reviews/pages-release-pipeline.md), board, integration and publication | Actual source/check review, original-owner feedback, matching-head PR/main checks, deliberate dispatch, online smoke and actual recovery verification |
 
 Author's 2026-11-17 Pages publication instruction applies. Manual release only from protected `main`; existing Source=GitHub Actions/main-only Pages environment and branch/write protections remain intact. No new reader feature, manuscript/translation, Figma change, paid service or credential/access expansion. Existing dependency disposition remains bounded unresolved maintenance. Preserve all owner/historical work and31 recovery files.
+
+PR21 reviewed head `ff2fb09b03f4187d3839e2999832b7bda1cb4228` passed PR run44009718337; squash `9d43198684ff276c7992732246661c90dc0fcbaa` passed main run44010177077. Clean main/origin-main were tree-verified. Manual dispatch44010600116 at that exact SHA completed build/deploy successfully. Actual public HTTP smoke passed6routes/11assets/21requests and exact release identity. Browser entry/language/chapters/search-heading checks passed, but PAGES-02 blocks complete browser acceptance: after search-heading navigation, Header Appearance opens then its radio is invisible. Original owner investigation is active; actual restore/recovery and Writer public-status alignment remain unfinished. The website is publicly reachable, not fully accepted/closed.
 
 ## Completed Milestone 1 release verification
 

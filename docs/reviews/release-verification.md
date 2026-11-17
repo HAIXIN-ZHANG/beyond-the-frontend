@@ -1,6 +1,6 @@
 # Milestone 1 release verification — review
 
-Owner: Coordinator/Reviewer. Started: 2026-11-17 (Australia/Perth). Status: Accepted local verification/materials bundle; both owner tasks closed. Exact-head cloud checks and integration remain separate.
+Owner: Coordinator/Reviewer. Started: 2026-11-17 (Australia/Perth). Status: Developer r2 accepted after affected review; Writer inventory accepted. Fresh exact-head Linux CI/integration and separate CD remain outstanding.
 
 ## Assignment and baseline
 
@@ -12,7 +12,7 @@ Inspect actual tests and meaningful assertions on fresh static artifacts, failur
 
 Current dependency metadata/advisory exposure needs an evidenced disposition; no forced major override/downgrade or weakened checking. Review material rights/language/availability for the two approved Chinese sources, not a blanket legal clearance. Source acceptance, CI, integration and actual public release remain distinct facts.
 
-After acceptance/integration, separately scope the gated Pages pipeline and reproducible release/recovery procedure. The prior explicit no-deployment hold remains; neither new CI nor a merged manual pipeline may publish automatically. Actual authorization/access capabilities and live URL/404/rollback evidence are final release gates, not facts to prefill here.
+After acceptance/integration, separately scope the gated Pages pipeline and reproducible release/recovery procedure. At the original assignment, deployment was held; the author's continuation below explicitly supersedes that hold. Publication remains deliberate after review, not automatic on merge. Actual live URL/404/rollback evidence is a final release gate, not a fact to prefill here.
 
 ## Writer r1 — approved-material inventory accepted
 
@@ -28,6 +28,7 @@ Coordinator inspected the new static-preview helper/config/test and current brow
 | --- | --- | --- | --- |
 | RV-01 | Failure traces/screenshots are generated locally, but current root/Pages CI has no artifact upload; diagnostics disappear when the runner ends. | Developer: failure-only upload of the public-test output folder, immutable official action, unique deployment name, short retention and no broader permissions/source/env upload. | Closed in source: actual failure-only workflow/pin/inputs rechecked. Cloud upload is conditional and not claimed before execution. |
 | RV-02 | The new maintained developer-guide status still says deployment is held after the author's explicit Pages publication instruction. | Developer: point to current board authorization and review gates; preserve this stage's no-CD/no-deployment result and historical chronology. Guide-only change needs no repeated runtime check. | Closed: original owner corrected current guide to explicit publication authorization and review gates; no deployment claimed by verification stage. |
+| RV-03 | Actual PR20 run44001166691 passes Quality/build/verifier/browser install and7E2E in each export, but both Linux jobs fail line210's requirement that an existing table must overflow. Fitting content is not itself a product defect; font-dependent incidental widths are not a stable acceptance rule. | Developer: inspect actual artifacts/geometry, preserve normal fitting-table acceptance, prove real local scroll/focus using a bounded named long-content fixture and retain no-page-overflow/code coverage; no skips/retries/forced production widths. | Closed in r2 after actual affected review and independent two-case Pages pass. Revised-head Linux success is still required before merge. |
 
 ## Interrupted implementation checkpoint
 
@@ -51,6 +52,18 @@ The unchanged single-advisory development chain remains bounded unresolved maint
 
 ## Integration and remaining external step
 
-Coordinator may integrate only the accepted bundle after exact reviewed-head Quality/root/Pages jobs, including the new browser steps, actually pass. Public Pages source is configured and explicit publication is authorized. Native browser continuation currently requires the user's Mac to be unlocked; this is an external UI constraint, not a failed code check or a reason to stop code/CI/pipeline preparation. The separate CD/recovery assignment follows this stage's integration, with observed deployment/live verification recorded separately.
+Coordinator may integrate only the accepted bundle after exact reviewed-head Quality/root/Pages jobs, including the new browser steps, actually pass. Public Pages source is configured and explicit publication is authorized. An earlier locked-screen interruption was resolved and native browser access restored; it is no longer a release blocker. The separate CD/recovery assignment follows this stage's integration, with observed deployment/live verification recorded separately.
 
 Accepted payload `afbb87f918db7504ecc5547e67ab855930ab117e` is tracked in actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20), based on main `e0b530a3ef7397c16158cde8d59190f18f84e57b`. Only Coordinator review/board pointers follow this snapshot; owner payloads remain frozen. The PR execution record owns actual final-head/browser/check jobs, squash and main reconciliation, without a prefilled outcome.
+
+Cloud result at head `62ceed241f7cf2e6f5f8a6c5b6063016bf51693e`: run44001166691 Quality passed; both static-export jobs failed the same narrow-table assertion after all build/verifier/install steps and seven browser cases passed. Coordinator inspected decoded logs and actual steps. Both failure-artifact uploads succeeded (root14292885724, Pages14292915662), supplying real hosted RV-01 evidence. RV-03 reopens the original Developer test/report scope and affected acceptance; no merge or deployment occurred. Original local passes remain evidence for their environment rather than being rewritten as cloud success.
+
+Actual browser access was restored after the owner continuation. Pages environment inspection found the existing `github-pages` policy already limited to branch `main` and zero tags; no environment change was necessary. A fresh read of the saved classic main rule confirmed PRs/three required checks/up-to-date branches/conversation resolution/linear history, administrator enforcement with bypass disabled, force pushes disabled and deletions disabled. No protection checkbox or Save action was changed. The separate in-app browser remains unavailable to this chat's control tool; authorized settings inspection used the existing Safari session.
+
+## RV-03 affected inspection
+
+Coordinator inspected the revised test at SHA-256 `509b9e948d5706009cb7f005055f760a777ca4cc3287e712cff07e7c6e0f89ac`, the actual Linux failure screenshot and the revised local geometry. Ordinary source tables retain focus, viewport bounds and scroll-container checks without requiring incidental overflow. A separate explicitly named test replaces one rendered cell with bounded long inline-code content, leaves production styles unchanged, requires horizontal overflow and uses a real ArrowRight key to prove scroll movement. Unexpected-error and no-page-overflow checks remain enforced; there are no skips/retries or production width changes.
+
+Coordinator independently reran the two affected Pages cases against the current frozen export; both passed. The initial restricted attempt could not bind loopback (`EPERM`) and ran no cases; the authorized local-browser run succeeded. Local fixture geometry shows a288px container at x16–304 in a320px viewport, scrollWidth5762 and scrollLeft30 after keyboard input. This establishes actual local behavior, not Linux portability. Developer's complete root/Pages logs each record9passes. Final owner handoff/freeze and fresh exact-head Linux CI remain required; this inspection alone does not merge or publish.
+
+Final r2 handoff SHA-256 `73602fb48c809956c6f589edc7d83c137050e5a07bfc45433b71c9a586eb3ad5` and unchanged spec hash match the submitted freeze. Inspected the full appended report, including its invalid local restore attempt and corrected hash-verified runs; evidence boundaries are accurate. Independently matched all177 unaffected tracked files, all54 current Pages-export hashes and31 recovery files. RV-03 is accepted/closed in source with no further owner revision required; Developer task closes pending a separately scoped release assignment. The current board is aligned to this decision. PR20 must pass its new exact-head checks before merge; the failed r1 run remains preserved.

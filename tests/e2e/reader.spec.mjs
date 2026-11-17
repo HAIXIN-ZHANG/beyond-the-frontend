@@ -1,4 +1,5 @@
 import { test as base, expect } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { chapterManifest, chapterPath } from '../../site/content/manifest.ts';
 import { withBasePath } from '../../site/config/deployment.ts';
 
@@ -186,7 +187,25 @@ test('copy denial reveals a real manual URL and correction is deliberate preview
   expect(context.pages()).toHaveLength(1); expect(external).toEqual([]);
 });
 
-test('narrow keyboard navigation has visible focus and code/tables scroll locally', async ({ page }, testInfo) => {
+function tableGeometry(elements) {
+  return elements.map(element => {
+    const bounds = element.getBoundingClientRect();
+    return {
+      left: bounds.left, right: bounds.right, viewport: window.innerWidth,
+      clientWidth: element.clientWidth, scrollWidth: element.scrollWidth, scrollLeft: element.scrollLeft,
+      overflowX: window.getComputedStyle(element).overflowX,
+    };
+  });
+}
+
+async function attachGeometry(testInfo, name, geometry) {
+  await mkdir(testInfo.outputDir, { recursive: true });
+  const file = testInfo.outputPath(`${name}.json`);
+  await writeFile(file, JSON.stringify(geometry, null, 2));
+  await testInfo.attach(name, { path: file, contentType: 'application/json' });
+}
+
+test('narrow keyboard navigation bounds real tables and preserves local code overflow', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(at(chapterPath(g01)));
@@ -207,7 +226,47 @@ test('narrow keyboard navigation has visible focus and code/tables scroll locall
   const table = page.locator('article [role="region"]').first();
   await table.focus(); await expect(table).toBeFocused();
   expect(await page.locator('article pre').evaluateAll(elements => elements.some(element => element.scrollWidth > element.clientWidth))).toBe(true);
-  expect(await page.locator('article [role="region"]').evaluateAll(elements => elements.some(element => element.scrollWidth > element.clientWidth))).toBe(true);
+  const geometry = await page.locator('article [role="region"]').evaluateAll(tableGeometry);
+  expect(geometry.length).toBeGreaterThan(0);
+  for (const region of geometry) {
+    expect(region.clientWidth).toBeGreaterThan(0);
+    expect(region.left).toBeGreaterThanOrEqual(-1);
+    expect(region.right).toBeLessThanOrEqual(region.viewport + 1);
+    expect(region.overflowX).toMatch(/^(auto|scroll)$/);
+  }
+  await attachGeometry(testInfo, 'real-content-table-geometry', geometry);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('narrow-reader.png') });
+});
+
+test('bounded long inline-code fixture scrolls within the actual rendered table', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto(at(chapterPath(g01)));
+  const region = page.locator('article [role="region"]').first();
+  await expect(region.locator('table')).toBeVisible();
+  const before = await region.evaluate(element => ({ clientWidth: element.clientWidth, scrollWidth: element.scrollWidth }));
+  // Test-only content, using the existing table and its real inline-code styling; no width/CSS override.
+  const fixtureText = 'RV03_LONG_TABLE_VALUE_'.repeat(32);
+  await region.evaluate((element, text) => {
+    const cell = element.querySelector('tbody td');
+    if (!cell) throw new Error('Approved rendered table cell is missing');
+    const code = document.createElement('code'); code.textContent = text;
+    cell.replaceChildren(code);
+    element.dataset.e2eFixture = 'rv03-bounded-long-inline-code';
+    element.scrollLeft = 0;
+  }, fixtureText);
+  await expect.poll(() => region.evaluate(element => element.scrollWidth - element.clientWidth)).toBeGreaterThan(0);
+  await region.focus(); await expect(region).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => region.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);
+  const [after] = await region.evaluateAll(tableGeometry);
+  expect(after.overflowX).toMatch(/^(auto|scroll)$/);
+  expect(after.left).toBeGreaterThanOrEqual(-1);
+  expect(after.right).toBeLessThanOrEqual(after.viewport + 1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+  await attachGeometry(testInfo, 'bounded-long-table-geometry', {
+    fixture: 'rv03-bounded-long-inline-code', characters: fixtureText.length, before, after,
+  });
+  await page.screenshot({ path: testInfo.outputPath('long-table-fixture.png') });
 });

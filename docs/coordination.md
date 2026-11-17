@@ -8,7 +8,7 @@ The author assigned remaining Milestone 1 release work, correcting demonstrated 
 
 | Owner | Current assignment | Boundary |
 | --- | --- | --- |
-| Developer | [Permanent release verification and dependency disposition](handoffs/developer/release-verification.md) | r1 verification accepted after actual review; root/Pages suites and both returned findings complete. Owner task closed/files frozen; integration is Coordinator-only |
+| Developer | [Permanent release verification and dependency disposition](handoffs/developer/release-verification.md) | r2 accepted after RV-03 semantic correction and independent affected recheck; task closed/files frozen. New exact-head Linux CI must pass before integration and a separate CD assignment |
 | Writer | [Reviewed release-material inventory](handoffs/writer/release-materials.md) | r1 inventory accepted after actual source/notice/hash review; task closed/report frozen. Public URL/copy update waits for actual public acceptance |
 | Coordinator/Reviewer | [Release-verification review](reviews/release-verification.md), current board and scoped integration | Inspect actual revisions/evidence, return findings, verify exact-head CI/merge; prepare a separate reviewed Pages CD/recovery slice afterward |
 
@@ -16,7 +16,7 @@ Prior necessary npm/browser tooling authorization applies. File ownership stays 
 
 Previous interrupted checkpoint (superseded by explicit resumption): actual branch/HEAD remains the assigned baseline; release-verification changes are uncommitted and no new PR/merge is claimed. Developer records passing lint/strict compilers/32 Node tests, root build/verifier and8 root E2E; Pages verification/final freeze is unfinished. RV-01 failure-artifact upload is present but awaits final workflow review/cloud execution. Writer report is accepted/frozen. Coordinator must inspect actual resumed evidence before dependent CD; do not replace or restart this work from an old task.
 
-Final local release-verification/materials bundle is accepted after actual review; both owner tasks are closed. Actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20) tracks payload `afbb87f918db7504ecc5547e67ab855930ab117e`. Its execution record owns final reviewed-head/cloud browser checks/merge and local main reconciliation. The interrupted checkpoint above is historical; do not restart completed root/Pages checks from it.
+Final local release-verification/materials bundle is accepted after actual review; both owner tasks are closed. Actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20) tracks original payload `afbb87f918db7504ecc5547e67ab855930ab117e` and the subsequent r2 table-test correction after failed Linux run44001166691. Its execution record owns final reviewed-head/cloud browser checks/merge and local main reconciliation. The interrupted checkpoint above is historical; do not restart completed root/Pages checks from it.
 
 ## Completed project-consistency audit
 

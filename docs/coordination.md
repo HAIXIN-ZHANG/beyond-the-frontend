@@ -2,7 +2,19 @@
 
 Updated: 2026-11-17 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
-## Active Milestone 1 release verification
+## Active Milestone 1 Pages release
+
+Release verification integrated through [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20): reviewed head `3546952ab8b6e889d08fb808c0d9de1e16ce0613` passed all three required jobs/actual steps in run44004294695; squash `d390f53420f88deda0627328d140be058a91feac` also passed all three main jobs/steps in run44004768738. Coordinator verified identical trees and clean local main/origin-main. No deployment is claimed.
+
+| Owner | Current assignment | Boundary |
+| --- | --- | --- |
+| Developer | [Manual Pages release and recovery](handoffs/developer/pages-release-pipeline.md) | r1 accepted after actual source/HTTP/tool-test review and PAGES-01 correction. Task closed/files frozen; Coordinator handles exact-head CI/integration and actual release. Reopen only on concrete findings |
+| Writer | Release-material inventory remains accepted/closed | Public URL/status alignment waits for observed successful publication and a concrete assignment |
+| Coordinator/Reviewer | [Pages release review](reviews/pages-release-pipeline.md), board, integration and publication | Actual source/check review, original-owner feedback, matching-head PR/main checks, deliberate dispatch, online smoke and actual recovery verification |
+
+Author's 2026-11-17 Pages publication instruction applies. Manual release only from protected `main`; existing Source=GitHub Actions/main-only Pages environment and branch/write protections remain intact. No new reader feature, manuscript/translation, Figma change, paid service or credential/access expansion. Existing dependency disposition remains bounded unresolved maintenance. Preserve all owner/historical work and31 recovery files.
+
+## Completed Milestone 1 release verification
 
 The author assigned remaining Milestone 1 release work, correcting demonstrated issues before progression. Current branch `codex/milestone-1-release-verification`, based on verified clean main/origin-main `e0b530a3ef7397c16158cde8d59190f18f84e57b`. PR19 correction/audit is merged with successful PR/main Quality/root/Pages runs; its execution record owns exact integration evidence.
 

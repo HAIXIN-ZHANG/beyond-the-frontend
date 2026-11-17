@@ -15,7 +15,6 @@ export const globalCss = defineGlobalStyles({
     color: 'token(colors.fg.default)', textStyle: 'body', overflowWrap: 'anywhere',
     '@media (max-width: 767px)': { textStyle: 'mobile-body' },
   },
-  'html[lang="zh-CN"] body': { textStyle: 'zh-body' },
   a: { color: 'token(colors.fg.link)', textUnderlineOffset: '0.25em' },
   'a:hover': { color: 'token(colors.accent.hover)' },
   ':where(a, button, input, select, textarea, pre, [tabindex]):focus-visible': {
@@ -24,7 +23,7 @@ export const globalCss = defineGlobalStyles({
   },
   '.shell': {
     width: 'calc(100% - token(spacing.layout.gutterMobile) * 2)',
-    maxWidth: '68rem', marginInline: 'auto',
+    maxWidth: 'token(sizes.size.pageMax)', marginInline: 'auto',
     '@media (min-width: 768px)': { width: 'calc(100% - token(spacing.layout.gutterTablet) * 2)' },
     '@media (max-width: 360px)': { width: 'calc(100% - token(spacing.layout.gutterNarrow) * 2)' },
   },
@@ -32,9 +31,9 @@ export const globalCss = defineGlobalStyles({
     display: 'grid', gridTemplateColumns: 'auto minmax(0, 1fr) auto', alignItems: 'center',
     gap: 'token(spacing.header.gap)', minHeight: 'token(sizes.size.headerWide)', paddingBlock: 'token(spacing.header.paddingBlockWide)',
     borderBottomWidth: 'token(borderWidths.stroke.subtle)', borderBottomStyle: 'solid', borderColor: 'token(colors.border.default)',
-    '@media (max-width: 899px)': { gridTemplateColumns: 'minmax(0, 1fr) auto', gap: 'token(spacing.control.gap)', '& nav': { gridColumn: '1 / -1', justifyContent: 'flex-end' }, '& .wordmark': { fontSize: '14px', lineHeight: '20px' } },
+    '@media (max-width: 899px)': { gridTemplateColumns: 'minmax(0, 1fr) auto', gap: 'token(spacing.control.gap)', '& nav': { gridColumn: '1 / -1', justifyContent: 'flex-end' }, '& .wordmark': { textStyle: 'ui', fontWeight: 600 } },
   },
-  '.wordmark': { color: 'token(colors.fg.default)', fontWeight: 700, letterSpacing: '-0.03em', textDecoration: 'none' },
+  '.wordmark': { display: 'flex', flexWrap: 'wrap', alignItems: 'center', minWidth: 0, minHeight: 'token(sizes.size.actionMin)', color: 'token(colors.fg.default)', textStyle: 'brand', textDecoration: 'none', '& span': { whiteSpace: 'pre' } },
   '.visually-hidden': { position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clipPath: 'inset(50%)', whiteSpace: 'nowrap', border: 0 },
   '.search-trigger': { justifySelf: 'center', gap: 'token(spacing.control.paddingInline)', '& kbd': { textStyle: 'mono', color: 'token(colors.fg.muted)' }, '@media (max-width: 899px)': { '& kbd': { display: 'none' } } },
   '.search-dialog': {
@@ -89,8 +88,7 @@ export const globalCss = defineGlobalStyles({
     '&:has(input:checked)': { backgroundColor: 'token(colors.bg.selected)', color: 'token(colors.fg.link)' },
     '& input': { margin: 0, accentColor: 'token(colors.accent.default)' },
   },
-  'body:has(.chapter-layout) .shell': { maxWidth: '88rem' },
-  '.main:has(.chapter-layout)': { paddingBlock: 'token(spacing.layout.gutterTablet)' },
+  '.main:has(.chapter-layout)': { maxWidth: 'token(sizes.size.readingLayoutMax)', paddingBlock: 'token(spacing.layout.gutterTablet)' },
   '.chapter-layout': {
     display: 'grid', gridTemplateColumns: 'token(sizes.size.sidebarWide) minmax(0, token(sizes.size.proseMax)) token(sizes.size.sidebarCompact)',
     gap: 'token(spacing.layout.columnGap)', justifyContent: 'center', alignItems: 'start',
@@ -122,7 +120,7 @@ export const globalCss = defineGlobalStyles({
   '.reading-disclosure-body': { padding: 'token(spacing.control.paddingInline)', marginTop: 'token(spacing.control.gap)', borderWidth: 'token(borderWidths.stroke.subtle)', borderStyle: 'solid', borderColor: 'token(colors.border.default)', borderRadius: 'token(radii.shape.control)', backgroundColor: 'token(colors.bg.surface)' },
   '.chapter-context': { textStyle: 'small', color: 'token(colors.fg.link)', marginTop: 0, marginBottom: 'token(spacing.prose.blockGap)', '& span': { color: 'token(colors.fg.muted)', display: 'block' } },
   '.chapter-prose': {
-    minWidth: 0, maxWidth: 'token(sizes.size.proseMax)', fontFamily: 'token(fonts.chinese)',
+    minWidth: 0, maxWidth: 'token(sizes.size.proseMax)', textStyle: 'zh-body',
     '& h1': { textStyle: 'zh-title', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h2': { textStyle: 'zh-h2', marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.prose.blockGap)' },
     '& h3, & h4, & h5, & h6': { marginTop: 'token(spacing.prose.sectionGap)', marginBottom: 'token(spacing.control.paddingInline)' },
@@ -134,7 +132,6 @@ export const globalCss = defineGlobalStyles({
     '& blockquote': { marginInline: 0, paddingInlineStart: 'token(spacing.card.padding)', borderInlineStart: 'token(borderWidths.stroke.focus) solid token(colors.border.control)', color: 'token(colors.fg.muted)' },
     '& :not(pre) > code': { textStyle: 'mono', backgroundColor: 'token(colors.bg.subtle)', borderRadius: 'token(radii.shape.label)', paddingInline: 'token(spacing.1)' },
     '& .heading-link': { color: 'inherit', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
-    '@media (max-width: 767px)': { '& h1': { fontSize: '32px', lineHeight: '40px' }, '& h2': { fontSize: '24px', lineHeight: '32px' } },
   },
   '.chapter-pagination': {
     display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'token(spacing.layout.columnGap)',
@@ -187,6 +184,7 @@ export const globalCss = defineGlobalStyles({
   },
   '.skip-link:focus': { transform: 'translateY(0)', color: 'token(colors.fg.onAccent)' },
   '@media (max-width: 767px)': {
+    'h1': { textStyle: 'h1-compact' },
     '.site-header': { minHeight: 'token(sizes.size.headerCompact)', paddingBlock: 'token(spacing.header.paddingBlockCompact)' },
     '.site-header nav': { gap: 'token(spacing.control.gap)' },
     '.main': { paddingBlock: 'token(spacing.prose.sectionGap)' },

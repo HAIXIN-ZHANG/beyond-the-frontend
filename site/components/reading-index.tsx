@@ -15,7 +15,7 @@ export async function ReadingIndex({ locale }: { locale: Locale }) {
       <p className="availability-note">{messages.availableNotice}</p>
       {locale === 'en' ? <p>{messages.englishUnavailable}</p> : null}
       <ol className="available-chapters">{chapters.map(chapter => <li key={chapter.entry.id}>
-        <Link href={chapterPath(chapter.entry)} hrefLang="zh" lang="zh-CN">{chapter.title}</Link>
+        <Link href={chapterPath(chapter.entry)} hrefLang="zh" lang={messages.lang}>{messages.chapterLabels[chapter.entry.id] ?? chapter.title}</Link>
         <p>{messages.chineseDraft}</p>
       </li>)}</ol>
       <a className="text-link" href={site.issues}>{messages.suggest} <span aria-hidden="true">↗</span></a>

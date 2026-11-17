@@ -2,7 +2,21 @@
 
 Updated: 2026-11-17 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
-## Milestone 1 public release — documentation integration
+## Final Milestone 1 locale correction — reviewed revision
+
+The author's Chinese-first/English-first UI, typography and width corrections are accepted in source after actual before/after visual and browser review. The [Pages review](reviews/pages-release-pipeline.md#localetypography-r3--source-and-visual-acceptance) owns LOCALE-01/TYPE-01/WIDTH-01/WRAP-01 closure and exact frozen revisions. Actual integration/public acceptance is recorded in the scoped PR execution record; source acceptance alone is not publication. Read [public release metadata](https://haixin-zhang.github.io/vibe-coding-then-what/release.json) for the actual deployed identity.
+
+| Owner | Final scoped outcome | Boundary |
+| --- | --- | --- |
+| Developer | Same [release handoff](handoffs/developer/pages-release-pipeline.md), r3 localization/shared typography/layout and phrase wrapping | Accepted after actual code/screenshots/metrics and independent affected Pages checks; closed/files frozen. No new implementation |
+| Writer | Same [public-closeout handoff](handoffs/writer/pages-public-closeout.md), vision hold correction and historical-versus-current source wording | Accepted; closed/files frozen. No manuscript/translation assignment |
+| Coordinator/Reviewer | Existing [Pages review](reviews/pages-release-pipeline.md), this board and authorized Git/public operations | Integrate the accepted revision through matching checks, deliberately publish and verify actual public behavior; return any concrete failure to its owner |
+
+Assignment baseline: verified clean main/origin-main `9729a614d5dd59abcc4f4cbd814657ed1e82d4f6` (PR23, all three main jobs passed); branch `codex/milestone-1-final-audit`. Both reviewed Chinese sources and the absent English corpus are unchanged. The pre-correction published source `8c29f4d` retains its accepted initial publication/recovery evidence below; new UI is not inferred from it. Final local metrics show matching home/index roles across locales and stable Header widths, while reading prose/rails retain deliberate page-type roles. Production font changes explicitly override historical Figma primitives; the reference file is unchanged.
+
+Read-only architecture review found the current app/content/components/Panda/scripts/tests separation proportionate with no engineering-structure blocker. Optional manifest-derived availability counts belong to the next content intake, not this closure. The About website link is now saved to the verified public URL; current vision wording no longer imposes an obsolete deployment hold. Existing moderate development-advisory maintenance and bounded prior-version recovery limits remain. Preserve all accepted history, manuscript identities and31 recovery files. No additional reader feature, translation, Figma update, paid service or access change is assigned.
+
+## Verified Milestone 1 public release baseline
 
 The initial reading site is publicly accepted at <https://haixin-zhang.github.io/vibe-coding-then-what/>, exact source `8c29f4dfbab684eb7623600f304cdce197951bcc`: two reviewed Chinese drafts, zero English bodies. PR20 added maintained verification, PR21 manual Pages release tooling, and PR22 corrected PAGES-02 after actual public QA. All matching PR/main jobs passed. The [Pages review](reviews/pages-release-pipeline.md) owns source findings, exact integration and actual publication/recovery evidence; historical interruptions stay in those records rather than acting as current tasks.
 

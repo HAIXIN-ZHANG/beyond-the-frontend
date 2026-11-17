@@ -33,6 +33,7 @@ type Messages = {
   availableNotice: string;
   englishUnavailable: string;
   chineseDraft: string;
+  chapterLabels: Readonly<Record<string, string>>;
 };
 
 const messages = {
@@ -67,6 +68,10 @@ const messages = {
     availableNotice: 'Two reviewed drafts are available in Chinese. The book is still being written.',
     englishUnavailable: 'English chapters are not available yet. The links below open the Chinese originals.',
     chineseDraft: 'Chinese · Reviewed draft',
+    chapterLabels: {
+      opening: 'Before We Start: It Runs. Then What?',
+      G01: 'A Page and the System Behind It',
+    },
   },
   zh: {
     lang: 'zh-CN',
@@ -99,6 +104,7 @@ const messages = {
     availableNotice: '目前可阅读两篇已审阅中文草稿，全书仍在写作中。',
     englishUnavailable: '英文正文尚未提供，下方链接为中文原稿。',
     chineseDraft: '中文 · 已审阅草稿',
+    chapterLabels: {},
   },
 } satisfies Record<Locale, Messages>;
 

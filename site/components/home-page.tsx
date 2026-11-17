@@ -7,7 +7,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   const messages = getMessages(locale);
   return (
     <section className="book-intro" aria-labelledby="book-title">
-      <p className="eyebrow" lang="en">{site.name}</p>
+      <p className="eyebrow" lang={messages.lang}>{messages.title}</p>
       <h1 id="book-title">{messages.titleLines[0]}<span>{messages.titleLines[1]}</span></h1>
       <p className="intro">{messages.description}</p>
       <p className="availability-note">{messages.availableNotice}</p>

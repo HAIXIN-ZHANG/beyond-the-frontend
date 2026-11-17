@@ -104,7 +104,7 @@ These are local Chromium, source/artifact and exact-revision CI observations. Th
 
 ### Current outcome — 2026-11-17
 
-The author explicitly authorized this bounded Pages release on 2026-11-17, superseding the earlier no-deployment hold. The verified public source is `8c29f4dfbab684eb7623600f304cdce197951bcc` (PR #22). [Pages source/integration/public/recovery review](../reviews/pages-release-pipeline.md) owns the actual execution observations; [release-verification review](../reviews/release-verification.md) owns permanent E2E and dependency disposition. These are observed initial-release outcomes, not a release of future content or reader features.
+The author explicitly authorized this bounded Pages release on 2026-11-17, superseding the earlier no-deployment hold. Initial publication was verified at source `8c29f4dfbab684eb7623600f304cdce197951bcc` (PR #22). The current deployed identity is available in the public [release metadata](https://haixin-zhang.github.io/vibe-coding-then-what/release.json); subsequent UI-release evidence belongs in the existing [Pages source/integration/public/recovery review](../reviews/pages-release-pipeline.md), which owns actual execution observations. The [release-verification review](../reviews/release-verification.md) owns permanent E2E and dependency disposition. These are observed initial-release outcomes, not a release of future content or reader features.
 
 | Operational gate | Verified outcome and remaining limit |
 | --- | --- |

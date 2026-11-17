@@ -17,6 +17,8 @@
     "test:e2e:install": "playwright install chromium",
     "check": "npm run lint && npm run typecheck && npm test",
     "verify:export": "node scripts/verify-export.mjs",
+    "release:metadata": "node scripts/release-metadata.mjs",
+    "release:smoke": "node scripts/public-smoke.mjs",
     "typecheck": "npm run codegen && NEXT_TELEMETRY_DISABLED=1 next typegen site && tsc --project site/tsconfig.json --noEmit && tsc --project tsconfig.panda.json --noEmit",
     "codegen": "panda codegen",
     "prepare": "npm run codegen"

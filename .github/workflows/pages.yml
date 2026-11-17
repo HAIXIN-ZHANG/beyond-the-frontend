@@ -1,0 +1,97 @@
+name: Pages release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+  NEXT_PUBLIC_BASE_PATH: /vibe-coding-then-what
+
+jobs:
+  build:
+    name: Validate Pages release
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.repository == 'HAIXIN-ZHANG/vibe-coding-then-what' }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out the immutable dispatch revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Verify checked-out identity
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Report runtime versions
+        run: |
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --no-fund
+      - name: Check source
+        run: npm run check
+      - name: Build Pages export
+        run: npm run build:pages
+      - name: Verify exported pages and assets
+        run: npm run verify:export
+      - name: Install Chromium
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Test the static reading experience
+        run: npm run test:e2e
+      - name: Stamp public release identity and validate output boundary
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: npm run release:metadata
+      - name: Upload only the validated static export
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: github-pages-${{ github.run_attempt }}
+          path: site/out
+          retention-days: 7
+      - name: Retain failed public browser-check evidence
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pages-browser-failure-${{ github.run_attempt }}
+          path: .artifacts/playwright/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
+
+  deploy:
+    name: Deploy validated Pages artifact
+    needs: build
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.repository == 'HAIXIN-ZHANG/vibe-coding-then-what' }}
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}

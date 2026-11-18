@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
-// Non-reader routes retain their existing inline links. No-JS readers keep the same static links.
+// Home and reader views share the compact header; indexes and no-JS pages retain inline links.
 export function ChapterHeaderMenu({ label, children }: { label: string; children: ReactNode }) {
   const pathname = usePathname();
   const menu = useRef<HTMLDetailsElement>(null);
@@ -14,7 +14,7 @@ export function ChapterHeaderMenu({ label, children }: { label: string; children
     if (!element) return;
     function reconcile() {
       if (!element) return;
-      const compact = window.innerWidth < 900 && !!document.querySelector('.chapter-layout');
+      const compact = window.innerWidth < 900 && !!document.querySelector('.chapter-layout, .home-layout');
       if ((element.dataset.compact === 'true') === compact) return;
       const active = document.activeElement;
       element.dataset.compact = String(compact); element.open = !compact;

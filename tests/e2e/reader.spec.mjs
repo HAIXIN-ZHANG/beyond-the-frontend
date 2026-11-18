@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chapterManifest, chapterPath } from '../../site/content/manifest.ts';
 import { withBasePath } from '../../site/config/deployment.ts';
 import { getMessages } from '../../site/config/i18n.ts';
+import { homeContent } from '../../site/components/home-content.ts';
 
 const at = pathname => withBasePath(pathname, process.env.NEXT_PUBLIC_BASE_PATH);
 const [opening, g01, browserChapter] = chapterManifest;
@@ -106,11 +107,11 @@ test('both home locales show exactly the approved Chinese reading destinations a
     await page.goto(at(locale === 'en' ? '/' : '/zh/'));
     const links = page.locator('.home-chapters a');
     await expect(links).toHaveCount(chapterManifest.length);
-    await expect(page.locator('.book-intro > .availability-note')).toHaveText(getMessages(locale).availableNotice(chapterManifest.length));
+    await expect(page.locator('.home-hero-copy > .availability-note')).toHaveText(getMessages(locale).availableNotice(chapterManifest.length));
     for (const [index, chapter] of chapterManifest.entries()) {
       await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
       await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
-      await expect(links.nth(index)).toHaveText(getMessages(locale).chapterLabels[chapter.id] ?? chapter.title);
+      await expect(links.nth(index).locator('.home-chapter-title')).toHaveText(getMessages(locale).chapterLabels[chapter.id] ?? chapter.title);
     }
     if (locale === 'en') await expect(page.locator('.home-chapters')).toContainText('English chapters are not available yet.');
     await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
@@ -175,7 +176,9 @@ test('localized chrome and matching page roles remain coherent across languages 
         expect(zh[role].left, `${width}px ${kind} ${role} left`).toBeCloseTo(en[role].left, 0);
         expect(zh[role].width, `${width}px ${kind} ${role} width`).toBeCloseTo(en[role].width, 0);
       }
-      expect(zh.header.height, `${width}px ${kind} shared header height`).toBeCloseTo(en.header.height, 0);
+      if (kind === 'index' || width >= 900) expect(zh.header.height, `${width}px ${kind} shared header height`).toBeCloseTo(en.header.height, 0);
+      // The compact home header may add a phrase-preserving line for a longer localized brand.
+      if (kind === 'home' && width < 900) for (const snapshot of [en, zh]) expect(snapshot.header.height).toBeGreaterThanOrEqual(60);
     }
     await page.goto(at(chapterPath(g01)));
     await expect(page).toHaveTitle(`${g01.title} | ${getMessages('zh').title}`);
@@ -653,7 +656,7 @@ test('V2 twelve appearance/accent combinations render readable controls without 
     const read = () => page.evaluate(() => {
       const style = selector => window.getComputedStyle(document.querySelector(selector));
       const canvas = style('html'), body = style('body'), button = style('#v2-palette-fixture button');
-      const link = style('.home-chapters a'), notice = style('#v2-palette-fixture aside');
+      const link = style('.home-chapters .home-chapter-arrow'), notice = style('#v2-palette-fixture aside');
       return { canvas: canvas.backgroundColor, text: body.color, link: link.color, buttonText: button.color,
         button: button.backgroundColor, border: button.borderTopColor, outline: button.outlineColor, outlineStyle: button.outlineStyle,
         warning: [notice.color, notice.backgroundColor] };
@@ -1111,4 +1114,109 @@ test('V2 breakpoint focus does not override a deliberate click away from the des
   await expect(page.locator('.mobile-book-navigation summary')).not.toBeFocused();
   await expect(page.locator('body')).toBeFocused();
   expect(await page.evaluate(() => window.scrollY)).toBe(position);
+});
+
+
+test('V2 home uses approved local art and real localized reading rows across viewports and appearance', async ({ page }, testInfo) => {
+  const observations = [];
+  for (const locale of ['en', 'zh']) for (const width of [1440, 1024, 390, 320]) for (const mode of ['light', 'dark']) {
+    const m = getMessages(locale), copy = homeContent[locale];
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto(at(locale === 'en' ? '/' : '/zh/'));
+    await page.evaluate(mode => { window.__btfTheme.setPreference(mode); window.__btfTheme.setAccent(mode === 'light' ? 'green' : 'purple'); }, mode);
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', mode);
+    await expect(page.locator('html')).toHaveAttribute('data-accent', mode === 'light' ? 'green' : 'purple');
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toHaveText(m.titleLines.join(''));
+    await expect(page.locator('.home-hero-copy .intro')).toHaveText(m.description);
+    await expect(page.locator('.home-chapters a')).toHaveCount(3);
+    await expect(page.locator('.home-hero-copy .eyebrow')).toHaveCount(0);
+    await expect(page.locator('.home-chapters li')).toHaveCount(3);
+    await expect(page.locator('.home-chapters li > div > span, .home-sidebar .reading-nav__availability')).toHaveCount(0);
+    await expect(page.locator('.home-topics li p')).toHaveCount(0);
+    await expect(page.getByText(copy.planNotice, { exact: true })).toHaveCount(1);
+    await expect(page.locator('.home-topics li')).toHaveCount(8);
+    await expect(page.locator('.home-topics a, .home-sidebar-topics a')).toHaveCount(0);
+    const image = page.getByRole('img', { name: copy.illustrationAlt, exact: true });
+    await image.scrollIntoViewIfNeeded(); await image.evaluate(element => element.decode());
+    const geometry = await image.evaluate(element => {
+      const bounds = element.getBoundingClientRect(), list = window.document.querySelector('.home-chapters').getBoundingClientRect();
+      return { source: new URL(element.currentSrc).pathname, naturalWidth: element.naturalWidth, naturalHeight: element.naturalHeight,
+        width: bounds.width, height: bounds.height, left: bounds.left, right: bounds.right, chapterTop: list.top, top: bounds.top,
+        overflow: window.document.documentElement.scrollWidth > window.innerWidth };
+    });
+    const mobile = width < 900;
+    expect(geometry.source).toBe(at(`/illustrations/home-systems-${mobile ? 'mobile' : 'desktop'}.svg`));
+    expect([geometry.naturalWidth, geometry.naturalHeight]).toEqual(mobile ? [304, 54] : [410, 112]);
+    expect(geometry.width / geometry.height).toBeCloseTo(geometry.naturalWidth / geometry.naturalHeight, 2);
+    expect(geometry.width).toBeGreaterThan(0); expect(geometry.left).toBeGreaterThanOrEqual(0); expect(geometry.right).toBeLessThanOrEqual(width);
+    expect(geometry.overflow).toBe(false);
+    if (mobile) expect(geometry.top).toBeGreaterThan(geometry.chapterTop);
+    observations.push({ locale, mode, viewport: width, ...geometry });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    if ([1440, 390, 320].includes(width)) await page.screenshot({ path: testInfo.outputPath(`home-${locale}-${width}-${mode}.png`), fullPage: true });
+  }
+  await attachGeometry(testInfo, 'home-assets-geometry', observations);
+});
+
+test('V2 home keyboard navigation, real search, language menu and enlarged text preserve usable links', async ({ page }, testInfo) => {
+  for (const locale of ['en', 'zh']) {
+    const m = getMessages(locale), copy = homeContent[locale];
+    await page.setViewportSize({ width: 1440, height: 1000 }); await page.goto(at(locale === 'en' ? '/' : '/zh/'));
+    const sidebar = page.locator('.home-navigation'), summary = sidebar.locator('summary');
+    await summary.focus(); await summary.press('Enter'); await expect(sidebar).not.toHaveAttribute('open', '');
+    expect(await page.locator('.home-sidebar').evaluate(element => element.getBoundingClientRect().width)).toBe(64);
+    await summary.press('Enter'); await expect(sidebar).toHaveAttribute('open', '');
+    expect(await page.locator('.home-sidebar').evaluate(element => element.getBoundingClientRect().width)).toBe(248);
+    const first = page.getByRole('link', { name: copy.read, exact: true });
+    await first.focus(); await first.press('Enter'); await expect(page.locator('article')).toHaveAttribute('data-chapter-id', opening.id);
+    await page.goto(at(locale === 'en' ? '/' : '/zh/'));
+    await page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true }).click();
+    const dialog = page.getByRole('dialog');
+    if (locale === 'zh') {
+      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(14);
+    } else await expect(dialog).toContainText('English');
+    await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
+    await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeFocused();
+    await page.setViewportSize({ width: 320, height: 844 });
+    const menu = page.locator('.chapter-header-menu'), menuSummary = menu.locator('summary');
+    await expect(menu).toHaveAttribute('data-compact', 'true'); await expect(menuSummary).toBeVisible();
+    await menuSummary.focus(); await menuSummary.press('Enter'); await expect(menu).toHaveAttribute('open', '');
+    await menuSummary.press('Escape'); await expect(menuSummary).toBeFocused();
+    await menuSummary.press('Enter');
+    await menu.getByRole('link', { name: m.switchLabel, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${at(locale === 'en' ? '/zh/' : '/')}$`));
+  }
+  await page.goto(at('/zh/'));
+  await page.evaluate(() => {
+    const elements = [...window.document.querySelectorAll('.site-header, .site-header a, .site-header button, .home-hero-copy h1, .home-hero-copy .intro, .home-chapters a')];
+    const sizes = elements.map(element => ({ element, size: parseFloat(window.getComputedStyle(element).fontSize), line: parseFloat(window.getComputedStyle(element).lineHeight) }));
+    for (const { element, size, line } of sizes) { element.style.fontSize = `${size * 2}px`; if (Number.isFinite(line)) element.style.lineHeight = `${line * 2}px`; }
+  });
+  expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  for (const link of await page.locator('.home-chapters a').all()) { await link.focus(); await expect(link).toBeFocused(); }
+  await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: testInfo.outputPath('home-320-enlarged.png'), fullPage: true });
+});
+
+
+test('V2 homepage keeps native art, chapter links and desktop collapse available without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  try {
+    for (const locale of ['en', 'zh']) {
+      await page.setViewportSize({ width: 390, height: 844 }); await page.goto(`http://127.0.0.1:4179${at(locale === 'en' ? '/' : '/zh/')}`);
+      await expect(page.locator('.home-chapters a')).toHaveCount(3);
+      await expect(page.getByRole('img', { name: homeContent[locale].illustrationAlt })).toBeVisible();
+      const switchLink = page.getByRole('link', { name: getMessages(locale).switchLabel, exact: true });
+      await expect(switchLink).toBeVisible();
+      expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.locator('.home-navigation > summary').click();
+      await expect(page.locator('.home-navigation')).not.toHaveAttribute('open', '');
+      await page.locator('.home-navigation > summary').click();
+      await page.locator('.home-chapters a').last().click();
+      await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+    }
+  } finally { await context.close(); }
 });

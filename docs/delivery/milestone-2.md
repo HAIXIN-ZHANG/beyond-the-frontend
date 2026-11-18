@@ -1,5 +1,33 @@
 # Delivery Milestone 2 — a useful next reading slice
 
+## Current approved plan — 2026-11-18
+
+The author approved M2–4 planning. **Milestone 2 now aims to complete coherent reviewed Chinese core-draft coverage of all eight parts, with essential reading support and basic measurement.** It is not 48 mandatory chapter files or a claim that the book is already complete. This current plan supersedes older prospective feature/pilot and V2-first priorities below; their dated outcomes/technical limits remain historical evidence.
+
+The [roadmap's M2 routes](../roadmap.md#beta-2--practical-improvements-with-bounded-experiments) own the detailed plan and [acceptance gate](../roadmap.md#beta-2-gate-improve-a-demonstrated-reading-need). This delivery record keeps a concise current slice/acceptance summary and the original records, not a competing feature backlog. [The board](../coordination.md) alone assigns actual work; plan approval does not release chapters, V2 implementation, analytics or deployment.
+
+| Route / support | Planned output and boundary |
+| --- | --- |
+| 2.1 Identity/status | Confirmed title/subtitle; distinguish five reviewed Chinese originals, three local manifest entries, last verified two public and zero English; separate revision copies from originals. |
+| 2.2 Four writing groups | Opening/map/browser/product; frontend Design Systems/API/backend/data; async/cloud/tests/delivery/observability/recovery; AI product/coding AI/human judgment and a small closing section. Reuse reviewed material, expose gaps and maintain cross-part continuity; assignments remain bounded. |
+| 2.3 Review/corrections | Research and concrete concept → actual concept review/release → manuscript → separate review and original-owner corrections/affected re-review. Scope/mechanism changes return to the appropriate gate. |
+| 2.4 Figures/contracts | Original static images only when useful, with alt/caption/provenance/prose explanation and responsive legibility; stable chapter/heading/source/language contracts before intake. This is not schema or asset implementation. |
+| 2.5 V2 core and essential reading | Deliver the reviewed/author-confirmed V2 core with honest entry/navigation/search/code/table/figure/sharing/correction paths. Independent design/technical review and author confirmation precede implementation; writing proceeds meanwhile. |
+| 2.6 Minimum local Continue | Device/browser-only return path, explicit URL precedence, stable chapter/heading fallback and changed/missing/malformed/denied/quota-storage recovery. M3 adds bookmarks and extra preferences from feedback. |
+| 2.7 Basic measurement | Privacy-conscious event/session measurement under retained event-union/dedup/cost limits. Download clicks only for actual links; no service/account/script authorized by this plan. |
+| 2.8 Intake/delivery/acceptance | Exact-source allowlist intake, coherent eight-part coverage and actual reader/Continue/content/measurement checks. Plan desktop/narrow-screen, Safari and real-phone checks, record performed environments/results and leave required unrun checks open; integration/publication remain separate. |
+
+**Current source checkpoint:** five reviewed originals are opening/G01/F01 plus [P8.10](../../book/drafts/zh/03-after-ai-finishes.md) and [P3.2](../../book/drafts/zh/04-api-contract.md), whose complete articles are accepted in [P810M](../reviews/P810M.md) and [P32M](../reviews/P32M.md). Both remain reviewed sources without reader intake or publication. The local manifest still admits three; the last verified public edition contains opening/G01 only, with zero English bodies. Three separately [accepted voice copies](../reviews/existing-sources-voice-manuscripts.md) have not replaced canonical sources and are not new original chapters. F01 source/intake reached remote main through PR #26; this does not certify its public availability.
+
+**Completion criteria:** accepted core manuscripts with coherent explanations/original examples/limits across the eight parts; reviewed image/source/identity contracts and essential V2/Continue reading journey and URL/storage/changed-target recovery; basic measurement validated under its scoped privacy/event/session rules; accurate source/local/public/language status. Planning or one sample chapter does not meet these criteria. An individual accepted chapter may progress through separately authorized intake before the whole draft. Required missing checks remain open; no full bilingual, Safari/device, Figma or live-service verification is implied by this document.
+
+Writing does not wait for optional audio/interactive/offline/export/card pilots or a new portal. M3 owns whole-book Chinese first-edition refinement, reviewed English batches, connected-reading/feedback improvements and a real versioned PDF or EPUB plus small copy-only AI aids; optional pilots are evidence-led. M4 owns a static author/works portal, with richer multi-guide features only for a real second collection/need. Commercial publishing remains after M4. Read [the full approved direction](../roadmap.md#approved-milestones-24-direction--2026-11-18) before selecting a later slice.
+
+## Historical slice record — 2026-11-17
+
+The following record is preserved at its original checkpoints. Its then-current source counts, preparation-only holds and next-step recommendations are not today's assignment or whole-M2 completion criteria.
+
+
 Date: 2026-11-17 (Australia/Perth). Owner: Coordinator/Reviewer. The author approved the five-item sequence and resumed work. [The board](../coordination.md) is the only live assignment/status authority; [the roadmap](../roadmap.md#beta-2--practical-improvements-with-bounded-experiments) owns the complete candidate backlog. This record defines the current slice, not a promise to deliver every candidate or the whole first edition at once.
 
 ## Design direction and next delivery priority — 2026-11-17

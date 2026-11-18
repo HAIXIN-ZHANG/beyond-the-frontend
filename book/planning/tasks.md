@@ -1,6 +1,16 @@
 # Writing Stages and Review Gates
 
-Updated: 2026-11-17. Owner: Writer. [Current assignments/holds](../../docs/coordination.md) belong only to the board. This document describes writing dependencies and evidence, not an independently executable queue.
+Updated: 2026-11-18. Owner: Writer. [Current assignments/holds](../../docs/coordination.md) belong only to the board. This document describes writing dependencies and evidence, not an independently executable queue.
+
+## Approved delivery direction — 2026-11-18
+
+The author-approved [M2–4 roadmap](../../docs/roadmap.md#approved-milestones-24-direction--2026-11-18) owns full routes and acceptance. This is stage direction, not another live queue: M2 completes coherent reviewed Chinese core coverage across eight parts plus essential reading/basic measurement; M3 refines the Chinese first edition, adapts stable Chinese material into separately reviewed English batches and selects useful extensions; M4 provides a lightweight author/works portal. Optional pilots do not block writing and no list here assigns chapters or runtime work.
+
+M2 writing proceeds in four manageable groups: opening/map/browser/product; frontend Design Systems/API/backend/data; asynchronous work/cloud/tests/delivery/observability/recovery; AI product/coding AI/human judgment with a small closing section. The [existing outline](outline.md) remains the detailed topic map; its 48 working units are flexible, not a mandatory file count. The [M2 delivery record](../../docs/delivery/milestone-2.md#current-approved-plan--2026-11-18) summarizes the current writing routes and completion criteria. A stable Chinese source precedes its separately scoped English adaptation, preserving meaning and uncertainty while allowing natural prose/humor.
+
+M2's essential reader scope includes the actually reviewed/author-confirmed V2 core and minimum local Continue, with explicit URL precedence, device-only disclosure, stable-target/storage recovery and actual acceptance evidence. Writing does not wait for the visual gate. M3 adds bookmarks, preferences/print and other selected improvements from feedback; this plan itself assigns no implementation.
+
+**Actual content status:** five reviewed Chinese originals (opening/G01/F01/P8.10/P3.2), three local manifest entries (opening/G01/F01), last verified two public entries (opening/G01), zero English manuscript bodies. Three accepted voice copies revise the first three works; they are not additional originals, canonical replacements or automatic reader intake. No new prose, closing unit or whole-book translation is assigned by this plan.
 
 ## Content-framework task: planning only
 
@@ -26,7 +36,10 @@ These retained checkboxes are the historical planning acceptance criteria, not a
 | --- | --- | --- |
 | Opening and Common Foundations (W02) | Two Chinese sources passed re-review R1–R3 and PR #1; [review](../../docs/reviews/W02.md), [integration](../../docs/reviews/INT01.md), [scope](W02-scope.md), [handoff](../../docs/handoffs/writer/W02.md) | G01 anchors P1.1 with its existing explanation; new product-success detail is not pre-approved. Do not change source bytes, paths, IDs or routes in planning. |
 | Browser Fundamentals — Research and Outline (F01A) | Original r1 accepted, PR #6 integrated; [analysis](analyses/F01.md), [review](../../docs/reviews/F01A.md), [handoff](../../docs/handoffs/writer/F01A.md) | P1.2 reuses this analysis; the original analysis decision did not accept prose or run browser experiments. Later F01M source acceptance is recorded separately below. Expanded scope returns to the relevant analysis gate. |
-| Browser Fundamentals — Chinese Manuscript (F01M) | Chinese r3 passed the separate [manuscript review](../../docs/reviews/F01M.md); [source](../drafts/zh/02-browser-foundations.md), [scope review](../../docs/reviews/F01M-scope.md), [handoff](../../docs/handoffs/writer/F01M.md) | Accepted manuscript source; subsequent local manifest/route/search intake is implemented, with its final acceptance decision owned by the independent [intake review](../../docs/reviews/milestone-2-chapter-intake.md). The local allowlist has opening/G01/F01; Git integration/publication remain pending and public reading still has only opening/G01. Chapter experiments remain unrun; English adaptation and further writing require separate scope. |
+| Browser Fundamentals — Chinese Manuscript (F01M) | Chinese r3 passed [manuscript review](../../docs/reviews/F01M.md); [source](../drafts/zh/02-browser-foundations.md), [scope](../../docs/reviews/F01M-scope.md), [handoff](../../docs/handoffs/writer/F01M.md); the [local intake](../../docs/reviews/milestone-2-chapter-intake.md) was separately accepted and integrated through PR #26 | Local allowlist contains opening/G01/F01; F01's public release remains unverified and the last verified public edition is opening/G01. Chapter experiments remain unrun; English adaptation and expanded prose require separate scope. |
+| After AI finishes — P8.10 article | [Concept P810A](../../docs/reviews/P810A.md) and full Chinese [manuscript P810M](../../docs/reviews/P810M.md) accepted; [source](../drafts/zh/03-after-ai-finishes.md) | Complete local reading draft only; no manifest intake, publication or full P8.10-unit completion implied. |
+| Page/API agreement — P3.2 article | [Concept P32A](../../docs/reviews/P32A.md) and full Chinese [manuscript P32M](../../docs/reviews/P32M.md) accepted; [source](../drafts/zh/04-api-contract.md) | Complete local reading draft only; no manifest intake, publication or full P3.2-unit completion implied. |
+| Existing-source voice alignment | [Audit/scope](../../docs/reviews/existing-sources-voice-scope.md) and [actual manuscript review](../../docs/reviews/existing-sources-voice-manuscripts.md) accepted three separate opening/G01/F01 revision copies | Alternative revisions of existing works, not three new original chapters; canonical/manifest sources stay unchanged. |
 | Chapter Analysis and Manuscript Review Workflow (WF01) | [Process](chapter-workflow.md)/[template](templates/chapter-analysis.md) accepted in [review](../../docs/reviews/WF01.md); later onboarding clarified startup/recovery | Two distinct gates remain applicable to each future assigned chapter. Analyzer is a document, not a fourth standing role. |
 | Editorial Baseline and Content Map (W01) | Historical proposal and later R3/DOC01 status corrections in [handoff](../../docs/handoffs/writer/W01.md) | Superseded as the current organizing map. Preserve all 45 IDs in the new outline mapping; do not keep issuing the old proposal as the only current directory. |
 | English process documentation/onboarding | [Documentation review](../../docs/reviews/ai-development-documentation.md) / [onboarding review](../../docs/reviews/agent-workflow-onboarding.md) and PR #7/#8 | Process work did not produce English book prose, new chapter acceptance or product implementation. |
@@ -34,6 +47,17 @@ These retained checkboxes are the historical planning acceptance criteria, not a
 The accepted [initial content contract](../../docs/content-contract.md) covers only reviewed opening/G01 inputs, now used by the integrated reader/search implementation recorded in the Milestone 1 ledger. New planning labels are not a manifest, slug schema or automatic public-content list; source acceptance and integration are distinct from deployed release.
 
 The opening's later AI-assisted-product entry, reader guidance and eight-part orientation passed [independent r2 review](../../docs/reviews/beta1-opening-alignment.md) and integrated through PR #12. The content contract identifies that approved source hash. G01 and F01A retain their existing boundaries; this status correction does not change manuscript bytes or authorize expanded writing.
+
+## Voice calibration before wider drafting
+
+The author confirmed a story-led, humane and literarily attentive direction on 2026-11-18; the [editorial baseline](editorial-brief.md#author-confirmed-purpose-and-reading-experience) owns its purpose and style. The exact [approved voice specimen](samples/zh/tomorrow-voice-reference.md) now exists; the three old-source revision copies and P8.10 article have completed actual review. The earlier sample-selection steps below are retained as method/history, not an unfinished calibration assignment or a new length requirement:
+
+1. Review the assigned positioning/coverage analysis against understanding systems and making use of AI while living with wider uncertainty. Identify actual gaps before changing chapter allocation.
+2. Select a bounded Chinese sample from an existing reading unit and confirm question, source/revision, allowed files, scenario and analysis scope. An AI-built feature meeting real use and roughly 1,500–2,500 Chinese characters are proposals, not fixed choices or permission to edit a reviewed manuscript.
+3. Review the concept for reader interest, plausibility, sound mechanisms and useful product/AI judgment. After acceptance and explicit writing scope, draft the sample and separately review actual language, pacing and accuracy.
+4. Use author feedback and the reviewed sample to calibrate the canonical editorial baseline; then continue small assigned batches with varied chapter structures. Author/editor review alone is not reader validation.
+
+This supports Goal 2 drafting and Goal 3 whole-book refinement. It does not restart completed reviews or claim existing sources already meet the new voice. Current assignments and next authorized steps remain solely on the [board](../../docs/coordination.md).
 
 ## Each future reading page: two gates, separately assigned
 
@@ -48,6 +72,7 @@ Use the [stable Writer guide](../../docs/writer-sync-prompt.md) for startup/reco
 
 ## Manuscript acceptance criteria
 
+- Actual prose meets the [narrative baseline](editorial-brief.md#narrative-voice-and-original-examples): recognizable situations carry understanding, advice respects the reader, literary devices earn their space and rhythm avoids a repeated formula. Distinguish fictional cases from cleared personal experience.
 - Readers can explain a concrete user/product question through a correct mechanism, an original example and conditional choices, not just a term list.
 - Necessary assumptions/prerequisites are supplied or linked to the main topic home; optional depth is skippable for Junior readers while useful to experienced readers.
 - Normal/failure/unknown outcomes, security/accessibility/testing/observability/performance appear where they affect the example, not merely as a final checklist.
@@ -61,7 +86,7 @@ Use the [stable Writer guide](../../docs/writer-sync-prompt.md) for startup/reco
 
 An English sample (historical candidate W03) is still unstarted and requires an explicit scope after its Chinese source stabilizes. It should preserve facts, uncertainty and code meaning while adapting prose/humor naturally. Process-document translation is not that sample. Later English batches follow corresponding stable Chinese work; do not automatically translate all planning pages.
 
-Whole-book Chinese editing, English semantic alignment, real reading acceptance and final facts/license/status review are later separately scoped stages. Final order/depth/repetition/transitions can be changed after author reading; do not impose a print-page target or require an integrated assignment. Optional glossary, diagram-reading and Git/curl/SQL references follow real manuscript needs. Licenses, contributions and release conditions remain author/Coordinator decisions, not implied by this plan.
+Milestone 3's approved direction includes whole-book Chinese first-edition editing, English semantic alignment in separately reviewed batches from stable sources, real reading acceptance and final facts/license/status review. No complete bilingual edition may be claimed until that coverage actually exists. Final order/depth/repetition/transitions can be changed after author reading; do not impose a print-page target or require an integrated assignment. Optional glossary, diagram-reading and Git/curl/SQL references follow real manuscript needs. Licenses, contributions and release conditions remain author/Coordinator decisions, not implied by this plan.
 
 ## Feedback and recovery
 

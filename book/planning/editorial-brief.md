@@ -1,6 +1,6 @@
 # Editorial Baseline: Vibe Coding, Then What?
 
-Updated: 2026-11-16 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
+Updated: 2026-11-18 (Australia/Perth). Owner: Writer. The author confirmed v1 positioning for Junior–Senior Full-stack + AI Product Engineers and an eight-part content direction. [Vision](../../docs/project-vision.md) owns shared positioning; [outline](outline.md) owns the detailed page map; [roadmap](../../docs/roadmap.md) owns future dependencies; the [board](../../docs/coordination.md) alone owns current task/hold state.
 
 The former W01 three-part/45-chapter proposal is historical, superseded as an organizing framework. Its 45 entries remain traceable in the outline's legacy map and original handoff/Git history. Confirmation of v1 direction does not accept every page's research, prose, implementation or publication.
 
@@ -10,15 +10,42 @@ The former W01 three-part/45-chapter proposal is historical, superseded as an or
 | --- | --- |
 | Chinese book | 《Vibe Coding 之后：能跑，然后呢？》 |
 | English book/project | Vibe Coding, Then What? |
-| Subtitle | Understand the Systems Behind Your AI-Built Products |
+| Subtitle | Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control |
 | Repository slug | `vibe-coding-then-what` |
 | Author and creation | Jason Zhang, with AI assistance throughout creation |
+| Chosen English pen name | Jar & Prince Explore the World |
+| Chosen Chinese pen name | 缸子太子与世界 |
 
 Beyond the Frontend and Engineer Better are historical working names. The entry is an engineer who has built a working product with AI but wants to connect gaps in system understanding. Build informed judgment about interfaces, APIs, data, delivery, recovery and AI capabilities without implying that AI-written code is inherently wrong or promising complete knowledge. This remains full-stack and AI product engineering for readers with development exposure, not a from-zero programming course.
 
 Readers often learn Design Systems, System Design, data, operations and model integration in separate places. This book connects them through a user's task and the decisions needed to deliver a reliable product. Ask what success means, where responsibility/state/trust live, which work must finish first, what a failure means to the user and what evidence justifies a change.
 
 Product thinking is concrete: who needs what result, what should count as success, what users can do while waiting or when a result is uncertain, and whether a proposed feature needs AI at all. Architecture is concrete too: boundaries, data, dependencies, quality constraints, trade-offs and recovery. Avoid slogans or a catalogue of fashionable patterns.
+
+## Author-confirmed purpose and reading experience
+
+The author confirmed this direction on 2026-11-18: a humane, story-led book connecting foundational system understanding, full-stack product awareness and AI awareness. Write as an observant practitioner sharing experience and conditional advice, with literary care, warmth and restraint. Help readers recognize familiar difficulties, understand their causes and notice where to look next. Necessary explanations must stand on their own; specialist references offer further depth.
+
+Two connected themes guide the text:
+
+- **Understand the systems we build:** connect interfaces, services, data, asynchronous work, delivery and operations through a user's task and the consequences of design choices.
+- **Use AI while living with uncertainty:** explore its convenience alongside output verification, delegation, responsibility, changing working practices, learning, confidence and human agency. Reliability is only one part of this theme. Unknown distributed outcomes, uncertain model answers and uncertainty about one's future are different problems and require different explanations.
+
+These themes do not mandate two physical halves or a new chapter allocation. The eight-part map remains the working coverage structure while the assigned analysis evaluates actual gaps. Product awareness asks whose problem is being solved, what success feels like and what a wait or error does to that person. AI awareness includes deciding what to delegate, what to understand and what evidence to trust. Distinguish mechanisms, personal observations and advice; avoid unsupported career predictions, universal psychological claims or generic motivational conclusions. Accepting uncertainty does not remove responsibility for verification and bounded consequences.
+
+## Author-confirmed follow-up direction — 2026-11-18
+
+The author confirmed the following direction after the P8.10 reading draft was completed. These are inputs for bounded introduction/closing work, not acceptance of candidate prose, a rewrite of frozen sources or release of another manuscript task. The [board](../../docs/coordination.md) owns assignments; existing concept and manuscript gates still apply.
+
+- **Reading experience:** plain, enjoyable, lightly humorous peer narration with literary care. Situations lead into accurate foundations, connecting full-stack systems, product judgment, AI collaboration and uncertainty. Necessary explanation stands alone; specialist material is a further-reading route. Mix sentence lengths within connected paragraphs, with purposeful pauses rather than fragmented lines or repeated maxims.
+- **Author-provided introduction background:** over roughly the past year, the author personally felt the economic climate was difficult, read books and explored code at home, noticed opportunities enabled by AI and tried several ideas/projects. Some were soon put aside; few became things used consistently. The author also experienced organizational change; no employer identity or internal particulars are supplied for publication. This helped motivate connecting the knowledge and questions in a book. Use briefly and faithfully; do not invent layoffs, unemployment, financial distress, business failures or additional episodes, or turn a personal impression into an economic finding.
+- **Why writing began:** the book idea had waited a long time. Trying AI for drafting, organization and revision worked unexpectedly well and made starting easier. Express sincere thanks to AI while keeping the collaboration transparent and human selection/checking responsibility visible. Chat trial wording is not an independent source of autobiographical detail.
+- **Lasting value and humorous opening:** aim for foundations still useful in three to five years without major structural rework, while allowing corrections and tool/example updates. This is a wish, not a lifespan/freshness guarantee. The author requests light humor about fast-changing tools and a guide growing old before the book is finished; candidate wording is editorial humor, not a verified update-frequency claim or a mandatory three-paragraph opening. A second edition may follow accumulated experience, without a timetable. Reposition the earlier closing wish when used at the opening so it is not repeated.
+- **Work/life uncertainty:** AI can be useful while a detailed instruction still produces a surprising or off-track result, sometimes feeling like a blind box. Boundaries, checking and feedback can reduce exposure without guaranteeing every outcome; do not claim AI is inherently unconstrainable. The author's life reflection is to leave room beyond work, technology and career outcomes, without making them carry all self-evaluation. This is a contextual interpretation of the supplied reflection, not a quotation of the ambiguous dictated line or a mental-health maxim.
+- **Two cats:** 缸子 and 太子 have actual significance for the author: familiarity can grow while calling a cat does not always receive the same response. Use briefly in the introduction, with a possible later closing echo, as a feeling about expectations and adjustment. No invented household incident, response frequency, animal detail or equivalence between a cat's needs and AI mechanisms; technical explanation and engineering responsibility remain. Do not require cats in every chapter.
+- **Small closing section:** move from everyday AI-era work (news/tool selection, permitted meeting/message summaries, bounded AI tasks) toward rest, another interest and life away from the screen; the latter is the main destination, not another productivity assignment. Important summaries distinguish source facts/inference and need checks/permission; deep collaboration stays in P8.10. Fishing/float-notification humor and alternatives such as walking, cooking or music are optional seeds, not author-outing facts, health/cost guarantees, monetization duties or tracking targets. [Board inputs](../../docs/coordination.md#current-assignment--revised-author-introduction) retain the longer examples and limits. Keep one small closing within the existing structure, with working titles only; no automatic 49th unit or life/career handbook, and no closing prose is assigned by this baseline update.
+
+The identity table above remains active, including the approved long subtitle and chosen pen names. Later cover-side copy and the candidates “和 AI 一起写代码，把系统和产品想明白” / “Making Sense of What We Build with AI” are not final wording. Approval of the broad direction does not replace the title/subtitle, accept all new prose word for word or authorize Git/publication. Preserve completed P810M review and its exact manuscript identity; later prose changes need affected review by the original-owner workflow.
 
 ## Readers: one text, layered depth
 
@@ -49,7 +76,13 @@ The outline gives the working independently readable pages. The count and titles
 
 ## Narrative voice and original examples
 
-Write like a patient colleague explaining something clearly: light, direct, concrete and accurate. Start with an observable difficulty and introduce terms after their purpose is clear. Avoid “obviously,” inflated incidents, long invented character stories and constant jokes.
+Write as a thoughtful peer: clear, warm, lightly humorous and willing to acknowledge uncertainty. Explain why a tempting choice was reasonable under its original constraints before showing what changed. Give advice with reasons and conditions rather than blame, superiority or repeated commands.
+
+Literary quality comes from precise observation, concrete detail, rhythm, restraint and empathy. Use connected paragraphs with varied sentence lengths. Short sentences can provide emphasis, humor or a pause; give longer sentences room to carry observation, causality and transitions. Avoid turning the whole passage into detached one-line statements or removing short sentences altogether. Small moments of delight, impatience, doubt or relief can illuminate a decision. Avoid elaborate invented biographies, forced jokes, ornamental metaphors, manufactured anxiety and aphorisms appended to every section. Plain explanation is often the right next sentence. Literary ambition is a creative goal, not a public claim of superiority or proven reader resonance.
+
+**Length and reading load:** length is a review trigger, not a hard cap or an automatic reason to split. Consider the whole piece, individual scenes and paragraphs: their purpose, conceptual load, pacing, repetition and actual readability. Keep a longer piece when its explanation and continuity earn the space; shorten or split only to address a concrete reading problem, and check whether the change would damage the story or reasoning. Mix sentence and paragraph lengths where they help the reader. Earlier numeric ranges are planning heuristics, not verified attention limits; do not pad toward a target or cut necessary meaning to satisfy a count.
+
+Let a situation create a question before naming the concept. A fictional cart, for example, shows three items in its header and two at checkout: let the disagreement raise the question, then explain state ownership and duplicated facts. Supply the necessary standard explanation and terminology once their purpose is clear. A scene must carry a mechanism or meaningful choice rather than decorate a definition. Chapters may open with an observation, dialogue, small failure or design decision; vary the rhythm instead of prescribing one hook.
 
 > Familiar situation → mechanism and intuition → original example/diagram → relevant choice and evidence → one changed condition.
 
@@ -66,6 +99,16 @@ This is an explanatory relationship, not a compulsory set of headings. Main pros
 | Coding-AI delivery | Decomposition/contracts/context/skills, actual diffs/tests and release verification |
 
 These cases are not real employer incidents, measured benchmarks or compulsory exercises. A Datadog-shaped RUM/APM investigation is one original example for evidence correlation, not a paid service choice or claim that the project ran Datadog. Start with a simple assumed design, then change one condition rather than draw an architecture containing every advanced tool.
+
+## Calibrating the voice before wider drafting
+
+On 2026-11-18 the author requested a roughly thousand-character Chinese trial, reviewed successive versions and approved the final [Tomorrow, I will look into it — voice reference](samples/zh/tomorrow-voice-reference.md). The fictional event-signup scene connects AI-assisted convenience, user expectations, persistence and uncertain confirmation. Earlier feedback liked the lightness, humor and accuracy, but found excessive short sentences scattered; the approved revision adds literary observation and connected paragraphs while retaining deliberate short sentences.
+
+Use this exact specimen to calibrate future writing. It establishes author acceptance of voice and rhythm, not completed chapter analysis, independent technical/manuscript acceptance, publication or measured reader validation. Its scene and imagery are examples, not a required template for every chapter. The earlier 1,500–2,500-character suggestion is not a prerequisite or quota now that the author has selected and approved this shorter trial.
+
+For future assigned work, concept review checks whether a scene can carry an accurate explanation; manuscript review checks actual clarity, pacing, pleasure of reading and factual fidelity. Continue small assigned batches through the existing gates, with confirmed unit, reader question and allowed files. Record future author-approved lessons here and preserve the specimen as the approved historical text rather than silently replacing it.
+
+Author-supplied observations may enrich the voice when cleared for use. Distinguish real experience, fictional teaching cases and hypothetical examples. Never invent first-person production history or expose recognizable employer/client details without authorization. Preserve accepted sources unless a specific revision is assigned.
 
 ## Two required AI threads with different responsibilities
 
@@ -93,6 +136,21 @@ The opening's historical book-name replacement and subsequent AI-assisted-produc
 
 ## Public copy discussion
 
-Book names and v1 audience/direction above are confirmed; final marketing copy still needs author review. A possible description: **A practical guide to full-stack and AI product engineering, connecting user goals, interfaces, services, data, reliable delivery and controlled AI capabilities.** A lighter opening line remains: **The code works. What should we look at next?**
+### Bilingual cover study — 2026-11-18
+
+The author selected the English pen name **Jar & Prince Explore the World** and Chinese pen name **缸子太子与世界**, and requested a matched Chinese/English cover study. These are chosen presentation bylines; the recorded human author and AI-creation provenance above remain. This documentation update does not alter existing reviewed manuscript credits, notices or website metadata.
+
+The two new raster studies retain the preferred soft grey-white background, person and two cats. Their proposed wording is recorded below for evaluation, separately from the confirmed identity table above. The studies do not replace the two previously retained White and Soft grey-white cover colourways, and do not establish a Figma update, editable typography or print-ready artwork. Social-sharing mosaic previews are not book-cover sources.
+
+| Study language | Title shown | Subtitle shown | Decision state |
+| --- | --- | --- | --- |
+| English | Vibe Coding, Then What? | Understanding What We Build and Learning to Live with the Unexpected | English title unchanged; this alternate subtitle remains proposed |
+| Chinese | 代码跑起来，然后呢？ | 理解我们创造的系统，与意料之外的事友好相处 | This Chinese title/subtitle pair remains proposed |
+
+Until an explicit wording decision, retain the previously approved formal long English subtitle and current Chinese title as the active identity. The pen names are confirmed independently of the proposed title/subtitle changes. Do not turn a generated image's embedded text into a naming approval.
+
+### Other proposed public copy
+
+Book names, the formal long subtitle and the audience/editorial direction above are confirmed. Concise marketing copy still needs author review. A possible description: **Stories and clear explanations connecting full-stack systems, product decisions and the experience of building with AI.** A lighter opening line remains: **The code works. What should we look at next?**
 
 These are original copy proposals, not quotations or a new README/site assignment. Do not promise job level, productivity, reliability or completed content. Historical earlier descriptions remain in Git; accepted v1 positioning supersedes their narrower audience/scope.

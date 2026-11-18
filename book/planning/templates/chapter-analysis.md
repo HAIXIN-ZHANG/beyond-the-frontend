@@ -15,6 +15,9 @@ Use the workflow's [reader-first review criteria](../chapter-workflow.md#editori
 
 [Start from a specific difficulty. State what the reader should explain or judge afterward.]
 
+- **Recognizable situation and stake:** [what the person wants, what feels easy or difficult and why the question matters]
+- **Product / AI awareness:** [the useful judgment developed here; include AI convenience or uncertainty only where relevant]
+
 ## 2. Scope and dependencies
 
 - **Prior knowledge:** [minimum knowledge; which earlier chapters actually exist and passed review]
@@ -41,6 +44,9 @@ Use the workflow's [reader-first review criteria](../chapter-workflow.md#editori
 ## 5. Original cases, diagrams and implementation windows
 
 - **Scenario and assumptions:** [connection to recurring cases; fictional conditions]
+- **Experience provenance:** [cleared author experience / fictional teaching case / hypothetical example; no invented first-person history]
+- **Story-to-mechanism connection:** [why the initial choice was reasonable, what exposes its limit, which foundation this explains and when to name it]
+- **Voice and pacing:** [where observation, empathy or light humor helps; where direct explanation is clearer; avoid prescribing a literary device]
 - **Normal and exceptional paths:** [relevant failure/unknown/race/change]
 - **Diagrams:** [question answered; nodes/arrows/states, assumptions and text alternative]
 - **Code or implementation reference:** [why needed; pseudocode/text sufficient? framework difference relevant?]
@@ -62,7 +68,7 @@ Use the workflow's [reader-first review criteria](../chapter-workflow.md#editori
 
 ## 8. Reviewer decisions
 
-[Concrete questions affecting accuracy, depth, scope or structure. Keep editorial responsibility with Writer.]
+[Concrete questions affecting accuracy, depth, scope or structure; also identify scenes, transitions or advice whose tone needs review against the editorial baseline. Keep editorial responsibility with Writer.]
 
 ## 9. Review revisions
 

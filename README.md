@@ -1,12 +1,12 @@
 # Vibe Coding, Then What?
 
-**Understand the Systems Behind Your AI-Built Products**
+**Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control**
 
 **《Vibe Coding 之后：能跑，然后呢？》**
 
-AI can help you turn an idea into a working product. This book helps you understand the systems behind it, so you can judge what works, what needs checking and what should change next.
+AI can help you turn an idea into something that works. This book connects the systems behind it with the experience of building alongside AI: choosing what to delegate, what to understand and what evidence to trust, while learning to work with uncertainty.
 
-**[Read online →](https://haixin-zhang.github.io/vibe-coding-then-what/)** Free to read and publicly maintained. Two reviewed Chinese drafts are available; English manuscripts are planned.
+**[Read online →](https://haixin-zhang.github.io/vibe-coding-then-what/)** Free to read and publicly maintained. The last verified online edition contains two Chinese drafts; English manuscripts are planned.
 
 ## Who is this for?
 
@@ -33,9 +33,11 @@ Explanations combine principles, original examples and conditional choices. Recu
 
 ## Read what exists today
 
-Start with the reviewed [Chinese opening](book/drafts/zh/00-before-we-start.md) and [common-foundations chapter](book/drafts/zh/01-a-page-and-a-system.md). Browser Fundamentals has an accepted research outline, but its manuscript is not written. The remaining framework is planned content, not a finished book.
+Five reviewed Chinese originals are available in this repository: the [opening](book/drafts/zh/00-before-we-start.md), [common foundations](book/drafts/zh/01-a-page-and-a-system.md), [Browser Fundamentals](book/drafts/zh/02-browser-foundations.md), [After AI finishes, what is left for us?](book/drafts/zh/03-after-ai-finishes.md) and [No matching courses, or no search result?](book/drafts/zh/04-api-contract.md). The wider framework remains in progress. Three separately reviewed voice revisions of the earlier texts are revisions of those same works, not additional original chapters; they have not replaced the reader's current source versions.
 
-The [online reader](https://haixin-zhang.github.io/vibe-coding-then-what/zh/) includes chapter navigation, Chinese search, section links and a correction entry. The interface supports Simplified Chinese and English; there are **two reviewed Chinese drafts and zero English manuscript bodies**. Chinese drafts are reviewed before English adaptation. The [first-delivery record](docs/delivery/milestone-1.md) documents the verified public release and its limits; [development instructions](site/DEVELOPMENT.md) are separate from the book.
+The [online reader](https://haixin-zhang.github.io/vibe-coding-then-what/zh/) includes chapter navigation, Chinese search, section links and a correction entry. The interface supports Simplified Chinese and English; there are **five reviewed Chinese originals, three entries admitted to the local reader and zero English manuscript bodies**. The last verified public edition contains only the opening and common foundations. Browser Fundamentals is admitted locally but its public release is unverified; the AI and API-contract articles are reviewed sources only, with no reader intake or publication. Chinese drafts are reviewed before English adaptation. The [first-delivery record](docs/delivery/milestone-1.md) documents the initial verified public release and its limits; [development instructions](site/DEVELOPMENT.md) are separate from the book.
+
+The approved next direction is a Chinese core draft across all eight parts with essential reading support and basic measurement (Milestone 2), whole-book refinement, separately reviewed English batches and selected extensions (Milestone 3), then a lightweight author/works portal (Milestone 4). Optional pilots do not block the writing. The [roadmap](docs/roadmap.md#approved-milestones-24-direction--2026-11-18) gives the detailed scope and acceptance boundaries; this is a plan, not a claim that these outcomes are complete.
 
 ## About the author
 

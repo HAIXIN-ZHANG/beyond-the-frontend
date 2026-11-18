@@ -13,8 +13,8 @@ export const action = defineRecipe({
   variants: {
     visual: {
       primary: {
-        backgroundColor: 'token(colors.accent.default)', color: 'token(colors.fg.onAccent)', borderColor: 'token(colors.accent.default)',
-        '&:hover:not(:disabled)': { backgroundColor: 'token(colors.accent.hover)' },
+        backgroundColor: 'token(colors.accent.surface)', color: 'token(colors.fg.onAccent)', borderColor: 'token(colors.border.control)',
+        '&:hover:not(:disabled)': { backgroundColor: 'token(colors.accent.surfaceHover)' },
         '&:disabled': { color: 'token(colors.fg.disabled)', backgroundColor: 'token(colors.bg.disabled)', borderColor: 'token(colors.border.default)', cursor: 'not-allowed' },
       },
       quiet: {

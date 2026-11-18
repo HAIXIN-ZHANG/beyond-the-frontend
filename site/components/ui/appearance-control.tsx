@@ -3,6 +3,7 @@
 import { useId, useLayoutEffect, useRef } from 'react';
 import type { Locale } from '../../config/i18n.ts';
 import type { ThemePreference } from '../../theme/runtime.ts';
+import { accentOptions } from '../../theme/runtime.ts';
 import { getMessages } from '../../config/i18n.ts';
 import { useTheme } from '../../theme/use-theme.ts';
 import { IconButton } from './icon-button.tsx';
@@ -12,7 +13,8 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
   const panel = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const openingRect = useRef<DOMRect | null>(null);
-  const { preference, resolvedTheme, setPreference } = useTheme();
+  const openingScroll = useRef<{ x: number; y: number } | null>(null);
+  const { preference, resolvedTheme, accent, setPreference, setAccent } = useTheme();
   const m = getMessages(locale);
   const options: readonly [ThemePreference, string][] = [['system', m.systemTheme], ['light', m.dayTheme], ['dark', m.nightTheme]];
   const preferenceLabel = options.find(([value]) => value === preference)?.[1] ?? m.systemTheme;
@@ -30,7 +32,8 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
       const rect = trigger.current?.getBoundingClientRect();
       // A queued scroll from revealing the trigger can arrive after the popover opens.
       // Dismiss only when its anchor actually moved; panel-internal scrolling is safe too.
-      if (rect && openingRect.current && rect.top === openingRect.current.top && rect.left === openingRect.current.left) return;
+      if (rect && openingRect.current && rect.top === openingRect.current.top && rect.left === openingRect.current.left &&
+        openingScroll.current?.x === window.scrollX && openingScroll.current.y === window.scrollY) return;
       dismiss();
     };
     window.addEventListener('resize', dismiss);
@@ -43,11 +46,12 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
 
   return (
     <div className="appearance-control">
-      <IconButton ref={trigger} label={`${m.appearance}: ${preferenceLabel}; ${m.currentAppearance}: ${effectiveLabel}`}
+      <IconButton ref={trigger} label={`${m.appearance}: ${preferenceLabel}; ${m.currentAppearance}: ${effectiveLabel}; ${m.accentColor}: ${m.accentNames[accent]}`}
         title={m.appearance} popoverTarget={id} className="appearance-trigger"
         onClick={() => {
           const rect = trigger.current?.getBoundingClientRect();
           openingRect.current = rect ?? null;
+          openingScroll.current = { x: window.scrollX, y: window.scrollY };
           if (rect && panel.current) {
             const gutter = Number.parseFloat(getComputedStyle(panel.current).getPropertyValue('--spacing-layout-gutter-narrow')) || 16;
             const panelWidth = Number.parseFloat(getComputedStyle(panel.current).width);
@@ -55,6 +59,7 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
             panel.current.style.top = `${rect.bottom + 8}px`;
             panel.current.style.left = `${left}px`;
             panel.current.style.right = 'auto';
+            panel.current.style.maxHeight = `${Math.max(44, window.innerHeight - rect.bottom - 8 - gutter)}px`;
           }
         }}>
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -63,6 +68,11 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
         </svg>
       </IconButton>
       <div id={id} ref={panel} popover="auto" className="appearance-panel"
+        onKeyDown={event => {
+          if (event.key !== 'Escape') return;
+          event.preventDefault(); event.stopPropagation();
+          panel.current?.hidePopover(); trigger.current?.focus({ preventScroll: true });
+        }}
         onToggle={event => {
           if (event.newState === 'open' && panel.current?.matches(':popover-open')) {
             panel.current.querySelector<HTMLInputElement>('input:checked')?.focus({ preventScroll: true });
@@ -72,8 +82,18 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
           <legend>{m.appearance}</legend>
           <div className="appearance-options">{options.map(([value, label]) => <label key={value} className="appearance-option">
             <input type="radio" name={id} value={value} checked={preference === value}
-              onChange={() => { setPreference(value); panel.current?.hidePopover(); trigger.current?.focus({ preventScroll: true }); }} />
+              onChange={() => setPreference(value)} />
             <span>{label}</span>
+          </label>)}</div>
+        </fieldset>
+        <fieldset>
+          <legend>{m.accentColor}</legend>
+          <div className="accent-options">{accentOptions.map(value => <label key={value} className="accent-option"
+            data-accent-option={value} title={m.accentNames[value]}>
+            <input className="visually-hidden" type="radio" name={`${id}-accent`} value={value}
+              checked={accent === value} onChange={() => setAccent(value)} />
+            <span className="accent-swatch" aria-hidden="true"><span className="accent-check">✓</span></span>
+            <span>{m.accentNames[value]}</span>
           </label>)}</div>
         </fieldset>
         <p className="appearance-hint">{preference === 'system' ? m.systemAppearanceHint : m.explicitAppearanceHint}</p>

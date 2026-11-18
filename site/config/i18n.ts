@@ -1,3 +1,5 @@
+import type { AccentPreference } from '../theme/runtime.ts';
+
 export const defaultLocale = 'en';
 
 export type Locale = 'en' | 'zh';
@@ -24,6 +26,8 @@ type Messages = {
   switchLabel: string;
   switchText: string;
   appearance: string;
+  accentColor: string;
+  accentNames: Readonly<Record<AccentPreference, string>>;
   systemTheme: string;
   dayTheme: string;
   nightTheme: string;
@@ -43,7 +47,7 @@ const messages = {
     lang: 'en',
     title: 'Vibe Coding, Then What?',
     titleLines: ['Vibe Coding,', 'Then What?'],
-    description: 'Understand the Systems Behind Your AI-Built Products',
+    description: 'Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control',
     home: 'Home',
     contents: 'Chapters',
     navigation: 'Main navigation',
@@ -61,9 +65,11 @@ const messages = {
     switchLabel: 'Switch to Chinese',
     switchText: '中文',
     appearance: 'Appearance',
+    accentColor: 'Accent colour',
+    accentNames: { blue: 'Blue', green: 'Green', purple: 'Purple', orange: 'Orange', rose: 'Rose', graphite: 'Graphite' },
     systemTheme: 'System',
-    dayTheme: 'Day',
-    nightTheme: 'Night',
+    dayTheme: 'Light',
+    nightTheme: 'Dark',
     currentAppearance: 'Current appearance',
     systemAppearanceHint: 'Follow device appearance.',
     explicitAppearanceHint: 'This site uses your selected appearance instead of the device setting.',
@@ -86,7 +92,7 @@ const messages = {
     lang: 'zh-CN',
     title: 'Vibe Coding 之后：能跑，然后呢？',
     titleLines: ['Vibe Coding 之后：', '能跑，然后呢？'],
-    description: '理解 AI 帮你构建的产品背后的系统。',
+    description: '看懂我们构建的系统，也学着与无法完全掌控的事相处。',
     home: '首页',
     contents: '章节目录',
     navigation: '主导航',
@@ -104,9 +110,11 @@ const messages = {
     switchLabel: 'Switch to English',
     switchText: 'English',
     appearance: '外观',
+    accentColor: '强调色',
+    accentNames: { blue: '蓝色', green: '绿色', purple: '紫色', orange: '橙色', rose: '玫红', graphite: '石墨' },
     systemTheme: '跟随系统',
-    dayTheme: '日间',
-    nightTheme: '夜间',
+    dayTheme: '浅色',
+    nightTheme: '深色',
     currentAppearance: '当前外观',
     systemAppearanceHint: '跟随设备的外观设置。',
     explicitAppearanceHint: '本网站使用所选外观，不再跟随系统。',

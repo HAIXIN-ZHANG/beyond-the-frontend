@@ -53,8 +53,8 @@ export function SearchControl({ locale }: { locale: Locale }) {
   const headline = locale === 'en' ? m.unavailable : status === 'loading' ? m.loading : status === 'error' ? m.failed
     : !hasQuery || composing ? m.ready : matches.length ? `${matches.length} ${m.results}` : m.empty;
   return <>
-    <Button visual="quiet" className="search-trigger" aria-haspopup="dialog" aria-controls={id} onClick={open}>
-      <span>{m.title}</span><kbd aria-hidden="true">⌘ / Ctrl K</kbd>
+    <Button visual="quiet" className="search-trigger" aria-label={m.title} aria-haspopup="dialog" aria-controls={id} onClick={open}>
+      <span className="search-trigger-icon" aria-hidden="true">⌕</span><span className="search-trigger-label">{m.title}</span><kbd aria-hidden="true">⌘ / Ctrl K</kbd>
     </Button>
     <dialog ref={dialog} id={id} className="search-dialog" aria-labelledby={`${id}-title`} aria-describedby={`${id}-scope`}
       onCancel={event => { if (composing) event.preventDefault(); }}

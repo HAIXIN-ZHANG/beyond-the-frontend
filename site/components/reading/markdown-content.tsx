@@ -22,9 +22,12 @@ export function MarkdownContent({ node, sharing }: { node: Nodes; sharing: Shari
     case 'heading': {
       const id = node.data?.id;
       if (!id) throw new Error('Heading IDs must be assigned before rendering');
-      return <>{createElement(`h${node.depth}`, { id, tabIndex: -1 },
+      const heading = <>{createElement(`h${node.depth}`, { id, tabIndex: -1 },
         <a className="heading-link" href={`#${encodeURIComponent(id)}`}>{children}</a>)}
         <SectionActions context={sharing} headingId={id} headingTitle={nodeText(node)} /></>;
+      return node.data?.legacyId
+        ? <div id={node.data.legacyId} className="legacy-heading-target" role="group" aria-labelledby={id} tabIndex={-1}>{heading}</div>
+        : heading;
     }
     case 'link': return node.url.startsWith('/')
       ? <Link href={node.url} title={node.title ?? undefined}>{children}</Link>

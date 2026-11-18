@@ -12,6 +12,8 @@ const english = buildSearchIndex(chapters, 'en');
 test('static indexes contain only approved public sections, real IDs and source revisions', () => {
   assert.equal(chinese.entries.length, chapters.reduce((count, chapter) => count + chapter.headingIds.length, 0));
   assert.deepEqual(new Set(chinese.entries.map(entry => entry.chapterId)), new Set(['opening', 'G01', 'F01']));
+  assert.equal(chinese.entries.length, 28);
+  assert.ok(!chinese.entries.some(entry => entry.headingId === '关于本书的-ai-协作'));
   assert.deepEqual(english.entries, []);
   for (const entry of chinese.entries) {
     const chapter = chapters.find(item => item.entry.id === entry.chapterId);
@@ -23,7 +25,7 @@ test('static indexes contain only approved public sections, real IDs and source 
     assert.deepEqual(Object.keys(entry).sort(), ['chapterId', 'chapterTitle', 'headingId', 'headingTitle', 'locale', 'sourceHash', 'href', 'text'].sort());
   }
   assert.doesNotMatch(JSON.stringify(chinese), /book\/drafts|docs\/|\.local|待 review|frontmatter/);
-  assert.match(JSON.stringify(chinese), /作者：Jason Zhang/);
+  assert.match(JSON.stringify(chinese), /作者：缸子太子与世界/);
   assert.deepEqual(readSearchIndex(JSON.parse(JSON.stringify(chinese)), 'zh'), chinese);
 });
 

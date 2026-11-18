@@ -4,6 +4,7 @@ import { site } from '../config/site.ts';
 import { getMessages, localePath } from '../config/i18n.ts';
 import { LanguageSwitch } from './language-switch.tsx';
 import { AppearanceControl } from './ui/appearance-control.tsx';
+import { ChapterHeaderMenu } from './reading/chapter-header-menu.tsx';
 import { SearchControl } from './search/search-control.tsx';
 
 export function SiteHeader({ locale, languageHome = false }: { locale: Locale; languageHome?: boolean }) {
@@ -16,6 +17,7 @@ export function SiteHeader({ locale, languageHome = false }: { locale: Locale; l
       </Link>
       <SearchControl locale={locale} />
       <nav aria-label={messages.navigation}>
+        <ChapterHeaderMenu label={messages.navigation}>
         <Link href={localePath(locale, 'read/')}>{messages.contents}</Link>
         {languageHome ? (
           <Link href={localePath(otherLocale)} hrefLang={otherLocale} lang={getMessages(otherLocale).lang}>
@@ -23,6 +25,7 @@ export function SiteHeader({ locale, languageHome = false }: { locale: Locale; l
           </Link>
         ) : <LanguageSwitch locale={locale} />}
         <a href={site.repository} lang="en">GitHub <span aria-hidden="true">↗</span></a>
+        </ChapterHeaderMenu>
         <AppearanceControl locale={locale} />
       </nav>
     </header>

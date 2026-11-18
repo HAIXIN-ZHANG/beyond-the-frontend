@@ -12,9 +12,10 @@ The former W01 three-part/45-chapter proposal is historical, superseded as an or
 | English book/project | Vibe Coding, Then What? |
 | Subtitle | Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control |
 | Repository slug | `vibe-coding-then-what` |
-| Author and creation | Jason Zhang, with AI assistance throughout creation |
+| Maintainer and provenance | Jason Zhang; real-name legal/license/history records remain unchanged |
 | Chosen English pen name | Jar & Prince Explore the World |
 | Chosen Chinese pen name | 缸子太子与世界 |
+| Book byline and writing acknowledgment | Use the Chinese pen name in Chinese book prose and the English pen name for later English/public metadata. Keep one concise AI-writing acknowledgment in the introduction, with human selection/source-checking responsibility; do not repeat prominent creation-method labels across chapters. |
 
 Beyond the Frontend and Engineer Better are historical working names. The entry is an engineer who has built a working product with AI but wants to connect gaps in system understanding. Build informed judgment about interfaces, APIs, data, delivery, recovery and AI capabilities without implying that AI-written code is inherently wrong or promising complete knowledge. This remains full-stack and AI product engineering for readers with development exposure, not a from-zero programming course.
 

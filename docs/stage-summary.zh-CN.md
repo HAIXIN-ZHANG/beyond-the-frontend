@@ -4,7 +4,7 @@
 
 正式副标题为 **Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control**。中文名、英文书名与八大部分的框架保持不变；48 个工作单元可拆合，不是必须写出 48 个文件。理解系统与学习使用 AI、作出判断和委托，是两条相连的主线。
 
-**当前内容状态：** 仓库有五份已审中文原创稿：引言、G01、浏览器基础、[AI 写完以后，我们还需要做什么？](../book/drafts/zh/03-after-ai-finishes.md)、[没有找到课程，还是没有查到结果？](../book/drafts/zh/04-api-contract.md)。本地网站 manifest 仍只有前三份；最后核实的公开版本仍为引言和 G01；英文正文为零。前三份另有三份[已审语气修订副本](reviews/existing-sources-voice-manuscripts.md)，它们不是额外三章，也没有替换原稿或接入网站。P8.10 和 P3.2 分别完成[正文 review](reviews/P810M.md) 与 [API 契约正文 review](reviews/P32M.md)，两篇都尚未收录或发布。
+**当前内容状态：** 仓库有五份已审中文原创稿：引言、G01、浏览器基础、[AI 写完以后，我们还需要做什么？](../book/drafts/zh/03-after-ai-finishes.md)、[没有找到课程，还是没有查到结果？](../book/drafts/zh/04-api-contract.md)。本地网站 manifest 仍只有前三份；最后核实的公开版本仍为引言和 G01；英文正文为零。前三篇的修订版已接入阅读器并[通过本地验证](reviews/existing-source-intake.md)。引言采用已审阅的 r3，署名为“缸子太子与世界”，并保留一段简短的 AI 致谢。G01 和浏览器基础采用各自已审阅的语气修订版。P8.10 和 P3.2 分别完成[正文 review](reviews/P810M.md) 与 [API 契约正文 review](reviews/P32M.md)，两篇都尚未收录或发布。
 
 **Milestone 1 的基础与首轮发布关口已完成：** 实际验收、发布、同版本恢复及保留限制以[统一记录](delivery/milestone-1.md#6-release-readiness-remains-in-delivery-milestone-1)为准。本页引用已记录的结果，不重新核实远端或认证当前部署；后续版本是否上线仍需各自证据。下方 Nov16 的“发布未完成”只描述当时状态。
 

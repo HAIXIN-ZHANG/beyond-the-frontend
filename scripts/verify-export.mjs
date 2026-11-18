@@ -85,6 +85,9 @@ for (const [page, language, title, alternatePath] of pages) {
   if (chapter) {
     const article = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)?.[1];
     assert.ok(article, `${page}: missing chapter body`);
+    assert.ok(html.includes('data-sidebar="expanded" data-enhanced="false"'), `${page}: static sidebar fallback missing`);
+    assert.ok(html.includes('aria-controls="reader-book-navigation"') && html.includes('id="reader-book-navigation"'), `${page}: resize control target missing`);
+    assert.ok(html.includes('class="chapter-header-menu"') && html.includes('name="reader-tools"'), `${page}: static navigation disclosures missing`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `${page}: source title must be the only H1`);
     assert.ok(article.includes(chapter.title), `${page}: source title was lost`);
     assert.ok(html.includes(`data-source-sha256="${chapter.entry.sha256}"`), `${page}: wrong reviewed revision`);
@@ -105,8 +108,11 @@ for (const [page, language, title, alternatePath] of pages) {
     for (const code of chapter.tree.children.filter(node => node.type === 'code')) {
       assert.ok(article.includes(escapeHtml(code.value)), `${page}: original preformatted text changed`);
     }
+    assert.ok(html.includes('class="reading-attribution">缸子太子与世界</p>'), `${page}: reader byline differs`);
     if (chapter.entry.id === 'opening') {
-      assert.ok(article.includes('作者：Jason Zhang') && article.includes('创作方式：AI 全程辅助创作。'), `${page}: attribution lost`);
+      assert.ok(article.includes('id="关于本书的-ai-协作" class="legacy-heading-target" role="group" aria-labelledby="我为什么想写这本书" tabindex="-1"'), `${page}: static legacy target missing`);
+      assert.ok(!chapter.headingIds.includes('关于本书的-ai-协作'), `${page}: alias became a canonical heading`);
+      assert.ok(article.includes('作者：缸子太子与世界') && article.includes('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。'), `${page}: attribution lost`);
     } else if (chapter.entry.id === 'G01') {
       assert.equal((article.match(/<table\b/g) || []).length, 2, `${page}: source tables missing`);
       assert.equal((article.match(/<pre\b/g) || []).length, 4, `${page}: source text diagrams/examples missing`);

@@ -1,15 +1,15 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
-import { installTheme, themeStorageKey } from './runtime.ts';
-import type { ThemePreference, ThemeSnapshot } from './runtime.ts';
+import { installTheme, themeStorageKey, accentStorageKey } from './runtime.ts';
+import type { AccentPreference, ThemePreference, ThemeSnapshot } from './runtime.ts';
 
 function subscribe(listener: () => void): () => void {
-  installTheme(themeStorageKey);
+  installTheme(themeStorageKey, accentStorageKey);
   return window.__btfTheme?.subscribe(listener) ?? (() => {});
 }
 
-const serverSnapshot: ThemeSnapshot = { preference: 'system', resolvedTheme: 'light' };
+const serverSnapshot: ThemeSnapshot = { preference: 'system', resolvedTheme: 'light', accent: 'blue' };
 const getSnapshot = (): ThemeSnapshot => window.__btfTheme?.getSnapshot() ?? serverSnapshot;
 const getServerSnapshot = (): ThemeSnapshot => serverSnapshot;
 
@@ -18,8 +18,12 @@ export function useTheme() {
   return {
     ...snapshot,
     setPreference(value: ThemePreference) {
-      installTheme(themeStorageKey);
+      installTheme(themeStorageKey, accentStorageKey);
       window.__btfTheme?.setPreference(value);
+    },
+    setAccent(value: AccentPreference) {
+      installTheme(themeStorageKey, accentStorageKey);
+      window.__btfTheme?.setAccent(value);
     },
   };
 }

@@ -179,11 +179,12 @@ test('localized chrome and matching page roles remain coherent across languages 
     }
     await page.goto(at(chapterPath(g01)));
     await expect(page).toHaveTitle(`${g01.title} | ${getMessages('zh').title}`);
-    const reading = await roles(), index = snapshots['zh-index'];
-    expect(reading.header.left).toBeCloseTo(index.header.left, 0);
-    expect(reading.header.width).toBeCloseTo(index.header.width, 0);
-    expect(reading.brand.type).toEqual(index.brand.type);
-    expect(reading.content.width).toBeCloseTo(index.content.width, 0);
+    const reading = await roles();
+    // Chapter views have a full-width V2 header and their own bounded reading column.
+    expect(reading.header.left).toBe(0);
+    expect(reading.header.width).toBeLessThanOrEqual(width);
+    expect(reading.content.width).toBeLessThanOrEqual(704);
+    await expect(page.locator('.wordmark')).toHaveAttribute('aria-label', `${getMessages('zh').title} · ${getMessages('zh').home}`);
     for (const chapter of [g01, opening]) {
       if (chapter !== g01) await page.goto(at(chapterPath(chapter)));
       const title = page.locator('article h1 .heading-link');
@@ -223,7 +224,7 @@ test('approved browser chapter renders illustrative source safely and every inde
     await expect(page.locator('.chapter-pagination a[rel="prev"]')).toHaveAttribute('href', at(chapterPath(g01)));
     await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveCount(0);
     await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
-    for (const [label, theme] of [['日间', 'light'], ['夜间', 'dark']]) {
+    for (const [label, theme] of [[getMessages('zh').dayTheme, 'light'], [getMessages('zh').nightTheme, 'dark']]) {
       await chooseAppearance(page, label);
       await page.reload();
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
@@ -257,6 +258,7 @@ test('approved browser chapter renders illustrative source safely and every inde
       await expect(page).toHaveURL(new URL(at(entry.href), page.url()).href);
       await expect(page.locator(`[id="${entry.headingId}"]`)).toBeFocused();
     }
+    if (width < 900) await page.locator('.chapter-header-menu > summary').click();
     await page.getByRole('link', { name: 'Switch to English', exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`${at('/read/')}$`));
     await expect(page.locator('.reading-index')).toContainText(getMessages('en').englishUnavailable);
@@ -440,11 +442,14 @@ test('English search is honest and never fetches another-language corpus', async
 });
 
 async function chooseAppearance(page, label) {
-  await page.getByRole('button', { name: /^外观:/ }).click();
-  await page.getByRole('radio', { name: label, exact: true }).check();
+  if (!await page.locator('.appearance-panel').isVisible()) await page.getByRole('button', { name: /^外观:/ }).click();
+  const choice = page.getByRole('radio', { name: label, exact: true });
+  await choice.check();
+  await expect(page.locator('.appearance-panel')).toBeVisible();
+  await choice.press('Escape');
 }
 
-test('appearance separates System/Day/Night and persists explicit choices across refresh', async ({ page }) => {
+test('appearance separates System/Light/Dark and persists explicit choices across refresh', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(at(chapterPath(g01)));
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
@@ -457,13 +462,13 @@ test('appearance separates System/Day/Night and persists explicit choices across
   await dialog.getByRole('searchbox').press('Enter');
   await expect(page).toHaveURL(destination.href);
   await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
-  expect(await page.locator('.appearance-trigger').evaluate(element => element.getBoundingClientRect().bottom)).toBeLessThan(0);
-  // Clicking the offscreen header scrolls it into view before opening its popover.
-  await chooseAppearance(page, '日间');
+  await expect(page.locator('.appearance-trigger')).toBeInViewport();
+  // The chapter desktop header is sticky; the mobile offscreen reveal is checked below.
+  await chooseAppearance(page, getMessages('zh').dayTheme);
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'light');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await chooseAppearance(page, '夜间');
+  await chooseAppearance(page, getMessages('zh').nightTheme);
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'dark');
   await chooseAppearance(page, '跟随系统');
@@ -473,7 +478,7 @@ test('appearance separates System/Day/Night and persists explicit choices across
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
   await page.getByRole('button', { name: /^外观:/ }).click();
   await expect(page.getByRole('radio', { name: '跟随系统', exact: true })).toBeFocused();
-  await page.mouse.move(20, 400);
+  await page.mouse.move(600, 400);
   await page.mouse.wheel(0, 400);
   await expect(page.locator('.appearance-panel')).not.toBeVisible();
   await expect(page.locator('.appearance-trigger')).toBeFocused();
@@ -483,8 +488,14 @@ test('appearance separates System/Day/Night and persists explicit choices across
   await page.setViewportSize({ width: 320, height: 900 });
   await expect(page.locator('.appearance-panel')).not.toBeVisible();
   await expect(page.locator('.appearance-trigger')).toBeFocused();
-  await chooseAppearance(page, '夜间');
+  await page.locator('.mobile-outline summary').click();
+  const mobileTarget = page.locator('.mobile-outline a').last();
+  await mobileTarget.click();
+  expect(await page.locator('.appearance-trigger').evaluate(element => element.getBoundingClientRect().bottom)).toBeLessThan(0);
+  const beforeReveal = await page.evaluate(() => window.scrollY);
+  await chooseAppearance(page, getMessages('zh').nightTheme);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  expect(await page.evaluate(() => window.scrollY)).toBeLessThan(beforeReveal);
 });
 
 test('denied storage retains usable System fallback and a session-only choice', async ({ page }) => {
@@ -494,7 +505,7 @@ test('denied storage retains usable System fallback and a session-only choice', 
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(at('/zh/read/'));
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await chooseAppearance(page, '日间');
+  await chooseAppearance(page, getMessages('zh').dayTheme);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
@@ -608,4 +619,439 @@ test('bounded long inline-code fixture scrolls within the actual rendered table'
     fixture: 'rv03-bounded-long-inline-code', characters: fixtureText.length, before, after,
   });
   await page.screenshot({ path: testInfo.outputPath('long-table-fixture.png') });
+});
+
+// These bounded fixtures exercise production recipes without publishing a fixture route.
+test('V2 twelve appearance/accent combinations render readable controls without recoloring neutral or warning roles', async ({ page }, testInfo) => {
+  await page.goto(at('/'));
+  await page.evaluate(({ buttonClass, noticeClass }) => {
+    const fixture = document.createElement('div'); fixture.id = 'v2-palette-fixture';
+    const button = document.createElement('button'); button.className = buttonClass; button.textContent = 'QA primary action';
+    const notice = document.createElement('aside'); notice.className = noticeClass; notice.textContent = 'QA warning meaning';
+    fixture.append(button, notice); document.querySelector('main').append(fixture);
+  }, { buttonClass: 'action action--visual_primary', noticeClass: 'reading-callout__root reading-callout__root--tone_caution' });
+  const colors = ['blue', 'green', 'purple', 'orange', 'rose', 'graphite'];
+  const measurements = [], neutral = new Map(), warning = new Map(), families = new Set();
+  const trigger = page.locator('.appearance-trigger'), panel = page.locator('.appearance-panel');
+  function contrast(first, second) {
+    const luminance = value => value.match(/[\d.]+/g).slice(0, 3).map(Number).map(v => v / 255)
+      .map(v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, value, i) => sum + value * [0.2126, 0.7152, 0.0722][i], 0);
+    const a = luminance(first), b = luminance(second); return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  }
+  for (const [label, mode] of [[getMessages('en').dayTheme, 'light'], [getMessages('en').nightTheme, 'dark']]) for (const accent of colors) {
+    await trigger.click();
+    await page.getByRole('radio', { name: label, exact: true }).check();
+    await page.locator(`[data-accent-option="${accent}"]`).click();
+    await expect(panel).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('data-accent', accent);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', mode);
+    await page.screenshot({ path: testInfo.outputPath(`appearance-${mode}-${accent}.png`) });
+    await page.getByRole('radio', { name: getMessages('en').accentNames[accent], exact: true }).press('Escape');
+    const fixtureButton = page.locator('#v2-palette-fixture button');
+    await fixtureButton.focus();
+    const read = () => page.evaluate(() => {
+      const style = selector => window.getComputedStyle(document.querySelector(selector));
+      const canvas = style('html'), body = style('body'), button = style('#v2-palette-fixture button');
+      const link = style('.home-chapters a'), notice = style('#v2-palette-fixture aside');
+      return { canvas: canvas.backgroundColor, text: body.color, link: link.color, buttonText: button.color,
+        button: button.backgroundColor, border: button.borderTopColor, outline: button.outlineColor, outlineStyle: button.outlineStyle,
+        warning: [notice.color, notice.backgroundColor] };
+    });
+    const normal = await read();
+    await fixtureButton.hover(); const hover = await read();
+    expect(contrast(normal.text, normal.canvas)).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(normal.link, normal.canvas)).toBeGreaterThanOrEqual(4.5);
+    for (const state of [normal, hover]) {
+      expect(contrast(state.buttonText, state.button)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(state.border, state.button)).toBeGreaterThanOrEqual(3);
+      expect(contrast(state.border, state.canvas)).toBeGreaterThanOrEqual(3);
+    }
+    expect(normal.outlineStyle).toBe('solid');
+    expect(contrast(normal.outline, normal.canvas)).toBeGreaterThanOrEqual(3);
+    if (neutral.has(mode)) expect(normal.canvas).toBe(neutral.get(mode)); else neutral.set(mode, normal.canvas);
+    if (warning.has(mode)) expect(normal.warning).toEqual(warning.get(mode)); else warning.set(mode, normal.warning);
+    families.add(`${mode}:${normal.link}`);
+    await fixtureButton.evaluate(element => { element.disabled = true; });
+    expect(await fixtureButton.isDisabled()).toBe(true);
+    await fixtureButton.evaluate(element => { element.disabled = false; });
+    measurements.push({ mode, accent, normal, hover });
+  }
+  expect(families.size).toBe(12);
+  await attachGeometry(testInfo, 'appearance-computed-colors', measurements);
+});
+
+test('V2 native groups remain open, wrap readable names and preserve focus across actual viewport changes', async ({ page }, testInfo) => {
+  for (const locale of ['en', 'zh']) for (const width of [1440, 1024, 768, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(at(locale === 'en' ? '/' : '/zh/'));
+    const m = getMessages(locale), trigger = page.locator('.appearance-trigger'), panel = page.locator('.appearance-panel');
+    await trigger.click();
+    const group = page.getByRole('group', { name: m.accentColor, exact: true });
+    await expect(group.getByRole('radio')).toHaveCount(6);
+    const blue = group.getByRole('radio', { name: m.accentNames.blue, exact: true });
+    await blue.focus(); await blue.press('ArrowRight');
+    await expect(group.getByRole('radio', { name: m.accentNames.green, exact: true })).toBeChecked();
+    await expect(panel).toBeVisible();
+    const light = page.getByRole('radio', { name: m.dayTheme, exact: true });
+    await light.focus(); await light.press('Space');
+    await expect(panel).toBeVisible(); await expect(light).toBeFocused();
+    const geometry = await page.locator('.accent-option').evaluateAll(elements => elements.map(element => {
+      const swatch = element.querySelector('.accent-swatch').getBoundingClientRect();
+      const name = element.lastElementChild, bounds = name.getBoundingClientRect(), range = document.createRange();
+      range.selectNodeContents(name);
+      return { target: { width: swatch.width, height: swatch.height }, nameWidth: bounds.width,
+        textWidth: Math.max(...[...range.getClientRects()].map(rect => rect.width)), lines: range.getClientRects().length };
+    }));
+    for (const entry of geometry) { expect(entry.target.width).toBeGreaterThanOrEqual(44); expect(entry.target.height).toBeGreaterThanOrEqual(44); expect(entry.lines).toBe(1); }
+    await page.screenshot({ path: testInfo.outputPath(`appearance-${locale}-${width}.png`) });
+    await light.press('Escape'); await expect(trigger).toBeFocused(); await expect(panel).not.toBeVisible();
+    await trigger.click();
+    // Deliberate outside focus must survive native light-dismiss.
+    const outside = page.locator('.book-intro .actions a').first();
+    await outside.evaluate(element => element.addEventListener('click', event => event.preventDefault(), { once: true }));
+    await outside.click(); await expect(outside).toBeFocused();
+    await expect(panel).not.toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+  await page.goto(at('/')); await page.locator('.appearance-trigger').click();
+  await page.locator('.appearance-panel').evaluate(panel => {
+    const samples = [panel, ...panel.querySelectorAll('*')].map(element => {
+      const style = window.getComputedStyle(element);
+      return { element, size: parseFloat(style.fontSize), line: parseFloat(style.lineHeight) };
+    });
+    for (const { element, size, line } of samples) {
+      element.style.fontSize = `${size * 2}px`;
+      if (Number.isFinite(line)) element.style.lineHeight = `${line * 2}px`;
+    }
+  });
+  for (const label of await page.locator('.accent-option').all()) {
+    const input = label.locator('input'); await input.focus(); await input.press('Space');
+    await expect(input).toBeChecked();
+    expect(await label.locator(':scope > span').last().evaluate(element => {
+      const range = document.createRange(); range.selectNodeContents(element); return range.getClientRects().length;
+    })).toBe(1);
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  await page.screenshot({ path: testInfo.outputPath('appearance-320-enlarged.png') });
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
+  const selected = page.locator('.accent-option:has(input:checked)');
+  await selected.locator('input').focus();
+  await expect(selected.locator('.accent-check')).toBeVisible();
+  expect(await selected.locator('.accent-swatch').evaluate(e => window.getComputedStyle(e).outlineStyle)).toBe('solid');
+  await page.screenshot({ path: testInfo.outputPath('appearance-forced-colors.png') });
+});
+
+test('V2 accent bootstrap, refresh, OS, cross-tab and quota failures preserve independent preferences', async ({ page, context }) => {
+  await page.addInitScript(() => {
+    if (!window.sessionStorage.getItem('qa-seeded')) {
+      window.localStorage.setItem('btf.theme', 'system'); window.localStorage.setItem('btf.accent', 'purple'); window.sessionStorage.setItem('qa-seeded', 'true');
+    }
+    new window.MutationObserver(() => {
+      const root = document.documentElement;
+      if (!window.__qaFirstAppearance && root?.dataset.accent && root.dataset.theme) {
+        window.__qaFirstAppearance = { accent: root.dataset.accent, mode: root.dataset.theme, beforeBody: !document.body };
+      }
+    }).observe(document, { subtree: true, attributes: true, childList: true });
+  });
+  await page.emulateMedia({ colorScheme: 'dark' }); await page.goto(at('/zh/read/'));
+  expect(await page.evaluate(() => window.__qaFirstAppearance)).toEqual({ accent: 'purple', mode: 'dark', beforeBody: true });
+  await page.emulateMedia({ colorScheme: 'light' }); await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('html')).toHaveAttribute('data-accent', 'purple');
+  await page.evaluate(() => window.__btfTheme.setPreference('dark'));
+  await page.emulateMedia({ colorScheme: 'light' }); await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  const other = await context.newPage();
+  await other.goto(at('/'));
+  await other.evaluate(() => { window.localStorage.setItem('btf.accent', 'rose'); });
+  await expect(page.locator('html')).toHaveAttribute('data-accent', 'rose');
+  await other.evaluate(() => { window.sessionStorage.setItem('btf.accent', 'blue'); });
+  await expect(page.locator('html')).toHaveAttribute('data-accent', 'rose');
+  await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-accent', 'rose');
+  await other.evaluate(() => { window.localStorage.setItem('btf.accent', 'not-a-color'); });
+  await expect(page.locator('html')).toHaveAttribute('data-accent', 'blue');
+  await other.evaluate(() => window.localStorage.clear());
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
+  await other.close();
+  await page.evaluate(() => {
+    window.Storage.prototype.setItem = () => { throw new window.DOMException('QA quota', 'QuotaExceededError'); };
+    window.__btfTheme.setAccent('orange');
+  });
+  await expect(page.locator('html')).toHaveAttribute('data-accent', 'orange');
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
+});
+
+for (const javaScriptEnabled of [true, false]) test(`reviewed source identity and legacy section links work with JavaScript ${javaScriptEnabled ? 'on' : 'off'}`, async ({ browser }, testInfo) => {
+  const context = await browser.newContext({ javaScriptEnabled });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  const legacyId = '关于本书的-ai-协作', canonicalId = '我为什么想写这本书';
+  const observations = [];
+  try {
+    for (const width of [1440, 390, 320]) {
+      await page.setViewportSize({ width, height: 844 });
+      for (const id of [legacyId, canonicalId]) {
+        await page.goto(`http://127.0.0.1:4179${at(chapterPath(opening))}#${encodeURIComponent(id)}`);
+        const target = page.locator(`[id="${id}"]`);
+        await expect(target).toBeFocused();
+        await expect(page.locator('article')).toHaveAttribute('data-source-sha256', opening.sha256);
+        await expect(page.locator('.reading-attribution').first()).toHaveText('缸子太子与世界');
+        await expect(page.locator('article')).toContainText('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。');
+        await expect(page.locator('article')).not.toContainText('创作方式：AI 全程辅助创作');
+        const geometry = await page.evaluate(({ id, canonicalId }) => {
+          const target = window.document.getElementById(id), heading = window.document.getElementById(canonicalId);
+          const toolbar = window.document.querySelector('.reading-tools');
+          const toolbarRect = toolbar.getBoundingClientRect();
+          return { width: window.innerWidth, target: id, focus: window.document.activeElement.id,
+            headingTop: heading.getBoundingClientRect().top,
+            toolbarBottom: window.getComputedStyle(toolbar).display === 'none' ? 0 : toolbarRect.bottom,
+            scrollMargin: window.getComputedStyle(target).scrollMarginTop,
+            overflow: window.document.documentElement.scrollWidth > window.innerWidth };
+        }, { id, canonicalId });
+        expect(geometry.overflow).toBe(false);
+        expect(geometry.headingTop).toBeGreaterThanOrEqual(geometry.toolbarBottom);
+        observations.push(geometry);
+        if (id === legacyId) {
+          await page.screenshot({ path: testInfo.outputPath(`intake-${width}-legacy-direct.png`) });
+          await expect(target).toHaveAttribute('role', 'group');
+          await expect(target).toHaveAccessibleName('我为什么想写这本书');
+          await page.keyboard.press('Tab');
+          await expect(target.locator('.heading-link')).toBeFocused();
+          await page.keyboard.press('Enter');
+          await expect(page.locator(`[id="${canonicalId}"]`)).toBeFocused();
+          expect(decodeURIComponent(new URL(page.url()).hash.slice(1))).toBe(canonicalId);
+        }
+        await page.screenshot({ path: testInfo.outputPath(`intake-${width}-${id === legacyId ? 'legacy-keyboard' : 'canonical'}.png`) });
+      }
+    }
+    const response = await page.request.get(`http://127.0.0.1:4179${at('/search-index/zh.json')}`);
+    const index = await response.json();
+    expect(index.entries).toHaveLength(28);
+    expect(index.entries.some(entry => entry.headingId === legacyId)).toBe(false);
+    for (const entry of chapterManifest) {
+      expect(index.entries.filter(item => item.chapterId === entry.id).every(item => item.sourceHash === entry.sha256)).toBe(true);
+    }
+    for (const locale of ['en', 'zh']) {
+      const messages = getMessages(locale);
+      await page.goto(`http://127.0.0.1:4179${at(locale === 'en' ? '/' : '/zh/')}`);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', messages.description);
+      await expect(page.locator('h1')).toHaveText(messages.titleLines.join(''));
+    }
+    await attachGeometry(testInfo, 'source-intake-fragments', observations);
+    expect(errors).toEqual([]);
+  } finally { await context.close(); }
+});
+
+test('V2 desktop navigation resizes, collapses, hides and restores its validated width', async ({ page }, testInfo) => {
+  const spacing = [];
+  async function headerSpacing() {
+    const measured = await page.locator('.chapter-header-links').evaluate(element => {
+      const links = [...element.querySelectorAll('a')].map(link => link.getBoundingClientRect());
+      return { width: window.innerWidth, cssGap: window.getComputedStyle(element).columnGap,
+        gaps: links.slice(1).map((link, i) => link.left - links[i].right) };
+    });
+    expect(parseFloat(measured.cssGap)).toBeGreaterThanOrEqual(8);
+    expect(measured.gaps.every(gap => gap >= 8)).toBe(true); spacing.push(measured);
+  }
+  await page.goto(at(chapterPath(g01))); await headerSpacing();
+  const layout = page.locator('.chapter-layout'), grip = page.getByRole('separator', { name: '调整章节栏宽度' });
+  await expect(layout).toHaveAttribute('data-enhanced', 'true');
+  await expect(grip).toHaveAttribute('aria-valuenow', '248');
+  await grip.focus(); await grip.press('ArrowRight');
+  await expect(grip).toHaveAttribute('aria-valuenow', '256');
+  await grip.press('End'); await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await grip.press('Home'); await expect(grip).toHaveAttribute('aria-valuenow', '224');
+  await grip.press('Enter'); await expect(grip).toHaveAttribute('aria-valuenow', '248');
+  let box = await grip.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + 200); await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 56, box.y + 200, { steps: 5 }); await page.mouse.up();
+  await expect(grip).toHaveAttribute('aria-valuenow', '304');
+  // A cancelled captured pointer must restore the prior value and leave dragging disabled.
+  box = await grip.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + 200); await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 24, box.y + 200);
+  await grip.dispatchEvent('pointercancel', { pointerId: 1 }); await page.mouse.up();
+  await expect(grip).toHaveAttribute('aria-valuenow', '304');
+  await expect(layout).toHaveAttribute('data-resizing', 'false');
+  await grip.focus(); await grip.press('End');
+  await page.setViewportSize({ width: 900, height: 900 });
+  await expect(grip).toHaveAttribute('aria-valuenow', '300'); await headerSpacing();
+  expect(await page.evaluate(() => JSON.parse(window.localStorage.getItem('btf.readerNavigation')).width)).toBe(360);
+  await page.setViewportSize({ width: 1440, height: 900 }); await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await page.getByRole('button', { name: '收起章节栏', exact: true }).click();
+  await expect(layout).toHaveAttribute('data-sidebar', 'collapsed');
+  await expect(page.getByRole('button', { name: '展开章节栏', exact: true })).toBeFocused();
+  expect(await page.locator('.book-rail').evaluate(element => element.getBoundingClientRect().width)).toBe(64);
+  await page.reload(); await expect(layout).toHaveAttribute('data-sidebar', 'collapsed');
+  await page.getByRole('button', { name: '展开章节栏', exact: true }).click();
+  await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await page.getByRole('button', { name: '隐藏章节栏', exact: true }).filter({ visible: true }).click();
+  await expect(layout).toHaveAttribute('data-sidebar', 'hidden');
+  await expect(page.getByRole('button', { name: '显示章节栏', exact: true })).toBeFocused();
+  const index = await (await page.request.get(at('/search-index/zh.json'))).json();
+  const entry = index.entries.find(entry => entry.chapterId === g01.id && entry.headingTitle.startsWith('时间'));
+  await page.goto(at(entry.href));
+  const target = page.locator(`[id="${entry.headingId}"]`);
+  await expect(target).toBeFocused();
+  await expect(layout).toHaveAttribute('data-sidebar', 'hidden');
+  const geometry = await target.evaluate(element => ({ top: element.getBoundingClientRect().top,
+    header: window.document.querySelector('.site-header').getBoundingClientRect().bottom,
+    tools: window.document.querySelector('.reading-tools').getBoundingClientRect().bottom }));
+  expect(geometry.top).toBeGreaterThanOrEqual(Math.max(geometry.header, geometry.tools));
+  await page.getByRole('button', { name: '显示章节栏', exact: true }).click();
+  await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await page.getByRole('button', { name: '重置宽度', exact: true }).click(); await expect(grip).toHaveAttribute('aria-valuenow', '248');
+  await attachGeometry(testInfo, 'restored-sidebar-fragment', geometry);
+  await attachGeometry(testInfo, 'desktop-header-spacing', spacing);
+});
+
+test('V2 chapter navigation remains usable with invalid or denied preference storage', async ({ page }) => {
+  await page.goto(at(chapterPath(g01)));
+  await page.evaluate(() => window.localStorage.setItem('btf.readerNavigation', '{"mode":"hidden","width":"100vw"}'));
+  await page.reload();
+  await expect(page.getByRole('separator', { name: '调整章节栏宽度' })).toHaveAttribute('aria-valuenow', '248');
+  await page.addInitScript(() => Object.defineProperty(window, 'localStorage', { configurable: true, get() { throw new Error('QA denied'); } }));
+  await page.reload();
+  await expect(page.locator('.chapter-layout')).toHaveAttribute('data-sidebar', 'expanded');
+  await page.getByRole('button', { name: '收起章节栏', exact: true }).click();
+  await expect(page.getByRole('button', { name: '展开章节栏', exact: true })).toBeFocused();
+  await page.getByRole('button', { name: '展开章节栏', exact: true }).click();
+  const grip = page.getByRole('separator', { name: '调整章节栏宽度' });
+  await grip.focus(); await grip.press('ArrowRight'); await expect(grip).toHaveAttribute('aria-valuenow', '256');
+});
+
+test('V2 nearby navigation closes without scrolling, coordinates overlays and reconciles breakpoint focus', async ({ page }) => {
+  for (const width of [768, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(at(chapterPath(g01)));
+    const book = page.locator('.mobile-book-navigation details'), summary = book.locator('summary');
+    const outline = page.locator('.mobile-outline details'), outlineSummary = outline.locator('summary');
+    await outlineSummary.click();
+    const section = outline.getByRole('link', { name: '时间：先发生什么，用户要等到哪里？', exact: true });
+    const id = decodeURIComponent((await section.getAttribute('href')).slice(1));
+    await section.click(); await expect(page.locator(`[id="${id}"]`)).toBeFocused();
+    const position = await page.evaluate(() => window.scrollY);
+    await summary.focus(); await summary.press('Enter');
+    await expect(book).toHaveAttribute('open', '');
+    expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    const current = book.getByRole('link', { name: new RegExp(g01.title) });
+    await current.focus(); await current.press('Escape'); await expect(summary).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(position);
+    await summary.press('Enter'); await outlineSummary.click();
+    await expect(book).not.toHaveAttribute('open', ''); await expect(outline).toHaveAttribute('open', '');
+    await outlineSummary.press('Escape');
+    await summary.focus(); await summary.press('Enter');
+    await page.keyboard.press('Control+k'); await expect(page.getByRole('dialog')).toBeVisible();
+    await expect(book).not.toHaveAttribute('open', ''); await page.keyboard.press('Escape');
+    await summary.focus(); await summary.press('Enter'); await current.focus();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(book).not.toHaveAttribute('open', ''); await expect(page.locator('#main')).toBeFocused();
+    const grip = page.getByRole('separator', { name: '调整章节栏宽度' }); await grip.focus();
+    const beforeNarrow = await page.evaluate(() => window.scrollY);
+    await page.setViewportSize({ width, height: 844 }); await expect(summary).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(beforeNarrow);
+    expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    const menu = page.locator('.chapter-header-menu'), menuSummary = menu.locator('summary');
+    await menuSummary.click(); await expect(menu).toHaveAttribute('open', '');
+    const menuPosition = await page.evaluate(() => window.scrollY);
+    await menuSummary.press('Escape'); await expect(menuSummary).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(menuPosition);
+    await menuSummary.press('Enter'); await page.keyboard.press('Control+k');
+    await expect(menu).not.toHaveAttribute('open', ''); await expect(page.getByRole('dialog')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await menuSummary.click(); await page.locator('.appearance-trigger').click();
+    await expect(menu).not.toHaveAttribute('open', ''); await expect(page.locator('.appearance-panel')).toBeVisible();
+    await summary.focus(); await summary.press('Enter');
+    await expect(page.locator('.appearance-panel')).not.toBeVisible(); await expect(book).toHaveAttribute('open', '');
+    await summary.press('Escape');
+    await menuSummary.click(); await menu.getByRole('link', { name: 'Switch to English', exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${at('/read/')}$`));
+    await page.locator('.available-chapters a').nth(1).click();
+    await expect(page.locator('article')).toHaveAttribute('data-chapter-id', g01.id);
+    await expect(page.locator('.chapter-header-menu')).toHaveAttribute('data-compact', 'true');
+  }
+});
+
+test('V2 real chapter remains readable across appearances, accents, widths and enlarged text', async ({ page }, testInfo) => {
+  const measurements = [];
+  for (const width of [1440, 1024, 768, 390, 320]) for (const mode of ['light', 'dark']) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(at(chapterPath(g01)));
+    await page.evaluate(({ mode }) => { window.__btfTheme.setPreference(mode); window.__btfTheme.setAccent(mode === 'light' ? 'blue' : 'purple'); }, { mode });
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', mode);
+    await expect(page.locator('html')).toHaveAttribute('data-accent', mode === 'light' ? 'blue' : 'purple');
+    await expect(page.locator('article h1')).toHaveText(g01.title);
+    await expect(page.locator('article')).toHaveAttribute('data-source-sha256', g01.sha256);
+    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿 全书仍在写作中');
+    const geometry = await page.evaluate(() => {
+      const article = window.document.querySelector('article'), header = window.document.querySelector('.site-header');
+      return { width: window.innerWidth, article: article.getBoundingClientRect().width,
+        header: header.getBoundingClientRect().height, overflow: window.document.documentElement.scrollWidth > window.innerWidth,
+        rail: window.document.querySelector('.book-rail').getBoundingClientRect().width,
+        firstParagraphTop: article.querySelector(':scope > p').getBoundingClientRect().top };
+    });
+    expect(geometry.overflow).toBe(false); expect(geometry.article).toBeLessThanOrEqual(704); measurements.push({ mode, ...geometry });
+    if ([1440, 390, 320].includes(width)) await page.screenshot({ path: testInfo.outputPath(`reader-${width}-${mode}.png`) });
+    for (const surface of await page.locator('article pre, article [role="region"]').all()) {
+      await surface.scrollIntoViewIfNeeded(); await surface.focus();
+      expect(await surface.evaluate(element => element.scrollWidth >= element.clientWidth)).toBe(true);
+      expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    }
+  }
+  await page.setViewportSize({ width: 320, height: 844 }); await page.goto(at(chapterPath(g01)));
+  await page.evaluate(() => {
+    const elements = [...window.document.querySelectorAll('.site-header, .site-header a, .site-header button, article, article h1, article h2, .reading-tools summary')];
+    const styles = elements.map(element => ({ element, size: parseFloat(window.getComputedStyle(element).fontSize), line: parseFloat(window.getComputedStyle(element).lineHeight) }));
+    for (const { element, size, line } of styles) { element.style.fontSize = `${size * 2}px`; if (Number.isFinite(line)) element.style.lineHeight = `${line * 2}px`; }
+  });
+  expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  const headerControls = await page.locator('.wordmark, .search-trigger, .chapter-header-menu > summary, .appearance-trigger').evaluateAll(elements => elements.map(element => {
+    const { left, right, top, bottom } = element.getBoundingClientRect(); return { left, right, top, bottom };
+  }));
+  for (let i = 0; i < headerControls.length; i++) for (let j = i + 1; j < headerControls.length; j++) {
+    const a = headerControls[i], b = headerControls[j];
+    expect(Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1).toBe(false);
+  }
+  await page.screenshot({ path: testInfo.outputPath('reader-320-enlarged-entry.png') });
+  await page.locator('.mobile-outline summary').click();
+  const link = page.locator('.mobile-outline a').last(), id = decodeURIComponent((await link.getAttribute('href')).slice(1));
+  await link.click(); const heading = page.locator(`[id="${id}"]`); await expect(heading).toBeFocused();
+  expect(await heading.evaluate(element => element.getBoundingClientRect().top)).toBeGreaterThanOrEqual(await page.locator('.reading-tools').evaluate(element => element.getBoundingClientRect().bottom));
+  await page.screenshot({ path: testInfo.outputPath('reader-320-enlarged.png') });
+  await attachGeometry(testInfo, 'reader-widths', measurements);
+});
+
+test('V2 static navigation retains real chapters and headings without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  try {
+    await page.goto(`http://127.0.0.1:4179${at(chapterPath(opening))}`);
+    await page.locator('.mobile-book-navigation summary').click();
+    await page.locator('.mobile-book-navigation').getByRole('link', { name: new RegExp(g01.title) }).click();
+    await expect(page.locator('article h1')).toHaveText(g01.title);
+    await page.locator('.mobile-outline summary').click();
+    const link = page.locator('.mobile-outline a').last(), id = decodeURIComponent((await link.getAttribute('href')).slice(1));
+    await link.click(); await expect(page.locator(`[id="${id}"]`)).toBeFocused();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(page.getByRole('separator', { name: '调整章节栏宽度' })).not.toBeVisible();
+    await page.locator('.book-rail').getByRole('link', { name: new RegExp(browserChapter.title) }).click();
+    await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+    expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(1440);
+  } finally { await context.close(); }
+});
+
+
+test('V2 breakpoint focus does not override a deliberate click away from the desktop grip', async ({ page }) => {
+  await page.goto(at(chapterPath(g01)));
+  const grip = page.getByRole('separator', { name: '调整章节栏宽度' });
+  await grip.focus(); await expect(grip).toBeFocused();
+  await page.locator('.site-header').click({ position: { x: 490, y: 31 } });
+  await expect(page.locator('body')).toBeFocused();
+  const position = await page.evaluate(() => window.scrollY);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.mobile-book-navigation summary')).not.toBeFocused();
+  await expect(page.locator('body')).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBe(position);
 });

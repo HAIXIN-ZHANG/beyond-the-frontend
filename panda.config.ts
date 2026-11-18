@@ -9,8 +9,14 @@ export default defineConfig({
   exclude: ['./site/.next/**', './site/out/**', './site/styled-system/**'],
   outdir: 'site/styled-system',
   conditions: {
+    accentBlue: '[data-accent="blue"] &',
+    accentGreen: '[data-accent="green"] &',
+    accentPurple: '[data-accent="purple"] &',
+    accentOrange: '[data-accent="orange"] &',
+    accentRose: '[data-accent="rose"] &',
+    accentGraphite: '[data-accent="graphite"] &',
     dark: '[data-theme="dark"] &',
-    system: 'html:not([data-theme]) &',
+    system: ':not([data-theme]) &',
     osDark: '@media (prefers-color-scheme: dark)',
   },
   theme: {

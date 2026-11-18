@@ -8,22 +8,22 @@ export const tokens = defineTokens({
         "value": "#ffffff"
       },
       "paper": {
-        "value": "#f8faf9"
+        "value": "#ffffff"
       },
       "panel": {
-        "value": "#f0f3f2"
+        "value": "#f7f9fc"
       },
       "ink": {
-        "value": "#202c28"
+        "value": "#202530"
       },
       "muted": {
-        "value": "#5c6b64"
+        "value": "#536175"
       },
       "line": {
-        "value": "#d6ddd6"
+        "value": "#e7e9ee"
       },
       "control": {
-        "value": "#84958a"
+        "value": "#5b687c"
       },
       "green": {
         "value": "#176653"
@@ -41,19 +41,19 @@ export const tokens = defineTokens({
         "value": "#f8eedc"
       },
       "dark": {
-        "value": "#111617"
+        "value": "#17191f"
       },
       "darkPanel": {
-        "value": "#1b2425"
+        "value": "#20242c"
       },
       "darkInk": {
-        "value": "#eef3f0"
+        "value": "#eceef4"
       },
       "darkMuted": {
-        "value": "#aabbb4"
+        "value": "#aab3c2"
       },
       "darkLine": {
-        "value": "#3b4b48"
+        "value": "#343943"
       },
       "darkGreen": {
         "value": "#9be0c4"
@@ -65,16 +65,183 @@ export const tokens = defineTokens({
         "value": "#ffffffee"
       },
       "glassNight": {
-        "value": "#1b2425ee"
+        "value": "#20242cee"
       },
       "shadowDay": {
-        "value": "#102c2414"
+        "value": "#20253014"
       },
       "shadowNight": {
         "value": "#00000066"
       },
       "darkHover": {
         "value": "#b8eed7"
+      },
+      "darkControl": {
+        "value": "#b4bdcc"
+      },
+      "selected": {
+        "value": "#e8edf5"
+      },
+      "darkSelected": {
+        "value": "#292e38"
+      }
+    },
+    "families": {
+      "blue": {
+        "fg": {
+          "value": "#245bd2"
+        },
+        "fgDark": {
+          "value": "#8aaeff"
+        },
+        "hover": {
+          "value": "#1c49a5"
+        },
+        "hoverDark": {
+          "value": "#bdd0ff"
+        },
+        "surface": {
+          "value": "#d6e6ff"
+        },
+        "surfaceDark": {
+          "value": "#304665"
+        },
+        "surfaceHover": {
+          "value": "#bed4f5"
+        },
+        "surfaceHoverDark": {
+          "value": "#405d80"
+        }
+      },
+      "green": {
+        "fg": {
+          "value": "#24794f"
+        },
+        "fgDark": {
+          "value": "#75d4a2"
+        },
+        "hover": {
+          "value": "#185c3b"
+        },
+        "hoverDark": {
+          "value": "#b1e9ca"
+        },
+        "surface": {
+          "value": "#daf0e0"
+        },
+        "surfaceDark": {
+          "value": "#2d5040"
+        },
+        "surfaceHover": {
+          "value": "#bee4ca"
+        },
+        "surfaceHoverDark": {
+          "value": "#3c6651"
+        }
+      },
+      "purple": {
+        "fg": {
+          "value": "#6841b2"
+        },
+        "fgDark": {
+          "value": "#c2a5ff"
+        },
+        "hover": {
+          "value": "#51318e"
+        },
+        "hoverDark": {
+          "value": "#d9ccff"
+        },
+        "surface": {
+          "value": "#e9e1fa"
+        },
+        "surfaceDark": {
+          "value": "#473b5f"
+        },
+        "surfaceHover": {
+          "value": "#d9c9ef"
+        },
+        "surfaceHoverDark": {
+          "value": "#5a4b76"
+        }
+      },
+      "orange": {
+        "fg": {
+          "value": "#a74c20"
+        },
+        "fgDark": {
+          "value": "#ffb387"
+        },
+        "hover": {
+          "value": "#803916"
+        },
+        "hoverDark": {
+          "value": "#ffd1b4"
+        },
+        "surface": {
+          "value": "#fbe7d9"
+        },
+        "surfaceDark": {
+          "value": "#604536"
+        },
+        "surfaceHover": {
+          "value": "#f3d2bb"
+        },
+        "surfaceHoverDark": {
+          "value": "#775745"
+        }
+      },
+      "rose": {
+        "fg": {
+          "value": "#a6345c"
+        },
+        "fgDark": {
+          "value": "#ffa3c4"
+        },
+        "hover": {
+          "value": "#812544"
+        },
+        "hoverDark": {
+          "value": "#ffd1e1"
+        },
+        "surface": {
+          "value": "#fae1ea"
+        },
+        "surfaceDark": {
+          "value": "#5e3d4a"
+        },
+        "surfaceHover": {
+          "value": "#f2cada"
+        },
+        "surfaceHoverDark": {
+          "value": "#774d5d"
+        }
+      },
+      "graphite": {
+        "fg": {
+          "value": "#505c70"
+        },
+        "fgDark": {
+          "value": "#bcc8db"
+        },
+        "hover": {
+          "value": "#384354"
+        },
+        "hoverDark": {
+          "value": "#dfe6f2"
+        },
+        "surface": {
+          "value": "#e7ebf0"
+        },
+        "surfaceDark": {
+          "value": "#3c4755"
+        },
+        "surfaceHover": {
+          "value": "#d2dbe5"
+        },
+        "surfaceHoverDark": {
+          "value": "#506072"
+        }
       }
     }
   },
@@ -135,10 +302,10 @@ export const tokens = defineTokens({
       "value": "6px"
     },
     "md": {
-      "value": "12px"
+      "value": "10px"
     },
     "lg": {
-      "value": "20px"
+      "value": "12px"
     },
     "full": {
       "value": "999px"
@@ -229,20 +396,20 @@ export const semanticTokens = defineSemanticTokens({
       },
       "selected": {
         "value": {
-          "base": "{colors.accent.soft}",
+          "base": "{colors.palette.selected}",
           "_osDark": {
-            "_system": "{colors.accent.soft}"
+            "_system": "{colors.palette.darkSelected}"
           },
-          "_dark": "{colors.accent.soft}"
+          "_dark": "{colors.palette.darkSelected}"
         }
       },
       "hover": {
         "value": {
-          "base": "{colors.bg.subtle}",
+          "base": "{colors.palette.selected}",
           "_osDark": {
-            "_system": "{colors.bg.subtle}"
+            "_system": "{colors.palette.darkSelected}"
           },
-          "_dark": "{colors.bg.subtle}"
+          "_dark": "{colors.palette.darkSelected}"
         }
       },
       "disabled": {
@@ -276,11 +443,11 @@ export const semanticTokens = defineSemanticTokens({
       },
       "onAccent": {
         "value": {
-          "base": "{colors.palette.white}",
+          "base": "{colors.palette.ink}",
           "_osDark": {
-            "_system": "{colors.palette.dark}"
+            "_system": "{colors.palette.darkInk}"
           },
-          "_dark": "{colors.palette.dark}"
+          "_dark": "{colors.palette.darkInk}"
         }
       },
       "link": {
@@ -316,47 +483,275 @@ export const semanticTokens = defineSemanticTokens({
         "value": {
           "base": "{colors.palette.control}",
           "_osDark": {
-            "_system": "{colors.palette.darkMuted}"
+            "_system": "{colors.palette.darkControl}"
           },
-          "_dark": "{colors.palette.darkMuted}"
+          "_dark": "{colors.palette.darkControl}"
         }
       },
       "focus": {
         "value": {
-          "base": "{colors.accent.default}",
+          "base": "{colors.palette.ink}",
           "_osDark": {
-            "_system": "{colors.accent.default}"
+            "_system": "{colors.palette.darkInk}"
           },
-          "_dark": "{colors.accent.default}"
+          "_dark": "{colors.palette.darkInk}"
         }
       }
     },
     "accent": {
       "default": {
         "value": {
-          "base": "{colors.palette.green}",
+          "base": "{colors.families.blue.fg}",
           "_osDark": {
-            "_system": "{colors.palette.darkGreen}"
+            "_system": "{colors.families.blue.fgDark}"
           },
-          "_dark": "{colors.palette.darkGreen}"
+          "_dark": "{colors.families.blue.fgDark}",
+          "_accentBlue": {
+            "base": "{colors.families.blue.fg}",
+            "_osDark": {
+              "_system": "{colors.families.blue.fgDark}"
+            },
+            "_dark": "{colors.families.blue.fgDark}"
+          },
+          "_accentGreen": {
+            "base": "{colors.families.green.fg}",
+            "_osDark": {
+              "_system": "{colors.families.green.fgDark}"
+            },
+            "_dark": "{colors.families.green.fgDark}"
+          },
+          "_accentPurple": {
+            "base": "{colors.families.purple.fg}",
+            "_osDark": {
+              "_system": "{colors.families.purple.fgDark}"
+            },
+            "_dark": "{colors.families.purple.fgDark}"
+          },
+          "_accentOrange": {
+            "base": "{colors.families.orange.fg}",
+            "_osDark": {
+              "_system": "{colors.families.orange.fgDark}"
+            },
+            "_dark": "{colors.families.orange.fgDark}"
+          },
+          "_accentRose": {
+            "base": "{colors.families.rose.fg}",
+            "_osDark": {
+              "_system": "{colors.families.rose.fgDark}"
+            },
+            "_dark": "{colors.families.rose.fgDark}"
+          },
+          "_accentGraphite": {
+            "base": "{colors.families.graphite.fg}",
+            "_osDark": {
+              "_system": "{colors.families.graphite.fgDark}"
+            },
+            "_dark": "{colors.families.graphite.fgDark}"
+          }
         }
       },
       "hover": {
         "value": {
-          "base": "{colors.palette.greenHover}",
+          "base": "{colors.families.blue.hover}",
           "_osDark": {
-            "_system": "{colors.palette.darkHover}"
+            "_system": "{colors.families.blue.hoverDark}"
           },
-          "_dark": "{colors.palette.darkHover}"
+          "_dark": "{colors.families.blue.hoverDark}",
+          "_accentBlue": {
+            "base": "{colors.families.blue.hover}",
+            "_osDark": {
+              "_system": "{colors.families.blue.hoverDark}"
+            },
+            "_dark": "{colors.families.blue.hoverDark}"
+          },
+          "_accentGreen": {
+            "base": "{colors.families.green.hover}",
+            "_osDark": {
+              "_system": "{colors.families.green.hoverDark}"
+            },
+            "_dark": "{colors.families.green.hoverDark}"
+          },
+          "_accentPurple": {
+            "base": "{colors.families.purple.hover}",
+            "_osDark": {
+              "_system": "{colors.families.purple.hoverDark}"
+            },
+            "_dark": "{colors.families.purple.hoverDark}"
+          },
+          "_accentOrange": {
+            "base": "{colors.families.orange.hover}",
+            "_osDark": {
+              "_system": "{colors.families.orange.hoverDark}"
+            },
+            "_dark": "{colors.families.orange.hoverDark}"
+          },
+          "_accentRose": {
+            "base": "{colors.families.rose.hover}",
+            "_osDark": {
+              "_system": "{colors.families.rose.hoverDark}"
+            },
+            "_dark": "{colors.families.rose.hoverDark}"
+          },
+          "_accentGraphite": {
+            "base": "{colors.families.graphite.hover}",
+            "_osDark": {
+              "_system": "{colors.families.graphite.hoverDark}"
+            },
+            "_dark": "{colors.families.graphite.hoverDark}"
+          }
         }
       },
       "soft": {
         "value": {
-          "base": "{colors.palette.greenSoft}",
+          "base": "{colors.families.blue.surface}",
           "_osDark": {
-            "_system": "{colors.palette.darkGreenSoft}"
+            "_system": "{colors.families.blue.surfaceDark}"
           },
-          "_dark": "{colors.palette.darkGreenSoft}"
+          "_dark": "{colors.families.blue.surfaceDark}",
+          "_accentBlue": {
+            "base": "{colors.families.blue.surface}",
+            "_osDark": {
+              "_system": "{colors.families.blue.surfaceDark}"
+            },
+            "_dark": "{colors.families.blue.surfaceDark}"
+          },
+          "_accentGreen": {
+            "base": "{colors.families.green.surface}",
+            "_osDark": {
+              "_system": "{colors.families.green.surfaceDark}"
+            },
+            "_dark": "{colors.families.green.surfaceDark}"
+          },
+          "_accentPurple": {
+            "base": "{colors.families.purple.surface}",
+            "_osDark": {
+              "_system": "{colors.families.purple.surfaceDark}"
+            },
+            "_dark": "{colors.families.purple.surfaceDark}"
+          },
+          "_accentOrange": {
+            "base": "{colors.families.orange.surface}",
+            "_osDark": {
+              "_system": "{colors.families.orange.surfaceDark}"
+            },
+            "_dark": "{colors.families.orange.surfaceDark}"
+          },
+          "_accentRose": {
+            "base": "{colors.families.rose.surface}",
+            "_osDark": {
+              "_system": "{colors.families.rose.surfaceDark}"
+            },
+            "_dark": "{colors.families.rose.surfaceDark}"
+          },
+          "_accentGraphite": {
+            "base": "{colors.families.graphite.surface}",
+            "_osDark": {
+              "_system": "{colors.families.graphite.surfaceDark}"
+            },
+            "_dark": "{colors.families.graphite.surfaceDark}"
+          }
+        }
+      },
+      "surface": {
+        "value": {
+          "base": "{colors.families.blue.surface}",
+          "_osDark": {
+            "_system": "{colors.families.blue.surfaceDark}"
+          },
+          "_dark": "{colors.families.blue.surfaceDark}",
+          "_accentBlue": {
+            "base": "{colors.families.blue.surface}",
+            "_osDark": {
+              "_system": "{colors.families.blue.surfaceDark}"
+            },
+            "_dark": "{colors.families.blue.surfaceDark}"
+          },
+          "_accentGreen": {
+            "base": "{colors.families.green.surface}",
+            "_osDark": {
+              "_system": "{colors.families.green.surfaceDark}"
+            },
+            "_dark": "{colors.families.green.surfaceDark}"
+          },
+          "_accentPurple": {
+            "base": "{colors.families.purple.surface}",
+            "_osDark": {
+              "_system": "{colors.families.purple.surfaceDark}"
+            },
+            "_dark": "{colors.families.purple.surfaceDark}"
+          },
+          "_accentOrange": {
+            "base": "{colors.families.orange.surface}",
+            "_osDark": {
+              "_system": "{colors.families.orange.surfaceDark}"
+            },
+            "_dark": "{colors.families.orange.surfaceDark}"
+          },
+          "_accentRose": {
+            "base": "{colors.families.rose.surface}",
+            "_osDark": {
+              "_system": "{colors.families.rose.surfaceDark}"
+            },
+            "_dark": "{colors.families.rose.surfaceDark}"
+          },
+          "_accentGraphite": {
+            "base": "{colors.families.graphite.surface}",
+            "_osDark": {
+              "_system": "{colors.families.graphite.surfaceDark}"
+            },
+            "_dark": "{colors.families.graphite.surfaceDark}"
+          }
+        }
+      },
+      "surfaceHover": {
+        "value": {
+          "base": "{colors.families.blue.surfaceHover}",
+          "_osDark": {
+            "_system": "{colors.families.blue.surfaceHoverDark}"
+          },
+          "_dark": "{colors.families.blue.surfaceHoverDark}",
+          "_accentBlue": {
+            "base": "{colors.families.blue.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.blue.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.blue.surfaceHoverDark}"
+          },
+          "_accentGreen": {
+            "base": "{colors.families.green.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.green.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.green.surfaceHoverDark}"
+          },
+          "_accentPurple": {
+            "base": "{colors.families.purple.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.purple.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.purple.surfaceHoverDark}"
+          },
+          "_accentOrange": {
+            "base": "{colors.families.orange.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.orange.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.orange.surfaceHoverDark}"
+          },
+          "_accentRose": {
+            "base": "{colors.families.rose.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.rose.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.rose.surfaceHoverDark}"
+          },
+          "_accentGraphite": {
+            "base": "{colors.families.graphite.surfaceHover}",
+            "_osDark": {
+              "_system": "{colors.families.graphite.surfaceHoverDark}"
+            },
+            "_dark": "{colors.families.graphite.surfaceHoverDark}"
+          }
         }
       }
     },
@@ -394,11 +789,11 @@ export const semanticTokens = defineSemanticTokens({
     "focus": {
       "ring": {
         "value": {
-          "base": "{colors.accent.default}",
+          "base": "{colors.palette.ink}",
           "_osDark": {
-            "_system": "{colors.accent.default}"
+            "_system": "{colors.palette.darkInk}"
           },
-          "_dark": "{colors.accent.default}"
+          "_dark": "{colors.palette.darkInk}"
         }
       }
     }

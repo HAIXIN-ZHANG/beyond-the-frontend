@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import vm from 'node:vm';
-import { getThemeBootstrap, themeStorageKey } from '../site/theme/runtime.ts';
+import { getThemeBootstrap, themeStorageKey, accentStorageKey, accentOptions } from '../site/theme/runtime.ts';
 
-function browser({ stored = null, dark = false, getThrows = false, writeThrows = false, mediaAvailable = true } = {}) {
+function browser({ stored = null, storedAccent = null, readKeyThrows = null, dark = false, getThrows = false, writeThrows = false, mediaAvailable = true } = {}) {
   const dataset = {};
   const events = new Map();
   const media = { matches: dark, addEventListener: (_name, callback) => { media.change = callback; } };
   const writes = [];
   const storage = {
-    getItem: () => stored,
-    setItem(key, value) { if (writeThrows) throw Error('blocked'); writes.push([key, value]); stored = value; },
+    getItem: key => { if (key === readKeyThrows) throw Error('Read denied'); return key === accentStorageKey ? storedAccent : stored; },
+    setItem(key, value) { if (writeThrows) throw Error('blocked'); writes.push([key, value]); if (key === accentStorageKey) storedAccent = value; else stored = value; },
     removeItem(key) { if (writeThrows) throw Error('blocked'); writes.push([key, null]); stored = null; },
   };
   const sessionStorage = { getItem: () => null, setItem() {}, removeItem() {}, clear() {} };
@@ -129,4 +129,62 @@ test('external-store snapshots stay stable until preference or resolved mode cha
   assert.notEqual(controller.getSnapshot(), initial);
   assert.equal(controller.getSnapshot().preference, 'system');
   assert.equal(controller.getSnapshot().resolvedTheme, 'dark');
+});
+
+
+test('all saved accents bootstrap before React and stay independent of appearance and system changes', () => {
+  for (const accent of accentOptions) for (const stored of [null, 'light', 'dark']) {
+    const b = browser({ stored, storedAccent: accent, dark: true });
+    assert.equal(b.dataset.accent, accent);
+    b.changeSystem(false); b.changeSystem(true);
+    assert.equal(b.dataset.accent, accent);
+    b.window.__btfTheme.setPreference('light');
+    assert.equal(b.dataset.accent, accent);
+    b.window.__btfTheme.setAccent('graphite');
+    assert.equal(b.dataset.themePreference, 'light');
+    assert.equal(b.dataset.theme, 'light');
+    assert.equal(b.dataset.accent, 'graphite');
+  }
+});
+
+test('invalid and per-key failed reads default independently; blocked writes retain session accents', () => {
+  for (const value of [null, '', 'invalid', 'Blue', '{"color":"rose"}']) {
+    assert.equal(browser({ stored: 'dark', storedAccent: value }).dataset.accent, 'blue');
+  }
+  const themeReadDenied = browser({ stored: 'dark', storedAccent: 'purple', readKeyThrows: themeStorageKey });
+  assert.equal(themeReadDenied.dataset.themePreference, 'system');
+  assert.equal(themeReadDenied.dataset.accent, 'purple');
+  const accentReadDenied = browser({ stored: 'dark', storedAccent: 'rose', readKeyThrows: accentStorageKey });
+  assert.equal(accentReadDenied.dataset.theme, 'dark');
+  assert.equal(accentReadDenied.dataset.accent, 'blue');
+  for (const options of [{ getThrows: true }, { writeThrows: true }]) {
+    const b = browser(options), controller = b.window.__btfTheme;
+    assert.doesNotThrow(() => controller.setAccent('orange'));
+    assert.equal(b.dataset.accent, 'orange');
+    controller.setAccent('invalid');
+    assert.equal(b.dataset.accent, 'orange');
+  }
+});
+
+test('accent storage events, clearing and irrelevant areas preserve independent state without writes', () => {
+  const b = browser({ stored: 'dark', storedAccent: 'green' });
+  b.storageEvent(accentStorageKey, 'purple', 'session');
+  assert.equal(b.dataset.accent, 'green');
+  b.storageEvent(accentStorageKey, 'purple');
+  assert.equal(b.dataset.accent, 'purple'); assert.equal(b.dataset.theme, 'dark');
+  b.storageEvent(themeStorageKey, 'light');
+  assert.equal(b.dataset.accent, 'purple'); assert.equal(b.dataset.theme, 'light');
+  b.storageEvent(accentStorageKey, 'bad'); assert.equal(b.dataset.accent, 'blue');
+  b.storageEvent(null, null); assert.equal(b.dataset.themePreference, 'system');
+  assert.equal(b.dataset.accent, 'blue'); assert.deepEqual(b.writes, []);
+});
+
+test('accent changes notify once and keep snapshots stable until a real preference changes', () => {
+  const b = browser(), controller = b.window.__btfTheme, initial = controller.getSnapshot();
+  let calls = 0; const unsubscribe = controller.subscribe(() => { calls++; });
+  controller.setAccent('blue'); assert.equal(controller.getSnapshot(), initial); assert.equal(calls, 0);
+  controller.setAccent('rose'); const changed = controller.getSnapshot();
+  assert.notEqual(changed, initial); assert.equal(changed.accent, 'rose'); assert.equal(calls, 1);
+  controller.setAccent('rose'); assert.equal(controller.getSnapshot(), changed); assert.equal(calls, 1);
+  b.run(); assert.equal(b.window.__btfTheme, controller); unsubscribe();
 });

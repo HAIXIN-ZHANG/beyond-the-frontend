@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { chapterManifest, chapterPath, validateManifest } from '../site/content/manifest.ts';
 import { loadBook } from '../site/content/load-book.ts';
-import { parseMarkdown, nodeText } from '../site/content/markdown.ts';
+import { applyLegacyHeadingAlias, parseMarkdown, nodeText } from '../site/content/markdown.ts';
 import { resolveChapterLink } from '../site/content/links.ts';
 import { alternateLocalePath } from '../site/config/i18n.ts';
 
@@ -14,8 +14,8 @@ test('only the three approved sources load with original titles, attribution, di
   const chapters = await loadBook();
   assert.deepEqual(chapters.map(chapter => chapter.entry.id), ['opening', 'G01', 'F01']);
   assert.equal(chapters[0].title, '写在前面：能跑，然后呢？');
-  assert.match(nodeText(chapters[0].tree), /作者：Jason Zhang/);
-  assert.match(nodeText(chapters[0].tree), /创作方式：AI 全程辅助创作/);
+  assert.match(nodeText(chapters[0].tree), /作者：缸子太子与世界/);
+  assert.match(nodeText(chapters[0].tree), /这本书从资料整理、正文起草到反复修改，都有 AI 的帮助/);
   assert.equal(chapters[1].tree.children.filter(node => node.type === 'code').length, 4);
   assert.equal(chapters[1].tree.children.filter(node => node.type === 'table').length, 2);
   const urls = chapters.flatMap(chapter => chapter.tree.children.filter(node => node.type === 'paragraph')
@@ -30,7 +30,7 @@ test('the approved browser chapter retains fenced illustrative HTML and its cano
   const chapters = await loadBook();
   const browser = chapters.find(chapter => chapter.entry.id === 'F01');
   assert.equal(browser.title, '页面出现之前，浏览器在忙什么？');
-  assert.equal(browser.entry.sha256, '54b983945710303a7e790706d86b9acc3884f50f6ae82f06dbde71711967ca24');
+  assert.equal(browser.entry.sha256, '3688b7967433b7a97304438100908d37883d5de9740aaa5c08820b37aa9bf624');
   assert.equal(browser.tree.children.filter(node => node.type === 'code').length, 4);
   assert.equal(browser.tree.children.filter(node => node.type === 'table').length, 2);
   assert.equal(browser.tree.children.find(node => node.type === 'code').lang, 'html');
@@ -57,7 +57,7 @@ test('changed bytes, missing files and symlinks outside book fail instead of sil
   try {
     await mkdir(path.join(root, 'book'));
     const body = '# Fixture\n\nReviewed text.\n';
-    const entry = { ...chapterManifest[0], title: 'Fixture', source: 'book/fixture.md', sha256: createHash('sha256').update(body).digest('hex') };
+    const entry = { ...chapterManifest[0], id: 'fixture', title: 'Fixture', source: 'book/fixture.md', sha256: createHash('sha256').update(body).digest('hex') };
     await writeFile(path.join(root, entry.source), body);
     assert.equal((await loadBook(root, [entry]))[0].title, 'Fixture');
     await writeFile(path.join(root, entry.source), body + 'Changed');
@@ -127,4 +127,21 @@ test('untranslated chapter switches to the English index once under both deploym
   for (const prefix of ['', '/vibe-coding-then-what']) for (const chapter of chapterManifest) {
     assert.equal(alternateLocalePath(prefix + chapterPath(chapter), 'zh', prefix), '/read/');
   }
+});
+
+test('the one legacy heading targets real content without entering canonical headings', async () => {
+  const chapters = await loadBook();
+  const opening = chapters[0];
+  const target = opening.tree.children.find(node => node.type === 'heading' && node.data.id === '我为什么想写这本书');
+  assert.equal(target.data.legacyId, '关于本书的-ai-协作');
+  assert.equal(chapters.reduce((total, chapter) => total + chapter.headingIds.length, 0), 28);
+  assert.ok(!opening.headingIds.includes(target.data.legacyId));
+  assert.ok(!opening.headings.some(heading => heading.id === target.data.legacyId));
+  for (const [alias, targetId] of [['old', 'absent'], ['main', 'section'], ['title', 'section'], ['section', 'section'], ['<unsafe>', 'section']]) {
+    assert.throws(() => applyLegacyHeadingAlias(parseMarkdown('# Title\n\n## Section'), alias, targetId), /missing|invalid or collides/);
+  }
+  const parsed = parseMarkdown('# Title\n\n## Section\n\n## Other');
+  applyLegacyHeadingAlias(parsed, 'old', 'section');
+  assert.throws(() => applyLegacyHeadingAlias(parsed, 'old', 'other'), /collides/);
+  assert.throws(() => applyLegacyHeadingAlias(parsed, 'another', 'section'), /collides/);
 });

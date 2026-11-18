@@ -33,7 +33,7 @@ Explanations combine principles, original examples and conditional choices. Recu
 
 ## Read what exists today
 
-Five reviewed Chinese originals are available in this repository: the [opening](book/drafts/zh/00-before-we-start.md), [common foundations](book/drafts/zh/01-a-page-and-a-system.md), [Browser Fundamentals](book/drafts/zh/02-browser-foundations.md), [After AI finishes, what is left for us?](book/drafts/zh/03-after-ai-finishes.md) and [No matching courses, or no search result?](book/drafts/zh/04-api-contract.md). The wider framework remains in progress. Three separately reviewed voice revisions of the earlier texts are revisions of those same works, not additional original chapters; they have not replaced the reader's current source versions.
+Five reviewed Chinese originals are available in this repository: the [opening](book/drafts/zh/00-before-we-start.md), [common foundations](book/drafts/zh/01-a-page-and-a-system.md), [Browser Fundamentals](book/drafts/zh/02-browser-foundations.md), [After AI finishes, what is left for us?](book/drafts/zh/03-after-ai-finishes.md) and [No matching courses, or no search result?](book/drafts/zh/04-api-contract.md). The wider framework remains in progress. The [verified local reader](docs/reviews/existing-source-intake.md) uses the revised opening, common foundations and Browser Fundamentals. These revisions are included in the five reviewed originals.
 
 The [online reader](https://haixin-zhang.github.io/vibe-coding-then-what/zh/) includes chapter navigation, Chinese search, section links and a correction entry. The interface supports Simplified Chinese and English; there are **five reviewed Chinese originals, three entries admitted to the local reader and zero English manuscript bodies**. The last verified public edition contains only the opening and common foundations. Browser Fundamentals is admitted locally but its public release is unverified; the AI and API-contract articles are reviewed sources only, with no reader intake or publication. Chinese drafts are reviewed before English adaptation. The [first-delivery record](docs/delivery/milestone-1.md) documents the initial verified public release and its limits; [development instructions](site/DEVELOPMENT.md) are separate from the book.
 
@@ -41,7 +41,7 @@ The approved next direction is a Chinese core draft across all eight parts with 
 
 ## About the author
 
-Created and maintained by **Jason Zhang**, with AI assistance in research, writing, design and development. Open to engineering opportunities and collaboration. Find Jason on [GitHub](https://github.com/HAIXIN-ZHANG).
+The book is written under the pen name **Jar & Prince Explore the World / 缸子太子与世界**. **Jason Zhang** maintains the project; a brief acknowledgment of AI's role in writing appears in the [introduction](book/drafts/zh/00-before-we-start.md). Open to engineering opportunities and collaboration. Find Jason on [GitHub](https://github.com/HAIXIN-ZHANG).
 
 Questions, corrections and relevant sources are welcome through [GitHub issues](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues). See [contributing](CONTRIBUTING.md) for the review process and contribution expectations.
 

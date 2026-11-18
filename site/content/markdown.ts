@@ -4,7 +4,7 @@ import { gfmTableFromMarkdown } from 'mdast-util-gfm-table';
 import { gfmTable } from 'micromark-extension-gfm-table';
 
 declare module 'mdast' {
-  interface HeadingData { id?: string }
+  interface HeadingData { id?: string; legacyId?: string }
   interface CodeData { sectionTitle?: string }
   interface TableData { sectionTitle?: string }
 }
@@ -62,4 +62,18 @@ export function parseMarkdown(source: string): ParsedMarkdown {
     tree.children.splice(1, 1);
   }
   return { tree, title, headings, headingIds };
+}
+
+// Trusted build metadata only: aliases must never manufacture canonical headings.
+export function applyLegacyHeadingAlias(parsed: ParsedMarkdown, legacyId: string, headingId: string): void {
+  const headings: Extract<Nodes, { type: 'heading' }>[] = [];
+  walkMarkdown(parsed.tree, node => { if (node.type === 'heading') headings.push(node); });
+  const target = headings.find(node => node.data?.id === headingId);
+  if (!target) throw new Error(`Legacy heading target is missing: ${headingId}`);
+  if (!/^[\p{Letter}\p{Number}\p{Mark}]+(?:-[\p{Letter}\p{Number}\p{Mark}]+)*$/u.test(legacyId) ||
+    legacyId === 'main' || parsed.headingIds.includes(legacyId) ||
+    headings.some(node => node.data?.legacyId === legacyId) || target.data?.legacyId) {
+    throw new Error(`Legacy heading ID is invalid or collides: ${legacyId}`);
+  }
+  target.data = { ...target.data, legacyId };
 }

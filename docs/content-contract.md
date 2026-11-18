@@ -30,6 +30,20 @@ Reuse the current renderer/parser and relative-link allowlist, including F01's l
 
 The new chapter's original diagrams/pseudocode are conceptual material, not browser benchmark results. Verify its real rendered code/tables/headings/links at desktop and320/390px with Day/Night under root and Pages prefixes. Manuscript source acceptance, local intake/code acceptance, CI, Git integration and public deployment remain separate. The [current board](coordination.md) and [intake handoff](handoffs/developer/milestone-2-chapter-intake.md) define permitted execution; this extension assigns no translation, next chapter, resume/bookmark/palette feature, dependency installation or release.
 
+## Reviewed source revision and reader identity — 2026-11-18
+
+The [accepted Writer refresh](reviews/existing-manuscripts-refresh.md) replaces only the reviewed revisions of the three already admitted sources. Earlier tables above retain their dated source identities. The current manifest keeps their IDs, locale, slugs, H1s, order and reviewed-draft status, with the same review pointer `docs/reviews/existing-manuscripts-refresh.md` for all three:
+
+| ID | Current reviewed SHA-256 |
+| --- | --- |
+| opening | `b4d0dd040e183cebc0400526ca5b317d23db1dc406e0bd5b00e3af74a940f521` |
+| G01 | `e0fca6dd95b87e93107c4279fb4bad120e80a068c8fc91a58689154293b25a05` |
+| F01 | `3688b7967433b7a97304438100908d37883d5de9740aaa5c08820b37aa9bf624` |
+
+The approved introduction removes its separate AI-method heading while retaining a quiet acknowledgment and human responsibility under `我为什么想写这本书`. A single explicit typed compatibility entry preserves old fragment `关于本书的-ai-协作` at that retained section. Build validation requires a real canonical target and rejects reserved/canonical/alias collisions. The controlled renderer uses a named focusable static wrapper around the canonical H2 and actions: direct old links focus the wrapper, including without JavaScript; Tab then Enter on the heading link moves to the canonical H2/URL. The old URL is not automatically rewritten. Alias and H2 scroll clearance include a closed-toolbar fallback before JavaScript measurement. This is one reviewed exception, not a general heading-migration contract.
+
+Aliases do not create headings, outline/search entries or sharing targets. The actual Chinese index contains28 canonical sections across3 chapters (opening7/G01 12/F01 9); English remains empty. Both newer original manuscripts03/04 remain unadmitted. Reader byline is `缸子太子与世界` without a repeated creation-method label. Descriptions are EN `Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control` and ZH `看懂我们构建的系统，也学着与无法完全掌控的事相处。` Approved body prose, AI teaching/provenance and all5 source bytes remain Writer-owned. See the [intake handoff](handoffs/developer/existing-source-intake.md) for actual QA and limits; this addendum establishes neither integration nor deployment.
+
 ## Minimal implementation
 
 - Developer owns a small typed allowlist under `site/content/`, with stable ID, locale, slug, title, order, source path, reviewed status/review reference and expected source hash. It may be extended after review; do not require Writer to retrofit frontmatter merely to render the existing chapters.

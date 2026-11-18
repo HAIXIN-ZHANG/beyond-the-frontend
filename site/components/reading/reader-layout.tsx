@@ -1,0 +1,158 @@
+'use client';
+
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { IconButton } from '../ui/icon-button.tsx';
+import { Button } from '../ui/button.tsx';
+import { ReadingTools } from './reading-tools.tsx';
+import { ReadingDisclosure } from './reading-disclosure.tsx';
+import { effectiveSidebarWidth, readSidebarPreference, sidebarBreakpoint, sidebarDefault,
+  sidebarMin, sidebarStorageKey, sidebarWidthLimit } from './sidebar-preference.ts';
+import type { SidebarMode, SidebarPreference } from './sidebar-preference.ts';
+
+const subscribeReady = () => () => {};
+const clientReady = () => true;
+const serverReady = () => false;
+const viewportSnapshot = () => window.innerWidth;
+const serverViewport = () => 1440;
+function subscribeViewport(listener: () => void) {
+  window.addEventListener('resize', listener);
+  return () => window.removeEventListener('resize', listener);
+}
+function initialPreference(): SidebarPreference {
+  try { return readSidebarPreference(window.localStorage.getItem(sidebarStorageKey)); } catch { return sidebarDefault; }
+}
+
+export function ReaderLayout({ navigation, outline, children }: { navigation: ReactNode; outline: ReactNode; children: ReactNode }) {
+  const root = useRef<HTMLDivElement>(null);
+  const grip = useRef<HTMLDivElement>(null);
+  const lastFocused = useRef<Element | null>(null);
+  const [preference, setPreference] = useState(initialPreference);
+  const preferenceRef = useRef(preference);
+  const drag = useRef<{ pointer: number; x: number; width: number; original: SidebarPreference } | null>(null);
+  const viewport = useSyncExternalStore(subscribeViewport, viewportSnapshot, serverViewport);
+  const ready = useSyncExternalStore(subscribeReady, clientReady, serverReady);
+  const applied = ready ? preference : sidebarDefault;
+  const [resizing, setResizing] = useState(false);
+  const width = effectiveSidebarWidth(applied.width, viewport);
+  const limit = sidebarWidthLimit(viewport);
+
+  function apply(next: SidebarPreference, persist = true) {
+    preferenceRef.current = next; setPreference(next);
+    if (persist) try { window.localStorage.setItem(sidebarStorageKey, JSON.stringify(next)); } catch { /* Keep the session choice. */ }
+  }
+  function cancelDrag() {
+    const current = drag.current;
+    if (!current) return;
+    drag.current = null; setResizing(false);
+    preferenceRef.current = current.original; setPreference(current.original);
+    if (grip.current?.hasPointerCapture(current.pointer)) grip.current.releasePointerCapture(current.pointer);
+  }
+  useLayoutEffect(() => {
+    const updateViewport = () => {
+      const current = drag.current;
+      if (current) {
+        drag.current = null; setResizing(false);
+        preferenceRef.current = current.original; setPreference(current.original);
+        if (grip.current?.hasPointerCapture(current.pointer)) grip.current.releasePointerCapture(current.pointer);
+      }
+      // CSS may hide/blur a descendant before the browser dispatches resize.
+      const active = document.activeElement === document.body && lastFocused.current?.isConnected ? lastFocused.current : document.activeElement;
+      if (window.innerWidth < sidebarBreakpoint && active?.closest('.book-rail, .desktop-reopen')) {
+        root.current?.querySelector<HTMLElement>('.mobile-book-navigation summary')?.focus({ preventScroll: true });
+      } else if (window.innerWidth >= sidebarBreakpoint && active?.closest('.mobile-book-navigation') ||
+        window.innerWidth >= 1200 && active?.closest('.mobile-outline')) {
+        document.getElementById('main')?.focus({ preventScroll: true });
+      }
+    };
+    const recordFocus = (event: FocusEvent) => {
+      if (event.target instanceof Element && event.target !== document.body) lastFocused.current = event.target;
+    };
+    const recordPointerIntent = (event: PointerEvent) => {
+      if (event.target instanceof Node && !lastFocused.current?.contains(event.target)) lastFocused.current = null;
+    };
+    document.addEventListener('focusin', recordFocus, true);
+    document.addEventListener('pointerdown', recordPointerIntent, true);
+    window.addEventListener('resize', updateViewport);
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const measureHeader = () => root.current?.style.setProperty('--reader-header-height', `${header?.getBoundingClientRect().height ?? 68}px`);
+    const observer = new ResizeObserver(measureHeader);
+    if (header) observer.observe(header);
+    measureHeader();
+    return () => { window.removeEventListener('resize', updateViewport); document.removeEventListener('focusin', recordFocus, true); document.removeEventListener('pointerdown', recordPointerIntent, true); observer.disconnect(); };
+  }, []);
+  useLayoutEffect(() => {
+    if (!ready || !window.location.hash) return;
+    // A restored desktop width may reflow content after native initial-fragment navigation.
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+        target?.scrollIntoView({ block: 'start' });
+      } catch { /* Invalid URL escapes do not prevent reading. */ }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [ready]);
+
+  function mode(next: SidebarMode) {
+    cancelDrag(); apply({ ...preferenceRef.current, mode: next });
+    window.requestAnimationFrame(() => root.current?.querySelector<HTMLElement>(
+      next === 'expanded' ? '[data-collapse-sidebar]' : next === 'collapsed' ? '[data-expand-sidebar]' : '[data-reopen-sidebar]',
+    )?.focus({ preventScroll: true }));
+  }
+  const style = { '--reader-rail-width': applied.mode === 'hidden' ? '0px' : applied.mode === 'collapsed' ? '64px' : `${width}px` } as CSSProperties;
+  return <div ref={root} className="chapter-layout" data-sidebar={applied.mode} data-enhanced={ready} data-resizing={resizing} style={style}>
+    <aside className="book-rail" aria-label="章节栏">
+      <div className="expanded-book-rail">
+        <div className="sidebar-controls reader-js-controls">
+          <span>本书</span>
+          <IconButton label="收起章节栏" title="收起章节栏" data-collapse-sidebar onClick={() => mode('collapsed')}><span aria-hidden="true">‹</span></IconButton>
+          <IconButton label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><span aria-hidden="true">×</span></IconButton>
+        </div>
+        <div className="sidebar-content" id="reader-book-navigation">{navigation}</div>
+        <div className="sidebar-width-controls reader-js-controls">
+          <Button visual="quiet" onClick={() => apply({ ...preferenceRef.current, width: sidebarDefault.width })}>重置宽度</Button>
+          <span aria-hidden="true">{width}px</span>
+        </div>
+        <div ref={grip} role="separator" tabIndex={ready ? 0 : -1} aria-label="调整章节栏宽度" aria-orientation="vertical"
+          aria-controls="reader-book-navigation" aria-valuemin={sidebarMin} aria-valuemax={limit} aria-valuenow={width}
+          aria-describedby="sidebar-resize-help" className="sidebar-resize reader-js-controls"
+          onKeyDown={event => {
+            const next = event.key === 'ArrowLeft' ? width - 8 : event.key === 'ArrowRight' ? width + 8 :
+              event.key === 'Home' ? sidebarMin : event.key === 'End' ? limit : event.key === 'Enter' ? sidebarDefault.width : null;
+            if (next !== null) { event.preventDefault(); apply({ ...preferenceRef.current, width: Math.max(sidebarMin, Math.min(next, limit)) }); }
+          }}
+          onPointerDown={event => {
+            if (event.button !== 0 || !event.isPrimary) return;
+            event.preventDefault(); event.currentTarget.focus({ preventScroll: true });
+            drag.current = { pointer: event.pointerId, x: event.clientX, width, original: preferenceRef.current };
+            event.currentTarget.setPointerCapture(event.pointerId); setResizing(true);
+          }} onPointerMove={event => {
+            const current = drag.current;
+            if (!current || current.pointer !== event.pointerId) return;
+            apply({ ...preferenceRef.current, width: Math.max(sidebarMin, Math.min(Math.round(current.width + event.clientX - current.x), limit)) }, false);
+          }} onPointerUp={event => {
+            if (drag.current?.pointer !== event.pointerId) return;
+            drag.current = null; setResizing(false); apply(preferenceRef.current);
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          }} onPointerCancel={cancelDrag} onLostPointerCapture={cancelDrag} />
+        <p className="visually-hidden" id="sidebar-resize-help">左右方向键每次调整8像素，Home和End跳到边界，Enter或重置宽度恢复248像素。</p>
+      </div>
+      <div className="collapsed-book-rail reader-js-controls">
+        <IconButton label="展开章节栏" title="展开章节栏" data-expand-sidebar onClick={() => mode('expanded')}><span aria-hidden="true">☰</span></IconButton>
+        <IconButton label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><span aria-hidden="true">×</span></IconButton>
+      </div>
+    </aside>
+    <div className="reader-body">
+      <div className="chapter-column">
+        <ReadingTools>
+          <p className="chapter-context">中文 · 已审阅草稿 <span>全书仍在写作中</span></p>
+          <div className="desktop-reopen reader-js-controls"><Button visual="quiet" data-reopen-sidebar onClick={() => mode('expanded')}>显示章节栏</Button></div>
+          <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航" compactLabel="章节">{navigation}</ReadingDisclosure></div>
+          <div className="mobile-outline"><ReadingDisclosure label="本章目录" compactLabel="目录">{outline}</ReadingDisclosure></div>
+        </ReadingTools>
+        {children}
+      </div>
+      <aside className="outline-rail">{outline}</aside>
+    </div>
+  </div>;
+}

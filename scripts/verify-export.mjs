@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import vm from 'node:vm';
 import { parseBasePath } from '../site/config/deployment.ts';
+import { homeContent } from '../site/components/home-content.ts';
+import { getMessages } from '../site/config/i18n.ts';
 import { themeStorageKey } from '../site/theme/runtime.ts';
 import { loadBook } from '../site/content/load-book.ts';
 import { chapterPath } from '../site/content/manifest.ts';
@@ -135,6 +137,21 @@ for (const [page, language, title, alternatePath] of pages) {
       assert.ok(html.includes('English chapters are not available yet') && html.includes('Chinese · Reviewed draft'), `${page}: missing language availability explanation`);
       assert.ok(!links.some(link => /^\/read\/[^/]+\//.test(link.href?.slice(basePath.length) || '')), `${page}: invented English article`);
     }
+  }
+
+  if (page === 'index.html' || page === 'zh/index.html') {
+    const locale = page === 'index.html' ? 'en' : 'zh', messages = getMessages(locale), copy = homeContent[locale];
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, `${page}: home requires one real H1`);
+    assert.ok(html.includes(escapeHtml(messages.description)), `${page}: approved home description changed`);
+    assert.ok(html.includes(`alt="${escapeHtml(copy.illustrationAlt)}"`), `${page}: system illustration lacks localized description`);
+    assert.ok(html.includes(`src="${basePath}/illustrations/home-systems-desktop.svg"`) && html.includes(`srcSet="${basePath}/illustrations/home-systems-mobile.svg"`), `${page}: local responsive art missing`);
+    for (const [variant, width, height] of [['desktop', 410, 112], ['mobile', 304, 54]]) {
+      const asset = await readFile(path.join(output, `illustrations/home-systems-${variant}.svg`), 'utf8');
+      assert.ok(asset.startsWith('<svg') && asset.includes(`width="${width}"`) && asset.includes(`height="${height}"`), `${page}: approved SVG dimensions changed`);
+    }
+    assert.ok(!html.includes('figma.com/api/mcp/asset/'), `${page}: expiring design URL exposed`);
+    for (const chapter of chapters) assert.ok(links.some(link => link.href === `${basePath}${chapterPath(chapter.entry)}`), `${page}: real home chapter absent`);
+    if (locale === 'en') assert.ok(html.includes(messages.englishUnavailable), `${page}: English availability missing`);
   }
 
   // Validate emitted links and assets against the actual static export, not dev routing.

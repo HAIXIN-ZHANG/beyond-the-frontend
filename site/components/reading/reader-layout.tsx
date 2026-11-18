@@ -82,15 +82,40 @@ export function ReaderLayout({ navigation, outline, children }: { navigation: Re
     return () => { window.removeEventListener('resize', updateViewport); document.removeEventListener('focusin', recordFocus, true); document.removeEventListener('pointerdown', recordPointerIntent, true); observer.disconnect(); };
   }, []);
   useLayoutEffect(() => {
-    if (!ready || !window.location.hash) return;
-    // A restored desktop width may reflow content after native initial-fragment navigation.
-    const frame = window.requestAnimationFrame(() => {
+    const layout = root.current;
+    if (!ready || !layout) return;
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const tools = layout.querySelector<HTMLElement>('.reading-tools');
+    let pendingHash = window.location.hash;
+    let frame = 0;
+    const correctFragment = () => {
+      frame = 0;
+      if (!pendingHash || pendingHash !== window.location.hash) return;
       try {
-        const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
-        target?.scrollIntoView({ block: 'start' });
+        const target = document.getElementById(decodeURIComponent(pendingHash.slice(1)));
+        if (!target || !layout.contains(target) || document.activeElement !== target) return;
+        // Native hash navigation may precede responsive header reconciliation and its observers.
+        // Use both current measurements together before applying the real target's CSS clearance.
+        layout.style.setProperty('--reader-header-height', `${header?.getBoundingClientRect().height ?? 68}px`);
+        tools?.parentElement?.style.setProperty('--reading-tools-height', `${tools.getBoundingClientRect().height}px`);
+        const clearance = Number.parseFloat(getComputedStyle(target).scrollMarginTop);
+        if (Math.abs(target.getBoundingClientRect().top - clearance) > 1) target.scrollIntoView({ block: 'start', behavior: 'instant' });
       } catch { /* Invalid URL escapes do not prevent reading. */ }
-    });
-    return () => window.cancelAnimationFrame(frame);
+    };
+    const schedule = () => { if (!frame && pendingHash) frame = window.requestAnimationFrame(correctFragment); };
+    const navigate = () => { pendingHash = window.location.hash; schedule(); };
+    // A fragment owns its landing only until the reader deliberately scrolls or interacts again.
+    const relinquish = () => { pendingHash = ''; };
+    const observer = new ResizeObserver(schedule);
+    for (const element of [header, tools, layout.querySelector('.reader-body')]) if (element) observer.observe(element);
+    window.addEventListener('hashchange', navigate);
+    const intents = ['pointerdown', 'wheel', 'touchstart', 'keydown'] as const;
+    for (const type of intents) window.addEventListener(type, relinquish, { capture: true, passive: true });
+    schedule();
+    return () => {
+      window.cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('hashchange', navigate);
+      for (const type of intents) window.removeEventListener(type, relinquish, true);
+    };
   }, [ready]);
 
   function mode(next: SidebarMode) {

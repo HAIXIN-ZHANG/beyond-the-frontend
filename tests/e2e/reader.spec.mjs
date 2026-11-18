@@ -788,6 +788,42 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   const legacyId = '关于本书的-ai-协作', canonicalId = '我为什么想写这本书';
   const observations = [];
+  if (javaScriptEnabled) await page.addInitScript(() => {
+    // Control the production resize-listener ordering without replacing native hash navigation.
+    const add = window.addEventListener.bind(window), remove = window.removeEventListener.bind(window), wrapped = new Map();
+    window.__holdFragmentResize = false; window.__fragmentResizeQueue = [];
+    window.addEventListener = (type, listener, options) => {
+      if (type !== 'resize' || typeof listener !== 'function') return add(type, listener, options);
+      const callback = event => { if (window.__holdFragmentResize) window.__fragmentResizeQueue.push(() => listener(event)); else listener(event); };
+      wrapped.set(listener, callback); return add(type, callback, options);
+    };
+    window.removeEventListener = (type, listener, options) => remove(type, wrapped.get(listener) ?? listener, options);
+    const scroll = window.Element.prototype.scrollIntoView;
+    window.__fragmentScrollCalls = 0;
+    window.Element.prototype.scrollIntoView = function (...args) { window.__fragmentScrollCalls++; return scroll.apply(this, args); };
+  });
+  async function fragmentGeometry(id) {
+    return page.evaluate(({ id, canonicalId }) => {
+      const target = window.document.getElementById(id), heading = window.document.getElementById(canonicalId);
+      const toolbar = window.document.querySelector('.reading-tools'), header = window.document.querySelector('.site-header');
+      const stickyHeader = window.getComputedStyle(header).position === 'sticky' ? header.getBoundingClientRect().bottom : 0;
+      return { width: window.innerWidth, target: id, focus: window.document.activeElement.id,
+        headingTop: heading.getBoundingClientRect().top, toolbarBottom: toolbar.getBoundingClientRect().bottom,
+        stickyHeader, scrollMargin: window.getComputedStyle(target).scrollMarginTop,
+        compact: window.document.querySelector('.chapter-header-menu').dataset.compact,
+        overflow: window.document.documentElement.scrollWidth > window.innerWidth };
+    }, { id, canonicalId });
+  }
+  async function assertFragmentLanding(id) {
+    // Observe the measured-layout repair, never accept a frame with an obscured heading.
+    await expect.poll(async () => {
+      const geometry = await fragmentGeometry(id);
+      return geometry.focus === id && geometry.headingTop >= Math.max(geometry.toolbarBottom, geometry.stickyHeader) && !geometry.overflow;
+    }, { message: `Focused fragment ${id} must clear the actual sticky surfaces` }).toBe(true);
+    const geometry = await fragmentGeometry(id);
+    expect(geometry.headingTop).toBeGreaterThanOrEqual(Math.max(geometry.toolbarBottom, geometry.stickyHeader));
+    return geometry;
+  }
   try {
     for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 844 });
@@ -799,18 +835,7 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
         await expect(page.locator('.reading-attribution').first()).toHaveText('缸子太子与世界');
         await expect(page.locator('article')).toContainText('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。');
         await expect(page.locator('article')).not.toContainText('创作方式：AI 全程辅助创作');
-        const geometry = await page.evaluate(({ id, canonicalId }) => {
-          const target = window.document.getElementById(id), heading = window.document.getElementById(canonicalId);
-          const toolbar = window.document.querySelector('.reading-tools');
-          const toolbarRect = toolbar.getBoundingClientRect();
-          return { width: window.innerWidth, target: id, focus: window.document.activeElement.id,
-            headingTop: heading.getBoundingClientRect().top,
-            toolbarBottom: window.getComputedStyle(toolbar).display === 'none' ? 0 : toolbarRect.bottom,
-            scrollMargin: window.getComputedStyle(target).scrollMarginTop,
-            overflow: window.document.documentElement.scrollWidth > window.innerWidth };
-        }, { id, canonicalId });
-        expect(geometry.overflow).toBe(false);
-        expect(geometry.headingTop).toBeGreaterThanOrEqual(geometry.toolbarBottom);
+        const geometry = await assertFragmentLanding(id);
         observations.push(geometry);
         if (id === legacyId) {
           await page.screenshot({ path: testInfo.outputPath(`intake-${width}-legacy-direct.png`) });
@@ -824,6 +849,38 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
         }
         await page.screenshot({ path: testInfo.outputPath(`intake-${width}-${id === legacyId ? 'legacy-keyboard' : 'canonical'}.png`) });
       }
+    }
+    if (javaScriptEnabled) {
+      for (const width of [390, 320]) {
+        await page.setViewportSize({ width: 1440, height: 844 });
+        await page.goto(`http://127.0.0.1:4179${at(chapterPath(opening))}#${encodeURIComponent(canonicalId)}`);
+        await expect(page.locator('.chapter-layout')).toHaveAttribute('data-enhanced', 'true');
+        await expect(page.locator('.chapter-header-menu')).toHaveAttribute('data-compact', 'false');
+        await assertFragmentLanding(canonicalId);
+        await page.evaluate(() => { window.__holdFragmentResize = true; });
+        await page.setViewportSize({ width, height: 844 });
+        await page.goto(`http://127.0.0.1:4179${at(chapterPath(opening))}#${encodeURIComponent(legacyId)}`);
+        const beforeRelease = await fragmentGeometry(legacyId);
+        await page.evaluate(() => {
+          window.__holdFragmentResize = false;
+          window.__fragmentResizeQueue.splice(0).forEach(run => run());
+        });
+        await expect(page.locator('.chapter-header-menu')).toHaveAttribute('data-compact', 'true');
+        observations.push({ controlledResize: width, beforeRelease, afterRelease: await assertFragmentLanding(legacyId) });
+        await page.screenshot({ path: testInfo.outputPath(`fragment-controlled-${width}.png`) });
+        await page.keyboard.press('Tab'); await page.keyboard.press('Enter');
+        await expect(page.locator(`[id="${canonicalId}"]`)).toBeFocused();
+        await assertFragmentLanding(canonicalId);
+      }
+      // A settled fragment does not keep owning the viewport after deliberate reading scroll.
+      const position = await page.evaluate(() => window.scrollY);
+      await page.mouse.move(180, 500); await page.mouse.wheel(0, 200);
+      await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(position);
+      await page.evaluate(() => { window.__fragmentScrollCalls = 0; });
+      await page.setViewportSize({ width: 390, height: 844 });
+      await expect(page.locator('.chapter-header-menu')).toHaveAttribute('data-compact', 'true');
+      await page.evaluate(() => new Promise(resolve => new window.ResizeObserver((_, observer) => { observer.disconnect(); window.requestAnimationFrame(resolve); }).observe(window.document.querySelector('.reading-tools'))));
+      expect(await page.evaluate(() => window.__fragmentScrollCalls)).toBe(0);
     }
     const response = await page.request.get(`http://127.0.0.1:4179${at('/search-index/zh.json')}`);
     const index = await response.json();

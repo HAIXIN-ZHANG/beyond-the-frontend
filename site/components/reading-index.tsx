@@ -6,6 +6,8 @@ import { getBook } from '../content/book.ts';
 import { chapterPath } from '../content/manifest.ts';
 import { ChapterNavigation } from './reading/chapter-navigation.tsx';
 import { homeContent } from './home-content.ts';
+import { readingLocator } from '../content/reading-locator.ts';
+import { ContinueReading } from './reading/continue-reading.tsx';
 
 export async function ReadingIndex({ locale }: { locale: Locale }) {
   const messages = getMessages(locale);
@@ -26,6 +28,7 @@ export async function ReadingIndex({ locale }: { locale: Locale }) {
         <h1 id="contents-title">{messages.directory.title}</h1>
         <p className="availability-note">{messages.availableNotice(chapters.length)}</p>
         {locale === 'en' ? <p>{messages.englishUnavailable}</p> : null}
+        <ContinueReading locale={locale} chapters={chapters.map(readingLocator)} />
         <section className="directory-chapters home-chapters" aria-labelledby="directory-available">
           <h2 id="directory-available">{messages.directory.available}</h2>
           <p id="directory-availability" className="visually-hidden">{messages.chineseDraft}</p>

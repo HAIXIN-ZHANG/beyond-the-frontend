@@ -1,6 +1,6 @@
 # Manual Pages release and recovery
 
-Coordinator owns review, Git integration, settings, dispatch and observed public acceptance. This runbook does not authorize another role to publish. The author's existing initial-publication authorization applies; preserve the protected public repository, required checks and main-only `github-pages` environment.
+The release operator is a maintainer explicitly assigned to the release or recovery. That operator coordinates review, Git integration, setting verification, dispatch and observed public acceptance under the owner's applicable authorization. In the project's existing workflow, Coordinator performs that responsibility. This runbook grants no additional access or publication authorization: preserve the protected public repository, required checks and main-only `github-pages` environment.
 
 Expected URL: <https://haixin-zhang.github.io/vibe-coding-then-what/>. An expected URL or successful build is not evidence that the site is live.
 
@@ -16,7 +16,7 @@ Workflow concurrency uses `pages-production` with `cancel-in-progress:false`: a 
 
 ## Exact public identity and HTTP checks
 
-Use the reviewed source checkout matching the expected release SHA and its existing locked tooling. This matters because the smoke helper compares the public chapter set/hashes against that checkout's canonical reviewed manifest. Do not alter a shared dirty workspace to prepare it; Coordinator can use a separate verified checkout.
+Use the reviewed source checkout matching the expected release SHA and its existing locked tooling. This matters because the smoke helper compares the public chapter set/hashes against that checkout's canonical reviewed manifest. Do not alter a shared dirty workspace to prepare it; the release operator can use a separate verified checkout.
 
 ```sh
 npm run release:smoke -- https://haixin-zhang.github.io/vibe-coding-then-what/ FULL_40_CHARACTER_RELEASE_SHA
@@ -33,15 +33,15 @@ The helper does not submit issues, follow external correction links, execute Jav
 
 ## Public browser acceptance
 
-After HTTP identity checks pass, Coordinator uses the actual public site in a browser. Record the observed URL/SHA, viewport, actions/results and relevant evidence separately from local and CI results:
+After HTTP identity checks pass, the release operator uses the actual public site in a browser. Record the observed URL/SHA, viewport, actions/results and relevant evidence separately from local and CI results. Check the chapter set and interface belonging to the expected release SHA; a feature merged on newer main is not automatically part of an older deployment or recovery target.
 
-- English default entry → Chinese directory → opening → G01 → previous chapter. Language switching preserves the honest absence of English chapter bodies; verify a missing English chapter URL returns an actual 404 too.
+- English default entry → Chinese directory → every admitted Chinese chapter, including opening → G01 → F01 for the recorded three-chapter edition; exercise previous/next links. Language switching preserves the honest absence of English chapter bodies; verify a missing English chapter URL returns an actual 404 too.
 - Chinese search loads the public index, returns a real reviewed heading and navigates/focuses it. English search explains the absent corpus without inventing results.
-- System/Day/Night preference works and survives refresh when storage is available. Search/share/correction UI renders correctly; inspect the correction preview without submitting an external issue.
+- System/Light/Dark preference works and survives refresh when storage is available. Search/share/correction UI renders correctly; inspect the correction preview without submitting an external issue.
 - At 320px and a normal desktop width, keyboard focus remains visible, navigation remains usable and the page has no horizontal overflow; code blocks and tables stay within their intended containers. Verify an overflowing code block scrolls locally. Ordinary tables may fit and are not required to overflow.
 - An unknown URL renders the bilingual 404 and links back under the project prefix. Check the browser for unexpected console/page errors and failed site asset requests.
 
-The maintained Playwright suite stays loopback-only. A local/CI pass does not replace these observations of actual hosting/CDN behavior. Coordinator records acceptance and assigns Writer any factual public-status copy update afterward.
+The maintained Playwright suite stays loopback-only. A local/CI pass does not replace these observations of actual hosting/CDN behavior. The release operator records acceptance and requests any factual public-status documentation update afterward.
 
 ## Recovery and return to the intended release
 

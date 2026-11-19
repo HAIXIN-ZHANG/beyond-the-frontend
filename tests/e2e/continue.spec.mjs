@@ -41,12 +41,15 @@ async function section(page, index) {
   return heading;
 }
 
-test('Continue starts absent, records a deliberate section and returns only by explicit native link', async ({ page }) => {
+test('Continue starts absent, records a deliberate section and returns only by explicit native link', async ({ page }, testInfo) => {
   await page.goto(at('/zh/read/'));
   await expect(panel(page)).toHaveCount(0);
   await expect(page.locator('.directory-chapters a')).toHaveCount(3);
   await ready(page);
   const heading = await section(page, 2);
+  const target = page.locator(`[id="${heading.id}"]`);
+  const destination = new URL(`${at(chapter.href)}#${encodeURIComponent(heading.id)}`, page.url()).href;
+  const reloads = [];
   await expect.poll(() => snapshot(page)).toBe(raw(saved(chapter, heading.id)));
   for (const locale of ['zh', 'en']) {
     await page.goto(at(locale === 'zh' ? '/zh/read/' : '/read/'));
@@ -58,12 +61,27 @@ test('Continue starts absent, records a deliberate section and returns only by e
     await expect(link).toHaveAttribute('href', `${at(chapter.href)}#${encodeURIComponent(heading.id)}`);
     await expect(link).toHaveAttribute('hreflang', 'zh');
     await link.focus(); await link.press('Enter');
-    await expect(page.locator(`[id="${heading.id}"]`)).toBeFocused();
-    await expect(page).toHaveURL(new URL(`${at(chapter.href)}#${encodeURIComponent(heading.id)}`, page.url()).href);
+    await expect(target).toBeFocused();
+    await expect(page).toHaveURL(destination);
     await page.reload();
-    await expect(page.locator(`[id="${heading.id}"]`)).toBeFocused();
+    // Passive reload may restore document focus. It must retain the explicit section and saved place.
+    await expect(page.locator('.chapter-layout')).toHaveAttribute('data-enhanced', 'true');
+    await expect(page).toHaveURL(destination);
+    await expect(target).toBeInViewport({ ratio: 1 });
+    await expect.poll(() => target.evaluate(element => {
+      const clearance = Math.max(...['.site-header', '.reading-tools'].map(selector => {
+        const item = document.querySelector(selector);
+        return item && window.getComputedStyle(item).position === 'sticky' ? item.getBoundingClientRect().bottom : 0;
+      }));
+      return element.getBoundingClientRect().top >= clearance - 1;
+    }), { message: 'reloaded section remains below sticky reader chrome' }).toBe(true);
     expect(await snapshot(page)).toBe(raw(saved(chapter, heading.id)));
+    reloads.push(await target.evaluate((element, locale) => ({ locale, url: window.location.href,
+      activeTag: document.activeElement?.tagName, activeId: document.activeElement?.id,
+      headingId: element.id, top: element.getBoundingClientRect().top, bottom: element.getBoundingClientRect().bottom,
+    }), locale));
   }
+  await testInfo.attach('native-reload-position', { body: JSON.stringify(reloads, null, 2), contentType: 'application/json' });
   for (const route of ['/', '/zh/']) {
     await page.goto(at(route));
     await expect(panel(page)).toHaveCount(0);

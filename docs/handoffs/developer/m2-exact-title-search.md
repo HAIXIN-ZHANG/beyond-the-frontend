@@ -1,6 +1,6 @@
 # Exact chapter-title search grouping
 
-Owner: Developer. Date: 2026-11-19 Australia/Perth. Revision: r2, frozen for affected Coordinator review. Local review candidate only; no integration or publication.
+Owner: Developer. Date: 2026-11-19 Australia/Perth. Revision: r3, frozen for affected Coordinator review at PR head 19e94e6. Publication remains separate.
 
 ## Brief and contract before implementation
 
@@ -53,10 +53,10 @@ Both final exported indexes are byte-identical to the unchanged index builder's 
 | `site/components/search/messages.ts` | `c57b428c5bb5a34444546bf4bf767202ba48142584ac8324b8b28c6e2230bfb7` |
 | `site/components/search/search-control.tsx` | `c21dd6f432e8ec631a2da0158d3a3ecc7abfee7300ac3f0765d6f699ad6048b8` |
 | `site/content/search.ts` | `3c863441880d8b8831e258842be526e5b6af502a8a3e2e6922fec88fb9bc0dec` |
-| `tests/e2e/reader.spec.mjs` | `732441e58cdb1e81563e32622df49c89fd0fd22378ec3ac645fe8cd62b0f56f8` |
+| `tests/e2e/reader.spec.mjs` | `e61c41367a66b7054af526e9b009cb99cc4a25ee2efbe31772ce90067344a50f` |
 | `tests/search-sharing.test.mjs` | `c791cbf41b7a5bf7b47ee235c131759a9dde86486a567d4bcbcde2a3d07d6628` |
 
-The seventh file is this handoff; its final digest is sent with delivery rather than self-embedded. Workspace remains `codex/m2-exact-title-search@7fcb8c404243b6cee043c8cf92debf387ab74a06`.
+The seventh file is this handoff; its final digest is sent with delivery rather than self-embedded. The initial branch baseline was `7fcb8c404243b6cee043c8cf92debf387ab74a06`; the current r3 workspace is `codex/m2-exact-title-search@19e94e6527755ff449bf5277aa1e8e76bfae2df5`. The table reflects the latest r3 payload; r1/r2 evidence below retains its dated scope.
 
 ## Limits and next gate
 
@@ -73,5 +73,24 @@ Implemented only this label condition in SearchControl. The existing 24-case bro
 - `npm run check` passed lint, strict app/Panda types and all 55 Node tests. Fresh root build/export/full Chromium passed 32/32 in 35.1 seconds; fresh Pages build/export/full Chromium passed 32/32 in 35.3 seconds. Both verifiers still report 8 pages/185 references/zh28/en0. Logs are `/tmp/vctw-exact-search-r2-{check,build-root,verify-root,e2e-root,build-pages,verify-pages,e2e-pages}.log`. These supersede the r1 logs for the current candidate.
 - Browser plugin not available; used the existing Playwright workflow, local static server `http://127.0.0.1:4179`, both root and `/vibe-coding-then-what` prefixes, Chromium at 1440/390/320px. Existing fixtures verify actual page content/navigation, uncaught errors and unexpected console errors. The target flow opens search, enters the full real F01 title, shows two clearly labeled results without duplicate title context, then activates the same original destinations with correct focus. All 24 navigation combinations pass at each prefix; the distinct-heading context assertion also passes at each prefix. No framework error page or overlay appeared in the inspected captures.
 - Current artifacts: `/tmp/vctw-exact-search/r2/{root,pages}/playwright/reader-exact-chapter-title-746ba-use-and-keyboard-navigation/`, containing the refreshed `exact-title-{1440,390,320}.png` and `exact-title-navigation.json`. Inspected root 390/320 and Pages 390 screenshots: `小节` appears once above the one highlighted title; chapter/section labels and the two real links remain separate and readable. The r1 screenshots above remain historical evidence only.
-- Repeated the 268-file baseline audit: the same six payload paths differ and the other 262 remain identical, including owner mirrors and manuscripts. Both final index hashes are unchanged and their bytes equal the unchanged builder output. `git diff --check` passed. The six-file hash table above now describes r2. Final `site/out` remains the fresh Pages build. No Git operation, installation, external service or deployment occurred.
+- Repeated the 268-file baseline audit: the same six payload paths differ and the other 262 remain identical, including owner mirrors and manuscripts. Both final index hashes are unchanged and their bytes equal the unchanged builder output. `git diff --check` passed. The r2 digests were sent with that revision; the table above now includes the subsequent r3 E2E correction. Final `site/out` at r2 remained the fresh Pages build. No Git operation, installation, external service or deployment occurred during r2.
 - Frozen for affected review of this display correction and assertions. Browser/device/AT and individual cleanup-path limits above remain unchanged; no new acceptance or publication is claimed.
+
+## r3 CI follow-up — precise locale navigation completion
+
+Coordinator advanced the same checkout to the pushed PR32 head `19e94e6527755ff449bf5277aa1e8e76bfae2df5`; no executor reset/rebase/Git write occurred. The initially modified board and both review mirrors are protected. New byte snapshot: `/tmp/vctw-exact-search/r3/baseline.json` (270 tracked files).
+
+The supplied [root CI job](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44446332277/job/135299702669) failed one existing homepage case at its final `page.goto('/zh/')`, after both new search cases passed. Inspected the decoded job log and actual [failure artifact](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44446332277/artifacts/14494390044) through the GitHub connector. Local trace: `/tmp/vctw-exact-search/r3/ci/reader-V2-home-keyboard-na-f2fa4--text-preserve-usable-links/trace.zip`.
+
+The trace records `Switch to English`, then URL assertion `regexSource: \\/$`, then the next `goto('/zh/')` failing `net::ERR_ABORTED`. That suffix regex already accepts the source Chinese URL `/zh/`, so it does not establish that the English navigation has committed. The Pages prefix makes this false positive less likely because its expected suffix contains the project path. This is evidence of a test synchronization defect; no product change is currently indicated. The bounded correction is to assert the exact destination URL and its actual target document locale/visible homepage H1 before proceeding. Retain existing keyboard, search, language and enlarged-text coverage; no retry, fixed sleep, dependency/config/runtime change or weakened assertion.
+
+### r3 implementation and actual checks
+
+Changed only the existing homepage test's locale-completion assertion. It now requires an exact absolute URL, the target `html[lang]`, a visible `#book-title` and its actual localized title text. Both language directions still use the actual menu link. All earlier keyboard/search/viewport/enlargement/link assertions remain present; the suite remains 32 tests. No product runtime code changed from reviewed r2.
+
+- `npm run check`: lint, strict app/Panda types and 55/55 Node passed. Fresh root build/export/full Chromium: 32/32 passed in 35.0 seconds. Fresh Pages build/export/full Chromium: 32/32 passed in 35.0 seconds. Both exports remain 8 pages/185 references/zh28/en0. Logs: `/tmp/vctw-exact-search-r3-{check,build-root,verify-root,e2e-root,build-pages,verify-pages,e2e-pages}.log`. These supersede r1/r2 checks for the latest candidate.
+- Existing Playwright on local `http://127.0.0.1:4179`, root and Pages prefixes; Browser plugin unavailable. The actual formerly failing case now exercises both locale transitions through exact URL/locale/H1 confirmation before the next scripted navigation, then the original 320px enlarged-text steps. Full suites retain search 9→2/signup14, 24-way chapter/section navigation, focus cancellation, UI, no-JS and browser error checks. Refreshed artifacts: `/tmp/vctw-exact-search/r3/{root,pages}/playwright/`. Both include `reader-V2-home-keyboard-na-f2fa4--text-preserve-usable-links/home-320-enlarged.png`; inspected the Pages capture, which retains all three focused-accessible links and no horizontal overflow.
+- Supplemental controlled Pages response gate: `/tmp/vctw-exact-search/r3/navigation-probe.mjs`, `probe-pages.log` and `probe-pages.json`, using local port 4181. While the English route was held, the actual source remained Chinese; the former root suffix predicate matched that source, while the Pages-specific predicate did not. After releasing the gate, the exact URL wait completed and the actual English document locale/visible H1 matched. This is supporting predicate/commit evidence, not a claimed deterministic reproduction of the exact early CI gap. An earlier root probe which awaited the old Playwright matcher after a document navigation had already registered timed out instead of reproducing the false positive (`probe-root.log`); the cloud trace is the evidence for that earlier timing window.
+- The 270-file PR-head byte snapshot differs only at `tests/e2e/reader.spec.mjs` and this handoff; the other 268 files, including all runtime, source/index/dependency/CI inputs and the initially dirty board/two review mirrors, remain unchanged. `git diff --check` passed. Final export is the fresh Pages build. No Git writes, installation, retry setting, fixed sleep or deployment.
+
+Frozen r3 for affected review and a new exact-head cloud run by Coordinator. Local success does not close the previous failed cloud job or establish the next cloud result. The original browser/device/AT limits remain; no product issue was indicated by the inspected failure trace and actual local checks.

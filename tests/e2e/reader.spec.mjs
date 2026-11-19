@@ -1186,7 +1186,11 @@ test('V2 home keyboard navigation, real search, language menu and enlarged text 
     await menuSummary.press('Escape'); await expect(menuSummary).toBeFocused();
     await menuSummary.press('Enter');
     await menu.getByRole('link', { name: m.switchLabel, exact: true }).click();
-    await expect(page).toHaveURL(new RegExp(`${at(locale === 'en' ? '/zh/' : '/')}$`));
+    const targetLocale = locale === 'en' ? 'zh' : 'en', targetMessages = getMessages(targetLocale);
+    await expect(page).toHaveURL(new URL(at(targetLocale === 'zh' ? '/zh/' : '/'), page.url()).href);
+    await expect(page.locator('html')).toHaveAttribute('lang', targetMessages.lang);
+    await expect(page.locator('#book-title')).toBeVisible();
+    await expect(page.locator('#book-title')).toHaveText(targetMessages.titleLines.join(''));
   }
   await page.goto(at('/zh/'));
   await page.evaluate(() => {

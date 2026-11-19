@@ -143,3 +143,63 @@ test('correction drafts encode only explicit public chapter, heading, revision a
   assert.ok(body.startsWith(`章节：${context.chapterTitle} (${context.chapterId})\n小节：状态？ & API\n链接：${location}\n原稿版本 SHA-256：${context.sourceHash}\n`));
   assert.ok(body.endsWith('建议修改：\n'));
 });
+
+test('an exact real chapter title groups only inherited hits and retains the actual H1 fragment', () => {
+  const title = chapters.find(chapter => chapter.entry.id === 'F01').title;
+  const original = JSON.stringify(chinese);
+  const results = searchEntries(chinese, title, 'zh');
+  assert.equal(chinese.entries.filter(entry => entry.chapterId === 'F01').length, 9);
+  assert.equal(results.length, 2);
+  assert.deepEqual(results.map(result => result.kind), ['chapter', 'section']);
+  assert.equal(results[0].href, '/zh/read/browser-foundations/');
+  const h1 = chinese.entries.find(entry => entry.chapterId === 'F01' && entry.headingTitle === title);
+  assert.equal(results[1].href, h1.href);
+  assert.equal(results[1].entry, h1);
+  assert.equal(results[0].excerpt, '');
+  assert.equal(JSON.stringify(chinese), original, 'presentation grouping must not mutate the index/schema');
+  assert.deepEqual(readSearchIndex(JSON.parse(original), 'zh'), chinese);
+  const signup = searchEntries(chinese, '报名', 'zh');
+  assert.equal(signup.length, 14);
+  assert.ok(signup.every(result => result.kind === 'section' && result.href === result.entry.href));
+});
+
+test('normalized exact titles group each distinct chapter while preserving every genuine heading/body hit', () => {
+  const makeEntry = (chapterId, headingId, headingTitle, text, chapterTitle = 'Café AI') => ({
+    ...chinese.entries[0], chapterId, chapterTitle, headingId, headingTitle, text,
+    href: `/zh/read/${chapterId}/#${encodeURIComponent(headingId)}`,
+  });
+  const first = [makeEntry('first', 'title', 'Café AI', ''), makeEntry('first', 'other', 'Overview', ''),
+    makeEntry('first', 'section', 'Café AI mechanisms', ''), makeEntry('first', 'body', 'Evidence', 'We checked Café AI in the example.')];
+  const second = [makeEntry('second', 'title', 'CAFÉ AI', '', 'Ｃａｆé ＡＩ'), makeEntry('second', 'other', 'Details', '', 'Ｃａｆé ＡＩ')];
+  const index = { version: 1, locale: 'zh', entries: [...first, ...second] };
+  const expectedSections = [first[0], first[2], first[3], second[0]];
+  for (const query of ['Café AI', '  ＣＡＦÉ\n  ＡＩ\t', 'cafe\u0301 ai']) {
+    const results = searchEntries(index, query, 'zh');
+    assert.deepEqual(results.filter(result => result.kind === 'chapter').map(result => result.href), ['/zh/read/first/', '/zh/read/second/']);
+    assert.deepEqual(new Set(results.filter(result => result.kind === 'section').map(result => result.href)), new Set(expectedSections.map(entry => entry.href)));
+    for (const result of results.filter(result => result.kind === 'section')) assert.equal(result.href, result.entry.href);
+    assert.ok(results.every(result => result.entry.sourceHash === chinese.entries[0].sourceHash));
+  }
+  const genuineOnly = searchEntries({ ...index, entries: expectedSections }, 'Café AI', 'zh');
+  assert.equal(genuineOnly.length, expectedSections.length);
+  assert.ok(genuineOnly.every(result => result.kind === 'section'), 'no inherited-only hit means no manufactured chapter group');
+  for (const query of ['Café', 'AI', 'Café A']) {
+    const partial = searchEntries(index, query, 'zh');
+    assert.equal(partial.length, index.entries.length);
+    assert.ok(partial.every(result => result.kind === 'section' && result.href === result.entry.href));
+  }
+  assert.deepEqual(searchEntries(index, 'Café AI', 'en'), []);
+});
+
+test('chapter result priority is independent of how many exact-title terms boost a real H1', () => {
+  const title = 'alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima';
+  const entry = { ...chinese.entries[0], chapterTitle: title, headingTitle: title, text: title };
+  const inherited = { ...entry, headingId: 'other', headingTitle: 'Other', text: '', href: '/zh/read/before-we-start/#other' };
+  const index = { version: 1, locale: 'zh', entries: [entry, inherited] };
+  const results = searchEntries(index, title, 'zh');
+  assert.equal(results[0].kind, 'chapter');
+  assert.equal(results[0].href, '/zh/read/before-we-start/');
+  assert.equal(results[1].kind, 'section');
+  assert.ok(results[1].score > results[0].score, 'section relevance must not defeat explicit chapter priority');
+  assert.ok(searchEntries(index, 'alpha bravo', 'zh').every(result => result.kind === 'section'));
+});

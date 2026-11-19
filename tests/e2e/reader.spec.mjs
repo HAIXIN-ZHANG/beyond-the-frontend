@@ -1220,3 +1220,85 @@ test('V2 homepage keeps native art, chapter links and desktop collapse available
     }
   } finally { await context.close(); }
 });
+
+test('exact chapter-title search keeps chapter and real H1 destinations distinct through mouse and keyboard navigation', async ({ page }, testInfo) => {
+  const index = await (await page.request.get(at('/search-index/zh.json'))).json();
+  const h1 = index.entries.find(entry => entry.chapterId === browserChapter.id && entry.headingTitle === browserChapter.title);
+  const deep = index.entries.find(entry => entry.chapterId === browserChapter.id && entry.headingId !== h1.headingId);
+  const observations = [];
+  for (const width of [1440, 390, 320]) for (const samePage of [false, true]) for (const kind of ['chapter', 'section']) for (const method of ['mouse', 'keyboard']) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(at(samePage ? deep.href : chapterPath(g01)));
+    const dialog = await openSearch(page), input = dialog.getByRole('searchbox');
+    await input.fill(width === 320 ? `  ${browserChapter.title.normalize('NFKC')}  ` : browserChapter.title);
+    await expect(dialog.getByRole('status')).toHaveText('2 条匹配 · 中文已审阅草稿');
+    await expect(dialog.locator('.search-results a')).toHaveCount(2);
+    const chapterResult = dialog.locator('[data-search-kind="chapter"] a'), sectionResult = dialog.locator('[data-search-kind="section"] a');
+    await expect(chapterResult).toHaveAttribute('href', at(chapterPath(browserChapter)));
+    await expect(sectionResult).toHaveAttribute('href', at(h1.href));
+    await expect(chapterResult.locator('span')).toHaveText('章节入口');
+    await expect(sectionResult.locator('span')).toHaveText('小节');
+    await expect(sectionResult.locator('mark')).toHaveCount(1);
+    for (const result of [chapterResult, sectionResult]) await expect(result.locator('strong mark')).toHaveText(browserChapter.title);
+    expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    if (!samePage && kind === 'chapter' && method === 'mouse') await page.screenshot({ path: testInfo.outputPath(`exact-title-${width}.png`) });
+    const target = kind === 'chapter' ? chapterResult : sectionResult;
+    if (method === 'mouse') await target.click();
+    else {
+      await input.press('ArrowDown'); if (kind === 'section') await page.keyboard.press('ArrowDown');
+      await expect(target).toBeFocused(); await page.keyboard.press('Enter');
+    }
+    await expect(page.getByRole('dialog')).not.toBeVisible();
+    await expect(page).toHaveURL(new URL(at(kind === 'chapter' ? chapterPath(browserChapter) : h1.href), page.url()).href);
+    const heading = page.locator(`article [id="${h1.headingId}"]`);
+    await expect(heading).toBeFocused();
+    await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+    await expect.poll(() => heading.evaluate(element => {
+      const tools = window.document.querySelector('.reading-tools'), header = window.document.querySelector('.site-header');
+      return element.getBoundingClientRect().top >= Math.max(tools.getBoundingClientRect().bottom,
+        window.getComputedStyle(header).position === 'sticky' ? header.getBoundingClientRect().bottom : 0);
+    })).toBe(true);
+    observations.push({ width, samePage, kind, method, url: page.url(), focus: await heading.getAttribute('id') });
+  }
+  // The input's direct Enter route uses the grouped chapter, with no fragment manufactured.
+  await page.goto(at(chapterPath(g01))); const dialog = await openSearch(page);
+  await dialog.getByRole('searchbox').fill(browserChapter.title); await expect(dialog.locator('.search-results a')).toHaveCount(2);
+  await dialog.getByRole('searchbox').press('Enter');
+  await expect(page).toHaveURL(new URL(at(chapterPath(browserChapter)), page.url()).href);
+  await expect(page.locator('article h1')).toBeFocused();
+  // A differently titled section still needs its chapter context above the heading.
+  const sectionDialog = await openSearch(page);
+  await sectionDialog.getByRole('searchbox').fill(deep.headingTitle);
+  const distinctSection = sectionDialog.locator(`[data-search-kind="section"] a[href="${at(deep.href)}"]`);
+  await expect(distinctSection.locator('span')).toHaveText(`小节 · ${browserChapter.title}`);
+  await expect(distinctSection.locator('strong')).toHaveText(deep.headingTitle);
+  await page.keyboard.press('Escape');
+  await attachGeometry(testInfo, 'exact-title-navigation', observations);
+});
+
+test('a pending chapter result never takes focus back from a later search interaction', async ({ page }) => {
+  let release;
+  const gate = new Promise(resolve => { release = resolve; });
+  let held = 0;
+  await page.route('**/*', async route => {
+    if (new URL(route.request().url()).pathname.includes('/zh/read/browser-foundations')) { held++; await gate; }
+    await route.continue();
+  });
+  try {
+    await page.goto(at(chapterPath(g01)));
+    const dialog = await openSearch(page);
+    await dialog.getByRole('searchbox').fill(browserChapter.title);
+    await expect(dialog.locator('.search-results a')).toHaveCount(2);
+    await dialog.locator('[data-search-kind="chapter"] a').click();
+    await expect(dialog).not.toBeVisible();
+    await expect.poll(() => held).toBeGreaterThan(0);
+    await page.getByRole('button', { name: '搜索章节', exact: true }).click();
+    await expect(dialog).toBeVisible(); await expect(dialog.getByRole('searchbox')).toBeFocused();
+    release();
+    await expect(page.locator('article')).toHaveAttribute('data-chapter-id', browserChapter.id);
+    await expect(page).toHaveURL(new URL(at(chapterPath(browserChapter)), page.url()).href);
+    await expect(dialog).toBeVisible(); await expect(dialog.getByRole('searchbox')).toBeFocused();
+    await expect(page.locator('article h1')).not.toBeFocused();
+    await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
+  } finally { release(); }
+});

@@ -5,7 +5,7 @@ export type SearchEntry = {
   locale: Locale; sourceHash: string; href: string; text: string;
 };
 export type SearchIndex = { version: 1; locale: Locale; entries: SearchEntry[] };
-export type SearchResult = { entry: SearchEntry; excerpt: string; score: number };
+export type SearchResult = { kind: 'chapter' | 'section'; href: string; entry: SearchEntry; excerpt: string; score: number };
 export type SearchFragment = { text: string; matched: boolean };
 
 const graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
@@ -77,14 +77,22 @@ export function searchEntries(index: SearchIndex, query: string, locale: Locale)
   const phrase = normalizeSearch(query);
   if (!phrase || index.locale !== locale) return [];
   const terms = [...new Set(phrase.split(' '))];
-  return index.entries.filter(entry => entry.locale === locale).flatMap(entry => {
+  const groupedChapters = new Set<string>();
+  return index.entries.filter(entry => entry.locale === locale).flatMap<SearchResult>(entry => {
     const heading = normalizeSearch(entry.headingTitle), chapter = normalizeSearch(entry.chapterTitle), text = normalizeSearch(entry.text);
     if (!terms.every(term => `${heading} ${chapter} ${text}`.includes(term))) return [];
+    if (chapter === phrase && !terms.every(term => `${heading} ${text}`.includes(term))) {
+      const identity = `${entry.locale}/${entry.chapterId}`;
+      if (groupedChapters.has(identity)) return [];
+      groupedChapters.add(identity);
+      // Group only inherited title hits; the indexed section and real section matches stay intact.
+      return [{ kind: 'chapter', href: entry.href.split('#')[0], entry, excerpt: '', score: 200 }];
+    }
     const score = (heading === phrase ? 100 : 0) + (heading.includes(phrase) ? 20 : 0) +
       terms.reduce((total, term) => total + (heading.includes(term) ? 8 : 0) + (chapter.includes(term) ? 3 : 0) + (text.includes(term) ? 1 : 0), 0);
     const excerpt = searchExcerpt(entry.text, query);
-    return [{ entry, excerpt, score }];
-  }).sort((a, b) => b.score - a.score);
+    return [{ kind: 'section', href: entry.href, entry, excerpt, score }];
+  }).sort((a, b) => Number(a.kind === 'section') - Number(b.kind === 'section') || b.score - a.score);
 }
 
 export function readSearchIndex(value: unknown, locale: Locale): SearchIndex {

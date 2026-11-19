@@ -96,8 +96,8 @@ test('mobile outline stays nearby without shifting position on opening or hiding
     await expect(target).toBeVisible();
     await target.focus(); await target.press('Enter');
     await expect(heading).toBeFocused();
-    expect(await heading.evaluate(element => element.getBoundingClientRect().top)).toBeGreaterThanOrEqual(
-      await page.locator('.reading-tools').evaluate(element => element.getBoundingClientRect().bottom));
+    await expect.poll(() => heading.evaluate(element => element.getBoundingClientRect().top >=
+      window.document.querySelector('.reading-tools').getBoundingClientRect().bottom)).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   }
 });
@@ -159,7 +159,7 @@ test('localized chrome and matching page roles remain coherent across languages 
         const links = page.locator('.available-chapters a');
         await expect(links).toHaveCount(chapterManifest.length);
         for (const [index, chapter] of chapterManifest.entries()) {
-          await expect(links.nth(index)).toHaveText(messages.chapterLabels[chapter.id] ?? chapter.title);
+          await expect(links.nth(index).locator('.directory-chapter-title')).toHaveText(messages.chapterLabels[chapter.id] ?? chapter.title);
           await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
           await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
           await expect(links.nth(index)).toHaveAttribute('lang', messages.lang);
@@ -440,7 +440,7 @@ test('English search is honest and never fetches another-language corpus', async
   await expect(dialog.locator('.search-results a')).toHaveCount(0);
   expect(resources).toEqual([]);
   await dialog.getByRole('link', { name: /Browse Chinese chapters/ }).click();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('章节目录');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(getMessages('zh').directory.title);
   await expect(page).toHaveURL(new RegExp(`${at('/zh/read/')}$`));
 });
 
@@ -1305,4 +1305,205 @@ test('a pending chapter result never takes focus back from a later search intera
     await expect(page.locator('article h1')).not.toBeFocused();
     await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
   } finally { release(); }
+});
+
+test('V2 directory shows only real localized Chinese reading rows across viewports and appearances', async ({ page }, testInfo) => {
+  const observations = [];
+  for (const locale of ['en', 'zh']) for (const mode of ['light', 'dark']) for (const width of [1440, 390, 320]) {
+    const m = getMessages(locale);
+    await page.setViewportSize({ width, height: 950 });
+    await page.emulateMedia({ colorScheme: mode });
+    await page.goto(at(locale === 'en' ? '/read/' : '/zh/read/'));
+    await expect(page).toHaveTitle(`${m.contents} | ${m.title}`);
+    await expect(page.locator('html')).toHaveAttribute('lang', m.lang);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', mode);
+    await expect(page.locator('#contents-title')).toHaveText(m.directory.title);
+    await expect(page.locator('.reading-index > .availability-note')).toHaveText(m.availableNotice(chapterManifest.length));
+    await expect(page.locator('#directory-available')).toHaveText(m.directory.available);
+    const links = page.locator('.available-chapters a');
+    await expect(links).toHaveCount(chapterManifest.length);
+    for (const [index, chapter] of chapterManifest.entries()) {
+      await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
+      await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
+      await expect(links.nth(index)).toHaveAccessibleName(m.chapterLabels[chapter.id] ?? chapter.title);
+      await expect(links.nth(index)).toHaveAccessibleDescription(m.chineseDraft);
+      await expect(links.nth(index).locator('.directory-chapter-language')).toHaveText(`${m.directory.openChinese} →`);
+      await expect(page.locator('.available-chapters li').nth(index).locator('p')).toHaveText(m.chapterBenefits[chapter.id]);
+      expect((await links.nth(index).boundingBox()).height).toBeGreaterThanOrEqual(44);
+    }
+    await expect(page.locator('.directory-planned li')).toHaveText(homeContent[locale].topics);
+    await expect(page.locator('.directory-planned a')).toHaveCount(0);
+    if (locale === 'en') await expect(page.locator('.reading-index')).toContainText(m.englishUnavailable);
+    const sidebar = page.locator('.directory-sidebar');
+    if (width === 1440) {
+      await expect(sidebar).toBeVisible();
+      await expect(sidebar.getByRole('link', { name: m.contents, exact: true })).toHaveAttribute('aria-current', 'page');
+      await expect(sidebar.getByRole('link', { name: homeContent[locale].overview, exact: true })).toHaveAttribute('href', at(locale === 'en' ? '/' : '/zh/'));
+      expect((await sidebar.boundingBox()).width).toBe(248);
+    } else await expect(sidebar).not.toBeVisible();
+    const geometry = await page.locator('.reading-index').evaluate(element => {
+      const rect = element.getBoundingClientRect(), style = window.getComputedStyle(element);
+      return { left: rect.left, width: rect.width, color: style.color, background: window.getComputedStyle(window.document.body).backgroundColor,
+        scrollWidth: window.document.documentElement.scrollWidth };
+    });
+    expect(geometry.scrollWidth).toBeLessThanOrEqual(width);
+    observations.push({ locale, mode, width, ...geometry });
+    await page.screenshot({ path: testInfo.outputPath(`directory-${locale}-${width}-${mode}.png`), fullPage: true });
+  }
+  await attachGeometry(testInfo, 'directory-geometry', observations);
+});
+
+test('V2 directory keyboard links, locale changes, search, appearance and enlarged text remain usable', async ({ page }, testInfo) => {
+  for (const locale of ['en', 'zh']) {
+    const m = getMessages(locale), route = at(locale === 'en' ? '/read/' : '/zh/read/');
+    await page.setViewportSize({ width: 1440, height: 950 });
+    for (const [index, chapter] of chapterManifest.entries()) {
+      await page.goto(route);
+      const link = page.locator('.available-chapters a').nth(index);
+      await link.focus(); await expect(link).toBeFocused(); await link.press('Enter');
+      await expect(page).toHaveURL(new URL(at(chapterPath(chapter)), page.url()).href);
+      await expect(page.locator('article')).toHaveAttribute('data-source-sha256', chapter.sha256);
+    }
+    await page.goto(route);
+    await page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true }).click();
+    const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible();
+    if (locale === 'zh') {
+      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(14);
+    } else await expect(dialog).toContainText('English');
+    await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
+    await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeFocused();
+    await page.getByRole('button', { name: new RegExp(m.appearance) }).click();
+    await page.getByRole('radio', { name: m.nightTheme, exact: true }).check();
+    await page.keyboard.press('Escape');
+    await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await page.setViewportSize({ width: 320, height: 844 });
+    await page.getByRole('link', { name: m.switchLabel, exact: true }).click();
+    const targetLocale = locale === 'en' ? 'zh' : 'en', target = getMessages(targetLocale);
+    await expect(page).toHaveURL(new URL(at(targetLocale === 'zh' ? '/zh/read/' : '/read/'), page.url()).href);
+    await expect(page.locator('html')).toHaveAttribute('lang', target.lang);
+    await expect(page.locator('#contents-title')).toHaveText(target.directory.title);
+    await page.goto(route);
+    await page.evaluate(() => {
+      const root = window.document.querySelector('.reading-index');
+      const sizes = [...root.querySelectorAll('h1, h2, p, a, span, li')].map(element => {
+        const style = window.getComputedStyle(element);
+        return { element, size: parseFloat(style.fontSize), line: parseFloat(style.lineHeight) };
+      });
+      for (const { element, size, line } of sizes) {
+        element.style.fontSize = `${size * 2}px`; if (Number.isFinite(line)) element.style.lineHeight = `${line * 2}px`;
+      }
+    });
+    expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+    for (const link of await page.locator('.available-chapters a').all()) { await link.focus(); await expect(link).toBeFocused(); }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: testInfo.outputPath(`directory-${locale}-320-enlarged.png`), fullPage: true });
+  }
+});
+
+test('V2 directory retains real chapter routes and bilingual 404 without JavaScript', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false, viewport: { width: 320, height: 844 } });
+  const page = await context.newPage();
+  try {
+    for (const locale of ['en', 'zh']) {
+      await page.goto(at(locale === 'en' ? '/read/' : '/zh/read/'));
+      await expect(page.locator('#contents-title')).toHaveText(getMessages(locale).directory.title);
+      const links = page.locator('.available-chapters a'); await expect(links).toHaveCount(chapterManifest.length);
+      await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+      await page.setViewportSize({ width: 1440, height: 950 });
+      await page.goto(at(locale === 'en' ? '/read/' : '/zh/read/'));
+      await page.locator('.directory-sidebar a').first().click();
+      await expect(page.locator('#book-title')).toBeVisible();
+      await page.setViewportSize({ width: 320, height: 844 });
+    }
+    const response = await page.goto(at('/missing-directory-regression/'));
+    expect(response.status()).toBe(404);
+    await expect(page.locator('h1')).toHaveText('Page not found');
+    await expect(page.locator('body')).toContainText('这一页还没找到');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+  } finally { await context.close(); }
+});
+
+test('repeating the current native section remeasures enlarged tools without a hashchange or overriding later intent', async ({ page }, testInfo) => {
+  await page.addInitScript(() => {
+    window.__holdSameFragmentResize = false; window.__sameFragmentResizeQueue = []; window.__sameFragmentHashChanges = 0;
+    const OriginalResizeObserver = window.ResizeObserver;
+    window.ResizeObserver = class extends OriginalResizeObserver {
+      constructor(callback) {
+        super((entries, observer) => {
+          if (window.__holdSameFragmentResize && entries.some(entry => entry.target.matches('.reading-tools'))) {
+            window.__sameFragmentResizeQueue.push(() => callback(entries, observer));
+          } else callback(entries, observer);
+        });
+      }
+    };
+    window.addEventListener('hashchange', () => window.__sameFragmentHashChanges++);
+    const scroll = window.Element.prototype.scrollIntoView;
+    window.__sameFragmentScrollCalls = 0;
+    window.Element.prototype.scrollIntoView = function (...args) { window.__sameFragmentScrollCalls++; return scroll.apply(this, args); };
+  });
+  const observations = [];
+  for (const method of ['mouse', 'keyboard']) for (let repetition = 0; repetition < 3; repetition++) {
+    await page.setViewportSize({ width: 320, height: 844 }); await page.goto(at(chapterPath(g01)));
+    const summary = page.locator('.mobile-outline summary'); await summary.click();
+    const link = page.locator('.mobile-outline').getByRole('link', { name: '时间：先发生什么，用户要等到哪里？', exact: true });
+    const id = decodeURIComponent((await link.getAttribute('href')).slice(1)), heading = page.locator(`[id="${id}"]`);
+    await link.click(); await expect(heading).toBeFocused();
+    await expect.poll(() => page.evaluate(() => window.__sameFragmentHashChanges)).toBe(1);
+    const destination = page.url();
+    await summary.focus(); await summary.press('Enter'); await summary.press('Escape'); await expect(summary).toBeFocused();
+    await page.locator('.reading-tools').evaluate(element => {
+      window.__holdSameFragmentResize = true; window.__sameFragmentHashChanges = 0;
+      const samples = [...element.querySelectorAll('summary')].map(node => ({ node,
+        size: parseFloat(window.getComputedStyle(node).fontSize), line: parseFloat(window.getComputedStyle(node).lineHeight) }));
+      for (const { node, size, line } of samples) { node.style.fontSize = `${size * 2}px`; node.style.lineHeight = `${line * 2}px`; }
+    });
+    await summary.press('Enter'); await expect(link).toBeVisible();
+    if (method === 'mouse') await link.click();
+    else { await link.focus(); await link.press('Enter'); }
+    await expect(heading).toBeFocused(); await expect(page).toHaveURL(destination);
+    await expect.poll(() => heading.evaluate(element => element.getBoundingClientRect().top >=
+      window.document.querySelector('.reading-tools').getBoundingClientRect().bottom)).toBe(true);
+    await expect.poll(() => page.evaluate(() => window.__sameFragmentResizeQueue.length)).toBeGreaterThan(0);
+    await page.evaluate(() => {
+      window.__holdSameFragmentResize = false; window.__sameFragmentResizeQueue.splice(0).forEach(run => run());
+    });
+    const geometry = await heading.evaluate(element => ({ top: element.getBoundingClientRect().top,
+      bottom: window.document.querySelector('.reading-tools').getBoundingClientRect().bottom,
+      focus: window.document.activeElement === element, hashChanges: window.__sameFragmentHashChanges }));
+    expect(geometry.top).toBeGreaterThanOrEqual(geometry.bottom); expect(geometry.hashChanges).toBe(0);
+    observations.push({ method, repetition, ...geometry });
+    // A canceled click, even canceled by a later window listener, must not re-arm correction.
+    await heading.evaluate(element => {
+      window.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape' }));
+      window.scrollTo(0, 0); element.focus({ preventScroll: true }); window.__sameFragmentScrollCalls = 0;
+      const anchor = window.document.querySelector('.mobile-outline a[href="' + window.location.hash + '"]');
+      window.addEventListener('click', event => event.preventDefault(), { once: true });
+      anchor.dispatchEvent(new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+    });
+    await page.evaluate(() => new Promise(resolve => window.requestAnimationFrame(() => window.requestAnimationFrame(resolve))));
+    expect(await page.evaluate(() => window.__sameFragmentScrollCalls)).toBe(0);
+    if (repetition === 0) {
+      await summary.focus(); await summary.press('Enter'); await expect(link).toBeVisible();
+      await page.evaluate(() => { window.__sameFragmentScrollCalls = 0; });
+      await link.click({ modifiers: ['ControlOrMeta'] });
+      for (const other of page.context().pages()) if (other !== page) await other.close();
+      await expect(page).toHaveURL(destination);
+      expect(await page.evaluate(() => window.__sameFragmentScrollCalls)).toBe(0);
+    }
+    // Real wheel intent also releases a successful repeated-fragment landing before a later resize.
+    await summary.focus(); await summary.press('Enter'); await expect(link).toBeVisible(); await link.click();
+    await expect(heading).toBeFocused();
+    await expect.poll(() => heading.evaluate(element => element.getBoundingClientRect().top >=
+      window.document.querySelector('.reading-tools').getBoundingClientRect().bottom)).toBe(true);
+    const position = await page.evaluate(() => window.scrollY);
+    await page.mouse.move(180, 500); await page.mouse.wheel(0, 160);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(position);
+    await page.evaluate(() => { window.__sameFragmentScrollCalls = 0; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(() => new Promise(resolve => new window.ResizeObserver((_, observer) => {
+      observer.disconnect(); window.requestAnimationFrame(resolve);
+    }).observe(window.document.querySelector('.reading-tools'))));
+    expect(await page.evaluate(() => window.__sameFragmentScrollCalls)).toBe(0);
+  }
+  await attachGeometry(testInfo, 'repeated-fragment-landing', observations);
 });

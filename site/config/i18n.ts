@@ -40,6 +40,7 @@ type Messages = {
   chapterLabels: Readonly<Record<string, string>>;
   startReading: string;
   chapterBenefits: Readonly<Record<string, string>>;
+  directory: { title: string; available: string; planned: string; openChinese: string };
 };
 
 const messages = {
@@ -82,6 +83,7 @@ const messages = {
       F01: 'How the Browser Builds a Page',
     },
     startReading: 'Start with these Chinese drafts',
+    directory: { title: 'Explore the chapters', available: 'Available in Chinese', planned: 'Coming in the book', openChinese: 'Chinese' },
     chapterBenefits: {
       opening: 'Why a working AI-built product is the start of the engineering conversation.',
       G01: 'Follow one feature through the interface, service and database—and the failures between them.',
@@ -123,6 +125,7 @@ const messages = {
     chineseDraft: '中文 · 已审阅草稿',
     chapterLabels: {},
     startReading: '从这里开始读',
+    directory: { title: '浏览章节', available: '可阅读的中文章节', planned: '后续主题', openChinese: '中文' },
     chapterBenefits: {
       opening: '为什么产品能跑起来之后，我们还需要理解它背后的系统。',
       G01: '顺着一个功能，串起界面、服务、数据库，以及它们之间的问题。',

@@ -104,16 +104,35 @@ export function ReaderLayout({ navigation, outline, children }: { navigation: Re
     };
     const schedule = () => { if (!frame && pendingHash) frame = window.requestAnimationFrame(correctFragment); };
     const navigate = () => { pendingHash = window.location.hash; schedule(); };
+    const repeatFragment = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
+      const link = event.target.closest('a[href]');
+      if (!(link instanceof HTMLAnchorElement) || !layout.contains(link) || link.hasAttribute('download') || link.target && link.target.toLowerCase() !== '_self') return;
+      const href = link.href, hash = link.hash;
+      if (!hash || href !== window.location.href) return;
+      try {
+        const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+        if (!target || !layout.contains(target)) return;
+      } catch { return; }
+      // Repeating a native fragment does not emit hashchange. Re-arm after all click handlers,
+      // without replacing the browser's focus/scroll or overriding a canceled navigation.
+      queueMicrotask(() => {
+        if (event.defaultPrevented || !link.isConnected || href !== window.location.href) return;
+        pendingHash = hash; schedule();
+      });
+    };
     // A fragment owns its landing only until the reader deliberately scrolls or interacts again.
     const relinquish = () => { pendingHash = ''; };
     const observer = new ResizeObserver(schedule);
     for (const element of [header, tools, layout.querySelector('.reader-body')]) if (element) observer.observe(element);
     window.addEventListener('hashchange', navigate);
+    window.addEventListener('click', repeatFragment);
     const intents = ['pointerdown', 'wheel', 'touchstart', 'keydown'] as const;
     for (const type of intents) window.addEventListener(type, relinquish, { capture: true, passive: true });
     schedule();
     return () => {
       window.cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('hashchange', navigate);
+      window.removeEventListener('click', repeatFragment);
       for (const type of intents) window.removeEventListener(type, relinquish, true);
     };
   }, [ready]);

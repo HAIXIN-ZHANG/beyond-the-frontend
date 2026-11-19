@@ -6,6 +6,8 @@ import { BookNavigation } from './book-navigation.tsx';
 import { OnThisPage } from './on-this-page.tsx';
 import { MarkdownContent } from './markdown-content.tsx';
 import { ReaderLayout } from './reader-layout.tsx';
+import { readingLocator } from '../../content/reading-locator.ts';
+import { ReadingProgress } from './reading-progress.tsx';
 
 export function ChapterReader({ chapter, chapters }: { chapter: LoadedChapter; chapters: readonly ChapterEntry[] }) {
   const index = chapters.findIndex(entry => entry.id === chapter.entry.id);
@@ -15,6 +17,7 @@ export function ChapterReader({ chapter, chapters }: { chapter: LoadedChapter; c
   const outline = <OnThisPage label="本章目录" headings={chapter.headings} />;
   return <ReaderLayout navigation={bookNavigation} outline={outline}>
       <article className="chapter-prose" data-chapter-id={chapter.entry.id} data-source-sha256={chapter.entry.sha256}>
+        <ReadingProgress chapter={readingLocator(chapter)} />
         <MarkdownContent node={chapter.tree} sharing={{ chapterId: chapter.entry.id, chapterTitle: chapter.title, sourceHash: chapter.entry.sha256 }} />
       </article>
       <nav className="chapter-pagination" aria-label="前后章节">

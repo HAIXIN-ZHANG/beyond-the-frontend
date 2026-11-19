@@ -41,6 +41,7 @@ type Messages = {
   startReading: string;
   chapterBenefits: Readonly<Record<string, string>>;
   directory: { title: string; available: string; planned: string; openChinese: string };
+  continueReading: { title: string; destination: string; lastRead: string; return: string; local: string; shared: string; fallback: string };
 };
 
 const messages = {
@@ -84,6 +85,11 @@ const messages = {
     },
     startReading: 'Start with these Chinese drafts',
     directory: { title: 'Explore the chapters', available: 'Available in Chinese', planned: 'Coming in the book', openChinese: 'Chinese' },
+    continueReading: {
+      title: 'Continue reading', destination: 'Chinese original', lastRead: 'Last read:', return: 'Return to your place',
+      local: 'Progress is saved in this browser only.', shared: 'Shared links take priority. Missing positions open the chapter start.',
+      fallback: 'This chapter or section has changed. Continue from the chapter start.',
+    },
     chapterBenefits: {
       opening: 'Why a working AI-built product is the start of the engineering conversation.',
       G01: 'Follow one feature through the interface, service and database—and the failures between them.',
@@ -126,6 +132,11 @@ const messages = {
     chapterLabels: {},
     startReading: '从这里开始读',
     directory: { title: '浏览章节', available: '可阅读的中文章节', planned: '后续主题', openChinese: '中文' },
+    continueReading: {
+      title: '继续上次阅读', destination: '中文原稿', lastRead: '上次读到：', return: '回到上次位置',
+      local: '进度仅保存在此浏览器。', shared: '位置失效时进入章节开头；外部分享链接优先。',
+      fallback: '章节或小节内容已更新，将从章节开头继续阅读。',
+    },
     chapterBenefits: {
       opening: '为什么产品能跑起来之后，我们还需要理解它背后的系统。',
       G01: '顺着一个功能，串起界面、服务、数据库，以及它们之间的问题。',

@@ -6,7 +6,7 @@ Expected URL: <https://haixin-zhang.github.io/vibe-coding-then-what/>. An expect
 
 ## Automatic release and manual recovery
 
-After a successful CI **push** run for `main`, Pages release automatically validates and deploys that run's source revision. Pull-request runs, failed CI and other branches cannot trigger a release. The build repeats the Pages checks on that exact source; immediately before deployment, the workflow checks that the source is still current `main`. A stale release fails closed. GitHub may replace pending runs in the concurrency group, so if the latest release is skipped or fails, investigate the run and manually dispatch the current reviewed main. Automatic release does not itself prove public smoke or rollback acceptance.
+After a successful CI **push** run for `main`, Pages release automatically validates and deploys that run's source revision. Pull-request runs, failed CI and other branches cannot trigger a release. The build repeats the Pages checks on that exact source; immediately before deployment, the workflow checks that the source is still current `main`. A stale release fails closed. The concurrency group queues up to 100 pending runs; stale revisions fail closed. If the latest release is skipped or fails, investigate the run and manually dispatch the current reviewed main. Automatic release does not itself prove public smoke or rollback acceptance.
 
 The manual dispatch remains available for current `main` and follows the same validation and latest-main gate. Historical-run reruns cannot restore an older revision through this gate: restore earlier content through a reviewed revert or fix on main, then verify CI and the new release. Existing older recovery notes below describe the former manual-only procedure; do not rerun an older source revision expecting it to bypass the latest-main guard.
 
@@ -18,7 +18,7 @@ The manual dispatch remains available for current `main` and follows the same va
 4. Follow the build and deploy jobs to completion. The run checks out the immutable event SHA, installs the lockfile, runs project checks, builds/verifies the Pages export and runs the maintained Chromium E2E suite for that checked-out revision. It then writes `release.json`, checks the ordinary-file export boundary, uploads only `site/out` and deploys that artifact. Build has only `contents:read`; the separate environment-gated deploy job has `contents:read` for the latest-main check and `pages:write`/`id-token:write`, and no checkout/npm step. Failed browser evidence is limited to the existing public-test artifact directory with seven-day retention.
 5. Record run URL/attempt, exact SHA, actual successful steps, deploy URL and timestamp. A deploy-job success still requires the public acceptance below. Keep current and previous known-good run IDs and their source SHAs for recovery.
 
-Workflow concurrency uses `pages-production` with `cancel-in-progress:false`: a new dispatch does not cancel a running deployment. GitHub may replace a pending run; this is not a FIFO release queue. Dispatch deliberately, observe completion and never manually cancel an active deploy as a routine release technique.
+Workflow concurrency uses `pages-production`, `cancel-in-progress:false` and `queue:max`; a new run does not cancel a running deployment. GitHub allows up to 100 pending runs, but ordering of starts is not guaranteed. Observe the latest release and never manually cancel an active deploy as a routine release technique.
 
 ## Exact public identity and HTTP checks
 
@@ -56,7 +56,7 @@ The maintained Playwright suite stays loopback-only. A local/CI pass does not re
 3. After the replacement reaches main and all CI jobs pass, follow its automatic Pages run. If necessary, manually dispatch the current main. Verify `release.json` against the actual new main SHA and perform the public HTTP/browser checks above.
 4. Record the recovery, including the prior known-good evidence, replacement revision, actual release run and public checks. A reviewed revert preserves historical commits; it does not reproduce an earlier artifact byte-for-byte.
 
-Production release concurrency is not a FIFO queue. If an older completion displaces a pending newer run, its latest-main guard prevents stale deployment; inspect the newest main CI and run a manual dispatch if needed. A successful action does not replace public smoke checks.
+Production release concurrency can hold up to 100 pending runs, but start order is not guaranteed. The latest-main guard prevents known stale revisions from deploying; inspect the newest main CI and run a manual dispatch if needed. A successful action does not replace public smoke checks.
 
 ## Local reproduction and output boundary
 

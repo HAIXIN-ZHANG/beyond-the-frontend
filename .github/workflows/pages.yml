@@ -13,6 +13,7 @@ permissions:
 concurrency:
   group: pages-production
   cancel-in-progress: false
+  queue: max
 
 defaults:
   run:

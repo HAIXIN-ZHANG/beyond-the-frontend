@@ -37,3 +37,7 @@ The revised homepage language test waits for the exact absolute destination, tar
 Independently ran the changed browser test eight times per path in the isolated review copy (8/8 root and 8/8 Pages). Used the existing Next.js Webpack build flag for the independent run because the local Turbopack worker could not bind a port under the review sandbox. Both exports passed verification, with 8 pages and zh28/en0. An earlier invalid root retry served Pages output and produced asset 404s. It was discarded, then both paths were rebuilt and tested sequentially. Evidence: `/private/tmp/vctw-exact-search-review/r3-independent-*`.
 
 The affected correction is accepted. Protected merge still requires the new exact head's cloud checks.
+
+## Verified protected integration
+
+[PR #32](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/32) at reviewed head `d466bea5526e4fb1fc70b9b6e53d24527599a531` passed Quality, Static export (root) and Static export (pages) in [run 44447807890](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44447807890). Squash-merged to main as `891c27cdb1dbee6a9475239c6fda08f659c9e1aa`. Verified the remote main ref, the closed and merged PR and equality of the resulting Git tree with the reviewed head (`7ba73df10ddac633c4d360db2f617e993dd70089`). The live release last verified separately is `8167a056525e71eb61513d3d1ca9716428733531`. This integration did not dispatch Pages.

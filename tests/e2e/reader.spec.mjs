@@ -627,6 +627,13 @@ test('bounded long inline-code fixture scrolls within the actual rendered table'
 // These bounded fixtures exercise production recipes without publishing a fixture route.
 test('V2 twelve appearance/accent combinations render readable controls without recoloring neutral or warning roles', async ({ page }, testInfo) => {
   await page.goto(at('/'));
+  // Confirm the real React preference handler before inserting QA nodes into its managed tree.
+  await page.locator('.appearance-trigger').click();
+  const initialDark = page.getByRole('radio', { name: getMessages('en').nightTheme, exact: true });
+  await initialDark.check();
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await initialDark.press('Escape');
   await page.evaluate(({ buttonClass, noticeClass }) => {
     const fixture = document.createElement('div'); fixture.id = 'v2-palette-fixture';
     const button = document.createElement('button'); button.className = buttonClass; button.textContent = 'QA primary action';

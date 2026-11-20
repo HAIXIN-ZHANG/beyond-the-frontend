@@ -23,3 +23,7 @@ Read the exact 10 Developer file digests and the handoff SHA-256 `bb08eaf3267e9d
 Ran `npm run check` (lint, strict app/Panda types, 52 Node tests), fresh root and Pages builds and verifiers, and full Chromium at both paths (30/30 each). Each export contained 8 pages, 185 local references, 28 Chinese search sections and zero English sections. Rechecked `git diff --check`, native no-JS links, mobile header/search keyboard flow and earlier reader fragment regressions. Independent logs and screenshots are under `/private/tmp/vctw-home/coordinator/`. Safari, Firefox, physical phones, native zoom and actual screen readers were outside this local pass.
 
 Accepted for a protected PR based on the reviewed newer main. Package only the frozen implementation and review. Exact-title search remains a separate assignment. No Pages dispatch is included.
+
+## Verified Git integration
+
+[PR #31](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/31) had 12 scoped files at exact reviewed head `59d2b663569e7415dc7e8f1df53c243bcdbe2eb4`. Quality and both static export jobs passed in [CI 44319215793](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44319215793). Used the expected head when squashing to protected main `7fcb8c404243b6cee043c8cf92debf387ab74a06`. Fetched main and confirmed its Git tree equals the reviewed head. The public Pages reader remains the verified release at `8167a05`; no new Pages dispatch was assigned.

@@ -1,6 +1,14 @@
 # Vibe Coding, Then What? — coordination board
 
-Updated: 2026-11-18 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
+Updated: 2026-11-20 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
+
+## Current closeout and next scope — 2026-11-20
+
+The public site is release3b359160d9dcd3911b7d9315c95e865fcabdec94 from Pages run44495362655: V2 home/directory, exact-title search and local Continue, with three Chinese bodies and no English bodies. HTTP, public Chromium and targeted desktop Safari checks were recorded; mobile Safari, physical devices, Firefox and assistive technology remain unverified.
+
+Developer recovered the bounded palette-test timing repair and factual public-status update for PR36; [handoff](handoffs/developer/public-release-closeout.md), [Coordinator review](reviews/public-release-closeout.md). Fresh affected checks and exact-head cloud CI remain the merge gate. No runtime change or new release is part of this closeout. Previous temporary workspaces are unavailable; use the assigned persistent isolated checkout and retained recovery record, never reset the original shared checkout.
+
+The author-confirmed next Developer slice is V2 reading polish: quieter conditional sidebar-width reset, recognizable sidebar icons, smaller measured default reading typography and lightweight toolbar/search styling. Preserve resize/keyboard/focus/Continue semantics and compare the actual Chinese F01 page at about1261px and320/390px. The Figma Reading size selector remains a separate evaluation. No new chapter, analytics activation or whole-site redesign is assigned. Older sections below retain dated task history; this section supersedes their current-task labels.
 
 ## Current assignments — existing manuscripts and V2 reader alignment
 

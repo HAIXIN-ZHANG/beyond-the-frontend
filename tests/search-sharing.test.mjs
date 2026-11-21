@@ -11,8 +11,8 @@ const english = buildSearchIndex(chapters, 'en');
 
 test('static indexes contain only approved public sections, real IDs and source revisions', () => {
   assert.equal(chinese.entries.length, chapters.reduce((count, chapter) => count + chapter.headingIds.length, 0));
-  assert.deepEqual(new Set(chinese.entries.map(entry => entry.chapterId)), new Set(['opening', 'G01', 'F01']));
-  assert.equal(chinese.entries.length, 28);
+  assert.deepEqual(new Set(chinese.entries.map(entry => entry.chapterId)), new Set(chapters.map(chapter => chapter.entry.id)));
+  assert.equal(chinese.entries.length, 108);
   assert.ok(!chinese.entries.some(entry => entry.headingId === '关于本书的-ai-协作'));
   assert.deepEqual(english.entries, []);
   for (const entry of chinese.entries) {
@@ -24,7 +24,7 @@ test('static indexes contain only approved public sections, real IDs and source 
     assert.equal(entry.href.split('#')[0], `/zh/read/${chapter.entry.slug}/`);
     assert.deepEqual(Object.keys(entry).sort(), ['chapterId', 'chapterTitle', 'headingId', 'headingTitle', 'locale', 'sourceHash', 'href', 'text'].sort());
   }
-  assert.doesNotMatch(JSON.stringify(chinese), /book\/drafts|docs\/|\.local|待 review|frontmatter/);
+  assert.doesNotMatch(JSON.stringify(chinese), /book\/(?:drafts|revisions)|docs\/|\.local|待 review|frontmatter/);
   assert.match(JSON.stringify(chinese), /作者：缸子太子与世界/);
   assert.deepEqual(readSearchIndex(JSON.parse(JSON.stringify(chinese)), 'zh'), chinese);
 });
@@ -72,7 +72,7 @@ test('ranking ties are stable and excerpts stay bounded near a real body match',
 
 test('all matching sections remain reachable beyond the former twelve-result limit', () => {
   const expected = chinese.entries.filter(entry => normalizeSearch(`${entry.headingTitle} ${entry.chapterTitle} ${entry.text}`).includes('报名'));
-  assert.equal(expected.length, 14);
+  assert.equal(expected.length, 57);
   const results = searchEntries(chinese, '报名', 'zh');
   assert.equal(results.length, expected.length);
   assert.deepEqual(new Set(results.map(result => result.entry.href)), new Set(expected.map(entry => entry.href)));
@@ -159,7 +159,7 @@ test('an exact real chapter title groups only inherited hits and retains the act
   assert.equal(JSON.stringify(chinese), original, 'presentation grouping must not mutate the index/schema');
   assert.deepEqual(readSearchIndex(JSON.parse(original), 'zh'), chinese);
   const signup = searchEntries(chinese, '报名', 'zh');
-  assert.equal(signup.length, 14);
+  assert.equal(signup.length, 57);
   assert.ok(signup.every(result => result.kind === 'section' && result.href === result.entry.href));
 });
 

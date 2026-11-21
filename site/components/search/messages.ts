@@ -14,7 +14,7 @@ const messages = {
     scope: '搜索语言：中文', ready: '搜索已提供的章节', hint: '输入词语或短语，仅搜索已审阅的公开内容。',
     loading: '正在准备搜索…', empty: '没有匹配的公开内容', fewer: '试试更少的词语，或清除搜索。',
     failed: '搜索暂时不可用', retryHint: '已保留搜索内容。请重试，或查看可阅读章节。', retry: '重试',
-    unavailable: '目前没有可搜索的英文正文。', chinese: '查看中文章节', browse: '查看可阅读章节', results: '条匹配 · 中文已审阅草稿', chapterResult: '章节入口', sectionResult: '小节',
+    unavailable: '目前没有可搜索的英文正文。', chinese: '查看中文章节', browse: '查看可阅读章节', results: '条匹配 · 中文第二稿', chapterResult: '章节入口', sectionResult: '小节',
   },
 } satisfies Record<Locale, Record<string, string>>;
 

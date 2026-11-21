@@ -11,7 +11,7 @@ export default defineConfig({
   workers: 1,
   retries: 0,
   timeout: 30_000,
-  globalTimeout: 180_000,
+  globalTimeout: process.env.CI === 'true' ? 300_000 : 180_000,
   expect: { timeout: 5_000 },
   reporter: 'list',
   outputDir: '.artifacts/playwright',

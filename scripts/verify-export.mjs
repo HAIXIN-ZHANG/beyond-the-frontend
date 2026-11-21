@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -8,7 +8,8 @@ import { homeContent } from '../site/components/home-content.ts';
 import { getMessages } from '../site/config/i18n.ts';
 import { themeStorageKey } from '../site/theme/runtime.ts';
 import { loadBook } from '../site/content/load-book.ts';
-import { chapterPath } from '../site/content/manifest.ts';
+import { chapterPath, legacyHeadingAliases } from '../site/content/manifest.ts';
+import { readingParts } from '../site/content/reading-parts.ts';
 import { walkMarkdown } from '../site/content/markdown.ts';
 import { buildSearchIndex } from '../site/content/build-search-index.ts';
 import { readSearchIndex } from '../site/content/search.ts';
@@ -18,14 +19,17 @@ const basePath = parseBasePath(process.env.NEXT_PUBLIC_BASE_PATH);
 const pages = [
   ['index.html', 'en', 'Vibe Coding, Then What?', '/zh/'],
   ['read/index.html', 'en', 'Chapters | Vibe Coding, Then What?', '/zh/read/'],
-  ['zh/index.html', 'zh-CN', 'Vibe Coding 之后：能跑，然后呢？', '/'],
-  ['zh/read/index.html', 'zh-CN', '章节目录 | Vibe Coding 之后：能跑，然后呢？', '/read/'],
+  ['zh/index.html', 'zh-CN', '用 AI 写代码：能跑，然后呢？', '/'],
+  ['zh/read/index.html', 'zh-CN', '章节目录 | 用 AI 写代码：能跑，然后呢？', '/read/'],
   ['404.html', 'en', 'Page not found | Vibe Coding, Then What?', '/zh/'],
 ];
 const chapters = await loadBook();
 pages.push(...chapters.map(chapter => [
-  `${chapterPath(chapter.entry).slice(1)}index.html`, 'zh-CN', `${chapter.title} | Vibe Coding 之后：能跑，然后呢？`, '/read/',
+  `${chapterPath(chapter.entry).slice(1)}index.html`, 'zh-CN', `${chapter.title} | 用 AI 写代码：能跑，然后呢？`, '/read/',
 ]));
+const frameworkPages = ['404/index.html', '_not-found/index.html'];
+const actualPages = (await readdir(output, { recursive: true })).filter(file => file.endsWith('.html'));
+assert.deepEqual(actualPages.sort(), [...pages.map(([page]) => page), ...frameworkPages].sort(), 'Unexpected public page inventory');
 let checked = 0;
 
 function attributes(tag) {
@@ -41,7 +45,7 @@ function escapeHtml(value) {
 for (const [page, language, title, alternatePath] of pages) {
   const html = await readFile(path.join(output, page), 'utf8');
   assert.ok(html.includes(`<html lang="${language}"`), `${page}: incorrect document language`);
-  assert.ok(html.includes(`<title>${title}</title>`), `${page}: incorrect page title`);
+  assert.ok(html.includes(`<title>${escapeHtml(title)}</title>`), `${page}: incorrect page title`);
   assert.match(html, /id="main"/, `${page}: missing skip-link target`);
   assert.match(html, /vibe-coding-then-what\/issues/, `${page}: outdated issue URL`);
   assert.ok(html.includes('class="search-dialog"') && html.includes('aria-haspopup="dialog"'), `${page}: missing search dialog or trigger`);
@@ -49,6 +53,7 @@ for (const [page, language, title, alternatePath] of pages) {
   const footers = [...html.matchAll(/<footer\b([^>]*)>([\s\S]*?)<\/footer>/g)]
     .filter(([, tag]) => attributes(tag).class?.split(/\s+/).includes('site-footer'));
   assert.equal(footers.length, 1, `${page}: expected one site footer`);
+  assert.ok(footers[0][2].includes(escapeHtml(messages.editionLabel)), `${page}: missing footer edition`);
   const bylines = [...footers[0][2].matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/g)]
     .filter(([, tag]) => attributes(tag).class?.split(/\s+/).includes('footer-byline'));
   assert.equal(bylines.length, 1, `${page}: expected one footer author line`);
@@ -100,12 +105,12 @@ for (const [page, language, title, alternatePath] of pages) {
     assert.ok(html.includes('aria-controls="reader-book-navigation"') && html.includes('id="reader-book-navigation"'), `${page}: resize control target missing`);
     assert.ok(html.includes('class="chapter-header-menu"') && html.includes('name="reader-tools"'), `${page}: static navigation disclosures missing`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `${page}: source title must be the only H1`);
-    assert.ok(article.includes(chapter.title), `${page}: source title was lost`);
+    assert.ok(article.includes(escapeHtml(chapter.title)), `${page}: source title was lost`);
     assert.ok(html.includes(`data-source-sha256="${chapter.entry.sha256}"`), `${page}: wrong reviewed revision`);
     assert.equal((article.match(/class="section-actions"/g) || []).length, chapter.headingIds.length, `${page}: missing heading sharing actions`);
-    assert.ok(html.includes('中文 · 已审阅草稿'), `${page}: missing truthful draft context`);
+    assert.ok(html.includes('中文 · 第二稿'), `${page}: missing truthful draft context`);
     assert.ok(!article.includes('中文初稿 · 待 review'), `${page}: stale authoring preamble exposed`);
-    assert.ok(!html.includes('book/drafts/'), `${page}: internal source path exposed`);
+    assert.doesNotMatch(html, /book\/(?:drafts|revisions)\//, `${page}: internal source path exposed`);
     const articleTags = [...article.matchAll(/<[a-z][\w-]*\b[^>]*>/gi)].map(([tag]) => tag);
     assert.ok(!articleTags.some(tag => /^<(?:script|iframe)\b/i.test(tag) ||
       Object.keys(attributes(tag)).some(name => /^on/i.test(name))), `${page}: executable manuscript HTML`);
@@ -134,13 +139,17 @@ for (const [page, language, title, alternatePath] of pages) {
       const infoLinks = [...content.matchAll(/<a\b[^>]*>/g)].map(([tag]) => attributes(tag));
       assert.ok(infoLinks.some(link => link.href === 'https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues'), `${page}: book information feedback missing`);
     }
+    for (const { legacyId, headingId } of legacyHeadingAliases.filter(alias => alias.chapterId === chapter.entry.id)) {
+      assert.ok(article.includes(`id="${legacyId}" class="legacy-heading-target" role="group" aria-labelledby="${headingId}" tabindex="-1"`),
+        `${page}: static legacy target missing: ${legacyId}`);
+      assert.ok(!chapter.headingIds.includes(legacyId), `${page}: alias became a canonical heading`);
+    }
     if (chapter.entry.id === 'opening') {
-      assert.ok(article.includes('id="关于本书的-ai-协作" class="legacy-heading-target" role="group" aria-labelledby="我为什么想写这本书" tabindex="-1"'), `${page}: static legacy target missing`);
-      assert.ok(!chapter.headingIds.includes('关于本书的-ai-协作'), `${page}: alias became a canonical heading`);
       assert.ok(article.includes('作者：缸子太子与世界') && article.includes('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。'), `${page}: attribution lost`);
     } else if (chapter.entry.id === 'G01') {
       assert.equal((article.match(/<table\b/g) || []).length, 2, `${page}: source tables missing`);
       assert.equal((article.match(/<pre\b/g) || []).length, 4, `${page}: source text diagrams/examples missing`);
+      assert.ok(article.includes('class="home-system-figure enrolment-figure"'), `${page}: supplemental figure missing`);
       assert.ok(article.includes('https://www.rfc-editor.org/rfc/rfc9110.html#section-15.3.3'), `${page}: citation lost`);
     }
     const position = chapters.indexOf(chapter);
@@ -155,9 +164,17 @@ for (const [page, language, title, alternatePath] of pages) {
     assert.equal((article.match(/<pre\b/g) || []).length, counts.code, `${page}: source code/diagrams missing`);
   }
   if (page === 'read/index.html' || page === 'zh/read/index.html') {
+    for (const part of readingParts(chapters.map(chapter => chapter.entry), language === 'en' ? 'en' : 'zh')) {
+      assert.ok(html.includes(`id="${part.id}">${escapeHtml(part.title)}`), `${page}: reading part absent`);
+    }
+    if (language === 'zh-CN') {
+      const closing = chapters.at(-1);
+      for (const heading of closing.headings) assert.ok(links.some(link =>
+        link.href === basePath + chapterPath(closing.entry) + '#' + encodeURIComponent(heading.id)), `${page}: closing section link missing`);
+    }
     for (const item of chapters) assert.ok(links.some(link => link.href === `${basePath}${chapterPath(item.entry)}`), `${page}: available chapter absent`);
     if (page === 'read/index.html') {
-      assert.ok(html.includes('English chapters are not available yet') && html.includes('Chinese · Reviewed draft'), `${page}: missing language availability explanation`);
+      assert.ok(html.includes(messages.englishUnavailable) && html.includes(messages.chineseDraft), `${page}: missing language availability explanation`);
       assert.ok(!links.some(link => /^\/read\/[^/]+\//.test(link.href?.slice(basePath.length) || '')), `${page}: invented English article`);
     }
   }
@@ -175,6 +192,14 @@ for (const [page, language, title, alternatePath] of pages) {
     assert.ok(!html.includes('figma.com/api/mcp/asset/'), `${page}: expiring design URL exposed`);
     for (const chapter of chapters) assert.ok(links.some(link => link.href === `${basePath}${chapterPath(chapter.entry)}`), `${page}: real home chapter absent`);
     if (locale === 'en') assert.ok(html.includes(messages.englishUnavailable), `${page}: English availability missing`);
+  }
+
+  for (const { href } of links.filter(link => link.href?.startsWith('/') && link.href.includes('#'))) {
+    const url = new URL(href, 'https://static.invalid');
+    assert.ok(!basePath || url.pathname.startsWith(basePath + '/'), `${page}: fragment link escaped its base path`);
+    const target = await readFile(path.join(output, url.pathname.slice(basePath.length), 'index.html'), 'utf8');
+    assert.ok(target.includes(`id="${decodeURIComponent(url.hash.slice(1))}"`), `${page}: broken cross-page fragment ${href}`);
+    checked++;
   }
 
   // Validate emitted links and assets against the actual static export, not dev routing.

@@ -11,7 +11,8 @@ const chapter = chapters[1];
 const position = { version: 1, chapterId: chapter.chapterId, headingId: chapter.headings[1].id, sourceHash: chapter.sourceHash };
 
 test('Continue projects only current public identities and live headings from approved sources', () => {
-  assert.deepEqual(chapters.map(item => item.chapterId), ['opening', 'G01', 'F01']);
+  assert.equal(chapters.length, 27);
+  assert.deepEqual(chapters.slice(0, 3).map(item => item.chapterId), ['opening', 'G01', 'F01']);
   for (const item of chapters) {
     assert.deepEqual(Object.keys(item).sort(), ['chapterId', 'headings', 'href', 'sourceHash', 'title']);
     assert.ok(item.headings.length > 1);

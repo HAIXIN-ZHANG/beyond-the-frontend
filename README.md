@@ -2,7 +2,7 @@
 
 **Understanding the Systems We Build, and Learning to Live with What We Can’t Fully Control**
 
-**《Vibe Coding 之后：能跑，然后呢？》**
+**《用 AI 写代码：能跑，然后呢？》**
 
 AI can help you turn an idea into something that works. This book connects the systems behind it with the experience of building alongside AI: choosing what to delegate, what to understand and what evidence to trust, while learning to work with uncertainty.
 
@@ -10,9 +10,7 @@ AI can help you turn an idea into something that works. This book connects the s
 
 Start with the [introduction](https://haixin-zhang.github.io/vibe-coding-then-what/zh/read/before-we-start/) for why the book exists and how to read it. Then follow a course signup across the interface, service and database in [一个页面，究竟连着什么？](https://haixin-zhang.github.io/vibe-coding-then-what/zh/read/a-page-and-a-system/), and see what the browser does before a page can respond in [页面出现之前，浏览器在忙什么？](https://haixin-zhang.github.io/vibe-coding-then-what/zh/read/browser-foundations/).
 
-These chapters are free to read in Simplified Chinese. The [English site](https://haixin-zhang.github.io/vibe-coding-then-what/) links to the Chinese originals. English chapters are planned.
-
-Two additional Chinese drafts are available here in the repository: [AI 写完以后，我们还需要做什么？](book/drafts/zh/03-after-ai-finishes.md) and [没有找到课程，还是没有查到结果？](book/drafts/zh/04-api-contract.md). The reading site currently carries the three chapters listed above.
+The first volume’s complete Simplified Chinese second draft contains 27 entries across a preface, eight parts and a closing. Use the [online contents](https://haixin-zhang.github.io/vibe-coding-then-what/zh/read/) or browse the [second-draft manuscripts](book/revisions/zh/volume-one-r2/README.md). The [English site](https://haixin-zhang.github.io/vibe-coding-then-what/) links to the Chinese originals. English translations are pending.
 
 ## Who is this for?
 
@@ -24,7 +22,7 @@ See the [reader roadmap](docs/reader-roadmap.md) for what we’re working toward
 
 ## About the author
 
-The book is written under the pen name **Jar & Prince Explore the World / 缸子太子与世界**. **Jason Zhang** maintains the project; a brief acknowledgment of AI's role in writing appears in the [introduction](book/drafts/zh/00-before-we-start.md). Open to engineering opportunities and collaboration. Find Jason on [GitHub](https://github.com/HAIXIN-ZHANG).
+The book is written under the pen name **Jar & Prince Explore the World / 缸子太子与世界**. **Jason Zhang** maintains the project; a brief acknowledgment of AI's role in writing appears in the [introduction](book/revisions/zh/volume-one-r2/00-before-we-start.md). Open to engineering opportunities and collaboration. Find Jason on [GitHub](https://github.com/HAIXIN-ZHANG).
 
 Questions, corrections and relevant sources are welcome through [GitHub issues](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues). See [contributing](CONTRIBUTING.md) for the review process and contribution expectations.
 

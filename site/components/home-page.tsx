@@ -5,12 +5,18 @@ import { site } from '../config/site.ts';
 import { getMessages, localePath } from '../config/i18n.ts';
 import { withBasePath } from '../config/deployment.ts';
 import { chapterManifest, chapterPath } from '../content/manifest.ts';
+import { getBook } from '../content/book.ts';
+import { readingLocator } from '../content/reading-locator.ts';
+import { HomeReadingAction } from './reading/continue-reading.tsx';
+import { readingParts } from '../content/reading-parts.ts';
 import { action } from '../styled-system/recipes/action.js';
 import { ChapterNavigation } from './reading/chapter-navigation.tsx';
 import { homeContent } from './home-content.ts';
 
-export function HomePage({ locale }: { locale: Locale }) {
+export async function HomePage({ locale }: { locale: Locale }) {
   const messages = getMessages(locale), copy = homeContent[locale];
+  const groups = readingParts(chapterManifest, locale);
+  const positions = locale === 'zh' ? (await getBook()).map(readingLocator) : null;
   const illustration = <figure className="home-system-figure">
     <p className="home-example-label">{copy.example}</p>
     <h2>{copy.exampleTitle}</h2>
@@ -28,13 +34,12 @@ export function HomePage({ locale }: { locale: Locale }) {
         <summary aria-label={copy.navigation}><span aria-hidden="true">☰</span><span className="home-navigation-label">{copy.book}</span></summary>
         <div className="home-navigation-body">
           <Link className="home-overview" href={localePath(locale)} aria-current="page">{copy.overview}</Link>
-          <ChapterNavigation showAvailability={false} label={copy.navigation} groups={[{ id: 'available', title: messages.startReading, chapters: chapterManifest.map(chapter => ({
-            id: chapter.id, title: messages.chapterLabels[chapter.id] ?? chapter.title, availability: messages.chineseDraft,
-            status: 'available', href: chapterPath(chapter),
-          })) }]} />
-          <section className="home-sidebar-topics" aria-label={copy.explore} aria-describedby="home-plan-notice">
-            <p>{copy.explore}</p><ol>{copy.topics.map(topic => <li key={topic}>{topic}</li>)}</ol>
-          </section>
+          <ChapterNavigation showAvailability={false} label={copy.navigation} groups={groups.map(part => ({
+            id: part.id, title: part.title, chapters: part.entries.map(chapter => ({
+              id: chapter.id, title: messages.chapterLabels[chapter.id] ?? chapter.title, availability: messages.chineseDraft,
+              status: 'available', href: chapterPath(chapter), lang: messages.chapterLabels[chapter.id] ? undefined : 'zh-CN',
+            })),
+          }))} />
         </div>
       </details>
     </aside>
@@ -44,9 +49,9 @@ export function HomePage({ locale }: { locale: Locale }) {
           <h1 id="book-title">{messages.titleLines[0]}<span>{messages.titleLines[1]}</span></h1>
           <p className="intro">{messages.description}</p>
           <div className="actions">
-            <Link className={action({ visual: 'primary' })} href={chapterPath(chapterManifest[0])} hrefLang="zh" lang={messages.lang}>
+            {positions ? <HomeReadingAction chapters={positions} firstLabel={copy.read} /> : <Link className={action({ visual: 'primary' })} href={chapterPath(chapterManifest[0])} hrefLang="zh" lang={messages.lang}>
               {copy.read} <span aria-hidden="true">→</span>
-            </Link>
+            </Link>}
             <Link className="text-link" href={localePath(locale, 'read/')}>{messages.browse} <span aria-hidden="true">→</span></Link>
           </div>
           <p className="availability-note">{messages.availableNotice(chapterManifest.length)}</p>
@@ -60,16 +65,17 @@ export function HomePage({ locale }: { locale: Locale }) {
           <span className="home-chapter-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           <div>
             <Link href={chapterPath(chapter)} hrefLang="zh" lang={messages.lang}>
-              <span className="home-chapter-title">{messages.chapterLabels[chapter.id] ?? chapter.title}</span><span className="home-chapter-arrow" aria-hidden="true">→</span>
+              <span className="home-chapter-title" lang={messages.chapterLabels[chapter.id] ? undefined : 'zh-CN'}>{messages.chapterLabels[chapter.id] ?? chapter.title}</span><span className="home-chapter-arrow" aria-hidden="true">→</span>
             </Link>
-            <p>{messages.chapterBenefits[chapter.id]}</p>
+            {messages.chapterBenefits[chapter.id] ? <p>{messages.chapterBenefits[chapter.id]}</p> : null}
           </div>
         </li>)}</ol>
       </section>
       <section className="home-topics" aria-labelledby="home-topics-title">
-        <h2 id="home-topics-title">{copy.explore}</h2><p id="home-plan-notice">{copy.planNotice}</p>
-        <ol>{copy.topics.map((topic, index) => <li key={topic}>
-          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><h3>{topic}</h3>
+        <h2 id="home-topics-title">{copy.explore}</h2>
+        <ol>{groups.slice(1, -1).map((part, index) => <li key={part.id}>
+          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <h3><Link href={localePath(locale, 'read/') + '#' + part.id}>{part.title}</Link></h3>
         </li>)}</ol>
       </section>
       <a className="home-repository text-link" href={site.repository}>{messages.repository} <span aria-hidden="true">↗</span></a>

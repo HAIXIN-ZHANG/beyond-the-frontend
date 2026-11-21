@@ -50,6 +50,7 @@ export function ReaderLayout({ navigation, outline, bookInfo, children }: { navi
     if (grip.current?.hasPointerCapture(current.pointer)) grip.current.releasePointerCapture(current.pointer);
   }
   useLayoutEffect(() => {
+    let narrowFrame = 0;
     const updateViewport = () => {
       const current = drag.current;
       if (current) {
@@ -60,7 +61,22 @@ export function ReaderLayout({ navigation, outline, bookInfo, children }: { navi
       // CSS may hide/blur a descendant before the browser dispatches resize.
       const active = document.activeElement === document.body && lastFocused.current?.isConnected ? lastFocused.current : document.activeElement;
       if (window.innerWidth < sidebarBreakpoint && active?.closest('.book-rail, .desktop-reopen')) {
-        root.current?.querySelector<HTMLElement>('.mobile-book-navigation summary')?.focus({ preventScroll: true });
+        const summary = root.current?.querySelector<HTMLElement>('.mobile-book-navigation summary');
+        summary?.focus({ preventScroll: true });
+        const hash = window.location.hash;
+        window.cancelAnimationFrame(narrowFrame);
+        if (summary && hash) narrowFrame = window.requestAnimationFrame(() => {
+          if (window.innerWidth >= sidebarBreakpoint || document.activeElement !== summary || window.location.hash !== hash) return;
+          let heading: HTMLElement | null;
+          try { heading = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return; }
+          const tools = root.current?.querySelector('.reading-tools');
+          if (!tools || !heading?.matches('.chapter-prose :is(h1,h2,h3,h4)')) return;
+          const { top, bottom } = heading.getBoundingClientRect();
+          const readableTop = tools.getBoundingClientRect().bottom;
+          if (top < readableTop && bottom > readableTop) {
+            window.scrollBy({ top: Math.floor(top - readableTop) - 2, behavior: 'instant' });
+          }
+        });
       } else if (window.innerWidth >= sidebarBreakpoint && active?.closest('.mobile-book-navigation') ||
         window.innerWidth >= 1200 && active?.closest('.mobile-outline')) {
         document.getElementById('main')?.focus({ preventScroll: true });
@@ -80,7 +96,7 @@ export function ReaderLayout({ navigation, outline, bookInfo, children }: { navi
     const observer = new ResizeObserver(measureHeader);
     if (header) observer.observe(header);
     measureHeader();
-    return () => { window.removeEventListener('resize', updateViewport); document.removeEventListener('focusin', recordFocus, true); document.removeEventListener('pointerdown', recordPointerIntent, true); observer.disconnect(); };
+    return () => { window.cancelAnimationFrame(narrowFrame); window.removeEventListener('resize', updateViewport); document.removeEventListener('focusin', recordFocus, true); document.removeEventListener('pointerdown', recordPointerIntent, true); observer.disconnect(); };
   }, []);
   useLayoutEffect(() => {
     const layout = root.current;
@@ -200,7 +216,7 @@ export function ReaderLayout({ navigation, outline, bookInfo, children }: { navi
           <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航" compactLabel="章节">{navigation}{bookInfo}</ReadingDisclosure></div>
           <div className="mobile-outline"><ReadingDisclosure label="本章目录">{outline}</ReadingDisclosure></div>
         </ReadingTools>
-        <p className="chapter-context">中文 · 已审阅草稿</p>
+        <p className="chapter-context">中文 · 第二稿</p>
         {children}
       </div>
       <aside className="outline-rail">{outline}</aside>

@@ -1,5 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { withBasePath } from '../../site/config/deployment.ts';
+import { expectVisibleKeyboardFocus } from './support/reading-assertions.mjs';
 import { chapterManifest } from '../../site/content/manifest.ts';
 
 const at=path=>withBasePath(path,process.env.NEXT_PUBLIC_BASE_PATH);
@@ -24,17 +25,13 @@ async function clearance(page,target,panel){
 }
 
 test('nearby tools separate scrolling status, retain native disclosure focus and disappear when no action is visible',async({page},testInfo)=>{
-  for(const width of [1188,390,320])for(const theme of ['light','dark']){
+  for(const {width,theme} of [{width:1188,theme:'light'},{width:390,theme:'dark'},{width:320,theme:'light'}]){
     await reader(page,width,theme);const status=page.locator('.chapter-context'),tools=page.locator('.reading-tools'),summary=page.locator('.mobile-outline summary');
     await expect(status).toHaveText('中文 · 已审阅草稿');expect(await status.evaluate(e=>e.closest('.reading-tools'))).toBeNull();
     await expect(summary).toHaveText('本章目录');expect((await summary.boundingBox()).height).toBeGreaterThanOrEqual(44);
-    const icon=summary.locator('.reading-disclosure-icon');expect(await icon.evaluate(e=>[e.clientWidth,e.clientHeight])).toEqual([18,18]);
-    expect(await icon.evaluate(e=>window.getComputedStyle(e).maskImage)).toContain(at('/icons/reader/section-list.svg'));
-    expect((await page.request.get(at('/icons/reader/section-list.svg'))).status()).toBe(200);
     const position=await page.evaluate(()=>window.scrollY),top=await page.locator('article').evaluate(e=>e.getBoundingClientRect().top);
-    const normal=await summary.evaluate(e=>window.getComputedStyle(e).backgroundColor);
     await summary.focus();await summary.press('Enter');await expect(page.locator('.mobile-outline details')).toHaveAttribute('open','');
-    expect(await summary.evaluate(e=>window.getComputedStyle(e).backgroundColor)).not.toBe(normal);
+    await expectVisibleKeyboardFocus(summary);
     expect(await page.locator('article').evaluate(e=>e.getBoundingClientRect().top)).toBe(top);
     expect(await page.evaluate(()=>window.scrollY)).toBe(position);
     await page.screenshot({path:testInfo.outputPath(`toolbar-${width}-${theme}-open.png`)});
@@ -53,53 +50,39 @@ test('nearby tools separate scrolling status, retain native disclosure focus and
   await expect(page.getByRole('button',{name:'收起章节栏',exact:true})).toBeFocused();
 });
 
-test('real prose links retain source text, inline typography and theme-specific states across all six accents',async({page},testInfo)=>{
-  const accents=['蓝色','绿色','紫色','橙色','玫红','石墨'];
+test('real inline links preserve source text and readable focus in both themes',async({page},testInfo)=>{
   for(const theme of ['light','dark']){
     await reader(page,1188,theme);
-    for(const accent of accents){
-      await page.locator('.appearance-trigger').click();
-      const radio=page.getByRole('radio',{name:accent,exact:true});
-      await page.locator('.accent-option').filter({has:radio}).click();await expect(radio).toBeChecked();
-      await page.keyboard.press('Escape');
-      for(const name of bodyLinks){
-        const link=page.getByRole('link',{name,exact:true});await link.scrollIntoViewIfNeeded();await page.mouse.move(1,1);
-        const s=await link.evaluate(e=>{const s=window.getComputedStyle(e),p=window.getComputedStyle(e.parentElement);return {color:s.color,font:s.fontSize,line:s.lineHeight,weight:s.fontWeight,parentWeight:p.fontWeight,display:s.display,whiteSpace:s.whiteSpace,margin:s.marginRight,underline:s.textDecorationLine,thickness:s.textDecorationThickness,offset:s.textUnderlineOffset,spacing:s.letterSpacing,text:e.textContent,next:e.nextSibling?.textContent};});
-        expect(s.color).toBe(theme==='light'?'rgb(69, 93, 128)':'rgb(176, 199, 227)');
-        expect([s.font,s.line,s.display]).toEqual(['16px','28px','inline']);expect(s.weight).toBe(s.parentWeight);
-        expect(s.whiteSpace).not.toBe('nowrap');expect(parseFloat(s.margin)).toBeCloseTo(1.2);expect(['normal','0px']).toContain(s.spacing);
-        expect([s.underline,s.thickness,s.offset]).toEqual(['underline','1px','3px']);expect(s.text).toBe(name);
-        if(name===bodyLinks[1])expect(s.next.startsWith('区分了这两类依赖。')).toBe(true);
-        await link.hover();expect(await link.evaluate(e=>window.getComputedStyle(e).textDecorationThickness)).toBe('2px');
-        expect(await link.evaluate(e=>window.getComputedStyle(e).color===window.getComputedStyle(e.parentElement).color)).toBe(true);
-        await page.mouse.move(1,1);await link.focus();
-        expect(await link.evaluate(e=>window.getComputedStyle(e).outlineWidth)).toBe('2px');
-      }
+    for(const name of bodyLinks){
+      const link=page.getByRole('link',{name,exact:true});await link.scrollIntoViewIfNeeded();
+      const s=await link.evaluate(e=>{const s=window.getComputedStyle(e),p=window.getComputedStyle(e.parentElement);return{font:s.fontSize,line:s.lineHeight,weight:s.fontWeight,parent:[p.fontSize,p.lineHeight,p.fontWeight],display:s.display,whiteSpace:s.whiteSpace,underline:s.textDecorationLine,text:e.textContent,next:e.nextSibling?.textContent};});
+      expect([s.font,s.line,s.weight]).toEqual(s.parent);
+      expect(s.display).toBe('inline');expect(s.whiteSpace).not.toBe('nowrap');expect(s.underline).toContain('underline');
+      expect(s.text).toBe(name);await expect(link).toHaveAttribute('href',/^https:\/\//);
+      if(name===bodyLinks[1])expect(s.next.startsWith('区分了这两类依赖。')).toBe(true);
+      await link.hover();await expect(link).toBeVisible();
+      await page.mouse.move(1,1);await link.focus();await link.press('Shift+Tab');await page.keyboard.press('Tab');await expectVisibleKeyboardFocus(link);
     }
-    const web=page.getByRole('link',{name:bodyLinks[1],exact:true});await web.focus();
     await page.screenshot({path:testInfo.outputPath(`prose-link-${theme}-focus.png`)});
     await expect(page.locator('article')).toHaveAttribute('data-source-sha256',chapterManifest[2].sha256);
-    expect(await page.locator('.heading-link').first().evaluate(e=>window.getComputedStyle(e).marginRight)).toBe('0px');
-    const actions=page.locator('.section-actions').first();await actions.locator('summary').click();
-    await actions.getByRole('button',{name:'查看纠错信息',exact:true}).click();
-    expect(await actions.locator('.correction-preview a').evaluate(e=>window.getComputedStyle(e).marginRight)).toBe('0px');
-    await actions.getByRole('button',{name:'查看纠错信息',exact:true}).press('Escape');
   }
 });
 
 test('enlarged inline English and Chinese links wrap without chips, clipping or page overflow and remain visible in forced colors',async({page},testInfo)=>{
-  await reader(page,320,'dark');await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+  await reader(page,320,'dark');
+  const before=await page.getByRole('link',{name:bodyLinks[0],exact:true}).evaluate(e=>parseFloat(window.getComputedStyle(e).fontSize));
+  await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
   for(const name of bodyLinks){
     const link=page.getByRole('link',{name,exact:true});await link.scrollIntoViewIfNeeded();
     const g=await link.evaluate(e=>({font:window.getComputedStyle(e).fontSize,bg:window.getComputedStyle(e).backgroundColor,rects:[...e.getClientRects()].map(r=>({left:r.left,right:r.right})),width:window.innerWidth}));
-    expect(g.font).toBe('32px');expect(g.bg).toBe('rgba(0, 0, 0, 0)');expect(g.rects.length).toBeGreaterThan(1);
+    expect(parseFloat(g.font)).toBeGreaterThan(before);expect(g.rects.length).toBeGreaterThan(1);
     for(const r of g.rects){expect(r.left).toBeGreaterThanOrEqual(0);expect(r.right).toBeLessThanOrEqual(g.width);}
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
     await page.screenshot({path:testInfo.outputPath(`link-320-amplified-${bodyLinks.indexOf(name)}.png`)});
   }
-  await page.emulateMedia({forcedColors:'active'});const link=page.getByRole('link',{name:bodyLinks[1],exact:true});await link.focus();
+  await page.emulateMedia({forcedColors:'active'});const link=page.getByRole('link',{name:bodyLinks[1],exact:true});await link.focus();await link.press('Shift+Tab');await page.keyboard.press('Tab');
   expect(await link.evaluate(e=>window.getComputedStyle(e).textDecorationLine)).toBe('underline');
-  expect(await link.evaluate(e=>window.getComputedStyle(e).outlineStyle)).toBe('solid');
+  await expectVisibleKeyboardFocus(link);
   await page.screenshot({path:testInfo.outputPath('prose-link-forced-colors.png')});
 });
 

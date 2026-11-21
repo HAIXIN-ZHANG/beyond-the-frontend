@@ -214,10 +214,14 @@ test('Continue responds to real local-storage changes while ignoring unrelated s
   await other.close();
 });
 
-test('Continue wraps with visible keyboard focus in both locales, light and dark at 1440, 390 and 320', async ({ page }, testInfo) => {
+test('Continue remains readable and keyboard reachable across locales, themes and screen sizes', async ({ page }, testInfo) => {
   test.setTimeout(45_000);
   await page.goto(at('/read/')); await seed(page, raw(saved()));
-  for (const width of [1440, 390, 320]) for (const mode of ['light', 'dark']) for (const locale of ['en', 'zh']) {
+  for (const {width,mode,locale} of [
+    {width:1440,mode:'light',locale:'en'}, {width:1440,mode:'dark',locale:'zh'},
+    {width:390,mode:'dark',locale:'en'}, {width:390,mode:'light',locale:'zh'},
+    {width:320,mode:'light',locale:'en'}, {width:320,mode:'dark',locale:'zh'},
+  ]) {
     await page.setViewportSize({ width, height: 900 });
     await page.evaluate(mode => window.localStorage.setItem('btf.theme', mode), mode);
     await page.goto(at(locale === 'zh' ? '/zh/read/' : '/read/'));

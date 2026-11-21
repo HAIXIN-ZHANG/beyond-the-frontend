@@ -401,7 +401,11 @@ test('search locks the reading position while results scroll and restores normal
       expect(await page.evaluate(() => window.scrollY)).toBe(position);
     } else await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
     const restored = await page.evaluate(() => window.scrollY);
-    await page.mouse.move(2, 850); await page.mouse.wheel(0, 150);
+    // After dismissal, wheel the real reading column; the sidebar intentionally isolates its scrolling.
+    const column = await page.locator('.chapter-column').boundingBox();
+    const point = { x: column.x + column.width / 2, y: 850 };
+    expect(await page.evaluate(({ x, y }) => !!document.elementFromPoint(x, y)?.closest('.chapter-column'), point)).toBe(true);
+    await page.mouse.move(point.x, point.y); await page.mouse.wheel(0, 150);
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(restored);
   }
 });
@@ -842,7 +846,11 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
         const target = page.locator(`[id="${id}"]`);
         await expect(target).toBeFocused();
         await expect(page.locator('article')).toHaveAttribute('data-source-sha256', opening.sha256);
-        await expect(page.locator('.reading-attribution').first()).toHaveText('缸子太子与世界');
+        await expect(page.locator('.reading-attribution')).toHaveCount(0);
+        await expect(page.locator('.site-footer')).toBeHidden();
+        await expect(page.locator('.book-info-name')).toHaveCount(2);
+        for (const name of await page.locator('.book-info-name').all()) await expect(name).toHaveText('缸子太子与世界');
+        await expect(page.locator('article')).toContainText('作者：缸子太子与世界');
         await expect(page.locator('article')).toContainText('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。');
         await expect(page.locator('article')).not.toContainText('创作方式：AI 全程辅助创作');
         const geometry = await assertFragmentLanding(id);
@@ -1051,7 +1059,8 @@ test('V2 real chapter remains readable across appearances, accents, widths and e
     await expect(page.locator('html')).toHaveAttribute('data-accent', mode === 'light' ? 'blue' : 'purple');
     await expect(page.locator('article h1')).toHaveText(g01.title);
     await expect(page.locator('article')).toHaveAttribute('data-source-sha256', g01.sha256);
-    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿 全书仍在写作中');
+    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿');
+    await expect(page.locator('#reader-book-navigation')).toContainText('全书仍在写作中');
     const geometry = await page.evaluate(() => {
       const article = window.document.querySelector('article'), header = window.document.querySelector('.site-header');
       return { width: window.innerWidth, article: article.getBoundingClientRect().width,

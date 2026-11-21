@@ -1,0 +1,167 @@
+import { test as base, expect } from '@playwright/test';
+import { withBasePath } from '../../site/config/deployment.ts';
+
+const at = path => withBasePath(path, process.env.NEXT_PUBLIC_BASE_PATH);
+const test = base.extend({ health: [async ({ page }, use) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  await use(); expect(errors).toEqual([]);
+}, { auto: true }] });
+
+async function chapter(page) {
+  await page.goto(at('/zh/read/browser-foundations/'));
+  await expect(page.locator('.chapter-layout')).toHaveAttribute('data-enhanced', 'true');
+}
+
+test('quiet reset follows saved width, preserves clamping and returns keyboard focus without scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 }); await chapter(page);
+  const grip = page.getByRole('separator', { name: '调整章节栏宽度' });
+  const reset = page.getByRole('button', { name: '重置宽度', exact: true });
+  await expect(reset).toHaveCount(0);
+  await expect(page.locator('.sidebar-width-controls')).toHaveCount(0);
+  await grip.focus(); await grip.press('End'); await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await expect(reset).toBeVisible();
+  await page.setViewportSize({ width: 900, height: 900 });
+  await expect(grip).toHaveAttribute('aria-valuenow', '300'); await expect(reset).toBeVisible();
+  expect(await page.evaluate(() => JSON.parse(window.localStorage.getItem('btf.readerNavigation')).width)).toBe(360);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(grip).toHaveAttribute('aria-valuenow', '360');
+  await page.evaluate(() => window.scrollTo(0, 600));
+  await reset.focus(); const scroll = await page.evaluate(() => window.scrollY);
+  await reset.press('Enter'); await expect(reset).toHaveCount(0);
+  await expect(grip).toBeFocused(); await expect(grip).toHaveAttribute('aria-valuenow', '248');
+  expect(await page.evaluate(() => window.scrollY)).toBe(scroll);
+  expect(await page.evaluate(() => JSON.parse(window.localStorage.getItem('btf.readerNavigation')).width)).toBe(248);
+  for (const width of [820,900,1261]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(reset).toHaveCount(0);
+  }
+  await grip.focus(); await grip.press('ArrowRight'); await expect(reset).toBeVisible();
+  await grip.press('Enter'); await expect(reset).toHaveCount(0); await expect(grip).toBeFocused();
+});
+
+test('approved sidebar assets remain 20px in 44px controls across collapse, hide and restore', async ({ page }) => {
+  await page.setViewportSize({ width: 1261, height: 900 }); await chapter(page);
+  async function icon(button, kind) {
+    const image = button.locator(`[data-sidebar-icon="${kind}"]`);
+    await expect(image).toBeVisible();
+    const geometry = await image.evaluate(element => {
+      const box = element.getBoundingClientRect(), button = element.closest('button').getBoundingClientRect(), style = window.getComputedStyle(element);
+      return { width: box.width, height: box.height, target: [button.width, button.height], mask: style.maskImage, color: style.color, paint: style.backgroundColor };
+    });
+    expect([geometry.width, geometry.height]).toEqual([20,20]);
+    expect(geometry.target.every(value => value >= 44)).toBe(true);
+    expect(geometry.mask).toContain(`${at(`/icons/reader/${kind}.svg`)}`);
+    expect(geometry.paint).toBe(geometry.color);
+    const response = await page.request.get(at(`/icons/reader/${kind}.svg`)); expect(response.status()).toBe(200);
+    expect(await response.text()).toMatch(/width="20" height="20"/);
+  }
+  const collapse = page.getByRole('button', { name: '收起章节栏', exact: true }); await icon(collapse,'collapse');
+  await collapse.focus(); await collapse.press('Enter');
+  const expand = page.getByRole('button', { name: '展开章节栏', exact: true }); await expect(expand).toBeFocused(); await icon(expand,'expand');
+  const hide = page.getByRole('button', { name: '隐藏章节栏', exact: true }).filter({ visible: true });
+  await icon(hide,'hide'); await hide.press('Enter');
+  const reopen = page.getByRole('button', { name: '显示章节栏', exact: true }); await expect(reopen).toBeFocused(); await icon(reopen,'reopen');
+  await reopen.press('Enter'); await expect(collapse).toBeFocused();
+  await expect(page.locator('.chapter-layout')).toHaveAttribute('data-sidebar','expanded');
+});
+
+test('reading roles use the agreed scale and enlarge together without changing home typography', async ({ page }, testInfo) => {
+  for (const width of [1261,390,320]) {
+    await page.setViewportSize({ width, height: 900 }); await chapter(page);
+    const metrics = await page.evaluate(() => Object.fromEntries(['article','article h1','article h2'].map(selector => {
+      const style = window.getComputedStyle(document.querySelector(selector)); return [selector,[style.fontSize,style.lineHeight]];
+    })));
+    expect(metrics.article).toEqual(['16px','28px']);
+    expect(metrics['article h1']).toEqual(width < 900 ? ['28px','40px'] : ['32px','44px']);
+    expect(metrics['article h2']).toEqual(['21px','32px']);
+    // Text amplification is deliberately separate from native browser zoom.
+    await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+    await expect.poll(() => page.locator('article').evaluate(e => window.getComputedStyle(e).fontSize)).toBe('32px');
+    await expect.poll(() => page.locator('article h1').evaluate(e => window.getComputedStyle(e).fontSize)).toBe(width < 900 ? '56px' : '64px');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    await page.screenshot({ path: testInfo.outputPath(`reading-amplified-${width}.png`) });
+  }
+  await page.setViewportSize({ width: 1261, height: 900 }); await page.goto(at('/'));
+  await expect.poll(() => page.locator('.home-hero h1').evaluate(e => window.getComputedStyle(e).fontSize)).toBe('45px');
+  await page.setViewportSize({ width: 320, height: 900 });
+  await expect.poll(() => page.locator('.home-hero h1').evaluate(e => window.getComputedStyle(e).fontSize)).toBe('35px');
+});
+
+test('opt-in toolbar and search states retain forced-color contours and usable visible icons', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 1261, height: 900 }); await chapter(page);
+  const trigger = page.locator('.appearance-trigger'), search = page.locator('.search-trigger');
+  await expect(trigger).toHaveClass(/action--visual_toolbar/); await expect(search).toHaveClass(/action--visual_search/);
+  const normal = await trigger.evaluate(e => ({ border: window.getComputedStyle(e).borderTopColor, background: window.getComputedStyle(e).backgroundColor }));
+  expect(normal.border).toBe('rgba(0, 0, 0, 0)');
+  await trigger.hover();
+  expect(await trigger.evaluate(e => window.getComputedStyle(e).backgroundColor)).not.toBe(normal.background);
+  await trigger.focus(); await trigger.press('Enter');
+  await expect(page.locator('.appearance-panel')).toBeVisible();
+  await page.getByRole('radio', { name: '深色', exact: true }).check();
+  await page.keyboard.press('Escape'); await expect(trigger).toBeFocused();
+  await expect(trigger).toHaveAttribute('class', /action--visual_toolbar/);
+  await page.emulateMedia({ forcedColors: 'active' });
+  for (const control of [trigger,search,page.getByRole('button',{name:'收起章节栏',exact:true})]) {
+    await control.focus();
+    const style = await control.evaluate(e => { const s=window.getComputedStyle(e); return { outline:s.outlineStyle, border:s.borderTopColor, width:parseFloat(s.borderTopWidth), color:s.color }; });
+    expect(style.outline).toBe('solid'); expect(style.width).toBeGreaterThanOrEqual(1); expect(style.border).not.toBe('rgba(0, 0, 0, 0)');
+  }
+  const image = page.locator('[data-sidebar-icon="collapse"]');
+  const forced = await image.evaluate(e => ({ paint:window.getComputedStyle(e).backgroundColor,color:window.getComputedStyle(e).color,adjust:window.getComputedStyle(e).forcedColorAdjust }));
+  expect(forced.paint).toBe(forced.color); expect(forced.adjust).toBe('none');
+  await page.screenshot({ path:testInfo.outputPath('reader-forced-colors.png') });
+  await page.getByRole('button',{name:'收起章节栏',exact:true}).press('Enter');
+  await expect(page.getByRole('button',{name:'展开章节栏',exact:true})).toBeFocused();
+  await search.click(); await expect(page.getByRole('dialog')).toBeVisible(); await page.keyboard.press('Escape'); await expect(search).toBeFocused();
+  await expect(page.getByText('Reading size',{exact:true})).toHaveCount(0);
+});
+
+test('non-reader localized footer identifies the approved author below the title', async ({ page }, testInfo) => {
+  test.setTimeout(60_000);
+  const routes = [
+    { path:'/', locale:'en', title:'Vibe Coding, Then What?', byline:'Author: Jar & Prince Explore the World', feedback:'Questions & corrections' },
+    { path:'/read/', locale:'en', title:'Vibe Coding, Then What?', byline:'Author: Jar & Prince Explore the World', feedback:'Questions & corrections' },
+    ...['/zh/','/zh/read/'].map(path => ({ path, locale:'zh', title:'Vibe Coding 之后：能跑，然后呢？', byline:'作者：缸子太子与世界', feedback:'提问与纠错' })),
+  ];
+  const observations = [];
+  for (const width of [320,390,1006,1261]) for (const theme of ['light','dark']) for (const [index, route] of routes.entries()) {
+    await page.setViewportSize({ width, height:900 }); await page.emulateMedia({ colorScheme:theme });
+    await page.goto(at(route.path)); await expect(page.locator('html')).toHaveAttribute('data-theme',theme);
+    expect(new URL(page.url()).pathname).toBe(at(route.path));
+    const footer = page.getByRole('contentinfo'), byline = footer.locator('.footer-byline');
+    await expect(footer.locator('.footer-identity > p').first()).toHaveText(route.title);
+    await expect(byline).toHaveText(route.byline); await expect(byline.locator('a')).toHaveCount(0);
+    await expect(footer.getByRole('link',{ name:route.feedback })).toHaveAttribute('href','https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues');
+    await expect(page.locator('.reading-attribution')).toHaveCount(0);
+    async function measure() {
+      return footer.evaluate(element => {
+        const [title,byline] = element.querySelectorAll('.footer-identity > p'), feedback = element.querySelector(':scope > a');
+        const rect = e => { const r=e.getBoundingClientRect(); return { left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height }; };
+        return { title:rect(title),byline:rect(byline),feedback:rect(feedback),font:window.getComputedStyle(byline).fontSize,
+          overflow:document.documentElement.scrollWidth>window.innerWidth,bylineOverflow:byline.scrollWidth>byline.clientWidth };
+      });
+    }
+    await footer.scrollIntoViewIfNeeded(); const geometry=await measure();
+    expect(geometry.font).toBe('13px'); expect(geometry.byline.top).toBeGreaterThanOrEqual(geometry.title.bottom);
+    expect(geometry.overflow).toBe(false); expect(geometry.bylineOverflow).toBe(false);
+    expect(geometry.byline.left).toBeGreaterThanOrEqual(0); expect(geometry.byline.right).toBeLessThanOrEqual(width);
+    if (width<768) expect(geometry.feedback.top).toBeGreaterThanOrEqual(geometry.byline.bottom);
+    observations.push({ width,theme,path:route.path,...geometry });
+    await footer.screenshot({ path:testInfo.outputPath(`footer-${index}-${route.locale}-${theme}-${width}.png`) });
+    if (width===320) {
+      // Double actual text metrics; this tests text amplification, not native browser zoom.
+      await footer.evaluate(element => {
+        const metrics=[...element.querySelectorAll('p,a')].map(e=>({ e,size:parseFloat(window.getComputedStyle(e).fontSize),line:parseFloat(window.getComputedStyle(e).lineHeight) }));
+        for (const { e,size,line } of metrics) { e.style.fontSize=`${size*2}px`; e.style.lineHeight=`${line*2}px`; }
+      });
+      const enlarged=await measure(); expect(enlarged.font).toBe('26px');
+      expect(enlarged.byline.top).toBeGreaterThanOrEqual(enlarged.title.bottom);
+      expect(enlarged.feedback.top).toBeGreaterThanOrEqual(enlarged.byline.bottom);
+      expect(enlarged.overflow).toBe(false); expect(enlarged.bylineOverflow).toBe(false);
+      await footer.screenshot({ path:testInfo.outputPath(`footer-${index}-${route.locale}-${theme}-320-amplified.png`) });
+    }
+  }
+  await testInfo.attach('footer-locales-geometry',{ body:JSON.stringify(observations,null,2),contentType:'application/json' });
+});

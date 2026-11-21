@@ -14,6 +14,10 @@ type Messages = {
   navigation: string;
   skip: string;
   feedback: string;
+  authorLabel: string;
+  authorName: string;
+  authorCaption: string;
+  bookInformation: string;
   browse: string;
   repository: string;
   reading: string;
@@ -55,6 +59,10 @@ const messages = {
     navigation: 'Main navigation',
     skip: 'Skip to content',
     feedback: 'Questions & corrections',
+    authorLabel: 'Author: ',
+    authorName: 'Jar & Prince Explore the World',
+    authorCaption: 'Author',
+    bookInformation: 'Book information',
     browse: 'Browse chapters',
     repository: 'View on GitHub',
     reading: 'READ',
@@ -106,6 +114,10 @@ const messages = {
     navigation: '主导航',
     skip: '跳到正文',
     feedback: '提问与纠错',
+    authorLabel: '作者：',
+    authorName: '缸子太子与世界',
+    authorCaption: '作者',
+    bookInformation: '本书信息',
     browse: '查看章节目录',
     repository: '在 GitHub 查看项目',
     reading: '阅读',

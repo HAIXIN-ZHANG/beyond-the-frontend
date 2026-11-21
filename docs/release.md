@@ -1,18 +1,24 @@
-# Manual Pages release and recovery
+# Pages release and recovery
 
 The release operator is a maintainer explicitly assigned to the release or recovery. That operator coordinates review, Git integration, setting verification, dispatch and observed public acceptance under the owner's applicable authorization. In the project's existing workflow, Coordinator performs that responsibility. This runbook grants no additional access or publication authorization: preserve the protected public repository, required checks and main-only `github-pages` environment.
 
 Expected URL: <https://haixin-zhang.github.io/vibe-coding-then-what/>. An expected URL or successful build is not evidence that the site is live.
 
-## Release gate and dispatch
+## Automatic release and manual recovery
+
+After a successful CI **push** run for `main`, Pages release automatically validates and deploys that run's source revision. Pull-request runs, failed CI and other branches cannot trigger a release. The build repeats the Pages checks on that exact source; immediately before deployment, the workflow checks that the source is still current `main`. A stale release fails closed. The concurrency group queues up to 100 pending runs; stale revisions fail closed. If the latest release is skipped or fails, investigate the run and manually dispatch the current reviewed main. Automatic release does not itself prove public smoke or rollback acceptance.
+
+The manual dispatch remains available for current `main` and follows the same validation and latest-main gate. Historical-run reruns cannot restore an older revision through this gate: restore earlier content through a reviewed revert or fix on main, then verify CI and the new release. Do not rerun an older source revision expecting it to bypass the latest-main guard.
+
+## Release gate and optional manual dispatch
 
 1. Review the actual implementation and resolve findings with its original owner. Merge only after the reviewed PR head passes `Quality`, `Static export (root)` and `Static export (pages)`. Verify those same three checks and their actual steps on the exact integrated `main` SHA. Record that SHA and the check-run links in Coordinator's release review.
 2. Confirm Pages Source is GitHub Actions, the default HTTPS domain has no unexpected custom domain, and the `github-pages` environment still allows only `main`, with no tags. These are operator preconditions; this workflow does not change settings or protections.
-3. In Actions → **Pages release** → **Run workflow**, select **main**. There is no commit/revision input. Verify the resulting run's event is `workflow_dispatch`, ref is `refs/heads/main` and full head SHA is the reviewed integrated SHA. If main moved to an unreviewed revision, stop before dispatch; if an incorrect run was already dispatched, do not accept it as the intended release. Repeat review/checks for the new main before release.
-4. Follow the build and deploy jobs to completion. The run checks out the immutable event SHA, installs the lockfile, runs project checks, builds/verifies the Pages export and runs the maintained Chromium E2E suite for that checked-out revision. It then writes `release.json`, checks the ordinary-file export boundary, uploads only `site/out` and deploys that artifact. Build has only `contents:read`; the separate environment-gated deploy job has only `pages:write`/`id-token:write`, and no checkout/npm step. Failed browser evidence is limited to the existing public-test artifact directory with seven-day retention.
+3. For a manual release or recovery, in Actions → **Pages release** → **Run workflow**, select **main**. There is no commit/revision input. Verify the resulting run's event is `workflow_dispatch`, ref is `refs/heads/main` and full head SHA is the reviewed integrated SHA. If main moved to an unreviewed revision, stop before dispatch; if an incorrect run was already dispatched, do not accept it as the intended release. Repeat review/checks for the new main before release.
+4. Follow the build and deploy jobs to completion. The run checks out the immutable event SHA, installs the lockfile, runs project checks, builds/verifies the Pages export and runs the maintained Chromium E2E suite for that checked-out revision. It then writes `release.json`, checks the ordinary-file export boundary, uploads only `site/out` and deploys that artifact. Build has only `contents:read`; the separate environment-gated deploy job has `contents:read` for the latest-main check and `pages:write`/`id-token:write`, and no checkout/npm step. Failed browser evidence is limited to the existing public-test artifact directory with seven-day retention.
 5. Record run URL/attempt, exact SHA, actual successful steps, deploy URL and timestamp. A deploy-job success still requires the public acceptance below. Keep current and previous known-good run IDs and their source SHAs for recovery.
 
-Workflow concurrency uses `pages-production` with `cancel-in-progress:false`: a new dispatch does not cancel a running deployment. GitHub may replace a pending run; this is not a FIFO release queue. Dispatch deliberately, observe completion and never manually cancel an active deploy as a routine release technique.
+Workflow concurrency uses `pages-production`, `cancel-in-progress:false` and `queue:max`; a new run does not cancel a running deployment. GitHub allows up to 100 pending runs, but ordering of starts is not guaranteed. Observe the latest release and never manually cancel an active deploy as a routine release technique.
 
 ## Exact public identity and HTTP checks
 
@@ -45,14 +51,12 @@ The maintained Playwright suite stays loopback-only. A local/CI pass does not re
 
 ## Recovery and return to the intended release
 
-1. Select a previously **observed known-good Pages release run**, recording its exact SHA, previous successful public checks and original `main` dispatch context. Confirm that source is still suitable to restore. Do not use a failed/unreviewed run, an arbitrary SHA input or a forced main reset.
-2. In that run choose **Re-run all jobs**. Do not rerun only deploy/failed jobs: the intended path must rebuild, recheck, stamp and upload a fresh artifact before deploy. Upload and deployment both use `github-pages-${{ github.run_attempt }}`, so each attempt selects its own rebuilt artifact, avoiding name-collision or stale-selection ambiguity across attempts without deleting old artifacts or adding permissions. This is a preventative contract; a hosted artifact collision has not been observed here. GitHub retains the original event's `GITHUB_SHA`/`GITHUB_REF` for reruns, and checkout explicitly uses that SHA. The original actor's privileges apply; current environment/access rules must still allow the run. See [GitHub rerun semantics](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
-3. Observe all actual build/deploy steps. Run the public HTTP helper from the matching known-good source checkout with that known-good SHA, then repeat the public browser acceptance. Record the observed restoration, not just the rerun button or deployment status.
-4. Return to the intended reviewed release by rerunning **all jobs** of its known-good Pages run, or by deliberately dispatching main after verifying the exact current main/checks. Repeat identity/HTTP/browser acceptance and record the final public SHA.
+1. Identify a previously observed known-good release, its source SHA and public acceptance evidence. Diagnose the current failure and preserve the failing run and its logs.
+2. Restore the desired source with a narrowly reviewed revert or fix PR. Preserve protected main and required checks; do not force-push, weaken protections or rerun an old release expecting it to pass the latest-main guard.
+3. After the replacement reaches main and all CI jobs pass, follow its automatic Pages run. If necessary, manually dispatch the current main. Verify `release.json` against the actual new main SHA and perform the public HTTP/browser checks above.
+4. Record the recovery, including the prior known-good evidence, replacement revision, actual release run and public checks. A reviewed revert preserves historical commits; it does not reproduce an earlier artifact byte-for-byte.
 
-This is a **validated rebuild/redeploy of known-good source**, not byte-identical restoration of the old artifact. Node 24 patch/runner changes and external package availability can affect a rebuild even with the committed lockfile and fixed action SHAs. The Pages artifact retention is seven days; all-job rebuild does not rely on that old artifact. GitHub currently permits workflow reruns within 30 days of the original run, up to 50 reruns. If unavailable, restore source through a normally reviewed revert/fix PR and its matching checks, then dispatch main; do not bypass protections or add an arbitrary revision input as a shortcut.
-
-For the first release there is no previously published version to roll back to. A successful all-job rerun can demonstrate same-source recovery, but cannot prove restoration of a different earlier release. Record that distinction; once two accepted versions exist, exercise the prior-version restore and return to the intended version. A documented path alone is not observed recovery evidence.
+Production release concurrency can hold up to 100 pending runs, but start order is not guaranteed. The latest-main guard prevents known stale revisions from deploying; inspect the newest main CI and run a manual dispatch if needed. A successful action does not replace public smoke checks.
 
 ## Local reproduction and output boundary
 
@@ -69,7 +73,7 @@ NEXT_PUBLIC_BASE_PATH=/vibe-coding-then-what node scripts/static-preview.mjs
 npm run release:smoke -- http://127.0.0.1:4179/vibe-coding-then-what/ FULL_40_CHARACTER_RELEASE_SHA
 ```
 
-For a local uncommitted implementation check, explicitly label metadata's SHA as the baseline/test identity; it does not make uncommitted files that published revision. Production identity comes from immutable dispatch checkout. Stamping requires a fresh export with no existing `release.json`, verifies the actual reviewed manuscript hashes and refuses symlinks, hardlinks, unusual files or hidden content (except an ordinary root `.nojekyll`). Do not upload repository directories, traces, env files, caches or dependencies as Pages content. No source/review file paths, private credentials or machine paths are included in metadata.
+For a local uncommitted implementation check, explicitly label metadata's SHA as the baseline/test identity; it does not make uncommitted files that published revision. Production identity comes from the immutable CI-validated or manually dispatched checkout. Stamping requires a fresh export with no existing `release.json`, verifies the actual reviewed manuscript hashes and refuses symlinks, hardlinks, unusual files or hidden content (except an ordinary root `.nojekyll`). Do not upload repository directories, traces, env files, caches or dependencies as Pages content. No source/review file paths, private credentials or machine paths are included in metadata.
 
 ## Official action pins and limits
 

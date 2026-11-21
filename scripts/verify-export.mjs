@@ -45,6 +45,15 @@ for (const [page, language, title, alternatePath] of pages) {
   assert.match(html, /id="main"/, `${page}: missing skip-link target`);
   assert.match(html, /vibe-coding-then-what\/issues/, `${page}: outdated issue URL`);
   assert.ok(html.includes('class="search-dialog"') && html.includes('aria-haspopup="dialog"'), `${page}: missing search dialog or trigger`);
+  const messages = getMessages(language === 'en' ? 'en' : 'zh');
+  const footers = [...html.matchAll(/<footer\b([^>]*)>([\s\S]*?)<\/footer>/g)]
+    .filter(([, tag]) => attributes(tag).class?.split(/\s+/).includes('site-footer'));
+  assert.equal(footers.length, 1, `${page}: expected one site footer`);
+  const bylines = [...footers[0][2].matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/g)]
+    .filter(([, tag]) => attributes(tag).class?.split(/\s+/).includes('footer-byline'));
+  assert.equal(bylines.length, 1, `${page}: expected one footer author line`);
+  assert.equal(bylines[0][2].replace(/<!--[\s\S]*?-->/g, ''), escapeHtml(messages.authorLabel + messages.authorName),
+    `${page}: incorrect localized footer author`);
 
   // Verify the actual production-serialized head script, not only its source function.
   const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1] || '';
@@ -110,7 +119,21 @@ for (const [page, language, title, alternatePath] of pages) {
     for (const code of chapter.tree.children.filter(node => node.type === 'code')) {
       assert.ok(article.includes(escapeHtml(code.value)), `${page}: original preformatted text changed`);
     }
-    assert.ok(html.includes('class="reading-attribution">缸子太子与世界</p>'), `${page}: reader byline differs`);
+    assert.ok(!html.includes('class="reading-attribution"'), `${page}: old sidebar attribution remains`);
+    const bookRail = html.match(/<aside\b[^>]*class="book-rail"[^>]*>([\s\S]*?)<\/aside>/)?.[1];
+    const bookNavigation = bookRail?.match(/<div\b[^>]*id="reader-book-navigation"[^>]*>([\s\S]*?)<\/div>/)?.[1];
+    assert.ok(bookNavigation && !bookNavigation.includes(escapeHtml(messages.authorName)) && !bookNavigation.includes('class="book-info"'), `${page}: book information mixed into chapter navigation`);
+    const bookInfos = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/g)]
+      .filter(([, tag]) => attributes(tag).class?.split(/\s+/).includes('book-info'));
+    assert.equal(bookInfos.length, 2, `${page}: desktop/mobile book information missing`);
+    assert.ok(bookRail.includes('class="book-info"'), `${page}: expanded sidebar dock missing`);
+    for (const [, tag, content] of bookInfos) {
+      assert.equal(attributes(tag)['aria-label'], messages.bookInformation, `${page}: book information label differs`);
+      assert.ok(content.includes(`class="book-info-label">${escapeHtml(messages.authorCaption)}</span>`) &&
+        content.includes(`class="book-info-name">${escapeHtml(messages.authorName)}</span>`), `${page}: labelled book author missing`);
+      const infoLinks = [...content.matchAll(/<a\b[^>]*>/g)].map(([tag]) => attributes(tag));
+      assert.ok(infoLinks.some(link => link.href === 'https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues'), `${page}: book information feedback missing`);
+    }
     if (chapter.entry.id === 'opening') {
       assert.ok(article.includes('id="关于本书的-ai-协作" class="legacy-heading-target" role="group" aria-labelledby="我为什么想写这本书" tabindex="-1"'), `${page}: static legacy target missing`);
       assert.ok(!chapter.headingIds.includes('关于本书的-ai-协作'), `${page}: alias became a canonical heading`);

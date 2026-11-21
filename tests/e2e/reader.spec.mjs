@@ -118,7 +118,8 @@ test('both home locales show exactly the approved Chinese reading destinations a
   }
 });
 
-test('localized chrome and matching page roles remain coherent across languages and viewport sizes', async ({ page }) => {
+test('localized chrome and matching page roles remain coherent across languages and viewport sizes', async ({ page }, testInfo) => {
+  const headerObservations = [];
   async function roles() {
     return page.evaluate(() => Object.fromEntries(Object.entries({
       header: '.site-header', brand: '.wordmark', content: '.book-intro, .reading-index, .chapter-column',
@@ -168,6 +169,33 @@ test('localized chrome and matching page roles remain coherent across languages 
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       snapshots[`${locale}-${kind}`] = await roles();
+      if (width < 900) {
+        const controls = page.locator('.wordmark, .search-trigger, .chapter-header-menu > summary, .site-header nav a, .appearance-trigger').filter({ visible: true });
+        const geometry = await controls.evaluateAll(elements => {
+          const header = document.querySelector('.site-header').getBoundingClientRect();
+          return { availableWidth: document.documentElement.clientWidth, header: { left:header.left,right:header.right,top:header.top,bottom:header.bottom }, controls:elements.map(element => {
+            const r=element.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+            return { tag:element.tagName,left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height,hit:element.contains(hit) };
+          }) };
+        });
+        for (const control of geometry.controls) {
+          expect(control.height, `${width}px ${locale} ${kind} header target height`).toBeGreaterThanOrEqual(44);
+          if (control.tag === 'BUTTON' || control.tag === 'SUMMARY') expect(control.width).toBeGreaterThanOrEqual(44);
+          expect(control.left).toBeGreaterThanOrEqual(geometry.header.left); expect(control.right).toBeLessThanOrEqual(geometry.header.right + 0.5);
+          expect(control.top).toBeGreaterThanOrEqual(geometry.header.top); expect(control.bottom).toBeLessThanOrEqual(geometry.header.bottom);
+          expect(control.right).toBeLessThanOrEqual(geometry.availableWidth); expect(control.hit).toBe(true);
+        }
+        for (let i=0;i<geometry.controls.length;i++) for (let j=i+1;j<geometry.controls.length;j++) {
+          const a=geometry.controls[i],b=geometry.controls[j];
+          expect(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1, `${width}px ${locale} ${kind} header controls must not overlap`).toBe(false);
+        }
+        await controls.first().focus();
+        for (let i=0;i<await controls.count();i++) {
+          if (i) await page.keyboard.press('Tab');
+          await expect(controls.nth(i)).toBeFocused();
+        }
+        headerObservations.push({ width,locale,kind,...geometry });
+      }
     }
     for (const kind of ['home', 'index']) {
       const en = snapshots[`en-${kind}`], zh = snapshots[`zh-${kind}`];
@@ -176,9 +204,9 @@ test('localized chrome and matching page roles remain coherent across languages 
         expect(zh[role].left, `${width}px ${kind} ${role} left`).toBeCloseTo(en[role].left, 0);
         expect(zh[role].width, `${width}px ${kind} ${role} width`).toBeCloseTo(en[role].width, 0);
       }
-      if (kind === 'index' || width >= 900) expect(zh.header.height, `${width}px ${kind} shared header height`).toBeCloseTo(en.header.height, 0);
-      // The compact home header may add a phrase-preserving line for a longer localized brand.
-      if (kind === 'home' && width < 900) for (const snapshot of [en, zh]) expect(snapshot.header.height).toBeGreaterThanOrEqual(60);
+      if (width >= 900) expect(zh.header.height, `${width}px ${kind} shared header height`).toBeCloseTo(en.header.height, 0);
+      // Narrow localized labels can need different row counts; each real target is checked above.
+      if (width < 900) for (const snapshot of [en, zh]) expect(snapshot.header.height).toBeGreaterThanOrEqual(60);
     }
     await page.goto(at(chapterPath(g01)));
     await expect(page).toHaveTitle(`${g01.title} | ${getMessages('zh').title}`);
@@ -203,6 +231,7 @@ test('localized chrome and matching page roles remain coherent across languages 
       for (const phrase of phraseLines) expect(phrase.lines, `short title phrase ${phrase.phrase}`).toBe(1);
     }
   }
+  await attachGeometry(testInfo, 'localized-header-controls', headerObservations);
 });
 
 test('approved browser chapter renders illustrative source safely and every indexed heading remains reachable', async ({ page, request }, testInfo) => {
@@ -401,7 +430,11 @@ test('search locks the reading position while results scroll and restores normal
       expect(await page.evaluate(() => window.scrollY)).toBe(position);
     } else await expect(page.locator(`[id="${decodeURIComponent(destination.hash.slice(1))}"]`)).toBeFocused();
     const restored = await page.evaluate(() => window.scrollY);
-    await page.mouse.move(2, 850); await page.mouse.wheel(0, 150);
+    // After dismissal, wheel the real reading column; the sidebar intentionally isolates its scrolling.
+    const column = await page.locator('.chapter-column').boundingBox();
+    const point = { x: column.x + column.width / 2, y: 850 };
+    expect(await page.evaluate(({ x, y }) => !!document.elementFromPoint(x, y)?.closest('.chapter-column'), point)).toBe(true);
+    await page.mouse.move(point.x, point.y); await page.mouse.wheel(0, 150);
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(restored);
   }
 });
@@ -842,7 +875,11 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
         const target = page.locator(`[id="${id}"]`);
         await expect(target).toBeFocused();
         await expect(page.locator('article')).toHaveAttribute('data-source-sha256', opening.sha256);
-        await expect(page.locator('.reading-attribution').first()).toHaveText('缸子太子与世界');
+        await expect(page.locator('.reading-attribution')).toHaveCount(0);
+        await expect(page.locator('.site-footer')).toBeHidden();
+        await expect(page.locator('.book-info-name')).toHaveCount(2);
+        for (const name of await page.locator('.book-info-name').all()) await expect(name).toHaveText('缸子太子与世界');
+        await expect(page.locator('article')).toContainText('作者：缸子太子与世界');
         await expect(page.locator('article')).toContainText('这本书从资料整理、正文起草到反复修改，都有 AI 的帮助。');
         await expect(page.locator('article')).not.toContainText('创作方式：AI 全程辅助创作');
         const geometry = await assertFragmentLanding(id);
@@ -1051,7 +1088,8 @@ test('V2 real chapter remains readable across appearances, accents, widths and e
     await expect(page.locator('html')).toHaveAttribute('data-accent', mode === 'light' ? 'blue' : 'purple');
     await expect(page.locator('article h1')).toHaveText(g01.title);
     await expect(page.locator('article')).toHaveAttribute('data-source-sha256', g01.sha256);
-    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿 全书仍在写作中');
+    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿');
+    await expect(page.locator('#reader-book-navigation')).toContainText('全书仍在写作中');
     const geometry = await page.evaluate(() => {
       const article = window.document.querySelector('article'), header = window.document.querySelector('.site-header');
       return { width: window.innerWidth, article: article.getBoundingClientRect().width,

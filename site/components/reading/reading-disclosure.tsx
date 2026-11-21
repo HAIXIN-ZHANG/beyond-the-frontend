@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useLayoutEffect, useRef } from 'react';
+import { withBasePath } from '../../config/deployment.ts';
 
 export function ReadingDisclosure({ label, compactLabel, children }: { label: string; compactLabel?: string; children: ReactNode }) {
   const details = useRef<HTMLDetailsElement>(null);
@@ -56,7 +57,10 @@ export function ReadingDisclosure({ label, compactLabel, children }: { label: st
         if (sibling !== event.currentTarget) sibling.open = false;
       }
     }}>
-    <summary ref={summary} aria-label={label}>{compactLabel ?? label}</summary>
+    <summary ref={summary} aria-label={label}>
+      <span className="reading-disclosure-icon" aria-hidden="true" style={{ maskImage: `url("${withBasePath('/icons/reader/section-list.svg', process.env.NEXT_PUBLIC_BASE_PATH)}")` }} />
+      <span className="disclosure-label">{compactLabel ?? label}</span>
+    </summary>
     <div className="reading-disclosure-body">{children}</div>
   </details>;
 }

@@ -21,6 +21,5 @@ export function BookNavigation({ chapters, currentId }: { chapters: readonly Cha
       <ol>{plannedParts.map(part => <li key={part}>{part}</li>)}</ol>
       <p>全书仍在写作中。以上是内容方向，可阅读章节见上方。</p>
     </section>
-    <p className="reading-attribution">缸子太子与世界</p>
   </>;
 }

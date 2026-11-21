@@ -22,7 +22,10 @@ export function DocumentLayout({ children, locale, languageHome = false }: Docum
         <SiteHeader locale={locale} languageHome={languageHome} />
         <main className="shell main" id="main" tabIndex={-1}>{children}</main>
         <footer className="site-footer shell">
-          <p>{messages.title}</p>
+          <div className="footer-identity">
+            <p>{messages.title}</p>
+            <p className="footer-byline">{messages.authorLabel}{messages.authorName}</p>
+          </div>
           <a href={site.issues}>{messages.feedback} <span aria-hidden="true">↗</span></a>
         </footer>
       </body>

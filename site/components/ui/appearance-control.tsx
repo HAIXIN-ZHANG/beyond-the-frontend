@@ -46,7 +46,7 @@ export function AppearanceControl({ locale }: { locale: Locale }) {
 
   return (
     <div className="appearance-control">
-      <IconButton ref={trigger} label={`${m.appearance}: ${preferenceLabel}; ${m.currentAppearance}: ${effectiveLabel}; ${m.accentColor}: ${m.accentNames[accent]}`}
+      <IconButton ref={trigger} visual="toolbar" label={`${m.appearance}: ${preferenceLabel}; ${m.currentAppearance}: ${effectiveLabel}; ${m.accentColor}: ${m.accentNames[accent]}`}
         title={m.appearance} popoverTarget={id} className="appearance-trigger"
         onClick={() => {
           const rect = trigger.current?.getBoundingClientRect();

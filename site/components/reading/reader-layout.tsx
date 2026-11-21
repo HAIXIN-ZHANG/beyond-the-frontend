@@ -6,6 +6,7 @@ import { IconButton } from '../ui/icon-button.tsx';
 import { Button } from '../ui/button.tsx';
 import { ReadingTools } from './reading-tools.tsx';
 import { ReadingDisclosure } from './reading-disclosure.tsx';
+import { SidebarIcon } from './sidebar-icon.tsx';
 import { effectiveSidebarWidth, readSidebarPreference, sidebarBreakpoint, sidebarDefault,
   sidebarMin, sidebarStorageKey, sidebarWidthLimit } from './sidebar-preference.ts';
 import type { SidebarMode, SidebarPreference } from './sidebar-preference.ts';
@@ -23,7 +24,7 @@ function initialPreference(): SidebarPreference {
   try { return readSidebarPreference(window.localStorage.getItem(sidebarStorageKey)); } catch { return sidebarDefault; }
 }
 
-export function ReaderLayout({ navigation, outline, children }: { navigation: ReactNode; outline: ReactNode; children: ReactNode }) {
+export function ReaderLayout({ navigation, outline, bookInfo, children }: { navigation: ReactNode; outline: ReactNode; bookInfo: ReactNode; children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
   const grip = useRef<HTMLDivElement>(null);
   const lastFocused = useRef<Element | null>(null);
@@ -143,20 +144,26 @@ export function ReaderLayout({ navigation, outline, children }: { navigation: Re
       next === 'expanded' ? '[data-collapse-sidebar]' : next === 'collapsed' ? '[data-expand-sidebar]' : '[data-reopen-sidebar]',
     )?.focus({ preventScroll: true }));
   }
+  function resetWidth() {
+    cancelDrag();
+    apply({ ...preferenceRef.current, width: sidebarDefault.width });
+    // The conditional reset disappears; keep keyboard focus on the stable resizing control.
+    grip.current?.focus({ preventScroll: true });
+  }
   const style = { '--reader-rail-width': applied.mode === 'hidden' ? '0px' : applied.mode === 'collapsed' ? '64px' : `${width}px` } as CSSProperties;
   return <div ref={root} className="chapter-layout" data-sidebar={applied.mode} data-enhanced={ready} data-resizing={resizing} style={style}>
     <aside className="book-rail" aria-label="章节栏">
       <div className="expanded-book-rail">
         <div className="sidebar-controls reader-js-controls">
           <span>本书</span>
-          <IconButton label="收起章节栏" title="收起章节栏" data-collapse-sidebar onClick={() => mode('collapsed')}><span aria-hidden="true">‹</span></IconButton>
-          <IconButton label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><span aria-hidden="true">×</span></IconButton>
+          <IconButton visual="toolbar" label="收起章节栏" title="收起章节栏" data-collapse-sidebar onClick={() => mode('collapsed')}><SidebarIcon kind="collapse" /></IconButton>
+          <IconButton visual="toolbar" label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><SidebarIcon kind="hide" /></IconButton>
         </div>
         <div className="sidebar-content" id="reader-book-navigation">{navigation}</div>
-        <div className="sidebar-width-controls reader-js-controls">
-          <Button visual="quiet" onClick={() => apply({ ...preferenceRef.current, width: sidebarDefault.width })}>重置宽度</Button>
-          <span aria-hidden="true">{width}px</span>
-        </div>
+        {ready && preference.width !== sidebarDefault.width ? <div className="sidebar-width-controls reader-js-controls">
+          <Button visual="toolbar" onClick={resetWidth}>重置宽度</Button>
+        </div> : null}
+        {bookInfo}
         <div ref={grip} role="separator" tabIndex={ready ? 0 : -1} aria-label="调整章节栏宽度" aria-orientation="vertical"
           aria-controls="reader-book-navigation" aria-valuemin={sidebarMin} aria-valuemax={limit} aria-valuenow={width}
           aria-describedby="sidebar-resize-help" className="sidebar-resize reader-js-controls"
@@ -182,18 +189,18 @@ export function ReaderLayout({ navigation, outline, children }: { navigation: Re
         <p className="visually-hidden" id="sidebar-resize-help">左右方向键每次调整8像素，Home和End跳到边界，Enter或重置宽度恢复248像素。</p>
       </div>
       <div className="collapsed-book-rail reader-js-controls">
-        <IconButton label="展开章节栏" title="展开章节栏" data-expand-sidebar onClick={() => mode('expanded')}><span aria-hidden="true">☰</span></IconButton>
-        <IconButton label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><span aria-hidden="true">×</span></IconButton>
+        <IconButton visual="toolbar" label="展开章节栏" title="展开章节栏" data-expand-sidebar onClick={() => mode('expanded')}><SidebarIcon kind="expand" /></IconButton>
+        <IconButton visual="toolbar" label="隐藏章节栏" title="隐藏章节栏" onClick={() => mode('hidden')}><SidebarIcon kind="hide" /></IconButton>
       </div>
     </aside>
     <div className="reader-body">
       <div className="chapter-column">
         <ReadingTools>
-          <p className="chapter-context">中文 · 已审阅草稿 <span>全书仍在写作中</span></p>
-          <div className="desktop-reopen reader-js-controls"><Button visual="quiet" data-reopen-sidebar onClick={() => mode('expanded')}>显示章节栏</Button></div>
-          <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航" compactLabel="章节">{navigation}</ReadingDisclosure></div>
-          <div className="mobile-outline"><ReadingDisclosure label="本章目录" compactLabel="目录">{outline}</ReadingDisclosure></div>
+          <div className="desktop-reopen reader-js-controls"><IconButton visual="toolbar" label="显示章节栏" title="显示章节栏" data-reopen-sidebar onClick={() => mode('expanded')}><SidebarIcon kind="reopen" /></IconButton></div>
+          <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航" compactLabel="章节">{navigation}{bookInfo}</ReadingDisclosure></div>
+          <div className="mobile-outline"><ReadingDisclosure label="本章目录">{outline}</ReadingDisclosure></div>
         </ReadingTools>
+        <p className="chapter-context">中文 · 已审阅草稿</p>
         {children}
       </div>
       <aside className="outline-rail">{outline}</aside>

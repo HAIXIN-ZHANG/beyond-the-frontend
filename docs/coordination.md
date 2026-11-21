@@ -1,16 +1,123 @@
 # Vibe Coding, Then What? — coordination board
 
-Updated: 2026-11-20 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
+Updated: 2026-11-21 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
-## Current closeout and next scope — 2026-11-20
+## Integration gate and shared-checkout reconciliation — 2026-11-21
 
-The public site is release3b359160d9dcd3911b7d9315c95e865fcabdec94 from Pages run44495362655: V2 home/directory, exact-title search and local Continue, with three Chinese bodies and no English bodies. HTTP, public Chromium and targeted desktop Safari checks were recorded; mobile Safari, physical devices, Firefox and assistive technology remain unverified.
+[PR38](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/38) owns the exact submitted head, cloud results and observed integration outcome. The Developer handoff and Coordinator review preserve local acceptance, the Linux-specific assertion findings and their affected corrections. Runtime implementation is frozen; no further executor task follows without a concrete returned finding. Coordinator owns the remaining exact-head Quality/root/Pages CI gate and authorized protected merge. A completed merge closes that integration assignment; do not restart historical correction work from the dated evidence below. No feature/dependency expansion or check/protection weakening is authorized.
 
-Developer recovered the bounded palette-test timing repair and factual public-status update for PR36; [handoff](handoffs/developer/public-release-closeout.md), [Coordinator review](reviews/public-release-closeout.md). Fresh affected checks and exact-head cloud CI remain the merge gate. No runtime change or new release is part of this closeout. Previous temporary workspaces are unavailable; use the assigned persistent isolated checkout and retained recovery record, never reset the original shared checkout.
+The author additionally authorized a reasonable audit/integration of the original101 root changes and synchronizing local main. The verified audit found73 current-main identical,25 older-main identical and3 stale text differences, with no missing new implementation. All101 files and a binary patch are backed up and checked. After PR38 is actually merged and root bytes are rechecked, Coordinator may preserve the originals in a recorded include-untracked stash and fast-forward root main; retain the stash/archive rather than replaying old versions. Do not submit redundant/stale content or remove unrelated worktrees/evidence. The exact integration/audit records remain in the ignored recovery area and this PR's review.
 
-The author-confirmed next Developer slice is V2 reading polish: quieter conditional sidebar-width reset, recognizable sidebar icons, smaller measured default reading typography and lightweight toolbar/search styling. Preserve resize/keyboard/focus/Continue semantics and compare the actual Chinese F01 page at about1261px and320/390px. The Figma Reading size selector remains a separate evaluation. No new chapter, analytics activation or whole-site redesign is assigned. Older sections below retain dated task history; this section supersedes their current-task labels.
+## Reading experience closeout — implementation and local review complete
 
-## Current assignments — existing manuscripts and V2 reader alignment
+The author authorized finishing the current reading-page work and integrating it through GitHub. Developer completed the bounded candidate on `codex/v2-reading-polish-20261120`, based on `99ae156`: reading typography/quiet controls, separate status and nearby navigation, semantic prose links, fixed sidebar credit/feedback and the hidden-sidebar zero-width body correction. The final selected FigmaA aligns its caption and divider at16px. Existing manuscripts, admitted sources, saved preferences, dependencies and workflows remain unchanged.
+
+Final local verification: lint/strict types/60Node tests, root and Pages builds/static verification, and61/61 Chromium cases for each prefix. Coordinator independently reviewed18 real result groups on the final revision and closed the last inset finding. See the [single Developer handoff](handoffs/developer/v2-reading-polish.md) and [Coordinator review](reviews/v2-reading-polish.md) for exact source identities, initial failures, corrections and device limitations. Historical test counts below do not supersede this revision.
+
+No further executor task follows from this completion. Coordinator owns the author's authorized commit/push/PR, exact-head required CI and protected squash merge; the associated GitHub PR records the actual submitted head, checks and merge result. Local acceptance does not predeclare cloud CI or merge. Main independently gained automatic Pages release through PR37 during integration. This reading change preserves that existing workflow and adds no manual dispatch or access change; observe any automatic release separately from the PR merge. Preserve the original dirty shared checkout; the isolated candidate and ignored recovery archives retain all changes.
+
+## Historical checkpoints — superseded assignments and evidence
+
+The sections below preserve the prior decisions, intermediate failures and outcomes. Their older active/current/queued labels are historical, not instructions to restart work. Only an explicit new user/Coordinator assignment authorizes further execution.
+
+### Active final closeout — complete, review and integrate the assigned candidate
+
+The author clarified on2026-11-20 that closeout means finishing the current task and submitting it to GitHub, not stopping at a saved checkpoint. Developer resumes the existing isolated99ae156+r4/P1 candidate: repair the six-accent test interaction, implement selected FigmaR5A and deliver final evidence/freeze in the same handoff. Coordinator reviews actual files and affected browser/design evidence, returns findings to Developer, then performs authorized commit/push/PR and protected merge after exact-head CI succeeds. No additional feature, manuscript, installation or website deployment is assigned. Preserve original dirty checkout and all archives. This current assignment supersedes the previous stopped checkpoint below; existing r4/r5 briefs define the bounded implementation.
+
+### Current closeout checkpoint — saved, further execution stopped
+
+The author requested closing the current task. Developer reached its usage limit. P1's hidden-sidebar body-column fix is implemented and independently checked in10 real cases; r4 toolbar/prose-link code is preserved. Current check passes60Node/lint/types; full root59/60 and Pages affected5/6 leave the same new six-accent test interaction unresolved. Pages build/export verifier passed. R5A is the selected Figma design only and has not been implemented. No complete-candidate acceptance, feature Git integration or deployment is claimed.
+
+The ignored recovery record `reading-polish-closeout.md` supplies exact files/hashes, archive, evidence, remaining owner work and resume steps. Existing Developer handoff and Coordinator review remain authoritative by role. Current4199 serves frozen root-export-r4 with P1fix; current in-app browser could not be refreshed because its connection is unavailable. No automatic executor work remains active; resume existing Developer only on a new user continuation with available quota. Preserve original dirtymain95a6bec and the uncommitted isolated99ae156 candidate. This checkpoint supersedes earlier active labels below.
+
+### Corrected locally — hidden-sidebar column defect
+
+The author reproduced a real1161px layout failure after Hide chapters. Coordinator independently clicked the actual4199 r3 button: grid changed248px/913px to0px/1161px, but auto-placed reader-body occupied the first track (body64px including padding, chapter-column0px). Reopen restored readability. Prior mode/focus tests did not assert reading-column geometry. Developer owns the smallest layout correction and real hide/restore/persisted-mode/route/breakpoint geometry regression before further acceptance or integration. R4 continues as the bounded candidate; r5 sidebar-credit visual refinement is design-only until its selected composition is reviewed. Existing snapshots and failure evidence remain; no Git/publication scope is added.
+
+### Active annotation amendment — reading toolbar and prose links r4
+
+The author also requests refining the status/outline row and inline prose hyperlinks, including cramped adjacent text. R3 is locally accepted with60Node,54/54 Chromium per export path and four independent Coordinator cases. Developer preserves its frozen snapshot, then owns this bounded amendment in the same workspace and handoff. Coordinator reviews the actual implementation; the design owner is updating the matching references. The project-local `reading-toolbar-links-brief.md` defines scope and acceptance. No manuscript/source/dependency/Git/publication scope is added. Current4199 preview now serves the accepted frozen root-export-r3; Coordinator inspected the visible sidebar-bottom author/feedback and removed reader footer. R4 remains in progress.
+
+### Accepted annotation amendment — reader information dock r3
+
+The author explicitly rejected the reader's entire horizontal footer and requested moving both attribution and feedback to the bottom of the book sidebar. Developer owns the bounded r3 amendment in `.local/worktrees/v2-reading-polish-20261120`, preserving frozen r1/r2 archives. Use a distinct quiet bottom dock outside the desktop navigation scroller, with mobile chapter-menu access and existing expand/reopen recovery. Reading pages show no horizontal global footer; non-reader footer/source/identity contracts remain. No manuscript/dependency/Git/deployment change. The project-local `reader-info-dock-brief.md` owns the selected composition, acceptance and limits; one existing handoff/review continues. This supersedes only r2's reader placement, not its retained evidence.
+
+### Current outcome — reading polish and author relocation r2
+
+The author-approved local reading-polish candidate and follow-up footer byline are complete and locally accepted. Developer froze23 files in `.local/worktrees/v2-reading-polish-20261120`; all identities were matched, and13 unaffected r1 files remained byte-identical.60Node and49/49 Chromium cases on each export path passed. Coordinator independently checked actual footer cases and visible preview, with no blocking finding in scope. Figma297:122/123/128, runtime, design handoff and Developer guide are aligned; the introduction's formal byline remains.
+
+Preview: http://127.0.0.1:4199/zh/read/browser-foundations/ . Old4197 owned server stopped; r1 snapshot remains preserved. No feature commit/PR/push/merge/publication occurred. Runtime/source snapshots, handoff and independent review are retained in the existing recovery record. Executor work is closed pending a concrete next assignment; later PR/cloud CI/publication retain separate gates and native-zoom/mobile hardware/Firefox/AT limits. This current outcome supersedes older active labels below.
+
+### Reading-polish outcome — 2026-11-20
+
+The author-authorized first task is locally complete and reviewed. Developer froze16 runtime/test/assets/guide files and one handoff at persistent `.local/worktrees/v2-reading-polish-20261120`, branch codex/v2-reading-polish-20261120@99ae156. Coordinator matched digests and accepted the local implementation after actual source/design/browser review.60Node,48/48 root and48/48 Pages Chromium passed;11 independent Coordinator result groups passed. Native Safari resting layout was inspected; native zoom, mobile hardware/mobile Safari/Firefox/AT remain unverified.
+
+One handoff/review and frozen-source archive are retained in the project-local recovery record. Preview is open at http://127.0.0.1:4197/zh/read/browser-foundations/ and uses the preserved root export. No reading-size selector, manuscript, analytics, dependency, workflow or deployment change. No Git integration was performed for this slice; next stage is scoped PR/cloud CI/integration under the existing review process. Developer reached usage limit after frozen delivery; no additional executor scope is active. This outcome supersedes older queued/assignment labels below.
+
+### Current closeout outcome — 2026-11-20
+
+PR36 merged99ae1563f61b8945bf237028e80ecc90bb5c7fcc after exact reviewed48be35e passed all3 required jobs in run44668204709. Fetched main and confirmed tree equality. Palette test timing repair, accurate public status and selected integration records are on GitHub. No runtime change or new Pages deployment.
+
+The original shared checkout remains main95a6bec with101 preserved change entries; the audit found70 identical to former main,25 older remote file revisions and6 document differences. Selectively integrated the new review/coordination evidence instead of stale runtime/planning snapshots. The persistent closeout workspace is `.local/worktrees/release-closeout-20261120`; original temporary workspaces/evidence are absent.
+
+Developer completed/froze the reviewed closeout before hitting usage limit. Next is the queued bounded V2 reading polish in a fresh persistent workspace when that executor is available; no UI implementation has started. Reading-size selection is a separate evaluation. The original Writer must recover two uncommitted03/04 example revisions before any future intake; original drafts are safe on GitHub and current public sources are unaffected.
+
+### Current release outcome and bounded follow-up
+
+Pages release run44495362655 deployed source3b359160d9dcd3911b7d9315c95e865fcabdec94. Exact public HTTP and actual Chromium reading/search/Continue/theme/narrow/404 checks passed. Coordinator inspected screenshots/result evidence and completed targeted public desktop Safari directory/search/Continue/appearance checks after unlock. Mobile Safari, physical devices, Firefox and assistive technology remain untested. The ignored release review/handoff preserves exact evidence and earlier failures.
+
+Technical status PR36 is not merged: old-head root CI failed one palette test with React418 and a missing injected fixture;43/44 passed. Developer is assigned diagnosis and only an evidence-supported test-only repair in the exact release checkout, preserving the frozen DEV status update. No runtime/Git/dependency work is assigned. Coordinator must review affected output and exact-head required CI before integration.
+
+The external basic readership measurement proposal is accepted as a source-level design only and retained with its review in the ignored recovery record. It authorizes no collection, account, provider choice or external transmission. No new chapter or code feature is assigned.
+
+### Queued author feedback — V2 reading polish
+
+After the current palette CI closeout, the next bounded Developer slice is sidebar width-control simplification, recognizable sidebar icons, a measured smaller default reading scale and lightweight toolbar/search styling. Compare the actual Chinese F01 page at about1261px and320/390px, preserving accessibility, resize/Continue behavior and theme semantics. The local recovery brief `v2-reading-polish-next.md` preserves exact requested acceptance. A reading-size preference in Appearance is a separate evaluation, not bundled implementation. No runtime assignment is active until the current repair is reviewed and a distinct checkout is assigned.
+
+### Completed code priorities — V2 directory, baseline QA and local Continue
+
+The three author-confirmed code priorities are complete for integration. The existing homepage/search candidate passed independent root/Pages verification and targeted desktop Safari. PR34 merged the V2 directory and the existing repeated-fragment toolbar repair. PR35 merged local Continue to main as `3b359160d9dcd3911b7d9315c95e865fcabdec94`, after all required checks passed at reviewed head `10cf0048fdda7c595de894b26ffd8f3a7e9379f9` in run44486089407. The merged tree matches the reviewed candidate.
+
+Continue appears only in the two directory locales when a valid browser-local position exists. It follows deliberate reader activity, uses current source/heading identities and opens only through its native link. Changed/missing targets and denied storage have verified fallbacks. Developer corrections and Coordinator independent checks are preserved in the project-local ignored recovery reviews. Final local checks:60 Node tests and44 Chromium cases on each deployment path; independent new-feature cases8/8 on each. Safari/physical device/AT for Continue remain unverified.
+
+All executor code is frozen and closed. Production Pages dispatch remains a separately authorized release. Preserve the original dirty shared checkout and existing Writer assessment. No further code or manuscript scope follows automatically.
+
+### Current assignment — assess two reviewed drafts for reader admission
+
+The author authorized the readiness assessment only. The Writer reads the frozen 03/04 copies in the existing manuscripts checkout; the Coordinator independently compares the exact copies, reading sequence and current reader contract. The existing checkout is read-only for this assignment. No source edits, manifest changes, Git integration or deployment are assigned. Keep the handoff and review in the project-local ignored recovery area. The admission decision and implementation are a separate scope.
+
+### Completed assignment — reader and contributor documentation
+
+[PR #33](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/33) merged five reviewed Markdown files to main at `5beb7264b387947fc24bcae60b38e4663e596fe9`. [Quality and both static export/browser jobs](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44451806355) passed on the reviewed head. The merged tree matches that head.
+
+Writer updated README and the public reader roadmap. Developer completed the contributor entry and aligned the technical and release guides. Coordinator checked both entry paths. The internal-material inventory and handoffs are in the project-local Git-ignored recovery record. No private destination was verified. Existing public files and history remain accessible. The live Pages release still follows its separate release record.
+
+### Completed assignment — exact chapter-title search
+
+[PR #32](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/32) merged to main at `891c27cdb1dbee6a9475239c6fda08f659c9e1aa` after [all three exact-head checks](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44447807890). Full F01 title search now yields the chapter and the actual H1 target. The ordinary “报名” query retains all 14 destinations. The [review](reviews/m2-exact-title-search.md#verified-protected-integration) records the scope and separate publication boundary.
+
+### Completed assignments — V2 homepage and verified public status
+
+[PR #29](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/29) and [Pages release 44312295643](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44312295643) completed after the earlier reader regression was resolved. The [public release review](reviews/v2-fragment-release-fix.md#verified-public-release) contains the verified main SHA, deployed routes, browser results and remaining device limits. The public edition contains the opening, G01 and F01. Five Chinese originals are reviewed and English manuscripts remain unavailable.
+
+| Owner | Current bounded assignment | Gate |
+| --- | --- | --- |
+| Developer | Integrated V2 homepage from the agreed Figma targets in [V2 gap assessment](handoffs/developer/v2-design-gap.md), `/private/tmp/vctw-m2-v2-home`, `codex/m2-v2-home@8167a05`. Record one `docs/handoffs/developer/v2-home.md`. | Preserve the actual three links, localized roles and theme. Compare desktop/320/390px using real content. Use approved art only. Exact-title search is a distinct subsequent task. |
+| Writer | Public-status copy accepted and merged through [PR #30](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/30). | Writer factual alignment is closed. The next book task follows its separate manuscript scope. |
+| Coordinator/Reviewer | Review actual frozen outputs and manage scoped integration. | No second Pages dispatch is assigned for these tasks; no new chapter prose, source intake, analytics or cover adoption is assigned. |
+
+[PR #31](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/31) merged the reviewed homepage to `7fcb8c404243b6cee043c8cf92debf387ab74a06` after all required checks. The [review](reviews/v2-home.md#verified-git-integration) records the exact tree and CI evidence. The live release remains `8167a05`.
+
+### Completed publication blocker — V2 Reader
+
+The author released the V2 Pages publication and subsequent homepage/search follow-up on 2026-11-18. The original exact-main failure described below was resolved by PR #29, and Pages release 44312295643 verified the updated reader. The former execution rows describe the completed repair. The [root Chromium job](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/44291575947/job/134758433045) passed build and export verification but one section-fragment geometry check failed. The Pages job and Quality passed. Existing GitHub Pages source, default HTTPS domain and main-only deployment rule were read back from the repository.
+
+| Owner | Active work | Boundary |
+| --- | --- | --- |
+| Developer | Diagnose and repair the fragment landing regression in `/private/tmp/vctw-m2-fragment-release-fix`, `codex/m2-fragment-release-fix@e4e5037`. Record one `docs/handoffs/developer/v2-fragment-release-fix.md`. | Preserve source digests, aliases, actual focus, no-JS behavior and layout. Submit the smallest runtime/test correction supported by reproduction and both base path checks. Keep checks intact. No homepage/search feature, workflow/settings changes or Git writes. |
+| Coordinator/Reviewer | Evidence, actual review, PR and protected integration, then exact-main CI and the authorized manual Pages release. | Keep the published edition until the reviewed fix and exact-main gates pass. Homepage/search follow after observed public acceptance. Writer remains closed. |
+
+### Completed assignments — existing manuscripts and V2 reader alignment
 
 The author authorized returning to **all existing manuscript corrections and the newer style/layout upgrade after the current batch merges**. [PR27](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/27) is now verified squash-merged at `5141823f9c4a0b5403cf7a24d4269b0d09e2e92d`; exact reviewed head `c7454b6859ddf26ee90e5da27293e1a276900009` passed all three required cloud jobs in run44254832068. [Integration review](reviews/reviewed-book-planning-closeout.md) and the PR execution comment preserve the evidence. No deployment occurred. The V2 proposal below is retained as history. Only the bounded slices listed here are active.
 
@@ -25,9 +132,9 @@ The author authorized returning to **all existing manuscript corrections and the
 
 V2 direction remains author-confirmed: neutral Light/Dark with System preference; six restrained accent choices independent of appearance; calm macOS character; English-first design annotations; collapsible/hideable/resizable chapter navigation; real reading typography/notes/figures/code/tables/mobile/keyboard states. Exact values/nodes and missing interactions must be verified. Figma file `3GYIfJz8xSPGx3AE3RRkKi`; the design owner's latest actual product discussion supplies current targets. Cover-session authentication failure is not proof that reader V2 is absent. If normal access fails, record exact limits and complete the independent code-side assessment without repeated authentication or guessed UI.
 
-Preserve the original shared checkout `/Users/haixin/Desktop/code/vibe-coding-then-what`, dirty main95a6bec. Do not pull/reset/switch it. The isolated execution checkouts above are authoritative for new executor edits; this board is mirrored there by Coordinator at assignment. Writer and Developer outputs are disjoint. No search/audio/chat/analytics/portal/new feature expansion is assigned. Website admission remains exactly three sources; this intake replaces their reviewed revisions, not the source count. Both newer originals03/04 remain unadmitted. The accepted source-intake revision passed root and Pages browser verification. V2 layout r2 resolved the earlier browser failures and passed both builds and all 27 Chromium tests on each base path. The last verified public edition remains the previously deployed two chapters.
+Preserve the original shared checkout `/Users/haixin/Desktop/code/vibe-coding-then-what`, dirty main95a6bec. Do not pull/reset/switch it. The isolated execution checkouts above are authoritative for new executor edits; this board is mirrored there by Coordinator at assignment. Writer and Developer outputs are disjoint. No search/audio/chat/analytics/portal/new feature expansion is assigned. Website admission remains exactly three sources; this intake replaces their reviewed revisions, not the source count. Both newer originals03/04 remain unadmitted. The accepted source-intake revision passed root and Pages browser verification. V2 layout r2 passed both builds and all 27 Chromium tests on each base path. [PR #28](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/28) merged the accepted layout, appearance and manuscript package into remote main `e4e5037150608e116a4a066049b173adfd1b4b21` after all three required cloud jobs passed. Pages was not dispatched. No further executor assignment has started. The last verified public edition remains the previously deployed two chapters.
 
-## Completed assignment — reviewed-source integration closeout
+### Completed assignment — reviewed-source integration closeout
 
 The author explicitly authorized completing and merging the current reviewed batch before returning to all-existing-manuscript corrections and the V2 style/layout upgrade. Coordinator owns isolated packaging, review, PR, matching-head CI and permitted squash merge; no deployment or new reader intake is included. Writer may make only the bounded source-count/current-checkpoint factual synchronization assigned below; no byline/AI-disclosure changes, new prose or V2 code enters this closeout.
 
@@ -37,7 +144,7 @@ Shared source checkout remains dirty `main@95a6bec69e26cbe13fe9f5d9433ee91e07632
 
 After this merge, resume the separately scoped public pen-name/quiet centralized AI-disclosure and existing-manuscript corrections, then assess actual V2 Figma targets before assigning the style/layout upgrade. Do not start the deferred V2 assessment merely from the old proposal below. This current assignment supersedes earlier no-Git closeout limits only for the explicitly authorized integration; historical entries remain evidence.
 
-## Deferred proposal — V2 design-to-code gap assessment
+### Deferred proposal — V2 design-to-code gap assessment
 
 **Priority correction:** after the initial relay, the author clarified that asking when to upgrade the reader was a scheduling question, not an instruction to begin immediately. The earlier product-owner relay overinterpreted that question. Coordinator has withdrawn the immediate assessment assignment and sent Developer a stop/correction message; preserve any already produced brief/evidence, but do not continue Figma/external inspection or create output merely to satisfy the prior assignment. The scope below is a retained proposal for a later explicit start, not current execution authority. No code upgrade was released. The confirmed visual direction remains valid input; schedule its actual gap assessment after the next content/source-selection readiness decision, without waiting for the whole book.
 
@@ -55,7 +162,7 @@ Target direction: neutral Light/Dark surfaces with System preference, six soft a
 Recommend slices from verified evidence: tokens/appearance/shared controls → reading/sidebar → home. Separate actual old behavior to preserve from design-only/new interactions and states needing technical decisions. Do not mix analytics, portal, new search/audio/AI features, manuscript replacement or pipeline work into the assessment or first code slice. Current M2 text now labels the older empty-page checkpoint as historical; do not treat that dated sentence as an active prohibition or erase its evidence.
 
 <a id="current-assignment--one-frontendapi-contract-article-p32"></a>
-## Completed assignment — one frontend/API contract article (P3.2)
+### Completed assignment — one frontend/API contract article (P3.2)
 
 **Current outcome — article complete and reviewed:** Writer delivered the full Chinese [没有找到课程，还是没有查到结果？](../book/drafts/zh/04-api-contract.md); Coordinator read the actual complete draft, returned a precision finding and accepted final r2 after affected recheck in [P32M](reviews/P32M.md). Manuscript SHA256 `7bdfb4eac5aa8203a0502a1f8f2c95091878100eda0d9ecd6b7578eb6f0c16fc`; concept SHA256 `4f6a6cd96fe23a6bc5dad04319bb53da98194138aae227efacd76280dba65621`. This Writer batch and priority 2 are closed. The book now has five reviewed Chinese original sources, with three local runtime entries, last-verified two public entries and zero English bodies. Separate introduction/voice revisions are not additional originals. Current-facing documents retaining the earlier four-source checkpoint need scoped factual alignment with the next intake/publication batch; no automatic source admission, README rewrite or deployment occurred here.
 
@@ -74,7 +181,7 @@ Assume practical page/request experience and briefly explain unfamiliar vocabula
 Use the latest editorial voice and length criterion: story/paragraph purpose and continuity determine depth, not numeric caps. A short original illustrative request/response or small pure validation example may help if its assumptions and actual execution status are explicit; no app/server build, dependency or service is needed. Necessary read-only primary/official source verification is within the existing authorized research scope; record exact passages/date/limits, without provider/account/paid-service selection. Preserve the original two-gate workflow; a change in mechanism or factual scope returns to the affected concept gate. No next article, English, image/Figma work, canonical intake, Git or publication follows automatically.
 
 <a id="current-assignment--revised-author-introduction"></a>
-## Completed assignment — revised author introduction
+### Completed assignment — revised author introduction
 
 **New author-directed affected follow-up:** after r2 acceptance, the author explicitly requested synchronizing the fuller meaning of work/life uncertainty, the two cats' significance and a humorous lasting-value opening. Coordinator verified the actual author messages in the product discussion. Reopen only this introduction's original-owner loop; r2 remains accepted historical evidence, not automatically overwritten or rejected. Writer may update the existing editorial brief's author-follow-up inputs, append a compact affected edit map to the same introduction analysis, and update the same handoff. First deliver that actual small delta for INTROA affected review; reserve prose at `book/revisions/zh/voice-alignment-2026-11-18/00-before-we-start-author-introduction-r3.md` after release, keeping the accepted r2 file frozen. INTROM will record the new exact prose identity and full reading. No workflow/policy rewrite, outline change, new chapter, Developer/cover task, runtime, Git or publication.
 
@@ -104,7 +211,7 @@ The introduction should faithfully use the supplied motivation: long-held book i
 
 **Same closing input — fishing example:** the author offers fishing as a possible interest and story seed: attention can move to a float or the water instead of a phone, with gentle humor about the float being the day's only awaited notification. This is a supplied preference/example, not evidence of the author's outings, frequency, equipment or incidents. A later short closing can move from work/AI tips toward life and rest; 《代码先放这里，我们出去走走》 and 《程序员放松指南》 remain working titles for the same section. Do not promise fishing is universally inexpensive, gives adequate exercise, improves eyesight or treats fatigue/anxiety; costs and personal fit vary. Use ordinary experience and optional alternatives such as walking, cooking or music, without a health-ranking or tracking obligation. No medical-research batch or disclaimer is needed for a modest lifestyle scene; new concrete health/fitness claims would need their own justified reliable-source check. Record this seed now; do not write the closing or interrupt the introduction.
 
-## Current assignment — approved Milestones 2–4 documentation alignment
+### Current assignment — approved Milestones 2–4 documentation alignment
 
 **Status: completed and accepted after original-owner corrections.** The [actual review](reviews/milestones-2-4-alignment.md) records exact Writer/Developer revisions, scope findings and independent checks. Both executor tasks below are closed; they are retained as this batch’s ownership record, not instructions to keep editing. The five priorities below are proposed follow-ups awaiting their concrete assignments.
 
@@ -135,7 +242,7 @@ These are proposed bounded follow-ups, not five newly running tasks or a promise
 
 
 <a id="active-p810-writing-batch--2026-11-18"></a>
-## Completed P8.10 writing batch — 2026-11-18
+### Completed P8.10 writing batch — 2026-11-18
 
 The author authorized continued delivery of one independently readable Chinese article under the existing P8.10 AI-assisted development unit, working title **AI写完以后，我们还需要做什么？**. This batch includes concept analysis → Coordinator's actual first-gate review/revisions → explicit Coordinator manuscript release within this same authority → second-gate review/original-owner revisions → complete draft for the author. Do not seek repeated author permission for routine steps within this scope or stop at administrative handoff. No broad book rewrite, Git, reader implementation or publication is included.
 
@@ -160,7 +267,7 @@ Necessary read-only primary-source verification is authorized for exact factual 
 
 **Confirmed follow-up editorial direction — backlog, not a new manuscript assignment:** the author confirmed the reading experience, faithfully bounded personal introduction background, long-delayed book/AI-assisted start and gratitude, three-to-five-year usefulness aspiration, and small attention/learning closing section. The [editorial brief](../book/planning/editorial-brief.md#author-confirmed-follow-up-direction--2026-11-18) owns these inputs and their factual limits; Writer receives the same core direction. The introduction trial, closing working title and newer subtitle/cover copy are not final wording. Preserve completed P810M review and frozen opening/revisions; do not replace the approved title/subtitle, change the eight-part/48-unit structure or automatically open a 49th unit. No Developer/cover task is reopened. Define the next minimal introduction/closing assignment through the existing original-owner review workflow; broad direction approval is not word-for-word manuscript approval, Git or publication authority.
 
-## Active positioning analysis and candidate cover — 2026-11-18
+### Active positioning analysis and candidate cover — 2026-11-18
 
 **Latest product sequencing — 2026-11-18:** the author moved the author/bookshelf portal to Delivery Milestone 4; it is no longer a Milestone 3 candidate. Keep the current book and writing as the near-term focus. A simple portal can link this book and actual later works without requiring a second finished guide; richer multi-guide features still depend on real content. Writer completed the bounded portal-reference alignment in `docs/project-vision.md` and `docs/roadmap.md`; the [actual Coordinator review](reviews/portal-timing.md) accepts the exact revisions and corrected [handoff](handoffs/writer/portal-timing.md). This planning task is closed. Preserve prior source/technical reviews, all manuscript and runtime files, the existing analytics candidate and commercial boundaries. No portal design/build, analytics installation, provider/account selection, Git or publication is assigned. The question of analytics timing is being explained separately; a recommendation is not an implementation assignment.
 
@@ -183,7 +290,7 @@ The author approved the subtitle **Understanding the Systems We Build, and Learn
 
 The cover is a raster mockup with embedded text, not an editable or print-ready master; its online delivery size, alt text and responsive placement need review before website use. Keep the prior subtitle and earlier layouts in history/reference records rather than silently rewriting dated evidence. Cat imagery is an occasional analogy: uncertainty does not excuse unsafe actions, unclear state or abandonment of engineering responsibility. No external research is needed for the initial existing-material map; unverified new technical claims must be identified, not invented.
 
-## Current closeout and V2 design-first boundary — 2026-11-17
+### Current closeout and V2 design-first boundary — 2026-11-17
 
 The author asked to review and preserve the existing uncommitted work before continuing the newly agreed V2 direction. [Closeout review and integration proposal](reviews/uncommitted-closeout-2026-11-17.md) own the exact inventory, evidence and pending decisions. The quality corrections, F01M r3 source and F01 local intake r4 remain accepted within their recorded limits; they are not obsolete because a later visual design is planned. Local source/code has3 Chinese chapters; the last verified public edition has2. No Git integration or new release has occurred.
 
@@ -198,7 +305,7 @@ The author asked to review and preserve the existing uncommitted work before con
 
 The next-step suggestions in completed records below are dated recommendations, superseded by this design-first boundary. Do not treat them or the roadmap backlog as a standing instruction to code. Existing source reviews, historical Figma records and the approved manuscript framework remain intact.
 
-## Current Delivery Milestone 2 — third-chapter local intake accepted
+### Current Delivery Milestone 2 — third-chapter local intake accepted
 
 The author explicitly resumed main work after the accepted writing/preparation slice. Actual checkout remains `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `main`, HEAD/local origin-main `95a6bec69e26cbe13fe9f5d9433ee91e07632091`, with accepted quality/content/document changes uncommitted. Preserve the whole tree; no reset/branch switch/Git write is authorized. This concrete intake assignment supersedes the older preparation-only hold **only for the source and files below**.
 
@@ -212,7 +319,7 @@ Original intake assignment file scope (now closed/frozen): Developer could chang
 
 No new dependencies, full-draft scan, broadened schema, translation, Figma edit, resume/bookmark/palette/audio/AI feature or CI/deployment configuration. Preserve the accepted complete search/Unicode/highlight/sticky-outline behavior. These assigned source/build/browser gates were performed and accepted within the limits in the intake review. Both executors are closed; do not treat the completed file-scope list as a standing instruction to keep editing. Other closed stages below retain their historical scope/evidence.
 
-## Delivery Milestone 2 — content-first preparation and scoped writing
+### Delivery Milestone 2 — content-first preparation and scoped writing
 
 The author approved the five-item priority plan and explicitly resumed the main work on 2026-11-17. [Milestone 2's delivery slice](delivery/milestone-2.md) records the sequence and criteria; the roadmap remains the full candidate backlog. This assignment lifts historical documentation-only/manuscript pauses **only for the scoped browser chapter and preparation below**. It does not authorize the full outline, translations, runtime changes, dependencies, Git writes or publication. Actual shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `main`, HEAD/local origin-main `95a6bec69e26cbe13fe9f5d9433ee91e07632091`, with the accepted quality corrections still uncommitted. Preserve those files and the original review; do not reset or switch the shared branch.
 
@@ -224,13 +331,13 @@ The author approved the five-item priority plan and explicitly resumed the main 
 
 Writer manuscript/status alignment and Developer preparation are accepted and closed; their assigned files are frozen. Coordinator owns this board, the delivery slice and new review records. Relevant official-source reading is authorized for the browser explanation; no tool or dependency installation or paid service. Existing canonical opening/G01, routes, truthful missing English corpus, recovery files and accepted quality implementation remain frozen. Executors send actual startup and final handoff directly to the existing Coordinator chat; no new standing reviewer is created.
 
-## Independent quality findings — r1 independently accepted, integration pending
+### Independent quality findings — r1 independently accepted, integration pending
 
 The original quality reviewer accepted the seven bounded corrections in the [independent second review](reviews/quality-findings-2026-11-17.md). That review independently matched the submitted handoff SHA and all14 payload hashes, reproduced14 real search destinations and the synthetic Unicode excerpt, ran42 Node tests and15 Pages Chromium E2E, and inspected fresh Figma renders. Visual browser judgment partly used executor captures; root rebuild/E2E, other browser engines/devices/readers and deployed behavior were not independently certified. The dismissible expanded-outline overlay tradeoff is explicitly accepted within this correction.
 
 [Correction handoff](handoffs/developer/quality-findings-2026-11-17.md) preserves r1 reproduction and execution evidence. The reviewed source was the uncommitted tree over `95a6bec69e26cbe13fe9f5d9433ee91e07632091`; no commit, merge or publication is implied or authorized. Its hash manifest identifies the **review-time** board/document bytes, not later authorized coordination updates. Runtime, tests and design correction payload remain frozen; later work has separate scope and acceptance. No outstanding correction is assigned unless the original reviewer returns a concrete finding.
 
-## Milestone 1 whole-product publication audit — accepted source
+### Milestone 1 whole-product publication audit — accepted source
 
 The author requested a high-standard whole-product review after finding inconsistent localization, fonts, tokens and page widths. Coordinator assigned one bounded final audit from clean main/origin-main `cc59fd42f74bb5ed856881443a8bb2fd528b0817` (PR24; matching PR/main Quality/root/Pages jobs passed). Shared checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`, branch `codex/milestone-1-product-polish`. PR24 is integrated; its revised public publication has not been observed. The last public identity was `8c29f4d`. Manual release currently requires the author's Mac to be unlocked; do not infer a new deployment or bypass this UI limitation.
 
@@ -242,7 +349,7 @@ The author requested a high-standard whole-product review after finding inconsis
 
 Retain the current restrained macOS-style visual language, Day/Night behavior, honest availability (two Chinese originals; no English bodies), existing routes, canonical manuscript hashes and31 ignored recovery files. Existing dependency maintenance remains bounded; no speculative features, whole-site redesign, Figma edits or paid service. Any publication follows acceptance and matching CI. Findings return to the original owner; no acceptance is inferred from silence or a green suite.
 
-## Final Milestone 1 locale correction — reviewed revision
+### Final Milestone 1 locale correction — reviewed revision
 
 The author's Chinese-first/English-first UI, typography and width corrections are accepted in source after actual before/after visual and browser review. The [Pages review](reviews/pages-release-pipeline.md#localetypography-r3--source-and-visual-acceptance) owns LOCALE-01/TYPE-01/WIDTH-01/WRAP-01 closure and exact frozen revisions. Actual integration/public acceptance is recorded in the scoped PR execution record; source acceptance alone is not publication. Read [public release metadata](https://haixin-zhang.github.io/vibe-coding-then-what/release.json) for the actual deployed identity.
 
@@ -256,7 +363,7 @@ Assignment baseline: verified clean main/origin-main `9729a614d5dd59abcc4f4cbd81
 
 Read-only architecture review found the current app/content/components/Panda/scripts/tests separation proportionate with no engineering-structure blocker. Optional manifest-derived availability counts belong to the next content intake, not this closure. The About website link is now saved to the verified public URL; current vision wording no longer imposes an obsolete deployment hold. Existing moderate development-advisory maintenance and bounded prior-version recovery limits remain. Preserve all accepted history, manuscript identities and31 recovery files. No additional reader feature, translation, Figma update, paid service or access change is assigned.
 
-## Verified Milestone 1 public release baseline
+### Verified Milestone 1 public release baseline
 
 The initial reading site is publicly accepted at <https://haixin-zhang.github.io/vibe-coding-then-what/>, exact source `8c29f4dfbab684eb7623600f304cdce197951bcc`: two reviewed Chinese drafts, zero English bodies. PR20 added maintained verification, PR21 manual Pages release tooling, and PR22 corrected PAGES-02 after actual public QA. All matching PR/main jobs passed. The [Pages review](reviews/pages-release-pipeline.md) owns source findings, exact integration and actual publication/recovery evidence; historical interruptions stay in those records rather than acting as current tasks.
 
@@ -270,7 +377,7 @@ Manual run44013205918 attempt1 published the corrected source; attempt2 rebuilt/
 
 Current documentation branch: `codex/pages-public-closeout`, baseline main/origin-main `8c29f4dfbab684eb7623600f304cdce197951bcc`. Documentation integration is separate from deployment: this bundle does not change exported runtime/content, and the public source remains the verified SHA above. The author's bounded initial-publication authorization applies; manual-only protected-main publication and existing access/branch/check controls remain intact. The single moderate development-chain advisory remains unresolved bounded maintenance. Preserve all accepted history, manuscript identities and31 recovery files. No future reader feature, prose, Figma, paid service or access expansion is assigned.
 
-## Completed Milestone 1 release verification
+### Completed Milestone 1 release verification
 
 The author assigned remaining Milestone 1 release work, correcting demonstrated issues before progression. Current branch `codex/milestone-1-release-verification`, based on verified clean main/origin-main `e0b530a3ef7397c16158cde8d59190f18f84e57b`. PR19 correction/audit is merged with successful PR/main Quality/root/Pages runs; its execution record owns exact integration evidence.
 
@@ -286,7 +393,7 @@ Previous interrupted checkpoint (superseded by explicit resumption): actual bran
 
 Final local release-verification/materials bundle is accepted after actual review; both owner tasks are closed. Actual [PR20](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/20) tracks original payload `afbb87f918db7504ecc5547e67ab855930ab117e` and the subsequent r2 table-test correction after failed Linux run44001166691. Its execution record owns final reviewed-head/cloud browser checks/merge and local main reconciliation. The interrupted checkpoint above is historical; do not restart completed root/Pages checks from it.
 
-## Completed project-consistency audit
+### Completed project-consistency audit
 
 The author requested a fresh cross-check of documents, project structure, code/framework, Markdown and README, with bounded present corrections and clearly recorded later work. Assigned branch `codex/project-consistency-audit`, based on actual main/origin-main `78488012044e0a8fd8e4946f1abc72e1e2b084c9`. PR18 has merged after exact-head Quality/root/Pages success in run43899041187; its execution record owns later main-CI evidence.
 
@@ -300,13 +407,13 @@ Disjoint file ownership and the existing release/design holds remain. This task 
 
 The accepted audit payload `78b44a58af2ba232af9673e3d665aa23de26e7a4` integrated through [PR19](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/19), squash `e0b530a3ef7397c16158cde8d59190f18f84e57b`. Its execution record verifies final reviewed head, required PR/main runs and local-main reconciliation. No deployment occurred.
 
-## Completed editorial-review clarification
+### Completed editorial-review clarification
 
 The author confirmed a reader-first full-stack architecture guide, with tone, credible examples and technical accuracy checked at both chapter gates. The bounded [Writer r1 brief/handoff](handoffs/writer/editorial-review-criteria.md) is now [accepted after actual Coordinator review](reviews/editorial-review-criteria.md): the existing chapter workflow owns the criteria; its analysis template contains one link and usage paragraph. Writer's task is closed and its files frozen. [PR18](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/18) merged as `78488012044e0a8fd8e4946f1abc72e1e2b084c9`; its execution record verifies PR/main CI and local reconciliation. This completed task produced no manuscript, translation, runtime feature, design or deployment. Formal updates remain English-first.
 
 Historical editorial-criteria assignment baseline: main/origin-main `8e31da5e65aee4880a80aba8a35a418eb0fd4d45` (merged PR17, PR/main CI verified); branch `codex/editorial-review-criteria`. Writer owns only the brief's listed files; Coordinator owns this board and the review. The previous record-alignment tasks are closed. Future design is not resumed during this narrow documentation task; all release holds remain.
 
-## Current terminology and accepted baseline
+### Current terminology and accepted baseline
 
 **Product Goals** describe reader needs/outcomes (formerly Stages). **Delivery Milestones** describe concrete design/implementation/verification scope (formerly Betas). Numbering is not a one-to-one completion rule; legacy labels and filenames remain in dated evidence.
 
@@ -314,7 +421,7 @@ Delivery Milestone1's reading/code foundation and public-document closeouts are 
 
 The first-delivery retrospective below aligns final outcomes with original plans and review iterations. It does not reopen accepted UI or turn future plans into implemented features.
 
-## First-delivery record alignment
+### First-delivery record alignment
 
 The author requested retrospective alignment of first-delivery Markdown, aspirations and delivery records with actual work, using current terminology. The [canonical delivery ledger](delivery/milestone-1.md) is now complete and [independently accepted](reviews/milestone-1-record-alignment.md), with both original-owner tasks closed. Integration evidence belongs in the scoped PR execution record; only Coordinator performs Git writes.
 
@@ -326,7 +433,7 @@ The accepted alignment payload `ea365c7e64adf9db771ea834f0a9f23ae699747e` integr
 | Developer | [Technical-record audit and active wrappers r1](handoffs/developer/milestone-1-record-alignment.md) | Accepted four-document submission; historical bodies/evidence preserved. Task closed |
 | Coordinator/Reviewer | Terminology, actual review/feedback and scoped integration | Accepted and integrated through PR17 with successful PR/main checks; no runtime/prose substitution |
 
-## Remaining operational gate and holds
+### Remaining operational gate and holds
 
 **Release Readiness belongs to Delivery Milestone1:** dependency-alert reassessment, a small permanent E2E suite in CI, gated GitHub Pages CD, actual public URL/assets/subpath/404/theme/navigation smoke and a verified recovery/rollback path. Temporary headless browser checks and successful Quality/root/Pages jobs are completed evidence; they are not permanent E2E, CD or deployed acceptance. The earlier no-deployment hold was superseded by the author's 2026-11-17 release instruction; deployment still follows reviewed verification/pipeline gates. This documentation assignment does not itself implement those operational tasks.
 
@@ -338,13 +445,13 @@ The completed record-alignment task incorporated the author's planning clarifica
 
 Assigned checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`; record-alignment work started from main at the baseline above. Coordinator integrated the reviewed `codex/milestone-1-records` branch through PR17 and verified actual main afterward; this is historical context, not the active audit branch. Verify actual branch/HEAD/status before any new assignment. Preserve all owner work and31 ignored recovery files; the unaccepted DS01 checkpoint remains separate. Historical dispatch/workspace details below are evidence, not current assignments.
 
-## Last scoped workspace and baseline
+### Last scoped workspace and baseline
 
 - Actual root: `/Users/haixin/Desktop/code/vibe-coding-then-what`; branch `codex/beta1-design-alignment`; HEAD/base/local `origin/main` verified at `630ab7e57dd2139c87e2bdd3e90cd981c008a6fd` before alignment.
 - Initial main was clean. Coordinator subsequently created this branch while preserving the two audit reports. Executors made no Git writes. Use explicit workdirs and absolute edit paths; preserve disjoint ownership.
 - The earlier directory `/Users/haixin/Desktop/code/beyond-the-frontend` in past handoffs is historical execution context. The project directory was externally renamed before PR #10's final return to main; Coordinator verified repository/origin/file hashes and preserved ignored recovery data. Do not recreate the old directory or rewrite historical handoffs.
 
-## Closed owner assignments
+### Closed owner assignments
 
 | Owner | Concrete scope and handoff | State | Next action |
 | --- | --- | --- | --- |
@@ -354,7 +461,7 @@ Assigned checkout: `/Users/haixin/Desktop/code/vibe-coding-then-what`; record-al
 
 Both design/document executor assignments are closed after actual affected review. [PR #11](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/11) merged after final head `f4f3254a625d0dd38d634f4af127b03102f8cd8e` passed all three required jobs in [run 43723690316](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43723690316); actual squash is `eb822357b6bf1cafe090508254b1aa6c3e71ce8f`, verified locally against fetched main. No deployment occurred. The scoped workspace above is historical, superseded by the current assignments.
 
-## Current design decisions and durable evidence
+### Current design decisions and durable evidence
 
 Same Figma file `3GYIfJz8xSPGx3AE3RRkKi`, three pages. The retained UI04/Beta 1 foundation has 111 variables; the Beta 2 palette addition brings the live file to **133 variables/four collections/14 text styles**, preserving all original IDs/values and the production reference mapping. UI04 added **eight families/24 variants**, six Beta 1 (including conditional copy and SearchField) and two Beta 2 concepts; the later palette work adds **two families/27 variants plus one close-icon atom**. The prior seven/21 count preceded the UI04 SearchField correction. Compatibility BTF namespaces remain; no Code Connect publication is established.
 
@@ -362,13 +469,13 @@ Same Figma file `3GYIfJz8xSPGx3AE3RRkKi`, three pages. The retained UI04/Beta 1 
 
 The design handoff records exact IDs, actual reported structure/color checks and unresolved runtime/accessibility gates. Temporary screenshots are supplementary; design composition, code implementation, browser acceptance and release are distinct.
 
-## Earlier integrations
+### Earlier integrations
 
 Branding and reader-facing README/workflow alignment completed through [PR #10](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/pull/10). Coordinator's actual integration record names final reviewed head `ec037833532cad033126e20f99952e1c82eea6c9`, successful Quality/root/Pages jobs and steps in [run 43719534693](https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/actions/runs/43719534693), and squash `630ab7e57dd2139c87e2bdd3e90cd981c008a6fd`, the verified base at that stage. [Its review](reviews/vibe-coding-rebrand.md) retains the historical opening-title exception/hash and scope. No deployment occurred. PR #11 and the latest PR #12 evidence are recorded above.
 
 The canonical repository/About/origin rename is completed. Older task paths, aliases and review/PR records retain their historical identities; none is an active assignment or proof of the current design's implementation.
 
-## Preserved recovery
+### Preserved recovery
 
 The unaccepted DS01 work stays at branch `codex/ds01-panda-theme` / checkpoint `4da2578048f8df113fed92d99e084f644a9a788e`. Locate it with `git worktree list` and actual revision/status checks, without assuming a permanent directory. [DS01 handoff](handoffs/developer/DS01.md) and [review](reviews/DS01.md) retain local evidence and unfinished browser/integration gates; no wholesale merge or harness run is assigned here.
 

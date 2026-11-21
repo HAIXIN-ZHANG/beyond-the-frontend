@@ -459,6 +459,13 @@ export const semanticTokens = defineSemanticTokens({
           "_dark": "{colors.accent.default}"
         }
       },
+      "proseLink": {
+        "value": {
+          "base": "#455D80",
+          "_osDark": { "_system": "#B0C7E3" },
+          "_dark": "#B0C7E3"
+        }
+      },
       "disabled": {
         "value": {
           "base": "{colors.fg.muted}",
@@ -949,6 +956,19 @@ export const semanticTokens = defineSemanticTokens({
 });
 
 export const textStyles = defineTextStyles({
+  // Shared reading roles scale with the browser's default text size, independently of chrome/home.
+  "reading-body": {
+    "value": { "fontFamily": "token(fonts.body)", "fontSize": "1rem", "fontWeight": 400, "lineHeight": "1.75rem", "letterSpacing": "0em" }
+  },
+  "reading-title": {
+    "value": { "fontFamily": "token(fonts.body)", "fontSize": "2rem", "fontWeight": 700, "lineHeight": "2.75rem", "letterSpacing": "0em" }
+  },
+  "reading-title-compact": {
+    "value": { "fontFamily": "token(fonts.body)", "fontSize": "1.75rem", "fontWeight": 700, "lineHeight": "2.5rem", "letterSpacing": "0em" }
+  },
+  "reading-heading": {
+    "value": { "fontFamily": "token(fonts.body)", "fontSize": "1.3125rem", "fontWeight": 700, "lineHeight": "2rem", "letterSpacing": "0em" }
+  },
   // Shared chrome role: explicit metrics avoid inheriting locale/prose typography.
   "brand": {
     "value": {

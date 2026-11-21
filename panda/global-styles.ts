@@ -313,6 +313,10 @@ export const globalCss = defineGlobalStyles({
     '@media (max-width: 899px)': { order: 2, '& p': { lineHeight: 1.5 } },
   },
   '.home-layout .home-chapters .home-chapter-number': { color: 'token(colors.fg.link)', textStyle: 'small', paddingTop: 'token(spacing.control.paddingInline)' },
+  '.home-reading-action': {
+    minWidth: 0, display: 'grid', justifyItems: 'start', gap: 'token(spacing.control.gap)',
+    '& small': { textStyle: 'small', color: 'token(colors.fg.muted)', overflowWrap: 'anywhere' },
+  },
   '.home-topics': { marginTop: 'token(spacing.prose.blockGap)', '& h2': { textStyle: 'h2', marginBlock: 'token(spacing.control.paddingInline)' }, '& > p': { textStyle: 'small', color: 'token(colors.fg.muted)' }, '& ol': { display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 'token(spacing.control.paddingInline)', padding: 0, listStyle: 'none' }, '& li': { minWidth: 0, padding: 'token(spacing.control.paddingInline)', backgroundColor: 'token(colors.bg.subtle)', borderRadius: 'token(radii.shape.card)' }, '& h3': { textStyle: 'ui' }, '& li > span, & li > p': { textStyle: 'small', color: 'token(colors.fg.muted)' },
     '@media (max-width: 1199px)': { '& ol': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' } },
     '@media (max-width: 899px)': { order: 4 },

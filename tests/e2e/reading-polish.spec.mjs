@@ -114,7 +114,7 @@ test('non-reader localized footer identifies the approved author below the title
   const routes = [
     { path:'/', locale:'en', title:'Vibe Coding, Then What?', byline:'Author: Jar & Prince Explore the World', feedback:'Questions & corrections' },
     { path:'/read/', locale:'en', title:'Vibe Coding, Then What?', byline:'Author: Jar & Prince Explore the World', feedback:'Questions & corrections' },
-    ...['/zh/','/zh/read/'].map(path => ({ path, locale:'zh', title:'Vibe Coding 之后：能跑，然后呢？', byline:'作者：缸子太子与世界', feedback:'提问与纠错' })),
+    ...['/zh/','/zh/read/'].map(path => ({ path, locale:'zh', title:'用 AI 写代码：能跑，然后呢？', byline:'作者：缸子太子与世界', feedback:'提问与纠错' })),
   ];
   const observations = [];
   for (const {width,theme} of [{width:320,theme:'light'},{width:390,theme:'dark'},{width:1261,theme:'light'}]) for (const [index, route] of routes.entries()) {

@@ -4,6 +4,7 @@ import { site } from '../config/site.ts';
 import { getMessages, localePath } from '../config/i18n.ts';
 import { getBook } from '../content/book.ts';
 import { chapterPath } from '../content/manifest.ts';
+import { readingParts } from '../content/reading-parts.ts';
 import { ChapterNavigation } from './reading/chapter-navigation.tsx';
 import { homeContent } from './home-content.ts';
 import { readingLocator } from '../content/reading-locator.ts';
@@ -13,6 +14,8 @@ export async function ReadingIndex({ locale }: { locale: Locale }) {
   const messages = getMessages(locale);
   const copy = homeContent[locale];
   const chapters = await getBook();
+  const groups = readingParts(chapters.map(chapter => chapter.entry), locale);
+  const closing = chapters.find(chapter => chapter.entry.part === 9);
   return (
     <div className="directory-layout">
       <aside className="directory-sidebar home-sidebar">
@@ -32,21 +35,26 @@ export async function ReadingIndex({ locale }: { locale: Locale }) {
         <section className="directory-chapters home-chapters" aria-labelledby="directory-available">
           <h2 id="directory-available">{messages.directory.available}</h2>
           <p id="directory-availability" className="visually-hidden">{messages.chineseDraft}</p>
-          <ol className="available-chapters">{chapters.map((chapter, index) => <li key={chapter.entry.id}>
-            <span className="directory-chapter-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <Link href={chapterPath(chapter.entry)} hrefLang="zh" lang={messages.lang} aria-describedby="directory-availability">
-                <span className="directory-chapter-title">{messages.chapterLabels[chapter.entry.id] ?? chapter.title}</span>
-                <span className="directory-chapter-language" aria-hidden="true">{messages.directory.openChinese} →</span>
-              </Link>
-              <p>{messages.chapterBenefits[chapter.entry.id]}</p>
-            </div>
-          </li>)}</ol>
-        </section>
-        <section className="directory-planned" aria-labelledby="directory-planned-title">
-          <h2 id="directory-planned-title">{messages.directory.planned}</h2>
-          <ul>{copy.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
-          <p>{copy.planNotice}</p>
+          {groups.map(part => <section key={part.id} aria-labelledby={part.id}>
+            <h3 id={part.id}>{part.title}</h3>
+            <ol className="available-chapters" start={part.entries[0].order}>{part.entries.map(chapter => <li key={chapter.id}>
+              <span className="directory-chapter-number" aria-hidden="true">{String(chapter.order).padStart(2, '0')}</span>
+              <div>
+                <Link href={chapterPath(chapter)} hrefLang="zh" aria-describedby="directory-availability">
+                  <span className="directory-chapter-title" lang={messages.chapterLabels[chapter.id] ? undefined : 'zh-CN'}>
+                    {messages.chapterLabels[chapter.id] ?? chapter.title}
+                  </span>
+                  <span className="directory-chapter-language" aria-hidden="true">{messages.directory.openChinese} →</span>
+                </Link>
+                {messages.chapterBenefits[chapter.id] ? <p>{messages.chapterBenefits[chapter.id]}</p> : null}
+              </div>
+            </li>)}</ol>
+            {locale === 'zh' && part.id === 'part-9' && closing ? <ul className="closing-sections">
+              {closing.headings.filter(heading => heading.level === 2).map(heading => <li key={heading.id}>
+                <Link href={chapterPath(closing.entry) + '#' + encodeURIComponent(heading.id)}>{heading.title}</Link>
+              </li>)}
+            </ul> : null}
+          </section>)}
         </section>
         <a className="text-link" href={site.issues}>{messages.suggest} <span aria-hidden="true">↗</span></a>
       </section>

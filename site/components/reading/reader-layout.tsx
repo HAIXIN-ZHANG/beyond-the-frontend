@@ -200,7 +200,7 @@ export function ReaderLayout({ navigation, outline, bookInfo, children }: { navi
           <div className="mobile-book-navigation"><ReadingDisclosure label="章节导航" compactLabel="章节">{navigation}{bookInfo}</ReadingDisclosure></div>
           <div className="mobile-outline"><ReadingDisclosure label="本章目录">{outline}</ReadingDisclosure></div>
         </ReadingTools>
-        <p className="chapter-context">中文 · 已审阅草稿</p>
+        <p className="chapter-context">中文 · 第二稿</p>
         {children}
       </div>
       <aside className="outline-rail">{outline}</aside>

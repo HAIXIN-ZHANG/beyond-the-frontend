@@ -44,7 +44,7 @@ async function section(page, index) {
 test('Continue starts absent, records a deliberate section and returns only by explicit native link', async ({ page }, testInfo) => {
   await page.goto(at('/zh/read/'));
   await expect(panel(page)).toHaveCount(0);
-  await expect(page.locator('.directory-chapters a')).toHaveCount(3);
+  await expect(page.locator('.available-chapters a')).toHaveCount(chapters.length);
   await ready(page);
   const heading = await section(page, 2);
   const target = page.locator(`[id="${heading.id}"]`);
@@ -94,7 +94,7 @@ test('Continue rejects corrupt destinations and uses the current chapter start f
     raw({ ...saved(), chapterId: 'removed' }), raw({ ...saved(), href: 'https://untrusted.example/' })]) {
     await seed(page, value); await page.reload();
     await expect(panel(page)).toHaveCount(0);
-    await expect(page.locator('.directory-chapters a')).toHaveCount(3);
+    await expect(page.locator('.available-chapters a')).toHaveCount(chapters.length);
   }
   for (const position of [{ ...saved(), sourceHash: 'a'.repeat(64) }, { ...saved(), headingId: 'removed-heading' },
     { ...saved(), headingId: legacyHeadingAliases[0].legacyId }]) {
@@ -165,7 +165,7 @@ test('blocked writes latch for the mounted recorder and denied storage never inv
     await page.waitForTimeout(800);
     expect(await page.evaluate(() => window.progressAttempts)).toBe(failure === 'quota' ? 1 : 0);
     await page.goto(at('/zh/read/')); await expect(panel(page)).toHaveCount(0);
-    await expect(page.locator('.directory-chapters a')).toHaveCount(3);
+    await expect(page.locator('.available-chapters a')).toHaveCount(chapters.length);
     expect(errors).toEqual([]);
     await context.close();
   }
@@ -250,7 +250,7 @@ test('no-JS directory and shared chapter links remain static without a Continue 
   for (const locale of ['en', 'zh']) {
     await page.goto(at(locale === 'zh' ? '/zh/read/' : '/read/'));
     await expect(panel(page)).toHaveCount(0);
-    await expect(page.locator('.directory-chapters a')).toHaveCount(3);
+    await expect(page.locator('.available-chapters a')).toHaveCount(chapters.length);
     await page.locator('.directory-chapters a').nth(1).click();
     await expect(page.locator('article')).toHaveAttribute('data-chapter-id', chapter.chapterId);
   }
@@ -258,4 +258,48 @@ test('no-JS directory and shared chapter links remain static without a Continue 
   await page.goto(at(`${chapter.href}#${encodeURIComponent(id)}`));
   await expect(page.locator(`[id="${id}"]`)).toBeInViewport();
   await context.close();
+});
+
+test('a saved public pre-R2 heading resumes at the chapter start and the old shared URL still lands at its successor', async ({ page }) => {
+  const old = { version: 1, chapterId: 'opening', headingId: '例子会重复问题会变深',
+    sourceHash: 'b4d0dd040e183cebc0400526ca5b317d23db1dc406e0bd5b00e3af74a940f521' };
+  await page.goto(at('/zh/read/'));
+  await seed(page, raw(old));
+  await page.reload();
+  await expect(panel(page).locator('.continue-fallback')).toBeVisible();
+  await expect(panel(page).locator('a')).toHaveAttribute('href', at(opening.href));
+  await panel(page).locator('a').click();
+  await expect(page.locator('article h1')).toBeInViewport();
+  await page.goto(at(opening.href) + '#' + encodeURIComponent(old.headingId));
+  await expect(page.locator(`[id="${old.headingId}"]`)).toBeFocused();
+  await expect(page.locator('[id="往后看也往旁边看"]')).toBeInViewport();
+  expect(await snapshot(page)).toBe(raw(old));
+});
+
+test('Chinese homepage offers the deliberate saved position and restarts a stale chapter', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(at('/zh/'));
+  const link = page.locator('.home-reading-action a');
+  await expect(link).toHaveAccessibleName('阅读中文原稿');
+  await expect(link).toHaveAttribute('href', at(opening.href));
+  await page.goto(at(chapter.href));
+  await ready(page);
+  const heading = chapter.headings[2];
+  await page.locator('.mobile-outline summary').click();
+  await page.locator('.mobile-outline a').filter({ hasText: heading.title }).click();
+  await expect(page.locator(`[id="${heading.id}"]`)).toBeFocused();
+  await expect.poll(() => snapshot(page)).toBe(raw(saved(chapter, heading.id)));
+  await page.goto(at('/zh/'));
+  await expect(link).toHaveAccessibleName('继续上次阅读');
+  await expect(link).toHaveAccessibleDescription(heading.title);
+  await link.press('Enter');
+  await expect(page.locator(`[id="${heading.id}"]`)).toBeFocused();
+  await page.goto(at('/zh/'));
+  await seed(page, raw({ ...saved(chapter, heading.id), sourceHash: 'a'.repeat(64) }));
+  await page.reload();
+  await expect(link).toHaveAccessibleName('从本章开头读起');
+  await expect(link).toHaveAttribute('href', at(chapter.href));
+  await expect(link).toHaveAccessibleDescription(/从章节开头/);
+  await page.goto(at('/'));
+  await expect(page.getByRole('link', { name: 'Read in Chinese', exact: true })).toHaveAttribute('href', at(opening.href));
 });

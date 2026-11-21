@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: ChapterPageProps): Promise<Me
   const [{ slug }, chapters] = await Promise.all([params, getBook()]);
   const chapter = chapters.find(item => item.entry.slug === slug);
   if (!chapter) notFound();
-  return { title: chapter.title, description: `${chapter.title} · 中文已审阅草稿。全书仍在写作中。` };
+  return { title: chapter.title, description: `${chapter.title} · 中文第二稿。` };
 }
 
 export default async function ChapterPage({ params }: ChapterPageProps) {

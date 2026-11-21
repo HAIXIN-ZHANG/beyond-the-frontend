@@ -25,6 +25,7 @@ export function DocumentLayout({ children, locale, languageHome = false }: Docum
           <div className="footer-identity">
             <p>{messages.title}</p>
             <p className="footer-byline">{messages.authorLabel}{messages.authorName}</p>
+            <p>{messages.editionLabel}</p>
           </div>
           <a href={site.issues}>{messages.feedback} <span aria-hidden="true">↗</span></a>
         </footer>

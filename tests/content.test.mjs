@@ -1,25 +1,37 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, writeFile, symlink, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile, symlink, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { chapterManifest, chapterPath, validateManifest } from '../site/content/manifest.ts';
+import { chapterManifest, chapterPath, legacyHeadingAliases, validateManifest } from '../site/content/manifest.ts';
 import { loadBook } from '../site/content/load-book.ts';
-import { applyLegacyHeadingAlias, parseMarkdown, nodeText } from '../site/content/markdown.ts';
+import { applyLegacyHeadingAlias, parseMarkdown, nodeText, walkMarkdown } from '../site/content/markdown.ts';
 import { resolveChapterLink } from '../site/content/links.ts';
 import { alternateLocalePath } from '../site/config/i18n.ts';
 
-test('only the three approved sources load with original titles, attribution, diagrams and citations', async () => {
+test('all 27 approved sources load with original titles, attribution, diagrams and citations', async () => {
   const chapters = await loadBook();
-  assert.deepEqual(chapters.map(chapter => chapter.entry.id), ['opening', 'G01', 'F01']);
+  const indexPath = 'book/revisions/zh/volume-one-r2/README.md';
+  const bytes = await readFile(indexPath);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), 'b11f4142386b22546c551106aad594f34f991c0abc4fd3fb9351a8a945bf1da0');
+  const names = [...new Set([...bytes.toString().matchAll(/\]\(([^)#]+\.md)\)/g)].map(([, name]) => name))];
+  assert.equal(chapters.length, 27);
+  assert.deepEqual(chapters.map(chapter => path.basename(chapter.entry.source)), names);
+  assert.deepEqual(Array.from({ length: 10 }, (_, part) => chapters.filter(chapter => chapter.entry.part === part).length),
+    [1, 3, 6, 3, 2, 2, 2, 2, 5, 1]);
+  const readingOrder = createHash('sha256');
+  for (const file of [indexPath, ...chapters.map(chapter => chapter.entry.source)]) {
+    readingOrder.update(file).update('\0').update(await readFile(file)).update('\0');
+  }
+  assert.equal(readingOrder.digest('hex'), 'c1ddc94a791dd2de70b82a7cc1079698aae469852c049fe760ec5ecbfcd272c6');
   assert.equal(chapters[0].title, '写在前面：能跑，然后呢？');
   assert.match(nodeText(chapters[0].tree), /作者：缸子太子与世界/);
   assert.match(nodeText(chapters[0].tree), /这本书从资料整理、正文起草到反复修改，都有 AI 的帮助/);
   assert.equal(chapters[1].tree.children.filter(node => node.type === 'code').length, 4);
   assert.equal(chapters[1].tree.children.filter(node => node.type === 'table').length, 2);
-  const urls = chapters.flatMap(chapter => chapter.tree.children.filter(node => node.type === 'paragraph')
-    .flatMap(node => node.children.filter(child => child.type === 'link').map(child => child.url)));
+  const urls = [];
+  for (const chapter of chapters) walkMarkdown(chapter.tree, node => { if (node.type === 'link') urls.push(node.url); });
   assert.ok(urls.includes('/zh/read/a-page-and-a-system/'));
   assert.ok(urls.includes('/zh/read/before-we-start/'));
   assert.ok(urls.some(url => url.startsWith('https://www.rfc-editor.org/')));
@@ -30,7 +42,7 @@ test('the approved browser chapter retains fenced illustrative HTML and its cano
   const chapters = await loadBook();
   const browser = chapters.find(chapter => chapter.entry.id === 'F01');
   assert.equal(browser.title, '页面出现之前，浏览器在忙什么？');
-  assert.equal(browser.entry.sha256, '3688b7967433b7a97304438100908d37883d5de9740aaa5c08820b37aa9bf624');
+  assert.equal(browser.entry.sha256, '7d14124963eedef19c1bd56c56951e1f2001bea97b468cf2eeb566c977fb3065');
   assert.equal(browser.tree.children.filter(node => node.type === 'code').length, 4);
   assert.equal(browser.tree.children.filter(node => node.type === 'table').length, 2);
   assert.equal(browser.tree.children.find(node => node.type === 'code').lang, 'html');
@@ -129,19 +141,20 @@ test('untranslated chapter switches to the English index once under both deploym
   }
 });
 
-test('the one legacy heading targets real content without entering canonical headings', async () => {
+test('legacy public and preview fragments resolve without entering canonical headings', async () => {
   const chapters = await loadBook();
-  const opening = chapters[0];
-  const target = opening.tree.children.find(node => node.type === 'heading' && node.data.id === '我为什么想写这本书');
-  assert.equal(target.data.legacyId, '关于本书的-ai-协作');
-  assert.equal(chapters.reduce((total, chapter) => total + chapter.headingIds.length, 0), 28);
-  assert.ok(!opening.headingIds.includes(target.data.legacyId));
-  assert.ok(!opening.headings.some(heading => heading.id === target.data.legacyId));
+  assert.equal(legacyHeadingAliases.length, 5);
+  for (const { chapterId, legacyId, headingId } of legacyHeadingAliases) {
+    const chapter = chapters.find(item => item.entry.id === chapterId);
+    const target = chapter.tree.children.find(node => node.type === 'heading' && node.data.id === headingId);
+    assert.ok(target?.data.legacyIds.includes(legacyId));
+    assert.ok(!chapter.headingIds.includes(legacyId));
+  }
   for (const [alias, targetId] of [['old', 'absent'], ['main', 'section'], ['title', 'section'], ['section', 'section'], ['<unsafe>', 'section']]) {
     assert.throws(() => applyLegacyHeadingAlias(parseMarkdown('# Title\n\n## Section'), alias, targetId), /missing|invalid or collides/);
   }
   const parsed = parseMarkdown('# Title\n\n## Section\n\n## Other');
   applyLegacyHeadingAlias(parsed, 'old', 'section');
   assert.throws(() => applyLegacyHeadingAlias(parsed, 'old', 'other'), /collides/);
-  assert.throws(() => applyLegacyHeadingAlias(parsed, 'another', 'section'), /collides/);
+  assert.doesNotThrow(() => applyLegacyHeadingAlias(parsed, 'another', 'section'));
 });

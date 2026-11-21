@@ -1,12 +1,14 @@
 import { test as base, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { chapterManifest, chapterPath } from '../../site/content/manifest.ts';
+import { chapterManifest, chapterPath, legacyHeadingAliases } from '../../site/content/manifest.ts';
 import { withBasePath } from '../../site/config/deployment.ts';
 import { getMessages } from '../../site/config/i18n.ts';
+import { readingParts } from '../../site/content/reading-parts.ts';
 import { homeContent } from '../../site/components/home-content.ts';
 
 const at = pathname => withBasePath(pathname, process.env.NEXT_PUBLIC_BASE_PATH);
 const [opening, g01, browserChapter] = chapterManifest;
+const closing = chapterManifest.at(-1);
 
 const test = base.extend({
   health: [async ({ page }, use, testInfo) => {
@@ -41,9 +43,9 @@ test('every real search match remains available with a truthful count and contex
     await page.goto(at('/zh/read/'));
     const dialog = await openSearch(page);
     await dialog.getByRole('searchbox').fill('报名');
-    await expect(dialog.getByRole('status')).toHaveText('14 条匹配 · 中文已审阅草稿');
+    await expect(dialog.getByRole('status')).toHaveText('57 条匹配 · 中文第二稿');
     const links = dialog.locator('.search-results a');
-    await expect(links).toHaveCount(14);
+    await expect(links).toHaveCount(57);
     const response = await page.request.get(at('/search-index/zh.json'));
     const index = await response.json();
     const expected = index.entries.filter(entry => `${entry.chapterTitle} ${entry.headingTitle} ${entry.text}`.includes('报名'));
@@ -53,7 +55,7 @@ test('every real search match remains available with a truthful count and contex
       expect(Array.from(await item.locator('p').innerText()).length).toBeLessThanOrEqual(66);
     }
     await dialog.getByRole('searchbox').press('ArrowDown');
-    for (let index = 1; index < 14; index++) await page.keyboard.press('ArrowDown');
+    for (let index = 1; index < 57; index++) await page.keyboard.press('ArrowDown');
     await expect(links.last()).toBeFocused();
     const destination = new URL(await links.last().getAttribute('href'), page.url());
     await page.keyboard.press('Enter');
@@ -114,7 +116,7 @@ test('both home locales show exactly the approved Chinese reading destinations a
       await expect(links.nth(index).locator('.home-chapter-title')).toHaveText(getMessages(locale).chapterLabels[chapter.id] ?? chapter.title);
     }
     if (locale === 'en') await expect(page.locator('.home-chapters')).toContainText('English chapters are not available yet.');
-    await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+    await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', closing.sha256);
   }
 });
 
@@ -163,7 +165,7 @@ test('localized chrome and matching page roles remain coherent across languages 
           await expect(links.nth(index).locator('.directory-chapter-title')).toHaveText(messages.chapterLabels[chapter.id] ?? chapter.title);
           await expect(links.nth(index)).toHaveAttribute('href', at(chapterPath(chapter)));
           await expect(links.nth(index)).toHaveAttribute('hreflang', 'zh');
-          await expect(links.nth(index)).toHaveAttribute('lang', messages.lang);
+          if (!messages.chapterLabels[chapter.id]) await expect(links.nth(index).locator('.directory-chapter-title')).toHaveAttribute('lang', 'zh-CN');
         }
         if (locale === 'en') await expect(page.locator('.reading-index')).toContainText(messages.englishUnavailable);
       }
@@ -248,8 +250,7 @@ test('approved browser chapter renders illustrative source safely and every inde
     await expect(article.getByRole('link', { name: '返回：一个页面，究竟连着什么？', exact: true }))
       .toHaveAttribute('href', at(chapterPath(g01)));
     await expect(page.locator('.chapter-pagination a[rel="prev"]')).toHaveAttribute('href', at(chapterPath(g01)));
-    await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveCount(0);
-    await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
+    await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveAttribute('href', at(chapterPath(chapterManifest[3])));
     for (const [label, theme] of [[getMessages('zh').dayTheme, 'light'], [getMessages('zh').nightTheme, 'dark']]) {
       await chooseAppearance(page, label);
       await page.reload();
@@ -347,8 +348,7 @@ test('entry, truthful availability, approved chapters, previous/next and static 
   await page.locator('.chapter-pagination a[rel="next"]').click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(browserChapter.title);
   await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
-  await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveCount(0);
-  await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
+  await expect(page.locator('.chapter-pagination a[rel="next"]')).toHaveAttribute('href', at(chapterPath(chapterManifest[3])));
   await expect(page.locator('.chapter-pagination a[rel="prev"]')).toHaveAttribute('href', at(chapterPath(g01)));
   await page.locator('.chapter-pagination a[rel="prev"]').click();
   await expect(page).toHaveURL(new RegExp(`${at(chapterPath(g01))}$`));
@@ -926,7 +926,7 @@ for (const javaScriptEnabled of [true, false]) test(`reviewed source identity an
     }
     const response = await page.request.get(`http://127.0.0.1:4179${at('/search-index/zh.json')}`);
     const index = await response.json();
-    expect(index.entries).toHaveLength(28);
+    expect(index.entries).toHaveLength(108);
     expect(index.entries.some(entry => entry.headingId === legacyId)).toBe(false);
     for (const entry of chapterManifest) {
       expect(index.entries.filter(item => item.chapterId === entry.id).every(item => item.sourceHash === entry.sha256)).toBe(true);
@@ -1083,8 +1083,8 @@ test('V2 real chapter remains readable across appearances, accents, widths and e
     await expect(page.locator('html')).toHaveAttribute('data-accent', mode === 'light' ? 'blue' : 'purple');
     await expect(page.locator('article h1')).toHaveText(g01.title);
     await expect(page.locator('article')).toHaveAttribute('data-source-sha256', g01.sha256);
-    await expect(page.locator('.chapter-context')).toHaveText('中文 · 已审阅草稿');
-    await expect(page.locator('#reader-book-navigation')).toContainText('全书仍在写作中');
+    await expect(page.locator('.chapter-context')).toHaveText('中文 · 第二稿');
+    await expect(page.locator('#reader-book-navigation')).toContainText('第八部分');
     const geometry = await page.evaluate(() => {
       const article = window.document.querySelector('article'), header = window.document.querySelector('.site-header');
       return { width: window.innerWidth, article: article.getBoundingClientRect().width,
@@ -1170,14 +1170,13 @@ test('V2 home uses approved local art and real localized reading rows across vie
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('h1')).toHaveText(m.titleLines.join(''));
     await expect(page.locator('.home-hero-copy .intro')).toHaveText(m.description);
-    await expect(page.locator('.home-chapters a')).toHaveCount(3);
+    await expect(page.locator('.home-chapters a')).toHaveCount(chapterManifest.length);
     await expect(page.locator('.home-hero-copy .eyebrow')).toHaveCount(0);
-    await expect(page.locator('.home-chapters li')).toHaveCount(3);
+    await expect(page.locator('.home-chapters li')).toHaveCount(chapterManifest.length);
     await expect(page.locator('.home-chapters li > div > span, .home-sidebar .reading-nav__availability')).toHaveCount(0);
     await expect(page.locator('.home-topics li p')).toHaveCount(0);
-    await expect(page.getByText(copy.planNotice, { exact: true })).toHaveCount(1);
     await expect(page.locator('.home-topics li')).toHaveCount(8);
-    await expect(page.locator('.home-topics a, .home-sidebar-topics a')).toHaveCount(0);
+    await expect(page.locator('.home-topics a')).toHaveCount(8);
     const image = page.getByRole('img', { name: copy.illustrationAlt, exact: true });
     await image.scrollIntoViewIfNeeded(); await image.evaluate(element => element.decode());
     const geometry = await image.evaluate(element => {
@@ -1217,7 +1216,7 @@ test('V2 home keyboard navigation, real search, language menu and enlarged text 
     await page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true }).click();
     const dialog = page.getByRole('dialog');
     if (locale === 'zh') {
-      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(14);
+      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(57);
     } else await expect(dialog).toContainText('English');
     await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
     await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeFocused();
@@ -1252,7 +1251,7 @@ test('V2 homepage keeps native art, chapter links and desktop collapse available
   try {
     for (const locale of ['en', 'zh']) {
       await page.setViewportSize({ width: 390, height: 844 }); await page.goto(`http://127.0.0.1:4179${at(locale === 'en' ? '/' : '/zh/')}`);
-      await expect(page.locator('.home-chapters a')).toHaveCount(3);
+      await expect(page.locator('.home-chapters a')).toHaveCount(chapterManifest.length);
       await expect(page.getByRole('img', { name: homeContent[locale].illustrationAlt })).toBeVisible();
       const switchLink = page.getByRole('link', { name: getMessages(locale).switchLabel, exact: true });
       await expect(switchLink).toBeVisible();
@@ -1262,7 +1261,7 @@ test('V2 homepage keeps native art, chapter links and desktop collapse available
       await expect(page.locator('.home-navigation')).not.toHaveAttribute('open', '');
       await page.locator('.home-navigation > summary').click();
       await page.locator('.home-chapters a').last().click();
-      await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+      await expect(page.locator('article')).toHaveAttribute('data-source-sha256', closing.sha256);
     }
   } finally { await context.close(); }
 });
@@ -1277,7 +1276,7 @@ test('exact chapter-title search keeps chapter and real H1 destinations distinct
     await page.goto(at(samePage ? deep.href : chapterPath(g01)));
     const dialog = await openSearch(page), input = dialog.getByRole('searchbox');
     await input.fill(width === 320 ? `  ${browserChapter.title.normalize('NFKC')}  ` : browserChapter.title);
-    await expect(dialog.getByRole('status')).toHaveText('2 条匹配 · 中文已审阅草稿');
+    await expect(dialog.getByRole('status')).toHaveText('2 条匹配 · 中文第二稿');
     await expect(dialog.locator('.search-results a')).toHaveCount(2);
     const chapterResult = dialog.locator('[data-search-kind="chapter"] a'), sectionResult = dialog.locator('[data-search-kind="section"] a');
     await expect(chapterResult).toHaveAttribute('href', at(chapterPath(browserChapter)));
@@ -1370,11 +1369,10 @@ test('V2 directory shows only real localized Chinese reading rows across viewpor
       await expect(links.nth(index)).toHaveAccessibleName(m.chapterLabels[chapter.id] ?? chapter.title);
       await expect(links.nth(index)).toHaveAccessibleDescription(m.chineseDraft);
       await expect(links.nth(index).locator('.directory-chapter-language')).toHaveText(`${m.directory.openChinese} →`);
-      await expect(page.locator('.available-chapters li').nth(index).locator('p')).toHaveText(m.chapterBenefits[chapter.id]);
+      if (m.chapterBenefits[chapter.id]) await expect(page.locator('.available-chapters li').nth(index).locator('p')).toHaveText(m.chapterBenefits[chapter.id]);
       expect((await links.nth(index).boundingBox()).height).toBeGreaterThanOrEqual(44);
     }
-    await expect(page.locator('.directory-planned li')).toHaveText(homeContent[locale].topics);
-    await expect(page.locator('.directory-planned a')).toHaveCount(0);
+    await expect(page.locator('.directory-chapters h3')).toHaveText(readingParts(chapterManifest, locale).map(part => part.title));
     if (locale === 'en') await expect(page.locator('.reading-index')).toContainText(m.englishUnavailable);
     const sidebar = page.locator('.directory-sidebar');
     if (width === 1440) {
@@ -1410,7 +1408,7 @@ test('V2 directory keyboard links, locale changes, search, appearance and enlarg
     await page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true }).click();
     const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible();
     if (locale === 'zh') {
-      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(14);
+      await dialog.getByRole('searchbox').fill('报名'); await expect(dialog.locator('.search-results a')).toHaveCount(57);
     } else await expect(dialog).toContainText('English');
     await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible();
     await expect(page.getByRole('button', { name: locale === 'en' ? 'Search chapters' : '搜索章节', exact: true })).toBeFocused();
@@ -1450,7 +1448,7 @@ test('V2 directory retains real chapter routes and bilingual 404 without JavaScr
       await page.goto(at(locale === 'en' ? '/read/' : '/zh/read/'));
       await expect(page.locator('#contents-title')).toHaveText(getMessages(locale).directory.title);
       const links = page.locator('.available-chapters a'); await expect(links).toHaveCount(chapterManifest.length);
-      await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', browserChapter.sha256);
+      await links.last().click(); await expect(page.locator('article')).toHaveAttribute('data-source-sha256', closing.sha256);
       await page.setViewportSize({ width: 1440, height: 950 });
       await page.goto(at(locale === 'en' ? '/read/' : '/zh/read/'));
       await page.locator('.directory-sidebar a').first().click();
@@ -1548,4 +1546,33 @@ test('repeating the current native section remeasures enlarged tools without a h
     expect(await page.evaluate(() => window.__sameFragmentScrollCalls)).toBe(0);
   }
   await attachGeometry(testInfo, 'repeated-fragment-landing', observations);
+});
+
+test('R2 closing, new chapter cross-link, supplemental figure and old shared fragments remain directly reachable', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 760 });
+  await page.goto(at('/zh/read/'));
+  const closingLinks = page.locator('.closing-sections a');
+  await expect(closingLinks).toHaveCount(3);
+  await closingLinks.last().click();
+  await expect(page.getByRole('heading', { name: '我去钓会儿鱼' })).toBeInViewport();
+  await expect(page.locator('.chapter-pagination [rel="next"]')).toHaveCount(0);
+  await expect(page.locator('.chapter-pagination')).toContainText('已到当前最后一章');
+  for (const { chapterId, legacyId, headingId } of legacyHeadingAliases) {
+    const chapter = chapterManifest.find(entry => entry.id === chapterId);
+    await page.goto(at(chapterPath(chapter) + '#' + encodeURIComponent(legacyId)));
+    await expect(page.locator(`[id="${legacyId}"]`)).toBeFocused();
+    const heading = page.locator(`[id="${headingId}"]`);
+    await expect(heading).toBeInViewport({ ratio: 1 });
+    await expect.poll(() => heading.evaluate(element =>
+      element.getBoundingClientRect().top - window.document.querySelector('.reading-tools').getBoundingClientRect().bottom)).toBeGreaterThanOrEqual(0);
+  }
+  await page.goto(at(chapterPath(opening)));
+  await page.locator('article').getByRole('link', { name: '老师合上电脑之后，谁还在转那份讲义' }).click();
+  await expect(page.locator('article')).toHaveAttribute('data-chapter-id', 'p5-handout-job');
+  await page.goto(at(chapterPath(g01)));
+  const figure = page.locator('.enrolment-figure');
+  await expect(figure.getByRole('img')).toHaveAccessibleName(homeContent.zh.illustrationAlt);
+  await expect(figure.locator('figcaption')).toHaveText(homeContent.zh.exampleCaption);
+  const svg = await figure.getByRole('img').evaluate(async image => { await image.decode(); return new URL(image.currentSrc).pathname; });
+  expect(svg).toBe(at('/illustrations/home-systems-mobile.svg'));
 });

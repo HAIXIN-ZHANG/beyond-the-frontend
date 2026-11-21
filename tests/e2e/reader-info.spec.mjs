@@ -106,7 +106,7 @@ for(const javaScriptEnabled of [true,false]) test(`mobile chapter disclosure kee
       const {dock,feedback}=await info(page),panel=page.locator('.mobile-book-navigation .reading-disclosure-body');
       await panel.locator('nav[aria-label="全书导航"] a').last().focus(); await page.keyboard.press('Tab'); await expect(feedback).toBeFocused(); await expect(feedback).toBeInViewport();
       expect(await panel.evaluate(e=>e.scrollTop)).toBeGreaterThan(0);
-      expect(await dock.evaluate(e=>e.previousElementSibling?.classList.contains('planned-map'))).toBe(true);
+      expect(await dock.evaluate(e=>e.previousElementSibling?.getAttribute('aria-label'))).toBe('全书导航');
       await page.screenshot({path:testInfo.outputPath(`reader-info-${width}-${theme}-js-${javaScriptEnabled}.png`)});
       if(width===320){
         await panel.evaluate(e=>{

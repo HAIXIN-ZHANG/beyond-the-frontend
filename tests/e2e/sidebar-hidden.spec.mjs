@@ -18,11 +18,19 @@ test('hidden sidebar keeps readable geometry through persistence, real chapter l
     const g=await page.evaluate(()=>{
       const body=document.querySelector('.reader-body'),article=document.querySelector('article'),button=document.querySelector('[data-reopen-sidebar]'),h1=article.querySelector('h1');
       const rect=e=>{const r=e.getBoundingClientRect();return{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+      const layout=document.querySelector('.chapter-layout'),main=layout.parentElement,mainRect=main.getBoundingClientRect(),mainStyle=window.getComputedStyle(main);
+      const contentLeft=mainRect.left+parseFloat(mainStyle.borderLeftWidth)+parseFloat(mainStyle.paddingLeft);
+      const contentRight=mainRect.right-parseFloat(mainStyle.borderRightWidth)-parseFloat(mainStyle.paddingRight);
+      const ancestors=[document.documentElement,document.body,main].map(element=>{
+        const style=window.getComputedStyle(element);
+        return{tag:element.tagName,id:element.id,rect:rect(element),clientWidth:element.clientWidth,scrollWidth:element.scrollWidth,scrollbarGutter:style.scrollbarGutter,overflowY:style.overflowY,padding:[style.paddingLeft,style.paddingRight],border:[style.borderLeftWidth,style.borderRightWidth]};
+      });
       const b=button.getBoundingClientRect(),hit=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);
-      return{columns:window.getComputedStyle(document.querySelector('.chapter-layout')).gridTemplateColumns,bodyColumn:window.getComputedStyle(body).gridColumn,availableWidth:document.documentElement.clientWidth,layout:rect(document.querySelector('.chapter-layout')),body:rect(body),article:rect(article),h1:rect(h1),reopen:rect(button),hit:button.contains(hit),overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth};
+      return{columns:window.getComputedStyle(layout).gridTemplateColumns,bodyColumn:window.getComputedStyle(body).gridColumn,availableWidth:document.documentElement.clientWidth,mainContent:{left:contentLeft,right:contentRight,width:contentRight-contentLeft},ancestors,layout:rect(layout),body:rect(body),article:rect(article),h1:rect(h1),reopen:rect(button),hit:button.contains(hit),overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth};
     });
-    // Classic scrollbars reserve layout space; the hidden reader must fill that real available column.
-    expect(g.layout.width).toBeCloseTo(g.availableWidth,0);
+    // Root clientWidth can include a reserved stable gutter; use the actual containing content box.
+    expect(g.layout.width).toBeCloseTo(g.mainContent.width,0);
+    expect(g.layout.left).toBeCloseTo(g.mainContent.left,0);expect(g.layout.right).toBeCloseTo(g.mainContent.right,0);
     expect(g.body.width).toBeCloseTo(g.layout.width,0);expect(g.body.left).toBe(g.layout.left);
     expect(g.body.right).toBeCloseTo(g.layout.right,0);
     expect(g.article.width).toBeGreaterThanOrEqual(600);expect(g.article.width).toBeLessThanOrEqual(704);

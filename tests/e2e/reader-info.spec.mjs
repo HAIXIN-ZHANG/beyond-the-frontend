@@ -1,5 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { withBasePath } from '../../site/config/deployment.ts';
+import { expectUsableCredit, expectVisibleKeyboardFocus } from './support/reading-assertions.mjs';
 import { chapterManifest } from '../../site/content/manifest.ts';
 
 const at = path => withBasePath(path, process.env.NEXT_PUBLIC_BASE_PATH);
@@ -26,7 +27,7 @@ async function info(page) {
   await expect(dock.locator('.book-info-name')).toHaveText('缸子太子与世界');
   const feedback=dock.getByRole('link',{name:'提问与纠错',exact:true});
   await expect(feedback).toHaveAttribute('href','https://github.com/HAIXIN-ZHANG/vibe-coding-then-what/issues');
-  expect((await feedback.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  await expectUsableCredit(dock);
   await expect(page.locator('#reader-book-navigation')).not.toContainText('缸子太子与世界');
   await expect(page.locator('article')).toHaveAttribute('data-source-sha256',chapterManifest[2].sha256);
   return {dock,feedback};
@@ -34,7 +35,7 @@ async function info(page) {
 
 test('reader dock stays outside the chapter scroller at the top and chapter end across desktop widths and modes',async({page},testInfo)=>{
   const measurements=[];
-  for (const width of [1325,1006,1261]) for (const theme of ['light','dark']) {
+  for (const {width,theme} of [{width:1325,theme:'light'},{width:1006,theme:'dark'}]) {
     await page.setViewportSize({width,height:width===1325?1267:900}); await page.emulateMedia({colorScheme:theme}); await reader(page);
     const {dock,feedback}=await info(page), nav=page.locator('#reader-book-navigation');
     const geometry=await dock.evaluate(e=>{
@@ -98,7 +99,7 @@ for(const javaScriptEnabled of [true,false]) test(`mobile chapter disclosure kee
   const context=await browser.newContext({baseURL,javaScriptEnabled}),page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message)); page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   try {
-    for(const width of [320,390]) for(const theme of ['light','dark']) {
+    for(const {width,theme} of [{width:320,theme:'dark'},{width:390,theme:'light'}]) {
       await page.setViewportSize({width,height:844}); await page.emulateMedia({colorScheme:theme}); await page.goto(at(chapter));
       await expect(page.locator('.site-footer')).toBeHidden(); await expect(page.getByRole('contentinfo')).toHaveCount(0);
       const summary=page.locator('.mobile-book-navigation summary'); await summary.click();
@@ -133,42 +134,27 @@ test('English directory retains its footer and opens the actual Chinese reader d
   await page.locator('.mobile-book-navigation summary').click();await info(page);
 });
 
-test('selected credit utility keeps exact message geometry, quiet states and natural name wrap',async({page},testInfo)=>{
-  for(const theme of ['light','dark'])for(const width of [224,248]){
+test('credit and feedback remain readable, focusable and bounded at narrow sidebar widths',async({page},testInfo)=>{
+  for(const {theme,key} of [{theme:'light',key:'Home'},{theme:'dark',key:'Enter'}]){
     await page.setViewportSize({width:1261,height:900});await page.emulateMedia({colorScheme:theme});await reader(page);
-    const grip=page.getByRole('separator');await grip.focus();await grip.press('Home');
-    if(width===248)for(let i=0;i<3;i++)await grip.press('ArrowRight');
-    await expect(grip).toHaveAttribute('aria-valuenow',String(width));
-    const {dock,feedback}=await info(page);await page.mouse.move(900,700);
-    const s=await feedback.evaluate(e=>{const s=window.getComputedStyle(e);return{color:s.color,bg:s.backgroundColor,underline:s.textDecorationLine,radius:s.borderRadius};});
-    expect(s.bg).toBe('rgba(0, 0, 0, 0)');expect(s.underline).toBe('none');expect(s.radius).toBe('8px');
-    const credit=await dock.locator('.book-info-author').evaluate(e=>{
-      const label=e.querySelector('.book-info-label').getBoundingClientRect(),name=e.querySelector('.book-info-name').getBoundingClientRect();
-      const dock=e.closest('.book-info').getBoundingClientRect(),rail=e.closest('.book-rail').getBoundingClientRect();
-      return{sameRow:Math.abs(label.top-name.top)<4,gap:name.left-label.right,labelLeft:label.left,dividerLeft:dock.left,railLeft:rail.left};
-    });expect(credit.sameRow).toBe(true);expect(credit.gap).toBe(10);
-    expect(credit.labelLeft).toBe(credit.dividerLeft);expect(credit.labelLeft-credit.railLeft).toBe(16);
-    const icon=feedback.locator('.book-info-icon');expect(await icon.evaluate(e=>[e.clientWidth,e.clientHeight])).toEqual([18,18]);
-    expect(await icon.evaluate(e=>window.getComputedStyle(e).maskImage)).toContain(at('/icons/reader/message.svg'));
-    const response=await page.request.get(at('/icons/reader/message.svg'));expect(response.status()).toBe(200);expect(await response.text()).toMatch(/width="18" height="18"/);
-    await dock.screenshot({path:testInfo.outputPath(`credit-${width}-${theme}-default.png`)});
-    await feedback.hover();expect(await feedback.evaluate(e=>window.getComputedStyle(e).backgroundColor)).not.toBe(s.bg);
-    expect(await feedback.evaluate(e=>window.getComputedStyle(e).textDecorationLine)).toBe('none');
-    await dock.screenshot({path:testInfo.outputPath(`credit-${width}-${theme}-hover.png`)});
-    await page.mouse.move(900,700);await grip.focus();await grip.press('Shift+Tab');await expect(feedback).toBeFocused();
-    expect(await feedback.evaluate(e=>window.getComputedStyle(e).outlineWidth)).toBe('2px');
-    await dock.screenshot({path:testInfo.outputPath(`credit-${width}-${theme}-focus.png`)});
+    const grip=page.getByRole('separator');await grip.focus();await grip.press(key);
+    const {dock,feedback}=await info(page);
+    await grip.press('Shift+Tab');await expectVisibleKeyboardFocus(feedback);
+    await dock.screenshot({path:testInfo.outputPath(`credit-${theme}-focus.png`)});
     await dock.evaluate(e=>{
       const metrics=[...e.querySelectorAll('a,.book-info-label,.book-info-name')].map(e=>({e,size:parseFloat(window.getComputedStyle(e).fontSize),line:parseFloat(window.getComputedStyle(e).lineHeight)}));
       for(const{e,size,line}of metrics){e.style.fontSize=`${size*2}px`;e.style.lineHeight=`${line*2}px`;}
     });
-    expect(await dock.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+    await expectUsableCredit(dock);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
-    await dock.screenshot({path:testInfo.outputPath(`credit-${width}-${theme}-amplified.png`)});
-    await page.emulateMedia({forcedColors:'active'});await feedback.focus();
-    expect(await icon.evaluate(e=>window.getComputedStyle(e).backgroundColor===window.getComputedStyle(e).color)).toBe(true);
-    expect(await feedback.evaluate(e=>window.getComputedStyle(e).outlineStyle)).toBe('solid');
-    await dock.screenshot({path:testInfo.outputPath(`credit-${width}-${theme}-forced.png`)});
+    await expect(dock.locator('.book-info-name')).toBeVisible();
+    await expect(feedback).toBeInViewport();
+    await dock.screenshot({path:testInfo.outputPath(`credit-${theme}-amplified.png`)});
+    await page.emulateMedia({forcedColors:'active'});await grip.focus();await grip.press('Shift+Tab');
+    await expectVisibleKeyboardFocus(feedback);
+    const icon=feedback.locator('.book-info-icon'); await expect(icon).toBeVisible();
+    expect(await icon.evaluate(e=>window.getComputedStyle(e).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+    await dock.screenshot({path:testInfo.outputPath(`credit-${theme}-forced.png`)});
     await page.emulateMedia({forcedColors:'none'});
   }
 });

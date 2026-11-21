@@ -19,9 +19,12 @@ test('hidden sidebar keeps readable geometry through persistence, real chapter l
       const body=document.querySelector('.reader-body'),article=document.querySelector('article'),button=document.querySelector('[data-reopen-sidebar]'),h1=article.querySelector('h1');
       const rect=e=>{const r=e.getBoundingClientRect();return{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
       const b=button.getBoundingClientRect(),hit=document.elementFromPoint(b.x+b.width/2,b.y+b.height/2);
-      return{columns:window.getComputedStyle(document.querySelector('.chapter-layout')).gridTemplateColumns,bodyColumn:window.getComputedStyle(body).gridColumn,body:rect(body),article:rect(article),h1:rect(h1),reopen:rect(button),hit:button.contains(hit),overflow:document.documentElement.scrollWidth>window.innerWidth};
+      return{columns:window.getComputedStyle(document.querySelector('.chapter-layout')).gridTemplateColumns,bodyColumn:window.getComputedStyle(body).gridColumn,availableWidth:document.documentElement.clientWidth,layout:rect(document.querySelector('.chapter-layout')),body:rect(body),article:rect(article),h1:rect(h1),reopen:rect(button),hit:button.contains(hit),overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth};
     });
-    expect(g.body.width).toBeGreaterThanOrEqual(width-1);expect(g.body.left).toBe(0);
+    // Classic scrollbars reserve layout space; the hidden reader must fill that real available column.
+    expect(g.layout.width).toBeCloseTo(g.availableWidth,0);
+    expect(g.body.width).toBeCloseTo(g.layout.width,0);expect(g.body.left).toBe(g.layout.left);
+    expect(g.body.right).toBeCloseTo(g.layout.right,0);
     expect(g.article.width).toBeGreaterThanOrEqual(600);expect(g.article.width).toBeLessThanOrEqual(704);
     expect(g.h1.height).toBeLessThan(150);expect(g.overflow).toBe(false);expect(g.hit).toBe(true);
     expect(g.reopen.left).toBeGreaterThanOrEqual(0);expect(g.reopen.right).toBeLessThanOrEqual(width);expect(g.reopen.height).toBeGreaterThanOrEqual(44);

@@ -2,6 +2,12 @@
 
 Updated: 2026-11-21 (Australia/Perth). This is the sole live assignment/hold/workspace record. Read [AGENTS](../AGENTS.md) → explicit role guide → this board → task brief/necessary inputs. [Collaboration](collaboration.md) owns detailed workflow; reviews own acceptance and handoffs execution/recovery evidence.
 
+## Integration gate and shared-checkout reconciliation — 2026-11-21
+
+PR38 is open at reviewed5161d70 after preserving concurrent main PR37. The first exact-head cloud run passed Quality/builds/verifiers but root/Pages browser59/61 exposed two platform-sensitive assertions. Developer owns the bounded existing-handoff correction using actual Linux screenshots/trace: narrow localized headers may wrap differently without typography/overlap regressions; hidden-body width must fill the real client viewport after classic scrollbar space. Coordinator reviews the affected revision and all required checks before protected merge. No feature or dependency expansion follows.
+
+The author additionally authorized a reasonable audit/integration of the original101 root changes and synchronizing local main. The verified audit found73 current-main identical,25 older-main identical and3 stale text differences, with no missing new implementation. All101 files and a binary patch are backed up and checked. After PR38 is actually merged and root bytes are rechecked, Coordinator may preserve the originals in a recorded include-untracked stash and fast-forward root main; retain the stash/archive rather than replaying old versions. Do not submit redundant/stale content or remove unrelated worktrees/evidence. The exact integration/audit records remain in the ignored recovery area and this PR's review.
+
 ## Reading experience closeout — implementation and local review complete
 
 The author authorized finishing the current reading-page work and integrating it through GitHub. Developer completed the bounded candidate on `codex/v2-reading-polish-20261120`, based on `99ae156`: reading typography/quiet controls, separate status and nearby navigation, semantic prose links, fixed sidebar credit/feedback and the hidden-sidebar zero-width body correction. The final selected FigmaA aligns its caption and divider at16px. Existing manuscripts, admitted sources, saved preferences, dependencies and workflows remain unchanged.

@@ -1047,9 +1047,12 @@ test('V2 nearby navigation closes without scrolling, coordinates overlays and re
     await page.setViewportSize({ width: 1440, height: 900 });
     await expect(book).not.toHaveAttribute('open', ''); await expect(page.locator('#main')).toBeFocused();
     const grip = page.getByRole('separator', { name: '调整章节栏宽度' }); await grip.focus();
-    const beforeNarrow = await page.evaluate(() => window.scrollY);
     await page.setViewportSize({ width, height: 844 }); await expect(summary).toBeFocused();
-    expect(await page.evaluate(() => window.scrollY)).toBe(beforeNarrow);
+    // A resize reflows earlier prose and the responsive figure. The current heading must remain readable.
+    const heading = page.locator(`[id="${id}"]`);
+    await expect(heading).toBeInViewport({ ratio: 1 });
+    await expect.poll(() => heading.evaluate(element => element.getBoundingClientRect().top -
+      window.document.querySelector('.reading-tools').getBoundingClientRect().bottom)).toBeGreaterThanOrEqual(0);
     expect(await page.evaluate(() => window.document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     const menu = page.locator('.chapter-header-menu'), menuSummary = menu.locator('summary');
     await menuSummary.click(); await expect(menu).toHaveAttribute('open', '');
